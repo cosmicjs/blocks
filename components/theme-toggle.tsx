@@ -1,14 +1,20 @@
 "use client"
 
 import * as React from "react"
+import { useSearchParams } from "next/navigation"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 
 export function ThemeToggle() {
+  const searchParams = useSearchParams()
+  const dashboardTheme = searchParams.get("theme")
   const { setTheme, theme } = useTheme()
-
+  if (dashboardTheme) {
+    setTheme(dashboardTheme)
+    return <></>
+  }
   return (
     <Button
       variant="ghost"
