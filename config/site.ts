@@ -3,7 +3,7 @@ export type SiteConfig = typeof siteConfig
 export const siteConfig = {
   name: "Next.js",
   description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
+    "Beautifully designed template built with Next.js, Shadcn UI, Tailwind CSS, and Cosmic.",
   mainNav: [
     {
       title: "Home",
@@ -11,8 +11,9 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    twitter: "https://twitter.com/cosmicjs",
+    github: "https://github.com/cosmicjs",
+    docs: "https://www.cosmicjs.com/docs",
+    login: "https://app.cosmicjs.com/login",
   },
 }
