@@ -11,7 +11,7 @@ export default function IndexPage() {
           Beautifully designed template <br className="hidden sm:inline" />
           built with Next.js, Shadcn UI, Tailwind CSS, and Cosmic.
         </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
+        <p className="max-w-[700px] text-lg text-gray-800 dark:text-dark-gray-800">
           Use it as a starter for your Cosmic websites and apps. Extension
           ready.
         </p>
