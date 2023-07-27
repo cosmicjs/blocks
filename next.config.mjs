@@ -4,6 +4,18 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "imgix.cosmicjs.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.cosmicjs.com",
+      },
+    ],
+  },
 }
 
 export default nextConfig
