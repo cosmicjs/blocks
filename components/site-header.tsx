@@ -28,19 +28,15 @@ export function SiteHeader() {
                 <span className="sr-only">GitHub</span>
               </div>
             </Link>
-            <Link
-              href={siteConfig.links.twitter}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <Link href={siteConfig.links.x} target="_blank" rel="noreferrer">
               <div
                 className={buttonVariants({
                   size: "icon",
                   variant: "ghost",
                 })}
               >
-                <Icons.twitter className="h-5 w-5 fill-current" />
-                <span className="sr-only">Twitter</span>
+                <Icons.x className="h-5 w-5 fill-current" />
+                <span className="sr-only">X</span>
               </div>
             </Link>
             <ThemeToggle />
