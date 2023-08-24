@@ -1,6 +1,6 @@
 # Cosmic Next Template
 
-Beautifully designed template built with Next.js, Shadcn UI, Tailwind CSS. Use it as a starter for your Cosmic websites and apps. Extension ready.
+Beautifully designed template built with Next.js, Shadcn UI, Tailwind CSS. Use it as a starter for your Cosmic websites and apps. Use it as a [Cosmic extension](https://www.cosmicjs.com/docs/dashboard/buckets#extensions) starter.
 
 ## Usage
 
