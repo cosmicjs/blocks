@@ -36,7 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen w-full mx-auto flex justify-center bg-light-background font-sans antialiased dark:bg-dark-background",
+            "mx-auto flex min-h-screen w-full justify-center bg-light-background font-sans antialiased dark:bg-dark-background",
             fontSans.variable
           )}
         >
