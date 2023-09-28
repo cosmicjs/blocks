@@ -34,44 +34,34 @@ type FeaturesProps = {
 
 type FeatureType = "metafields" | "object_type"
 
-type FeatureData = {
-  seo: {
-    title: string
-    type: FeatureType
-  }
-  faqs: {
-    title: string
-    type: FeatureType
-  }
-  page_builder: {
-    title: string
-    type: FeatureType
-  }
-  blog: {
-    title: string
-    type: FeatureType
-  }
-}
-
 // Set the target Object type. This will change to selectable.
 const OBJECT_TYPE = "test-target"
-const FEATURE_DATA: FeatureData = {
-  seo: {
-    title: "SEO",
-    type: "metafields",
-  },
-  faqs: {
-    title: "FAQs",
-    type: "metafields",
-  },
-  page_builder: {
-    title: "Page Builder",
-    type: "object_type",
-  },
-  blog: {
-    title: "Blog",
-    type: "object_type",
-  },
+
+function featureInfo(featureKey: string) {
+  let title
+  let type
+  switch (featureKey) {
+    case "seo":
+      title = "SEO"
+      type = "metafields"
+      break
+    case "faqs":
+      title = "FAQs"
+      type = "metafields"
+      break
+    case "page_builder":
+      title = "Page Builder"
+      type = "object_type"
+      break
+    case "blog":
+      title = "Blog"
+      type = "object_type"
+      break
+  }
+  return {
+    title,
+    type,
+  }
 }
 
 export function Features({ bucket }: FeaturesProps) {
@@ -95,7 +85,7 @@ export function Features({ bucket }: FeaturesProps) {
           onEscapeKeyDown={() => setShowModal(false)}
         >
           <DialogHeader>
-            <DialogTitle>Add {FEATURE_DATA[featureKey].title}</DialogTitle>
+            <DialogTitle>Add {featureInfo(featureKey).title}</DialogTitle>
             <DialogDescription>
               Which existing Object type would you like to add this feature to?
               You can also{" "}
@@ -124,7 +114,7 @@ export function Features({ bucket }: FeaturesProps) {
             >
               {installing
                 ? `Installing...`
-                : `Install ${FEATURE_DATA[featureKey].title}`}
+                : `Install ${featureInfo(featureKey).title}`}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -179,7 +169,7 @@ export function Features({ bucket }: FeaturesProps) {
 
   async function installFeature() {
     try {
-      if (FEATURE_DATA[featureKey].type === "metafields")
+      if (featureInfo(featureKey).type === "metafields")
         await installMetafields()
       else await installObjectType()
     } catch (err) {}
