@@ -224,8 +224,8 @@ export function Features({ targetBucket }: FeaturesProps) {
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
             Adds a blog to your Project. Installs the following new Object
-            types: `blog-posts`,`authors`, and `categories` (slugs must be
-            available). Blog fields include:
+            types: `blog-posts`,`authors`, and `categories`. Blog fields
+            include:
           </p>
         </div>
         <div className="mb-6">
@@ -286,7 +286,7 @@ export function Features({ targetBucket }: FeaturesProps) {
         <h2 className="mb-4 text-2xl font-semibold">🔍 SEO fields</h2>
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Adds SEO fields to existing Object type. Fields include:
+            Adds SEO fields to existing Object type.
           </p>
         </div>
         <div className="mb-6">
