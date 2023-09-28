@@ -1,7 +1,11 @@
 import { createBucketClient } from "@cosmicjs/sdk"
-
 type CosmicConfig = any
-export const cosmicBucketConfig = (
+const cosmicSourceBucketConfig = createBucketClient({
+  bucketSlug: process.env.NEXT_PUBLIC_SOURCE_BUCKET_SLUG || '',
+  readKey: process.env.NEXT_PUBLIC_SOURCE_READ_KEY || ''
+})
+
+export const cosmicTargetBucketConfig = (
   bucketSlug: string,
   readKey: string,
   writeKey: string
@@ -11,27 +15,26 @@ export const cosmicBucketConfig = (
     readKey,
     writeKey,
   })
-
-
-export async function getSEOMetafields(cosmic: CosmicConfig) {
-  const { object_type } = await cosmic.objectTypes.findOne("seo-feature")
+  
+export async function getSEOMetafields() {
+  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne("seo-feature")
   return object_type.metafields
 }
 
-export async function getFAQMetafields(cosmic: CosmicConfig) {
-  const { object_type } = await cosmic.objectTypes.findOne("faq-feature")
+export async function getFAQMetafields() {
+  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne("faq-feature")
   return object_type.metafields
 }
 
-export async function getPageBuilderMetafields(cosmic: CosmicConfig) {
-  const { object_type } = await cosmic.objectTypes.findOne(
+export async function getPageBuilderMetafields() {
+  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
     "page-builder-feature"
   )
   return object_type.metafields
 }
 
-export async function getBlogMetafields(cosmic: CosmicConfig) {
-  const { object_type } = await cosmic.objectTypes.findOne("blog-feature")
+export async function getBlogMetafields() {
+  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne("blog-feature")
   return object_type.metafields
 }
 

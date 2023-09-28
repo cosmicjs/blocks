@@ -10,7 +10,7 @@ export default async function IndexPage({
     location: string
   }
 }) {
-  const bucket = {
+  const targetBucket = {
     bucket_slug: searchParams.bucket_slug,
     read_key: searchParams.read_key,
     write_key: searchParams.write_key,
@@ -22,9 +22,13 @@ export default async function IndexPage({
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
           Feature Installer
         </h1>
-        <p>Install the following features to your Cosmic Object types.</p>
+        <p>
+          Use the Feature Installer to install specific features to your Cosmic
+          Project. Save development time and learn how to model common
+          use-cases. Extend them to suit your needs.
+        </p>
       </div>
-      <Features bucket={bucket} />
+      <Features targetBucket={targetBucket} />
     </section>
   )
 }

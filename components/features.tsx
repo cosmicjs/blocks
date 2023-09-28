@@ -1,13 +1,14 @@
 "use client"
 
 import { useState } from "react"
+import { Loader2 } from "lucide-react"
 
 import {
   addAuthorObjectType,
   addBlogObjectType,
   addCategoriesObjectType,
   addPagesObjectType,
-  cosmicBucketConfig,
+  cosmicTargetBucketConfig,
   getBlogMetafields,
   getFAQMetafields,
   getPageBuilderMetafields,
@@ -22,17 +23,18 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/components/ui/use-toast"
 
 // Types
 type FeaturesProps = {
-  bucket: {
+  targetBucket: {
     bucket_slug: string
     read_key: string
     write_key: string
   }
 }
-
-type FeatureType = "metafields" | "object_type"
 
 // Set the target Object type. This will change to selectable.
 const OBJECT_TYPE = "test-target"
@@ -64,19 +66,19 @@ function featureInfo(featureKey: string) {
   }
 }
 
-export function Features({ bucket }: FeaturesProps) {
-  const cosmic = cosmicBucketConfig(
-    bucket.bucket_slug,
-    bucket.read_key,
-    bucket.write_key
+export function Features({ targetBucket }: FeaturesProps) {
+  const cosmicTargetBucket = cosmicTargetBucketConfig(
+    targetBucket.bucket_slug,
+    targetBucket.read_key,
+    targetBucket.write_key
   )
 
   const [showModal, setShowModal] = useState<boolean>(false)
   const [featureKey, setFeatureKey] = useState<string>("")
   const [installedFeatures, setInstalledFeature] = useState<string[]>([])
-
   function InstallDialog() {
     const [installing, setInstalling] = useState<boolean>(false)
+    const { toast } = useToast()
     return (
       <Dialog open onOpenChange={() => setShowModal(false)}>
         <DialogContent
@@ -85,23 +87,36 @@ export function Features({ bucket }: FeaturesProps) {
           onEscapeKeyDown={() => setShowModal(false)}
         >
           <DialogHeader>
-            <DialogTitle>Add {featureInfo(featureKey).title}</DialogTitle>
+            <DialogTitle>Install {featureInfo(featureKey).title}</DialogTitle>
             <DialogDescription>
-              Which existing Object type would you like to add this feature to?
-              You can also{" "}
-              <a
-                href={`https://app.cosmicjs.com/${bucket.bucket_slug}/object-types/new`}
-                target="_parent"
-                className="text-cosmic-blue"
-              >
-                create a new Object type
-              </a>
-              .
+              {featureInfo(featureKey).type === "metafields" ? (
+                <>
+                  <div className="mb-4">
+                    Which existing Object type would you like to add this
+                    feature to? You can also{" "}
+                    <a
+                      href={`https://app.cosmicjs.com/${targetBucket.bucket_slug}/object-types/new`}
+                      target="_parent"
+                      className="text-cosmic-blue"
+                    >
+                      create a new Object type
+                    </a>
+                  </div>
+                  <div className="mb-4">ADD SELECT OBJECT TYPE LIST HERE</div>
+                  <div className="mb-4">
+                    <div className="mb-2">Add Object type slug here:</div>
+                    <Input type="text" placeholder="Object type slug" />
+                  </div>
+                </>
+              ) : (
+                <>Are you sure you want to add this feature to your Project?</>
+              )}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button
               type="submit"
+              disabled={installing}
               onClick={async () => {
                 setInstalling(true)
                 try {
@@ -110,11 +125,20 @@ export function Features({ bucket }: FeaturesProps) {
                 } catch (err) {}
                 setInstalling(false)
                 setShowModal(false)
+                toast({
+                  title: "Success!",
+                  description: `${featureInfo(featureKey).title} installed`,
+                })
               }}
             >
-              {installing
-                ? `Installing...`
-                : `Install ${featureInfo(featureKey).title}`}
+              {installing ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Installing...
+                </>
+              ) : (
+                `Install ${featureInfo(featureKey).title}`
+              )}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -126,12 +150,12 @@ export function Features({ bucket }: FeaturesProps) {
     // Get the selected Object type metafields
     const {
       object_type: { metafields },
-    } = await cosmic.objectTypes.findOne(OBJECT_TYPE)
+    } = await cosmicTargetBucket.objectTypes.findOne(OBJECT_TYPE)
 
     // Get new Metafields
     let newMetafields
-    if (featureKey === "seo") newMetafields = await getSEOMetafields(cosmic)
-    if (featureKey === "faqs") newMetafields = await getFAQMetafields(cosmic)
+    if (featureKey === "seo") newMetafields = await getSEOMetafields()
+    if (featureKey === "faqs") newMetafields = await getFAQMetafields()
 
     const keyArr = newMetafields.map((obj: any) => obj.key)
 
@@ -139,13 +163,12 @@ export function Features({ bucket }: FeaturesProps) {
     let metafieldClash
     for (const metafield of metafields) {
       if (keyArr.indexOf(metafield.key) !== -1) {
-        console.log("FOUND!!!!")
         throw Error
       }
     }
     // Check for metafield key exists then add to the top of the Metafields array
     if (!metafieldClash) {
-      await cosmic.objectTypes.updateOne(OBJECT_TYPE, {
+      await cosmicTargetBucket.objectTypes.updateOne(OBJECT_TYPE, {
         metafields: [...newMetafields, ...metafields],
       })
     }
@@ -154,16 +177,22 @@ export function Features({ bucket }: FeaturesProps) {
   async function installObjectType() {
     let metafields
     if (featureKey === "page_builder") {
-      metafields = await getPageBuilderMetafields(cosmic)
-      const seoMetafields = await getSEOMetafields(cosmic)
-      await addPagesObjectType(cosmic, [...metafields, ...seoMetafields])
+      metafields = await getPageBuilderMetafields()
+      const seoMetafields = await getSEOMetafields()
+      await addPagesObjectType(cosmicTargetBucket, [
+        ...metafields,
+        ...seoMetafields,
+      ])
     }
     if (featureKey === "blog") {
-      await addAuthorObjectType(cosmic)
-      await addCategoriesObjectType(cosmic)
-      metafields = await getBlogMetafields(cosmic)
-      const seoMetafields = await getSEOMetafields(cosmic)
-      await addBlogObjectType(cosmic, [...metafields, ...seoMetafields])
+      await addAuthorObjectType(cosmicTargetBucket)
+      await addCategoriesObjectType(cosmicTargetBucket)
+      metafields = await getBlogMetafields()
+      const seoMetafields = await getSEOMetafields()
+      await addBlogObjectType(cosmicTargetBucket, [
+        ...metafields,
+        ...seoMetafields,
+      ])
     }
   }
 
@@ -180,16 +209,23 @@ export function Features({ bucket }: FeaturesProps) {
     setFeatureKey(key)
   }
 
+  type Props = {
+    children: React.ReactNode
+  }
+
+  function Card({ children }: Props) {
+    return <div className="mb-10 rounded-xl border p-6">{children}</div>
+  }
+
   return (
     <div>
-      <h2 className="mb-4 text-3xl font-semibold">Install New Object Type</h2>
-      <div className="mb-10">
-        <h2 className="mb-4 text-2xl font-semibold">Blog</h2>
+      <Card>
+        <h2 className="mb-4 text-2xl font-semibold">📝 Blog</h2>
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Add a blog to your Bucket. Requires the following Object type slugs
-            to be available: `blog-posts`,`authors`, and `categories`. Blog
-            fields include:
+            Install New Object TypeAdds a blog to your Project. Requires the
+            following Object type slugs to be available: `blog-posts`,`authors`,
+            and `categories`. Blog fields include:
           </p>
         </div>
         <div className="mb-6">
@@ -213,13 +249,13 @@ export function Features({ bucket }: FeaturesProps) {
             Install Blog Feature
           </Button>
         )}
-      </div>
-      <div className="mb-10">
-        <h2 className="mb-4 text-2xl font-semibold">Page Builder</h2>
+      </Card>
+      <Card>
+        <h2 className="mb-4 text-2xl font-semibold">📄 Page Builder</h2>
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Add a `pages` Object type to your Bucket with a page builder. Fields
-            include:
+            Adds a `pages` Object type to your Bucket with a page builder.
+            Fields include:
           </p>
         </div>
         <div className="mb-6">
@@ -245,15 +281,12 @@ export function Features({ bucket }: FeaturesProps) {
             Install Page Builder
           </Button>
         )}
-      </div>
-      <h2 className="mb-4 text-3xl font-semibold">
-        Install Feature to Existing Object Type
-      </h2>
-      <div className="mb-10">
-        <h2 className="mb-4 text-2xl font-semibold">SEO fields</h2>
+      </Card>
+      <Card>
+        <h2 className="mb-4 text-2xl font-semibold">🔍 SEO fields</h2>
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Adds SEO fields. Fields include:
+            Adds SEO fields to existing Object type. Fields include:
           </p>
         </div>
         <div className="mb-6">
@@ -278,12 +311,12 @@ export function Features({ bucket }: FeaturesProps) {
             Install SEO
           </Button>
         )}
-      </div>
-      <div className="mb-10">
-        <h2 className="mb-4 text-2xl font-semibold">FAQs</h2>
+      </Card>
+      <Card>
+        <h2 className="mb-4 text-2xl font-semibold">❓ FAQs</h2>
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Add FAQs to any Object type. Fields include:
+            Add FAQs to existing Object type. Fields include:
           </p>
         </div>
         <div className="mb-6">
@@ -308,8 +341,9 @@ export function Features({ bucket }: FeaturesProps) {
             Install FAQs
           </Button>
         )}
-      </div>
+      </Card>
       {showModal && <InstallDialog />}
+      <Toaster />
     </div>
   )
 }
