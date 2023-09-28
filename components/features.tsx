@@ -223,9 +223,9 @@ export function Features({ targetBucket }: FeaturesProps) {
         <h2 className="mb-4 text-2xl font-semibold">📝 Blog</h2>
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Install New Object TypeAdds a blog to your Project. Requires the
-            following Object type slugs to be available: `blog-posts`,`authors`,
-            and `categories`. Blog fields include:
+            Adds a blog to your Project. Installs the following new Object
+            types: `blog-posts`,`authors`, and `categories` (slugs must be
+            available). Blog fields include:
           </p>
         </div>
         <div className="mb-6">
