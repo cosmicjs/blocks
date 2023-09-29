@@ -5,6 +5,8 @@ export const cosmicSourceBucketConfig = createBucketClient({
   readKey: process.env.NEXT_PUBLIC_SOURCE_READ_KEY || ''
 })
 
+import { getMediaBlogFromURL } from "@/lib/utils"
+
 export const cosmicTargetBucketConfig = (
   bucketSlug: string,
   readKey: string,
@@ -48,21 +50,25 @@ export async function getBlog(cosmic: CosmicConfig) {
 export async function getAuthors(cosmic: CosmicConfig) {
   const { objects } = await cosmic.objects.find({
     type: "authors"
-  }).limit(2).props('id,slug,title,type,metadata')
+  }).limit(2).props('id,slug,title,type,metadata,thumbnail')
   return objects
 }
 
 export async function getCategories(cosmic: CosmicConfig) {
   const { objects } = await cosmic.objects.find({
     type: "categories"
-  }).limit(2).props('id,slug,title,type')
+  }).limit(2).props('id,slug,title,type,thumbnail')
   return objects
 }
 
 export async function addAuthors(cosmic: CosmicConfig, authors: any) {
   for (let author of authors) {
     delete author.id
-    author.metadata.image = author.metadata.image.url.split('https://cdn.cosmicjs.com/')[1]
+    const media = await getMediaBlogFromURL(author.metadata.image.imgix_url)
+    // Upload media
+    const mediaRes = await cosmic.media.insertOne({ media })
+    author.metadata.image = mediaRes.media.name
+    author.thumbnail = mediaRes.media.name
     await cosmic.objects.insertOne(author)
   }
 }
@@ -70,13 +76,22 @@ export async function addAuthors(cosmic: CosmicConfig, authors: any) {
 export async function addCategories(cosmic: CosmicConfig, categories: any) {
   for (const category of categories) {
     delete category.id
+    const media = await getMediaBlogFromURL(category.thumbnail)
+    // Upload media
+    const mediaRes = await cosmic.media.insertOne({ media })
+    category.thumbnail = mediaRes.media.name
     await cosmic.objects.insertOne(category)
   }
 }
 
 export async function addBlog(cosmic: CosmicConfig, blog: any) {
-  blog.metadata.image = blog.metadata.image.url.split('https://cdn.cosmicjs.com/')[1]
   blog.type = "blog-posts"
+  const media = await getMediaBlogFromURL(blog.metadata.image.imgix_url)
+  // Upload media
+  const mediaRes = await cosmic.media.insertOne({ media })
+  blog.metadata.image = mediaRes.media.name
+  blog.metadata.seo.og_image = mediaRes.media.name
+  blog.thumbnail = mediaRes.media.name
   await cosmic.objects.insertOne(blog)
 }
 
