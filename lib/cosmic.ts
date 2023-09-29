@@ -64,7 +64,7 @@ export async function getCategories(cosmic: CosmicConfig) {
 export async function addAuthors(cosmic: CosmicConfig, authors: any) {
   for (let author of authors) {
     delete author.id
-    const media = await getMediaBlogFromURL(author.metadata.image.imgix_url)
+    const media = await getMediaBlogFromURL(author.metadata.image.imgix_url, author.title + '.jpg')
     // Upload media
     const mediaRes = await cosmic.media.insertOne({ media })
     author.metadata.image = mediaRes.media.name
@@ -76,7 +76,7 @@ export async function addAuthors(cosmic: CosmicConfig, authors: any) {
 export async function addCategories(cosmic: CosmicConfig, categories: any) {
   for (const category of categories) {
     delete category.id
-    const media = await getMediaBlogFromURL(category.thumbnail)
+    const media = await getMediaBlogFromURL(category.thumbnail, category.title + '.jpg')
     // Upload media
     const mediaRes = await cosmic.media.insertOne({ media })
     category.thumbnail = mediaRes.media.name
@@ -86,7 +86,7 @@ export async function addCategories(cosmic: CosmicConfig, categories: any) {
 
 export async function addBlog(cosmic: CosmicConfig, blog: any) {
   blog.type = "blog-posts"
-  const media = await getMediaBlogFromURL(blog.metadata.image.imgix_url)
+  const media = await getMediaBlogFromURL(blog.metadata.image.imgix_url, blog.title + '.jpg')
   // Upload media
   const mediaRes = await cosmic.media.insertOne({ media })
   blog.metadata.image = mediaRes.media.name

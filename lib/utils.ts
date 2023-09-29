@@ -5,13 +5,13 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export async function getMediaBlogFromURL(url: string) {
+export async function getMediaBlogFromURL(url: string, name: string) {
   const response = await fetch(url)
   const blob = await response.blob()
   const media: any = new Blob([blob], {
     type: "image/jpeg",
   })
-  media.name = getImageNameFromURL(url)
+  media.name = name
   return media
 }
 
