@@ -20,12 +20,12 @@ export default async function IndexPage({
     <section className="container grid items-center gap-6 p-4 pb-8 pt-6 md:py-10 lg:w-[980px]">
       <div className="flex max-w-[980px] flex-col items-start gap-2">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Feature Installer
+          🏗 Cosmic Feature Builder
         </h1>
         <p>
-          Use the Feature Installer to install specific features to your Cosmic
-          Project. Save development time and learn how to model common
-          use-cases. Extend them to suit your needs.
+          Use the Cosmic Feature Builder to install specific features to your
+          Cosmic Project. Save development time and learn how to model common
+          use cases. Extend the features to suit your needs.
         </p>
       </div>
       <Features targetBucket={targetBucket} />
