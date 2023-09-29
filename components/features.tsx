@@ -244,11 +244,7 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
       const newAuthors = await getAuthors(cosmicTargetBucket)
       const newCategories = await getCategories(cosmicTargetBucket)
       metafields = await getBlogMetafields()
-      const seoMetafields = await getSEOMetafields()
-      await addBlogObjectType(cosmicTargetBucket, [
-        ...metafields,
-        ...seoMetafields,
-      ])
+      await addBlogObjectType(cosmicTargetBucket, metafields)
       // Add blog
       let blog = await getBlog(cosmicSourceBucketConfig)
       blog.metadata.author = newAuthors[0].id
