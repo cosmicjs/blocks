@@ -34,6 +34,7 @@ type FeaturesProps = {
     read_key: string
     write_key: string
   }
+  objectTypes: any
 }
 
 // Set the target Object type. This will change to selectable.
@@ -66,7 +67,7 @@ function featureInfo(featureKey: string) {
   }
 }
 
-export function Features({ targetBucket }: FeaturesProps) {
+export function Features({ targetBucket, objectTypes }: FeaturesProps) {
   const cosmicTargetBucket = cosmicTargetBucketConfig(
     targetBucket.bucket_slug,
     targetBucket.read_key,
@@ -102,10 +103,10 @@ export function Features({ targetBucket }: FeaturesProps) {
                       create a new Object type
                     </a>
                   </div>
-                  <div className="mb-4">ADD SELECT OBJECT TYPE LIST HERE</div>
                   <div className="mb-4">
-                    <div className="mb-2">Add Object type slug here:</div>
-                    <Input type="text" placeholder="Object type slug" />
+                    {objectTypes?.map((type: any) => {
+                      return <div>{type.title}</div>
+                    })}
                   </div>
                 </>
               ) : (

@@ -1,3 +1,4 @@
+import { cosmicTargetBucketConfig } from "@/lib/cosmic"
 import { Features } from "@/components/features"
 
 export default async function IndexPage({
@@ -15,6 +16,13 @@ export default async function IndexPage({
     read_key: searchParams.read_key,
     write_key: searchParams.write_key,
   }
+  const cosmicTargetBucket = cosmicTargetBucketConfig(
+    targetBucket.bucket_slug,
+    targetBucket.read_key,
+    targetBucket.write_key
+  )
+  const { object_types: objectTypes } =
+    await cosmicTargetBucket.objectTypes.find()
 
   return (
     <section className="container grid items-center gap-6 p-4 pb-8 pt-6 md:py-10 lg:w-[980px]">
@@ -28,7 +36,7 @@ export default async function IndexPage({
           practices. Extend the features to suit your needs.
         </p>
       </div>
-      <Features targetBucket={targetBucket} />
+      <Features targetBucket={targetBucket} objectTypes={objectTypes} />
     </section>
   )
 }
