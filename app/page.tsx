@@ -21,8 +21,10 @@ export default async function IndexPage({
     targetBucket.read_key,
     targetBucket.write_key
   )
-  const { object_types: objectTypes } =
-    await cosmicTargetBucket.objectTypes.find()
+  let objectTypes = []
+  try {
+    objectTypes = (await cosmicTargetBucket.objectTypes.find()).object_types
+  } catch {}
 
   return (
     <section className="container grid items-center gap-6 p-4 pb-8 pt-6 md:py-10 lg:w-[980px]">

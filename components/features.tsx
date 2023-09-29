@@ -15,6 +15,7 @@ import {
   getSEOMetafields,
 } from "@/lib/cosmic"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Dialog,
   DialogContent,
@@ -23,7 +24,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
 
@@ -36,9 +36,6 @@ type FeaturesProps = {
   }
   objectTypes: any
 }
-
-// Set the target Object type. This will change to selectable.
-const OBJECT_TYPE = "test-target"
 
 function featureInfo(featureKey: string) {
   let title
@@ -79,7 +76,16 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
   const [installedFeatures, setInstalledFeature] = useState<string[]>([])
   function InstallDialog() {
     const [installing, setInstalling] = useState<boolean>(false)
+    const [selectedObjectTypes, setSelectedObjectTypes] = useState<string[]>([])
     const { toast } = useToast()
+    function handleObjectTypeSelected(typeSlug: string) {
+      if (selectedObjectTypes.indexOf(typeSlug) === -1)
+        setSelectedObjectTypes([...selectedObjectTypes, typeSlug])
+      else {
+        const removedTypeArr = selectedObjectTypes.filter((e) => e !== typeSlug)
+        setSelectedObjectTypes(removedTypeArr)
+      }
+    }
     return (
       <Dialog open onOpenChange={() => setShowModal(false)}>
         <DialogContent
@@ -93,8 +99,17 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
               {featureInfo(featureKey).type === "metafields" ? (
                 <>
                   <div className="mb-4">
-                    Which existing Object type would you like to add this
-                    feature to? You can also{" "}
+                    {objectTypes.length ? (
+                      <>
+                        Which existing Object type would you like to add this
+                        feature to? Or
+                      </>
+                    ) : (
+                      <>
+                        You do not have any existing Object types to add this
+                        feature. You will need to{" "}
+                      </>
+                    )}{" "}
                     <a
                       href={`https://app.cosmicjs.com/${targetBucket.bucket_slug}/object-types/new`}
                       target="_parent"
@@ -102,10 +117,28 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
                     >
                       create a new Object type
                     </a>
+                    .
                   </div>
                   <div className="mb-4">
                     {objectTypes?.map((type: any) => {
-                      return <div>{type.title}</div>
+                      return (
+                        <div className="flex h-8" key={type.slug}>
+                          <Checkbox
+                            id={type.slug}
+                            className="mr-2"
+                            onCheckedChange={() => {
+                              handleObjectTypeSelected(type.slug)
+                            }}
+                            checked={selectedObjectTypes.includes(type.slug)}
+                          />
+                          <label
+                            className="relative top-[-2px] cursor-pointer"
+                            htmlFor={type.slug}
+                          >
+                            {type.title}
+                          </label>
+                        </div>
+                      )
                     })}
                   </div>
                 </>
@@ -115,63 +148,71 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button
-              type="submit"
-              disabled={installing}
-              onClick={async () => {
-                setInstalling(true)
-                try {
-                  await installFeature()
-                  setInstalledFeature([...installedFeatures, featureKey])
-                } catch (err) {}
-                setInstalling(false)
-                setShowModal(false)
-                toast({
-                  title: "Success!",
-                  description: `${featureInfo(featureKey).title} installed`,
-                })
-              }}
-            >
-              {installing ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Installing...
-                </>
-              ) : (
-                `Install ${featureInfo(featureKey).title}`
-              )}
-            </Button>
+            {featureInfo(featureKey).type === "metafields" &&
+            !objectTypes.length ? (
+              <></>
+            ) : (
+              <Button
+                type="submit"
+                disabled={installing}
+                onClick={async () => {
+                  setInstalling(true)
+                  try {
+                    await installFeature(selectedObjectTypes)
+                    setInstalledFeature([...installedFeatures, featureKey])
+                  } catch (err) {}
+                  setInstalling(false)
+                  setShowModal(false)
+                  toast({
+                    title: "Success!",
+                    description: `${featureInfo(featureKey).title} installed`,
+                  })
+                }}
+              >
+                {installing ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Installing...
+                  </>
+                ) : (
+                  `Install ${featureInfo(featureKey).title}`
+                )}
+              </Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>
     )
   }
 
-  async function installMetafields() {
-    // Get the selected Object type metafields
-    const {
-      object_type: { metafields },
-    } = await cosmicTargetBucket.objectTypes.findOne(OBJECT_TYPE)
+  async function installMetafields(selectedObjectTypes: string[]) {
+    if (!selectedObjectTypes.length) return alert("No Object types selected")
+    for (const typeSlug of selectedObjectTypes) {
+      // Get the selected Object type metafields
+      const {
+        object_type: { metafields },
+      } = await cosmicTargetBucket.objectTypes.findOne(typeSlug)
 
-    // Get new Metafields
-    let newMetafields
-    if (featureKey === "seo") newMetafields = await getSEOMetafields()
-    if (featureKey === "faqs") newMetafields = await getFAQMetafields()
+      // Get new Metafields
+      let newMetafields
+      if (featureKey === "seo") newMetafields = await getSEOMetafields()
+      if (featureKey === "faqs") newMetafields = await getFAQMetafields()
 
-    const keyArr = newMetafields.map((obj: any) => obj.key)
+      const keyArr = newMetafields.map((obj: any) => obj.key)
 
-    // Check for the metafields existing
-    let metafieldClash
-    for (const metafield of metafields) {
-      if (keyArr.indexOf(metafield.key) !== -1) {
-        throw Error
+      // Check for the metafields existing
+      let metafieldClash
+      for (const metafield of metafields) {
+        if (keyArr.indexOf(metafield.key) !== -1) {
+          throw Error
+        }
       }
-    }
-    // Check for metafield key exists then add to the top of the Metafields array
-    if (!metafieldClash) {
-      await cosmicTargetBucket.objectTypes.updateOne(OBJECT_TYPE, {
-        metafields: [...newMetafields, ...metafields],
-      })
+      // Check for metafield key exists then add to the top of the Metafields array
+      if (!metafieldClash) {
+        await cosmicTargetBucket.objectTypes.updateOne(typeSlug, {
+          metafields: [...newMetafields, ...metafields],
+        })
+      }
     }
   }
 
@@ -197,10 +238,10 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
     }
   }
 
-  async function installFeature() {
+  async function installFeature(selectedObjectTypes: string[]) {
     try {
       if (featureInfo(featureKey).type === "metafields")
-        await installMetafields()
+        await installMetafields(selectedObjectTypes)
       else await installObjectType()
     } catch (err) {}
   }
