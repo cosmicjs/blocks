@@ -5,11 +5,18 @@ import { Loader2 } from "lucide-react"
 
 import {
   addAuthorObjectType,
+  addAuthors,
+  addBlog,
   addBlogObjectType,
+  addCategories,
   addCategoriesObjectType,
   addPagesObjectType,
+  cosmicSourceBucketConfig,
   cosmicTargetBucketConfig,
+  getAuthors,
+  getBlog,
   getBlogMetafields,
+  getCategories,
   getFAQMetafields,
   getPageBuilderMetafields,
   getSEOMetafields,
@@ -228,13 +235,26 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
     }
     if (featureKey === "blog") {
       await addAuthorObjectType(cosmicTargetBucket)
+      const authors = await getAuthors(cosmicSourceBucketConfig)
+      const categories = await getCategories(cosmicSourceBucketConfig)
       await addCategoriesObjectType(cosmicTargetBucket)
+      await addAuthors(cosmicTargetBucket, authors)
+      await addCategories(cosmicTargetBucket, categories)
+      // Update authors and categories
+      const newAuthors = await getAuthors(cosmicTargetBucket)
+      const newCategories = await getCategories(cosmicTargetBucket)
       metafields = await getBlogMetafields()
       const seoMetafields = await getSEOMetafields()
       await addBlogObjectType(cosmicTargetBucket, [
         ...metafields,
         ...seoMetafields,
       ])
+      // Add blog
+      let blog = await getBlog(cosmicSourceBucketConfig)
+      blog.metadata.author = newAuthors[0].id
+      blog.metadata.categories = [newCategories[0].id, newCategories[1].id]
+      console.log(blog)
+      await addBlog(cosmicTargetBucket, blog)
     }
   }
 
