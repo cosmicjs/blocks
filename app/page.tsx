@@ -24,8 +24,8 @@ export default async function IndexPage({
         </h1>
         <p>
           Use the Cosmic Feature Builder to install specific features to your
-          Cosmic Project. Save development time and learn how to model common
-          use cases. Extend the features to suit your needs.
+          Cosmic Project. Save development time and learn content modeling best
+          practices. Extend the features to suit your needs.
         </p>
       </div>
       <Features targetBucket={targetBucket} />

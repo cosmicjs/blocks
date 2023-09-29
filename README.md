@@ -1,6 +1,6 @@
 # Feature Builder
 
-A Cosmic Extension to help you add features to your website.
+Use the Cosmic Feature Builder to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
 
 ## Built with
 
