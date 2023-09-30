@@ -255,9 +255,8 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
         <h2 className="mb-4 text-2xl font-semibold">📝 Blog</h2>
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Adds a blog to your Project. Installs the following new Object
-            types: `blog-posts`,`authors`, and `categories`. Blog fields
-            include:
+            Adds three new Object types to your Bucket with slugs
+            `blog-posts`,`authors`, and `categories`. Blog fields include:
           </p>
         </div>
         <div className="mb-6">
@@ -286,8 +285,8 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
         <h2 className="mb-4 text-2xl font-semibold">📄 Page Builder</h2>
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Adds a `pages` Object type to your Bucket with a page builder.
-            Fields include:
+            Adds a new Object type with slug `pages` to your Bucket. Fields
+            include:
           </p>
         </div>
         <div className="mb-6">
@@ -318,14 +317,11 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
         <h2 className="mb-4 text-2xl font-semibold">🔍 SEO fields</h2>
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Adds SEO fields to existing Object type.
+            Adds a parent Metafield with key `seo` to an existing Object type
+            with the following children:
           </p>
         </div>
         <div className="mb-6">
-          <p>
-            Parent Metafield with key <code>seo</code> with the following
-            children:
-          </p>
           <ol className="list-decimal pl-8">
             <li>SEO Title</li>
             <li>SEO Description</li>
@@ -348,14 +344,11 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
         <h2 className="mb-4 text-2xl font-semibold">❓ FAQs</h2>
         <div className="mb-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Add FAQs to existing Object type. Fields include:
+            Adds a repeater Metafield with key `faqs` to an existing Object type
+            with the following children:
           </p>
         </div>
         <div className="mb-6">
-          <p>
-            Repeater Metafield with key <code>faqs</code> with the following
-            children:
-          </p>
           <ol className="list-decimal pl-8">
             <li>Question</li>
             <li>Answer</li>
