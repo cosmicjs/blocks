@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export async function getMediaBlogFromURL(url: string, name: string) {
+export async function getMediaBlobFromURL(url: string, name: string) {
   const response = await fetch(url)
   const blob = await response.blob()
   const media: any = new Blob([blob], {
@@ -16,5 +16,5 @@ export async function getMediaBlogFromURL(url: string, name: string) {
 }
 
 export function getImageNameFromURL(name: string) {
-  return name.split('https://imgix.cosmicjs.com/')[1]
+  return name.split("https://imgix.cosmicjs.com/")[1]
 }

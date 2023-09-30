@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Loader2 } from "lucide-react"
 
+import { featureInfo } from "@/config/features"
 import {
   addAuthorObjectType,
   addAuthors,
@@ -10,6 +11,7 @@ import {
   addBlogObjectType,
   addCategories,
   addCategoriesObjectType,
+  addPage,
   addPagesObjectType,
   cosmicSourceBucketConfig,
   cosmicTargetBucketConfig,
@@ -18,6 +20,7 @@ import {
   getBlogMetafields,
   getCategories,
   getFAQMetafields,
+  getPage,
   getPageBuilderMetafields,
   getSEOMetafields,
 } from "@/lib/cosmic"
@@ -42,33 +45,6 @@ type FeaturesProps = {
     write_key: string
   }
   objectTypes: any
-}
-
-function featureInfo(featureKey: string) {
-  let title
-  let type
-  switch (featureKey) {
-    case "seo":
-      title = "SEO"
-      type = "metafields"
-      break
-    case "faqs":
-      title = "FAQs"
-      type = "metafields"
-      break
-    case "page_builder":
-      title = "Page Builder"
-      type = "object_type"
-      break
-    case "blog":
-      title = "Blog"
-      type = "object_type"
-      break
-  }
-  return {
-    title,
-    type,
-  }
 }
 
 export function Features({ targetBucket, objectTypes }: FeaturesProps) {
@@ -227,11 +203,10 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
     let metafields
     if (featureKey === "page_builder") {
       metafields = await getPageBuilderMetafields()
-      const seoMetafields = await getSEOMetafields()
-      await addPagesObjectType(cosmicTargetBucket, [
-        ...metafields,
-        ...seoMetafields,
-      ])
+      await addPagesObjectType(cosmicTargetBucket, metafields)
+      // Add page
+      const page = await getPage(cosmicSourceBucketConfig)
+      await addPage(cosmicTargetBucket, page)
     }
     if (featureKey === "blog") {
       await addAuthorObjectType(cosmicTargetBucket)
