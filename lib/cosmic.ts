@@ -160,6 +160,7 @@ export async function addAuthorObjectType(cosmic: CosmicConfig) {
     emoji: "👥",
     options: {
       slug_field: true,
+      content_editor: false,
     },
     metafields: [
       {
@@ -182,6 +183,7 @@ export async function addBlogObjectType(cosmic: CosmicConfig, metafields: any) {
     emoji: "📝",
     options: {
       slug_field: true,
+      content_editor: false,
     },
     metafields,
   })
@@ -195,6 +197,7 @@ export async function addCategoriesObjectType(cosmic: CosmicConfig) {
     emoji: "🔗",
     options: {
       slug_field: true,
+      content_editor: false,
     },
   })
 }
@@ -210,6 +213,7 @@ export async function addPagesObjectType(
     emoji: "📄",
     options: {
       slug_field: true,
+      content_editor: false,
     },
     metafields,
   })
