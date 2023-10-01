@@ -87,7 +87,7 @@ export default async function BlogPage({
               {helpers.stringToFriendlyDate(blog.metadata.published_date)}
             </div>
             <div className="absolute right-0">
-              {blog.metadata.categories.map((cat) => {
+              {blog.metadata.categories.map((cat: any) => {
                 return (
                   <span
                     className="px-3 py-1 mb-1 mr-1 rounded-xl text-white"
