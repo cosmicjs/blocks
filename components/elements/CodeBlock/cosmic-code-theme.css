@@ -1,0 +1,142 @@
+.cosmic-code-theme pre[class*='language-'],
+code[class*='language-'] {
+  color: #ffffff;
+  font-size: 13px;
+  background: none;
+  text-shadow: none;
+  font-family: 'JetBrains Mono', 'Menlo', 'Andale Mono', 'Ubuntu Mono',
+    monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.cosmic-code-theme {
+  line-height: 24px !important;
+}
+
+pre {
+  padding: 10px 16px !important;
+  margin-bottom: 4px;
+}
+
+.cosmic-code-theme pre[class*='language-']::selection,
+code[class*='language-']::selection,
+pre[class*='language-']::mozselection,
+code[class*='language-']::mozselection {
+  text-shadow: none;
+  background: #537aa2;
+}
+@media print {
+  .cosmic-code-theme pre[class*='language-'],
+  .cosmic-code-theme code[class*='language-'] {
+    text-shadow: none;
+  }
+}
+.cosmic-code-theme pre[class*='language-'] {
+  padding: 8px 12px;
+  margin: 0.5em 0;
+  overflow: auto;
+  background: #11171a;
+}
+.cosmic-code-theme :not(pre) > code[class*='language-'] {
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  color: #85e89d;
+  background: #11171a;
+}
+
+/*********************************************************
+* Tokens
+*/
+.cosmic-code-theme .namespace {
+  opacity: 0.7;
+}
+.cosmic-code-theme .token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #697980;
+}
+.cosmic-code-theme .token.punctuation {
+  color: #ddeaf0;
+}
+.cosmic-code-theme .token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #85e89d;
+}
+.cosmic-code-theme .token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #85e89d;
+}
+.cosmic-code-theme .token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #ffffff;
+}
+.cosmic-code-theme .token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #79b8ff;
+}
+.cosmic-code-theme .token.function {
+  color: #b392f0;
+}
+.cosmic-code-theme .token.regex,
+.token.important,
+.token.variable {
+  color: #85e89d;
+}
+.cosmic-code-theme .token.important,
+.token.bold {
+  font-weight: bold;
+}
+.cosmic-code-theme .token.italic {
+  font-style: italic;
+}
+.cosmic-code-theme .token.entity {
+  cursor: help;
+}
+/*********************************************************
+* Line highlighting
+*/
+.cosmic-code-theme pre[data-line] {
+  position: relative;
+}
+.cosmic-code-theme pre[class*='language-'] > code[class*='language-'] {
+  position: relative;
+  z-index: 0;
+}
+.cosmic-code-theme .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: #537aa2;
+  box-shadow: inset 5px 0 0 #537aa2;
+  z-index: 0;
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}

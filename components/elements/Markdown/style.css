@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+pre {
+  @apply w-full overflow-x-auto break-words rounded-xl bg-gray-800;
+}
+
+@layer components {
+  .markdown {
+    @apply whitespace-normal;
+  }
+
+  .markdown table {
+    @apply block w-full table-auto border-separate border-spacing-0 overflow-x-auto rounded-lg border border-gray-100 p-2 text-left text-sm text-gray-500 dark:border dark:border-dark-gray-100 dark:text-dark-gray-500 sm:text-base;
+  }
+
+  .markdown thead tr th {
+    @apply px-2 py-1 text-gray-500 dark:text-dark-gray-500 sm:px-4;
+  }
+
+  .markdown tbody {
+    @apply border-separate border-t border-gray-100 dark:border-dark-gray-100;
+  }
+
+  .markdown tbody td {
+    @apply border-separate rounded p-2 sm:p-4;
+  }
+
+  .markdown tbody tr td:first-child {
+    @apply font-semibold;
+  }
+
+  .markdown tbody tr:nth-child(odd) {
+    @apply border-separate bg-gray-50 dark:bg-dark-gray-50;
+  }
+
+  .markdown h1 {
+    @apply text-4xl font-bold;
+  }
+
+  .markdown h2 {
+    @apply scroll-mt-32 lg:scroll-mt-20;
+  }
+
+  .markdown li a {
+    @apply text-cosmic-blue-link dark:text-cosmic-blue;
+  }
+
+  .markdown ul,
+  .markdown ol {
+    @apply flex flex-col;
+  }
+
+  .markdown {
+    @apply text-lg leading-relaxed;
+  }
+  .markdown p,
+  .markdown ul,
+  .markdown ol,
+  .markdown blockquote {
+    @apply mt-2 text-base md:mt-4 md:text-lg;
+  }
+
+  .markdown h2 {
+    @apply mt-14 text-3xl font-bold leading-snug;
+  }
+
+  .markdown h3 {
+    @apply mt-14 text-2xl font-bold leading-snug;
+  }
+
+  .markdown h2 + h3 {
+    @apply mt-10;
+  }
+
+  .markdown h4 {
+    @apply mt-8 text-xl font-bold leading-snug;
+  }
+
+  .markdown p a {
+    @apply text-cosmic-blue-link underline hover:text-opacity-70 dark:text-cosmic-blue;
+  }
+
+  .markdown ul li {
+    @apply ml-5 list-disc rounded p-2 text-base md:text-lg;
+  }
+
+  .markdown li p {
+    @apply inline;
+  }
+
+  .markdown ol li {
+    @apply ml-5 list-decimal rounded p-2 text-base md:text-lg;
+  }
+
+  .markdown li ul li {
+    @apply pl-5;
+  }
+
+  .markdown li ol li {
+    @apply pl-5;
+  }
+
+  .markdown img {
+    @apply mx-auto my-8 max-w-[xl] rounded-lg;
+  }
+
+  .markdown pre {
+    @apply mt-5 overflow-x-auto overflow-y-hidden;
+  }
+}

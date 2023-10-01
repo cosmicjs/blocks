@@ -21,6 +21,7 @@ import {
   getBlog,
   getBlogMetafields,
   getCategories,
+  getCategoriesMetafields,
   getFAQMetafields,
   getGlobalSettings,
   getGlobalSettingsMetafields,
@@ -216,7 +217,8 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
       await addAuthorObjectType(cosmicTargetBucket)
       const authors = await getAuthors(cosmicSourceBucketConfig)
       const categories = await getCategories(cosmicSourceBucketConfig)
-      await addCategoriesObjectType(cosmicTargetBucket)
+      metafields = await getCategoriesMetafields()
+      await addCategoriesObjectType(cosmicTargetBucket, metafields)
       await addAuthors(cosmicTargetBucket, authors)
       await addCategories(cosmicTargetBucket, categories)
       // Update authors and categories

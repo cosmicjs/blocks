@@ -54,6 +54,13 @@ export async function getBlogMetafields() {
   return object_type.metafields
 }
 
+export async function getCategoriesMetafields() {
+  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
+    "categories"
+  )
+  return object_type.metafields
+}
+
 export async function getBlog(cosmic: CosmicConfig) {
   const { object } = await cosmic.objects
     .findOne({
@@ -106,7 +113,7 @@ export async function getCategories(cosmic: CosmicConfig) {
       type: "categories",
     })
     .limit(2)
-    .props("id,slug,title,type,thumbnail")
+    .props("id,slug,title,type,thumbnail,metadata.color")
   return objects
 }
 
@@ -238,7 +245,10 @@ export async function addBlogObjectType(cosmic: CosmicConfig, metafields: any) {
   })
 }
 
-export async function addCategoriesObjectType(cosmic: CosmicConfig) {
+export async function addCategoriesObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
   await cosmic.objectTypes.insertOne({
     singular: "Category",
     title: "Categories",
@@ -248,6 +258,7 @@ export async function addCategoriesObjectType(cosmic: CosmicConfig) {
       slug_field: true,
       content_editor: false,
     },
+    metafields,
   })
 }
 

@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+pre {
+  @apply w-full overflow-x-auto break-words rounded-xl bg-gray-800;
+}
+
+@layer components {
+  .rich-text {
+    @apply whitespace-normal;
+  }
+
+  .rich-text table {
+    @apply block w-full table-auto border-separate border-spacing-0 overflow-x-auto rounded-lg border border-gray-100 p-2 text-left text-sm text-gray-500 dark:border dark:border-dark-gray-100 dark:text-dark-gray-500 sm:text-base;
+  }
+
+  .rich-text thead tr th {
+    @apply px-2 py-1 text-gray-500 dark:text-dark-gray-500 sm:px-4;
+  }
+
+  .rich-text tbody {
+    @apply border-separate border-t border-gray-100 dark:border-dark-gray-100;
+  }
+
+  .rich-text tbody td {
+    @apply border-separate rounded p-2 sm:p-4;
+  }
+
+  .rich-text tbody tr td:first-child {
+    @apply font-semibold;
+  }
+
+  .rich-text tbody tr:nth-child(odd) {
+    @apply border-separate bg-gray-50 dark:bg-dark-gray-50;
+  }
+
+  .rich-text h1 {
+    @apply text-4xl font-bold mt-8;
+  }
+
+  .rich-text h2 {
+    @apply scroll-mt-32 lg:scroll-mt-20 mt-8;
+  }
+
+  .rich-text li a {
+    @apply text-cosmic-blue-link dark:text-cosmic-blue;
+  }
+
+  .rich-text ul,
+  .rich-text ol {
+    @apply flex flex-col;
+  }
+
+  .rich-text {
+    @apply text-lg leading-relaxed;
+  }
+  .rich-text p,
+  .rich-text ul,
+  .rich-text ol,
+  .rich-text blockquote {
+    @apply mt-2 text-base md:mt-4 md:text-lg;
+  }
+
+  .rich-text h2 {
+    @apply mt-14 text-3xl font-bold leading-snug;
+  }
+
+  .rich-text h3 {
+    @apply mt-14 text-2xl font-bold leading-snug;
+  }
+
+  .rich-text h2 + h3 {
+    @apply mt-10;
+  }
+
+  .rich-text h4 {
+    @apply mt-8 text-xl font-bold leading-snug;
+  }
+
+  .rich-text p a {
+    @apply text-cosmic-blue-link underline hover:text-opacity-70 dark:text-cosmic-blue;
+  }
+
+  .rich-text ul li {
+    @apply ml-5 list-disc rounded p-2 text-base md:text-lg;
+  }
+
+  .rich-text li p {
+    @apply inline;
+  }
+
+  .rich-text ol li {
+    @apply ml-5 list-decimal rounded p-2 text-base md:text-lg;
+  }
+
+  .rich-text li ul li {
+    @apply pl-5;
+  }
+
+  .rich-text li ol li {
+    @apply pl-5;
+  }
+
+  .rich-text img {
+    @apply mx-auto my-8 max-w-[xl] rounded-lg;
+  }
+
+  .rich-text pre {
+    @apply mt-5 overflow-x-auto overflow-y-hidden;
+  }
+}
