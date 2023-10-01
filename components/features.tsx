@@ -11,6 +11,8 @@ import {
   addBlogObjectType,
   addCategories,
   addCategoriesObjectType,
+  addGlobalSettings,
+  addGlobalSettingsObjectType,
   addPage,
   addPagesObjectType,
   cosmicSourceBucketConfig,
@@ -20,6 +22,8 @@ import {
   getBlogMetafields,
   getCategories,
   getFAQMetafields,
+  getGlobalSettings,
+  getGlobalSettingsMetafields,
   getPage,
   getPageBuilderMetafields,
   getSEOMetafields,
@@ -226,6 +230,13 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
       blog.metadata.categories = [newCategories[0].id, newCategories[1].id]
       await addBlog(cosmicTargetBucket, blog)
     }
+    if (featureKey === "global_settings") {
+      metafields = await getGlobalSettingsMetafields()
+      await addGlobalSettingsObjectType(cosmicTargetBucket, metafields)
+      // Add page
+      const settings = await getGlobalSettings(cosmicSourceBucketConfig)
+      await addGlobalSettings(cosmicTargetBucket, settings)
+    }
   }
 
   async function installFeature(selectedObjectTypes: string[]) {
@@ -310,6 +321,38 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
             onClick={() => handleInstallClick("page_builder")}
           >
             Install Page Builder
+          </Button>
+        )}
+      </Card>
+      <Card>
+        <h2 className="mb-4 text-2xl font-semibold">⚙️ Global Settings</h2>
+        <div className="mb-4">
+          <p className="text-lg text-gray-800 dark:text-dark-gray-800">
+            Adds a new Object type with slug `settings` to your Bucket. Fields
+            include:
+          </p>
+        </div>
+        <div className="mb-6">
+          <ol className="list-decimal pl-8">
+            <li>Company name</li>
+            <li>Logo image</li>
+            <li>Contact email</li>
+            <li>
+              Repeater Metafield with fields for social links: title, URL, and
+              logo.
+            </li>
+          </ol>
+        </div>
+        {installedFeatures.indexOf("page_builder") !== -1 ? (
+          <Button variant="secondary" disabled>
+            Installed ✅
+          </Button>
+        ) : (
+          <Button
+            variant="secondary"
+            onClick={() => handleInstallClick("global_settings")}
+          >
+            Install Global Settings
           </Button>
         )}
       </Card>

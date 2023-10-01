@@ -18,6 +18,10 @@ export function featureInfo(featureKey: string) {
       title = "Blog"
       type = "object_type"
       break
+    case "global_settings":
+      title = "Global Settings"
+      type = "object_type"
+      break
   }
   return {
     title,

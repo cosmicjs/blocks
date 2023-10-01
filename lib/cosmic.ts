@@ -40,6 +40,13 @@ export async function getPageBuilderMetafields() {
   return object_type.metafields
 }
 
+export async function getGlobalSettingsMetafields() {
+  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
+    "global-settings-feature"
+  )
+  return object_type.metafields
+}
+
 export async function getBlogMetafields() {
   const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
     "blog-feature"
@@ -60,6 +67,24 @@ export async function getPage(cosmic: CosmicConfig) {
   const { object } = await cosmic.objects
     .findOne({
       type: "page-builder-feature",
+    })
+    .props("slug,title,metadata")
+  return object
+}
+
+export async function getGlobalSettings(cosmic: CosmicConfig) {
+  const { object } = await cosmic.objects
+    .findOne({
+      type: "global-settings-feature",
+    })
+    .props("slug,title,metadata")
+  return object
+}
+
+export async function getSettings(cosmic: CosmicConfig) {
+  const { object } = await cosmic.objects
+    .findOne({
+      type: "global-settings",
     })
     .props("slug,title,metadata")
   return object
@@ -152,6 +177,30 @@ export async function addPage(cosmic: CosmicConfig, page: any) {
   await cosmic.objects.insertOne(page)
 }
 
+export async function addGlobalSettings(cosmic: CosmicConfig, settings: any) {
+  settings.type = "settings"
+  const media = await getMediaBlobFromURL(
+    settings.metadata.logo.imgix_url,
+    settings.metadata.company +
+      "." +
+      settings.metadata.logo.imgix_url.split(".").pop()
+  )
+  // Upload media
+  const mediaRes = await cosmic.media.insertOne({ media })
+  settings.metadata.logo = mediaRes.media.name
+  settings.thumbnail = mediaRes.media.name
+  for (let link of settings.metadata.links) {
+    const media = await getMediaBlobFromURL(
+      link.icon.imgix_url,
+      link.company + "." + link.icon.imgix_url.split(".").pop()
+    )
+    // Upload media
+    const mediaRes = await cosmic.media.insertOne({ media })
+    link.icon = mediaRes.media.name
+  }
+  await cosmic.objects.insertOne(settings)
+}
+
 export async function addAuthorObjectType(cosmic: CosmicConfig) {
   await cosmic.objectTypes.insertOne({
     singular: "Author",
@@ -215,6 +264,24 @@ export async function addPagesObjectType(
       slug_field: true,
       content_editor: false,
     },
+    metafields,
+  })
+}
+
+export async function addGlobalSettingsObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Global Settings",
+    title: "Global Settings",
+    slug: "settings",
+    emoji: "⚙️",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
+    singleton: true,
     metafields,
   })
 }
