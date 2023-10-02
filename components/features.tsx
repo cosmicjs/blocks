@@ -215,7 +215,7 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
 
   async function installObjectType() {
     let metafields
-    if (featureKey === "page_builder") {
+    if (featureKey === "pages") {
       metafields = await getPageBuilderMetafields()
       await addPagesObjectType(cosmicTargetBucket, metafields)
       // Add page

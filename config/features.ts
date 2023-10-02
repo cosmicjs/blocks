@@ -10,8 +10,8 @@ export function featureInfo(featureKey: string) {
       title = "FAQs"
       type = "metafields"
       break
-    case "page_builder":
-      title = "Page Builder"
+    case "pages":
+      title = "Pages"
       type = "object_type"
       break
     case "products":
@@ -46,14 +46,15 @@ export const features = [
     field_list: [
       "Hero image",
       "Content in Markdown",
-      "Author Object relationship Metafield",
+      "Author single Object relationship Metafield",
+      "Categories multiple Object relationship Metafield",
       "SEO fields (see below)",
     ],
     preview_link: '/features/blog',
   },
   {
-    key: "page_builder",
-    title: "📄 Page Builder",
+    key: "pages",
+    title: "📄 Pages",
     description: `Adds a new Object type with slug \`pages\` to your Bucket. Fields
     include:`,
     field_list: [

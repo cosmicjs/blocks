@@ -35,7 +35,7 @@ export async function getFAQMetafields() {
 
 export async function getPageBuilderMetafields() {
   const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    "page-builder-feature"
+    "pages"
   )
   return object_type.metafields
 }
@@ -87,7 +87,7 @@ export async function getBlog(cosmic: CosmicConfig) {
 export async function getPage(cosmic: CosmicConfig) {
   const { object } = await cosmic.objects
     .findOne({
-      type: "page-builder-feature",
+      type: "pages",
     })
     .props("slug,title,metadata")
   return object
