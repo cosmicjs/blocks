@@ -13,6 +13,8 @@ import {
   addCategoriesObjectType,
   addGlobalSettings,
   addGlobalSettingsObjectType,
+  addNavMenus,
+  addNavMenusObjectType,
   addPage,
   addPagesObjectType,
   addProducts,
@@ -27,6 +29,8 @@ import {
   getFAQMetafields,
   getGlobalSettings,
   getGlobalSettingsMetafields,
+  getNavMenuMetafields,
+  getNavMenus,
   getPage,
   getPageBuilderMetafields,
   getProducts,
@@ -237,17 +241,24 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
       blog.metadata.categories = [newCategories[0].id, newCategories[1].id]
       await addBlog(cosmicTargetBucket, blog)
     }
+    if (featureKey === "navigation_menus") {
+      metafields = await getNavMenuMetafields()
+      await addNavMenusObjectType(cosmicTargetBucket, metafields)
+      // Add navigation menus
+      const settings = await getNavMenus(cosmicSourceBucketConfig)
+      await addNavMenus(cosmicTargetBucket, settings)
+    }
     if (featureKey === "global_settings") {
       metafields = await getGlobalSettingsMetafields()
       await addGlobalSettingsObjectType(cosmicTargetBucket, metafields)
-      // Add page
+      // Add settings
       const settings = await getGlobalSettings(cosmicSourceBucketConfig)
       await addGlobalSettings(cosmicTargetBucket, settings)
     }
     if (featureKey === "products") {
       metafields = await getProductsMetafields()
       await addProductsObjectType(cosmicTargetBucket, metafields)
-      // Add page
+      // Add products
       const products = await getProducts(cosmicSourceBucketConfig)
       await addProducts(cosmicTargetBucket, products)
     }

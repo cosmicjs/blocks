@@ -22,6 +22,10 @@ export function featureInfo(featureKey: string) {
       title = "Blog"
       type = "object_type"
       break
+    case "navigation_menus":
+      title = "Navigation Menus"
+      type = "object_type"
+      break
     case "global_settings":
       title = "Global Settings"
       type = "object_type"
@@ -70,6 +74,15 @@ export const features = [
       "Quantity",
       "Description",
       "SEO fields (see below)",
+    ],
+  },
+  {
+    key: "navigation_menus",
+    title: "⚙️ Navigation Menus",
+    description: `Adds an Object type with slug \`navigation-menus\` to your Bucket. Fields
+    include:`,
+    field_list: [
+      "Links repeater with title and URL",
     ],
   },
   {

@@ -40,7 +40,7 @@ export function FeatureCard({
           variant="secondary"
           onClick={() => handleInstallClick(feature.key)}
         >
-          Install Blog Feature
+          Install Feature
         </Button>
       )}
     </div>

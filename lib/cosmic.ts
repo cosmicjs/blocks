@@ -47,6 +47,13 @@ export async function getGlobalSettingsMetafields() {
   return object_type.metafields
 }
 
+export async function getNavMenuMetafields() {
+  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
+    "navigation-menus"
+  )
+  return object_type.metafields
+}
+
 export async function getBlogMetafields() {
   const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
     "blog-feature"
@@ -121,6 +128,15 @@ export async function getCategories(cosmic: CosmicConfig) {
     })
     .limit(2)
     .props("id,slug,title,type,thumbnail,metadata.color")
+  return objects
+}
+
+export async function getNavMenus(cosmic: CosmicConfig) {
+  const { objects } = await cosmic.objects
+    .find({
+      type: "navigation-menus",
+    })
+    .props("slug,title,type,metadata")
   return objects
 }
 
@@ -213,6 +229,12 @@ export async function addProducts(cosmic: CosmicConfig, products: any) {
       galleryItem.image = mediaRes.media.name
     }
     await cosmic.objects.insertOne(product)
+  }
+}
+
+export async function addNavMenus(cosmic: CosmicConfig, menus: any) {
+  for (let menu of menus) {
+    await cosmic.objects.insertOne(menu)
   }
 }
 
@@ -338,6 +360,23 @@ export async function addProductsObjectType(
     title: "Products",
     slug: "products",
     emoji: "🛍",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
+    metafields,
+  })
+}
+
+export async function addNavMenusObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Navigation Menu",
+    title: "Navigation Menus",
+    slug: "navigation-menus",
+    emoji: "🖱",
     options: {
       slug_field: true,
       content_editor: false,
