@@ -61,6 +61,13 @@ export async function getCategoriesMetafields() {
   return object_type.metafields
 }
 
+export async function getProductsMetafields() {
+  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
+    "products"
+  )
+  return object_type.metafields
+}
+
 export async function getBlog(cosmic: CosmicConfig) {
   const { object } = await cosmic.objects
     .findOne({
@@ -88,13 +95,13 @@ export async function getGlobalSettings(cosmic: CosmicConfig) {
   return object
 }
 
-export async function getSettings(cosmic: CosmicConfig) {
-  const { object } = await cosmic.objects
-    .findOne({
-      type: "global-settings",
+export async function getProducts(cosmic: CosmicConfig) {
+  const { objects } = await cosmic.objects
+    .find({
+      type: "products",
     })
-    .props("slug,title,metadata")
-  return object
+    .props("slug,title,type,metadata,thumbnail")
+  return objects
 }
 
 export async function getAuthors(cosmic: CosmicConfig) {
@@ -182,6 +189,31 @@ export async function addPage(cosmic: CosmicConfig, page: any) {
     section.image = mediaRes.media.name
   }
   await cosmic.objects.insertOne(page)
+}
+
+export async function addProducts(cosmic: CosmicConfig, products: any) {
+  for (let product of products) {
+    product.type = "products"
+    const media = await getMediaBlobFromURL(
+      product.metadata.image.imgix_url,
+      product.title + "." + product.metadata.image.imgix_url.split(".").pop()
+    )
+    // Upload media
+    const mediaRes = await cosmic.media.insertOne({ media })
+    product.metadata.image = mediaRes.media.name
+    product.metadata.seo.og_image = mediaRes.media.name
+    product.thumbnail = mediaRes.media.name
+    for (let galleryItem of product.metadata.gallery) {
+      const media = await getMediaBlobFromURL(
+        galleryItem.image.imgix_url,
+        product.title + "-Gallery-Image." + galleryItem.image.imgix_url.split(".").pop()
+      )
+      // Upload media
+      const mediaRes = await cosmic.media.insertOne({ media })
+      galleryItem.image = mediaRes.media.name
+    }
+    await cosmic.objects.insertOne(product)
+  }
 }
 
 export async function addGlobalSettings(cosmic: CosmicConfig, settings: any) {
@@ -293,6 +325,23 @@ export async function addGlobalSettingsObjectType(
       content_editor: false,
     },
     singleton: true,
+    metafields,
+  })
+}
+
+export async function addProductsObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Product",
+    title: "Products",
+    slug: "products",
+    emoji: "🛍",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
     metafields,
   })
 }

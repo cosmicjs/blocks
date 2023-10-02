@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Loader2 } from "lucide-react"
 
-import { featureInfo } from "@/config/features"
+import { featureInfo, features } from "@/config/features"
 import {
   addAuthorObjectType,
   addAuthors,
@@ -15,6 +15,8 @@ import {
   addGlobalSettingsObjectType,
   addPage,
   addPagesObjectType,
+  addProducts,
+  addProductsObjectType,
   cosmicSourceBucketConfig,
   cosmicTargetBucketConfig,
   getAuthors,
@@ -27,6 +29,8 @@ import {
   getGlobalSettingsMetafields,
   getPage,
   getPageBuilderMetafields,
+  getProducts,
+  getProductsMetafields,
   getSEOMetafields,
 } from "@/lib/cosmic"
 import { Button } from "@/components/ui/button"
@@ -41,6 +45,7 @@ import {
 } from "@/components/ui/dialog"
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/components/ui/use-toast"
+import { FeatureCard } from "@/components/feature-card"
 
 // Types
 type FeaturesProps = {
@@ -239,6 +244,13 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
       const settings = await getGlobalSettings(cosmicSourceBucketConfig)
       await addGlobalSettings(cosmicTargetBucket, settings)
     }
+    if (featureKey === "products") {
+      metafields = await getProductsMetafields()
+      await addProductsObjectType(cosmicTargetBucket, metafields)
+      // Add page
+      const products = await getProducts(cosmicSourceBucketConfig)
+      await addProducts(cosmicTargetBucket, products)
+    }
   }
 
   async function installFeature(selectedObjectTypes: string[]) {
@@ -254,164 +266,19 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
     setFeatureKey(key)
   }
 
-  type Props = {
-    children: React.ReactNode
-  }
-
-  function Card({ children }: Props) {
-    return <div className="mb-10 rounded-xl border p-6">{children}</div>
-  }
-
   return (
     <div>
-      <Card>
-        <h2 className="mb-4 text-2xl font-semibold">📝 Blog</h2>
-        <div className="mb-4">
-          <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Adds three new Object types to your Bucket with slugs
-            `blog-posts`,`authors`, and `categories`. Blog fields include:
-          </p>
-        </div>
-        <div className="mb-6">
-          <ol className="list-decimal pl-8">
-            <li>Hero image</li>
-            <li>Content in Markdown</li>
-            <li>Author Object relationship Metafield</li>
-            <li>Categories Object relationship Metafield</li>
-            <li>SEO fields (see below)</li>
-          </ol>
-        </div>
-        {installedFeatures.indexOf("blog") !== -1 ? (
-          <Button variant="secondary" disabled>
-            Installed ✅
-          </Button>
-        ) : (
-          <Button
-            variant="secondary"
-            onClick={() => handleInstallClick("blog")}
-          >
-            Install Blog Feature
-          </Button>
-        )}
-      </Card>
-      <Card>
-        <h2 className="mb-4 text-2xl font-semibold">📄 Page Builder</h2>
-        <div className="mb-4">
-          <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Adds a new Object type with slug `pages` to your Bucket. Fields
-            include:
-          </p>
-        </div>
-        <div className="mb-6">
-          <ol className="list-decimal pl-8">
-            <li>Hero image</li>
-            <li>Rich text content</li>
-            <li>
-              Repeating layouts in: 1 column and alternating 2 columns with
-              headline, image, and rich text content.
-            </li>
-            <li>SEO fields (see below)</li>
-          </ol>
-        </div>
-        {installedFeatures.indexOf("page_builder") !== -1 ? (
-          <Button variant="secondary" disabled>
-            Installed ✅
-          </Button>
-        ) : (
-          <Button
-            variant="secondary"
-            onClick={() => handleInstallClick("page_builder")}
-          >
-            Install Page Builder
-          </Button>
-        )}
-      </Card>
-      <Card>
-        <h2 className="mb-4 text-2xl font-semibold">⚙️ Global Settings</h2>
-        <div className="mb-4">
-          <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Adds a new Object type with slug `settings` to your Bucket. Fields
-            include:
-          </p>
-        </div>
-        <div className="mb-6">
-          <ol className="list-decimal pl-8">
-            <li>Company name</li>
-            <li>Logo image</li>
-            <li>Contact email</li>
-            <li>
-              Repeater Metafield with fields for social links: title, URL, and
-              logo.
-            </li>
-          </ol>
-        </div>
-        {installedFeatures.indexOf("page_builder") !== -1 ? (
-          <Button variant="secondary" disabled>
-            Installed ✅
-          </Button>
-        ) : (
-          <Button
-            variant="secondary"
-            onClick={() => handleInstallClick("global_settings")}
-          >
-            Install Global Settings
-          </Button>
-        )}
-      </Card>
-      <Card>
-        <h2 className="mb-4 text-2xl font-semibold">🔍 SEO fields</h2>
-        <div className="mb-4">
-          <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Adds a parent Metafield with key `seo` to an existing Object type
-            with the following children:
-          </p>
-        </div>
-        <div className="mb-6">
-          <ol className="list-decimal pl-8">
-            <li>SEO Title</li>
-            <li>SEO Description</li>
-            <li>OG title</li>
-            <li>OG description</li>
-            <li>OG image</li>
-          </ol>
-        </div>
-        {installedFeatures.indexOf("seo") !== -1 ? (
-          <Button variant="secondary" disabled>
-            Installed ✅
-          </Button>
-        ) : (
-          <Button variant="secondary" onClick={() => handleInstallClick("seo")}>
-            Install SEO
-          </Button>
-        )}
-      </Card>
-      <Card>
-        <h2 className="mb-4 text-2xl font-semibold">❓ FAQs</h2>
-        <div className="mb-4">
-          <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            Adds a repeater Metafield with key `faqs` to an existing Object type
-            with the following children:
-          </p>
-        </div>
-        <div className="mb-6">
-          <ol className="list-decimal pl-8">
-            <li>Question</li>
-            <li>Answer</li>
-          </ol>
-        </div>
-        {installedFeatures.indexOf("faqs") !== -1 ? (
-          <Button variant="secondary" disabled>
-            Installed ✅
-          </Button>
-        ) : (
-          <Button
-            variant="secondary"
-            onClick={() => handleInstallClick("faqs")}
-          >
-            Install FAQs
-          </Button>
-        )}
-      </Card>
+      {features.map((feature) => {
+        return (
+          <div key={feature.key}>
+            <FeatureCard
+              feature={feature}
+              handleInstallClick={handleInstallClick}
+              installedFeatures={installedFeatures}
+            />
+          </div>
+        )
+      })}
       {showModal && <InstallDialog />}
       <Toaster />
     </div>
