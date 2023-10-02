@@ -2,7 +2,6 @@ import * as React from "react"
 import Link from "next/link"
 
 import { NavItem } from "@/types/nav"
-import { siteConfig } from "@/config/site"
 import { Icons } from "@/components/icons"
 
 interface MainNavProps {

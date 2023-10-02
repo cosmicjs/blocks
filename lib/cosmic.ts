@@ -56,7 +56,7 @@ export async function getNavMenuMetafields() {
 
 export async function getBlogMetafields() {
   const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    "blog-feature"
+    "blog-posts"
   )
   return object_type.metafields
 }
@@ -78,7 +78,7 @@ export async function getProductsMetafields() {
 export async function getBlog(cosmic: CosmicConfig) {
   const { object } = await cosmic.objects
     .findOne({
-      type: "blog-feature",
+      type: "blog-posts",
     })
     .props("slug,title,metadata")
   return object

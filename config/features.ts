@@ -49,6 +49,7 @@ export const features = [
       "Author Object relationship Metafield",
       "SEO fields (see below)",
     ],
+    preview_link: '/features/blog',
   },
   {
     key: "page_builder",

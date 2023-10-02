@@ -1,10 +1,14 @@
-import { Button } from "@/components/ui/button"
+import Link from "next/link"
+
+import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/components/ui/button"
 
 type Feature = {
   key: string
   title: string
   description: string
   field_list: string[]
+  preview_link?: string
 }
 
 export function FeatureCard({
@@ -31,18 +35,34 @@ export function FeatureCard({
           })}
         </ol>
       </div>
-      {installedFeatures.indexOf(feature.key) !== -1 ? (
-        <Button variant="secondary" disabled>
-          Installed ✅
-        </Button>
-      ) : (
-        <Button
-          variant="secondary"
-          onClick={() => handleInstallClick(feature.key)}
-        >
-          Install Feature
-        </Button>
-      )}
+      <div className="flex">
+        {installedFeatures.indexOf(feature.key) !== -1 ? (
+          <Button variant="secondary" disabled>
+            Installed ✅
+          </Button>
+        ) : (
+          <Button
+            variant="secondary"
+            onClick={() => handleInstallClick(feature.key)}
+          >
+            Install Feature
+          </Button>
+        )}
+        {feature.preview_link && (
+          <Link
+            href={feature.preview_link}
+            rel="noreferrer"
+            className={cn(
+              "ml-2",
+              buttonVariants({
+                variant: "secondary",
+              })
+            )}
+          >
+            Preview
+          </Link>
+        )}
+      </div>
     </div>
   )
 }
