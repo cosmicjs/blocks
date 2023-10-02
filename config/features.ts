@@ -78,7 +78,7 @@ export const features = [
   },
   {
     key: "navigation_menus",
-    title: "⚙️ Navigation Menus",
+    title: "🖱 Navigation Menus",
     description: `Adds an Object type with slug \`navigation-menus\` to your Bucket. Fields
     include:`,
     field_list: [
