@@ -71,6 +71,7 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
   const [showModal, setShowModal] = useState<boolean>(false)
   const [featureKey, setFeatureKey] = useState<string>("")
   const [installedFeatures, setInstalledFeature] = useState<string[]>([])
+  const feature = features.filter((feature) => feature.key === featureKey)[0]
   function InstallDialog() {
     const [installing, setInstalling] = useState<boolean>(false)
     const [selectedObjectTypes, setSelectedObjectTypes] = useState<string[]>([])
@@ -83,7 +84,6 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
         setSelectedObjectTypes(removedTypeArr)
       }
     }
-    const feature = features.filter((feature) => feature.key === featureKey)[0]
     return (
       <Dialog open onOpenChange={() => setShowModal(false)}>
         <DialogContent
