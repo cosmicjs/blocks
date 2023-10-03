@@ -19,60 +19,43 @@ export const cosmicTargetBucketConfig = (
     writeKey,
   })
 
-export async function getSEOMetafields() {
+export async function getMetafieldsFromObjectType(type: string) {
   const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    "seo-feature"
+    type
   )
-  return object_type.metafields
+  return object_type.metafields  
+}
+
+export async function getSEOMetafields() {
+  return await getMetafieldsFromObjectType("seo-feature")
 }
 
 export async function getFAQMetafields() {
-  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    "faq-feature"
-  )
-  return object_type.metafields
+  return await getMetafieldsFromObjectType("faq-feature")
 }
 
 export async function getPageBuilderMetafields() {
-  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    "pages"
-  )
-  return object_type.metafields
+  return await getMetafieldsFromObjectType("pages")
 }
 
 export async function getGlobalSettingsMetafields() {
-  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    "global-settings-feature"
-  )
-  return object_type.metafields
+  return await getMetafieldsFromObjectType("global-settings-feature")
 }
 
 export async function getNavMenuMetafields() {
-  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    "navigation-menus"
-  )
-  return object_type.metafields
+  return await getMetafieldsFromObjectType("navigation-menus")
 }
 
 export async function getBlogMetafields() {
-  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    "blog-posts"
-  )
-  return object_type.metafields
+  return await getMetafieldsFromObjectType("blog-posts")
 }
 
 export async function getCategoriesMetafields() {
-  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    "categories"
-  )
-  return object_type.metafields
+  return await getMetafieldsFromObjectType("categories")
 }
 
 export async function getProductsMetafields() {
-  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    "products"
-  )
-  return object_type.metafields
+  return await getMetafieldsFromObjectType("products")
 }
 
 export async function getBlog(cosmic: CosmicConfig) {
