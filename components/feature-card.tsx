@@ -43,7 +43,7 @@ export function FeatureCard({
           variant="secondary"
           onClick={() => handleInstallClick(feature.key)}
         >
-          Install Feature
+          Install
         </Button>
         {feature.preview_link && (
           <Link
