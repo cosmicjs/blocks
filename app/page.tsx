@@ -1,5 +1,6 @@
 import { cosmicTargetBucketConfig } from "@/lib/cosmic"
 import { Features } from "@/components/features"
+import { SiteHeader } from "@/components/site-header"
 
 export default async function IndexPage({
   searchParams,
@@ -27,8 +28,9 @@ export default async function IndexPage({
   } catch {}
 
   return (
-    <section className="container grid items-center gap-6 p-4 pb-8 pt-6 md:py-10 lg:w-[980px]">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
+    <>
+      <SiteHeader page="home" />
+      <section className="container grid items-center gap-6 p-4 pb-8 pt-6 md:py-10 lg:w-[980px]">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
           🏗 Cosmic Feature Builder
         </h1>
@@ -37,8 +39,8 @@ export default async function IndexPage({
           Cosmic Project. Save development time and learn content modeling best
           practices. Extend the features to suit your needs.
         </p>
-      </div>
-      <Features targetBucket={targetBucket} objectTypes={objectTypes} />
-    </section>
+        <Features targetBucket={targetBucket} objectTypes={objectTypes} />
+      </section>
+    </>
   )
 }

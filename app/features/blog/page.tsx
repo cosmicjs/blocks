@@ -1,6 +1,7 @@
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import helpers from "@/lib/helpers"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
+import { SiteHeader } from "@/components/site-header"
 
 export async function generateMetadata() {
   const cosmic = cosmicSourceBucketConfig
@@ -27,12 +28,12 @@ export default async function BlogPage() {
 
   return (
     <>
-      <div className="py-6">TABS: Preview / Code</div>
+      <SiteHeader page="preview" />
       <img
         src={`${blog.metadata.image.imgix_url}?w=1000&auto=format,compression`}
         alt={blog.title}
       />
-      <section className="container grid items-center gap-6 p-4 pb-8 pt-6 md:py-10 lg:w-[980px]">
+      <section className="container grid items-center gap-6 p-4 pb-8 pt-6 md:py-10">
         <div className="relative m-auto flex max-w-[750px] flex-col items-start gap-2">
           <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
             {blog.title}

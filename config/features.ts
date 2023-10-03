@@ -28,6 +28,7 @@ export const features = [
       "SEO fields (see below)",
     ],
     confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/features/page",
   },
   {
     key: "products",
