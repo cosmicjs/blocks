@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Loader2 } from "lucide-react"
 
-import { featureInfo, features } from "@/config/features"
+import { features } from "@/config/features"
 import {
   addAuthorObjectType,
   addAuthors,
@@ -83,6 +83,7 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
         setSelectedObjectTypes(removedTypeArr)
       }
     }
+    const feature = features.filter((feature) => feature.key === featureKey)[0]
     return (
       <Dialog open onOpenChange={() => setShowModal(false)}>
         <DialogContent
@@ -91,62 +92,66 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
           onEscapeKeyDown={() => setShowModal(false)}
         >
           <DialogHeader>
-            <DialogTitle>Install {featureInfo(featureKey).title}</DialogTitle>
+            <DialogTitle>Install {feature.title}</DialogTitle>
             <DialogDescription>
-              {featureInfo(featureKey).type === "metafields" ? (
-                <>
-                  <div className="mb-4">
-                    {objectTypes.length ? (
-                      <>
-                        Which existing Object type would you like to add this
-                        feature to? Or
-                      </>
-                    ) : (
-                      <>
-                        You do not have any existing Object types to add this
-                        feature. You will need to{" "}
-                      </>
-                    )}{" "}
-                    <a
-                      href={`https://app.cosmicjs.com/${targetBucket.bucket_slug}/object-types/new`}
-                      target="_parent"
-                      className="text-cosmic-blue"
-                    >
-                      create a new Object type
-                    </a>
-                    .
-                  </div>
-                  <div className="mb-4">
-                    {objectTypes?.map((type: any) => {
-                      return (
-                        <div className="flex h-8" key={type.slug}>
-                          <Checkbox
-                            id={type.slug}
-                            className="mr-2"
-                            onCheckedChange={() => {
-                              handleObjectTypeSelected(type.slug)
-                            }}
-                            checked={selectedObjectTypes.includes(type.slug)}
-                          />
-                          <label
-                            className="relative top-[-2px] cursor-pointer"
-                            htmlFor={type.slug}
-                          >
-                            {type.title}
-                          </label>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </>
-              ) : (
-                <>Are you sure you want to add this feature to your Project?</>
-              )}
+              <div className="mb-4">
+                {feature.type === "metafields" ? (
+                  <>
+                    <div className="mb-4">
+                      {objectTypes.length ? (
+                        <>
+                          Which existing Object type would you like to add this
+                          feature to? Or
+                        </>
+                      ) : (
+                        <>
+                          You do not have any existing Object types to add this
+                          feature. You will need to{" "}
+                        </>
+                      )}{" "}
+                      <a
+                        href={`https://app.cosmicjs.com/${targetBucket.bucket_slug}/object-types/new`}
+                        target="_parent"
+                        className="text-cosmic-blue"
+                      >
+                        create a new Object type
+                      </a>
+                      .
+                    </div>
+                    <div className="mb-4">
+                      {objectTypes?.map((type: any) => {
+                        return (
+                          <div className="flex h-8" key={type.slug}>
+                            <Checkbox
+                              id={type.slug}
+                              className="mr-2"
+                              onCheckedChange={() => {
+                                handleObjectTypeSelected(type.slug)
+                              }}
+                              checked={selectedObjectTypes.includes(type.slug)}
+                            />
+                            <label
+                              className="relative top-[-2px] cursor-pointer"
+                              htmlFor={type.slug}
+                            >
+                              {type.title}
+                            </label>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    Are you sure you want to add this feature to your Project?
+                  </>
+                )}
+              </div>
+              <div>{feature.confirmation}</div>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            {featureInfo(featureKey).type === "metafields" &&
-            !objectTypes.length ? (
+            {feature.type === "metafields" && !objectTypes.length ? (
               <></>
             ) : (
               <Button
@@ -162,7 +167,7 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
                   setShowModal(false)
                   toast({
                     title: "Success!",
-                    description: `${featureInfo(featureKey).title} installed`,
+                    description: `${feature.title} installed`,
                   })
                 }}
               >
@@ -172,7 +177,7 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
                     Installing...
                   </>
                 ) : (
-                  `Install ${featureInfo(featureKey).title}`
+                  `Install ${feature.title}`
                 )}
               </Button>
             )}
@@ -266,7 +271,7 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
 
   async function installFeature(selectedObjectTypes: string[]) {
     try {
-      if (featureInfo(featureKey).type === "metafields")
+      if (feature.type === "metafields")
         await installMetafields(selectedObjectTypes)
       else await installObjectType()
     } catch (err) {}
@@ -285,7 +290,6 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
             <FeatureCard
               feature={feature}
               handleInstallClick={handleInstallClick}
-              installedFeatures={installedFeatures}
             />
           </div>
         )

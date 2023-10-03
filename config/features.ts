@@ -1,48 +1,10 @@
-export function featureInfo(featureKey: string) {
-  let title
-  let type
-  switch (featureKey) {
-    case "seo":
-      title = "SEO"
-      type = "metafields"
-      break
-    case "faqs":
-      title = "FAQs"
-      type = "metafields"
-      break
-    case "pages":
-      title = "Pages"
-      type = "object_type"
-      break
-    case "products":
-      title = "Products"
-      type = "object_type"
-      break
-    case "blog":
-      title = "Blog"
-      type = "object_type"
-      break
-    case "navigation_menus":
-      title = "Navigation Menus"
-      type = "object_type"
-      break
-    case "global_settings":
-      title = "Global Settings"
-      type = "object_type"
-      break
-  }
-  return {
-    title,
-    type,
-  }
-}
-
 export const features = [
   {
     key: "blog",
-    title: "📝 Blog",
-    description: `Adds three new Object types to your Bucket with slugs
-    \`blog-posts\`,\`authors\`, and \`categories\`. Blog fields include:`,
+    title: "Blog",
+    type: "object_type",
+    emoji: "📝",
+    description: `Adds a Blog Posts Object type to your Project. Blog fields include:`,
     field_list: [
       "Hero image",
       "Content in Markdown",
@@ -50,25 +12,29 @@ export const features = [
       "Categories multiple Object relationship Metafield",
       "SEO fields (see below)",
     ],
-    preview_link: '/features/blog',
+    confirmation: `This will install the following Object types: \`blog-posts\`,\`authors\`, and \`categories\` as well as demo content.`,
+    preview_link: "/features/blog",
   },
   {
     key: "pages",
-    title: "📄 Pages",
-    description: `Adds a new Object type with slug \`pages\` to your Bucket. Fields
-    include:`,
+    title: "Pages",
+    type: "object_type",
+    emoji: "📄",
+    description: `Adds a Pages Object type to your Bucket. Fields include:`,
     field_list: [
       "Hero image",
       "Rich text content",
       "Repeating layouts in: 1 column and alternating 2 columns with headline, image, and rich text content.",
       "SEO fields (see below)",
     ],
+    confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
   },
   {
     key: "products",
-    title: "🛍️ Products",
-    description: `Adds a new Object type with slug \`products\` to your Bucket. Fields
-    include:`,
+    title: "Products",
+    type: "object_type",
+    emoji: "🛍️",
+    description: `Adds a Products Object type to your Bucket. Fields include:`,
     field_list: [
       "Image",
       "Image gallery with repeating image and description",
@@ -77,32 +43,37 @@ export const features = [
       "Description",
       "SEO fields (see below)",
     ],
+    confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
   },
   {
     key: "navigation_menus",
-    title: "🖱 Navigation Menus",
-    description: `Adds an Object type with slug \`navigation-menus\` to your Bucket. Fields
-    include:`,
-    field_list: [
-      "Links repeater with title and URL",
-    ],
+    title: "Navigation Menus",
+    type: "object_type",
+    emoji: "🖱",
+    description: `Adds Navigation Menus Object type to your Bucket. Fields include:`,
+    field_list: ["Links repeater with title and URL"],
+    confirmation: `This will install a \`navigation-menus\` Object type to your Bucket as well as demo content.`,
   },
   {
     key: "global_settings",
-    title: "⚙️ Global Settings",
-    description: `Adds a new singular Object type with slug \`settings\` to your Bucket. Fields
-    include:`,
+    title: "Global Settings",
+    type: "object_type",
+    emoji: "⚙️",
+    description: `Adds Global Settings Object type to your Bucket. Fields include:`,
     field_list: [
       "Company name",
       "Logo image",
       "Contact email",
       "Repeater Metafield with fields for social links: title, URL, and logo.",
     ],
+    confirmation: `This will install a \`settings\` Object type to your Bucket as well as demo content.`,
   },
   {
     key: "seo",
-    title: "🔍 SEO fields",
-    description: `Adds a parent Metafield with key \`seo\` to an existing Object type with the following children:`,
+    title: "SEO fields",
+    type: "metafields",
+    emoji: "🔍",
+    description: `Adds SEO fields to any existing Object type. Fields include:`,
     field_list: [
       "SEO Title",
       "SEO Description",
@@ -110,11 +81,15 @@ export const features = [
       "OG description",
       "OG image",
     ],
+    confirmation: `This will add a new Metafield with key \`seo\` to the selected Object types.`,
   },
   {
     key: "faqs",
-    title: "❓ FAQs",
-    description: `Adds a repeater Metafield with key \`faqs\` to an existing Object type with the following children:`,
+    title: "FAQs",
+    type: "metafields",
+    emoji: "❓",
+    description: `Adds an FAQs feature to any existing Object type.`,
     field_list: ["Question", "Answer"],
+    confirmation: `This will add a new Metafield with key \`faqs\` to the selected Object types.`,
   },
 ]

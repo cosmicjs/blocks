@@ -6,23 +6,26 @@ import { Button, buttonVariants } from "@/components/ui/button"
 type Feature = {
   key: string
   title: string
+  emoji: string
+  type: string
   description: string
   field_list: string[]
   preview_link?: string
+  confirmation?: string
 }
 
 export function FeatureCard({
   feature,
   handleInstallClick,
-  installedFeatures,
 }: {
   feature: Feature
   handleInstallClick: any
-  installedFeatures: any
 }) {
   return (
     <div className="mb-10 rounded-xl border p-6">
-      <h2 className="mb-4 text-2xl font-semibold">{feature.title}</h2>
+      <h2 className="mb-4 text-2xl font-semibold">
+        {`${feature.emoji} ${feature.title}`}
+      </h2>
       <div className="mb-4">
         <p className="text-lg text-gray-800 dark:text-dark-gray-800">
           {feature.description}
@@ -36,18 +39,12 @@ export function FeatureCard({
         </ol>
       </div>
       <div className="flex">
-        {installedFeatures.indexOf(feature.key) !== -1 ? (
-          <Button variant="secondary" disabled>
-            Installed ✅
-          </Button>
-        ) : (
-          <Button
-            variant="secondary"
-            onClick={() => handleInstallClick(feature.key)}
-          >
-            Install Feature
-          </Button>
-        )}
+        <Button
+          variant="secondary"
+          onClick={() => handleInstallClick(feature.key)}
+        >
+          Install Feature
+        </Button>
         {feature.preview_link && (
           <Link
             href={feature.preview_link}
