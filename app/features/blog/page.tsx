@@ -72,6 +72,7 @@ export default async function BlogPage({
                     style={{
                       backgroundColor: cat.metadata.color,
                     }}
+                    key={cat.slug}
                   >
                     {cat.title}
                   </span>
@@ -137,6 +138,7 @@ export default async function BlogPage({
                         style={{
                           backgroundColor: cat.metadata.color,
                         }}
+                        key={cat.slug}
                       >
                         {cat.title}
                       </span>

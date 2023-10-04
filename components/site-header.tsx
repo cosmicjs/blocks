@@ -24,8 +24,10 @@ export function SiteHeader({ page, tab }: { page: string; tab?: string }) {
             >
               <Link
                 className={cn(
-                  "cursor-pointer rounded-lg px-4 py-2 text-center font-semibold text-gray-600 dark:bg-dark-background dark:text-dark-gray-600",
-                  tab === "preview" ? "bg-white" : "bg-transparent"
+                  "cursor-pointer rounded-lg px-4 py-2 text-center font-semibold text-gray-600 dark:text-dark-gray-600",
+                  tab === "preview"
+                    ? "bg-white dark:bg-dark-background"
+                    : "bg-transparent"
                 )}
                 role="tab"
                 aria-selected="false"
@@ -37,7 +39,9 @@ export function SiteHeader({ page, tab }: { page: string; tab?: string }) {
               <Link
                 className={cn(
                   "cursor-pointer rounded-lg px-4 py-2 text-center font-semibold text-gray-500 dark:text-dark-gray-500",
-                  tab === "code" ? "bg-white" : "bg-transparent"
+                  tab === "code"
+                    ? "bg-white dark:bg-dark-background"
+                    : "bg-transparent"
                 )}
                 href="?tab=code"
               >
