@@ -11,8 +11,9 @@ export async function generateMetadata() {
   const { object: blog } = await cosmic.objects
     .findOne({
       type: "blog-posts",
+      slug: "our-amazing-adventure",
     })
-    .props("slug,title,metadata")
+    .props("title")
     .depth(1)
   return {
     title: `${blog.title}`,
@@ -26,19 +27,19 @@ export default async function BlogPage({
     tab?: "preview" | "tab"
   }
 }) {
-  const cosmic = cosmicSourceBucketConfig
-
-  const { object: blog } = await cosmic.objects
-    .findOne({
-      type: "blog-posts",
-      slug: "our-amazing-adventure",
-    })
-    .props("slug,title,metadata")
-    .depth(1)
   let tab = searchParams.tab
   if (!tab) tab = "preview"
 
-  function Preview() {
+  async function Preview() {
+    const cosmic = cosmicSourceBucketConfig
+    const { object: blog } = await cosmic.objects
+      .findOne({
+        type: "blog-posts",
+        slug: "our-amazing-adventure",
+      })
+      .props("slug,title,metadata")
+      .depth(1)
+
     return (
       <section className="max-w-2000 container grid items-center pb-8">
         <div className="mb-6 w-full">
