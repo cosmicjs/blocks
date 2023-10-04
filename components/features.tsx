@@ -62,6 +62,18 @@ type FeaturesProps = {
 }
 
 export function Features({ targetBucket, objectTypes }: FeaturesProps) {
+  // Get from localStorage if not in the URL
+  if (!targetBucket.bucket_slug) {
+    targetBucket = {
+      bucket_slug: localStorage.getItem("bucket_slug") || "",
+      read_key: localStorage.getItem("read_key") || "",
+      write_key: localStorage.getItem("write_key") || "",
+    }
+  }
+  localStorage.setItem("bucket_slug", targetBucket.bucket_slug)
+  localStorage.setItem("read_key", targetBucket.read_key)
+  localStorage.setItem("write_key", targetBucket.write_key)
+
   const cosmicTargetBucket = cosmicTargetBucketConfig(
     targetBucket.bucket_slug,
     targetBucket.read_key,

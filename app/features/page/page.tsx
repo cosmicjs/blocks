@@ -132,7 +132,15 @@ function Section({ section }: { section: SectionType }) {
   )
 }
 
-export default async function BlogPage() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: {
+    tab?: "preview" | "tab"
+  }
+}) {
+  let tab = searchParams.tab
+  if (!tab) tab = "preview"
   const cosmic = cosmicSourceBucketConfig
 
   const { object: page } = await cosmic.objects
@@ -145,7 +153,7 @@ export default async function BlogPage() {
 
   return (
     <div>
-      <SiteHeader page="preview" />
+      <SiteHeader tab={tab} />
       <div className="py-10">
         <h1 className="text-center text-4xl font-bold">{page.metadata.h1}</h1>
       </div>

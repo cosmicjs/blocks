@@ -227,7 +227,7 @@ export default async function BlogPage({
   }
   return (
     <>
-      <SiteHeader page="preview" tab={tab} />
+      <SiteHeader tab={tab} />
       <div>{tab === "preview" ? <Preview /> : <Code />}</div>
     </>
   )
