@@ -82,7 +82,7 @@ export function FeatureCard({
           <Link href={feature.preview_link}>
             <img
               src={`${feature.screenshot}?w=1200&auto=format,compression`}
-              className="h-full w-full rounded-xl object-cover"
+              className="h-full max-h-[400px] w-full rounded-xl object-cover object-top"
             />
           </Link>
         )}
