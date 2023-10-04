@@ -41,7 +41,7 @@ export default async function BlogPage({
       .depth(1)
 
     return (
-      <section className="max-w-2000 container grid items-center pb-8">
+      <section className="max-w-2000 container m-auto grid items-center pb-8">
         <div className="mb-6 w-full">
           <img
             src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
@@ -105,7 +105,7 @@ export default async function BlogPage({
           .depth(1);
         
         return (
-          <section className="container grid items-center pb-8">
+          <section className="container grid items-center pb-8 m-auto">
             <div className="mb-6 w-full">
               <img
                 src={\`\${blog.metadata.image.imgix_url}?w=2000&auto=format,compression\`}
