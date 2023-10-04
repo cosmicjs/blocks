@@ -2,7 +2,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useSearchParams } from "next/navigation"
 import { Loader2 } from "lucide-react"
+import { useTheme } from "next-themes"
 
 import { features } from "@/config/features"
 import {
@@ -63,6 +65,12 @@ type FeaturesProps = {
 }
 
 export function Features({ targetBucket, objectTypes }: FeaturesProps) {
+  const searchParams = useSearchParams()
+  const dashboardTheme = searchParams.get("theme")
+  const { setTheme, theme } = useTheme()
+  if (dashboardTheme) {
+    setTheme(dashboardTheme)
+  }
   let bucket_slug = targetBucket.bucket_slug
   let read_key = targetBucket.read_key
   let write_key = targetBucket.write_key
