@@ -88,13 +88,14 @@ export default async function BlogPage({
     const codeString = dedent`
       \`\`\`jsx
       import { createBucketClient } from "@cosmicjs/sdk";
-      import Markdown from "react-markdown";
+      const cosmic = createBucketClient({
+        bucketSlug: "BUCKET_SLUG",
+        readKey: "BUCKET_READ_KEY",
+      });
       
+      import Markdown from "react-markdown";
+
       export default async function BlogPage() {
-        const cosmic = createBucketClient({
-          bucketSlug: "BUCKET_SLUG",
-          readKey: "BUCKET_READ_KEY",
-        });
         
         const { object: blog } = await cosmic.objects
           .findOne({
@@ -176,7 +177,7 @@ export default async function BlogPage({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 2. Add the Cosmic JavaScript SDK and react markdown.
+            Step 2. Add the Cosmic JavaScript SDK the React Markdown packages.
           </h3>
           <Markdown>
             {dedent(
