@@ -4,7 +4,7 @@ export const features = [
     title: "Blog",
     type: "object_type",
     emoji: "📝",
-    description: `Adds a Blog Posts Object type to your Project. Blog fields include:`,
+    description: `Adds a Blog Object type to your Project. Blog fields include:`,
     field_list: [
       "Hero image",
       "Content in Markdown",
@@ -14,6 +14,7 @@ export const features = [
     ],
     confirmation: `This will install the following Object types: \`blog-posts\`,\`authors\`, and \`categories\` as well as demo content.`,
     preview_link: "/features/blog",
+    screenshot:"https://imgix.cosmicjs.com/36a6ee10-62e0-11ee-b975-cb0cfadd93ad-blog.png"
   },
   {
     key: "pages",
@@ -29,6 +30,7 @@ export const features = [
     ],
     confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/page",
+    screenshot: "https://imgix.cosmicjs.com/3e4113c0-62e1-11ee-b975-cb0cfadd93ad-page.png"
   },
   {
     key: "products",

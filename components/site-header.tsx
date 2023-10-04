@@ -10,26 +10,19 @@ import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
 import { ThemeToggle } from "@/components/theme-toggle"
 
-export function SiteHeader({ page }: { page: string }) {
-  const [tab, setTab] = useState("preview")
-
-  function handleTabClick(tabClicked: string) {
-    if (tabClicked === "preview") {
-      return setTab("preview")
-    }
-    return setTab("code")
-  }
+export function SiteHeader({ page, tab }: { page: string; tab?: string }) {
+  if (!tab) tab = "preview"
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-light-background dark:bg-dark-background">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
         {page === "preview" ? (
           <div className="flex flex-1 justify-center text-center">
-            <ul
+            <div
               className="flex rounded-lg bg-gray-100 p-[2px] dark:bg-dark-gray-100"
               role="tablist"
             >
-              <li
+              <Link
                 className={cn(
                   "cursor-pointer rounded-lg px-4 py-2 text-center font-semibold text-gray-600 dark:bg-dark-background dark:text-dark-gray-600",
                   tab === "preview" ? "bg-white" : "bg-transparent"
@@ -37,23 +30,20 @@ export function SiteHeader({ page }: { page: string }) {
                 role="tab"
                 aria-selected="false"
                 aria-disabled="false"
-                onClick={() => handleTabClick("preview")}
+                href="?tab=preview"
               >
                 Preview
-              </li>
-              <li
+              </Link>
+              <Link
                 className={cn(
                   "cursor-pointer rounded-lg px-4 py-2 text-center font-semibold text-gray-500 dark:text-dark-gray-500",
                   tab === "code" ? "bg-white" : "bg-transparent"
                 )}
-                role="tab"
-                aria-selected="false"
-                aria-disabled="false"
-                onClick={() => handleTabClick("code")}
+                href="?tab=code"
               >
                 Code
-              </li>
-            </ul>
+              </Link>
+            </div>
           </div>
         ) : (
           ""
