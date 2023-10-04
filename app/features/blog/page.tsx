@@ -41,7 +41,7 @@ export default async function BlogPage({
 
   function Preview() {
     return (
-      <section className="max-w-2000 container m-auto grid items-center pb-8">
+      <>
         <div className="mb-6 w-full">
           <img
             src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
@@ -82,7 +82,7 @@ export default async function BlogPage({
           </div>
           <Markdown>{blog.metadata.content}</Markdown>
         </div>
-      </section>
+      </>
     )
   }
   function Code() {
@@ -228,7 +228,9 @@ export default async function BlogPage({
   return (
     <>
       <SiteHeader tab={tab} />
-      <div>{tab === "preview" ? <Preview /> : <Code />}</div>
+      <section className="max-w-2000 container m-auto grid items-center pb-8">
+        {tab === "preview" ? <Preview /> : <Code />}
+      </section>
     </>
   )
 }
