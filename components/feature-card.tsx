@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
@@ -83,6 +84,7 @@ export function FeatureCard({
             <img
               src={`${feature.screenshot}?w=1200&auto=format,compression`}
               className="h-full max-h-[400px] w-full rounded-xl object-cover object-top"
+              alt={`Feature preview`}
             />
           </Link>
         )}
