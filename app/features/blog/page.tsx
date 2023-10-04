@@ -30,16 +30,16 @@ export default async function BlogPage({
   let tab = searchParams.tab
   if (!tab) tab = "preview"
 
-  async function Preview() {
-    const cosmic = cosmicSourceBucketConfig
-    const { object: blog } = await cosmic.objects
-      .findOne({
-        type: "blog-posts",
-        slug: "our-amazing-adventure",
-      })
-      .props("slug,title,metadata")
-      .depth(1)
+  const cosmic = cosmicSourceBucketConfig
+  const { object: blog } = await cosmic.objects
+    .findOne({
+      type: "blog-posts",
+      slug: "our-amazing-adventure",
+    })
+    .props("slug,title,metadata")
+    .depth(1)
 
+  function Preview() {
     return (
       <section className="max-w-2000 container m-auto grid items-center pb-8">
         <div className="mb-6 w-full">
