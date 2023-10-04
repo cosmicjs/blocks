@@ -74,18 +74,19 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
   let bucket_slug = targetBucket.bucket_slug
   let read_key = targetBucket.read_key
   let write_key = targetBucket.write_key
-  useEffect(() => {
+  if (typeof window !== "undefined") {
+    if (bucket_slug) {
+      localStorage.setItem("bucket_slug", bucket_slug)
+      localStorage.setItem("read_key", read_key)
+      localStorage.setItem("write_key", write_key)
+    }
     // Perform localStorage action
-    if (!bucket_slug) {
+    if (localStorage.getItem("bucket_slug")) {
       bucket_slug = localStorage.getItem("bucket_slug") || ""
       read_key = localStorage.getItem("read_key") || ""
       write_key = localStorage.getItem("write_key") || ""
     }
-    localStorage.setItem("bucket_slug", bucket_slug)
-    localStorage.setItem("read_key", read_key)
-    localStorage.setItem("write_key", write_key)
-  }, [bucket_slug, read_key, write_key])
-
+  }
   const cosmicTargetBucket = cosmicTargetBucketConfig(
     bucket_slug,
     read_key,
