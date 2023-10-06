@@ -1,6 +1,6 @@
-# Feature Builder
+# Cosmic Feature Templates
 
-Use the Cosmic Feature Builder to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
+Use Cosmic Feature Templates to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
 
 ## Built with
 
