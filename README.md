@@ -19,7 +19,7 @@ Use Cosmic Feature Templates to build common content-powered features for your w
 
 ```bash
 git clone https://github.com/cosmicjs/cosmic-feature-templates
-cd feature-builder-extension
+cd cosmic-feature-templates
 yarn
 yarn dev
 ```

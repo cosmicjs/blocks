@@ -101,7 +101,7 @@ export default async function BlogPage({
         const { object: blog } = await cosmic.objects
           .findOne({
             type: "blog-posts",
-            slug: "our-amazing-adventure",
+            slug: "our-amazing-adventure", // Change this to the slug in the URL for dynamic pages
           })
           .props("slug,title,metadata")
           .depth(1);
