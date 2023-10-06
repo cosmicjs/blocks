@@ -51,7 +51,7 @@ export function FeatureCard({
           {feature.preview_link && feature.preview_link && (
             <>
               <Link
-                href={feature.preview_link}
+                href={`${feature.preview_link}?tab=preview`}
                 rel="noreferrer"
                 className={cn(
                   "ml-2",

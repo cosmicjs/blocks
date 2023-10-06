@@ -18,7 +18,7 @@ export function SiteHeader({ tab }: { tab?: string }) {
             className="flex rounded-lg bg-gray-100 p-[2px] dark:bg-dark-gray-100"
             role="tablist"
           >
-            <a
+            <Link
               className={cn(
                 "cursor-pointer rounded-lg px-4 py-2 text-center font-semibold text-gray-600 dark:text-dark-gray-600",
                 tab === "preview"
@@ -31,8 +31,8 @@ export function SiteHeader({ tab }: { tab?: string }) {
               href="?tab=preview"
             >
               Preview
-            </a>
-            <a
+            </Link>
+            <Link
               className={cn(
                 "cursor-pointer rounded-lg px-4 py-2 text-center font-semibold text-gray-500 dark:text-dark-gray-500",
                 tab === "code"
@@ -42,7 +42,7 @@ export function SiteHeader({ tab }: { tab?: string }) {
               href="?tab=code"
             >
               Code
-            </a>
+            </Link>
           </div>
         </div>
       </div>
