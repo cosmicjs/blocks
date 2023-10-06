@@ -18,7 +18,7 @@ Use Cosmic Feature Templates to build common content-powered features for your w
 ## Contributiong
 
 ```bash
-git clone https://github.com/cosmicjs/feature-builder-extension
+git clone https://github.com/cosmicjs/cosmic-feature-templates
 cd feature-builder-extension
 yarn
 yarn dev
@@ -26,4 +26,4 @@ yarn dev
 
 ## License
 
-Licensed under the [MIT license](https://github.com/cosmicjs/cosmic-next-template/blob/main/LICENSE.md).
+Licensed under the [MIT license](https://github.com/cosmicjs/cosmic-feature-templates/blob/main/LICENSE.md).
