@@ -88,11 +88,7 @@ export default async function BlogPage({
   function Code() {
     const codeString = dedent`
       \`\`\`jsx
-      import { createBucketClient } from "@cosmicjs/sdk";
-      const cosmic = createBucketClient({
-        bucketSlug: "BUCKET_SLUG",
-        readKey: "BUCKET_READ_KEY",
-      });
+      import { cosmic } from "@/lib/cosmic";
       
       import Markdown from "react-markdown";
 
@@ -182,18 +178,36 @@ export default async function BlogPage({
             Step 2. Add the Cosmic JavaScript SDK the React Markdown packages.
           </h3>
           <Markdown>
-            {dedent(
-              `\`\`\`bash
-              yarn add @cosmicjs/sdk
-              yarn add react-markdown
+            {dedent(`\`\`\`bash
+            yarn add @cosmicjs/sdk
+            yarn add react-markdown
             \`\`\`
-          `
-            )}
+          `)}
           </Markdown>
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 3. Add a new file located at `app/blog/page.jsx` with the
+            Step 3. Create a new file located at `lib/cosmic.ts` with the
+            following
+          </h3>
+          <div className="py-2">
+            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
+            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
+          </div>
+          <Markdown>
+            {dedent(`\`\`\`ts
+            import { createBucketClient } from "@cosmicjs/sdk";
+            export const cosmic = createBucketClient({
+              bucketSlug: "BUCKET_SLUG",
+              readKey: "BUCKET_READ_KEY",
+            });
+            \`\`\`
+            `)}
+          </Markdown>
+        </div>
+        <div className="mb-10">
+          <h3 className="text-2xl font-semibold">
+            Step 4. Add a new file located at `app/blog/page.jsx` with the
             following
           </h3>
           <div className="py-2">
@@ -205,12 +219,10 @@ export default async function BlogPage({
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">Step 4. Run your app</h3>
           <Markdown>
-            {dedent(
-              `\`\`\`bash
+            {dedent(`\`\`\`bash
             yarn dev
             \`\`\`
-          `
-            )}
+          `)}
           </Markdown>
         </div>
         <div className="mb-6">
