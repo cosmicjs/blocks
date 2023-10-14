@@ -28,7 +28,7 @@ export default async function NavMenus({
       type: "navigation-menus",
       slug: "header",
     })
-    .props("slug,title,metadata")
+    .props("metadata")
     .depth(1)
 
   const { object: footer } = await cosmic.objects
@@ -36,7 +36,7 @@ export default async function NavMenus({
       type: "navigation-menus",
       slug: "footer",
     })
-    .props("slug,title,metadata")
+    .props("metadata")
     .depth(1)
 
   function Preview() {
@@ -44,11 +44,11 @@ export default async function NavMenus({
       <>
         <div className="my-10">
           <h2 className="mb-6 text-3xl">Header</h2>
-          <NavMenu items={header.metadata.links} />
+          <NavMenu items={header.metadata.items} />
         </div>
         <div className="my-10">
           <h2 className="mb-6 text-3xl">Footer</h2>
-          <NavMenu items={footer.metadata.links} />
+          <NavMenu items={footer.metadata.items} />
         </div>
       </>
     )
@@ -70,7 +70,7 @@ export default async function NavMenus({
 
       type Item = { title: string; link: string; open_in_new_tab: boolean }
 
-      export function NavigationMenuPreview({ items }: { items: Item[] }) {
+      export function NavMenu({ items }: { items: Item[] }) {
         return (
           <NavigationMenu>
             <NavigationMenuList>
@@ -95,51 +95,72 @@ export default async function NavMenus({
 
       \`\`\`
       `
-
-    const pageCode = dedent`
+    const headerCode = dedent`
       \`\`\`jsx
-      import { createBucketClient } from "@cosmicjs/sdk";
-      
-      const cosmic = createBucketClient({
-        bucketSlug: "BUCKET_SLUG",
-        readKey: "BUCKET_READ_KEY",
-      });
+      import { cosmic } from "@/lib/cosmic";
 
       import { NavMenu } from "@/components/nav-menu";
 
-      export default async function IndexPage() {
+      export default async function Header() {
         // Header data
         const { object: header } = await cosmic.objects
           .findOne({
             type: "navigation-menus",
             slug: "header",
           })
-          .props("slug,title,metadata")
+          .props("metadata")
           .depth(1);
 
+        return <NavMenu items={header.metadata.items} />
+      }
+      \`\`\`
+      `
+
+    const footerCode = dedent`
+      \`\`\`jsx
+      import { cosmic } from "@/lib/cosmic";
+
+      import { NavMenu } from "@/components/nav-menu";
+
+      export default async function Header() {
         // Footer data
-        const { object: footer } = await cosmic.objects
+        const { object: header } = await cosmic.objects
           .findOne({
             type: "navigation-menus",
             slug: "footer",
           })
-          .props("slug,title,metadata")
+          .props("metadata")
           .depth(1);
+
+        return <NavMenu items={header.metadata.items} />
+      }
+      \`\`\`
+      `
+
+    const pageCode = dedent`
+      \`\`\`jsx
+      import { cosmic } from "@/lib/cosmic";
+
+      import Header from "@/components/header";
+      import Footer from "@/components/footer";
+
+      export default async function IndexPage() {
         return (
           <>
             <div className="my-10">
               <h2 className="mb-6 text-3xl">Header</h2>
-              <NavMenu items={header.metadata.links} />
+              <Header items={header.metadata.items} />
             </div>
             <div className="my-10">
               <h2 className="mb-6 text-3xl">Footer</h2>
-              <NavMenu items={footer.metadata.links} />
+              <Footer items={footer.metadata.items} />
             </div>
           </>
         );
       }
       \`\`\`
       `
+
     return (
       <div className="pt-6">
         <div className="mb-6">
@@ -164,13 +185,11 @@ export default async function NavMenus({
             installation options.
           </div>
           <Markdown>
-            {dedent(
-              `\`\`\`bash
+            {dedent(`\`\`\`bash
             npx create-next-app@latest cosmic-app
             cd cosmic-app
             \`\`\`
-          `
-            )}
+          `)}
           </Markdown>
         </div>
         <div className="mb-10">
@@ -179,26 +198,58 @@ export default async function NavMenus({
             packages.
           </h3>
           <Markdown>
-            {dedent(
-              `\`\`\`bash
-              yarn add @cosmicjs/sdk
-              npx shadcn-ui@latest init
-              npx shadcn-ui@latest add navigation-menu
+            {dedent(`\`\`\`bash
+            yarn add @cosmicjs/sdk
+            npx shadcn-ui@latest init
+            npx shadcn-ui@latest add navigation-menu
             \`\`\`
-          `
-            )}
+          `)}
           </Markdown>
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 3. Add a new file located at `app/components/nav-menu.tsx` with
+            Step 3. Create a new file located at `lib/cosmic.ts` with the
+            following
+          </h3>
+          <div className="py-2">
+            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
+            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
+          </div>
+          <Markdown>
+            {dedent(`\`\`\`ts
+            import { createBucketClient } from "@cosmicjs/sdk";
+            export const cosmic = createBucketClient({
+              bucketSlug: "BUCKET_SLUG",
+              readKey: "BUCKET_READ_KEY",
+            });
+            \`\`\`
+            `)}
+          </Markdown>
+        </div>
+        <div className="mb-10">
+          <h3 className="text-2xl font-semibold">
+            Step 4. Add a new file located at `app/components/nav-menu.tsx` with
             the following
           </h3>
           <Markdown>{navCode}</Markdown>
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 4. Update `app/page.tsx` with the following
+            Step 5. Create a Header component located in the
+            `components/header.tsx`.
+          </h3>
+          <Markdown>{headerCode}</Markdown>
+        </div>
+        <div className="mb-10">
+          <h3 className="text-2xl font-semibold">
+            Step 6. Create a Footer component located in the
+            `components/footer.tsx`.
+          </h3>
+          <Markdown>{footerCode}</Markdown>
+        </div>
+        <div className="mb-10">
+          <h3 className="text-2xl font-semibold">
+            Step 5. Update `app/page.tsx` with the following
           </h3>
           <div className="py-2">
             Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
