@@ -162,9 +162,7 @@ export default async function Page({
           <h1 className="text-center text-4xl font-bold">{page.metadata.h1}</h1>
         </div>
         <div className="pb-8 max-w-3xl m-auto">
-          <div className="text-center text-xl text-gray-500 dark:text-dark-gray-500">
-            {page.metadata.subheadline}
-          </div>
+          <div className="text-center text-xl">{page.metadata.subheadline}</div>
         </div>
         <div className="pb-20 max-w-3xl m-auto">
           <div className="text-center text-xl">
@@ -189,14 +187,14 @@ export default async function Page({
             </a>
           </div>
         </div>
-        <div className="w-full px-4">
+        <div className="w-full px-4 max-w-[1100px] m-auto mb-10">
           <img
             src={`${page.metadata.image.imgix_url}?w=3000&auto=format,compression`}
             alt={page.title}
             className="w-full"
           />
         </div>
-        <section className="container grid items-center p-4 pb-8 pt-6 md:py-10">
+        <section className="container grid items-center py-10">
           <div className="relative m-auto max-w-3xl flex flex-col items-start gap-2">
             <div
               dangerouslySetInnerHTML={{ __html: page.metadata.content }}
@@ -376,14 +374,14 @@ export default async function Page({
                 </a>
               </div>
             </div>
-            <div className="w-full px-4">
+            <div className="w-full px-4 max-w-[1100px] m-auto mb-10">
               <img
                 src={\`\${page.metadata.image.imgix_url}?w=3000&auto=format,compression\`}
                 alt={page.title}
                 className="w-full"
               />
             </div>
-            <section className="container grid items-center p-4 pb-8 pt-6 md:py-10">
+            <section className="container grid items-center py-10">
               <div className="relative m-auto max-w-3xl flex flex-col items-start gap-2">
                 <div
                   dangerouslySetInnerHTML={{ __html: page.metadata.content }}
@@ -391,7 +389,7 @@ export default async function Page({
                 />
                 <div className="grid gap-y-28">
                   {page.metadata.sections.map((section: any) => {
-                    return <Section key={section.header} section={section} />
+                    return <Section key={section.header} section={section} />;
                   })}
                 </div>
               </div>
