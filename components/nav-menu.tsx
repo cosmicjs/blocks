@@ -14,7 +14,7 @@ type Item = { title: string; link: string; open_in_new_tab: boolean }
 
 export function NavMenu({ items }: { items: Item[] }) {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="m-auto">
       <NavigationMenuList>
         <NavigationMenuItem>
           {items.map((item: Item) => {

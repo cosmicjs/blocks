@@ -72,7 +72,7 @@ export default async function NavMenus({
 
       export function NavMenu({ items }: { items: Item[] }) {
         return (
-          <NavigationMenu>
+          <NavigationMenu className="m-auto">
             <NavigationMenuList>
               <NavigationMenuItem>
                 {items.map((item: Item) => {
@@ -149,11 +149,11 @@ export default async function NavMenus({
           <>
             <div className="my-10">
               <h2 className="mb-6 text-3xl">Header</h2>
-              <Header items={header.metadata.items} />
+              <Header />
             </div>
             <div className="my-10">
               <h2 className="mb-6 text-3xl">Footer</h2>
-              <Footer items={footer.metadata.items} />
+              <Footer />
             </div>
           </>
         );
