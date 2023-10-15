@@ -67,6 +67,16 @@ export const features = [
       "https://imgix.cosmicjs.com/f66ff570-6b8c-11ee-b27c-e13e14dddc51-global-settings.png",
   },
   {
+    key: "faqs",
+    title: "FAQs",
+    type: "metafields",
+    emoji: "❓",
+    description: `Adds an FAQs feature to any existing Object type.`,
+    field_list: ["Question", "Answer"],
+    confirmation: `This will add a new Metafield with key \`faqs\` to the selected Object types.`,
+    preview_link: "/features/faqs",
+  },
+  {
     key: "products",
     title: "Products",
     type: "object_type",
@@ -96,14 +106,5 @@ export const features = [
       "OG image",
     ],
     confirmation: `This will add a new Metafield with key \`seo\` to the selected Object types.`,
-  },
-  {
-    key: "faqs",
-    title: "FAQs",
-    type: "metafields",
-    emoji: "❓",
-    description: `Adds an FAQs feature to any existing Object type.`,
-    field_list: ["Question", "Answer"],
-    confirmation: `This will add a new Metafield with key \`faqs\` to the selected Object types.`,
   },
 ]

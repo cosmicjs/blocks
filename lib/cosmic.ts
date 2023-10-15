@@ -31,7 +31,7 @@ export async function getSEOMetafields() {
 }
 
 export async function getFAQMetafields() {
-  return await getMetafieldsFromObjectType("faq-feature")
+  return await getMetafieldsFromObjectType("faqs")
 }
 
 export async function getPageBuilderMetafields() {
