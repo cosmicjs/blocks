@@ -461,7 +461,7 @@ export default async function Page({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 4. Add a new file located at `app/page.jsx` with the following
+            Step 4. Update the file located at `app/page.jsx` with the following
           </h3>
           <div className="py-2">
             Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
@@ -480,7 +480,7 @@ export default async function Page({
         </div>
         <div className="mb-6">
           <h3 className="text-2xl font-semibold">
-            Step 5. Go to http://localhost:3000 to see your blog post. It should
+            Step 5. Go to http://localhost:3000 to see the home page. It should
             look like this:
           </h3>
         </div>
