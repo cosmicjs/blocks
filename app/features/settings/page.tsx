@@ -48,7 +48,7 @@ export default async function BlogPage({
   function Preview() {
     return (
       <div className="w-full">
-        <div className="my-10 h-[40px]">
+        <div className="my-10 h-[60px]">
           <a href="/">
             <img
               src={`${settings.metadata.logo.imgix_url}?w=500&auto=format,compression`}
@@ -111,7 +111,7 @@ export default async function BlogPage({
         
         return (
           <div className="w-full">
-            <div className="my-10 h-[40px]">
+            <div className="my-10 h-[60px]">
               <a href="/">
                 <img
                   src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
