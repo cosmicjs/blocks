@@ -60,7 +60,12 @@ export default async function BlogPage({
         <div className="mb-8 flex gap-x-8 justify-center">
           {settings.metadata.links.map((link: Link) => {
             return (
-              <a href={link.url} key={link.url} target="_blank">
+              <a
+                href={link.url}
+                key={link.url}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <img
                   className="h-[26px]"
                   src={`${link.icon.imgix_url}?w=500&auto=format,compression`}
@@ -118,7 +123,7 @@ export default async function BlogPage({
             <div className="mb-8 flex gap-x-8 justify-center">
               {settings.metadata.links.map((link: Link) => {
                 return (
-                  <a href={link.url} key={link.url} target="_blank">
+                  <a href={link.url} key={link.url} target="_blank" rel="noreferrer">
                     <img
                       className="h-[26px]"
                       src={\`\${link.icon.imgix_url}?w=500&auto=format,compression\`}
