@@ -42,11 +42,13 @@ export default async function BlogPage({
     return (
       <>
         <div className="mb-10 w-full max-h-[500px] overflow-hidden">
-          <img
-            src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
-            alt={blog.title}
-            className="object-cover"
-          />
+          <a href="https://app.cosmicjs.com/login">
+            <img
+              src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
+              alt={blog.title}
+              className="object-cover"
+            />
+          </a>
         </div>
         <section className="container grid items-center pb-8 m-auto">
           <div className="relative m-auto flex max-w-[750px] flex-col items-start gap-2">
@@ -106,11 +108,13 @@ export default async function BlogPage({
         return (
           <>
             <div className="mb-10 w-full max-h-[500px] overflow-hidden">
-              <img
-                src={\`\${blog.metadata.image.imgix_url}?w=2000&auto=format,compression\`}
-                alt={blog.title}
-                className="object-cover"
-              />
+              <a href="https://app.cosmicjs.com/login">
+                <img
+                  src={\`\${blog.metadata.image.imgix_url}?w=2000&auto=format,compression\`}
+                  alt={blog.title}
+                  className="object-cover"
+                />
+              </a>
             </div>
             <section className="container grid items-center pb-8 m-auto">
               <div className="relative m-auto flex max-w-[750px] flex-col items-start gap-2">
@@ -208,7 +212,7 @@ export default async function BlogPage({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 4. Add a new file located at `app/blog/page.jsx` with the
+            Step 4. Add a new file located at `app/blog/page.tsx` with the
             following
           </h3>
           <div className="py-2">

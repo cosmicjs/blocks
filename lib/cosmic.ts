@@ -39,7 +39,7 @@ export async function getPageBuilderMetafields() {
 }
 
 export async function getGlobalSettingsMetafields() {
-  return await getMetafieldsFromObjectType("global-settings-feature")
+  return await getMetafieldsFromObjectType("global-settings")
 }
 
 export async function getNavMenuMetafields() {
@@ -79,7 +79,8 @@ export async function getPage(cosmic: CosmicConfig) {
 export async function getGlobalSettings(cosmic: CosmicConfig) {
   const { object } = await cosmic.objects
     .findOne({
-      type: "global-settings-feature",
+      type: "global-settings",
+      slug: "settings",
     })
     .props("slug,title,metadata")
   return object
@@ -232,7 +233,7 @@ export async function addNavMenus(cosmic: CosmicConfig, menus: any) {
 }
 
 export async function addGlobalSettings(cosmic: CosmicConfig, settings: any) {
-  settings.type = "settings"
+  settings.type = "global-settings"
   const media = await getMediaBlobFromURL(
     settings.metadata.logo.imgix_url,
     settings.metadata.company +
@@ -333,7 +334,7 @@ export async function addGlobalSettingsObjectType(
   await cosmic.objectTypes.insertOne({
     singular: "Global Settings",
     title: "Global Settings",
-    slug: "settings",
+    slug: "global-settings",
     emoji: "⚙️",
     options: {
       slug_field: true,

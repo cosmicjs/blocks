@@ -49,6 +49,24 @@ export const features = [
       "https://imgix.cosmicjs.com/07a8df20-6889-11ee-b27c-e13e14dddc51-nav-menus.png",
   },
   {
+    key: "global_settings",
+    title: "Global Settings",
+    type: "object_type",
+    emoji: "⚙️",
+    description: `Adds Global Settings Object type to your Bucket. Fields include:`,
+    field_list: [
+      "Company name",
+      "Logo image",
+      "Contact email",
+      "Phone number",
+      "Repeater Metafield with fields for social links: title, URL, and logo.",
+    ],
+    confirmation: `This will install a \`global-settings\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/features/settings",
+    screenshot:
+      "https://imgix.cosmicjs.com/f66ff570-6b8c-11ee-b27c-e13e14dddc51-global-settings.png",
+  },
+  {
     key: "products",
     title: "Products",
     type: "object_type",
@@ -63,20 +81,6 @@ export const features = [
       "SEO fields (see below)",
     ],
     confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
-  },
-  {
-    key: "global_settings",
-    title: "Global Settings",
-    type: "object_type",
-    emoji: "⚙️",
-    description: `Adds Global Settings Object type to your Bucket. Fields include:`,
-    field_list: [
-      "Company name",
-      "Logo image",
-      "Contact email",
-      "Repeater Metafield with fields for social links: title, URL, and logo.",
-    ],
-    confirmation: `This will install a \`settings\` Object type to your Bucket as well as demo content.`,
   },
   {
     key: "seo",

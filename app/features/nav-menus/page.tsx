@@ -43,11 +43,11 @@ export default async function NavMenus({
     return (
       <>
         <div className="my-10">
-          <h2 className="mb-6 text-3xl">Header</h2>
+          <h2 className="mb-6 text-3xl text-center">Header</h2>
           <NavMenu items={header.metadata.items} />
         </div>
         <div className="my-10">
-          <h2 className="mb-6 text-3xl">Footer</h2>
+          <h2 className="mb-6 text-3xl text-center">Footer</h2>
           <NavMenu items={footer.metadata.items} />
         </div>
       </>
@@ -122,9 +122,9 @@ export default async function NavMenus({
 
       import { NavMenu } from "@/components/nav-menu";
 
-      export default async function Header() {
+      export default async function Footer() {
         // Footer data
-        const { object: header } = await cosmic.objects
+        const { object: footer } = await cosmic.objects
           .findOne({
             type: "navigation-menus",
             slug: "footer",
@@ -132,7 +132,7 @@ export default async function NavMenus({
           .props("metadata")
           .depth(1);
 
-        return <NavMenu items={header.metadata.items} />
+        return <NavMenu items={footer.metadata.items} />
       }
       \`\`\`
       `
@@ -147,14 +147,9 @@ export default async function NavMenus({
       export default async function IndexPage() {
         return (
           <>
-            <div className="my-10">
-              <h2 className="mb-6 text-3xl">Header</h2>
-              <Header />
-            </div>
-            <div className="my-10">
-              <h2 className="mb-6 text-3xl">Footer</h2>
-              <Footer />
-            </div>
+            <Header />
+            { /* Main content area */ }
+            <Footer />
           </>
         );
       }
@@ -249,12 +244,9 @@ export default async function NavMenus({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 5. Update `app/page.tsx` with the following
+            Step 5. Add the `Header` and `Footer` components to the file
+            `app/page.tsx`.
           </h3>
-          <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
-          </div>
           <Markdown>{pageCode}</Markdown>
         </div>
         <div className="mb-10">
