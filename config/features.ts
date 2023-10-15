@@ -64,7 +64,7 @@ export const features = [
     confirmation: `This will install a \`global-settings\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/settings",
     screenshot:
-      "https://imgix.cosmicjs.com/f66ff570-6b8c-11ee-b27c-e13e14dddc51-global-settings.png",
+      "https://imgix.cosmicjs.com/55082f80-6bb0-11ee-b27c-e13e14dddc51-global-settings.png",
   },
   {
     key: "faqs",
