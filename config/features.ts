@@ -14,7 +14,8 @@ export const features = [
     ],
     confirmation: `This will install the following Object types: \`blog-posts\`,\`authors\`, and \`categories\` as well as demo content.`,
     preview_link: "/features/blog",
-    screenshot:"https://imgix.cosmicjs.com/36a6ee10-62e0-11ee-b975-cb0cfadd93ad-blog.png"
+    screenshot:
+      "https://imgix.cosmicjs.com/36a6ee10-62e0-11ee-b975-cb0cfadd93ad-blog.png",
   },
   {
     key: "pages",
@@ -30,7 +31,8 @@ export const features = [
     ],
     confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/page",
-    screenshot: "https://imgix.cosmicjs.com/3e4113c0-62e1-11ee-b975-cb0cfadd93ad-page.png"
+    screenshot:
+      "https://imgix.cosmicjs.com/f3029020-6af4-11ee-b27c-e13e14dddc51-pages.png",
   },
   {
     key: "navigation_menus",
@@ -38,10 +40,13 @@ export const features = [
     type: "object_type",
     emoji: "🖱",
     description: `Adds Navigation Menus Object type to your Bucket. Fields include:`,
-    field_list: ["Links repeater with title, link, and option to open in a new browser tab"],
+    field_list: [
+      "Links repeater with title, link, and option to open in a new browser tab",
+    ],
     confirmation: `This will install a \`navigation-menus\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/nav-menus",
-    screenshot: "https://imgix.cosmicjs.com/07a8df20-6889-11ee-b27c-e13e14dddc51-nav-menus.png"
+    screenshot:
+      "https://imgix.cosmicjs.com/07a8df20-6889-11ee-b27c-e13e14dddc51-nav-menus.png",
   },
   {
     key: "products",
