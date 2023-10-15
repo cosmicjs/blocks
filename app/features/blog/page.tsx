@@ -2,7 +2,6 @@
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import helpers from "@/lib/helpers"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { SiteHeader } from "@/components/site-header"
 
@@ -42,46 +41,48 @@ export default async function BlogPage({
   function Preview() {
     return (
       <>
-        <div className="mb-6 w-full">
+        <div className="mb-10 w-full max-h-[500px] overflow-hidden">
           <img
             src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
             alt={blog.title}
             className="object-cover"
           />
         </div>
-        <div className="relative m-auto flex max-w-[750px] flex-col items-start gap-2">
-          <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-            {blog.title}
-          </h1>
-          <div className="flex">
-            <img
-              className="mr-2 h-[60px] w-[60px] rounded-full object-cover"
-              src={`${blog.metadata.author.metadata.image.imgix_url}?w=120&auto=format,compression`}
-              alt={blog.metadata.author.title}
-            />
-            <div>
-              Published by {blog.metadata.author.title}
-              <br />
-              {helpers.stringToFriendlyDate(blog.metadata.published_date)}
+        <section className="container grid items-center pb-8 m-auto">
+          <div className="relative m-auto flex max-w-[750px] flex-col items-start gap-2">
+            <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+              {blog.title}
+            </h1>
+            <div className="flex mb-8">
+              <img
+                className="mr-2 h-[60px] w-[60px] rounded-full object-cover"
+                src={`${blog.metadata.author.metadata.image.imgix_url}?w=120&auto=format,compression`}
+                alt={blog.metadata.author.title}
+              />
+              <div>
+                Published by {blog.metadata.author.title}
+                <br />
+                {blog.metadata.published_date}
+              </div>
+              <div className="absolute right-0">
+                {blog.metadata.categories.map((cat: any) => {
+                  return (
+                    <span
+                      className="mb-1 mr-1 rounded-xl px-3 py-1 text-white"
+                      style={{
+                        backgroundColor: cat.metadata.color,
+                      }}
+                      key={cat.slug}
+                    >
+                      {cat.title}
+                    </span>
+                  )
+                })}
+              </div>
             </div>
-            <div className="absolute right-0">
-              {blog.metadata.categories.map((cat: any) => {
-                return (
-                  <span
-                    className="mb-1 mr-1 rounded-xl px-3 py-1 text-white"
-                    style={{
-                      backgroundColor: cat.metadata.color,
-                    }}
-                    key={cat.slug}
-                  >
-                    {cat.title}
-                  </span>
-                )
-              })}
-            </div>
+            <Markdown>{blog.metadata.content}</Markdown>
           </div>
-          <Markdown>{blog.metadata.content}</Markdown>
-        </div>
+        </section>
       </>
     )
   }
@@ -103,48 +104,50 @@ export default async function BlogPage({
           .depth(1);
         
         return (
-          <section className="container grid items-center pb-8 m-auto">
-            <div className="mb-6 w-full">
+          <>
+            <div className="mb-10 w-full max-h-[500px] overflow-hidden">
               <img
                 src={\`\${blog.metadata.image.imgix_url}?w=2000&auto=format,compression\`}
                 alt={blog.title}
                 className="object-cover"
               />
             </div>
-            <div className="relative m-auto flex max-w-[750px] flex-col items-start gap-2">
-              <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-                {blog.title}
-              </h1>
-              <div className="flex">
-                <img
-                  className="mr-2 h-[60px] w-[60px] rounded-full object-cover"
-                  src={\`\${blog.metadata.author.metadata.image.imgix_url}?w=120&auto=format,compression\`}
-                  alt={blog.metadata.author.title}
-                />
-                <div>
-                  Published by {blog.metadata.author.title}
-                  <br />
-                  {blog.metadata.published_date}
+            <section className="container grid items-center pb-8 m-auto">
+              <div className="relative m-auto flex max-w-[750px] flex-col items-start gap-2">
+                <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+                  {blog.title}
+                </h1>
+                <div className="flex mb-8">
+                  <img
+                    className="mr-2 h-[60px] w-[60px] rounded-full object-cover"
+                    src={\`\${blog.metadata.author.metadata.image.imgix_url}?w=120&auto=format,compression\`}
+                    alt={blog.metadata.author.title}
+                  />
+                  <div>
+                    Published by {blog.metadata.author.title}
+                    <br />
+                    {blog.metadata.published_date}
+                  </div>
+                  <div className="absolute right-0">
+                    {blog.metadata.categories.map((cat: any) => {
+                      return (
+                        <span
+                          className="mb-1 mr-1 rounded-xl px-3 py-1 text-white"
+                          style={{
+                            backgroundColor: cat.metadata.color,
+                          }}
+                          key={cat.slug}
+                        >
+                          {cat.title}
+                        </span>
+                      );
+                    })}
+                  </div>
                 </div>
-                <div className="absolute right-0">
-                  {blog.metadata.categories.map((cat: any) => {
-                    return (
-                      <span
-                        className="mb-1 mr-1 rounded-xl px-3 py-1 text-white"
-                        style={{
-                          backgroundColor: cat.metadata.color,
-                        }}
-                        key={cat.slug}
-                      >
-                        {cat.title}
-                      </span>
-                    );
-                  })}
-                </div>
+                <Markdown>{blog.metadata.content}</Markdown>
               </div>
-              <Markdown>{blog.metadata.content}</Markdown>
-            </div>
-          </section>
+            </section>
+          </>
         );
       }
       \`\`\`
@@ -164,13 +167,11 @@ export default async function BlogPage({
             installation options.
           </div>
           <Markdown>
-            {dedent(
-              `\`\`\`bash
+            {dedent(`\`\`\`bash
             npx create-next-app@latest cosmic-app
             cd cosmic-app
             \`\`\`
-          `
-            )}
+          `)}
           </Markdown>
         </div>
         <div className="mb-10">
