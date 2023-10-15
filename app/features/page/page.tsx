@@ -217,16 +217,9 @@ export default async function Page({
     const codeString = dedent`
       \`\`\`jsx
       // app/page.jsx
-      
+      import { cn } from "@/lib/utils"
+      import { buttonVariants } from "@/components/ui/button"
       import { cosmic } from "@/lib/cosmic";
-      
-      const { object: page } = await cosmic.objects
-        .findOne({
-          type: "pages",
-          slug: "home",
-        })
-        .props("slug,title,metadata")
-        .depth(1)
 
       type SectionType = {
         heading: string
@@ -344,6 +337,14 @@ export default async function Page({
       }
 
       export default async function HomePage() {
+        const { object: page } = await cosmic.objects
+        .findOne({
+          type: "pages",
+          slug: "home",
+        })
+        .props("slug,title,metadata")
+        .depth(1)
+
         return (
           <div>
             <div className="pt-20 pb-4">
@@ -426,12 +427,14 @@ export default async function Page({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 2. Add the Cosmic JavaScript SDK the React Markdown packages.
+            Step 2. Add the Cosmic JavaScript SDK and Shandcn UI Button
+            packages.
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
             yarn add @cosmicjs/sdk
-            yarn add react-markdown
+            npx shadcn-ui@latest init
+            npx shadcn-ui@latest add button
             \`\`\`
           `)}
           </Markdown>
