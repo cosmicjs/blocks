@@ -75,6 +75,8 @@ export const features = [
     field_list: ["Question", "Answer"],
     confirmation: `This will add a new Metafield with key \`faqs\` to the selected Object types.`,
     preview_link: "/features/faqs",
+    screenshot:
+      "https://imgix.cosmicjs.com/4e388d20-6bac-11ee-b27c-e13e14dddc51-faqs.png",
   },
   {
     key: "products",
