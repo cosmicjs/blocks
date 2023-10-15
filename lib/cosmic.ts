@@ -1,6 +1,6 @@
 import { createBucketClient } from "@cosmicjs/sdk"
 
-import { getMediaBlobFromURL } from "@/lib/utils"
+import { getImageNameFromURL, getMediaBlobFromURL } from "@/lib/utils"
 
 type CosmicConfig = any
 export const cosmicSourceBucketConfig = createBucketClient({
@@ -23,7 +23,7 @@ export async function getMetafieldsFromObjectType(type: string) {
   const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
     type
   )
-  return object_type.metafields  
+  return object_type.metafields
 }
 
 export async function getSEOMetafields() {
@@ -72,7 +72,7 @@ export async function getPage(cosmic: CosmicConfig) {
     .findOne({
       type: "pages",
     })
-    .props("slug,title,metadata")
+    .props("slug,title,thumbnail,metadata")
   return object
 }
 
@@ -168,15 +168,23 @@ export async function addBlog(cosmic: CosmicConfig, blog: any) {
 
 export async function addPage(cosmic: CosmicConfig, page: any) {
   page.type = "pages"
+  // Upload hero image
   const media = await getMediaBlobFromURL(
     page.metadata.image.imgix_url,
     page.title + ".jpg"
   )
-  // Upload media
+  // Add hero image
   const mediaRes = await cosmic.media.insertOne({ media })
   page.metadata.image = mediaRes.media.name
   page.metadata.seo.og_image = mediaRes.media.name
-  page.thumbnail = mediaRes.media.name
+  // Upload thumbnail image
+  const thumbnail = await getMediaBlobFromURL(
+    page.thumbnail,
+    page.title + ".jpg"
+  )
+  // Add thumbnail image
+  const thumbnailRes = await cosmic.media.insertOne({ media: thumbnail })
+  page.thumbnail = thumbnailRes.media.name
   for (let section of page.metadata.sections) {
     section.layout = section.layout.value
     const media = await getMediaBlobFromURL(
@@ -205,7 +213,9 @@ export async function addProducts(cosmic: CosmicConfig, products: any) {
     for (let galleryItem of product.metadata.gallery) {
       const media = await getMediaBlobFromURL(
         galleryItem.image.imgix_url,
-        product.title + "-Gallery-Image." + galleryItem.image.imgix_url.split(".").pop()
+        product.title +
+          "-Gallery-Image." +
+          galleryItem.image.imgix_url.split(".").pop()
       )
       // Upload media
       const mediaRes = await cosmic.media.insertOne({ media })
