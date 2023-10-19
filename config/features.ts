@@ -91,6 +91,8 @@ export const features = [
     ],
     confirmation: `This will add a new Metafield with key \`seo\` to the selected Object types.`,
     preview_link: "/features/seo",
+    screenshot:
+      "https://imgix.cosmicjs.com/a1d12070-6e20-11ee-b27c-e13e14dddc51-seo.png",
   },
   {
     key: "products",
