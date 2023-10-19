@@ -77,21 +77,6 @@ export const features = [
       "https://imgix.cosmicjs.com/4e388d20-6bac-11ee-b27c-e13e14dddc51-faqs.png",
   },
   {
-    key: "products",
-    title: "Products",
-    type: "object_type",
-    emoji: "🛍️",
-    description: `Adds a Products Object type to your Bucket. Fields include:`,
-    field_list: [
-      "Image",
-      "Image gallery with repeating image and description",
-      "Price",
-      "Quantity",
-      "Description",
-    ],
-    confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
-  },
-  {
     key: "seo",
     title: "SEO fields",
     type: "metafields",
@@ -105,5 +90,21 @@ export const features = [
       "OG image",
     ],
     confirmation: `This will add a new Metafield with key \`seo\` to the selected Object types.`,
+    preview_link: "/features/seo",
+  },
+  {
+    key: "products",
+    title: "Products",
+    type: "object_type",
+    emoji: "🛍️",
+    description: `Adds a Products Object type to your Bucket. Fields include:`,
+    field_list: [
+      "Image",
+      "Image gallery with repeating image and description",
+      "Price",
+      "Quantity",
+      "Description",
+    ],
+    confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
   },
 ]
