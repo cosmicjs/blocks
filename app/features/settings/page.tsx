@@ -53,11 +53,11 @@ export default async function BlogPage({
             <img
               src={`${settings.metadata.logo.imgix_url}?w=500&auto=format,compression`}
               alt={settings.metadata.company}
-              className="h-full m-auto"
+              className="m-auto h-full"
             />
           </a>
         </div>
-        <div className="mb-8 flex gap-x-8 justify-center">
+        <div className="mb-8 flex justify-center gap-x-8">
           {settings.metadata.links.map((link: Link) => {
             return (
               <a
@@ -75,7 +75,7 @@ export default async function BlogPage({
             )
           })}
         </div>
-        <div className="flex gap-x-8 justify-center">
+        <div className="flex justify-center gap-x-8">
           <div>
             <a href={`mailto:${settings.metadata.email}`}>Email us</a>
           </div>
@@ -135,10 +135,10 @@ export default async function BlogPage({
             </div>
             <div className="flex gap-x-8 justify-center">
               <div>
-                <a href={\`mailto:${settings.metadata.email}\`}>Email us</a>
+                <a href={\`mailto:\${settings.metadata.email}\`}>Email us</a>
               </div>
               <div>
-                <a href={\`tel:${settings.metadata.phone}\`}>Call us</a>
+                <a href={\`tel:\${settings.metadata.phone}\`}>Call us</a>
               </div>
             </div>
           </div>

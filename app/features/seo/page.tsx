@@ -191,8 +191,30 @@ export default async function SEO({
           <Preview />
         </div>
         <div className="mb-6">
-          <h3 className="text-2xl font-semibold">
-            Next steps: Go the{" "}
+          <h3 className="mb-6 text-2xl font-semibold">Next steps</h3>
+          <div className="mb-6">
+            1. To test your open graph values locally, use something like{" "}
+            <a
+              className="text-cosmic-blue"
+              target="_blank"
+              rel="noreferrer"
+              href="https://ngrok.com/"
+            >
+              Ngrok
+            </a>{" "}
+            to create a tunnel to your local URL, then add the generated URL to{" "}
+            <a
+              className="text-cosmic-blue"
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.opengraph.xyz/"
+            >
+              opengraph.xyz
+            </a>
+            .
+          </div>
+          <div className="mb-6">
+            2. For more page metadata information and examples, go the{" "}
             <a
               className="text-cosmic-blue"
               target="_blank"
@@ -200,9 +222,9 @@ export default async function SEO({
               href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields"
             >
               Next.js Metadata docs
-            </a>{" "}
-            to see more examples.
-          </h3>
+            </a>
+            .
+          </div>
         </div>
       </div>
     )
