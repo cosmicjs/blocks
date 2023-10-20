@@ -8,7 +8,7 @@ import { SiteHeader } from "@/components/site-header"
 export async function generateMetadata() {
   const { object: seo } = await cosmicSourceBucketConfig.objects
     .findOne({
-      type: "seo-feature",
+      type: "seo-fields",
       slug: "seo",
     })
     .props("metadata")
@@ -37,15 +37,15 @@ export default async function SEO({
   const cosmic = cosmicSourceBucketConfig
   const { object: seo } = await cosmic.objects
     .findOne({
-      type: "seo-feature",
+      type: "seo-fields",
       slug: "seo",
     })
     .props("metadata")
     .depth(1)
   function Preview() {
     return (
-      <div className="w-full m-auto mt-10">
-        <h2 className="text-2xl font-semibold mb-4">SEO fields</h2>
+      <div className="m-auto mt-10 w-full">
+        <h2 className="mb-4 text-2xl font-semibold">SEO fields</h2>
         <div className="mb-8">
           <h3 className="text-xl font-semibold">Title</h3>
           <Markdown>{seo.metadata.seo.title}</Markdown>
@@ -63,7 +63,7 @@ export default async function SEO({
           <Markdown>{seo.metadata.seo.og_description}</Markdown>
         </div>
         <div className="mb-8">
-          <h3 className="text-xl font-semibold mb-4">OG Image</h3>
+          <h3 className="mb-4 text-xl font-semibold">OG Image</h3>
           <img
             src={`${seo.metadata.seo.og_image.imgix_url}?w=1200&auto=format,compression`}
             className="w-[600px]"

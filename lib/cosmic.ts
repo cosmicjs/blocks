@@ -27,7 +27,7 @@ export async function getMetafieldsFromObjectType(type: string) {
 }
 
 export async function getSEOMetafields() {
-  return await getMetafieldsFromObjectType("seo-feature")
+  return await getMetafieldsFromObjectType("seo-fields")
 }
 
 export async function getFAQMetafields() {
@@ -162,7 +162,6 @@ export async function addBlog(cosmic: CosmicConfig, blog: any) {
   // Upload media
   const mediaRes = await cosmic.media.insertOne({ media })
   blog.metadata.image = mediaRes.media.name
-  blog.metadata.seo.og_image = mediaRes.media.name
   blog.thumbnail = mediaRes.media.name
   await cosmic.objects.insertOne(blog)
 }
@@ -177,7 +176,6 @@ export async function addPage(cosmic: CosmicConfig, page: any) {
   // Add hero image
   const mediaRes = await cosmic.media.insertOne({ media })
   page.metadata.image = mediaRes.media.name
-  page.metadata.seo.og_image = mediaRes.media.name
   // Upload thumbnail image
   const thumbnail = await getMediaBlobFromURL(
     page.thumbnail,
@@ -209,7 +207,6 @@ export async function addProducts(cosmic: CosmicConfig, products: any) {
     // Upload media
     const mediaRes = await cosmic.media.insertOne({ media })
     product.metadata.image = mediaRes.media.name
-    product.metadata.seo.og_image = mediaRes.media.name
     product.thumbnail = mediaRes.media.name
     for (let galleryItem of product.metadata.gallery) {
       const media = await getMediaBlobFromURL(
