@@ -22,6 +22,8 @@ import {
   addPagesObjectType,
   addProducts,
   addProductsObjectType,
+  addTestimonials,
+  addTestimonialsObjectType,
   cosmicSourceBucketConfig,
   cosmicTargetBucketConfig,
   getAuthors,
@@ -39,6 +41,8 @@ import {
   getProducts,
   getProductsMetafields,
   getSEOMetafields,
+  getTestimonials,
+  getTestimonialsMetafields,
 } from "@/lib/cosmic"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -284,6 +288,13 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
       // Add settings
       const settings = await getGlobalSettings(cosmicSourceBucketConfig)
       await addGlobalSettings(cosmicTargetBucket, settings)
+    }
+    if (featureKey === "testimonials") {
+      metafields = await getTestimonialsMetafields()
+      await addTestimonialsObjectType(cosmicTargetBucket, metafields)
+      // Add testimonials
+      const testimonials = await getTestimonials(cosmicSourceBucketConfig)
+      await addTestimonials(cosmicTargetBucket, testimonials)
     }
     if (featureKey === "products") {
       metafields = await getProductsMetafields()

@@ -33,6 +33,18 @@ export const features = [
       "https://imgix.cosmicjs.com/f3029020-6af4-11ee-b27c-e13e14dddc51-pages.png",
   },
   {
+    key: "testimonials",
+    title: "Testimonials",
+    type: "object_type",
+    emoji: "🗣️",
+    description: `Adds Testimonials Object type to your Bucket. Fields include:`,
+    field_list: ["Company", "Position", "Image", "Quote"],
+    confirmation: `This will install a \`testimonials\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/features/testimonials",
+    screenshot:
+      "https://imgix.cosmicjs.com/ba908650-7037-11ee-b27c-e13e14dddc51-testimonials.png",
+  },
+  {
     key: "navigation_menus",
     title: "Navigation Menus",
     type: "object_type",

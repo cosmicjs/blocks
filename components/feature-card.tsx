@@ -29,7 +29,7 @@ export function FeatureCard({
         <h2 className="mb-4 text-2xl font-semibold">
           {`${feature.emoji} ${feature.title}`}
         </h2>
-        <div className="mb-4">
+        <div className="mb-4 pr-4">
           <p className="text-lg text-gray-800 dark:text-dark-gray-800">
             {feature.description}
           </p>

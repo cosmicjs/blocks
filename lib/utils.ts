@@ -14,7 +14,3 @@ export async function getMediaBlobFromURL(url: string, name: string) {
   media.name = name
   return media
 }
-
-export function getImageNameFromURL(name: string) {
-  return name.split("https://imgix.cosmicjs.com/")[1]
-}

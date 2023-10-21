@@ -1,6 +1,6 @@
 import { createBucketClient } from "@cosmicjs/sdk"
 
-import { getImageNameFromURL, getMediaBlobFromURL } from "@/lib/utils"
+import { getMediaBlobFromURL } from "@/lib/utils"
 
 type CosmicConfig = any
 export const cosmicSourceBucketConfig = createBucketClient({
@@ -36,6 +36,10 @@ export async function getFAQMetafields() {
 
 export async function getPageBuilderMetafields() {
   return await getMetafieldsFromObjectType("pages")
+}
+
+export async function getTestimonialsMetafields() {
+  return await getMetafieldsFromObjectType("testimonials")
 }
 
 export async function getGlobalSettingsMetafields() {
@@ -90,6 +94,15 @@ export async function getProducts(cosmic: CosmicConfig) {
   const { objects } = await cosmic.objects
     .find({
       type: "products",
+    })
+    .props("slug,title,type,metadata,thumbnail")
+  return objects
+}
+
+export async function getTestimonials(cosmic: CosmicConfig) {
+  const { objects } = await cosmic.objects
+    .find({
+      type: "testimonials",
     })
     .props("slug,title,type,metadata,thumbnail")
   return objects
@@ -223,6 +236,23 @@ export async function addProducts(cosmic: CosmicConfig, products: any) {
   }
 }
 
+export async function addTestimonials(cosmic: CosmicConfig, testimonials: any) {
+  for (let testimonial of testimonials) {
+    testimonial.type = "testimonials"
+    const media = await getMediaBlobFromURL(
+      testimonial.metadata.image.imgix_url,
+      testimonial.title +
+        "." +
+        testimonial.metadata.image.imgix_url.split(".").pop()
+    )
+    // Upload media
+    const mediaRes = await cosmic.media.insertOne({ media })
+    testimonial.metadata.image = mediaRes.media.name
+    testimonial.thumbnail = mediaRes.media.name
+    await cosmic.objects.insertOne(testimonial)
+  }
+}
+
 export async function addNavMenus(cosmic: CosmicConfig, menus: any) {
   for (let menu of menus) {
     await cosmic.objects.insertOne(menu)
@@ -253,6 +283,7 @@ export async function addGlobalSettings(cosmic: CosmicConfig, settings: any) {
   await cosmic.objects.insertOne(settings)
 }
 
+// Add Object types
 export async function addAuthorObjectType(cosmic: CosmicConfig) {
   await cosmic.objectTypes.insertOne({
     singular: "Author",
@@ -275,7 +306,6 @@ export async function addAuthorObjectType(cosmic: CosmicConfig) {
     ],
   })
 }
-
 export async function addBlogObjectType(cosmic: CosmicConfig, metafields: any) {
   await cosmic.objectTypes.insertOne({
     singular: "Blog Post",
@@ -289,7 +319,6 @@ export async function addBlogObjectType(cosmic: CosmicConfig, metafields: any) {
     metafields,
   })
 }
-
 export async function addCategoriesObjectType(
   cosmic: CosmicConfig,
   metafields: any
@@ -306,7 +335,6 @@ export async function addCategoriesObjectType(
     metafields,
   })
 }
-
 export async function addPagesObjectType(
   cosmic: CosmicConfig,
   metafields: any
@@ -323,7 +351,22 @@ export async function addPagesObjectType(
     metafields,
   })
 }
-
+export async function addTestimonialsObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Testimonial",
+    title: "Testimonials",
+    slug: "testimonials",
+    emoji: "🗣️",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
+    metafields,
+  })
+}
 export async function addGlobalSettingsObjectType(
   cosmic: CosmicConfig,
   metafields: any
@@ -341,7 +384,6 @@ export async function addGlobalSettingsObjectType(
     metafields,
   })
 }
-
 export async function addProductsObjectType(
   cosmic: CosmicConfig,
   metafields: any
@@ -358,7 +400,6 @@ export async function addProductsObjectType(
     metafields,
   })
 }
-
 export async function addNavMenusObjectType(
   cosmic: CosmicConfig,
   metafields: any
