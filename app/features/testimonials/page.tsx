@@ -47,7 +47,7 @@ export default async function Testimonials({
         <div className="md:p-8 text-center md:text-left space-y-4">
           <blockquote className="relative">
             <p className="relative text-lg z-10 font-medium">
-              "{testimonial.metadata.quote}"
+              &quot;{testimonial.metadata.quote}&quot;
             </p>
           </blockquote>
           <figcaption className="font-medium">
@@ -109,7 +109,7 @@ export default async function Testimonials({
               <div className="md:p-8 text-center md:text-left space-y-4">
                 <blockquote className="relative">
                   <p className="relative text-lg z-10 font-medium">
-                    "{testimonial.metadata.quote}"
+                  &quot;{testimonial.metadata.quote}&quot;
                   </p>
                 </blockquote>
                 <figcaption className="font-medium">
