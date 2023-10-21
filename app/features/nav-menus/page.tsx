@@ -139,18 +139,32 @@ export default async function NavMenus({
 
     const pageCode = dedent`
       \`\`\`jsx
-      import { cosmic } from "@/lib/cosmic";
-
+      // app/layout.tsx
+      import type { Metadata } from "next";
+      import { Inter } from "next/font/google";
+      import "./globals.css";
       import Header from "@/components/header";
       import Footer from "@/components/footer";
+      const inter = Inter({ subsets: ["latin"] });
 
-      export default async function IndexPage() {
+      export const metadata: Metadata = {
+        title: "Cosmic Feature Templates",
+        description: "Build content-powered websites and apps faster with Cosmic",
+      };
+
+      export default function RootLayout({
+        children,
+      }: {
+        children: React.ReactNode;
+      }) {
         return (
-          <>
-            <Header />
-            { /* Main content area */ }
-            <Footer />
-          </>
+          <html lang="en">
+            <body className={inter.className}>
+              <Header />
+              {children}
+              <Footer />
+            </body>
+          </html>
         );
       }
       \`\`\`
@@ -244,8 +258,7 @@ export default async function NavMenus({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 5. Add the `Header` and `Footer` components to the file
-            `app/page.tsx`.
+            Step 5. Replace `app/layout.tsx` with the following
           </h3>
           <Markdown>{pageCode}</Markdown>
         </div>
