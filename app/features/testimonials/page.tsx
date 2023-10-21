@@ -41,7 +41,7 @@ export default async function Testimonials({
       <figure className="mb-6 md:flex bg-slate-100 overflow-hidden rounded-xl p-8 md:p-0 dark:bg-slate-800">
         <img
           className="w-24 h-24 object-cover md:w-48 md:h-auto md:rounded-none rounded-full mx-auto"
-          src={`${testimonial.metadata.image.imgix_url}?w=2000&h=2000&auto=format,compression&fit=facearea&facepad=3`}
+          src={`${testimonial.metadata.image.imgix_url}?w=500&h=500&auto=format,compression&fit=facearea&facepad=3`}
           alt={testimonial.title}
         />
         <div className="md:p-8 text-center md:text-left space-y-4">
@@ -103,7 +103,7 @@ export default async function Testimonials({
             <figure className="mb-6 md:flex bg-slate-100 overflow-hidden rounded-xl p-8 md:p-0 dark:bg-slate-800">
               <img
                 className="w-24 h-24 object-cover md:w-48 md:h-auto md:rounded-none rounded-full mx-auto"
-                src={\`\${testimonial.metadata.image.imgix_url}?w=2000&h=2000&auto=format,compression&fit=facearea&facepad=3\`}
+                src={\`\${testimonial.metadata.image.imgix_url}?w=500&h=500&auto=format,compression&fit=facearea&facepad=3\`}
                 alt={testimonial.title}
               />
               <div className="md:p-8 text-center md:text-left space-y-4">
