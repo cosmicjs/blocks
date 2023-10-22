@@ -76,7 +76,7 @@ export default async function Testimonials({
       \`\`\`jsx
       import { cosmic } from "@/lib/cosmic";
       
-      export default async function Tesimonials() {
+      export async function Testimonials() {
         
         const { objects: testimonials } = await cosmic.objects
           .find({
@@ -209,7 +209,7 @@ export default async function Testimonials({
           </div>
           <Markdown>
             {dedent(`\`\`\`jsx
-            import Testimonials from "@/components/testimonials";
+            import { Testimonials } from "@/components/testimonials";
             
             export default function Home() {
               return (

@@ -59,39 +59,28 @@ export default async function FAQs({
     )
   }
   function Code() {
-    const codeString = dedent`
+    const componentCodeString = dedent`
       \`\`\`jsx
-      import { cosmic } from "@/lib/cosmic";
-      
+      // components/faqs.tsx
       import {
         Accordion,
         AccordionContent,
         AccordionItem,
         AccordionTrigger,
-      } from "@/components/ui/accordion"
-
-      export default async function FAQs() {
-        
-        // Set the type and slug to the page that contains the FAQs
-        const { object: page } = await cosmic.objects
-          .findOne({
-            type: "pages",
-            slug: "home",
-          })
-          .props("metadata")
-          .depth(1)
-        
-        type FAQ = {
-          question: string
-          answer: string
-        }
-        
+      } from "@/components/ui/accordion";
+      
+      type FAQ = {
+        question: string;
+        answer: string;
+      };
+      
+      export async function FAQs({ faqs }: { faqs: FAQ[] }) {
         return (
-          <div className="max-w-[700px] m-auto my-20">
+          <>
             <h2 className="text-2xl font-semibold mb-4">
               Frequently Asked Questions
             </h2>
-            {page.metadata.faqs.map((faq: FAQ) => {
+            {faqs.map((faq: FAQ) => {
               return (
                 <Accordion type="single" collapsible key={faq.question}>
                   <AccordionItem value="item-1">
@@ -101,9 +90,26 @@ export default async function FAQs({
                 </Accordion>
               );
             })}
-          </div>
+          </>
         );
-      }
+      }      
+      \`\`\`
+      `
+    const codeString = dedent`
+      \`\`\`jsx
+      // app/page.tsx
+      
+      import { FAQs } from "@/components/FAQs";
+
+      export default function Home() {
+        return (
+          <main className="container">
+            {/* page content above */}
+            <FAQs faqs={page.metadata.faqs} />
+            {/* page content below */}
+          </main>
+        );
+      }    
       \`\`\`
       `
     return (
@@ -164,7 +170,14 @@ export default async function FAQs({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 4. Add the following to any file that needs FAQs
+            Step 4. Create a new file located at `components/faqs.tsx` with the
+            following
+          </h3>
+          <Markdown>{componentCodeString}</Markdown>
+        </div>
+        <div className="mb-10">
+          <h3 className="text-2xl font-semibold">
+            Step 5. Add the FAQs component to any file that needs FAQs
           </h3>
           <Markdown>{codeString}</Markdown>
         </div>
