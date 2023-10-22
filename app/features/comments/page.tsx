@@ -335,10 +335,6 @@ export default async function Testimonials({
             Step 4. Create a new file at `components/comments-form.tsx` with the
             following
           </h3>
-          <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
-          </div>
           <Markdown>{commentsFormCodeString}</Markdown>
         </div>
         <div className="mb-10">
@@ -378,7 +374,7 @@ export default async function Testimonials({
           </Markdown>
         </div>
         <div className="mb-10">
-          <h3 className="text-2xl font-semibold">Step 4. Run your app</h3>
+          <h3 className="text-2xl font-semibold">Step 8. Run your app</h3>
           <Markdown>
             {dedent(`\`\`\`bash
             yarn dev
@@ -388,7 +384,7 @@ export default async function Testimonials({
         </div>
         <div className="mb-6">
           <h3 className="text-2xl font-semibold">
-            Step 5. Go to http://localhost:3000 and any page where this comments
+            Step 9. Go to http://localhost:3000 and any page where this comments
             feature has been added. It should look like this:
           </h3>
         </div>
