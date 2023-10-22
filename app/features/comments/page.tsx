@@ -300,6 +300,7 @@ export default async function Testimonials({
           <Markdown>
             {dedent(`\`\`\`bash
             yarn add @cosmicjs/sdk
+            npx shadcn-ui@latest init
             npx shadcn-ui@latest add input
             npx shadcn-ui@latest add label
             npx shadcn-ui@latest add textarea
