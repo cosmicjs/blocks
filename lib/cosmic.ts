@@ -6,6 +6,7 @@ type CosmicConfig = any
 export const cosmicSourceBucketConfig = createBucketClient({
   bucketSlug: process.env.NEXT_PUBLIC_SOURCE_BUCKET_SLUG || "",
   readKey: process.env.NEXT_PUBLIC_SOURCE_READ_KEY || "",
+  writeKey: process.env.NEXT_PUBLIC_SOURCE_WRITE_KEY || "",
 })
 
 export const cosmicTargetBucketConfig = (
@@ -40,6 +41,10 @@ export async function getPageBuilderMetafields() {
 
 export async function getTestimonialsMetafields() {
   return await getMetafieldsFromObjectType("testimonials")
+}
+
+export async function getCommentsMetafields() {
+  return await getMetafieldsFromObjectType("comments")
 }
 
 export async function getGlobalSettingsMetafields() {
@@ -103,6 +108,15 @@ export async function getTestimonials(cosmic: CosmicConfig) {
   const { objects } = await cosmic.objects
     .find({
       type: "testimonials",
+    })
+    .props("slug,title,type,metadata,thumbnail")
+  return objects
+}
+
+export async function getComments(cosmic: CosmicConfig) {
+  const { objects } = await cosmic.objects
+    .find({
+      type: "comments",
     })
     .props("slug,title,type,metadata,thumbnail")
   return objects
@@ -253,6 +267,14 @@ export async function addTestimonials(cosmic: CosmicConfig, testimonials: any) {
   }
 }
 
+export async function addComments(cosmic: CosmicConfig, comments: any) {
+  for (let comment of comments) {
+    comment.type = "comments"
+    comment.metadata.resource = ""
+    await cosmic.objects.insertOne(comment)
+  }
+}
+
 export async function addNavMenus(cosmic: CosmicConfig, menus: any) {
   for (let menu of menus) {
     await cosmic.objects.insertOne(menu)
@@ -360,6 +382,22 @@ export async function addTestimonialsObjectType(
     title: "Testimonials",
     slug: "testimonials",
     emoji: "🗣️",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
+    metafields,
+  })
+}
+export async function addCommentsObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Comment",
+    title: "Comments",
+    slug: "comments",
+    emoji: "💬",
     options: {
       slug_field: true,
       content_editor: false,

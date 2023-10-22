@@ -1,5 +1,21 @@
 export const features = [
   {
+    key: "pages",
+    title: "Pages",
+    type: "object_type",
+    emoji: "📄",
+    description: `Adds a Pages Object type to your Bucket. Fields include:`,
+    field_list: [
+      "Hero image",
+      "Rich text content",
+      "Repeating layouts in: 1 column and alternating 2 columns with headline, image, and rich text content.",
+    ],
+    confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/features/page",
+    screenshot:
+      "https://imgix.cosmicjs.com/f3029020-6af4-11ee-b27c-e13e14dddc51-pages.png",
+  },
+  {
     key: "blog",
     title: "Blog",
     type: "object_type",
@@ -17,22 +33,6 @@ export const features = [
       "https://imgix.cosmicjs.com/36a6ee10-62e0-11ee-b975-cb0cfadd93ad-blog.png",
   },
   {
-    key: "pages",
-    title: "Pages",
-    type: "object_type",
-    emoji: "📄",
-    description: `Adds a Pages Object type to your Bucket. Fields include:`,
-    field_list: [
-      "Hero image",
-      "Rich text content",
-      "Repeating layouts in: 1 column and alternating 2 columns with headline, image, and rich text content.",
-    ],
-    confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/features/page",
-    screenshot:
-      "https://imgix.cosmicjs.com/f3029020-6af4-11ee-b27c-e13e14dddc51-pages.png",
-  },
-  {
     key: "testimonials",
     title: "Testimonials",
     type: "object_type",
@@ -43,6 +43,18 @@ export const features = [
     preview_link: "/features/testimonials",
     screenshot:
       "https://imgix.cosmicjs.com/ba908650-7037-11ee-b27c-e13e14dddc51-testimonials.png",
+  },
+  {
+    key: "comments",
+    title: "Comments",
+    type: "object_type",
+    emoji: "💬",
+    description: `Adds Comments Object type to your Bucket. Fields include:`,
+    field_list: ["Email", "Comment", "Resource", "Approved"],
+    confirmation: `This will install a \`comments\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/features/comments",
+    screenshot:
+      "https://imgix.cosmicjs.com/87ce1aa0-7075-11ee-b27c-e13e14dddc51-comments.png",
   },
   {
     key: "navigation_menus",

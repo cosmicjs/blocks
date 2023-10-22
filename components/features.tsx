@@ -14,6 +14,8 @@ import {
   addBlogObjectType,
   addCategories,
   addCategoriesObjectType,
+  addComments,
+  addCommentsObjectType,
   addGlobalSettings,
   addGlobalSettingsObjectType,
   addNavMenus,
@@ -31,6 +33,8 @@ import {
   getBlogMetafields,
   getCategories,
   getCategoriesMetafields,
+  getComments,
+  getCommentsMetafields,
   getFAQMetafields,
   getGlobalSettings,
   getGlobalSettingsMetafields,
@@ -295,6 +299,13 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
       // Add testimonials
       const testimonials = await getTestimonials(cosmicSourceBucketConfig)
       await addTestimonials(cosmicTargetBucket, testimonials)
+    }
+    if (featureKey === "comments") {
+      metafields = await getCommentsMetafields()
+      await addCommentsObjectType(cosmicTargetBucket, metafields)
+      // Add comments
+      const comments = await getComments(cosmicSourceBucketConfig)
+      await addComments(cosmicTargetBucket, comments)
     }
     if (featureKey === "products") {
       metafields = await getProductsMetafields()
