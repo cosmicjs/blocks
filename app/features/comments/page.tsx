@@ -387,8 +387,8 @@ export default async function Testimonials({
         </div>
         <div className="mb-6">
           <h3 className="text-2xl font-semibold">
-            Step 5. Go to http://localhost:3000 and any page where this global
-            settings data has been added. It should look like this:
+            Step 5. Go to http://localhost:3000 and any page where this comments
+            feature has been added. It should look like this:
           </h3>
         </div>
         <div className="mb-6">
