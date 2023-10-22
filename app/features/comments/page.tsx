@@ -48,7 +48,7 @@ export default async function Testimonials({
             minute: "numeric",
           })}
         </div>
-        <div className="text-slate-400">{comment.metadata.comment}</div>
+        <div>{comment.metadata.comment}</div>
       </div>
     )
   }
@@ -227,7 +227,7 @@ export default async function Testimonials({
                 minute: "numeric",
               })}
             </div>
-            <div className="text-slate-400">{comment.metadata.comment}</div>
+            <div>{comment.metadata.comment}</div>
           </div>
         );
       }
