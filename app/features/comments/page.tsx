@@ -76,7 +76,7 @@ export default async function Testimonials({
     import { Label } from "@/components/ui/label"
     import { Textarea } from "@/components/ui/textarea"
 
-    export function CommentForm() {
+    export function CommentForm({ resourceId }: { resourceId: string }) {
       const [name, setName] = useState("")
       const [email, setEmail] = useState("")
       const [comment, setComment] = useState("")
@@ -97,8 +97,7 @@ export default async function Testimonials({
           metadata: {
             email,
             comment,
-            // Add Object id here to add this comment to a specific Object such as blog post or product
-            // resource: "object-id",
+            resource: resourceId, // Add resource id here such as blog post or product id
           },
         }
         try {
@@ -233,33 +232,30 @@ export default async function Testimonials({
         );
       }
 
-      export async function Comments() {
+      export async function Comments({ resourceId }: { resourceId: string }) {
         let comments = [];
         try {
           const { objects } = await cosmic.objects
             .find({
               type: "comments",
               "metadata.approved": true,
-              // Add Object id here to get comments connected to a specific resource such as blog post or product
-              // "metadata.resource": "object-id",
+              "metadata.resource": resourceId, // Add resource id here such as blog post or product id
             })
             .props("title,slug,metadata,created_at")
             .depth(1)
             .sort("created_at");
           comments = objects;
         } catch (err) {}
-
         return (
           <>
             <h2 className="text-2xl mb-4">Comments</h2>
             {comments.map((comment: Comment) => {
               return <Comment comment={comment} key={comment.slug} />;
             })}
-            <CommentForm />
+            <CommentForm resourceId={resourceId} />
           </>
         );
       }
-
       \`\`\`
       `
 
@@ -360,7 +356,8 @@ export default async function Testimonials({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 7. Add the following to any page that needs comments.
+            Step 7. Add the following to any page that needs comments and pass
+            the Object id to connect to this specific resource.
           </h3>
           <Markdown>
             {dedent(`\`\`\`jsx
@@ -370,7 +367,7 @@ export default async function Testimonials({
               return (
                 <main className="container">
                   {/* page content above */}
-                  <Comments />
+                  <Comments resourceId={page.id} />
                   {/* page content below */}
                 </main>
               );
