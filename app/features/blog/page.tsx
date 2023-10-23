@@ -211,10 +211,6 @@ export default async function BlogPage({
             Step 4. Add a new file located at `app/blog/page.tsx` with the
             following
           </h3>
-          <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
-          </div>
           <Markdown>{codeString}</Markdown>
         </div>
         <div className="mb-10">
