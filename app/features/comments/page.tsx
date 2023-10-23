@@ -66,6 +66,7 @@ export default async function Testimonials({
   function Code() {
     const commentsFormCodeString = dedent`
     \`\`\`jsx
+    // components/comments-form.tsx
     "use client"
 
     import { useState } from "react"
@@ -200,6 +201,7 @@ export default async function Testimonials({
     `
     const commentsCodeString = dedent`
       \`\`\`jsx
+      // components/comments.tsx
       import { cosmic } from "@/lib/cosmic";
 
       import { CommentForm } from "@/components/comment-form";
@@ -261,6 +263,7 @@ export default async function Testimonials({
 
     const commentsAPICodeString = dedent`
       \`\`\`ts
+      // app/api/comments/route.ts
       import { type NextRequest } from "next/server";
       import { cosmic } from "@/lib/cosmic";
 
@@ -288,6 +291,11 @@ export default async function Testimonials({
           <Markdown>
             {dedent(`\`\`\`bash
             bunx create-next-app@latest cosmic-app
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             cd cosmic-app
             \`\`\`
           `)}
@@ -300,10 +308,35 @@ export default async function Testimonials({
           <Markdown>
             {dedent(`\`\`\`bash
             bun add @cosmicjs/sdk
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest init
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest add button
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest add input
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest add label
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest add textarea
             \`\`\`
           `)}
@@ -360,13 +393,14 @@ export default async function Testimonials({
           </h3>
           <Markdown>
             {dedent(`\`\`\`jsx
+            // app/blog/page.tsx
             import { Comments } from "@/components/comments";
             
-            export default function Home() {
+            export default function BlogPost() {
               return (
                 <main className="container">
                   {/* page content above */}
-                  <Comments resourceId={page.id} />
+                  <Comments resourceId={blog.id} />
                   {/* page content below */}
                 </main>
               );
