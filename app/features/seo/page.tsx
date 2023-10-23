@@ -75,13 +75,14 @@ export default async function SEO({
   function Code() {
     const codeString = dedent`
       \`\`\`jsx
+      // app/blog/[slug]/page.tsx
       import { cosmic } from "@/lib/cosmic";
 
-      export async function generateMetadata() {
+      export async function generateMetadata({ params }: { params: { slug: string } }) {
         const { object: blog } = await cosmic.objects
           .findOne({
             type: "blog-posts", // Change to your Object type
-            slug: "our-amazing-adventure", // Change to your Object slug
+            slug: params.slug, // Change to your Object slug
           })
           .props("metadata")
           .depth(1)
@@ -96,12 +97,12 @@ export default async function SEO({
         }
       }
       
-      export default async function BlogPage() {
+      export default async function BlogPage({ params }: { params: { slug: string } }) {
         
         const { object: blog } = await cosmic.objects
           .findOne({
             type: "blog-posts",
-            slug: "our-amazing-adventure",
+            slug: params.slug,
           })
           .props("slug,title,metadata")
           .depth(1);
@@ -129,6 +130,11 @@ export default async function SEO({
           <Markdown>
             {dedent(`\`\`\`bash
             bunx create-next-app@latest cosmic-app
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             cd cosmic-app
             \`\`\`
           `)}

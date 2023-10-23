@@ -89,6 +89,7 @@ export default async function BlogPage({
   function Code() {
     const codeString = dedent`
       \`\`\`jsx
+      // components/footer.tsx
       import { cosmic } from "@/lib/cosmic";
       
       export default async function GlobalSettings() {
@@ -163,6 +164,11 @@ export default async function BlogPage({
           <Markdown>
             {dedent(`\`\`\`bash
             bunx create-next-app@latest cosmic-app
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             cd cosmic-app
             \`\`\`
           `)}
@@ -175,6 +181,11 @@ export default async function BlogPage({
           <Markdown>
             {dedent(`\`\`\`bash
             bun add @cosmicjs/sdk
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bun add react-markdown
             \`\`\`
           `)}

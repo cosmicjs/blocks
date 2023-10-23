@@ -98,9 +98,19 @@ export default async function FAQs({
     const codeString = dedent`
       \`\`\`jsx
       // app/page.tsx
+      import { cosmic } from "@/lib/cosmic";
       import { FAQs } from "@/components/FAQs";
-
-      export default function Home() {
+      
+      export default async function Home() {
+        
+        const { object: page } = await cosmic.objects
+          .findOne({
+            type: "pages",
+            slug: "home",
+          })
+          .props("slug,title,metadata")
+          .depth(1)
+        
         return (
           <main className="container">
             {/* page content above */}
@@ -128,6 +138,11 @@ export default async function FAQs({
           <Markdown>
             {dedent(`\`\`\`bash
             bunx create-next-app@latest cosmic-app
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             cd cosmic-app
             \`\`\`
           `)}
@@ -141,7 +156,17 @@ export default async function FAQs({
           <Markdown>
             {dedent(`\`\`\`bash
             bun add @cosmicjs/sdk
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest init
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest add accordion
             \`\`\`
           `)}
