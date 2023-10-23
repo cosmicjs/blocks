@@ -181,7 +181,7 @@ export default async function BlogPage({
           <Markdown>
             {dedent(`\`\`\`bash
             bun add @cosmicjs/sdk
-            yarn add react-markdown
+            bun add react-markdown
             \`\`\`
           `)}
           </Markdown>
@@ -221,7 +221,7 @@ export default async function BlogPage({
           <h3 className="text-2xl font-semibold">Step 4. Run your app</h3>
           <Markdown>
             {dedent(`\`\`\`bash
-            yarn dev
+            bun dev
             \`\`\`
           `)}
           </Markdown>

@@ -267,7 +267,7 @@ export default async function NavMenus({
           <Markdown>
             {dedent(
               `\`\`\`bash
-            yarn dev
+            bun dev
             \`\`\`
           `
             )}

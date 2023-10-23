@@ -25,7 +25,7 @@ Use Cosmic Feature Templates to build common content-powered features for your w
 git clone https://github.com/cosmicjs/cosmic-feature-templates
 cd cosmic-feature-templates
 yarn
-yarn dev
+bun dev
 ```
 
 ## License

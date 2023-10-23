@@ -175,7 +175,7 @@ export default async function SEO({
           <h3 className="text-2xl font-semibold">Step 5. Run your app</h3>
           <Markdown>
             {dedent(`\`\`\`bash
-            yarn dev
+            bun dev
             \`\`\`
           `)}
           </Markdown>
