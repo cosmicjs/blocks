@@ -56,6 +56,7 @@ export default async function NavMenus({
   function Code() {
     const navCode = dedent`
       \`\`\`jsx
+      // components/nav-menu.tsx
       "use client"
 
       import Link from "next/link"
@@ -97,6 +98,7 @@ export default async function NavMenus({
       `
     const headerCode = dedent`
       \`\`\`jsx
+      // components/header.tsx
       import { cosmic } from "@/lib/cosmic";
 
       import { NavMenu } from "@/components/nav-menu";
@@ -118,6 +120,7 @@ export default async function NavMenus({
 
     const footerCode = dedent`
       \`\`\`jsx
+      // components/footer.tsx
       import { cosmic } from "@/lib/cosmic";
 
       import { NavMenu } from "@/components/nav-menu";
@@ -196,6 +199,11 @@ export default async function NavMenus({
           <Markdown>
             {dedent(`\`\`\`bash
             bunx create-next-app@latest cosmic-app
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             cd cosmic-app
             \`\`\`
           `)}
@@ -209,7 +217,17 @@ export default async function NavMenus({
           <Markdown>
             {dedent(`\`\`\`bash
             bun add @cosmicjs/sdk
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest init
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest add navigation-menu
             \`\`\`
           `)}
@@ -226,6 +244,7 @@ export default async function NavMenus({
           </div>
           <Markdown>
             {dedent(`\`\`\`ts
+            // lib/cosmic.ts
             import { createBucketClient } from "@cosmicjs/sdk";
             export const cosmic = createBucketClient({
               bucketSlug: "BUCKET_SLUG",
@@ -237,8 +256,8 @@ export default async function NavMenus({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 4. Add a new file located at `app/components/nav-menu.tsx` with
-            the following
+            Step 4. Add a new file located at `components/nav-menu.tsx` with the
+            following
           </h3>
           <Markdown>{navCode}</Markdown>
         </div>

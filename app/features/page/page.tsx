@@ -417,6 +417,13 @@ export default async function Page({
             {dedent(
               `\`\`\`bash
             bunx create-next-app@latest cosmic-app
+            \`\`\`
+          `
+            )}
+          </Markdown>
+          <Markdown>
+            {dedent(
+              `\`\`\`bash
             cd cosmic-app
             \`\`\`
           `
@@ -431,7 +438,17 @@ export default async function Page({
           <Markdown>
             {dedent(`\`\`\`bash
             bun add @cosmicjs/sdk
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest init
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bunx shadcn-ui@latest add button
             \`\`\`
           `)}
@@ -448,6 +465,7 @@ export default async function Page({
           </div>
           <Markdown>
             {dedent(`\`\`\`ts
+            // lib/cosmic.ts
             import { createBucketClient } from "@cosmicjs/sdk";
             export const cosmic = createBucketClient({
               bucketSlug: "BUCKET_SLUG",

@@ -74,6 +74,7 @@ export default async function Testimonials({
   function Code() {
     const codeString = dedent`
       \`\`\`jsx
+      // components/testimonials.tsx
       import { cosmic } from "@/lib/cosmic";
       
       export async function Testimonials() {
@@ -152,6 +153,11 @@ export default async function Testimonials({
           <Markdown>
             {dedent(`\`\`\`bash
             bunx create-next-app@latest cosmic-app
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             cd cosmic-app
             \`\`\`
           `)}
@@ -179,6 +185,7 @@ export default async function Testimonials({
           </div>
           <Markdown>
             {dedent(`\`\`\`ts
+            // lib/cosmic.ts
             import { createBucketClient } from "@cosmicjs/sdk";
             export const cosmic = createBucketClient({
               bucketSlug: "BUCKET_SLUG",
@@ -203,12 +210,9 @@ export default async function Testimonials({
           <h3 className="text-2xl font-semibold">
             Step 5. Add the following to any page that needs testimonials.
           </h3>
-          <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
-          </div>
           <Markdown>
             {dedent(`\`\`\`jsx
+            // app/page.tsx
             import { Testimonials } from "@/components/testimonials";
             
             export default function Home() {
@@ -235,8 +239,8 @@ export default async function Testimonials({
         </div>
         <div className="mb-6">
           <h3 className="text-2xl font-semibold">
-            Step 5. Go to http://localhost:3000 and any page where this global
-            settings data has been added. It should look like this:
+            Step 5. Go to http://localhost:3000 and any page where this
+            testimonial component has been added. It should look like this:
           </h3>
         </div>
         <div className="mb-6">

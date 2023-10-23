@@ -321,6 +321,7 @@ export default async function Testimonials({
           </div>
           <Markdown>
             {dedent(`\`\`\`ts
+            // lib/cosmic.ts
             import { createBucketClient } from "@cosmicjs/sdk";
             export const cosmic = createBucketClient({
               bucketSlug: "BUCKET_SLUG",

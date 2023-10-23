@@ -191,6 +191,7 @@ export default async function BlogPage({
           </div>
           <Markdown>
             {dedent(`\`\`\`ts
+            // lib/cosmic.ts
             import { createBucketClient } from "@cosmicjs/sdk";
             export const cosmic = createBucketClient({
               bucketSlug: "BUCKET_SLUG",
@@ -203,7 +204,7 @@ export default async function BlogPage({
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
             Step 4. Add the following to any file that needs global settings
-            data, for example `app/components/footer.tsx`
+            data, for example `components/footer.tsx`
           </h3>
           <div className="py-2">
             Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with

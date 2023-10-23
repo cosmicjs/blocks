@@ -89,6 +89,7 @@ export default async function BlogPage({
   function Code() {
     const codeString = dedent`
       \`\`\`jsx
+      // app/blog/page.tsx
       import { cosmic } from "@/lib/cosmic";
       
       import Markdown from "react-markdown";
@@ -169,6 +170,11 @@ export default async function BlogPage({
           <Markdown>
             {dedent(`\`\`\`bash
             bunx create-next-app@latest cosmic-app
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             cd cosmic-app
             \`\`\`
           `)}
@@ -181,6 +187,11 @@ export default async function BlogPage({
           <Markdown>
             {dedent(`\`\`\`bash
             bun add @cosmicjs/sdk
+            \`\`\`
+          `)}
+          </Markdown>
+          <Markdown>
+            {dedent(`\`\`\`bash
             bun add react-markdown
             \`\`\`
           `)}
@@ -197,6 +208,7 @@ export default async function BlogPage({
           </div>
           <Markdown>
             {dedent(`\`\`\`ts
+            // lib/cosmic.ts
             import { createBucketClient } from "@cosmicjs/sdk";
             export const cosmic = createBucketClient({
               bucketSlug: "BUCKET_SLUG",
