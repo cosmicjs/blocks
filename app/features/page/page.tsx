@@ -158,13 +158,13 @@ export default async function Page({
   function Preview() {
     return (
       <div>
-        <div className="pt-20 pb-4">
+        <div className="pb-4 pt-20">
           <h1 className="text-center text-4xl font-bold">{page.metadata.h1}</h1>
         </div>
-        <div className="pb-8 max-w-3xl m-auto">
+        <div className="m-auto max-w-3xl pb-8">
           <div className="text-center text-xl">{page.metadata.subheadline}</div>
         </div>
-        <div className="pb-20 max-w-3xl m-auto">
+        <div className="m-auto max-w-3xl pb-20">
           <div className="text-center text-xl">
             <a
               className={cn(
@@ -187,7 +187,7 @@ export default async function Page({
             </a>
           </div>
         </div>
-        <div className="w-full px-4 max-w-[1100px] m-auto mb-10">
+        <div className="m-auto mb-10 w-full max-w-[1100px] px-4">
           <img
             src={`${page.metadata.image.imgix_url}?w=3000&auto=format,compression`}
             alt={page.title}
@@ -195,7 +195,7 @@ export default async function Page({
           />
         </div>
         <section className="container grid items-center py-10">
-          <div className="relative m-auto max-w-3xl flex flex-col items-start gap-2">
+          <div className="relative m-auto flex max-w-3xl flex-col items-start gap-2">
             <div
               dangerouslySetInnerHTML={{ __html: page.metadata.content }}
               className="m-auto mb-16 max-w-[800px]"
@@ -214,7 +214,7 @@ export default async function Page({
   function Code() {
     const codeString = dedent`
       \`\`\`jsx
-      // app/page.jsx
+      // app/page.tsx
       import { cn } from "@/lib/utils"
       import { buttonVariants } from "@/components/ui/button"
       import { cosmic } from "@/lib/cosmic";
@@ -416,7 +416,7 @@ export default async function Page({
           <Markdown>
             {dedent(
               `\`\`\`bash
-            npx create-next-app@latest cosmic-app
+            bunx create-next-app@latest cosmic-app
             cd cosmic-app
             \`\`\`
           `
@@ -430,9 +430,9 @@ export default async function Page({
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
-            yarn add @cosmicjs/sdk
-            npx shadcn-ui@latest init
-            npx shadcn-ui@latest add button
+            bun add @cosmicjs/sdk
+            bunx shadcn-ui@latest init
+            bunx shadcn-ui@latest add button
             \`\`\`
           `)}
           </Markdown>
@@ -459,7 +459,7 @@ export default async function Page({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 4. Update the file located at `app/page.jsx` with the following
+            Step 4. Update the file located at `app/page.tsx` with the following
           </h3>
           <div className="py-2">
             Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with

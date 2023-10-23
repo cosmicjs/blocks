@@ -43,11 +43,11 @@ export default async function NavMenus({
     return (
       <>
         <div className="my-10">
-          <h2 className="mb-6 text-3xl text-center">Header</h2>
+          <h2 className="mb-6 text-center text-3xl">Header</h2>
           <NavMenu items={header.metadata.items} />
         </div>
         <div className="my-10">
-          <h2 className="mb-6 text-3xl text-center">Footer</h2>
+          <h2 className="mb-6 text-center text-3xl">Footer</h2>
           <NavMenu items={footer.metadata.items} />
         </div>
       </>
@@ -195,7 +195,7 @@ export default async function NavMenus({
           </div>
           <Markdown>
             {dedent(`\`\`\`bash
-            npx create-next-app@latest cosmic-app
+            bunx create-next-app@latest cosmic-app
             cd cosmic-app
             \`\`\`
           `)}
@@ -208,9 +208,9 @@ export default async function NavMenus({
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
-            yarn add @cosmicjs/sdk
-            npx shadcn-ui@latest init
-            npx shadcn-ui@latest add navigation-menu
+            bun add @cosmicjs/sdk
+            bunx shadcn-ui@latest init
+            bunx shadcn-ui@latest add navigation-menu
             \`\`\`
           `)}
           </Markdown>

@@ -38,15 +38,15 @@ export default async function Testimonials({
 
   function Testimonial({ testimonial }: { testimonial: Testimonial }) {
     return (
-      <figure className="mb-6 md:flex bg-slate-100 overflow-hidden rounded-xl p-8 md:p-0 dark:bg-slate-800">
+      <figure className="mb-6 overflow-hidden rounded-xl bg-slate-100 p-8 dark:bg-slate-800 md:flex md:p-0">
         <img
-          className="w-24 h-24 object-cover md:w-48 md:h-auto md:rounded-none rounded-full mx-auto"
+          className="mx-auto h-24 w-24 rounded-full object-cover md:h-auto md:w-48 md:rounded-none"
           src={`${testimonial.metadata.image.imgix_url}?w=500&h=500&auto=format,compression&fit=facearea&facepad=3`}
           alt={testimonial.title}
         />
-        <div className="md:p-8 text-center md:text-left space-y-4">
+        <div className="space-y-4 text-center md:p-8 md:text-left">
           <blockquote className="relative">
-            <p className="relative text-lg z-10 font-medium">
+            <p className="relative z-10 text-lg font-medium">
               &quot;{testimonial.metadata.quote}&quot;
             </p>
           </blockquote>
@@ -151,7 +151,7 @@ export default async function Testimonials({
           </div>
           <Markdown>
             {dedent(`\`\`\`bash
-            npx create-next-app@latest cosmic-app
+            bunx create-next-app@latest cosmic-app
             cd cosmic-app
             \`\`\`
           `)}
@@ -163,7 +163,7 @@ export default async function Testimonials({
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
-            yarn add @cosmicjs/sdk
+            bun add @cosmicjs/sdk
             \`\`\`
           `)}
           </Markdown>

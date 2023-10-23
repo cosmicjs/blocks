@@ -36,9 +36,9 @@ export default async function Testimonials({
 
   function Comment({ comment }: { comment: Comment }) {
     return (
-      <div className="border p-8 rounded-xl mb-6">
-        <div className="text-lg mb-2">{comment.title}</div>
-        <div className="text-xs mb-4">
+      <div className="mb-6 rounded-xl border p-8">
+        <div className="mb-2 text-lg">{comment.title}</div>
+        <div className="mb-4 text-xs">
           {new Date(comment.created_at).toLocaleDateString("en-us", {
             weekday: "long",
             year: "numeric",
@@ -55,7 +55,7 @@ export default async function Testimonials({
   function Preview() {
     return (
       <div className="py-10">
-        <h2 className="text-2xl mb-4">Comments</h2>
+        <h2 className="mb-4 text-2xl">Comments</h2>
         {comments.map((comment: Comment) => {
           return <Comment comment={comment} key={comment.slug} />
         })}
@@ -287,7 +287,7 @@ export default async function Testimonials({
           </div>
           <Markdown>
             {dedent(`\`\`\`bash
-            npx create-next-app@latest cosmic-app
+            bunx create-next-app@latest cosmic-app
             cd cosmic-app
             \`\`\`
           `)}
@@ -299,12 +299,12 @@ export default async function Testimonials({
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
-            yarn add @cosmicjs/sdk
-            npx shadcn-ui@latest init
-            npx shadcn-ui@latest add button
-            npx shadcn-ui@latest add input
-            npx shadcn-ui@latest add label
-            npx shadcn-ui@latest add textarea
+            bun add @cosmicjs/sdk
+            bunx shadcn-ui@latest init
+            bunx shadcn-ui@latest add button
+            bunx shadcn-ui@latest add input
+            bunx shadcn-ui@latest add label
+            bunx shadcn-ui@latest add textarea
             \`\`\`
           `)}
           </Markdown>

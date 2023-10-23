@@ -41,8 +41,8 @@ export default async function FAQs({
   }
   function Preview() {
     return (
-      <div className="w-full m-auto mt-10">
-        <h2 className="text-2xl font-semibold mb-4">
+      <div className="m-auto mt-10 w-full">
+        <h2 className="mb-4 text-2xl font-semibold">
           Frequently Asked Questions
         </h2>
         {faqs.metadata.faqs.map((faq: FAQ) => {
@@ -128,7 +128,7 @@ export default async function FAQs({
           </div>
           <Markdown>
             {dedent(`\`\`\`bash
-            npx create-next-app@latest cosmic-app
+            bunx create-next-app@latest cosmic-app
             cd cosmic-app
             \`\`\`
           `)}
@@ -141,9 +141,9 @@ export default async function FAQs({
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
-            yarn add @cosmicjs/sdk
-            npx shadcn-ui@latest init
-            npx shadcn-ui@latest add accordion
+            bun add @cosmicjs/sdk
+            bunx shadcn-ui@latest init
+            bunx shadcn-ui@latest add accordion
             \`\`\`
           `)}
           </Markdown>

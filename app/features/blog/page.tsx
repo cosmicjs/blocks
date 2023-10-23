@@ -168,7 +168,7 @@ export default async function BlogPage({
           </div>
           <Markdown>
             {dedent(`\`\`\`bash
-            npx create-next-app@latest cosmic-app
+            bunx create-next-app@latest cosmic-app
             cd cosmic-app
             \`\`\`
           `)}
@@ -180,7 +180,7 @@ export default async function BlogPage({
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
-            yarn add @cosmicjs/sdk
+            bun add @cosmicjs/sdk
             yarn add react-markdown
             \`\`\`
           `)}

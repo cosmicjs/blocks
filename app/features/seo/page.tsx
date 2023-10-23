@@ -128,7 +128,7 @@ export default async function SEO({
           </div>
           <Markdown>
             {dedent(`\`\`\`bash
-            npx create-next-app@latest cosmic-app
+            bunx create-next-app@latest cosmic-app
             cd cosmic-app
             \`\`\`
           `)}
@@ -140,7 +140,7 @@ export default async function SEO({
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
-            yarn add @cosmicjs/sdk
+            bun add @cosmicjs/sdk
             \`\`\`
           `)}
           </Markdown>
