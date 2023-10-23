@@ -98,7 +98,6 @@ export default async function FAQs({
     const codeString = dedent`
       \`\`\`jsx
       // app/page.tsx
-      
       import { FAQs } from "@/components/FAQs";
 
       export default function Home() {
