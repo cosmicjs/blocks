@@ -81,7 +81,7 @@ export default async function NavMenus({
                     <Link href={item.link} legacyBehavior passHref key={item.title}>
                       <NavigationMenuLink
                         className={navigationMenuTriggerStyle()}
-                        target={item.open_in_new_tab ? "_blank" : "_parent"}
+                        target={item.open_in_new_tab ? "_blank" : ""}
                       >
                         {item.title}
                       </NavigationMenuLink>
