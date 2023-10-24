@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import dedent from "dedent"
+import { GithubIcon, LinkedinIcon, TwitterIcon } from "lucide-react"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { SiteHeader } from "@/components/site-header"
-import { TwitterIcon, GithubIcon, LinkedinIcon } from "lucide-react"
 
 export default async function Testimonials({
   searchParams,
@@ -44,23 +44,48 @@ export default async function Testimonials({
     return (
       <div className="flex w-full flex-col overflow-hidden rounded-lg bg-gray-900 shadow-lg md:flex-row">
         <div className="h-full w-full md:w-2/5">
-          <img className="h-full w-full object-cover object-center" src={`${member.metadata.image.imgix_url}?w=600&h=600&auto=format,compression&fit=crop&crop=faces}`} alt={member.title} />
+          <img
+            className="h-full w-full object-cover object-center"
+            src={`${member.metadata.image.imgix_url}?w=600&h=600&auto=format,compression&fit=crop&crop=faces}`}
+            alt={member.title}
+          />
         </div>
         <div className="w-full space-y-2 p-6 text-left md:w-3/5 md:p-4">
           <p className="text-xl font-bold text-white">{member.title}</p>
-          <p className="text-base font-normal text-gray-400">{member.metadata.position}</p>
-          <p className="text-base font-normal leading-relaxed text-gray-500">{member.metadata.bio}</p>
+          <p className="text-base font-normal text-gray-400">
+            {member.metadata.position}
+          </p>
+          <p className="text-base font-normal leading-relaxed text-gray-500">
+            {member.metadata.bio}
+          </p>
           <div className="flex justify-start space-x-4 py-4">
-            {member.metadata.links.x &&
-              <a href={member.metadata.links.x} className="text-gray-500 hover:text-gray-600">
-                <svg color="currentColor" aria-label="X formerly known as Twitter" fill="currentColor" height="22" viewBox="0 0 22 20"><path d="M16.99 0H20.298L13.071 8.26L21.573 19.5H14.916L9.702 12.683L3.736 19.5H0.426L8.156 10.665L0 0H6.826L11.539 6.231L16.99 0ZM15.829 17.52H17.662L5.83 1.876H3.863L15.829 17.52Z" fill="currentColor"></path></svg>
+            {member.metadata.links.x && (
+              <a
+                href={member.metadata.links.x}
+                className="text-gray-500 hover:text-gray-600"
+              >
+                <svg
+                  color="currentColor"
+                  aria-label="X formerly known as Twitter"
+                  fill="currentColor"
+                  height="22"
+                  viewBox="0 0 22 20"
+                >
+                  <path
+                    d="M16.99 0H20.298L13.071 8.26L21.573 19.5H14.916L9.702 12.683L3.736 19.5H0.426L8.156 10.665L0 0H6.826L11.539 6.231L16.99 0ZM15.829 17.52H17.662L5.83 1.876H3.863L15.829 17.52Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
               </a>
-            }
-            {member.metadata.links.linkedin &&
-              <a href={member.metadata.links.linkedin} className="text-gray-500 hover:text-gray-600">
+            )}
+            {member.metadata.links.linkedin && (
+              <a
+                href={member.metadata.links.linkedin}
+                className="text-gray-500 hover:text-gray-600"
+              >
                 <LinkedinIcon />
               </a>
-            }
+            )}
           </div>
         </div>
       </div>
@@ -70,13 +95,12 @@ export default async function Testimonials({
     return (
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-4">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {members.map((member: MemberType) => {
-          return <TeamCard member={member} />
-        })}
-      </div>
-    </section>
+          {members.map((member: MemberType) => {
+            return <TeamCard key={member.slug} member={member} />
+          })}
+        </div>
+      </section>
     )
-
   }
   function Code() {
     const codeString = dedent`
@@ -226,7 +250,7 @@ export default async function Testimonials({
                   <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-4">
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                       {members.map((member: MemberType) => {
-                        return <TeamCard member={member} />
+                        return <TeamCard key={member.slug} member={member} />
                       })}
                     </div>
                   </section>
