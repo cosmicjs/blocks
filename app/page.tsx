@@ -37,6 +37,13 @@ export default async function IndexPage({
           Cosmic Project. Save development time and learn content modeling best
           practices. Extend the features to suit your needs.
         </p>
+        <p>
+          <span className="font-bold">How to use</span>
+          <br />
+          To use these feature templates, first 1) Click Install to install the
+          template Object type to your Bucket, then 2) Click code to follow the
+          steps to copy / paste the code to your website codebase.
+        </p>
         <Features targetBucket={targetBucket} objectTypes={objectTypes} />
       </section>
     </>

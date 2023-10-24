@@ -403,7 +403,8 @@ export default async function Page({
       <div className="pt-6">
         <div className="mb-6">
           The following code example uses Next.js, Tailwind CSS, and the Cosmic
-          JavaScript SDK.
+          JavaScript SDK. Feel free to ignore any steps that have already been
+          completed.
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
@@ -432,8 +433,7 @@ export default async function Page({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 2. Add the Cosmic JavaScript SDK and Shandcn UI Button
-            packages.
+            Step 2. Add the Cosmic JavaScript SDK and Shandcn UI packages.
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
@@ -479,10 +479,6 @@ export default async function Page({
           <h3 className="text-2xl font-semibold">
             Step 4. Update the file located at `app/page.tsx` with the following
           </h3>
-          <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
-          </div>
           <Markdown>{codeString}</Markdown>
         </div>
         <div className="mb-10">

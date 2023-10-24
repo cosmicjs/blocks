@@ -187,6 +187,7 @@ export default async function NavMenus({
             Shadcn UI Navigation Menu
           </a>
           . This is a basic example, but can be extended using nested links.
+          Feel free to ignore any steps that have already been completed.
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">

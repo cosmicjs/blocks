@@ -151,7 +151,8 @@ export default async function BlogPage({
       <div className="pt-6">
         <div className="mb-6">
           The following code example uses Next.js, Tailwind CSS, and the Cosmic
-          JavaScript SDK.
+          JavaScript SDK. Feel free to ignore any steps that have already been
+          completed.
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">

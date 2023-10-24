@@ -125,7 +125,8 @@ export default async function FAQs({
       <div className="pt-6">
         <div className="mb-6">
           The following code example uses Next.js, Tailwind CSS, and the Cosmic
-          JavaScript SDK.
+          JavaScript SDK. Feel free to ignore any steps that have already been
+          completed.
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
@@ -150,8 +151,7 @@ export default async function FAQs({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 2. Add the Cosmic JavaScript SDK and Shandcn UI Accordion
-            packages.
+            Step 2. Add the Cosmic JavaScript SDK and Shandcn UI packages.
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
