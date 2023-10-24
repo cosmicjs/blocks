@@ -200,10 +200,6 @@ export default async function Testimonials({
             Step 4. Create a new file at `components/testimonials.tsx` with the
             following
           </h3>
-          <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
-          </div>
           <Markdown>{codeString}</Markdown>
         </div>
         <div className="mb-10">
