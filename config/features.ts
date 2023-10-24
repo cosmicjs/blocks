@@ -73,7 +73,7 @@ export const features = [
     confirmation: `This will install a \`team-members\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/team",
     screenshot:
-      "https://imgix.cosmicjs.com/54289170-72a1-11ee-b27c-e13e14dddc51-team.png",
+      "https://imgix.cosmicjs.com/646c1f60-72a2-11ee-b27c-e13e14dddc51-team.png",
   },
   {
     key: "comments",
