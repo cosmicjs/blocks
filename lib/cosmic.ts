@@ -43,6 +43,10 @@ export async function getTestimonialsMetafields() {
   return await getMetafieldsFromObjectType("testimonials")
 }
 
+export async function getTeamMetafields() {
+  return await getMetafieldsFromObjectType("team-members")
+}
+
 export async function getCommentsMetafields() {
   return await getMetafieldsFromObjectType("comments")
 }
@@ -108,6 +112,15 @@ export async function getTestimonials(cosmic: CosmicConfig) {
   const { objects } = await cosmic.objects
     .find({
       type: "testimonials",
+    })
+    .props("slug,title,type,metadata,thumbnail")
+  return objects
+}
+
+export async function getTeamMembers(cosmic: CosmicConfig) {
+  const { objects } = await cosmic.objects
+    .find({
+      type: "team-members",
     })
     .props("slug,title,type,metadata,thumbnail")
   return objects
@@ -267,6 +280,23 @@ export async function addTestimonials(cosmic: CosmicConfig, testimonials: any) {
   }
 }
 
+export async function addTeamMembers(cosmic: CosmicConfig, teamMembers: any) {
+  for (let member of teamMembers) {
+    member.type = "team-members"
+    const media = await getMediaBlobFromURL(
+      member.metadata.image.imgix_url,
+      member.title +
+        "." +
+        member.metadata.image.imgix_url.split(".").pop()
+    )
+    // Upload media
+    const mediaRes = await cosmic.media.insertOne({ media })
+    member.metadata.image = mediaRes.media.name
+    member.thumbnail = mediaRes.media.name
+    await cosmic.objects.insertOne(member)
+  }
+}
+
 export async function addComments(cosmic: CosmicConfig, comments: any) {
   for (let comment of comments) {
     comment.type = "comments"
@@ -382,6 +412,22 @@ export async function addTestimonialsObjectType(
     title: "Testimonials",
     slug: "testimonials",
     emoji: "🗣️",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
+    metafields,
+  })
+}
+export async function addTeamObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Team Member",
+    title: "Team Members",
+    slug: "team-members",
+    emoji: "👥",
     options: {
       slug_field: true,
       content_editor: false,

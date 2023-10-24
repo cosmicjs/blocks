@@ -59,6 +59,23 @@ export const features = [
       "https://imgix.cosmicjs.com/ba908650-7037-11ee-b27c-e13e14dddc51-testimonials.png",
   },
   {
+    key: "team",
+    title: "Team",
+    type: "object_type",
+    emoji: "👥",
+    description: `Adds a Team Members Object type to your Bucket. Fields include:`,
+    field_list: [
+      "Image",
+      "Position",
+      "Bio",
+      "Links for X and LinkedIn",
+    ],
+    confirmation: `This will install a \`team-members\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/features/team",
+    screenshot:
+      "https://imgix.cosmicjs.com/26ed28e0-729e-11ee-b27c-e13e14dddc51-team.png",
+  },
+  {
     key: "comments",
     title: "Comments",
     type: "object_type",

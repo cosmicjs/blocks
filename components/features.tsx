@@ -24,6 +24,8 @@ import {
   addPagesObjectType,
   addProducts,
   addProductsObjectType,
+  addTeamMembers,
+  addTeamObjectType,
   addTestimonials,
   addTestimonialsObjectType,
   cosmicSourceBucketConfig,
@@ -45,6 +47,8 @@ import {
   getProducts,
   getProductsMetafields,
   getSEOMetafields,
+  getTeamMembers,
+  getTeamMetafields,
   getTestimonials,
   getTestimonialsMetafields,
 } from "@/lib/cosmic"
@@ -306,6 +310,13 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
       // Add comments
       const comments = await getComments(cosmicSourceBucketConfig)
       await addComments(cosmicTargetBucket, comments)
+    }
+    if (featureKey === "team") {
+      metafields = await getTeamMetafields()
+      await addTeamObjectType(cosmicTargetBucket, metafields)
+      // Add team
+      const teamMembers = await getTeamMembers(cosmicSourceBucketConfig)
+      await addTeamMembers(cosmicTargetBucket, teamMembers)
     }
     if (featureKey === "products") {
       metafields = await getProductsMetafields()
