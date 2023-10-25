@@ -8,6 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { BucketAPILink } from "@/components/bucket-api-link"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { SiteHeader } from "@/components/site-header"
 
@@ -179,7 +180,7 @@ export default async function FAQs({
           </h3>
           <div className="py-2">
             Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
+            your Bucket API keys found in <BucketAPILink />.
           </div>
           <Markdown>
             {dedent(`\`\`\`ts

@@ -2,6 +2,7 @@
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
+import { BucketAPILink } from "@/components/bucket-api-link"
 import { CommentForm } from "@/components/comment-form"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { SiteHeader } from "@/components/site-header"
@@ -349,9 +350,10 @@ export default async function Testimonials({
             following
           </h3>
           <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
-            Be careful not to expose your write key to any client-side code.
+            Note: You will need to swap `BUCKET_SLUG`, `BUCKET_READ_KEY`, and
+            `BUCKET_WRITE_KEY` with your Bucket API keys found in{" "}
+            <BucketAPILink />. Be careful not to expose your write key to any
+            client-side code.
           </div>
           <Markdown>
             {dedent(`\`\`\`ts
