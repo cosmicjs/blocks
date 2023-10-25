@@ -67,7 +67,9 @@ export default async function Testimonials({
     return (
       <div className="py-10">
         {testimonials.map((testimonial: Testimonial) => {
-          return <Testimonial testimonial={testimonial} />
+          return (
+            <Testimonial testimonial={testimonial} key={testimonial.slug} />
+          )
         })}
       </div>
     )
@@ -130,7 +132,7 @@ export default async function Testimonials({
         return (
           <>
             {testimonials.map((testimonial: Testimonial) => {
-              return <Testimonial testimonial={testimonial} />
+              return <Testimonial testimonial={testimonial} key={testimonial.slug} />;
             })}
           </>
         )
