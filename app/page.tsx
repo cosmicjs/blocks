@@ -40,9 +40,17 @@ export default async function IndexPage({
         <p>
           <span className="font-bold">How to use</span>
           <br />
-          To use these feature templates, first 1) Click Install to install the
-          template Object type to your Bucket, then 2) Click code to follow the
-          steps to copy / paste the code to your website codebase.
+          To use these feature templates:
+          <ol className="list-decimal pl-8">
+            <li>
+              Click &quot;Install&quot; to install the template Object type to
+              your Bucket, then
+            </li>
+            <li>
+              Click &quot;Code&quot; to follow the steps to copy / paste the
+              code to your website codebase.
+            </li>
+          </ol>
         </p>
         <Features targetBucket={targetBucket} objectTypes={objectTypes} />
       </section>
