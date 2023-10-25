@@ -102,7 +102,7 @@ export default async function BlogPage({
             type: "blog-posts",
             slug: "our-amazing-adventure", // Change this to the slug in the URL for dynamic pages
           })
-          .props("slug,title,metadata")
+          .props("id,slug,title,metadata")
           .depth(1);
         
         return (
