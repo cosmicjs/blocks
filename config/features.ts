@@ -85,7 +85,7 @@ export const features = [
     confirmation: `This will install a \`comments\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/comments",
     screenshot:
-      "https://imgix.cosmicjs.com/87ce1aa0-7075-11ee-b27c-e13e14dddc51-comments.png",
+      "https://imgix.cosmicjs.com/11993f70-7383-11ee-84ba-091bdac7b8cc-comments.png",
   },
   {
     key: "global_settings",

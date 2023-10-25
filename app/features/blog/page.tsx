@@ -63,7 +63,14 @@ export default async function BlogPage({
               <div>
                 Published by {blog.metadata.author.title}
                 <br />
-                {blog.metadata.published_date}
+                {new Date(blog.metadata.published_date).toLocaleDateString(
+                  "en-us",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }
+                )}
               </div>
               <div className="absolute right-0">
                 {blog.metadata.categories.map((cat: any) => {
@@ -128,7 +135,14 @@ export default async function BlogPage({
                   <div>
                     Published by {blog.metadata.author.title}
                     <br />
-                    {blog.metadata.published_date}
+                    {new Date(blog.metadata.published_date).toLocaleDateString(
+                      "en-us",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      }
+                    )}
                   </div>
                   <div className="absolute right-0">
                     {blog.metadata.categories.map((cat: any) => {

@@ -46,15 +46,14 @@ export default async function Testimonials({
           <div className="mb-2 text-lg">{comment.title}</div>
           <div className="mb-4 text-xs">
             {new Date(comment.created_at).toLocaleDateString("en-us", {
-              weekday: "long",
               year: "numeric",
-              month: "short",
+              month: "long",
               day: "numeric",
               hour: "numeric",
               minute: "numeric",
             })}
           </div>
-          <div>{comment.metadata.comment}</div>
+          <div className="pr-6">{comment.metadata.comment}</div>
         </div>
       </div>
     )
@@ -232,15 +231,14 @@ export default async function Testimonials({
               <div className="text-lg mb-2">{comment.title}</div>
               <div className="text-xs mb-4">
                 {new Date(comment.created_at).toLocaleDateString("en-us", {
-                  weekday: "long",
                   year: "numeric",
-                  month: "short",
+                  month: "long",
                   day: "numeric",
                   hour: "numeric",
                   minute: "numeric",
                 })}
               </div>
-              <div>{comment.metadata.comment}</div>
+              <div className="pr-6">{comment.metadata.comment}</div>
             </div>
           </div>
         );
