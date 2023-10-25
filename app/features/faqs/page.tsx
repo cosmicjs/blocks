@@ -100,7 +100,7 @@ export default async function FAQs({
       \`\`\`jsx
       // app/page.tsx
       import { cosmic } from "@/lib/cosmic";
-      import { FAQs } from "@/components/FAQs";
+      import { FAQs } from "@/components/faqs";
       
       export default async function Home() {
         
