@@ -20,6 +20,11 @@ export const cosmicTargetBucketConfig = (
     writeKey,
   })
 
+export async function getObjectTypes(cosmic: CosmicConfig) {
+  const { object_types } = await cosmic.objectTypes.find()
+  return object_types
+}
+
 export async function getMetafieldsFromObjectType(type: string) {
   const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
     type

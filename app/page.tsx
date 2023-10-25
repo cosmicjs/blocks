@@ -16,15 +16,6 @@ export default async function IndexPage({
     read_key: searchParams.read_key,
     write_key: searchParams.write_key,
   }
-  const cosmicTargetBucket = cosmicTargetBucketConfig(
-    targetBucket.bucket_slug,
-    targetBucket.read_key,
-    targetBucket.write_key
-  )
-  let objectTypes = []
-  try {
-    objectTypes = (await cosmicTargetBucket.objectTypes.find()).object_types
-  } catch {}
 
   return (
     <>
@@ -37,7 +28,7 @@ export default async function IndexPage({
           Cosmic Project. Save development time and learn content modeling best
           practices. Extend the features to suit your needs.
         </p>
-        <p>
+        <div>
           <span className="font-bold">How to use</span>
           <br />
           To use these feature templates:
@@ -51,8 +42,8 @@ export default async function IndexPage({
               code to your website codebase.
             </li>
           </ol>
-        </p>
-        <Features targetBucket={targetBucket} objectTypes={objectTypes} />
+        </div>
+        <Features targetBucket={targetBucket} />
       </section>
     </>
   )
