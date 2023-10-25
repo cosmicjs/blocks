@@ -384,7 +384,7 @@ export default async function Page({
           <Markdown>{codeString}</Markdown>
         </div>
         <div className="mb-10">
-          <h3 className="text-2xl font-semibold">Step 4. Run your app</h3>
+          <h3 className="text-2xl font-semibold">Step 6. Run your app</h3>
           <Markdown>
             {dedent(`\`\`\`bash
             bun dev
@@ -394,12 +394,71 @@ export default async function Page({
         </div>
         <div className="mb-6">
           <h3 className="text-2xl font-semibold">
-            Step 6. Go to http://localhost:3000 to see the home page. It should
+            Step 7. Go to http://localhost:3000 to see the home page. It should
             look like this:
           </h3>
         </div>
         <div className="mb-6">
           <Preview />
+        </div>
+        <div className="mb-10">
+          <h3 className="text-3xl font-semibold">Dynamic pages</h3>
+        </div>
+        <div className="mb-10">
+          <h3 className="text-2xl font-semibold">
+            1. You can create dynamic pages by creating a new file at
+            `app/[slug]/page.tsx` with the following:
+          </h3>
+          <Markdown>
+            {dedent(`\`\`\`jsx
+            import { Section } from "@/components/page-section";
+            import { cosmic } from "@/lib/cosmic";
+            
+            export default async function Page({ params }: { params: { slug: string } }) {
+              const { object: page } = await cosmic.objects
+                .findOne({
+                  type: "pages",
+                  slug: params.slug, // Get the content using the page slug
+                })
+                .props("slug,title,metadata")
+                .depth(1);
+              return (
+                <div>
+                  <div className="pt-20 pb-4">
+                    <h1 className="text-center text-4xl font-bold">{page.metadata.h1}</h1>
+                  </div>
+                  <div className="pb-8 max-w-3xl m-auto">
+                    <div className="text-center text-xl">{page.metadata.subheadline}</div>
+                  </div>
+                  <div className="w-full px-4 max-w-[1100px] m-auto mb-10">
+                    <img
+                      src={\`\${page.metadata.image.imgix_url}?w=3000&auto=format,compression\`}
+                      alt={page.title}
+                      className="w-full"
+                    />
+                  </div>
+                  <section className="container grid items-center py-10">
+                    <div className="relative m-auto max-w-3xl flex flex-col items-start gap-2">
+                      <div className="grid gap-y-28">
+                        {page.metadata.sections.map((section: any) => {
+                          return <Section key={section.header} section={section} />;
+                        })}
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              );
+            }            
+            \`\`\`
+          `)}
+          </Markdown>
+        </div>
+        <div className="mb-10">
+          <h3 className="text-2xl font-semibold">
+            2. Then go to Bucket {">"} Objects {">"} Pages and add new pages.
+            For example create a new Page with title `Features` and slug
+            `features` and see it available at `https://localhost:3000/features`
+          </h3>
         </div>
       </div>
     )
