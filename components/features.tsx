@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation"
 import { useTheme } from "next-themes"
 
 import { features } from "@/config/features"
-import { Toaster } from "@/components/ui/toaster"
 import { FeatureCard } from "@/components/feature-card"
 import { InstallDialog } from "@/components/install-dialog"
 
@@ -67,7 +66,6 @@ export function Features({ targetBucket }: FeaturesProps) {
       {showModal && (
         <InstallDialog featureKey={featureKey} setShowModal={setShowModal} />
       )}
-      <Toaster />
     </div>
   )
 }

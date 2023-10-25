@@ -6,6 +6,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { Toaster } from "@/components/ui/toaster"
 import { InstallDialog } from "@/components/install-dialog"
 
 export function SiteHeader({

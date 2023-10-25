@@ -1,4 +1,3 @@
-import { cosmicTargetBucketConfig } from "@/lib/cosmic"
 import { Features } from "@/components/features"
 
 export default async function IndexPage({
