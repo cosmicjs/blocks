@@ -239,7 +239,7 @@ export default async function SEO({
   }
   return (
     <>
-      <SiteHeader tab={tab} />
+      <SiteHeader tab={tab} featureKey="seo" />
       <section className="max-w-2000 container m-auto grid items-center pb-8">
         {tab === "preview" ? <Preview /> : <Code />}
       </section>

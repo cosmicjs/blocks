@@ -1,11 +1,21 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { ArrowLeftIcon } from "@heroicons/react/24/solid"
 
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { InstallDialog } from "@/components/install-dialog"
 
-export function SiteHeader({ tab }: { tab?: string }) {
+export function SiteHeader({
+  tab,
+  featureKey,
+}: {
+  tab?: string
+  featureKey: string
+}) {
+  const [showModal, setShowModal] = useState<boolean>(false)
   if (!tab) tab = "preview"
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-light-background dark:bg-dark-background">
@@ -45,7 +55,13 @@ export function SiteHeader({ tab }: { tab?: string }) {
             </Link>
           </div>
         </div>
+        <div>
+          <Button onClick={() => setShowModal(true)}>Install</Button>
+        </div>
       </div>
+      {showModal && (
+        <InstallDialog featureKey={featureKey} setShowModal={setShowModal} />
+      )}
     </header>
   )
 }

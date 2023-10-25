@@ -504,7 +504,7 @@ export default async function Page({
   }
   return (
     <>
-      <SiteHeader tab={tab} />
+      <SiteHeader tab={tab} featureKey="pages" />
       <section className="max-w-2000 container m-auto grid items-center pb-8">
         {tab === "preview" ? <Preview /> : <Code />}
       </section>

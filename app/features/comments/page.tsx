@@ -433,7 +433,7 @@ export default async function Testimonials({
   }
   return (
     <>
-      <SiteHeader tab={tab} />
+      <SiteHeader tab={tab} featureKey="comments" />
       <section className="max-w-2000 container m-auto grid items-center pb-8">
         {tab === "preview" ? <Preview /> : <Code />}
       </section>
