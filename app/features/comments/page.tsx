@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import dedent from "dedent"
+import { User } from "lucide-react"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { BucketAPILink } from "@/components/bucket-api-link"
@@ -37,19 +38,24 @@ export default async function Testimonials({
 
   function Comment({ comment }: { comment: Comment }) {
     return (
-      <div className="mb-6 rounded-xl border p-8">
-        <div className="mb-2 text-lg">{comment.title}</div>
-        <div className="mb-4 text-xs">
-          {new Date(comment.created_at).toLocaleDateString("en-us", {
-            weekday: "long",
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-          })}
+      <div className="mb-6 flex rounded-xl border p-4 pb-6">
+        <div className="mr-2 pt-[2px] text-gray-500 dark:text-gray-200">
+          <User className="h-6 w-6" />
         </div>
-        <div>{comment.metadata.comment}</div>
+        <div>
+          <div className="mb-2 text-lg">{comment.title}</div>
+          <div className="mb-4 text-xs">
+            {new Date(comment.created_at).toLocaleDateString("en-us", {
+              weekday: "long",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+            })}
+          </div>
+          <div>{comment.metadata.comment}</div>
+        </div>
       </div>
     )
   }
@@ -218,19 +224,24 @@ export default async function Testimonials({
 
       function Comment({ comment }: { comment: Comment }) {
         return (
-          <div className="border p-8 rounded-xl mb-6">
-            <div className="text-lg mb-2">{comment.title}</div>
-            <div className="text-xs mb-4">
-              {new Date(comment.created_at).toLocaleDateString("en-us", {
-                weekday: "long",
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-                hour: "numeric",
-                minute: "numeric",
-              })}
+          <div className="border p-4 pb-6 rounded-xl mb-6 flex">
+            <div className="mr-2 pt-[2px] text-gray-500 dark:text-gray-200">
+              <User className="w-6 h-6" />
             </div>
-            <div>{comment.metadata.comment}</div>
+            <div>
+              <div className="text-lg mb-2">{comment.title}</div>
+              <div className="text-xs mb-4">
+                {new Date(comment.created_at).toLocaleDateString("en-us", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                })}
+              </div>
+              <div>{comment.metadata.comment}</div>
+            </div>
           </div>
         );
       }
@@ -271,7 +282,7 @@ export default async function Testimonials({
       export async function POST(request: NextRequest) {
         const res = await request.json();
         const data = await cosmic.objects.insertOne(res.comment);
-        return data;
+        return Response.json(data);
       }
       \`\`\`
       `
