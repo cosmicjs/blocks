@@ -107,7 +107,6 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
 
   const [showModal, setShowModal] = useState<boolean>(false)
   const [featureKey, setFeatureKey] = useState<string>("")
-  const [installedFeatures, setInstalledFeature] = useState<string[]>([])
   const feature = features.filter((feature) => feature.key === featureKey)[0]
   function InstallDialog() {
     const [installing, setInstalling] = useState<boolean>(false)
@@ -198,7 +197,6 @@ export function Features({ targetBucket, objectTypes }: FeaturesProps) {
                   setInstalling(true)
                   try {
                     await installFeature(selectedObjectTypes)
-                    setInstalledFeature([...installedFeatures, featureKey])
                   } catch (err) {}
                   setInstalling(false)
                   setShowModal(false)
