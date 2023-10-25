@@ -208,6 +208,7 @@ export default async function Testimonials({
     const commentsCodeString = dedent`
       \`\`\`jsx
       // components/comments.tsx
+      import { User } from "lucide-react";
       import { cosmic } from "@/lib/cosmic";
 
       import { CommentForm } from "@/components/comment-form";
