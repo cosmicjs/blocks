@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { BucketAPILink } from "@/components/bucket-api-link"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
+import { Section } from "@/components/page-section"
 import { SiteHeader } from "@/components/site-header"
 
 export async function generateMetadata() {
@@ -20,121 +21,6 @@ export async function generateMetadata() {
   return {
     title: `${page.title}`,
   }
-}
-
-type SectionType = {
-  heading: string
-  layout: {
-    key: string
-    value: string
-  }
-  image: {
-    url: string
-    imgix_url: string
-  }
-  content: string
-  cta_link: string
-  cta_text: string
-}
-
-function Section({ section }: { section: SectionType }) {
-  return (
-    <div key={section.heading}>
-      {section.layout.key === "1-column-center" && (
-        <div className="m-auto max-w-[800px]">
-          <div className="mb-6 text-center">
-            <h2 className="mb-4 text-2xl font-semibold">{section.heading}</h2>
-            <div
-              className="mb-6"
-              dangerouslySetInnerHTML={{ __html: section.content }}
-            />
-            <div>
-              <a
-                className={cn(
-                  "ml-2",
-                  buttonVariants({
-                    variant: "default",
-                  })
-                )}
-                href={section.cta_link}
-              >
-                {section.cta_text}
-              </a>
-            </div>
-          </div>
-          <div>
-            <img
-              alt={section.heading}
-              className="rounded-xl"
-              src={section.image.imgix_url}
-            />
-          </div>
-        </div>
-      )}
-      {section.layout.key === "2-column-image-content" && (
-        <div className="grid gap-2 md:grid-cols-2">
-          <div className="mr-4">
-            <img
-              alt={section.heading}
-              className="rounded-xl"
-              src={section.image.imgix_url}
-            />
-          </div>
-          <div>
-            <h2 className="mb-4 text-2xl font-semibold">{section.heading}</h2>
-            <div
-              className="mb-6"
-              dangerouslySetInnerHTML={{ __html: section.content }}
-            />
-            <div>
-              <a
-                className={cn(
-                  "ml-2",
-                  buttonVariants({
-                    variant: "default",
-                  })
-                )}
-                href={section.cta_link}
-              >
-                {section.cta_text}
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-      {section.layout.key === "2-column-content-image" && (
-        <div className="grid gap-2 md:grid-cols-2">
-          <div className="mr-4">
-            <h2 className="mb-4 text-2xl font-semibold">{section.heading}</h2>
-            <div
-              className="mb-6"
-              dangerouslySetInnerHTML={{ __html: section.content }}
-            />
-            <div>
-              <a
-                className={cn(
-                  "ml-2",
-                  buttonVariants({
-                    variant: "default",
-                  })
-                )}
-                href={section.cta_link}
-              >
-                {section.cta_text}
-              </a>
-            </div>
-          </div>
-          <div>
-            <img
-              alt={section.heading}
-              className="rounded-xl"
-              src={section.image.imgix_url}
-            />
-          </div>
-        </div>
-      )}
-    </div>
-  )
 }
 
 export default async function Page({
@@ -213,13 +99,12 @@ export default async function Page({
   }
 
   function Code() {
-    const codeString = dedent`
+    const codeSectionString = dedent`
       \`\`\`jsx
       // app/page.tsx
       import { cn } from "@/lib/utils"
       import { buttonVariants } from "@/components/ui/button"
-      import { cosmic } from "@/lib/cosmic";
-
+      
       type SectionType = {
         heading: string
         layout: {
@@ -235,7 +120,7 @@ export default async function Page({
         cta_text: string
       }
       
-      function Section({ section }: { section: SectionType }) {
+      export function Section({ section }: { section: SectionType }) {
         return (
           <div key={section.heading}>
             {section.layout.key === "1-column-center" && (
@@ -334,6 +219,15 @@ export default async function Page({
           </div>
         )
       }
+      \`\`\`
+      `
+    const codeString = dedent`
+      \`\`\`jsx
+      // app/page.tsx
+      import { cn } from "@/lib/utils"
+      import { buttonVariants } from "@/components/ui/button"
+      import { Section } from "@/components/page-section";
+      import { cosmic } from "@/lib/cosmic";
 
       export default async function HomePage() {
         const { object: page } = await cosmic.objects
@@ -478,7 +372,14 @@ export default async function Page({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 4. Update the file located at `app/page.tsx` with the following
+            Step 4. Create a file located at `components/page-section.tsx` with
+            the following
+          </h3>
+          <Markdown>{codeSectionString}</Markdown>
+        </div>
+        <div className="mb-10">
+          <h3 className="text-2xl font-semibold">
+            Step 5. Update the file located at `app/page.tsx` with the following
           </h3>
           <Markdown>{codeString}</Markdown>
         </div>
@@ -493,7 +394,7 @@ export default async function Page({
         </div>
         <div className="mb-6">
           <h3 className="text-2xl font-semibold">
-            Step 5. Go to http://localhost:3000 to see the home page. It should
+            Step 6. Go to http://localhost:3000 to see the home page. It should
             look like this:
           </h3>
         </div>
