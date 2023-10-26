@@ -72,7 +72,7 @@ export default async function Testimonials({
   function Code() {
     const commentsFormCodeString = dedent`
     \`\`\`jsx
-    // components/comments-form.tsx
+    // components/comment-form.tsx
     "use client"
 
     import { useState } from "react"
@@ -380,7 +380,7 @@ export default async function Testimonials({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 4. Create a new file at `components/comments-form.tsx` with the
+            Step 4. Create a new file at `components/comment-form.tsx` with the
             following
           </h3>
           <Markdown>{commentsFormCodeString}</Markdown>
