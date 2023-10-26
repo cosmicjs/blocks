@@ -222,17 +222,11 @@ export default async function BlogPage({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 2. Add the Cosmic JavaScript SDK the React Markdown packages.
+            Step 2. Add the Cosmic JavaScript SDK.
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
             bun add @cosmicjs/sdk
-            \`\`\`
-          `)}
-          </Markdown>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bun add react-markdown
             \`\`\`
           `)}
           </Markdown>

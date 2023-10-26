@@ -169,7 +169,7 @@ export default async function Testimonials({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 2. Add the Cosmic JavaScript SDK the React Markdown packages.
+            Step 2. Add the Cosmic JavaScript SDK.
           </h3>
           <Markdown>
             {dedent(`\`\`\`bash
