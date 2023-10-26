@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+
+import Link from "next/link"
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
@@ -88,12 +90,21 @@ export default async function BlogPage({
     )
   }
   function Code() {
-    const codeString = dedent`
+    const codeHeaderString = dedent`
       \`\`\`jsx
-      // components/footer.tsx
+      // components/header.tsx
       import { cosmic } from "@/lib/cosmic";
-      
-      export default async function GlobalSettings() {
+      import { NavMenu } from "@/components/nav-menu";
+
+      export default async function Header() {
+        // Header data
+        const { object: header } = await cosmic.objects
+          .findOne({
+            type: "navigation-menus",
+            slug: "header",
+          })
+          .props("metadata")
+          .depth(1);
         
         const { object: settings } = await cosmic.objects
           .findOne({
@@ -101,26 +112,59 @@ export default async function BlogPage({
             slug: "settings",
           })
           .props("metadata")
-          .depth(1)
+          .depth(1);
+
+        return (
+          <div className="my-4 flex items-center justify-between container space-x-4">
+            <a href="/">
+              <img
+                src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
+                alt={settings.metadata.company}
+                className="h-20 m-auto"
+              />
+            </a>
+            <NavMenu items={header.metadata.items} />
+          </div>
+        );
+      }
+      \`\`\`
+      `
+    const codeFooterString = dedent`
+      \`\`\`jsx
+      // components/footer.tsx
+      import { cosmic } from "@/lib/cosmic";
+      import { NavMenu } from "@/components/nav-menu";
+
+      export default async function Footer() {
+        // Footer data
+        const { object: footer } = await cosmic.objects
+          .findOne({
+            type: "navigation-menus",
+            slug: "footer",
+          })
+          .props("metadata")
+          .depth(1);
+
+        const { object: settings } = await cosmic.objects
+          .findOne({
+            type: "global-settings",
+            slug: "settings",
+          })
+          .props("metadata")
+          .depth(1);
 
         type Link = {
-          url: string
-          company: string
+          url: string;
+          company: string;
           icon: {
-            imgix_url: string
-          }
-        }
-        
+            imgix_url: string;
+          };
+        };
+
         return (
-          <div className="w-full">
-            <div className="my-10 h-[60px]">
-              <a href="/">
-                <img
-                  src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
-                  alt={settings.metadata.company}
-                  className="h-full m-auto"
-                />
-              </a>
+          <div className="my-10">
+            <div className="my-8">
+              <NavMenu items={footer.metadata.items} />
             </div>
             <div className="mb-8 flex gap-x-8 justify-center">
               {settings.metadata.links.map((link: Link) => {
@@ -200,7 +244,7 @@ export default async function BlogPage({
           </h3>
           <div className="py-2">
             Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in Bucket {`>`} Setting {`>`} API keys.
+            your Bucket API keys found in <BucketAPILink />.
           </div>
           <Markdown>
             {dedent(`\`\`\`ts
@@ -216,17 +260,26 @@ export default async function BlogPage({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 4. Add the following to any file that needs global settings
-            data, for example `components/footer.tsx`
+            Step 4. The Global Settings data is meant to be used in multiple
+            locations. For example, add the following to the
+            `components/header.tsx` file (Note: this assumes you have installed
+            the{" "}
           </h3>
-          <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in <BucketAPILink />.
-          </div>
-          <Markdown>{codeString}</Markdown>
+          <Markdown>{codeHeaderString}</Markdown>
         </div>
         <div className="mb-10">
-          <h3 className="text-2xl font-semibold">Step 4. Run your app</h3>
+          <h3 className="text-2xl font-semibold">
+            Step 5. Add the following to the `components/footer.tsx` file (Note:
+            this assumes you have installed the{" "}
+            <Link href="/features/nav-menus" className="text-cosmic-blue">
+              Nav Menu feature template
+            </Link>
+            .)
+          </h3>
+          <Markdown>{codeFooterString}</Markdown>
+        </div>
+        <div className="mb-10">
+          <h3 className="text-2xl font-semibold">Step 6. Run your app</h3>
           <Markdown>
             {dedent(`\`\`\`bash
             bun dev
@@ -236,7 +289,7 @@ export default async function BlogPage({
         </div>
         <div className="mb-6">
           <h3 className="text-2xl font-semibold">
-            Step 5. Go to http://localhost:3000 and any page where this global
+            Step 7. Go to http://localhost:3000 and any page where this global
             settings data has been added. It should look like this:
           </h3>
         </div>
