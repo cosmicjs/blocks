@@ -258,6 +258,10 @@ export default async function BlogPage({
             locations. For example, add the following to the
             `components/header.tsx` file (Note: this assumes you have installed
             the{" "}
+            <Link href="/features/nav-menus" className="text-cosmic-blue">
+              Nav Menu feature template
+            </Link>
+            .)
           </h3>
           <Markdown>{codeHeaderString}</Markdown>
         </div>
