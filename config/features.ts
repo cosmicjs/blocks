@@ -30,7 +30,7 @@ export const features = [
     confirmation: `This will install the following Object types: \`blog-posts\`,\`authors\`, and \`categories\` as well as demo content.`,
     preview_link: "/features/blog",
     screenshot:
-      "https://imgix.cosmicjs.com/36a6ee10-62e0-11ee-b975-cb0cfadd93ad-blog.png",
+      "https://imgix.cosmicjs.com/9c646190-743f-11ee-84ba-091bdac7b8cc-blog.png",
   },
   {
     key: "navigation_menus",
