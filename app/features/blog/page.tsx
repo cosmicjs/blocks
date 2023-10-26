@@ -46,7 +46,7 @@ export default async function BlogPage({
           <img
             src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
             alt={blog.title}
-            className="object-cover"
+            className="w-full object-cover"
           />
         </div>
         <section className="container m-auto grid items-center pb-8">
@@ -118,7 +118,7 @@ export default async function BlogPage({
               <img
                 src={\`\${blog.metadata.image.imgix_url}?w=2000&auto=format,compression\`}
                 alt={blog.title}
-                className="object-cover"
+                className="object-cover w-full"
               />
             </div>
             <section className="container grid items-center pb-8 m-auto">
