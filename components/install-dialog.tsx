@@ -93,7 +93,7 @@ export function InstallDialog({
 }) {
   const feature = features.filter((feature) => feature.key === featureKey)[0]
   const [installing, setInstalling] = useState<boolean>(false)
-  const [objectTypes, setObjectTypes] = useState()
+  const [objectTypes, setObjectTypes] = useState<string[]>([])
   const [selectedObjectTypes, setSelectedObjectTypes] = useState<string[]>([])
   const { toast } = useToast()
   function handleObjectTypeSelected(typeSlug: string) {
@@ -215,7 +215,7 @@ export function InstallDialog({
   }
 
   useEffect(() => {
-    if (!objectTypes) {
+    if (!objectTypes.length) {
       const fetchObjectTypes = async () => {
         const newObjectTypes = await getObjectTypes(cosmicTargetBucket)
         setObjectTypes(newObjectTypes)
@@ -259,26 +259,32 @@ export function InstallDialog({
                     .
                   </div>
                   <div className="mb-4">
-                    {objectTypes?.map((type: any) => {
-                      return (
-                        <div className="flex h-8" key={type.slug}>
-                          <Checkbox
-                            id={type.slug}
-                            className="mr-2"
-                            onCheckedChange={() => {
-                              handleObjectTypeSelected(type.slug)
-                            }}
-                            checked={selectedObjectTypes.includes(type.slug)}
-                          />
-                          <label
-                            className="relative top-[-2px] cursor-pointer"
-                            htmlFor={type.slug}
-                          >
-                            {type.title}
-                          </label>
-                        </div>
-                      )
-                    })}
+                    {objectTypes.length && (
+                      <>
+                        {objectTypes.map((type: any) => {
+                          return (
+                            <div className="flex h-8" key={type.slug}>
+                              <Checkbox
+                                id={type.slug}
+                                className="mr-2"
+                                onCheckedChange={() => {
+                                  handleObjectTypeSelected(type.slug)
+                                }}
+                                checked={selectedObjectTypes.includes(
+                                  type.slug
+                                )}
+                              />
+                              <label
+                                className="relative top-[-2px] cursor-pointer"
+                                htmlFor={type.slug}
+                              >
+                                {type.title}
+                              </label>
+                            </div>
+                          )
+                        })}
+                      </>
+                    )}
                   </div>
                 </>
               ) : (
@@ -289,7 +295,7 @@ export function InstallDialog({
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          {feature.type === "metafields" && !objectTypes.length ? (
+          {feature.type === "metafields" && !objectTypes ? (
             <></>
           ) : (
             <Button

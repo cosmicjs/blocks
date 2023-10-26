@@ -97,6 +97,11 @@ export default async function BlogPage({
         content: string;
         author: {
           title: string;
+          metadata: {
+            image: {
+              imgix_url: string;
+            };
+          };
         };
         published_date: string;
       };

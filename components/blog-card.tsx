@@ -9,6 +9,11 @@ export type PostType = {
     content: string
     author: {
       title: string
+      metadata: {
+        image: {
+          imgix_url: string
+        }
+      }
     }
     published_date: string
   }
