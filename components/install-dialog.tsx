@@ -7,8 +7,8 @@ import { features } from "@/config/features"
 import {
   addAuthorObjectType,
   addAuthors,
-  addBlog,
   addBlogObjectType,
+  addBlogs,
   addCategories,
   addCategoriesObjectType,
   addComments,
@@ -28,8 +28,8 @@ import {
   cosmicSourceBucketConfig,
   cosmicTargetBucketConfig,
   getAuthors,
-  getBlog,
   getBlogMetafields,
+  getBlogs,
   getCategories,
   getCategoriesMetafields,
   getComments,
@@ -93,7 +93,7 @@ export function InstallDialog({
 }) {
   const feature = features.filter((feature) => feature.key === featureKey)[0]
   const [installing, setInstalling] = useState<boolean>(false)
-  const [objectTypes, setObjectTypes] = useState<[]>([])
+  const [objectTypes, setObjectTypes] = useState()
   const [selectedObjectTypes, setSelectedObjectTypes] = useState<string[]>([])
   const { toast } = useToast()
   function handleObjectTypeSelected(typeSlug: string) {
@@ -159,10 +159,8 @@ export function InstallDialog({
       metafields = await getBlogMetafields()
       await addBlogObjectType(cosmicTargetBucket, metafields)
       // Add blog
-      let blog = await getBlog(cosmicSourceBucketConfig)
-      blog.metadata.author = newAuthors[0].id
-      blog.metadata.categories = [newCategories[0].id, newCategories[1].id]
-      await addBlog(cosmicTargetBucket, blog)
+      let blogs = await getBlogs(cosmicSourceBucketConfig)
+      await addBlogs(cosmicTargetBucket, blogs, newAuthors, newCategories)
     }
     if (featureKey === "navigation_menus") {
       metafields = await getNavMenuMetafields()
@@ -217,11 +215,13 @@ export function InstallDialog({
   }
 
   useEffect(() => {
-    const fetchObjectTypes = async () => {
-      const objectTypes = await getObjectTypes(cosmicTargetBucket)
-      setObjectTypes(objectTypes)
+    if (!objectTypes) {
+      const fetchObjectTypes = async () => {
+        const newObjectTypes = await getObjectTypes(cosmicTargetBucket)
+        setObjectTypes(newObjectTypes)
+      }
+      fetchObjectTypes()
     }
-    fetchObjectTypes()
   })
 
   return (

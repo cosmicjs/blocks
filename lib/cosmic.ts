@@ -76,13 +76,13 @@ export async function getProductsMetafields() {
   return await getMetafieldsFromObjectType("products")
 }
 
-export async function getBlog(cosmic: CosmicConfig) {
-  const { object } = await cosmic.objects
-    .findOne({
+export async function getBlogs(cosmic: CosmicConfig) {
+  const { objects } = await cosmic.objects
+    .find({
       type: "blog-posts",
     })
     .props("slug,title,metadata")
-  return object
+  return objects
 }
 
 export async function getPage(cosmic: CosmicConfig) {
@@ -198,17 +198,23 @@ export async function addCategories(cosmic: CosmicConfig, categories: any) {
   }
 }
 
-export async function addBlog(cosmic: CosmicConfig, blog: any) {
-  blog.type = "blog-posts"
-  const media = await getMediaBlobFromURL(
-    blog.metadata.image.imgix_url,
-    blog.title + ".jpg"
-  )
-  // Upload media
-  const mediaRes = await cosmic.media.insertOne({ media })
-  blog.metadata.image = mediaRes.media.name
-  blog.thumbnail = mediaRes.media.name
-  await cosmic.objects.insertOne(blog)
+export async function addBlogs(cosmic: CosmicConfig, blogs: any, authors: any, categories: any) {
+  let i = 0;
+  for (const post of blogs) {
+    post.type = "blog-posts"
+    const media = await getMediaBlobFromURL(
+      post.metadata.image.imgix_url,
+      post.title + ".jpg"
+    )
+    // Upload media
+    const mediaRes = await cosmic.media.insertOne({ media })
+    post.metadata.image = mediaRes.media.name
+    post.thumbnail = mediaRes.media.name
+    post.metadata.author = authors[i].id
+    post.metadata.categories = [categories[0].id, categories[1].id]
+    await cosmic.objects.insertOne(post)
+    i++
+  }
 }
 
 export async function addPage(cosmic: CosmicConfig, page: any) {
