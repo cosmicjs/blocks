@@ -115,10 +115,9 @@ export default async function FAQs({
         return (
           <main className="container">
             {/* page content above */}
-            {
-              page.metadata.faqs && // check if exists
+            {page.metadata.faqs && ( // check if exists
               <FAQs faqs={page.metadata.faqs} />
-            }
+            )}
             {/* page content below */}
           </main>
         );
