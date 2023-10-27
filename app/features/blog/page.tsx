@@ -86,6 +86,8 @@ export default async function BlogPage({
     const codeBlogCardString = dedent`
     \`\`\`jsx
     // components/blog-card.tsx
+    import Link from 'next/link'
+
     export type PostType = {
       id: string;
       title: string;
@@ -110,9 +112,9 @@ export default async function BlogPage({
     export function BlogCard({ post }: { post: PostType }) {
       return (
         <article>
-          <a
+          <Link
             className="group relative flex h-full w-full flex-col overflow-hidden rounded-lg
-             bg-white shadow-2xl shadow-gray-500/20 
+             shadow-2xl shadow-gray-500/20 
             transition hover:bg-gray-50 dark:bg-background dark:shadow-none dark:hover:bg-gray-900/40"
             href={\`/blog/\${post.slug}\`}
           >
@@ -163,7 +165,7 @@ export default async function BlogPage({
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
         </article>
       );
     }    
@@ -186,7 +188,7 @@ export default async function BlogPage({
         const { object: blog } = await cosmic.objects
           .findOne({
             type: "blog-posts",
-            slug: params.slug, // Change this to the slug in the URL for dynamic pages
+            slug: params.slug,
           })
           .props("id,slug,title,metadata")
           .depth(1);

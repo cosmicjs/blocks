@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export type PostType = {
   id: string
   title: string
@@ -22,7 +24,7 @@ export type PostType = {
 export function BlogCard({ post }: { post: PostType }) {
   return (
     <article>
-      <a
+      <Link
         className="dark:bg-background group relative flex h-full w-full flex-col overflow-hidden rounded-lg shadow-2xl shadow-gray-500/20 transition hover:bg-gray-50 dark:shadow-none dark:hover:bg-gray-900/40"
         href={``}
       >
@@ -70,7 +72,7 @@ export function BlogCard({ post }: { post: PostType }) {
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     </article>
   )
 }
