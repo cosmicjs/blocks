@@ -275,7 +275,8 @@ export default async function Testimonials({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 5. Add the following to any page that needs the team.
+            Step 5. Add the following to any page that needs the team. For
+            example add a new page at `app/about/page.tsx` with the following
           </h3>
           <Markdown>
             {dedent(`\`\`\`jsx
