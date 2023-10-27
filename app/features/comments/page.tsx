@@ -384,11 +384,12 @@ export default async function Testimonials({
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
             Step 7. Add the following to any page that needs comments and pass
-            the Object id to connect to this specific resource.
+            the Object id to connect to this specific resource. For example at a
+            specific blog page `app/blog/[slug]/page.tsx`
           </h3>
           <Markdown>
             {dedent(`\`\`\`jsx
-            // app/blog/page.tsx
+            // app/blog/[slug]/page.tsx
             import { Comments } from "@/components/comments";
             
             export default function BlogPost() {
