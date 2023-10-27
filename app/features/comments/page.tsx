@@ -331,25 +331,7 @@ export default async function Testimonials({
           </Markdown>
           <Markdown>
             {dedent(`\`\`\`bash
-            bunx shadcn-ui@latest add button
-            \`\`\`
-          `)}
-          </Markdown>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bunx shadcn-ui@latest add input
-            \`\`\`
-          `)}
-          </Markdown>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bunx shadcn-ui@latest add label
-            \`\`\`
-          `)}
-          </Markdown>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bunx shadcn-ui@latest add textarea
+            bunx shadcn-ui@latest add button input label textarea
             \`\`\`
           `)}
           </Markdown>
