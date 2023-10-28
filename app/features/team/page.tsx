@@ -6,7 +6,7 @@ import { BucketAPILink } from "@/components/bucket-api-link"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { SiteHeader } from "@/components/site-header"
 
-export default async function Testimonials({
+export default async function Team({
   searchParams,
 }: {
   searchParams: {
@@ -284,28 +284,30 @@ export default async function Testimonials({
             import { TeamCard, MemberType } from "@/components/team-card";
             
             export default async function AboutPage() {
-              
               const { objects: members } = await cosmic.objects
                 .find({
                   type: "team-members",
                 })
                 .props("title,slug,metadata")
-                .depth(1)
-              
+                .depth(1);
+            
               return (
-                <main className="container">
-                  {/* page content above */}
-                  <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-4">
-                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                      {members.map((member: MemberType) => {
-                        return <TeamCard key={member.slug} member={member} />
-                      })}
+                <>
+                  <section className="container pb-8 m-auto">
+                    <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
+                      <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+                        About
+                      </h1>
+                      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                        {members.map((member: MemberType) => {
+                          return <TeamCard key={member.slug} member={member} />;
+                        })}
+                      </div>
                     </div>
                   </section>
-                  {/* page content below */}
-                </main>
+                </>
               );
-            }
+            }            
             \`\`\`
           `)}
           </Markdown>

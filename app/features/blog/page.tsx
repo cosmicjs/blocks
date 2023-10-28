@@ -65,7 +65,7 @@ export default async function BlogPage({
           .depth(1);
         return (
           <>
-            <section className="container grid items-center pb-8 m-auto">
+            <section className="container pb-8 m-auto">
               <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
                 <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
                   Blog
@@ -80,7 +80,6 @@ export default async function BlogPage({
           </>
         );
       }
-
       \`\`\`
       `
     const codeBlogCardString = dedent`
