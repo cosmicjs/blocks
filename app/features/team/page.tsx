@@ -297,7 +297,7 @@ export default async function Team({
                   <section className="container pb-8 m-auto">
                     <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
                       <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-                        About
+                        About us
                       </h1>
                       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         {members.map((member: MemberType) => {
