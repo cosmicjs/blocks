@@ -93,6 +93,7 @@ export default async function BlogPage({
     const codeHeaderString = dedent`
       \`\`\`jsx
       // components/header.tsx
+      import Link from "next/link";
       import { cosmic } from "@/lib/cosmic";
       import { NavMenu } from "@/components/nav-menu";
 
@@ -116,13 +117,13 @@ export default async function BlogPage({
 
         return (
           <div className="my-4 flex items-center justify-between container space-x-4">
-            <a href="/">
+            <Link href="/">
               <img
                 src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
                 alt={settings.metadata.company}
                 className="h-20 m-auto"
               />
-            </a>
+            </Link>
             <NavMenu items={header.metadata.items} />
           </div>
         );
