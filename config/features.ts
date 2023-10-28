@@ -59,17 +59,30 @@ export const features = [
       "https://imgix.cosmicjs.com/ba908650-7037-11ee-b27c-e13e14dddc51-testimonials.png",
   },
   {
+    key: "products",
+    title: "Products",
+    type: "object_type",
+    emoji: "🛍️",
+    description: `Adds a Products Object type to your Bucket. Fields include:`,
+    field_list: [
+      "Image",
+      "Image gallery with repeating image and description",
+      "Price",
+      "Quantity",
+      "Description",
+    ],
+    confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/features/products",
+    screenshot:
+      "https://imgix.cosmicjs.com/2a1601f0-75e5-11ee-84ba-091bdac7b8cc-products.png",
+  },
+  {
     key: "team",
     title: "Team",
     type: "object_type",
     emoji: "👥",
     description: `Adds a Team Members Object type to your Bucket. Fields include:`,
-    field_list: [
-      "Image",
-      "Position",
-      "Bio",
-      "Links for X and LinkedIn",
-    ],
+    field_list: ["Image", "Position", "Bio", "Links for X and LinkedIn"],
     confirmation: `This will install a \`team-members\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/team",
     screenshot:
@@ -134,20 +147,5 @@ export const features = [
     preview_link: "/features/seo",
     screenshot:
       "https://imgix.cosmicjs.com/a1d12070-6e20-11ee-b27c-e13e14dddc51-seo.png",
-  },
-  {
-    key: "products",
-    title: "Products",
-    type: "object_type",
-    emoji: "🛍️",
-    description: `Adds a Products Object type to your Bucket. Fields include:`,
-    field_list: [
-      "Image",
-      "Image gallery with repeating image and description",
-      "Price",
-      "Quantity",
-      "Description",
-    ],
-    confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
   },
 ]
