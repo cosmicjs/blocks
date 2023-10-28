@@ -64,16 +64,16 @@ export function CommentForm() {
   }
   return (
     <div className="mb-8">
-      <h2 className="text-2xl mb-4">Add a new comment</h2>
+      <h2 className="mb-4 text-2xl">Add a new comment</h2>
       {error && (
-        <div className="border border-red-500 rounded-xl p-8 flex mb-4">
-          <XCircle className="mr-4 h-4 w-4 text-red-500 top-1 relative" />
+        <div className="mb-4 flex rounded-xl border border-red-500 p-8">
+          <XCircle className="relative top-1 mr-4 h-4 w-4 text-red-500" />
           There was an error with your request. Make sure all fields are valid.
         </div>
       )}
       {sumbitted ? (
-        <div className="border border-green-500 rounded-xl p-8 flex">
-          <CheckCircle className="mr-4 h-4 w-4 text-green-500 top-1 relative" />
+        <div className="flex rounded-xl border border-green-500 p-8">
+          <CheckCircle className="relative top-1 mr-4 h-4 w-4 text-green-500" />
           Comment submitted for approval.
         </div>
       ) : (

@@ -259,7 +259,7 @@ export function InstallDialog({
                     .
                   </div>
                   <div className="mb-4">
-                    {objectTypes.length && (
+                    {objectTypes.length ? (
                       <>
                         {objectTypes.map((type: any) => {
                           return (
@@ -284,6 +284,8 @@ export function InstallDialog({
                           )
                         })}
                       </>
+                    ) : (
+                      ""
                     )}
                   </div>
                 </>
@@ -295,7 +297,7 @@ export function InstallDialog({
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          {feature.type === "metafields" && !objectTypes ? (
+          {feature.type === "metafields" && !objectTypes.length ? (
             <></>
           ) : (
             <Button

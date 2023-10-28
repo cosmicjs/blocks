@@ -76,41 +76,40 @@ export default async function SEO({
   function Code() {
     const codeString = dedent`
       \`\`\`jsx
-      // app/blog/[slug]/page.tsx
+      // app/page.tsx
       import { cosmic } from "@/lib/cosmic";
 
-      export async function generateMetadata({ params }: { params: { slug: string } }) {
-        const { object: blog } = await cosmic.objects
+      export async function generateMetadata() {
+        const { object: page } = await cosmic.objects
           .findOne({
-            type: "blog-posts", // Change to your Object type
-            slug: params.slug, // Change to your Object slug
+            type: "pages",
+            slug: "home"
           })
           .props("metadata")
-          .depth(1)
+          .depth(1);
         return {
-          title: blog.metadata.seo.title,
-          description: blog.metadata.seo.description,
+          title: page.metadata.seo.title,
+          description: page.metadata.seo.description,
           openGraph: {
-            title: blog.metadata.seo.og_title,
-            description: blog.metadata.seo.og_description,
-            images: [blog.metadata.seo.og_image.imgix_url],
-          }
-        }
+            title: page.metadata.seo.og_title,
+            description: page.metadata.seo.og_description,
+            images: [page.metadata.seo.og_image.imgix_url],
+          },
+        };
       }
       
-      export default async function BlogPage({ params }: { params: { slug: string } }) {
-        
-        const { object: blog } = await cosmic.objects
+      export default async function HomePage() {
+        const { object: page } = await cosmic.objects
           .findOne({
-            type: "blog-posts",
-            slug: params.slug,
+            type: "pages",
+            slug: "home",
           })
           .props("slug,title,metadata")
           .depth(1);
         
         return (
           <>
-            { /* Blog post content here. See Blog feature template. */ }
+            { /* Page content here. See Page feature template. */ }
           </>
         );
       }
@@ -176,7 +175,8 @@ export default async function SEO({
         </div>
         <div className="mb-10">
           <h3 className="text-2xl font-semibold">
-            Step 4. Add the following to any file that needs SEO
+            Step 4. Add the following `generateMetadata` function to any file
+            that needs SEO
           </h3>
           <Markdown>{codeString}</Markdown>
         </div>
