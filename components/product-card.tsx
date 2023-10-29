@@ -17,7 +17,7 @@ export type ProductType = {
 export function ProductCard({ product }: { product: ProductType }) {
   return (
     <div className="group relative w-56 cursor-pointer">
-      <div className="w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 h-60">
+      <div className="w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 h-52">
         <img
           src={`${product.metadata.image.imgix_url}?w=1200&auto=format,compression`}
           alt={product.title}

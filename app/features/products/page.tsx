@@ -160,7 +160,7 @@ export default async function ProductsPage({
     export function ProductCard({ product }: { product: ProductType }) {
       return (
         <Link href={\`/shop/\${product.slug}\`} className="group relative w-56">
-          <div className="w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 h-60">
+          <div className="w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 h-52">
             <img
               src={\`\${product.metadata.image.imgix_url}?w=1200&auto=format,compression\`}
               alt={product.title}
