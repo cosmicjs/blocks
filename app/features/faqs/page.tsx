@@ -42,7 +42,7 @@ export default async function FAQs({
   }
   function Preview() {
     return (
-      <div className="m-auto mt-10 w-full">
+      <div className="m-auto mt-10 w-full md:min-w-[1000px]">
         <h2 className="mb-4 text-2xl font-semibold">
           Frequently Asked Questions
         </h2>

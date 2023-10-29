@@ -50,7 +50,7 @@ export default async function BlogPage({
   }
   function Preview() {
     return (
-      <div className="w-full">
+      <div className="m-auto mt-10 w-full md:min-w-[1000px]">
         <div className="my-10 h-[60px]">
           <a href="/">
             <img

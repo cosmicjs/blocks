@@ -45,7 +45,7 @@ export default async function SEO({
     .depth(1)
   function Preview() {
     return (
-      <div className="m-auto mt-10 w-full">
+      <div className="m-auto mt-10 w-full md:min-w-[1000px]">
         <h2 className="mb-4 text-2xl font-semibold">SEO fields</h2>
         <div className="mb-8">
           <h3 className="text-xl font-semibold">Title</h3>

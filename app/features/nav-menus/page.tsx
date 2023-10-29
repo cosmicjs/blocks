@@ -42,7 +42,7 @@ export default async function NavMenus({
 
   function Preview() {
     return (
-      <>
+      <div className="m-auto mt-10 w-full md:min-w-[1000px]">
         <div className="my-10">
           <h2 className="mb-6 text-center text-3xl">Header</h2>
           <NavMenu items={header.metadata.items} />
@@ -51,7 +51,7 @@ export default async function NavMenus({
           <h2 className="mb-6 text-center text-3xl">Footer</h2>
           <NavMenu items={footer.metadata.items} />
         </div>
-      </>
+      </div>
     )
   }
   function Code() {
