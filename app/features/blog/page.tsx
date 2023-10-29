@@ -32,18 +32,76 @@ export default async function BlogPage({
     .depth(1)
 
   function Preview() {
+    const blog = posts[0]
     return (
       <>
-        <section className="container m-auto grid items-center py-8">
+        <section className="container m-auto grid items-center py-8 px-4">
           <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
             <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-              Blog
+              Blog Page
             </h1>
             <div className="mx-auto grid w-full max-w-screen-lg grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
               {posts.map((post: PostType) => {
                 return <BlogCard key={post.id} post={post} />
               })}
             </div>
+          </div>
+          <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
+            <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+              Single Post Page
+            </h1>
+            <>
+              <div className="mb-10 w-full max-h-[500px] overflow-hidden">
+                <img
+                  src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
+                  alt={blog.title}
+                  className="object-cover w-full"
+                />
+              </div>
+              <section className="container grid items-center pb-8 m-auto">
+                <div className="relative m-auto flex max-w-[750px] flex-col items-start gap-2">
+                  <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+                    {blog.title}
+                  </h1>
+                  <div className="flex mb-8">
+                    <img
+                      className="mr-2 h-[60px] w-[60px] rounded-full object-cover"
+                      src={`${blog.metadata.author.metadata.image.imgix_url}?w=120&auto=format,compression`}
+                      alt={blog.metadata.author.title}
+                    />
+                    <div>
+                      <span className="font-semibold">
+                        {blog.metadata.author.title}
+                      </span>
+                      <br />
+                      {new Date(
+                        blog.metadata.published_date
+                      ).toLocaleDateString("en-us", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </div>
+                    <div className="absolute right-0">
+                      {blog.metadata.categories.map((cat: any) => {
+                        return (
+                          <span
+                            className="mb-1 mr-1 rounded-xl px-3 py-1 text-white"
+                            style={{
+                              backgroundColor: cat.metadata.color,
+                            }}
+                            key={cat.slug}
+                          >
+                            {cat.title}
+                          </span>
+                        )
+                      })}
+                    </div>
+                  </div>
+                  <Markdown>{blog.metadata.content}</Markdown>
+                </div>
+              </section>
+            </>
           </div>
         </section>
       </>

@@ -2,8 +2,10 @@
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
+import { Button } from "@/components/ui/button"
 import { BucketAPILink } from "@/components/bucket-api-link"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
+import { ImageGallery } from "@/components/image-gallery"
 import { ProductCard, ProductType } from "@/components/product-card"
 import { SiteHeader } from "@/components/site-header"
 
@@ -32,17 +34,72 @@ export default async function ProductsPage({
     .depth(1)
 
   function Preview() {
+    const product = products[0]
     return (
       <>
-        <section className="container m-auto grid items-center py-8">
-          <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
-            <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-              Shop
+        <section className="container m-auto grid items-center py-8 px-4">
+          <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2 mb-20">
+            <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+              Shop Page
             </h1>
-            <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
               {products.map((product: ProductType) => {
                 return <ProductCard key={product.id} product={product} />
               })}
+            </div>
+          </div>
+          <div className="relative m-auto max-w-[950px]">
+            <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+              Single Product Page
+            </h1>
+            <nav aria-label="Breadcrumb" className="mb-6">
+              <ol role="list" className="flex space-x-2">
+                <li>
+                  <div className="flex items-center">
+                    <span className="mr-2 text-sm font-medium text-gray-900">
+                      Shop
+                    </span>
+                    <svg
+                      width="16"
+                      height="20"
+                      viewBox="0 0 16 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      className="h-5 w-4 text-gray-300"
+                    >
+                      <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                    </svg>
+                  </div>
+                </li>
+                <li className="text-sm font-medium text-gray-500 hover:text-gray-600">
+                  {product.title}
+                </li>
+              </ol>
+            </nav>
+            <div className="grid md:grid-cols-2 md:gap-x-8">
+              <div>
+                <ImageGallery items={product.metadata.gallery} />
+              </div>
+              <div>
+                <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+                  {product.title}
+                </h1>
+                <p className="text-3xl tracking-tight text-gray-900 mb-6">
+                  ${product.metadata.price.toLocaleString("en-US")}
+                </p>
+                <div className="mb-8">
+                  <Button type="submit">Add to cart</Button>
+                </div>
+                <h2 className="text-sm font-medium text-gray-900 mb-2">
+                  Details
+                </h2>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: product.metadata.description,
+                  }}
+                  className="mb-6 text-sm text-gray-700"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -103,8 +160,7 @@ export default async function ProductsPage({
     export function ProductCard({ product }: { product: ProductType }) {
       return (
         <Link href={\`/shop/\${product.slug}\`} className="group relative w-56">
-          <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md
-           bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-52">
+          <div className="w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 h-60">
             <img
               src={\`\${product.metadata.image.imgix_url}?w=1200&auto=format,compression\`}
               alt={product.title}

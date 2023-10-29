@@ -74,7 +74,7 @@ export const features = [
     confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/products",
     screenshot:
-      "https://imgix.cosmicjs.com/2a1601f0-75e5-11ee-84ba-091bdac7b8cc-products.png",
+      "https://imgix.cosmicjs.com/0857ae80-75f7-11ee-84ba-091bdac7b8cc-product.png",
   },
   {
     key: "team",
