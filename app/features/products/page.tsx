@@ -56,7 +56,7 @@ export default async function ProductsPage({
               <ol role="list" className="flex space-x-2">
                 <li>
                   <div className="flex items-center">
-                    <span className="mr-2 text-sm font-medium text-gray-900">
+                    <span className="mr-2 text-sm font-medium text-gray-900 dark:text-white">
                       Shop
                     </span>
                     <svg
@@ -84,20 +84,20 @@ export default async function ProductsPage({
                 <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
                   {product.title}
                 </h1>
-                <p className="text-3xl tracking-tight text-gray-900 mb-6">
+                <p className="text-3xl tracking-tight text-gray-900 dark:text-white mb-6">
                   ${product.metadata.price.toLocaleString("en-US")}
                 </p>
                 <div className="mb-8">
                   <Button type="submit">Add to cart</Button>
                 </div>
-                <h2 className="text-sm font-medium text-gray-900 mb-2">
+                <h2 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
                   Details
                 </h2>
                 <div
                   dangerouslySetInnerHTML={{
                     __html: product.metadata.description,
                   }}
-                  className="mb-6 text-sm text-gray-700"
+                  className="mb-6 text-sm text-gray-700 dark:text-white"
                 />
               </div>
             </div>
@@ -265,7 +265,7 @@ export default async function ProductsPage({
                     <div className="flex items-center">
                       <Link
                         href="/shop"
-                        className="mr-2 text-sm font-medium text-gray-900"
+                        className="mr-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
                         Shop
                       </Link>
@@ -294,16 +294,16 @@ export default async function ProductsPage({
                   <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
                     {product.title}
                   </h1>
-                  <p className="text-3xl tracking-tight text-gray-900 mb-6">
+                  <p className="text-3xl tracking-tight text-gray-900 dark:text-white mb-6">
                     \${product.metadata.price.toLocaleString("en-US")}
                   </p>
                   <div className="mb-8">
                     <Button type="submit">Add to cart</Button>
                   </div>
-                  <h2 className="text-sm font-medium text-gray-900 mb-2">Details</h2>
+                  <h2 className="text-sm font-medium text-gray-900 dark:text-white mb-2">Details</h2>
                   <div
                     dangerouslySetInnerHTML={{ __html: product.metadata.description }}
-                    className="mb-6 text-sm text-gray-700"
+                    className="mb-6 text-sm text-gray-700 dark:text-white"
                   />
                 </div>
               </div>
