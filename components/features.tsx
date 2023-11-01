@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { useTheme } from "next-themes"
 
@@ -26,22 +26,28 @@ export function Features({ targetBucket }: FeaturesProps) {
   if (dashboardTheme) {
     setTheme(dashboardTheme)
   }
-  let bucket_slug = targetBucket.bucket_slug
-  let read_key = targetBucket.read_key
-  let write_key = targetBucket.write_key
-  if (typeof window !== "undefined") {
-    if (bucket_slug) {
-      localStorage.setItem("bucket_slug", bucket_slug)
-      localStorage.setItem("read_key", read_key)
-      localStorage.setItem("write_key", write_key)
+
+  const [bucketSlug, setBucketSlug] = useState(targetBucket.bucket_slug)
+  const [readKey, setReadKey] = useState(targetBucket.read_key)
+  const [writeKey, setWriteKey] = useState(targetBucket.write_key)
+
+  useEffect(() => {
+    if (bucketSlug) {
+      localStorage.setItem("bucket_slug", bucketSlug)
+      localStorage.setItem("read_key", readKey)
+      localStorage.setItem("write_key", writeKey)
     }
-    // Perform localStorage action
-    if (localStorage.getItem("bucket_slug")) {
-      bucket_slug = localStorage.getItem("bucket_slug") || ""
-      read_key = localStorage.getItem("read_key") || ""
-      write_key = localStorage.getItem("write_key") || ""
-    }
-  }
+
+    const localBucketSlug = localStorage.getItem("bucket_slug")
+    const localReadKey = localStorage.getItem("read_key")
+    const localWriteKey = localStorage.getItem("write_key")
+
+    if (localBucketSlug) setBucketSlug(localBucketSlug)
+
+    if (localReadKey) setReadKey(localReadKey)
+
+    if (localWriteKey) setWriteKey(localWriteKey)
+  }, [])
 
   const [showModal, setShowModal] = useState<boolean>(false)
   const [featureKey, setFeatureKey] = useState<string>("")
