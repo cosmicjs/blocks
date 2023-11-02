@@ -35,13 +35,6 @@ export function Features({ targetBucket }: FeaturesProps) {
       localStorage.setItem("read_key", read_key)
       localStorage.setItem("write_key", write_key)
     }
-    // Perform localStorage action
-    if (localStorage.getItem("bucket_slug")) {
-      bucket_slug = localStorage.getItem("bucket_slug") || ""
-      read_key = localStorage.getItem("read_key") || ""
-      write_key = localStorage.getItem("write_key") || ""
-    }
-    alert(bucket_slug + read_key + write_key)
   }
 
   const [showModal, setShowModal] = useState<boolean>(false)
