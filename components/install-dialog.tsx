@@ -62,28 +62,6 @@ import {
 } from "@/components/ui/dialog"
 import { useToast } from "@/components/ui/use-toast"
 
-let bucket_slug = ""
-let read_key = ""
-let write_key = ""
-if (typeof window !== "undefined") {
-  if (bucket_slug) {
-    localStorage.setItem("bucket_slug", bucket_slug)
-    localStorage.setItem("read_key", read_key)
-    localStorage.setItem("write_key", write_key)
-  }
-  // Perform localStorage action
-  if (localStorage.getItem("bucket_slug")) {
-    bucket_slug = localStorage.getItem("bucket_slug") || ""
-    read_key = localStorage.getItem("read_key") || ""
-    write_key = localStorage.getItem("write_key") || ""
-  }
-}
-const cosmicTargetBucket = cosmicTargetBucketConfig(
-  bucket_slug,
-  read_key,
-  write_key
-)
-
 export function InstallDialog({
   featureKey,
   setShowModal,
@@ -91,6 +69,20 @@ export function InstallDialog({
   featureKey: string
   setShowModal: any
 }) {
+  let bucket_slug = ""
+  let read_key = ""
+  let write_key = ""
+  if (localStorage.getItem("bucket_slug")) {
+    bucket_slug = localStorage.getItem("bucket_slug") || ""
+    read_key = localStorage.getItem("read_key") || ""
+    write_key = localStorage.getItem("write_key") || ""
+  }
+
+  const cosmicTargetBucket = cosmicTargetBucketConfig(
+    bucket_slug,
+    read_key,
+    write_key
+  )
   const feature = features.filter((feature) => feature.key === featureKey)[0]
   const [installing, setInstalling] = useState<boolean>(false)
   const [objectTypes, setObjectTypes] = useState<string[]>([])
