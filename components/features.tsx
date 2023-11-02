@@ -41,6 +41,7 @@ export function Features({ targetBucket }: FeaturesProps) {
       read_key = localStorage.getItem("read_key") || ""
       write_key = localStorage.getItem("write_key") || ""
     }
+    alert(bucket_slug + read_key + write_key)
   }
 
   const [showModal, setShowModal] = useState<boolean>(false)
