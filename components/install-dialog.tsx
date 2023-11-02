@@ -77,7 +77,8 @@ export function InstallDialog({
     read_key = localStorage.getItem("read_key") || ""
     write_key = localStorage.getItem("write_key") || ""
   } else {
-    alert("NO BUCKET INFO")
+    // TODO: add messaging to send user to extension in dashboard
+    alert("NO BUCKET INFO. Installing features will not work.")
   }
 
   const cosmicTargetBucket = cosmicTargetBucketConfig(
