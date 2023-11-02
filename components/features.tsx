@@ -29,12 +29,10 @@ export function Features({ targetBucket }: FeaturesProps) {
   let bucket_slug = targetBucket.bucket_slug
   let read_key = targetBucket.read_key
   let write_key = targetBucket.write_key
-  if (typeof window !== "undefined") {
-    if (bucket_slug) {
-      localStorage.setItem("bucket_slug", bucket_slug)
-      localStorage.setItem("read_key", read_key)
-      localStorage.setItem("write_key", write_key)
-    }
+  if (typeof window !== "undefined" && bucket_slug) {
+    localStorage.setItem("bucket_slug", bucket_slug)
+    localStorage.setItem("read_key", read_key)
+    localStorage.setItem("write_key", write_key)
   }
 
   const [showModal, setShowModal] = useState<boolean>(false)

@@ -72,10 +72,12 @@ export function InstallDialog({
   let bucket_slug = ""
   let read_key = ""
   let write_key = ""
-  if (localStorage.getItem("bucket_slug")) {
+  if (typeof window !== "undefined" && localStorage.getItem("bucket_slug")) {
     bucket_slug = localStorage.getItem("bucket_slug") || ""
     read_key = localStorage.getItem("read_key") || ""
     write_key = localStorage.getItem("write_key") || ""
+  } else {
+    alert("NO BUCKET INFO")
   }
 
   const cosmicTargetBucket = cosmicTargetBucketConfig(
