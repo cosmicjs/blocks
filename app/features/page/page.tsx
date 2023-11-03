@@ -101,7 +101,7 @@ export default async function Page({
   function Code() {
     const codeSectionString = dedent`
       \`\`\`jsx
-      // app/page.tsx
+      // components/page-section.tsx
       import { cn } from "@/lib/utils"
       import { buttonVariants } from "@/components/ui/button"
       
