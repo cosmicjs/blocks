@@ -221,19 +221,6 @@ export function InstallDialog({
     }
   })
 
-  useEffect(() => {
-    const handleBeforeUnload = (event: {
-      preventDefault: () => void
-      returnValue: string
-    }) => {
-      alert("YOOOO")
-    }
-    window.addEventListener("beforeunload", handleBeforeUnload)
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload)
-    }
-  }, [])
-
   return (
     <Dialog open onOpenChange={() => setShowModal(false)}>
       <DialogContent
