@@ -1,6 +1,6 @@
-# Cosmic Feature Templates
+# Cosmic Blocks
 
-Use Cosmic Feature Templates to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
+Use Cosmic Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
 
 ## Features include:
 

@@ -37,8 +37,8 @@ export default async function ProductsPage({
     const product = products[0]
     return (
       <>
-        <section className="container m-auto grid items-center py-8 px-4">
-          <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2 mb-20">
+        <section className="container m-auto grid items-center px-4 py-8">
+          <div className="relative m-auto mb-20 flex max-w-[950px] flex-col items-start gap-2">
             <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
               Shop Page
             </h1>
@@ -84,13 +84,13 @@ export default async function ProductsPage({
                 <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
                   {product.title}
                 </h1>
-                <p className="text-3xl tracking-tight text-gray-900 dark:text-white mb-6">
+                <p className="mb-6 text-3xl tracking-tight text-gray-900 dark:text-white">
                   ${product.metadata.price.toLocaleString("en-US")}
                 </p>
                 <div className="mb-8">
                   <Button type="submit">Add to cart</Button>
                 </div>
-                <h2 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                <h2 className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Details
                 </h2>
                 <div

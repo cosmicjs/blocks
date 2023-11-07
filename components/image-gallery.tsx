@@ -20,7 +20,7 @@ export function ImageGallery({ items }: { items: GalleryItemType[] }) {
         <img
           src={`${mainItem.image.imgix_url}?w=1200&auto=format,compression`}
           alt={mainItem.description}
-          className="rounded-xl mb-4 h-80 w-full object-cover object-center"
+          className="mb-4 h-80 w-full rounded-xl object-cover object-center"
         />
       </div>
       <div className="flex gap-x-2">
@@ -30,7 +30,7 @@ export function ImageGallery({ items }: { items: GalleryItemType[] }) {
               onClick={() => setMainItem(item)}
               key={item.image.imgix_url}
               className={cn(
-                `rounded-xl overflow-hidden border-2`,
+                `overflow-hidden rounded-xl border-2`,
                 item.image.imgix_url === mainItem.image.imgix_url
                   ? "border-gray-600"
                   : ""
@@ -38,7 +38,7 @@ export function ImageGallery({ items }: { items: GalleryItemType[] }) {
             >
               <img
                 src={`${item.image.imgix_url}?w=200&auto=format,compression`}
-                className="h-20 w-20 object-cover object-center cursor-pointer"
+                className="h-20 w-20 cursor-pointer object-cover object-center"
               />
             </div>
           );

@@ -35,7 +35,7 @@ export default async function BlogPage({
     const blog = posts[0]
     return (
       <>
-        <section className="container m-auto grid items-center py-8 px-4">
+        <section className="container m-auto grid items-center px-4 py-8">
           <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
             <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
               Blog Page
@@ -51,19 +51,19 @@ export default async function BlogPage({
               Single Post Page
             </h1>
             <>
-              <div className="mb-10 w-full max-h-[500px] overflow-hidden">
+              <div className="mb-10 max-h-[500px] w-full overflow-hidden">
                 <img
                   src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
                   alt={blog.title}
-                  className="object-cover w-full"
+                  className="w-full object-cover"
                 />
               </div>
-              <section className="container grid items-center pb-8 m-auto">
+              <section className="container m-auto grid items-center pb-8">
                 <div className="relative m-auto flex max-w-[750px] flex-col items-start gap-2">
                   <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
                     {blog.title}
                   </h1>
-                  <div className="flex mb-8">
+                  <div className="mb-8 flex">
                     <img
                       className="mr-2 h-[60px] w-[60px] rounded-full object-cover"
                       src={`${blog.metadata.author.metadata.image.imgix_url}?w=120&auto=format,compression`}

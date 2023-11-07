@@ -1,9 +1,9 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Cosmic Feature Templates",
+  name: "Cosmic Blocks",
   description:
-    "Use the Cosmic Feature Templates to build common content-powered features for your website or app. Save development time and learn content modeling best practices.",
+    "Use the Cosmic Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.",
   mainNav: [
     {
       title: "Home",
