@@ -3,6 +3,7 @@ export const features = [
     key: "pages",
     title: "Pages",
     type: "object_type",
+    slug: "pages",
     emoji: "📄",
     description: `Adds a Pages Object type to your Bucket. Fields include:`,
     field_list: [
@@ -19,6 +20,7 @@ export const features = [
     key: "blog",
     title: "Blog",
     type: "object_type",
+    slug: "blog-posts",
     emoji: "📝",
     description: `Adds a Blog Posts Object type to your Project. Blog fields include:`,
     field_list: [
@@ -36,6 +38,7 @@ export const features = [
     key: "navigation_menus",
     title: "Navigation Menus",
     type: "object_type",
+    slug: "navigation-menus",
     emoji: "🖱",
     description: `Adds a Navigation Menus Object type to your Bucket. Fields include:`,
     field_list: [
@@ -50,6 +53,7 @@ export const features = [
     key: "testimonials",
     title: "Testimonials",
     type: "object_type",
+    slug: "testimonials",
     emoji: "🗣️",
     description: `Adds a Testimonials Object type to your Bucket. Fields include:`,
     field_list: ["Company", "Position", "Image", "Quote"],
@@ -62,6 +66,7 @@ export const features = [
     key: "products",
     title: "Products",
     type: "object_type",
+    slug: "products",
     emoji: "🛍️",
     description: `Adds a Products Object type to your Bucket. Fields include:`,
     field_list: [
@@ -80,6 +85,7 @@ export const features = [
     key: "team",
     title: "Team",
     type: "object_type",
+    slug: "team-members",
     emoji: "👥",
     description: `Adds a Team Members Object type to your Bucket. Fields include:`,
     field_list: ["Image", "Position", "Bio", "Links for X and LinkedIn"],
@@ -92,6 +98,7 @@ export const features = [
     key: "comments",
     title: "Comments",
     type: "object_type",
+    slug: "comments",
     emoji: "💬",
     description: `Adds a Comments Object type to your Bucket. Fields include:`,
     field_list: ["Email", "Comment", "Resource", "Approved"],
@@ -104,6 +111,7 @@ export const features = [
     key: "global_settings",
     title: "Global Settings",
     type: "object_type",
+    slug: "global-settings",
     emoji: "⚙️",
     description: `Adds a Global Settings Object type to your Bucket. Fields include:`,
     field_list: [
@@ -122,6 +130,7 @@ export const features = [
     key: "faqs",
     title: "FAQs",
     type: "metafields",
+    slug: "faqs",
     emoji: "❓",
     description: `Adds an FAQs feature to any existing Object type.`,
     field_list: ["Question", "Answer"],
@@ -134,6 +143,7 @@ export const features = [
     key: "seo",
     title: "SEO fields",
     type: "metafields",
+    slug: "seo-fields",
     emoji: "🔍",
     description: `Adds SEO fields to any existing Object type. Fields include:`,
     field_list: [

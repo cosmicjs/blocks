@@ -129,10 +129,22 @@ export function InstallDialog({
         })
       }
     }
+    toast({
+      title: "Success!",
+      description: `${feature.title} installed`,
+    })
   }
 
   async function installObjectType() {
+    const existingObjectTypes = await getObjectTypes(cosmicTargetBucket)
     let metafields
+    // Check for Object type slug exists
+    if (
+      existingObjectTypes.filter(
+        (objectType: any) => objectType.slug === feature.slug
+      )[0]
+    )
+      return alert(`Object type "${feature.slug}" already exists.`)
     if (featureKey === "pages") {
       metafields = await getPageBuilderMetafields()
       await addPagesObjectType(cosmicTargetBucket, metafields)
@@ -199,6 +211,10 @@ export function InstallDialog({
       const products = await getProducts(cosmicSourceBucketConfig)
       await addProducts(cosmicTargetBucket, products)
     }
+    toast({
+      title: "Success!",
+      description: `${feature.title} installed`,
+    })
   }
 
   async function installFeature(selectedObjectTypes: string[]) {
@@ -307,10 +323,6 @@ export function InstallDialog({
                 } catch (err) {}
                 setInstalling(false)
                 setShowModal(false)
-                toast({
-                  title: "Success!",
-                  description: `${feature.title} installed`,
-                })
               }}
             >
               {installing ? (

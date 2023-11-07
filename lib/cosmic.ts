@@ -1,5 +1,4 @@
 import { createBucketClient } from "@cosmicjs/sdk"
-
 import { getMediaBlobFromURL } from "@/lib/utils"
 
 type CosmicConfig = any
