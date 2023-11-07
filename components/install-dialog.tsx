@@ -209,7 +209,9 @@ export function InstallDialog({
     } catch (err) {}
   }
 
+  // Fetch Object Types
   useEffect(() => {
+    if (feature.type !== "metafields") return
     if (!objectTypes.length) {
       const fetchObjectTypes = async () => {
         const newObjectTypes = await getObjectTypes(cosmicTargetBucket)
@@ -218,6 +220,19 @@ export function InstallDialog({
       fetchObjectTypes()
     }
   })
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: {
+      preventDefault: () => void
+      returnValue: string
+    }) => {
+      alert("YOOOO")
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload)
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload)
+    }
+  }, [])
 
   return (
     <Dialog open onOpenChange={() => setShowModal(false)}>
