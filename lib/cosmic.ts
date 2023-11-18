@@ -1,4 +1,5 @@
 import { createBucketClient } from "@cosmicjs/sdk"
+
 import { getMediaBlobFromURL } from "@/lib/utils"
 
 type CosmicConfig = any
@@ -20,8 +21,10 @@ export const cosmicTargetBucketConfig = (
   })
 
 export async function getObjectTypes(cosmic: CosmicConfig) {
-  const { object_types } = await cosmic.objectTypes.find()
-  return object_types
+  try {
+    const { object_types } = await cosmic.objectTypes.find()
+    return object_types
+  } catch {}
 }
 
 export async function getMetafieldsFromObjectType(type: string) {
@@ -197,8 +200,13 @@ export async function addCategories(cosmic: CosmicConfig, categories: any) {
   }
 }
 
-export async function addBlogs(cosmic: CosmicConfig, blogs: any, authors: any, categories: any) {
-  let i = 0;
+export async function addBlogs(
+  cosmic: CosmicConfig,
+  blogs: any,
+  authors: any,
+  categories: any
+) {
+  let i = 0
   for (const post of blogs) {
     post.type = "blog-posts"
     const media = await getMediaBlobFromURL(
@@ -295,9 +303,7 @@ export async function addTeamMembers(cosmic: CosmicConfig, teamMembers: any) {
     member.type = "team-members"
     const media = await getMediaBlobFromURL(
       member.metadata.image.imgix_url,
-      member.title +
-        "." +
-        member.metadata.image.imgix_url.split(".").pop()
+      member.title + "." + member.metadata.image.imgix_url.split(".").pop()
     )
     // Upload media
     const mediaRes = await cosmic.media.insertOne({ media })
@@ -429,10 +435,7 @@ export async function addTestimonialsObjectType(
     metafields,
   })
 }
-export async function addTeamObjectType(
-  cosmic: CosmicConfig,
-  metafields: any
-) {
+export async function addTeamObjectType(cosmic: CosmicConfig, metafields: any) {
   await cosmic.objectTypes.insertOne({
     singular: "Team Member",
     title: "Team Members",

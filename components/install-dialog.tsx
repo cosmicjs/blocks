@@ -145,7 +145,7 @@ export function InstallDialog({
     let metafields
     // Check for Object type slug exists
     if (
-      existingObjectTypes.filter(
+      existingObjectTypes?.filter(
         (objectType: any) => objectType.slug === feature.slug
       )[0]
     )
