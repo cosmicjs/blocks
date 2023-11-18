@@ -152,7 +152,7 @@ export default async function NavMenus({
       const inter = Inter({ subsets: ["latin"] });
 
       export const metadata: Metadata = {
-        title: "Cosmic Feature Templates",
+        title: "Cosmic Blocks",
         description: "Build content-powered websites and apps faster with Cosmic",
       };
 
