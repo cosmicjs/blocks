@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
 import { Loader2 } from "lucide-react"
 
 import { features } from "@/config/features"
@@ -50,7 +51,8 @@ import {
   getTestimonials,
   getTestimonialsMetafields,
 } from "@/lib/cosmic"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
   Dialog,
@@ -69,6 +71,7 @@ export function InstallDialog({
   featureKey: string
   setShowModal: any
 }) {
+  const [showLoginMessage, setShowLoginMessage] = useState(false)
   let bucket_slug = ""
   let read_key = ""
   let write_key = ""
@@ -76,9 +79,11 @@ export function InstallDialog({
     bucket_slug = localStorage.getItem("bucket_slug") || ""
     read_key = localStorage.getItem("read_key") || ""
     write_key = localStorage.getItem("write_key") || ""
+    if (showLoginMessage) setShowLoginMessage(false)
   } else {
     // TODO: add messaging to send user to extension in dashboard
-    alert("NO BUCKET INFO. Installing features will not work.")
+    // alert("NO BUCKET INFO. Installing features will not work.")
+    if (!showLoginMessage) setShowLoginMessage(true)
   }
 
   const cosmicTargetBucket = cosmicTargetBucketConfig(
@@ -236,6 +241,36 @@ export function InstallDialog({
       fetchObjectTypes()
     }
   })
+
+  if (showLoginMessage) {
+    return (
+      <Dialog open onOpenChange={() => setShowModal(false)}>
+        <DialogContent
+          className="sm:max-w-[425px]"
+          onInteractOutside={() => setShowModal(false)}
+          onEscapeKeyDown={() => setShowModal(false)}
+        >
+          <DialogHeader>
+            <DialogTitle>Log in required</DialogTitle>
+            <DialogDescription>
+              <div className="mb-4">
+                Log in to the Cosmic dashboard to install this Block.
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Link
+              href="https://app.cosmicjs.com/login"
+              target="_parent"
+              className={cn(buttonVariants())}
+            >
+              Log in
+            </Link>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    )
+  }
 
   return (
     <Dialog open onOpenChange={() => setShowModal(false)}>
