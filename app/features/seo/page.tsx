@@ -7,20 +7,20 @@ import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { SiteHeader } from "@/components/site-header"
 
 export async function generateMetadata() {
-  const { object: seo } = await cosmicSourceBucketConfig.objects
+  const { object: page } = await cosmicSourceBucketConfig.objects
     .findOne({
       type: "seo-fields",
       slug: "seo",
     })
-    .props("metadata")
+    .props("title,metadata")
     .depth(1)
   return {
-    title: seo.metadata.seo.title,
-    description: seo.metadata.seo.description,
+    title: page.metadata.seo?.title || page.title,
+    description: page.metadata?.seo.description,
     openGraph: {
-      title: seo.metadata.seo.og_title,
-      description: seo.metadata.seo.og_description,
-      images: [seo.metadata.seo.og_image.imgix_url],
+      title: page.metadata.seo?.og_title,
+      description: page.metadata.seo?.og_description,
+      images: [page.metadata.seo?.og_image?.imgix_url],
     },
   }
 }
@@ -85,15 +85,15 @@ export default async function SEO({
             type: "pages",
             slug: "home"
           })
-          .props("metadata")
+          .props("title,metadata")
           .depth(1);
         return {
-          title: page.metadata.seo.title,
-          description: page.metadata.seo.description,
+          title: page.metadata.seo?.title || page.title,
+          description: page.metadata?.seo.description,
           openGraph: {
-            title: page.metadata.seo.og_title,
-            description: page.metadata.seo.og_description,
-            images: [page.metadata.seo.og_image.imgix_url],
+            title: page.metadata.seo?.og_title,
+            description: page.metadata.seo?.og_description,
+            images: [page.metadata.seo?.og_image?.imgix_url],
           },
         };
       }
