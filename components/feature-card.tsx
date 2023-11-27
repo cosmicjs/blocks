@@ -1,8 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link"
+import Link from "next/link";
 
-import { cn } from "@/lib/utils"
+
+
+import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button"
+import { ArrowDownOnSquareIcon, CodeBracketIcon, EyeIcon } from "@heroicons/react/24/solid";
 
 type Feature = {
   key: string
@@ -23,72 +26,65 @@ export function FeatureCard({
   feature: Feature
   handleInstallClick: any
 }) {
+  if (!feature.preview_link) return null
+
   return (
-    <div className="mb-10 grid rounded-xl border p-6 md:grid-cols-2">
-      <div className="mb-4">
-        <h2 className="mb-4 text-2xl font-semibold">
-          {`${feature.emoji} ${feature.title}`}
-        </h2>
-        <div className="mb-4 pr-4">
-          <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            {feature.description}
-          </p>
-        </div>
-        <div className="mb-6">
-          <ol className="list-decimal pl-8">
-            {feature.field_list.map((item: string) => {
-              return <li key={item}>{item}</li>
-            })}
-          </ol>
-        </div>
-        <div className="flex">
+    <Link href={feature.preview_link}>
+      <div className="relative group">
+      <div className="opacity-0 group-hover:opacity-100 flex transition duration-[50] ease-linear absolute px-5 bottom-20 mx-auto inset-x-0">
           <Button
-            variant="secondary"
+          className="w-full"
             onClick={() => handleInstallClick(feature.key)}
+            iconRight={<ArrowDownOnSquareIcon className="w-4 h-4"/>}
           >
             Install
           </Button>
           {feature.preview_link && feature.preview_link && (
             <>
-              <Link
+              <Button
                 href={`${feature.preview_link}?tab=preview`}
                 rel="noreferrer"
+                iconRight={<EyeIcon className="w-4 h-4"/>}
                 className={cn(
-                  "ml-2",
+                  "ml-2 w-full",
                   buttonVariants({
                     variant: "secondary",
                   })
                 )}
               >
                 Preview
-              </Link>
-              <Link
+              </Button>
+              <Button
                 href={`${feature.preview_link}?tab=code`}
                 rel="noreferrer"
+                iconRight={<CodeBracketIcon className="w-4 h-4"/>}
                 className={cn(
-                  "ml-2",
+                  "ml-2 w-full",
                   buttonVariants({
                     variant: "secondary",
                   })
                 )}
               >
                 Code
-              </Link>
+              </Button>
             </>
           )}
         </div>
-      </div>
-      <div>
-        {feature.preview_link && feature.screenshot && (
-          <Link href={feature.preview_link}>
-            <img
-              src={`${feature.screenshot}?w=1200&auto=format,compression`}
-              className="h-full max-h-[400px] w-full rounded-xl object-cover object-top"
-              alt={`Feature preview`}
-            />
-          </Link>
-        )}
-      </div>
-    </div>
+      <div className="grid rounded-xl md:grid-cols-1">
+        <div>
+          <img
+            src={`${feature.screenshot}?w=1200&auto=format,compression`}
+            className="h-[250px] w-full rounded-2xl object-cover object-top"
+            alt={`Feature preview`}
+          />
+        </div>
+        <div>
+          <h2 className="mb-1 mt-4 text-2xl font-bold">{feature.title}</h2>
+          <p className="text-dark-gray-600 dark:text-dark-gray-600">
+            3 Object types • 2 Objects
+          </p>
+        </div>
+      </div></div>
+    </Link>
   )
 }

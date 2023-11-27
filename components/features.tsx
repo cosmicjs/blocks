@@ -1,13 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useSearchParams } from "next/navigation"
-import { useTheme } from "next-themes"
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useTheme } from "next-themes";
 
-import { features } from "@/config/features"
-import { FeatureCard } from "@/components/feature-card"
+
+
+import { features } from "@/config/features";
+import { FeatureCard } from "@/components/feature-card";
 import { InstallDialog } from "@/components/install-dialog"
+
+
+
+
 
 // Types
 export type TargetBucketType = {
@@ -22,7 +28,7 @@ export type FeaturesProps = {
 export function Features({ targetBucket }: FeaturesProps) {
   const searchParams = useSearchParams()
   const dashboardTheme = searchParams.get("theme")
-  const { setTheme, theme } = useTheme()
+  const { setTheme } = useTheme()
   if (dashboardTheme) {
     setTheme(dashboardTheme)
   }
@@ -44,7 +50,7 @@ export function Features({ targetBucket }: FeaturesProps) {
   }
 
   return (
-    <div>
+    <div className="grid grid-cols-3 gap-10">
       {features.map((feature) => {
         return (
           <div key={feature.key}>

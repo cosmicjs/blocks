@@ -10,4 +10,17 @@
     @apply bg-light-background text-gray-900 dark:bg-dark-background dark:text-dark-gray-900;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+    html {
+      scroll-behavior: smooth;
+    }
+}
+
+.glassmorphism {
+  @apply bg-clip-padding backdrop-blur-md backdrop-filter;
+}
+
+.header-gradient {
+  background: linear-gradient(80.27deg, #0093D1 0.03%, #AD80FF 20.22%, #54BCE8 60.25%, #37DDA5 80.86%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
