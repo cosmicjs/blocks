@@ -21,11 +21,18 @@ export default async function IndexPage({
   return (
     <>
       <section className="container grid items-center gap-6 p-4 pb-8 pt-6 md:py-10">
-        <Header/>
+        <Header />
         <div className="relative z-30">
-        <BigHeading id="features" subheading="Get Started" heading="Build Your Project, Block by Block" description="Install the content model into your Bucket in a single click, 
-then copy & paste the code into your website codebase." className="mb-20"/>
-        <Features targetBucket={targetBucket} /></div>
+          <BigHeading
+            id="features"
+            subheading="Get Started"
+            heading="Build Your Project, Block by Block"
+            description="Install the content model into your Bucket in a single click, 
+then copy & paste the code into your website codebase."
+            className="mb-12 mt-10 md:my-20 xl:mt-0"
+          />
+          <Features targetBucket={targetBucket} />
+        </div>
       </section>
     </>
   )

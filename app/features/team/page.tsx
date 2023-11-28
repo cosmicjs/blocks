@@ -207,7 +207,7 @@ export default async function Team({
       \`\`\`
       `
     return (
-      <div className="pt-6">
+      <div className="pt-8">
         <div className="mb-6">
           The following code example uses Next.js, Tailwind CSS, and the Cosmic
           JavaScript SDK. Feel free to skip any steps that have already been
@@ -337,7 +337,7 @@ export default async function Team({
   return (
     <>
       <SiteHeader tab={tab} featureKey="team" />
-      <section className="max-w-2000 container m-auto grid items-center pb-8">
+      <section className="container m-auto grid max-w-[800px] items-center pb-8">
         {tab === "preview" ? <Preview /> : <Code />}
       </section>
     </>

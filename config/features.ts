@@ -13,8 +13,12 @@ export const features = [
     ],
     confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/page",
-    screenshot:
-      "https://imgix.cosmicjs.com/f3029020-6af4-11ee-b27c-e13e14dddc51-pages.png",
+    object_types: 3,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27b1b620-8de1-11ee-b62d-5b90a0a1bade-Pages-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/27ac10d0-8de1-11ee-b62d-5b90a0a1bade-Pages.png",
   },
   {
     key: "blog",
@@ -31,8 +35,12 @@ export const features = [
     ],
     confirmation: `This will install the following Object types: \`blog-posts\`,\`authors\`, and \`categories\` as well as demo content.`,
     preview_link: "/features/blog",
-    screenshot:
-      "https://imgix.cosmicjs.com/9c646190-743f-11ee-84ba-091bdac7b8cc-blog.png",
+    object_types: 3,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27f46470-8de1-11ee-b62d-5b90a0a1bade-Blog-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/27f045c0-8de1-11ee-b62d-5b90a0a1bade-Blog.png",
   },
   {
     key: "navigation_menus",
@@ -46,8 +54,12 @@ export const features = [
     ],
     confirmation: `This will install a \`navigation-menus\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/nav-menus",
-    screenshot:
-      "https://imgix.cosmicjs.com/07a8df20-6889-11ee-b27c-e13e14dddc51-nav-menus.png",
+    object_types: 3,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27dd8110-8de1-11ee-b62d-5b90a0a1bade-Headers-and-Footers-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/27cae370-8de1-11ee-b62d-5b90a0a1bade-Headers-and-Footers.png",
   },
   {
     key: "testimonials",
@@ -59,8 +71,12 @@ export const features = [
     field_list: ["Company", "Position", "Image", "Quote"],
     confirmation: `This will install a \`testimonials\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/testimonials",
-    screenshot:
-      "https://imgix.cosmicjs.com/ba908650-7037-11ee-b27c-e13e14dddc51-testimonials.png",
+    object_types: 3,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27dbd360-8de1-11ee-b62d-5b90a0a1bade-Testimonials-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/27df07b0-8de1-11ee-b62d-5b90a0a1bade-Testimonials.png",
   },
   {
     key: "products",
@@ -78,8 +94,12 @@ export const features = [
     ],
     confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/products",
-    screenshot:
-      "https://imgix.cosmicjs.com/0857ae80-75f7-11ee-84ba-091bdac7b8cc-product.png",
+    object_types: 3,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27df7ce0-8de1-11ee-b62d-5b90a0a1bade-Products-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/27ed3880-8de1-11ee-b62d-5b90a0a1bade-Products.png",
   },
   {
     key: "team",
@@ -91,8 +111,12 @@ export const features = [
     field_list: ["Image", "Position", "Bio", "Links for X and LinkedIn"],
     confirmation: `This will install a \`team-members\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/team",
-    screenshot:
-      "https://imgix.cosmicjs.com/646c1f60-72a2-11ee-b27c-e13e14dddc51-team.png",
+    object_types: 3,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27f54ed0-8de1-11ee-b62d-5b90a0a1bade-Team-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/27e04030-8de1-11ee-b62d-5b90a0a1bade-Team.png",
   },
   {
     key: "comments",
@@ -104,8 +128,12 @@ export const features = [
     field_list: ["Email", "Comment", "Resource", "Approved"],
     confirmation: `This will install a \`comments\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/comments",
-    screenshot:
-      "https://imgix.cosmicjs.com/11993f70-7383-11ee-84ba-091bdac7b8cc-comments.png",
+    object_types: 3,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27ce65e0-8de1-11ee-b62d-5b90a0a1bade-Comments-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/27dc96b0-8de1-11ee-b62d-5b90a0a1bade-Comments.png",
   },
   {
     key: "global_settings",
@@ -123,8 +151,12 @@ export const features = [
     ],
     confirmation: `This will install a \`global-settings\` Object type to your Bucket as well as demo content.`,
     preview_link: "/features/settings",
-    screenshot:
-      "https://imgix.cosmicjs.com/55082f80-6bb0-11ee-b27c-e13e14dddc51-global-settings.png",
+    object_types: 3,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27f32bf0-8de1-11ee-b62d-5b90a0a1bade-Socials-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/27db5e30-8de1-11ee-b62d-5b90a0a1bade-Socials.png",
   },
   {
     key: "faqs",
@@ -136,8 +168,12 @@ export const features = [
     field_list: ["Question", "Answer"],
     confirmation: `This will add a new Metafield with key \`faqs\` to the selected Object types.`,
     preview_link: "/features/faqs",
-    screenshot:
-      "https://imgix.cosmicjs.com/4e388d20-6bac-11ee-b27c-e13e14dddc51-faqs.png",
+    object_types: 3,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27de6b70-8de1-11ee-b62d-5b90a0a1bade-FAQs-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/2793a6d0-8de1-11ee-b62d-5b90a0a1bade-FAQs.png",
   },
   {
     key: "seo",
@@ -155,7 +191,11 @@ export const features = [
     ],
     confirmation: `This will add a new Metafield with key \`seo\` to the selected Object types.`,
     preview_link: "/features/seo",
-    screenshot:
-      "https://imgix.cosmicjs.com/a1d12070-6e20-11ee-b27c-e13e14dddc51-seo.png",
+    object_types: 3,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27d87800-8de1-11ee-b62d-5b90a0a1bade-SEO-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/27d7b4b0-8de1-11ee-b62d-5b90a0a1bade-SEO.png",
   },
 ]

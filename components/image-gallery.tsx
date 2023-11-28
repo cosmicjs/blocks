@@ -1,8 +1,8 @@
 // components/image-gallery.tsx
-"use client";
+'use client';
 
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 export type GalleryItemType = {
   image: {
@@ -32,8 +32,8 @@ export function ImageGallery({ items }: { items: GalleryItemType[] }) {
               className={cn(
                 `rounded-xl overflow-hidden border-2`,
                 item.image.imgix_url === mainItem.image.imgix_url
-                  ? "border-gray-600"
-                  : ""
+                  ? 'border-gray-600'
+                  : ''
               )}
             >
               <img

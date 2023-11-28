@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import dedent from "dedent"
 
-import { cosmicSourceBucketConfig } from "@/lib/cosmic"
+import { cosmicSourceBucketConfig, fetchPageData } from "@/lib/cosmic"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { BucketAPILink } from "@/components/bucket-api-link"
@@ -10,14 +10,7 @@ import { Section } from "@/components/page-section"
 import { SiteHeader } from "@/components/site-header"
 
 export async function generateMetadata() {
-  const cosmic = cosmicSourceBucketConfig
-  const { object: page } = await cosmic.objects
-    .findOne({
-      type: "pages",
-      slug: "home",
-    })
-    .props("title")
-    .depth(1)
+  const page = await fetchPageData("home")
   return {
     title: `${page.title}`,
   }
@@ -34,13 +27,7 @@ export default async function Page({
   if (!tab) tab = "preview"
   const cosmic = cosmicSourceBucketConfig
 
-  const { object: page } = await cosmic.objects
-    .findOne({
-      type: "pages",
-      slug: "home",
-    })
-    .props("slug,title,metadata")
-    .depth(1)
+  const page = await fetchPageData("home")
 
   function Preview() {
     return (
@@ -295,7 +282,7 @@ export default async function Page({
       \`\`\`
       `
     return (
-      <div className="pt-6">
+      <div className="pt-8">
         <div className="mb-6">
           The following code example uses Next.js, Tailwind CSS, and the Cosmic
           JavaScript SDK. Feel free to skip any steps that have already been
@@ -466,7 +453,7 @@ export default async function Page({
   return (
     <>
       <SiteHeader tab={tab} featureKey="pages" />
-      <section className="max-w-2000 container m-auto grid items-center pb-8">
+      <section className="container m-auto grid max-w-[800px] items-center pb-8">
         {tab === "preview" ? <Preview /> : <Code />}
       </section>
     </>

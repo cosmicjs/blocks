@@ -28,9 +28,8 @@ export async function getObjectTypes(cosmic: CosmicConfig) {
 }
 
 export async function getMetafieldsFromObjectType(type: string) {
-  const { object_type } = await cosmicSourceBucketConfig.objectTypes.findOne(
-    type
-  )
+  const { object_type } =
+    await cosmicSourceBucketConfig.objectTypes.findOne(type)
   return object_type.metafields
 }
 
@@ -512,4 +511,27 @@ export async function addNavMenusObjectType(
     },
     metafields,
   })
+}
+
+export const fetchPageData = async (slug: string) => {
+  const cosmic = cosmicSourceBucketConfig
+  const { object: page } = await cosmic.objects
+    .findOne({
+      type: "pages",
+      slug,
+    })
+    .props("slug,title,metadata")
+    .depth(1)
+
+  return page
+}
+
+export async function fetchFeature<T>(type: string): Promise<T[]> {
+  const cosmic = cosmicSourceBucketConfig
+  const { objects } = await cosmic.objects
+    .find({ type })
+    .props("id,title,slug,metadata")
+    .depth(1)
+
+  return objects
 }

@@ -8,11 +8,13 @@
   }
   body {
     @apply bg-light-background text-gray-900 dark:bg-dark-background dark:text-dark-gray-900;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
-    html {
-      scroll-behavior: smooth;
-    }
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 .glassmorphism {
@@ -20,7 +22,28 @@
 }
 
 .header-gradient {
-  background: linear-gradient(80.27deg, #0093D1 0.03%, #AD80FF 20.22%, #54BCE8 60.25%, #37DDA5 80.86%);
+  background: linear-gradient(
+    80.27deg,
+    #0093d1 0.03%,
+    #ad80ff 20.22%,
+    #54bce8 60.25%,
+    #37dda5 80.86%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.fade-out {
+  position: relative;
+}
+
+.fade-out::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px; /* Adjust the height as needed */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #0c1013);
+  pointer-events: none; /* Allows clicks to pass through the fade-out area */
 }

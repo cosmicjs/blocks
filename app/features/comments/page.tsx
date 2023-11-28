@@ -286,7 +286,7 @@ export default async function Testimonials({
       \`\`\`
       `
     return (
-      <div className="pt-6">
+      <div className="pt-8">
         <div className="mb-6">
           The following code example uses Next.js, Tailwind CSS, Shad CN UI, and
           the Cosmic JavaScript SDK. Feel free to skip any steps that have
@@ -428,8 +428,8 @@ export default async function Testimonials({
   }
   return (
     <>
-      <SiteHeader tab={tab} featureKey="comments" />
-      <section className="max-w-2000 container m-auto grid items-center pb-8">
+      <SiteHeader />
+      <section className="container m-auto grid max-w-[800px] items-center pb-8">
         {tab === "preview" ? <Preview /> : <Code />}
       </section>
     </>

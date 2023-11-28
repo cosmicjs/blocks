@@ -1,33 +1,33 @@
-import { useState, useEffect } from 'react';
-import { Switch } from '@headlessui/react';
-import { useTheme } from 'next-themes';
-import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
+import { useState, useEffect } from "react"
+import { Switch } from "@headlessui/react"
+import { useTheme } from "next-themes"
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
 
 const ThemeSwitch = () => {
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme: theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false)
+  const { resolvedTheme: theme, setTheme } = useTheme()
 
-  const isLightTheme = theme === 'light';
+  const isLightTheme = theme === "light"
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
   if (!mounted) {
-    return null;
+    return null
   }
 
   const changeTheme = (isLightMode: boolean) => {
-    if (isLightMode) setTheme('light');
-    else setTheme('dark');
-  };
+    if (isLightMode) setTheme("light")
+    else setTheme("dark")
+  }
 
   return (
     <div className="relative h-5">
       <Switch
         checked={isLightTheme}
         onChange={changeTheme}
-        className="relative inline-flex shrink-0 cursor-pointer rounded-full focus:outline-none focus-visible:ring-2  focus-visible:ring-black/75 focus-visible:ring-opacity dark:focus-visible:ring-white"
+        className="focus-visible:ring-opacity relative inline-flex shrink-0 cursor-pointer rounded-full focus:outline-none  focus-visible:ring-2 focus-visible:ring-black/75 dark:focus-visible:ring-white"
       >
         <span className="sr-only">Theme switcher</span>
         {isLightTheme ? (
@@ -37,7 +37,7 @@ const ThemeSwitch = () => {
         )}
       </Switch>
     </div>
-  );
-};
+  )
+}
 
-export default ThemeSwitch;
+export default ThemeSwitch

@@ -1,19 +1,19 @@
-export type SiteConfig = typeof siteConfig
+export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Cosmic Blocks",
+  name: 'Cosmic Blocks',
   description:
-    "Use the Cosmic Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.",
+    'Use the Cosmic Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.',
   mainNav: [
     {
-      title: "Home",
-      href: "/",
+      title: 'Home',
+      href: '/',
     },
   ],
   links: {
-    x: "https://x.com/cosmicjs",
-    github: "https://github.com/cosmicjs/cosmic-feature-templates",
-    docs: "https://www.cosmicjs.com/docs",
-    login: "https://app.cosmicjs.com/login",
+    x: 'https://x.com/cosmicjs',
+    github: 'https://github.com/cosmicjs/cosmic-feature-templates',
+    docs: 'https://www.cosmicjs.com/docs',
+    login: 'https://app.cosmicjs.com/login',
   },
-}
+};

@@ -106,7 +106,7 @@ export function InstallDialog({
   }
 
   async function installMetafields(selectedObjectTypes: string[]) {
-    if (!selectedObjectTypes.length) return alert("No Object types selected")
+    if (!selectedObjectTypes?.length) return alert("No Object types selected")
     for (const typeSlug of selectedObjectTypes) {
       // Get the selected Object type metafields
       const {
@@ -233,7 +233,7 @@ export function InstallDialog({
   // Fetch Object Types
   useEffect(() => {
     if (feature.type !== "metafields") return
-    if (!objectTypes.length) {
+    if (!objectTypes?.length) {
       const fetchObjectTypes = async () => {
         const newObjectTypes = await getObjectTypes(cosmicTargetBucket)
         setObjectTypes(newObjectTypes)

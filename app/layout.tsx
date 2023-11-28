@@ -7,8 +7,9 @@ import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-import ThemeSwitch from "@/components/elements/ThemeSwitch/ThemeSwitch"
 import Navbar from "@/components/layouts/Navbar"
+import NextTopLoader from "nextjs-toploader"
+import Footer from "@/components/layouts/Footer"
 
 export const metadata: Metadata = {
   title: {
@@ -42,12 +43,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative flex min-h-screen flex-col">
-            <Navbar/>
-    <div className="flex-1 mx-auto">{children}</div>
-    <div className="h-[40px] mt-20 mx-auto"><img src="/assets/footer-logo.png" alt="footer logo" className="w-32 pb-7"/>
-    </div></div>
+          <NextTopLoader />
+          <ThemeProvider attribute="class" defaultTheme="dark">
+            <div className="relative flex min-h-screen flex-col">
+              <Navbar />
+              <div className="mx-auto grow">{children}</div>
+              <Footer />
+            </div>
             <TailwindIndicator />
             <Toaster />
           </ThemeProvider>

@@ -5,8 +5,8 @@ type BigHeadingProps = {
   subheading?: string
   heading: string
   description?: string
-  className?: string;
-  id?: string;
+  className?: string
+  id?: string
 }
 
 const BigHeading: React.FC<BigHeadingProps> = ({
@@ -14,19 +14,19 @@ const BigHeading: React.FC<BigHeadingProps> = ({
   subheading,
   description,
   className,
-  id
+  id,
 }) => {
   return (
     <div id={id} className={classNames("mx-auto text-center", className)}>
       {subheading && (
-        <h4 className="text-gray-400 dark:text-gray-400 text-3xl font-extrabold uppercase tracking-wider">{subheading}</h4>
+        <h4 className="text-lg font-extrabold uppercase tracking-wider text-gray-400 dark:text-gray-400 md:text-3xl">
+          {subheading}
+        </h4>
       )}
-      <h2 className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-dark-purple-gradient to-cosmic-bright-blue mt-2 mb-4">
+      <h2 className="mb-4 mt-2 bg-gradient-to-r from-dark-purple-gradient to-cosmic-bright-blue bg-clip-text text-3xl font-extrabold text-transparent md:text-5xl">
         {heading}
       </h2>
-      {description && (
-        <p className="max-w-[540px] mx-auto">{description}</p>
-      )}
+      {description && <p className="mx-auto max-w-[540px]">{description}</p>}
     </div>
   )
 }

@@ -175,7 +175,7 @@ export default async function NavMenus({
       `
 
     return (
-      <div className="pt-6">
+      <div className="pt-8">
         <div className="mb-6">
           The following code example uses Next.js, Tailwind CSS, and the Cosmic
           JavaScript SDK as well as the{" "}
@@ -309,7 +309,7 @@ export default async function NavMenus({
   return (
     <>
       <SiteHeader tab={tab} featureKey="navigation_menus" />
-      <section className="max-w-2000 container m-auto grid items-center pb-8">
+      <section className="container m-auto grid max-w-[800px] items-center pb-8">
         {tab === "preview" ? <Preview /> : <Code />}
       </section>
     </>

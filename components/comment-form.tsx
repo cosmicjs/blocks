@@ -1,66 +1,66 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { CheckCircle, Loader2, XCircle } from "lucide-react"
+import { useState } from 'react';
+import { CheckCircle, Loader2, XCircle } from 'lucide-react';
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 
 export function CommentForm() {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [comment, setComment] = useState("")
-  const [submitting, setSubmitting] = useState(false)
-  const [sumbitted, setSubmitted] = useState(false)
-  const [error, setError] = useState(false)
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [comment, setComment] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [sumbitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
   async function handleSubmitComment(e: React.SyntheticEvent) {
-    setError(false)
-    setSubmitting(true)
+    setError(false);
+    setSubmitting(true);
     if (!name.trim() || !email.trim() || !comment.trim()) {
-      setSubmitting(false)
-      setError(true)
-      return
+      setSubmitting(false);
+      setError(true);
+      return;
     }
     const newComment = {
-      type: "comments",
+      type: 'comments',
       title: name,
       metadata: {
         email,
         comment,
       },
-    }
+    };
     try {
-      await fetch("/api/comments", {
-        method: "POST",
+      await fetch('/api/comments', {
+        method: 'POST',
         body: JSON.stringify({ comment: newComment }),
-      })
+      });
     } catch (err) {
-      setSubmitting(false)
-      setError(true)
-      return
+      setSubmitting(false);
+      setError(true);
+      return;
     }
-    setSubmitting(false)
-    setSubmitted(true)
+    setSubmitting(false);
+    setSubmitted(true);
     setTimeout(() => {
-      setSubmitted(false)
-      setName("")
-      setEmail("")
-      setComment("")
-    }, 3000)
+      setSubmitted(false);
+      setName('');
+      setEmail('');
+      setComment('');
+    }, 3000);
   }
   function handleChangeName(e: React.SyntheticEvent) {
-    const target = e.target as HTMLInputElement
-    setName(target.value)
+    const target = e.target as HTMLInputElement;
+    setName(target.value);
   }
   function handleChangeEmail(e: React.SyntheticEvent) {
-    const target = e.target as HTMLInputElement
-    setEmail(target.value)
+    const target = e.target as HTMLInputElement;
+    setEmail(target.value);
   }
   function handleChangeComment(e: React.SyntheticEvent) {
-    const target = e.target as HTMLInputElement
-    setComment(target.value)
+    const target = e.target as HTMLInputElement;
+    setComment(target.value);
   }
   return (
     <div className="mb-8">
@@ -124,5 +124,5 @@ export function CommentForm() {
         </>
       )}
     </div>
-  )
+  );
 }

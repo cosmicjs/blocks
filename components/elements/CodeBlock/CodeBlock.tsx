@@ -1,25 +1,25 @@
-import { ReactNode, useEffect, useState } from "react"
-import classNames from "classnames"
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter"
-import css from "react-syntax-highlighter/dist/cjs/languages/prism/css"
-import javascript from "react-syntax-highlighter/dist/cjs/languages/prism/javascript"
-import json from "react-syntax-highlighter/dist/cjs/languages/prism/json"
-import jsx from "react-syntax-highlighter/dist/cjs/languages/prism/jsx"
-import markdown from "react-syntax-highlighter/dist/cjs/languages/prism/markdown"
-import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx"
-import typescript from "react-syntax-highlighter/dist/cjs/languages/prism/typescript"
+import { ReactNode, useEffect, useState } from 'react';
+import classNames from 'classnames';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import css from 'react-syntax-highlighter/dist/cjs/languages/prism/css';
+import javascript from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+import json from 'react-syntax-highlighter/dist/cjs/languages/prism/json';
+import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
+import markdown from 'react-syntax-highlighter/dist/cjs/languages/prism/markdown';
+import tsx from 'react-syntax-highlighter/dist/cjs/languages/prism/tsx';
+import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
 
-import "@/components/elements/CodeBlock/cosmic-code-theme.css"
-import CopyButton from "@/components/elements/CopyButton/CopyButton"
+import '@/components/elements/CodeBlock/cosmic-code-theme.css';
+import CopyButton from '@/components/elements/CopyButton/CopyButton';
 
-SyntaxHighlighter.registerLanguage("tsx", tsx)
-SyntaxHighlighter.registerLanguage("jsx", jsx)
-SyntaxHighlighter.registerLanguage("astro", jsx)
-SyntaxHighlighter.registerLanguage("typescript", typescript)
-SyntaxHighlighter.registerLanguage("javascript", javascript)
-SyntaxHighlighter.registerLanguage("markdown", markdown)
-SyntaxHighlighter.registerLanguage("json", json)
-SyntaxHighlighter.registerLanguage("css", css)
+SyntaxHighlighter.registerLanguage('tsx', tsx);
+SyntaxHighlighter.registerLanguage('jsx', jsx);
+SyntaxHighlighter.registerLanguage('astro', jsx);
+SyntaxHighlighter.registerLanguage('typescript', typescript);
+SyntaxHighlighter.registerLanguage('javascript', javascript);
+SyntaxHighlighter.registerLanguage('markdown', markdown);
+SyntaxHighlighter.registerLanguage('json', json);
+SyntaxHighlighter.registerLanguage('css', css);
 
 const CodeBlock = ({
   node,
@@ -30,20 +30,20 @@ const CodeBlock = ({
   showCopy = true,
   ...props
 }: {
-  node?: object
-  inline?: boolean
-  className?: string
-  codeClassName?: string
-  children: ReactNode
-  showCopy?: boolean
+  node?: object;
+  inline?: boolean;
+  className?: string;
+  codeClassName?: string;
+  children: ReactNode;
+  showCopy?: boolean;
 }) => {
-  const [hasMounted, setHasMounted] = useState(false)
+  const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
-    setHasMounted(true)
-  }, [])
-  if (!hasMounted) return null
-  const match = /language-(\w+)/.exec(className || "")
-  const data = String(children).replace(/\n$/, "")
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) return null;
+  const match = /language-(\w+)/.exec(className || '');
+  const data = String(children).replace(/\n$/, '');
   return (
     <>
       {!inline ? (
@@ -54,9 +54,9 @@ const CodeBlock = ({
             </div>
           )}
           <SyntaxHighlighter
-            language={match?.[1] || "javascript"}
+            language={match?.[1] || 'javascript'}
             className={classNames(
-              "cosmic-code-theme !my-0 overflow-x-auto rounded-md !bg-gray-800 px-3 py-2 shadow",
+              'cosmic-code-theme !my-0 overflow-x-auto rounded-md !bg-gray-800 px-3 py-2 shadow',
               codeClassName
             )}
             wrapLines={false}
@@ -73,7 +73,7 @@ const CodeBlock = ({
         </code>
       )}
     </>
-  )
-}
+  );
+};
 
-export default CodeBlock
+export default CodeBlock;
