@@ -20,9 +20,9 @@ export default async function IndexPage({
 
   return (
     <>
-      <section className="container grid items-center gap-6 p-4 pb-8 pt-6 md:py-10">
+      <section className="grid items-center gap-6 p-4 pb-8 pt-6 md:py-10">
         <Header />
-        <div className="relative z-30">
+        <div className="container relative z-30 mx-auto">
           <BigHeading
             id="features"
             subheading="Get Started"

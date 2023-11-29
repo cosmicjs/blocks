@@ -47,7 +47,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProvider attribute="class" defaultTheme="dark">
             <div className="relative flex min-h-screen flex-col">
               <Navbar />
-              <div className="mx-auto grow">{children}</div>
+              <div className="mx-auto w-screen grow !overflow-x-hidden">
+                {children}
+              </div>
               <Footer />
             </div>
             <TailwindIndicator />

@@ -9,7 +9,7 @@ const Header: React.FC = () => {
   const { resolvedTheme: theme } = useTheme()
 
   return (
-    <div className="lg:h-[631px]">
+    <div className="container mx-auto lg:h-[631px]">
       <div className="relative flex w-full flex-col-reverse items-center lg:flex-row">
         <div className="lg:w-[80%]">
           <h1 className="header-gradient relative z-10 mb-4 mt-56 text-center text-5xl font-[900] text-transparent md:mt-72 lg:mt-28 lg:text-left lg:text-8xl">
@@ -37,7 +37,7 @@ const Header: React.FC = () => {
           theme === "dark" ? "dark" : "light"
         }.png`}
         alt="gradient"
-        className="absolute -right-56 -top-60 z-20 mx-auto"
+        className="absolute -right-56 -top-60 z-20 mx-auto hidden lg:block"
       />
       <img
         src={`/assets/header/background-${
@@ -45,7 +45,7 @@ const Header: React.FC = () => {
         }.png`}
         alt="blocks background"
         className={classNames(
-          "absolute inset-0 -top-14 z-0 mx-auto w-screen max-w-[1950px] scale-[1.25]",
+          "w-inherit absolute inset-0 top-10 z-0 mx-auto w-screen max-w-[1950px] scale-[1.25] overflow-hidden lg:-top-14 lg:block",
           {
             "opacity-20": theme === "dark",
           }

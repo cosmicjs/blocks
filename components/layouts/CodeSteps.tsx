@@ -14,10 +14,12 @@ type StepProps = {
 }
 
 type CodeStepsProps = {
-  footer?: React.ReactNode
+  title?: React.ReactNode
+  preview?: React.ReactNode
   step1?: string[]
   step2?: string[]
   steps: StepProps[]
+  scratch?: boolean
 }
 
 const pmCommands = {
@@ -53,23 +55,18 @@ function Step({
   description,
   code,
   index,
-}: StepProps & { index: number; length: number }) {
-  const isLastStep = index === length + 3
-
+  scratch,
+}: StepProps & { index: number; length: number; scratch: boolean }) {
   return (
     <div className="relative mb-10">
       <div
         className={classNames(
-          "absolute -left-[42px] top-7 w-px bg-gray-200 dark:bg-dark-gray-200",
-          {
-            "h-[100%] dark:fade-out": isLastStep,
-            "h-[110%]": !isLastStep,
-          }
+          "absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"
         )}
       ></div>
       <div className="relative flex">
         <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-          {index + 4}
+          {scratch ? index + 1 : index + 4}
         </div>
         <h3 className="text-2xl font-semibold">{title}</h3>
       </div>
@@ -81,10 +78,12 @@ function Step({
 
 function CodeSteps(props: CodeStepsProps) {
   const {
-    footer,
+    preview,
     step1 = ["npx create-next-app@latest cosmic-app", "cd cosmic-app"],
     step2 = ["bun add @cosmicjs/sdk"],
     steps,
+    scratch = false,
+    title,
   } = props
 
   const searchParams = useSearchParams()
@@ -94,6 +93,12 @@ function CodeSteps(props: CodeStepsProps) {
 
   const [step1WithPm, setStep1WithPm] = useState<string[]>(step1)
   const [step2WithPm, setStep2WithPm] = useState<string[]>(step2)
+  const [step3WithPm, setStep3WithPm] = useState<string>(
+    dedent(`\`\`\`bash
+    ${pm} dev
+    \`\`\`
+  `)
+  )
 
   useEffect(() => {
     const replaceSteps = () => {
@@ -103,8 +108,11 @@ function CodeSteps(props: CodeStepsProps) {
       const step2Updated = step2.map((command) =>
         replacePackageManagerCommand(command, pm)
       )
+      const step3Updated = replacePackageManagerCommand(step3WithPm, pm)
+
       setStep1WithPm(step1Updated)
       setStep2WithPm(step2Updated)
+      setStep3WithPm(step3Updated)
     }
 
     replaceSteps()
@@ -114,83 +122,117 @@ function CodeSteps(props: CodeStepsProps) {
 
   return (
     <div className="pt-8">
-      <div className="mb-6">
-        The following code example uses Next.js, Tailwind CSS, and the Cosmic
-        JavaScript SDK. Feel free to skip any steps that have already been
-        completed.
-      </div>
-      <div className="relative mb-10">
-        <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
-        <div className="relative flex">
-          <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-            1
+      {!scratch && (
+        <div>
+          <div className="mb-6">
+            {title ||
+              "The following code example uses Next.js, Tailwind CSS, and the Cosmic JavaScript SDK. Feel free to skip any steps that have already been completed."}
           </div>
-          <h3 className="text-2xl font-semibold">
-            Install a new Next.js project
-          </h3>
-        </div>
-        <div className="py-2">
-          Note: Be sure to include TypeScript and Tailwind CSS in the
-          installation options.
-        </div>
-        {(step1WithPm || step1)?.map((step) => (
-          <Markdown>
-            {dedent(`\`\`\`bash
+          <div className="relative mb-10">
+            <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
+            <div className="relative flex">
+              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
+                1
+              </div>
+              <h3 className="text-2xl font-semibold">
+                Install a new Next.js project
+              </h3>
+            </div>
+            <div className="py-2">
+              Note: Be sure to include TypeScript and Tailwind CSS in the
+              installation options.
+            </div>
+            {(step1WithPm || step1)?.map((step) => (
+              <Markdown>
+                {dedent(`\`\`\`bash
           ${step}
           \`\`\`
           `)}
-          </Markdown>
-        ))}
-      </div>
-      <div className="relative mb-10">
-        <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
-        <div className="relative flex">
-          <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-            2
+              </Markdown>
+            ))}
           </div>
-          <h3 className="text-2xl font-semibold">
-            Add the Cosmic JavaScript SDK.
-          </h3>
-        </div>
-        {(step2WithPm || step2)?.map((step) => (
-          <Markdown>
-            {dedent(`\`\`\`bash
+          <div className="relative mb-10">
+            <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
+            <div className="relative flex">
+              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
+                2
+              </div>
+              <h3 className="text-2xl font-semibold">
+                Add the Cosmic JavaScript SDK & required packages
+              </h3>
+            </div>
+            {(step2WithPm || step2)?.map((step) => (
+              <Markdown>
+                {dedent(`\`\`\`bash
           ${step}
           \`\`\`
           `)}
-          </Markdown>
-        ))}
-      </div>
-      <div className="relative mb-10">
-        <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
-        <div className="relative flex">
-          <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-            3
+              </Markdown>
+            ))}
           </div>
-          <h3 className="text-2xl font-semibold">
-            Create a new file located at `lib/cosmic.ts` with the following
-          </h3>
-        </div>
-        <div className="py-2">
-          Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-          your Bucket API keys found in <BucketAPILink />.
-        </div>
-        <Markdown>
-          {dedent(`\`\`\`ts
+          <div className="relative mb-10">
+            <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
+            <div className="relative flex">
+              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
+                3
+              </div>
+              <h3 className="text-2xl font-semibold">
+                Create a new file located at `lib/cosmic.ts` with the following
+              </h3>
+            </div>
+            <div className="py-2">
+              Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY`
+              with your Bucket API keys found in <BucketAPILink />.
+            </div>
+            <Markdown>
+              {dedent(`\`\`\`ts
           // lib/cosmic.ts
           import { createBucketClient } from "@cosmicjs/sdk";
           export const cosmic = createBucketClient({
-            bucketSlug: "BUCKET_SLUG",
-            readKey: "BUCKET_READ_KEY",
-          });
-          \`\`\`
-          `)}
-        </Markdown>
-      </div>
+              bucketSlug: "BUCKET_SLUG",
+              readKey: "BUCKET_READ_KEY",
+            });
+            \`\`\`
+            `)}
+            </Markdown>
+          </div>
+        </div>
+      )}
       {steps.map((step, index) => (
-        <Step key={index} index={index} length={steps.length} {...step} />
+        <Step
+          scratch={scratch}
+          key={index}
+          index={index}
+          length={steps.length}
+          {...step}
+        />
       ))}
-      {footer && <div className="">{footer}</div>}
+      {!scratch && (
+        <div>
+          <div className="relative mb-10">
+            <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
+            <div className="relative flex">
+              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
+                {steps.length + 4}
+              </div>
+              <h3 className="text-2xl font-semibold">Run the app</h3>
+            </div>
+            <Markdown>{step3WithPm}</Markdown>
+          </div>
+          <div className="relative mb-10">
+            <div className="relative flex">
+              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
+                {steps.length + 5}
+              </div>
+              <h3 className="text-2xl font-semibold">
+                Go to http://localhost:3000 and any page where this component
+                has been added. It should look like this:
+              </h3>
+            </div>
+          </div>
+          {preview && <div className="">{preview}</div>}
+        </div>
+      )}
     </div>
   )
 }

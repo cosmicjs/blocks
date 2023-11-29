@@ -53,7 +53,7 @@ export default function FeatureLayout({
         </nav>
       </aside>
       <main className="flex flex-col items-center justify-center">
-        <div className="relative max-w-[800px] lg:-left-12">{children}</div>
+        <div className="relative">{children}</div>
         <div className="border-t">
           <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">
             More to explore

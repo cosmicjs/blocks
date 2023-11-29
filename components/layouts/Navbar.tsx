@@ -7,6 +7,7 @@ import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
 import { SiteHeader } from "../site-header"
 import Link from "next/link"
 import { useTheme } from "next-themes"
+import FeaturesMenu from "../FeaturesMenu"
 
 const Navbar: React.FC = () => {
   const { resolvedTheme: theme } = useTheme()
@@ -21,13 +22,14 @@ const Navbar: React.FC = () => {
             className="w-32"
           />
         </Link>
+        <FeaturesMenu />
         <div className="grow" />
         <SiteHeader />
         <div className="grow" />
         <div className="flex items-center">
           <Button
             variant={"ghost"}
-            className="mr-2 text-cosmic-blue"
+            className="mr-2 whitespace-nowrap text-cosmic-blue"
             iconRight={<ArrowTopRightOnSquareIcon className="h-4 w-4" />}
           >
             Cosmic Docs

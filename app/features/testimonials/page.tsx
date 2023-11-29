@@ -169,19 +169,7 @@ function Code({ manager }: { manager: PackageManagers }) {
           \`\`\`
         `),
     },
-    {
-      title: "Run your app",
-      code: dedent(`\`\`\`bash
-          bun dev
-          \`\`\`
-        `),
-    },
-    {
-      title:
-        "Go to http://localhost:3000 and any page where this testimonial component has been added. It should look like this:",
-      description: <Preview />,
-    },
   ]
 
-  return <CodeSteps steps={steps} />
+  return <CodeSteps steps={steps} preview={<Preview />} />
 }

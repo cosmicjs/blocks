@@ -4,7 +4,7 @@ import dedent from "dedent"
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { BucketAPILink } from "@/components/bucket-api-link"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
-import { SiteHeader } from "@/components/site-header"
+import CodeSteps from "@/components/layouts/CodeSteps"
 
 export async function generateMetadata() {
   const { object: page } = await cosmicSourceBucketConfig.objects
@@ -35,6 +35,16 @@ export default async function SEO({
   let tab = searchParams.tab
   if (!tab) tab = "preview"
 
+  return (
+    <>
+      <section className="container m-auto grid max-w-[800px] items-center pb-8">
+        {tab === "preview" ? <Preview /> : <Code />}
+      </section>
+    </>
+  )
+}
+
+async function Preview() {
   const cosmic = cosmicSourceBucketConfig
   const { object: seo } = await cosmic.objects
     .findOne({
@@ -43,38 +53,38 @@ export default async function SEO({
     })
     .props("metadata")
     .depth(1)
-  function Preview() {
-    return (
-      <div className="m-auto mt-10 w-full md:min-w-[1000px]">
-        <h2 className="mb-4 text-2xl font-semibold">SEO fields</h2>
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold">Title</h3>
-          <Markdown>{seo.metadata.seo.title}</Markdown>
-        </div>
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold">Description</h3>
-          <Markdown>{seo.metadata.seo.description}</Markdown>
-        </div>
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold">OG Title</h3>
-          <Markdown>{seo.metadata.seo.og_title}</Markdown>
-        </div>
-        <div className="mb-8">
-          <h3 className="text-xl font-semibold">OG Description</h3>
-          <Markdown>{seo.metadata.seo.og_description}</Markdown>
-        </div>
-        <div className="mb-8">
-          <h3 className="mb-4 text-xl font-semibold">OG Image</h3>
-          <img
-            src={`${seo.metadata.seo.og_image.imgix_url}?w=1200&auto=format,compression`}
-            className="w-[600px]"
-          />
-        </div>
+
+  return (
+    <div className="m-auto mt-10 w-full md:min-w-[1000px]">
+      <h2 className="mb-4 text-2xl font-semibold">SEO fields</h2>
+      <div className="mb-8">
+        <h3 className="text-xl font-semibold">Title</h3>
+        <Markdown>{seo.metadata.seo.title}</Markdown>
       </div>
-    )
-  }
-  function Code() {
-    const codeString = dedent`
+      <div className="mb-8">
+        <h3 className="text-xl font-semibold">Description</h3>
+        <Markdown>{seo.metadata.seo.description}</Markdown>
+      </div>
+      <div className="mb-8">
+        <h3 className="text-xl font-semibold">OG Title</h3>
+        <Markdown>{seo.metadata.seo.og_title}</Markdown>
+      </div>
+      <div className="mb-8">
+        <h3 className="text-xl font-semibold">OG Description</h3>
+        <Markdown>{seo.metadata.seo.og_description}</Markdown>
+      </div>
+      <div className="mb-8">
+        <h3 className="mb-4 text-xl font-semibold">OG Image</h3>
+        <img
+          src={`${seo.metadata.seo.og_image.imgix_url}?w=1200&auto=format,compression`}
+          className="w-[600px]"
+        />
+      </div>
+    </div>
+  )
+}
+function Code() {
+  const codeString = dedent`
       \`\`\`jsx
       // app/page.tsx
       import { cosmic } from "@/lib/cosmic";
@@ -115,135 +125,54 @@ export default async function SEO({
       }
       \`\`\`
       `
-    return (
-      <div className="pt-8">
-        <div className="mb-6">
-          The following code example uses Next.js and the Cosmic JavaScript SDK.
-          Feel free to skip any steps that have already been completed.
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 1. Install a new Next.js project
-          </h3>
-          <div className="py-2">
-            Note: Be sure to include TypeScript in the installation options.
-          </div>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bunx create-next-app@latest cosmic-app
-            \`\`\`
-          `)}
-          </Markdown>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            cd cosmic-app
-            \`\`\`
-          `)}
-          </Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 2. Add the Cosmic JavaScript SDK.
-          </h3>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bun add @cosmicjs/sdk
-            \`\`\`
-          `)}
-          </Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 3. Create a new file located at `lib/cosmic.ts` with the
-            following
-          </h3>
-          <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in <BucketAPILink />.
-          </div>
-          <Markdown>
-            {dedent(`\`\`\`ts
-            // lib/cosmic.ts
-            import { createBucketClient } from "@cosmicjs/sdk";
-            export const cosmic = createBucketClient({
-              bucketSlug: "BUCKET_SLUG",
-              readKey: "BUCKET_READ_KEY",
-            });
-            \`\`\`
-            `)}
-          </Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 4. Add the following `generateMetadata` function to any file
-            that needs SEO
-          </h3>
-          <Markdown>{codeString}</Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">Step 5. Run your app</h3>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bun dev
-            \`\`\`
-          `)}
-          </Markdown>
-        </div>
-        <div className="mb-6">
-          <h3 className="text-2xl font-semibold">
-            Step 5. Go to http://localhost:3000 and any page where the SEO
-            fields have been added and you should see the following in the
-            source code.
-          </h3>
-        </div>
-        <div className="mb-6">
-          <Preview />
-        </div>
-        <div className="mb-6">
-          <h3 className="mb-6 text-2xl font-semibold">Next steps</h3>
-          <div className="mb-6">
-            1. To test your open graph values locally, use something like{" "}
-            <a
-              className="text-cosmic-blue"
-              target="_blank"
-              rel="noreferrer"
-              href="https://ngrok.com/"
-            >
-              Ngrok
-            </a>{" "}
-            to create a tunnel to your local URL, then add the generated URL to{" "}
-            <a
-              className="text-cosmic-blue"
-              target="_blank"
-              rel="noreferrer"
-              href="https://www.opengraph.xyz/"
-            >
-              opengraph.xyz
-            </a>
-            .
-          </div>
-          <div className="mb-6">
-            2. For more page metadata information and examples, go the{" "}
-            <a
-              className="text-cosmic-blue"
-              target="_blank"
-              rel="noreferrer"
-              href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields"
-            >
-              Next.js Metadata docs
-            </a>
-            .
-          </div>
-        </div>
-      </div>
-    )
-  }
+
+  const steps = [
+    {
+      title:
+        " Add the following `generateMetadata` function to any file that needs SEO",
+      code: codeString,
+    },
+  ]
+
   return (
     <>
-      <SiteHeader tab={tab} featureKey="seo" />
-      <section className="container m-auto grid max-w-[800px] items-center pb-8">
-        {tab === "preview" ? <Preview /> : <Code />}
-      </section>
+      <CodeSteps steps={steps} preview={<Preview />} />
+      <div className="mb-6">
+        <h3 className="mb-6 text-2xl font-semibold">Next steps</h3>
+        <div className="mb-6">
+          1. To test your open graph values locally, use something like{" "}
+          <a
+            className="text-cosmic-blue"
+            target="_blank"
+            rel="noreferrer"
+            href="https://ngrok.com/"
+          >
+            Ngrok
+          </a>{" "}
+          to create a tunnel to your local URL, then add the generated URL to{" "}
+          <a
+            className="text-cosmic-blue"
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.opengraph.xyz/"
+          >
+            opengraph.xyz
+          </a>
+          .
+        </div>
+        <div className="mb-6">
+          2. For more page metadata information and examples, go the{" "}
+          <a
+            className="text-cosmic-blue"
+            target="_blank"
+            rel="noreferrer"
+            href="https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields"
+          >
+            Next.js Metadata docs
+          </a>
+          .
+        </div>
+      </div>
     </>
   )
 }

@@ -5,6 +5,7 @@ import { fetchFeature } from "@/lib/cosmic"
 import { BlogCard, PostType } from "@/components/blog-card"
 import { BucketAPILink } from "@/components/bucket-api-link"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
+import CodeSteps from "@/components/layouts/CodeSteps"
 
 export const generateMetadata = async () => ({ title: `Blog` })
 
@@ -312,111 +313,31 @@ function Code() {
     }
     \`\`\`
     `
+
+  const steps = [
+    {
+      title:
+        "Add a new file located at `components/blog-card.tsx` with the following",
+      code: codeBlogCardString,
+    },
+    {
+      title: "Add a new file located at `app/blog/page.tsx` with the following",
+      code: codeString,
+    },
+    {
+      title:
+        "Add a new file located at `app/blog/[slug]/page.tsx` with the following",
+      code: codeSinglePageString,
+    },
+  ]
+
   return (
-    <div className="pt-8">
-      <div className="mb-6">
-        The following code example uses Next.js, Tailwind CSS, and the Cosmic
-        JavaScript SDK. Feel free to skip any steps that have already been
-        completed.
-      </div>
-      <div className="mb-10">
-        <h3 className="text-2xl font-semibold">
-          Step 1. Install a new Next.js project
-        </h3>
-        <div className="py-2">
-          Note: Be sure to include TypeScript and Tailwind CSS in the
-          installation options.
-        </div>
-        <Markdown>
-          {dedent(`\`\`\`bash
-          bunx create-next-app@latest cosmic-app
-          \`\`\`
-        `)}
-        </Markdown>
-        <Markdown>
-          {dedent(`\`\`\`bash
-          cd cosmic-app
-          \`\`\`
-        `)}
-        </Markdown>
-      </div>
-      <div className="mb-10">
-        <h3 className="text-2xl font-semibold">
-          Step 2. Add the Cosmic JavaScript SDK the React Markdown packages.
-        </h3>
-        <Markdown>
-          {dedent(`\`\`\`bash
-          bun add @cosmicjs/sdk
-          \`\`\`
-        `)}
-        </Markdown>
-        <Markdown>
-          {dedent(`\`\`\`bash
-          bun add react-markdown
-          \`\`\`
-        `)}
-        </Markdown>
-      </div>
-      <div className="mb-10">
-        <h3 className="text-2xl font-semibold">
-          Step 3. Create a new file located at `lib/cosmic.ts` with the
-          following
-        </h3>
-        <div className="py-2">
-          Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-          your Bucket API keys found in <BucketAPILink />.
-        </div>
-        <Markdown>
-          {dedent(`\`\`\`ts
-          // lib/cosmic.ts
-          import { createBucketClient } from "@cosmicjs/sdk";
-          export const cosmic = createBucketClient({
-            bucketSlug: "BUCKET_SLUG",
-            readKey: "BUCKET_READ_KEY",
-          });
-          \`\`\`
-          `)}
-        </Markdown>
-      </div>
-      <div className="mb-10">
-        <h3 className="text-2xl font-semibold">
-          Step 4. Add a new file located at `components/blog-card.tsx` with the
-          following
-        </h3>
-        <Markdown>{codeBlogCardString}</Markdown>
-      </div>
-      <div className="mb-10">
-        <h3 className="text-2xl font-semibold">
-          Step 5. Add a new file located at `app/blog/page.tsx` with the
-          following
-        </h3>
-        <Markdown>{codeString}</Markdown>
-      </div>
-      <div className="mb-10">
-        <h3 className="text-2xl font-semibold">
-          Step 6. Add a new file located at `app/blog/[slug]/page.tsx` with the
-          following
-        </h3>
-        <Markdown>{codeSinglePageString}</Markdown>
-      </div>
-      <div className="mb-10">
-        <h3 className="text-2xl font-semibold">Step 4. Run your app</h3>
-        <Markdown>
-          {dedent(`\`\`\`bash
-          bun dev
-          \`\`\`
-        `)}
-        </Markdown>
-      </div>
-      <div className="mb-6">
-        <h3 className="text-2xl font-semibold">
-          Step 7. Go to http://localhost:3000/blog to see your blog post. It
-          should look like this:
-        </h3>
-      </div>
-      <div className="mb-6">
-        <Preview />
-      </div>
-    </div>
+    <>
+      <CodeSteps
+        step2={["bun add @cosmicjs/sdk", "bun add react-markdown"]}
+        steps={steps}
+        preview={<Preview />}
+      />
+    </>
   )
 }

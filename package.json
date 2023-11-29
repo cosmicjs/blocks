@@ -30,7 +30,7 @@
     "dedent": "^1.5.1",
     "isomorphic-dompurify": "^1.9.0",
     "lucide-react": "0.105.0-alpha.4",
-    "next": "latest",
+    "next": "14.0.0",
     "next-themes": "^0.2.1",
     "next-usequerystate": "^1.13.0",
     "nextjs-toploader": "^1.6.4",
