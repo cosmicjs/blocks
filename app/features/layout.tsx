@@ -40,8 +40,8 @@ export default function FeatureLayout({
   )
 
   return (
-    <div className="mx-auto flex w-[80%] flex-col lg:w-full lg:max-w-[1400px] lg:flex-row">
-      <aside className="mx-auto mt-10 w-20 rounded-xl lg:mx-4 lg:mt-8">
+    <div className="container relative mx-auto flex w-[80%] flex-col lg:w-full lg:max-w-[1400px] lg:flex-row">
+      <aside className="mx-auto mt-10 w-20 rounded-xl lg:fixed lg:mx-4 lg:mt-8">
         <nav>
           <Link
             href="/"
@@ -54,7 +54,7 @@ export default function FeatureLayout({
       </aside>
       <main className="flex flex-col items-center justify-center">
         <div className="relative">{children}</div>
-        <div className="border-t">
+        <div className="relative">
           <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">
             More to explore
           </h3>
@@ -62,9 +62,12 @@ export default function FeatureLayout({
         </div>
       </main>
       <aside
-        className={classNames("mx-4 mt-8 w-32 rounded-xl", {
-          "pointer-events-none opacity-0": tab !== "code",
-        })}
+        className={classNames(
+          "z-50 mx-auto mt-8 w-32 rounded-xl lg:fixed lg:right-60 lg:top-16 lg:mx-4",
+          {
+            "pointer-events-none opacity-0": tab !== "code",
+          }
+        )}
       >
         <nav className="pl-4">
           <SelectMenu

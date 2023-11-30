@@ -1,15 +1,12 @@
-"use client"
-
-import { useTheme } from "next-themes"
 import React from "react"
+import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
 
 const Footer: React.FC = () => {
-  const { resolvedTheme: theme } = useTheme()
-
   return (
     <div className="mx-auto my-20 h-[40px]">
-      <img
-        src={`/assets/${theme === "dark" ? "footer-dark" : "footer-light"}.png`}
+      <ThemedImage
+        lightSrc={`/assets/footer-light.png`}
+        darkSrc={`/assets/footer-dark.png`}
         alt="footer logo"
         className="w-32 pb-7"
       />

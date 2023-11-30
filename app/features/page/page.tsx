@@ -289,30 +289,6 @@ function Code() {
     \`\`\`
     `
 
-  //   const steps = [
-  //     {
-  //     title: '',
-  //     code: ''
-  //   },
-  //     {
-  //     title: '',
-  //     code: ''
-  //   },
-  //     {
-  //     title: '',
-  //     code: ''
-  //   },
-  //     {
-  //     title: '',
-  //     code: ''
-  //   },
-  //     {
-  //     title: '',
-  //     code: ''
-  //   },
-  // ]
-
-  // <CodeSteps step2={['']} steps={steps} preview={<Preview />} />
   const steps = [
     {
       title: "Create a new file located at `lib/cosmic.ts` with the following",

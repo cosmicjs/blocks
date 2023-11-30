@@ -5,7 +5,7 @@ import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
 
 const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false)
-  const { resolvedTheme: theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
 
   const isLightTheme = theme === "light"
 

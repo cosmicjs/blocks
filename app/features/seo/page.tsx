@@ -2,7 +2,6 @@
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import { BucketAPILink } from "@/components/bucket-api-link"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
@@ -55,7 +54,7 @@ async function Preview() {
     .depth(1)
 
   return (
-    <div className="m-auto mt-10 w-full md:min-w-[1000px]">
+    <div className="m-auto mt-10 w-full md:min-w-[200px]">
       <h2 className="mb-4 text-2xl font-semibold">SEO fields</h2>
       <div className="mb-8">
         <h3 className="text-xl font-semibold">Title</h3>

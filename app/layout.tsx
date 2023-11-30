@@ -6,10 +6,10 @@ import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
-import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/layouts/Navbar"
 import NextTopLoader from "nextjs-toploader"
 import Footer from "@/components/layouts/Footer"
+import ThemeProvider from "@/components/theme-provider"
 
 export const metadata: Metadata = {
   title: {
@@ -44,12 +44,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           <NextTopLoader />
-          <ThemeProvider attribute="class" defaultTheme="dark">
+          <ThemeProvider>
             <div className="relative flex min-h-screen flex-col">
               <Navbar />
-              <div className="mx-auto w-screen grow !overflow-x-hidden">
-                {children}
-              </div>
+              <div className="mx-auto w-screen grow">{children}</div>
               <Footer />
             </div>
             <TailwindIndicator />

@@ -52,7 +52,7 @@ async function Preview() {
     .depth(1)
 
   return (
-    <div className="m-auto mt-10 w-full md:min-w-[1000px]">
+    <div className="m-auto mt-10">
       <div className="my-10">
         <h2 className="mb-6 text-center text-3xl">Header</h2>
         <NavMenu items={header.metadata.items} />

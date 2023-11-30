@@ -9,6 +9,7 @@ import { ImageGallery } from "@/components/image-gallery"
 import { ProductCard, ProductType } from "@/components/product-card"
 import { SiteHeader } from "@/components/site-header"
 import CodeSteps from "@/components/layouts/CodeSteps"
+import classNames from "classnames"
 
 export async function generateMetadata() {
   return {
@@ -20,7 +21,7 @@ export default async function ProductsPage({
   searchParams,
 }: {
   searchParams: {
-    tab?: "preview" | "tab"
+    tab?: "preview" | "code"
   }
 }) {
   let tab = searchParams.tab
@@ -28,7 +29,12 @@ export default async function ProductsPage({
 
   return (
     <>
-      <section className="container m-auto grid max-w-[800px] items-center pb-8">
+      <section
+        className={classNames("container m-auto grid items-center pb-8", {
+          "max-w-[800px]": tab !== "preview",
+          "max-w-[1200px]": tab === "preview",
+        })}
+      >
         {tab === "preview" ? <Preview /> : <Code />}
       </section>
     </>

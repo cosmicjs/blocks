@@ -1,15 +1,11 @@
-"use client"
-
 import React from "react"
 import { Button } from "../ui/button"
-import { useTheme } from "next-themes"
 import classNames from "classnames"
+import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
 
 const Header: React.FC = () => {
-  const { resolvedTheme: theme } = useTheme()
-
   return (
-    <div className="container mx-auto lg:h-[631px]">
+    <div className="dark:dark-header-image light-header-image container mx-auto px-5 lg:h-[631px]">
       <div className="relative flex w-full flex-col-reverse items-center lg:flex-row">
         <div className="lg:w-[80%]">
           <h1 className="header-gradient relative z-10 mb-4 mt-56 text-center text-5xl font-[900] text-transparent md:mt-72 lg:mt-28 lg:text-left lg:text-8xl">
@@ -24,31 +20,25 @@ const Header: React.FC = () => {
             <Button variant="outline">Explore the Demo</Button>
           </div>
         </div>
-        <img
-          src={`/assets/header/blocks-${
-            theme === "dark" ? "dark" : "light"
-          }.png`}
+        <ThemedImage
+          darkSrc="/assets/header/blocks-dark.png"
+          lightSrc="/assets/header/blocks-light.png"
           alt="blocks illustration"
           className="absolute right-5 top-4 z-20 mx-auto w-[400px] scale-[2] md:inset-0 md:scale-100 lg:inset-auto lg:-top-36 lg:right-[-410px] lg:w-[90%]"
         />
       </div>
-      <img
-        src={`/assets/header/gradient-${
-          theme === "dark" ? "dark" : "light"
-        }.png`}
+      <ThemedImage
+        darkSrc="/assets/header/gradient-dark.png"
+        lightSrc="/assets/header/gradient-light.png"
         alt="gradient"
-        className="absolute -right-56 -top-60 z-20 mx-auto hidden lg:block"
+        className="absolute -top-40 right-0 z-20 mx-auto hidden w-[60%] lg:block"
       />
-      <img
-        src={`/assets/header/background-${
-          theme === "dark" ? "dark" : "light"
-        }.png`}
+      <ThemedImage
+        darkSrc="/assets/header/background-dark.png"
+        lightSrc="/assets/header/background-light.png"
         alt="blocks background"
         className={classNames(
-          "w-inherit absolute inset-0 top-10 z-0 mx-auto w-screen max-w-[1950px] scale-[1.25] overflow-hidden lg:-top-14 lg:block",
-          {
-            "opacity-20": theme === "dark",
-          }
+          "absolute inset-0 top-10 z-0 mx-auto w-screen max-w-[1750px] object-cover dark:mix-blend-overlay lg:-top-14 lg:block"
         )}
       />
     </div>

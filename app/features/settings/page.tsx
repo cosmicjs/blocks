@@ -32,8 +32,14 @@ export default async function BlogPage({
 
   return (
     <>
-      <section className="container m-auto grid max-w-[800px] items-center pb-8">
-        {tab === "preview" ? <Preview /> : <Code />}
+      <section className="container pb-8">
+        {tab === "preview" ? (
+          <Preview />
+        ) : (
+          <div className="m-auto grid max-w-[800px] items-center ">
+            <Code />
+          </div>
+        )}
       </section>
     </>
   )

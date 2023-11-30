@@ -22,28 +22,34 @@ type CodeStepsProps = {
   scratch?: boolean
 }
 
-const pmCommands = {
-  npm: "install",
-  yarn: "add",
-  pnpm: "add",
-  bun: "install",
+const managers = {
+  yarn: {
+    install: "yarn add",
+    run: "yarn",
+  },
+  bun: {
+    install: "bun add",
+    run: "bun",
+  },
+  npm: {
+    install: "npm install",
+    run: "npm run",
+  },
+  pnpm: {
+    install: "pnpm install",
+    run: "pnpm run",
+  },
 }
 
-type PackageManager = keyof typeof pmCommands
+type PackageManager = keyof typeof managers
 
 function replacePackageManagerCommand(command: string, pm: PackageManager) {
-  // Iterate over all package manager commands
-  for (const [pmKey, pmCommand] of Object.entries(pmCommands)) {
-    // If the command contains a package manager command, replace it
-    if (command.includes(pmCommand)) {
-      command = command.replace(pmCommand, pmCommands[pm] || pmCommand)
-    }
-  }
-
-  // If the command contains a package manager name, replace it
-  for (const pmKey of Object.keys(pmCommands)) {
-    if (command.includes(pmKey)) {
-      command = command.replace(pmKey, pm || pmKey)
+  // Iterate over all package managers
+  for (const [_, manager] of Object.entries(managers)) {
+    // If the command contains a package manager install command, replace it
+    if (command.includes(manager.install)) {
+      const regex = new RegExp(manager.install, "g")
+      command = command.replace(regex, managers[pm].install)
     }
   }
 
@@ -68,7 +74,7 @@ function Step({
         <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
           {scratch ? index + 1 : index + 4}
         </div>
-        <h3 className="text-2xl font-semibold">{title}</h3>
+        <h3 className="text-lg font-semibold lg:text-2xl">{title}</h3>
       </div>
       {description && <div className="py-2 text-base">{description}</div>}
       {code && <Markdown>{dedent(code)}</Markdown>}
@@ -95,7 +101,7 @@ function CodeSteps(props: CodeStepsProps) {
   const [step2WithPm, setStep2WithPm] = useState<string[]>(step2)
   const [step3WithPm, setStep3WithPm] = useState<string>(
     dedent(`\`\`\`bash
-    ${pm} dev
+    ${managers[pm || "bun"]["run"]} dev
     \`\`\`
   `)
   )
@@ -108,7 +114,10 @@ function CodeSteps(props: CodeStepsProps) {
       const step2Updated = step2.map((command) =>
         replacePackageManagerCommand(command, pm)
       )
-      const step3Updated = replacePackageManagerCommand(step3WithPm, pm)
+      const step3Updated = dedent(`\`\`\`bash
+      ${managers[pm || "bun"]["run"]} dev
+      \`\`\`
+    `)
 
       setStep1WithPm(step1Updated)
       setStep2WithPm(step2Updated)
@@ -118,10 +127,8 @@ function CodeSteps(props: CodeStepsProps) {
     replaceSteps()
   }, [pm])
 
-  console.log("manager", manager, step2WithPm)
-
   return (
-    <div className="pt-8">
+    <div className="max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-full">
       {!scratch && (
         <div>
           <div className="mb-6">
@@ -134,7 +141,7 @@ function CodeSteps(props: CodeStepsProps) {
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
                 1
               </div>
-              <h3 className="text-2xl font-semibold">
+              <h3 className="text-lg font-semibold lg:text-2xl">
                 Install a new Next.js project
               </h3>
             </div>
@@ -157,7 +164,7 @@ function CodeSteps(props: CodeStepsProps) {
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
                 2
               </div>
-              <h3 className="text-2xl font-semibold">
+              <h3 className="text-lg font-semibold lg:text-2xl">
                 Add the Cosmic JavaScript SDK & required packages
               </h3>
             </div>
@@ -176,7 +183,7 @@ function CodeSteps(props: CodeStepsProps) {
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
                 3
               </div>
-              <h3 className="text-2xl font-semibold">
+              <h3 className="text-lg font-semibold lg:text-2xl">
                 Create a new file located at `lib/cosmic.ts` with the following
               </h3>
             </div>
@@ -215,7 +222,7 @@ function CodeSteps(props: CodeStepsProps) {
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
                 {steps.length + 4}
               </div>
-              <h3 className="text-2xl font-semibold">Run the app</h3>
+              <h3 className="text-lg font-semibold lg:text-2xl">Run the app</h3>
             </div>
             <Markdown>{step3WithPm}</Markdown>
           </div>
@@ -224,7 +231,7 @@ function CodeSteps(props: CodeStepsProps) {
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
                 {steps.length + 5}
               </div>
-              <h3 className="text-2xl font-semibold">
+              <h3 className="text-lg font-semibold lg:text-2xl">
                 Go to http://localhost:3000 and any page where this component
                 has been added. It should look like this:
               </h3>

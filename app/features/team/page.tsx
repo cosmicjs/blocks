@@ -2,8 +2,6 @@
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import { BucketAPILink } from "@/components/bucket-api-link"
-import { Markdown } from "@/components/elements/Markdown/Markdown"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
 export default async function Team({
@@ -18,7 +16,7 @@ export default async function Team({
 
   return (
     <>
-      <section className="container m-auto grid max-w-[800px] items-center pb-8">
+      <section className="container m-auto grid  items-center pb-8">
         {tab === "preview" ? <Preview /> : <Code />}
       </section>
     </>
@@ -260,8 +258,8 @@ function Code() {
   ]
 
   return (
-    <>
+    <div className="max-w-[800px]">
       <CodeSteps steps={steps} preview={<Preview />} />
-    </>
+    </div>
   )
 }

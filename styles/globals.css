@@ -15,6 +15,9 @@
   html {
     scroll-behavior: smooth;
   }
+  img {
+    transition: opacity 0.3s ease-in-out; /* You can adjust the duration and easing function */
+  }
 }
 
 .glassmorphism {

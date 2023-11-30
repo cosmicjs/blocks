@@ -6,19 +6,18 @@ import { Button } from "../ui/button"
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
 import { SiteHeader } from "../site-header"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import FeaturesMenu from "../FeaturesMenu"
+import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
 
 const Navbar: React.FC = () => {
-  const { resolvedTheme: theme } = useTheme()
-
   return (
     <div className="lg:flex-center glassmorphism sticky top-0 z-50 h-[76px] border-b border-gray-50 bg-white/70 px-5 dark:border-dark-gray-100 dark:bg-black/50 md:w-screen">
       <div className="mx-auto flex h-full items-center md:max-w-[1500px]">
         <Link href="/">
-          <img
-            src={`/assets/${theme === "dark" ? "logo-dark" : "logo-light"}.png`}
-            alt="footer logo"
+          <ThemedImage
+            lightSrc={`/assets/logo-light.png`}
+            darkSrc={`/assets/logo-dark.png`}
+            alt="nav logo"
             className="w-32"
           />
         </Link>
