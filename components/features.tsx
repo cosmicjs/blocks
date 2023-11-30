@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { useTheme } from "next-themes"
 
@@ -9,7 +9,6 @@ import { features } from "@/config/features"
 import { FeatureCard } from "@/components/feature-card"
 import { InstallDialog } from "@/components/install-dialog"
 import { selectRandomValuesFromArray } from "@/lib/utils"
-import { useMemo } from "react"
 
 // Types
 export type TargetBucketType = {
@@ -49,11 +48,15 @@ export function Features({ targetBucket, limit, randomOrder }: FeaturesProps) {
     setFeatureKey(key)
   }
 
-  const mappedFeatures = useMemo(() => {
-    return !!randomOrder
-      ? selectRandomValuesFromArray(features, limit || features.length)
-      : features
-  }, [randomOrder, features, limit])
+  const [mappedFeatures, setMappedFeatures] = useState(features)
+
+  useEffect(() => {
+    if (randomOrder) {
+      setMappedFeatures((prevFeatures) =>
+        selectRandomValuesFromArray(prevFeatures, limit || 3)
+      )
+    }
+  }, [randomOrder, limit])
 
   return (
     <div className="grid grid-cols-1 gap-10 md:grid-cols-3">

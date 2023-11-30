@@ -45,31 +45,11 @@ export default function FeatureLayout({
         <nav>
           <Link
             href="/"
-            className="mt-5 flex items-center space-x-4 text-cosmic-blue lg:mt-0"
+            className="mb-4 mt-5 flex items-center space-x-4 text-cosmic-blue lg:mt-0"
           >
             <ArrowLeftIcon className="mr-2 h-4 w-4" />
             Back
           </Link>
-        </nav>
-      </aside>
-      <main className="flex flex-col items-center justify-center">
-        <div className="relative">{children}</div>
-        <div className="relative">
-          <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">
-            More to explore
-          </h3>
-          <Features randomOrder limit={3} />
-        </div>
-      </main>
-      <aside
-        className={classNames(
-          "z-50 mx-auto mt-8 w-32 rounded-xl lg:fixed lg:right-60 lg:top-16 lg:mx-4",
-          {
-            "pointer-events-none opacity-0": tab !== "code",
-          }
-        )}
-      >
-        <nav className="pl-4">
           <SelectMenu
             options={options}
             value={manager ? { title: manager, value: manager } : options[0]}
@@ -81,6 +61,15 @@ export default function FeatureLayout({
           />
         </nav>
       </aside>
+      <main className="flex flex-col items-center justify-center">
+        <div className="relative">{children}</div>
+        <div className="relative">
+          <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">
+            More to explore
+          </h3>
+          <Features randomOrder limit={3} />
+        </div>
+      </main>
     </div>
   )
 }
