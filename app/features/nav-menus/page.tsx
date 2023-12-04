@@ -68,120 +68,123 @@ async function Preview() {
 function Code() {
   const navCode = dedent`
     \`\`\`jsx
-    // components/nav-menu.tsx
-    "use client"
+      // components/nav-menu.tsx
+      "use client"
 
-    import Link from "next/link"
+      import Link from "next/link"
 
-    import {
-      NavigationMenu,
-      NavigationMenuItem,
-      NavigationMenuLink,
-      NavigationMenuList,
-      navigationMenuTriggerStyle,
-    } from "@/components/ui/navigation-menu"
+      import {
+        NavigationMenu,
+        NavigationMenuItem,
+        NavigationMenuLink,
+        NavigationMenuList,
+        navigationMenuTriggerStyle,
+      } from "@/components/ui/navigation-menu"
 
-    type Item = { title: string; link: string; open_in_new_tab: boolean }
+      type Item = {
+        title: string;
+        link: string;
+        open_in_new_tab: boolean
+      }
 
-    export function NavMenu({ items }: { items: Item[] }) {
-      return (
-        <NavigationMenu className="m-auto">
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              {items.map((item: Item) => {
-                return (
-                  <Link href={item.link} legacyBehavior passHref key={item.title}>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                      target={item.open_in_new_tab ? "_blank" : ""}
-                    >
-                      {item.title}
-                    </NavigationMenuLink>
-                  </Link>
-                )
-              })}
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-      )
-    }
-
+      export function NavMenu({ items }: { items: Item[] }) {
+        return (
+          <NavigationMenu className="m-auto">
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                {items.map((item: Item) => {
+                  return (
+                    <Link href={item.link} legacyBehavior passHref key={item.title}>
+                      <NavigationMenuLink
+                        className={navigationMenuTriggerStyle()}
+                        target={item.open_in_new_tab ? "_blank" : ""}
+                      >
+                        {item.title}
+                      </NavigationMenuLink>
+                    </Link>
+                  )
+                })}
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        )
+      }
     \`\`\`
     `
   const headerCode = dedent`
     \`\`\`jsx
-    // components/header.tsx
-    import { cosmic } from "@/lib/cosmic";
+      // components/header.tsx
+      import { cosmic } from "@/lib/cosmic";
 
-    import { NavMenu } from "@/components/nav-menu";
+      import { NavMenu } from "@/components/nav-menu";
 
-    export default async function Header() {
-      // Header data
-      const { object: header } = await cosmic.objects
-        .findOne({
-          type: "navigation-menus",
-          slug: "header",
-        })
-        .props("metadata")
-        .depth(1);
+      export default async function Header() {
+        // Header data
+        const { object: header } = await cosmic.objects
+          .findOne({
+            type: "navigation-menus",
+            slug: "header",
+          })
+          .props("metadata")
+          .depth(1);
 
-      return <NavMenu items={header.metadata.items} />
-    }
+        return <NavMenu items={header.metadata.items} />
+      }
     \`\`\`
     `
 
   const footerCode = dedent`
     \`\`\`jsx
-    // components/footer.tsx
-    import { cosmic } from "@/lib/cosmic";
+      // components/footer.tsx
+      import { cosmic } from "@/lib/cosmic";
 
-    import { NavMenu } from "@/components/nav-menu";
+      import { NavMenu } from "@/components/nav-menu";
 
-    export default async function Footer() {
-      // Footer data
-      const { object: footer } = await cosmic.objects
-        .findOne({
-          type: "navigation-menus",
-          slug: "footer",
-        })
-        .props("metadata")
-        .depth(1);
+      export default async function Footer() {
+        // Footer data
+        const { object: footer } = await cosmic.objects
+          .findOne({
+            type: "navigation-menus",
+            slug: "footer",
+          })
+          .props("metadata")
+          .depth(1);
 
-      return <NavMenu items={footer.metadata.items} />
-    }
+        return <NavMenu items={footer.metadata.items} />
+      }
     \`\`\`
     `
 
   const pageCode = dedent`
     \`\`\`jsx
-    // app/layout.tsx
-    import type { Metadata } from "next";
-    import { Inter } from "next/font/google";
-    import "./globals.css";
-    import Header from "@/components/header";
-    import Footer from "@/components/footer";
-    const inter = Inter({ subsets: ["latin"] });
+      // app/layout.tsx
+      import type { Metadata } from "next";
+      import { Inter } from "next/font/google";
+      import "./globals.css";
+      import Header from "@/components/header";
+      import Footer from "@/components/footer";
+      const inter = Inter({ subsets: ["latin"] });
 
-    export const metadata: Metadata = {
-      title: "Cosmic Blocks",
-      description: "Build content-powered websites and apps faster with Cosmic",
-    };
+      export const metadata: Metadata = {
+        title: "Cosmic Blocks",
+        description: "Build content-powered websites and apps faster with Cosmic",
+      };
 
-    export default function RootLayout({
-      children,
-    }: {
-      children: React.ReactNode;
-    }) {
-      return (
-        <html lang="en">
-          <body className={inter.className}>
-            <Header />
-            {children}
-            <Footer />
-          </body>
-        </html>
-      );
-    }
+      export default function RootLayout({
+        children,
+      }: {
+        children: React.ReactNode;
+      }) {
+        return (
+          <html lang="en">
+            <body className={inter.className}>
+              <Header />
+              {children}
+              <Footer />
+            </body>
+          </html>
+        );
+      }
     \`\`\`
     `
 
