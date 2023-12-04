@@ -42,7 +42,7 @@ export function FeatureCard({
     <>
       <div className="pointer-cursor group relative overflow-hidden">
         {handleInstallClick && (
-          <div className="duration-[50] absolute inset-x-0 bottom-20 z-10 mx-auto flex px-5 opacity-0 transition ease-linear group-hover:opacity-100">
+          <div className="duration-[50] absolute inset-x-0 bottom-24 z-10 mx-auto flex px-5 opacity-0 transition ease-linear group-hover:opacity-100">
             <Button
               className="relative z-20 w-full"
               onClick={(e) => handleInstallClick(feature.key)}
