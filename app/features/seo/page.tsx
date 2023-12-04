@@ -85,43 +85,43 @@ async function Preview() {
 function Code() {
   const codeString = dedent`
       \`\`\`jsx
-      // app/page.tsx
-      import { cosmic } from "@/lib/cosmic";
+        // app/page.tsx
+        import { cosmic } from "@/lib/cosmic";
 
-      export async function generateMetadata() {
-        const { object: page } = await cosmic.objects
-          .findOne({
-            type: "pages",
-            slug: "home"
-          })
-          .props("title,metadata")
-          .depth(1);
-        return {
-          title: page.metadata.seo?.title || page.title,
-          description: page.metadata?.seo.description,
-          openGraph: {
-            title: page.metadata.seo?.og_title,
-            description: page.metadata.seo?.og_description,
-            images: [page.metadata.seo?.og_image?.imgix_url],
-          },
-        };
-      }
-      
-      export default async function HomePage() {
-        const { object: page } = await cosmic.objects
-          .findOne({
-            type: "pages",
-            slug: "home",
-          })
-          .props("slug,title,metadata")
-          .depth(1);
+        export async function generateMetadata() {
+          const { object: page } = await cosmic.objects
+            .findOne({
+              type: "pages",
+              slug: "home"
+            })
+            .props("title,metadata")
+            .depth(1);
+          return {
+            title: page.metadata.seo?.title || page.title,
+            description: page.metadata?.seo.description,
+            openGraph: {
+              title: page.metadata.seo?.og_title,
+              description: page.metadata.seo?.og_description,
+              images: [page.metadata.seo?.og_image?.imgix_url],
+            },
+          };
+        }
         
-        return (
-          <>
-            { /* Page content here. See Page feature template. */ }
-          </>
-        );
-      }
+        export default async function HomePage() {
+          const { object: page } = await cosmic.objects
+            .findOne({
+              type: "pages",
+              slug: "home",
+            })
+            .props("slug,title,metadata")
+            .depth(1);
+          
+          return (
+            <>
+              { /* Page content here. See Page feature template. */ }
+            </>
+          );
+        }
       \`\`\`
       `
 
