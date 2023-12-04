@@ -35,7 +35,7 @@ const Header: React.FC = () => {
           darkSrc="/assets/header/blocks-dark.png"
           lightSrc="/assets/header/blocks-light.png"
           alt="blocks illustration"
-          className="absolute -left-2 top-4 z-20 scale-[2] md:-top-24 lg:relative lg:-right-[96px] lg:top-32 lg:w-[50%] lg:scale-[1.8] 2xl:-right-[104px]"
+          className="absolute -left-2 top-4 z-20 scale-[2] sm:left-auto sm:scale-100 md:-top-24 lg:relative lg:-right-[96px] lg:top-32 lg:w-[50%] lg:scale-[1.8] 2xl:-right-[104px]"
         />
       </div>
       <ThemedImage
