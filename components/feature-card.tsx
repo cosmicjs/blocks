@@ -24,6 +24,7 @@ type Feature = {
   light_thumbnail?: string
   object_types?: number
   objects?: number
+  metafields?: number
 }
 
 export function FeatureCard({
@@ -35,21 +36,15 @@ export function FeatureCard({
 }) {
   const router = useRouter()
 
-  if (!feature.preview_link) return null
+  if (!feature?.preview_link) return null
 
   return (
-    <Link href={feature.preview_link}>
-      <div className="group relative">
+    <>
+      <div className="pointer-cursor group relative overflow-hidden">
         {handleInstallClick && (
-          <div
-            className="duration-[50] absolute inset-x-0 bottom-20 mx-auto flex px-5 opacity-0 transition ease-linear group-hover:opacity-100"
-            onClick={(e) => {
-              e.stopPropagation()
-              e.preventDefault()
-            }}
-          >
+          <div className="duration-[50] absolute inset-x-0 bottom-20 z-10 mx-auto flex px-5 opacity-0 transition ease-linear group-hover:opacity-100">
             <Button
-              className="w-full"
+              className="relative z-20 w-full"
               onClick={(e) => handleInstallClick(feature.key)}
               iconRight={<ArrowDownOnSquareIcon className="h-4 w-4" />}
             >
@@ -89,23 +84,28 @@ export function FeatureCard({
             )}
           </div>
         )}
-        <div className="grid rounded-xl md:grid-cols-1">
-          <div>
-            <ThemedImage
-              lightSrc={`${feature?.light_thumbnail}?w=1200&auto=format,compression`}
-              darkSrc={`${feature?.dark_thumbnail}?w=1200&auto=format,compression`}
-              className="h-[250px] w-full rounded-2xl object-cover object-top"
-              alt={`Feature preview`}
-            />
+        <Link href={feature?.preview_link}>
+          <div className="grid md:grid-cols-1">
+            <div className="overflow-hidden rounded-3xl">
+              <ThemedImage
+                lightSrc={`${feature?.light_thumbnail}?w=1200&auto=format,compression`}
+                darkSrc={`${feature?.dark_thumbnail}?w=1200&auto=format,compression`}
+                className="h-[250px] w-full rounded-3xl object-cover object-top group-hover:blur-[5px]"
+                alt={`Feature preview`}
+              />
+            </div>
+            <div>
+              <h2 className="mb-1 mt-4 text-2xl font-bold">{feature.title}</h2>
+              <p className="text-dark-gray-600 dark:text-dark-gray-600">
+                {feature?.object_types}{" "}
+                {feature?.object_types && "Object types •"} {feature?.objects}{" "}
+                {feature?.objects && "Objects"}
+                {feature?.metafields} {feature?.metafields && "Metafield"}
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="mb-1 mt-4 text-2xl font-bold">{feature.title}</h2>
-            <p className="text-dark-gray-600 dark:text-dark-gray-600">
-              {feature?.object_types} Object types • {feature?.objects} Objects
-            </p>
-          </div>
-        </div>
+        </Link>
       </div>
-    </Link>
+    </>
   )
 }

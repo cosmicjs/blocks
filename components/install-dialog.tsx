@@ -91,7 +91,7 @@ export function InstallDialog({
     read_key,
     write_key
   )
-  const feature = features.filter((feature) => feature.key === featureKey)[0]
+  const feature = features.filter((feature) => feature?.key === featureKey)[0]
   const [installing, setInstalling] = useState<boolean>(false)
   const [objectTypes, setObjectTypes] = useState<string[]>([])
   const [selectedObjectTypes, setSelectedObjectTypes] = useState<string[]>([])
@@ -136,7 +136,7 @@ export function InstallDialog({
     }
     toast({
       title: "Success!",
-      description: `${feature.title} installed`,
+      description: `${feature?.title} installed`,
     })
   }
 
@@ -146,10 +146,10 @@ export function InstallDialog({
     // Check for Object type slug exists
     if (
       existingObjectTypes?.filter(
-        (objectType: any) => objectType.slug === feature.slug
+        (objectType: any) => objectType.slug === feature?.slug
       )[0]
     )
-      return alert(`Object type "${feature.slug}" already exists.`)
+      return alert(`Object type "${feature?.slug}" already exists.`)
     if (featureKey === "pages") {
       metafields = await getPageBuilderMetafields()
       await addPagesObjectType(cosmicTargetBucket, metafields)
@@ -218,13 +218,13 @@ export function InstallDialog({
     }
     toast({
       title: "Success!",
-      description: `${feature.title} installed`,
+      description: `${feature?.title} installed`,
     })
   }
 
   async function installFeature(selectedObjectTypes: string[]) {
     try {
-      if (feature.type === "metafields")
+      if (feature?.type === "metafields")
         await installMetafields(selectedObjectTypes)
       else await installObjectType()
     } catch (err) {}
@@ -232,7 +232,7 @@ export function InstallDialog({
 
   // Fetch Object Types
   useEffect(() => {
-    if (feature.type !== "metafields") return
+    if (feature?.type !== "metafields") return
     if (!objectTypes?.length) {
       const fetchObjectTypes = async () => {
         const newObjectTypes = await getObjectTypes(cosmicTargetBucket)
@@ -280,10 +280,10 @@ export function InstallDialog({
         onEscapeKeyDown={() => setShowModal(false)}
       >
         <DialogHeader>
-          <DialogTitle>Install {feature.title}</DialogTitle>
+          <DialogTitle>Install {feature?.title}</DialogTitle>
           <DialogDescription>
             <div className="mb-4">
-              {feature.type === "metafields" ? (
+              {feature?.type === "metafields" ? (
                 <>
                   <div className="mb-4">
                     {objectTypes.length ? (
@@ -294,7 +294,7 @@ export function InstallDialog({
                     ) : (
                       <>
                         You do not have any existing Object types to add this
-                        feature. You will need to{" "}
+                        feature?. You will need to{" "}
                       </>
                     )}{" "}
                     <a
@@ -341,11 +341,11 @@ export function InstallDialog({
                 <>Are you sure you want to add this feature to your Project?</>
               )}
             </div>
-            <div>{feature.confirmation}</div>
+            <div>{feature?.confirmation}</div>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          {feature.type === "metafields" && !objectTypes.length ? (
+          {feature?.type === "metafields" && !objectTypes.length ? (
             <></>
           ) : (
             <Button
@@ -366,7 +366,7 @@ export function InstallDialog({
                   Installing...
                 </>
               ) : (
-                `Install ${feature.title}`
+                `Install ${feature?.title}`
               )}
             </Button>
           )}

@@ -41,6 +41,7 @@ export interface ButtonProps
   renderAs?: string
   iconRight?: React.ReactElement
   href?: string
+  target?: string
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -52,6 +53,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       asChild = false,
       renderAs = "button",
       href,
+      target,
       iconRight,
       ...props
     },
@@ -64,7 +66,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-        {...(Comp === "a" ? { href } : {})}
+        {...(Comp === "a" ? { href, target } : {})}
       >
         {props.children}
         {iconRight && (

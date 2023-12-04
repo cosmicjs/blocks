@@ -35,9 +35,6 @@ async function Preview() {
     <>
       <section className="container m-auto grid items-center px-4 py-8">
         <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
-          <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-            Blog Page
-          </h1>
           <div className="mx-auto grid w-full max-w-screen-lg grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
             {posts.map((post: PostType) => {
               return <BlogCard key={post.id} post={post} />

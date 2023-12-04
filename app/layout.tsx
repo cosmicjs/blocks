@@ -9,7 +9,8 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import Navbar from "@/components/layouts/Navbar"
 import NextTopLoader from "nextjs-toploader"
 import Footer from "@/components/layouts/Footer"
-import ThemeProvider from "@/components/theme-provider"
+import ThemeProvider from "@/components/layouts/Providers"
+import Providers from "@/components/layouts/Providers"
 
 export const metadata: Metadata = {
   title: {
@@ -43,8 +44,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <NextTopLoader />
-          <ThemeProvider>
+          <NextTopLoader speed={400} />
+          <Providers>
             <div className="relative flex min-h-screen flex-col">
               <Navbar />
               <div className="mx-auto w-screen grow">{children}</div>
@@ -52,7 +53,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
             <TailwindIndicator />
             <Toaster />
-          </ThemeProvider>
+          </Providers>
         </body>
       </html>
     </>

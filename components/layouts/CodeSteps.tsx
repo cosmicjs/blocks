@@ -26,18 +26,22 @@ const managers = {
   yarn: {
     install: "yarn add",
     run: "yarn",
+    executable: "npx",
   },
   bun: {
     install: "bun add",
     run: "bun",
+    executable: "bunx",
   },
   npm: {
     install: "npm install",
     run: "npm run",
+    executable: "npx",
   },
   pnpm: {
     install: "pnpm install",
     run: "pnpm run",
+    executable: "pnpm dlx",
   },
 }
 
@@ -48,8 +52,14 @@ function replacePackageManagerCommand(command: string, pm: PackageManager) {
   for (const [_, manager] of Object.entries(managers)) {
     // If the command contains a package manager install command, replace it
     if (command.includes(manager.install)) {
-      const regex = new RegExp(manager.install, "g")
-      command = command.replace(regex, managers[pm].install)
+      const installRegex = new RegExp(`\\b${manager.install}\\b`, "g")
+      command = command.replace(installRegex, managers[pm].install)
+    }
+
+    // If the command contains a package manager executable command, replace it
+    if (command.includes(manager.executable)) {
+      const executableRegex = new RegExp(`\\b${manager.executable}\\b`, "g")
+      command = command.replace(executableRegex, managers[pm].executable)
     }
   }
 
@@ -128,7 +138,7 @@ function CodeSteps(props: CodeStepsProps) {
   }, [pm])
 
   return (
-    <div className="max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-full">
+    <div className="w-auto max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-[750px]">
       {!scratch && (
         <div>
           <div className="mb-6">

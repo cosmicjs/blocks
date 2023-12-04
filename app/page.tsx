@@ -24,7 +24,7 @@ export default async function IndexPage({
         <Header />
         <div className="container relative z-30 mx-auto">
           <BigHeading
-            id="features"
+            scrollId="features"
             subheading="Get Started"
             heading="Build Your Project, Block by Block"
             description="Install the content model into your Bucket in a single click, 
