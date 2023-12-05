@@ -291,24 +291,6 @@ function Code() {
 
   const steps = [
     {
-      title: "Create a new file located at `lib/cosmic.ts` with the following",
-      description: (
-        <div>
-          Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-          your Bucket API keys found in <BucketAPILink />.
-        </div>
-      ),
-      code: dedent(`\`\`\`ts
-            // lib/cosmic.ts
-            import { createBucketClient } from "@cosmicjs/sdk";
-            export const cosmic = createBucketClient({
-              bucketSlug: "BUCKET_SLUG",
-              readKey: "BUCKET_READ_KEY",
-            });
-            \`\`\`
-            `),
-    },
-    {
       title:
         "Create a file located at `components/page-section.tsx` with the following",
       code: codeSectionString,

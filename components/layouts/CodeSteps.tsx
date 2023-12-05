@@ -66,6 +66,21 @@ function replacePackageManagerCommand(command: string, pm: PackageManager) {
   return command
 }
 
+function wrapWithSpan(text: string) {
+  return text.split("`").map((item, index) => {
+    if (index % 2 === 0) return item
+    return (
+      <span className="bg-gray-100 px-1 py-px font-mono dark:bg-dark-gray-100">
+        {item}
+      </span>
+    )
+  })
+}
+
+const Title = ({ text }: { text: string }) => {
+  return wrapWithSpan(text)
+}
+
 function Step({
   title,
   description,
@@ -84,7 +99,9 @@ function Step({
         <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
           {scratch ? index + 1 : index + 4}
         </div>
-        <h3 className="text-lg font-semibold lg:text-2xl">{title}</h3>
+        <h3 className="text-lg font-semibold lg:text-2xl">
+          <Title text={title} />{" "}
+        </h3>
       </div>
       {description && <div className="py-2 text-base">{description}</div>}
       {code && <Markdown>{dedent(code)}</Markdown>}
@@ -146,7 +163,7 @@ function CodeSteps(props: CodeStepsProps) {
               "The following code example uses Next.js, Tailwind CSS, and the Cosmic JavaScript SDK. Feel free to skip any steps that have already been completed."}
           </div>
           <div className="relative mb-10">
-            <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
+            <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200" />
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
                 1
@@ -194,11 +211,13 @@ function CodeSteps(props: CodeStepsProps) {
                 3
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
-                Create a new file located at `lib/cosmic.ts` with the following
+                Create a new file located at <Title text="lib/cosmic.ts" /> with
+                the following
               </h3>
             </div>
             <div className="py-2">
-              Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY`
+              Note: You will need to swap <Title text={"`BUCKET_SLUG`"} /> and{" "}
+              <Title text="`BUCKET_READ_KEY`" />
               with your Bucket API keys found in <BucketAPILink />.
             </div>
             <Markdown>
@@ -247,7 +266,7 @@ function CodeSteps(props: CodeStepsProps) {
               </h3>
             </div>
           </div>
-          {preview && <div className="">{preview}</div>}
+          {preview && <div>{preview}</div>}
         </div>
       )}
     </div>

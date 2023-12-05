@@ -25,3 +25,7 @@ export function selectRandomValuesFromArray(arr: any[], limit: number) {
   }
   return result
 }
+
+export function pluralize(singular: string, count: number) {
+  return count > 1 ? `${singular}s` : singular
+}

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 
-import { cn } from "@/lib/utils"
+import { cn, pluralize } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
   ArrowDownOnSquareIcon,
@@ -98,9 +98,14 @@ export function FeatureCard({
               <h2 className="mb-1 mt-4 text-2xl font-bold">{feature.title}</h2>
               <p className="text-dark-gray-600 dark:text-dark-gray-600">
                 {feature?.object_types}{" "}
-                {feature?.object_types && "Object types •"} {feature?.objects}{" "}
-                {feature?.objects && "Objects"}
-                {feature?.metafields} {feature?.metafields && "Metafield"}
+                {feature?.object_types &&
+                  `${pluralize("Object type", feature?.object_types)} •`}{" "}
+                {feature?.objects}{" "}
+                {feature?.objects &&
+                  `${pluralize("Object type", feature?.objects)}`}
+                {feature?.metafields}{" "}
+                {feature?.metafields &&
+                  `${pluralize("Metafield", feature?.metafields)}`}
               </p>
             </div>
           </div>
