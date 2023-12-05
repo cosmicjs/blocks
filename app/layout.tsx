@@ -48,7 +48,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Providers>
             <div className="relative flex min-h-screen flex-col">
               <Navbar />
-              <div className="mx-auto w-screen grow">{children}</div>
+              <div className="mx-auto flex w-screen grow flex-col items-center justify-center overflow-x-hidden">
+                {children}
+              </div>
               <Footer />
             </div>
             <TailwindIndicator />

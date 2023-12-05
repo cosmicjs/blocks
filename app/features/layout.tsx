@@ -37,7 +37,18 @@ export default function FeatureLayout({
       (feature) => feature?.preview_link.includes(featurePathname)
     )?.[0] || {}
 
-  const { title, object_types, objects, metafields } = currentFeature
+  const { title, object_types, objects, metafields, description, field_list } =
+    currentFeature
+
+  const bucketSlug = searchParams.get("bucket_slug") || ""
+  const readKey = searchParams.get("bucket_slug") || ""
+  const writeKey = searchParams.get("bucket_slug") || ""
+
+  const targetBucket = {
+    bucket_slug: bucketSlug,
+    read_key: readKey,
+    write_key: writeKey,
+  }
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -50,7 +61,7 @@ export default function FeatureLayout({
   )
 
   return (
-    <div className="container relative mx-auto flex w-[80%] flex-col lg:w-full lg:max-w-[1400px] lg:flex-row">
+    <div className="container relative flex w-[80%] flex-col items-center justify-center lg:w-full lg:max-w-[1400px] lg:flex-row">
       <aside className="relative mx-auto mt-10 w-20 rounded-xl lg:fixed lg:mx-4 lg:mt-8">
         <nav>
           <Link
@@ -98,12 +109,28 @@ export default function FeatureLayout({
           {objects && " Objects"}
           {metafields} {metafields && "Metafield"}
         </p>
+        <p className="mt-5 max-w-[600px] text-center text-base text-dark-gray-600 dark:text-dark-gray-600">
+          {description}{" "}
+          {field_list?.map((field, index) => (
+            <span className="mx-[3px]">
+              <span className="bg-gray-100 p-px dark:bg-dark-gray-100">
+                {field}
+              </span>
+              {index !== field_list.length - 1 && ","}
+            </span>
+          ))}
+        </p>
         <div className="relative">{children}</div>
         <div className="relative">
           <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">
             More to explore
           </h3>
-          <Features randomOrder limit={3} excludeSelf />
+          <Features
+            targetBucket={targetBucket}
+            randomOrder
+            limit={3}
+            excludeSelf
+          />
         </div>
       </main>
     </div>
