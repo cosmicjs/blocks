@@ -76,7 +76,7 @@ function Event({ event }: { event: EventType }) {
             {event.metadata.end_time}
           </div>
           <div className="text-slate-700 dark:text-slate-300">
-            📍 Location: {event.metadata.location}
+            📍 {event.metadata.location}
           </div>
         </div>
       </div>
