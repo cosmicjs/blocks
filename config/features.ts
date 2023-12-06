@@ -215,4 +215,21 @@ export const features = [
     light_thumbnail:
       "https://imgix.cosmicjs.com/feddbc80-9416-11ee-b62d-5b90a0a1bade-Testimonials.png",
   },
+  {
+    key: "events",
+    title: "Events",
+    type: "object_type",
+    slug: "events",
+    emoji: "📆",
+    description: `Adds an Events Object type to your Bucket, which includes`,
+    field_list: ["Image", "Description", "Start Date", "Start Time", "End Date", "End Time",],
+    confirmation: `This will install an \`events\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/features/events",
+    object_types: 1,
+    objects: 3,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/fedf9140-9416-11ee-b62d-5b90a0a1bade-Testimonials-Dark.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/feddbc80-9416-11ee-b62d-5b90a0a1bade-Testimonials.png",
+  },
 ]
