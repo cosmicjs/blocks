@@ -118,6 +118,25 @@ export const features = [
       "https://imgix.cosmicjs.com/27ed3880-8de1-11ee-b62d-5b90a0a1bade-Products.png",
   },
   {
+    key: "image-gallery",
+    title: "Image Gallery",
+    type: "metafields",
+    slug: "image-gallery",
+    emoji: "🏞",
+    description: `Adds an image gallery to any existing Object type, which includes`,
+    field_list: [
+      "Image",
+      "Description"
+    ],
+    confirmation: `This will add a new Metafield with key \`image_gallery\` to the selected Object types.`,
+    preview_link: "/features/image-gallery",
+    metafields: 1,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/27d87800-8de1-11ee-b62d-5b90a0a1bade-SEO-1.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/27d7b4b0-8de1-11ee-b62d-5b90a0a1bade-SEO.png",
+  },
+  {
     key: "seo",
     title: "SEO fields",
     type: "metafields",

@@ -46,6 +46,7 @@ import {
   getProducts,
   getProductsMetafields,
   getSEOMetafields,
+  getImageGalleryMetafields,
   getTeamMembers,
   getTeamMetafields,
   getTestimonials,
@@ -117,6 +118,8 @@ export function InstallDialog({
       let newMetafields
       if (featureKey === "seo") newMetafields = await getSEOMetafields()
       if (featureKey === "faqs") newMetafields = await getFAQMetafields()
+      if (featureKey === "image-gallery")
+        newMetafields = await getImageGalleryMetafields()
 
       const keyArr = newMetafields.map((obj: any) => obj.key)
 
