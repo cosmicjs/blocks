@@ -32,21 +32,21 @@ const Header: React.FC = () => {
           </div>
         </div>
         <ThemedImage
-          darkSrc="/assets/header/blocks-dark.png"
-          lightSrc="/assets/header/blocks-light.png"
+          darkSrc="https://imgix.cosmicjs.com/b8597df0-9419-11ee-b62d-5b90a0a1bade-blocks-dark.png?w=1920&h=1080"
+          lightSrc="https://imgix.cosmicjs.com/b8a0e730-9419-11ee-b62d-5b90a0a1bade-blocks-light.png?w=1920&h=1080"
           alt="blocks illustration"
           className="absolute -left-2 top-4 z-20 scale-[2] sm:left-auto sm:scale-100 md:-top-24 lg:relative lg:-right-[96px] lg:top-32 lg:w-[50%] lg:scale-[1.8] 2xl:-right-[104px]"
         />
       </div>
       <ThemedImage
-        darkSrc="/assets/header/gradient-dark.png"
-        lightSrc="/assets/header/gradient-light.png"
+        darkSrc="https://imgix.cosmicjs.com/b96bff60-9419-11ee-b62d-5b90a0a1bade-gradient-dark.png?w=1200&h=800"
+        lightSrc="https://imgix.cosmicjs.com/b976adc0-9419-11ee-b62d-5b90a0a1bade-gradient-light.png?w=1200&h=800"
         alt="gradient"
         className="absolute -top-40 right-0 z-20 mx-auto hidden w-[60%] lg:block"
       />
       <ThemedImage
-        darkSrc="/assets/header/background-dark.png"
-        lightSrc="/assets/header/background-light.png"
+        darkSrc="https://imgix.cosmicjs.com/b5b93090-9419-11ee-b62d-5b90a0a1bade-background-dark.png?w=1200&h=800"
+        lightSrc="https://imgix.cosmicjs.com/b5cd06b0-9419-11ee-b62d-5b90a0a1bade-background-light.png?w=1200&h=800"
         alt="blocks background"
         className={classNames(
           "absolute inset-0 top-10 z-0 mx-auto w-screen max-w-[1750px] object-cover dark:mix-blend-overlay lg:-top-14 lg:block"

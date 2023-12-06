@@ -16,9 +16,9 @@ export const features = [
     object_types: 1,
     objects: 1,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27b1b620-8de1-11ee-b62d-5b90a0a1bade-Pages-1.png",
+      "https://imgix.cosmicjs.com/fe811d90-9416-11ee-b62d-5b90a0a1bade-Pages-Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/27ac10d0-8de1-11ee-b62d-5b90a0a1bade-Pages.png",
+      "https://imgix.cosmicjs.com/fed3d170-9416-11ee-b62d-5b90a0a1bade-Pages.png",
   },
   {
     key: "blog",
@@ -38,9 +38,9 @@ export const features = [
     object_types: 3,
     objects: 2,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27f46470-8de1-11ee-b62d-5b90a0a1bade-Blog-1.png",
+      "https://imgix.cosmicjs.com/ff0b0e10-9416-11ee-b62d-5b90a0a1bade-Blog-Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/27f045c0-8de1-11ee-b62d-5b90a0a1bade-Blog.png",
+      "https://imgix.cosmicjs.com/ff078ba0-9416-11ee-b62d-5b90a0a1bade-Blog.png",
   },
   {
     key: "comments",
@@ -55,9 +55,9 @@ export const features = [
     object_types: 1,
     objects: 5,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27ce65e0-8de1-11ee-b62d-5b90a0a1bade-Comments-1.png",
+      "https://imgix.cosmicjs.com/fee05490-9416-11ee-b62d-5b90a0a1bade-Comments-Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/27dc96b0-8de1-11ee-b62d-5b90a0a1bade-Comments.png",
+      "https://imgix.cosmicjs.com/fef0a840-9416-11ee-b62d-5b90a0a1bade-Comments.png",
   },
   {
     key: "faqs",
@@ -71,9 +71,9 @@ export const features = [
     preview_link: "/features/faqs",
     metafields: 1,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27de6b70-8de1-11ee-b62d-5b90a0a1bade-FAQs-1.png",
+      "https://imgix.cosmicjs.com/feffea80-9416-11ee-b62d-5b90a0a1bade-FAQs-Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/2793a6d0-8de1-11ee-b62d-5b90a0a1bade-FAQs.png",
+      "https://imgix.cosmicjs.com/fefa6c40-9416-11ee-b62d-5b90a0a1bade-FAQs.png",
   },
   {
     key: "navigation_menus",
@@ -90,9 +90,9 @@ export const features = [
     object_types: 1,
     objects: 2,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27dd8110-8de1-11ee-b62d-5b90a0a1bade-Headers-and-Footers-1.png",
+      "https://imgix.cosmicjs.com/feec1460-9416-11ee-b62d-5b90a0a1bade-HeadersFooters-Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/27cae370-8de1-11ee-b62d-5b90a0a1bade-Headers-and-Footers.png",
+      "https://imgix.cosmicjs.com/fedd4750-9416-11ee-b62d-5b90a0a1bade-HeadersFooters.png",
   },
   {
     key: "products",
@@ -113,9 +113,9 @@ export const features = [
     object_types: 1,
     objects: 4,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27df7ce0-8de1-11ee-b62d-5b90a0a1bade-Products-1.png",
+      "https://imgix.cosmicjs.com/fe8192c0-9416-11ee-b62d-5b90a0a1bade-Shop-Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/27ed3880-8de1-11ee-b62d-5b90a0a1bade-Products.png",
+      "https://cdn.cosmicjs.com/fedcab10-9416-11ee-b62d-5b90a0a1bade-Shop-Light.png",
   },
   {
     key: "image-gallery",
@@ -154,9 +154,9 @@ export const features = [
     preview_link: "/features/seo",
     metafields: 1,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27d87800-8de1-11ee-b62d-5b90a0a1bade-SEO-1.png",
+      "https://imgix.cosmicjs.com/feb94490-9416-11ee-b62d-5b90a0a1bade-SEO-Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/27d7b4b0-8de1-11ee-b62d-5b90a0a1bade-SEO.png",
+      "https://imgix.cosmicjs.com/fed81730-9416-11ee-b62d-5b90a0a1bade-SEO.png",
   },
   {
     key: "global_settings",
@@ -177,9 +177,9 @@ export const features = [
     object_types: 1,
     objects: 1,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27f32bf0-8de1-11ee-b62d-5b90a0a1bade-Socials-1.png",
+      "https://imgix.cosmicjs.com/fef710e0-9416-11ee-b62d-5b90a0a1bade-Socials-Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/27db5e30-8de1-11ee-b62d-5b90a0a1bade-Socials.png",
+      "https://imgix.cosmicjs.com/fe9ac010-9416-11ee-b62d-5b90a0a1bade-Socials.png",
   },
   {
     key: "team",
@@ -194,9 +194,9 @@ export const features = [
     object_types: 1,
     objects: 4,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27f54ed0-8de1-11ee-b62d-5b90a0a1bade-Team-1.png",
+      "https://imgix.cosmicjs.com/ff09ae80-9416-11ee-b62d-5b90a0a1bade-Team-Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/27e04030-8de1-11ee-b62d-5b90a0a1bade-Team.png",
+      "https://imgix.cosmicjs.com/feff7550-9416-11ee-b62d-5b90a0a1bade-Team.png",
   },
   {
     key: "testimonials",
@@ -211,8 +211,8 @@ export const features = [
     object_types: 1,
     objects: 4,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27dbd360-8de1-11ee-b62d-5b90a0a1bade-Testimonials-1.png",
+      "https://imgix.cosmicjs.com/fedf9140-9416-11ee-b62d-5b90a0a1bade-Testimonials-Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/27df07b0-8de1-11ee-b62d-5b90a0a1bade-Testimonials.png",
+      "https://imgix.cosmicjs.com/feddbc80-9416-11ee-b62d-5b90a0a1bade-Testimonials.png",
   },
 ]
