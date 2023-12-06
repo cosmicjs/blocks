@@ -30,6 +30,7 @@ type EventType = {
   slug: string
   metadata: {
     description: string
+    location: string
     start_date: string
     start_time: string
     end_date: string
@@ -57,13 +58,25 @@ function Event({ event }: { event: EventType }) {
           dangerouslySetInnerHTML={{ __html: event.metadata.description }}
         />
         <div className="absolute bottom-4 font-medium">
-          <div className="text-slate-700 dark:text-slate-300">
-            Starts {new Date(event.metadata.start_date).toLocaleDateString()},{" "}
-            {event.metadata.start_time}
+          <div className="mb-2 text-slate-700 dark:text-slate-300">
+            📆{" "}
+            {new Date(event.metadata.start_date).toLocaleDateString("en-us", {
+              weekday: "short",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}{" "}
+            {event.metadata.start_time} -{" "}
+            {new Date(event.metadata.end_date).toLocaleDateString("en-us", {
+              weekday: "short",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}{" "}
+            {event.metadata.end_time}
           </div>
           <div className="text-slate-700 dark:text-slate-300">
-            Ends {new Date(event.metadata.end_date).toLocaleDateString()},{" "}
-            {event.metadata.end_time}
+            📍 Location: {event.metadata.location}
           </div>
         </div>
       </div>
