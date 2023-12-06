@@ -71,66 +71,66 @@ async function Preview() {
 function Code() {
   const componentCodeString = dedent`
       \`\`\`jsx
-      // components/faqs.tsx
-      import {
-        Accordion,
-        AccordionContent,
-        AccordionItem,
-        AccordionTrigger,
-      } from "@/components/ui/accordion";
-      
-      type FAQ = {
-        question: string;
-        answer: string;
-      };
-      
-      export async function FAQs({ faqs }: { faqs: FAQ[] }) {
-        return (
-          <>
-            <h2 className="text-2xl font-semibold mb-4">
-              Frequently Asked Questions
-            </h2>
-            {faqs.map((faq: FAQ) => {
-              return (
-                <Accordion type="single" collapsible key={faq.question}>
-                  <AccordionItem value="item-1">
-                    <AccordionTrigger>{faq.question}</AccordionTrigger>
-                    <AccordionContent>{faq.answer}</AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              );
-            })}
-          </>
-        );
-      }      
+        // components/faqs.tsx
+        import {
+          Accordion,
+          AccordionContent,
+          AccordionItem,
+          AccordionTrigger,
+        } from "@/components/ui/accordion";
+        
+        type FAQ = {
+          question: string;
+          answer: string;
+        };
+        
+        export async function FAQs({ faqs }: { faqs: FAQ[] }) {
+          return (
+            <>
+              <h2 className="text-2xl font-semibold mb-4">
+                Frequently Asked Questions
+              </h2>
+              {faqs.map((faq: FAQ) => {
+                return (
+                  <Accordion type="single" collapsible key={faq.question}>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger>{faq.question}</AccordionTrigger>
+                      <AccordionContent>{faq.answer}</AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                );
+              })}
+            </>
+          );
+        }      
       \`\`\`
       `
   const codeString = dedent`
       \`\`\`jsx
-      // app/page.tsx
-      import { cosmic } from "@/lib/cosmic";
-      import { FAQs } from "@/components/faqs";
-      
-      export default async function Home() {
+        // app/page.tsx
+        import { cosmic } from "@/lib/cosmic";
+        import { FAQs } from "@/components/faqs";
         
-        const { object: page } = await cosmic.objects
-          .findOne({
-            type: "pages",
-            slug: "home",
-          })
-          .props("slug,title,metadata")
-          .depth(1)
-        
-        return (
-          <main className="container">
-            {/* page content above */}
-            {page.metadata.faqs && ( // check if exists
-              <FAQs faqs={page.metadata.faqs} />
-            )}
-            {/* page content below */}
-          </main>
-        );
-      }    
+        export default async function Home() {
+          
+          const { object: page } = await cosmic.objects
+            .findOne({
+              type: "pages",
+              slug: "home",
+            })
+            .props("slug,title,metadata")
+            .depth(1)
+          
+          return (
+            <main className="container">
+              {/* page content above */}
+              {page.metadata.faqs && ( // check if exists
+                <FAQs faqs={page.metadata.faqs} />
+              )}
+              {/* page content below */}
+            </main>
+          );
+        }    
       \`\`\`
       `
 
