@@ -37,6 +37,10 @@ export async function getSEOMetafields() {
   return await getMetafieldsFromObjectType("seo-fields")
 }
 
+export async function getImageGalleryMetafields() {
+  return await getMetafieldsFromObjectType("image-galleries")
+}
+
 export async function getFAQMetafields() {
   return await getMetafieldsFromObjectType("faqs")
 }
