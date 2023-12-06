@@ -1,18 +1,18 @@
 // components/product-card.tsx
-import Link from "next/link"
+import Link from 'next/link';
 
 export type ProductType = {
-  id: string
-  title: string
-  slug: string
+  id: string;
+  title: string;
+  slug: string;
   metadata: {
     image: {
-      imgix_url: string
-    }
-    description: string
-    price: number
-  }
-}
+      imgix_url: string;
+    };
+    description: string;
+    price: number;
+  };
+};
 
 export function ProductCard({ product }: { product: ProductType }) {
   return (
@@ -32,9 +32,9 @@ export function ProductCard({ product }: { product: ProductType }) {
           </h3>
         </div>
         <p className="text-sm font-medium text-gray-900 dark:text-white">
-          ${product.metadata.price.toLocaleString("en-US")}
+          ${product.metadata.price.toLocaleString('en-US')}
         </p>
       </div>
     </div>
-  )
+  );
 }

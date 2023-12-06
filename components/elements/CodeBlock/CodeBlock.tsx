@@ -49,7 +49,7 @@ const CodeBlock = ({
       {!inline ? (
         <div className="relative">
           {showCopy && (
-            <div className="absolute right-2 top-2 z-10">
+            <div className="absolute right-2 top-1 z-10">
               <CopyButton text={data} className="!bg-gray-800" iconOnly />
             </div>
           )}

@@ -1,4 +1,6 @@
+import BigHeading from "@/components/BigHeading"
 import { Features } from "@/components/features"
+import Header from "@/components/layouts/Header"
 
 export default async function IndexPage({
   searchParams,
@@ -18,31 +20,19 @@ export default async function IndexPage({
 
   return (
     <>
-      <section className="container grid items-center gap-6 p-4 pb-8 pt-6 md:py-10 lg:w-[980px]">
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          🏗 Cosmic Blocks
-        </h1>
-        <p>
-          Use Cosmic Blocks to install specific features to your
-          Cosmic Project. Save development time and learn content modeling best
-          practices. Extend the features to suit your needs.
-        </p>
-        <div>
-          <span className="font-bold">How to use</span>
-          <br />
-          To use these feature templates:
-          <ol className="list-decimal pl-8">
-            <li>
-              Click &quot;Install&quot; to install the template Object type to
-              your Bucket, then
-            </li>
-            <li>
-              Click &quot;Code&quot; to follow the steps to copy / paste the
-              code to your website codebase.
-            </li>
-          </ol>
+      <section className="grid items-center gap-6 p-4 pb-8 pt-6 md:py-10">
+        <Header />
+        <div className="container relative z-30 mx-auto">
+          <BigHeading
+            scrollId="features"
+            subheading="Get Started"
+            heading="Build Your Project, Block by Block"
+            description="Install the content model into your Bucket in a single click, 
+then copy & paste the code into your website codebase."
+            className="mb-12 mt-10 md:my-20 xl:mt-0"
+          />
+          <Features targetBucket={targetBucket} />
         </div>
-        <Features targetBucket={targetBucket} />
       </section>
     </>
   )

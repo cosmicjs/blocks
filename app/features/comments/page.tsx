@@ -5,8 +5,7 @@ import { User } from "lucide-react"
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { BucketAPILink } from "@/components/bucket-api-link"
 import { CommentForm } from "@/components/comment-form"
-import { Markdown } from "@/components/elements/Markdown/Markdown"
-import { SiteHeader } from "@/components/site-header"
+import CodeSteps from "@/components/layouts/CodeSteps"
 
 export default async function Testimonials({
   searchParams,
@@ -18,6 +17,47 @@ export default async function Testimonials({
   let tab = searchParams.tab
   if (!tab) tab = "preview"
 
+  return (
+    <>
+      <section className="container m-auto grid max-w-[800px] items-center pb-8">
+        {tab === "preview" ? <Preview /> : <Code />}
+      </section>
+    </>
+  )
+}
+type Comment = {
+  title: string
+  slug: string
+  metadata: {
+    comment: string
+  }
+  created_at: string
+}
+
+function Comment({ comment }: { comment: Comment }) {
+  return (
+    <div className="mb-6 flex rounded-xl border p-4 pb-6">
+      <div className="mr-2 pt-[2px] text-gray-500 dark:text-gray-200">
+        <User className="h-6 w-6" />
+      </div>
+      <div>
+        <div className="mb-2 text-lg">{comment.title}</div>
+        <div className="mb-4 text-xs">
+          {new Date(comment.created_at).toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+          })}
+        </div>
+        <div className="pr-6">{comment.metadata.comment}</div>
+      </div>
+    </div>
+  )
+}
+
+async function Preview() {
   const cosmic = cosmicSourceBucketConfig
   const { objects: comments } = await cosmic.objects
     .find({
@@ -27,51 +67,20 @@ export default async function Testimonials({
     .props("title,slug,metadata,created_at")
     .depth(1)
     .sort("created_at")
-  type Comment = {
-    title: string
-    slug: string
-    metadata: {
-      comment: string
-    }
-    created_at: string
-  }
 
-  function Comment({ comment }: { comment: Comment }) {
-    return (
-      <div className="mb-6 flex rounded-xl border p-4 pb-6">
-        <div className="mr-2 pt-[2px] text-gray-500 dark:text-gray-200">
-          <User className="h-6 w-6" />
-        </div>
-        <div>
-          <div className="mb-2 text-lg">{comment.title}</div>
-          <div className="mb-4 text-xs">
-            {new Date(comment.created_at).toLocaleDateString("en-us", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "numeric",
-              minute: "numeric",
-            })}
-          </div>
-          <div className="pr-6">{comment.metadata.comment}</div>
-        </div>
-      </div>
-    )
-  }
-  function Preview() {
-    return (
-      <div className="py-10">
-        <h2 className="mb-4 text-2xl">Comments</h2>
-        {comments.map((comment: Comment) => {
-          return <Comment comment={comment} key={comment.slug} />
-        })}
-        <CommentForm />
-      </div>
-    )
-  }
-  function Code() {
-    const commentsFormCodeString = dedent`
-    \`\`\`jsx
+  return (
+    <div className="py-10">
+      <h2 className="mb-4 text-2xl">Comments</h2>
+      {comments.map((comment: Comment) => {
+        return <Comment comment={comment} key={comment.slug} />
+      })}
+      <CommentForm />
+    </div>
+  )
+}
+function Code() {
+  const commentsFormCodeString = dedent`
+  \`\`\`jsx
     // components/comment-form.tsx
     "use client"
 
@@ -202,11 +211,10 @@ export default async function Testimonials({
         </div>
       )
     }
-
-    \`\`\`
-    `
-    const commentsCodeString = dedent`
-      \`\`\`jsx
+  \`\`\`
+  `
+  const commentsCodeString = dedent`
+    \`\`\`jsx
       // components/comments.tsx
       import { User } from "lucide-react";
       import { cosmic } from "@/lib/cosmic";
@@ -269,11 +277,11 @@ export default async function Testimonials({
           </>
         );
       }
-      \`\`\`
-      `
+    \`\`\`
+    `
 
-    const commentsAPICodeString = dedent`
-      \`\`\`ts
+  const commentsAPICodeString = dedent`
+    \`\`\`ts
       // app/api/comments/route.ts
       import { type NextRequest } from "next/server";
       import { cosmic } from "@/lib/cosmic";
@@ -283,155 +291,78 @@ export default async function Testimonials({
         const data = await cosmic.objects.insertOne(res.comment);
         return Response.json(data);
       }
+    \`\`\`
+    `
+
+  const steps = [
+    {
+      title: "Create a new file located at `lib/cosmic.ts` with the following",
+      description: (
+        <div className="py-2">
+          Note: You will need to swap `BUCKET_SLUG`, `BUCKET_READ_KEY`, and
+          `BUCKET_WRITE_KEY` with your Bucket API keys found in{" "}
+          <BucketAPILink />. Be careful not to expose your write key to any
+          client-side code.
+        </div>
+      ),
+      code: dedent(`\`\`\`ts
+      // lib/cosmic.ts
+      import { createBucketClient } from "@cosmicjs/sdk";
+      export const cosmic = createBucketClient({
+        bucketSlug: "BUCKET_SLUG",
+        readKey: "BUCKET_READ_KEY",
+        writeKey: "BUCKET_WRITE_KEY",
+      });
       \`\`\`
-      `
-    return (
-      <div className="pt-6">
-        <div className="mb-6">
-          The following code example uses Next.js, Tailwind CSS, Shad CN UI, and
-          the Cosmic JavaScript SDK. Feel free to skip any steps that have
-          already been completed.
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 1. Install a new Next.js project
-          </h3>
-          <div className="py-2">
-            Note: Be sure to include TypeScript and Tailwind CSS in the
-            installation options.
-          </div>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bunx create-next-app@latest cosmic-app
-            \`\`\`
-          `)}
-          </Markdown>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            cd cosmic-app
-            \`\`\`
-          `)}
-          </Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 2. Add the Cosmic JavaScript SDK and the Shad CN UI packages.
-          </h3>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bun add @cosmicjs/sdk
-            \`\`\`
-          `)}
-          </Markdown>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bunx shadcn-ui@latest init
-            \`\`\`
-          `)}
-          </Markdown>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bunx shadcn-ui@latest add button input label textarea
-            \`\`\`
-          `)}
-          </Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 3. Create a new file located at `lib/cosmic.ts` with the
-            following
-          </h3>
-          <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG`, `BUCKET_READ_KEY`, and
-            `BUCKET_WRITE_KEY` with your Bucket API keys found in{" "}
-            <BucketAPILink />. Be careful not to expose your write key to any
-            client-side code.
-          </div>
-          <Markdown>
-            {dedent(`\`\`\`ts
-            // lib/cosmic.ts
-            import { createBucketClient } from "@cosmicjs/sdk";
-            export const cosmic = createBucketClient({
-              bucketSlug: "BUCKET_SLUG",
-              readKey: "BUCKET_READ_KEY",
-              writeKey: "BUCKET_WRITE_KEY",
-            });
-            \`\`\`
-            `)}
-          </Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 4. Create a new file at `components/comment-form.tsx` with the
-            following
-          </h3>
-          <Markdown>{commentsFormCodeString}</Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 5. Create a new file at `components/comments.tsx` with the
-            following
-          </h3>
-          <Markdown>{commentsCodeString}</Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 6. Create a new file at `app/api/comments/route.ts` with the
-            following
-          </h3>
-          <Markdown>{commentsAPICodeString}</Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 7. Add the following to any page that needs comments and pass
-            the Object id to connect to this specific resource. For example at a
-            specific blog page `app/blog/[slug]/page.tsx`
-          </h3>
-          <Markdown>
-            {dedent(`\`\`\`jsx
-            // app/blog/[slug]/page.tsx
-            import { Comments } from "@/components/comments";
-            
-            export default function BlogPost() {
-              return (
-                <main className="container">
-                  {/* page content above */}
-                  <Comments resourceId={blog.id} />
-                  {/* page content below */}
-                </main>
-              );
-            }
-            \`\`\`
-          `)}
-          </Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">Step 8. Run your app</h3>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bun dev
-            \`\`\`
-          `)}
-          </Markdown>
-        </div>
-        <div className="mb-6">
-          <h3 className="text-2xl font-semibold">
-            Step 9. Go to http://localhost:3000 and any page where this comments
-            feature has been added. It should look like this:
-          </h3>
-        </div>
-        <div className="mb-6">
-          <Preview />
-        </div>
-      </div>
-    )
-  }
+      `),
+    },
+    {
+      title:
+        "Create a new file at `components/comment-form.tsx` with the following",
+      code: commentsFormCodeString,
+    },
+    {
+      title:
+        "Create a new file at `components/comments.tsx` with the following",
+      code: commentsCodeString,
+    },
+    {
+      title:
+        "Create a new file at `app/api/comments/route.ts` with the following",
+      code: commentsAPICodeString,
+    },
+    {
+      title:
+        "Add the following to any page that needs comments and pass the Object id to connect to this specific resource. For example at a specific blog page `app/blog/[slug]/page.tsx`",
+      code: dedent(`\`\`\`jsx
+        // app/blog/[slug]/page.tsx
+        import { Comments } from "@/components/comments";
+        
+        export default function BlogPost() {
+          return (
+            <main className="container">
+              {/* page content above */}
+              <Comments resourceId={blog.id} />
+              {/* page content below */}
+            </main>
+          );
+        }
+      \`\`\`
+    `),
+    },
+  ]
+
   return (
     <>
-      <SiteHeader tab={tab} featureKey="comments" />
-      <section className="max-w-2000 container m-auto grid items-center pb-8">
-        {tab === "preview" ? <Preview /> : <Code />}
-      </section>
+      <CodeSteps
+        step2={[
+          "bun add @cosmicjs/sdk",
+          "npx shadcn-ui@latest init",
+          "npx shadcn-ui@latest add button input label textarea",
+        ]}
+        steps={steps}
+        preview={<Preview />}
+      />
     </>
   )
 }

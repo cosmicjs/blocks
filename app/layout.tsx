@@ -6,7 +6,11 @@ import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
-import { ThemeProvider } from "@/components/theme-provider"
+import Navbar from "@/components/layouts/Navbar"
+import NextTopLoader from "nextjs-toploader"
+import Footer from "@/components/layouts/Footer"
+import ThemeProvider from "@/components/layouts/Providers"
+import Providers from "@/components/layouts/Providers"
 
 export const metadata: Metadata = {
   title: {
@@ -40,13 +44,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <NextTopLoader speed={400} />
+          <Providers>
             <div className="relative flex min-h-screen flex-col">
-              <div className="max-w-[1000px] flex-1">{children}</div>
+              <Navbar />
+              <div className="mx-auto flex w-screen grow flex-col items-center justify-center overflow-x-hidden">
+                {children}
+              </div>
+              <Footer />
             </div>
             <TailwindIndicator />
             <Toaster />
-          </ThemeProvider>
+          </Providers>
         </body>
       </html>
     </>

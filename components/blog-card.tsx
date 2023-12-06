@@ -5,6 +5,7 @@ export type PostType = {
   title: string
   slug: string
   metadata: {
+    categories: any
     image: {
       imgix_url: string
     }

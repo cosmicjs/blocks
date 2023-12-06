@@ -1,8 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 
-import { cn } from "@/lib/utils"
+import { cn, pluralize } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
+import {
+  ArrowDownOnSquareIcon,
+  CodeBracketIcon,
+  EyeIcon,
+} from "@heroicons/react/24/solid"
+import { useRouter } from "next/navigation"
+import { ThemedImage } from "./elements/ThemedImage/ThemedImage"
 
 type Feature = {
   key: string
@@ -13,7 +20,11 @@ type Feature = {
   field_list: string[]
   preview_link?: string
   confirmation?: string
-  screenshot?: string
+  dark_thumbnail?: string
+  light_thumbnail?: string
+  object_types?: number
+  objects?: number
+  metafields?: number
 }
 
 export function FeatureCard({
@@ -21,74 +32,85 @@ export function FeatureCard({
   handleInstallClick,
 }: {
   feature: Feature
-  handleInstallClick: any
+  handleInstallClick?: any
 }) {
+  const router = useRouter()
+
+  if (!feature?.preview_link) return null
+
   return (
-    <div className="mb-10 grid rounded-xl border p-6 md:grid-cols-2">
-      <div className="mb-4">
-        <h2 className="mb-4 text-2xl font-semibold">
-          {`${feature.emoji} ${feature.title}`}
-        </h2>
-        <div className="mb-4 pr-4">
-          <p className="text-lg text-gray-800 dark:text-dark-gray-800">
-            {feature.description}
-          </p>
-        </div>
-        <div className="mb-6">
-          <ol className="list-decimal pl-8">
-            {feature.field_list.map((item: string) => {
-              return <li key={item}>{item}</li>
-            })}
-          </ol>
-        </div>
-        <div className="flex">
-          <Button
-            variant="secondary"
-            onClick={() => handleInstallClick(feature.key)}
-          >
-            Install
-          </Button>
-          {feature.preview_link && feature.preview_link && (
-            <>
-              <Link
-                href={`${feature.preview_link}?tab=preview`}
-                rel="noreferrer"
-                className={cn(
-                  "ml-2",
-                  buttonVariants({
-                    variant: "secondary",
-                  })
-                )}
-              >
-                Preview
-              </Link>
-              <Link
-                href={`${feature.preview_link}?tab=code`}
-                rel="noreferrer"
-                className={cn(
-                  "ml-2",
-                  buttonVariants({
-                    variant: "secondary",
-                  })
-                )}
-              >
-                Code
-              </Link>
-            </>
-          )}
-        </div>
-      </div>
-      <div>
-        {feature.preview_link && feature.screenshot && (
-          <Link href={feature.preview_link}>
-            <img
-              src={`${feature.screenshot}?w=1200&auto=format,compression`}
-              className="h-full max-h-[400px] w-full rounded-xl object-cover object-top"
-              alt={`Feature preview`}
-            />
-          </Link>
+    <>
+      <div className="pointer-cursor group relative overflow-hidden">
+        {handleInstallClick && (
+          <div className="duration-[50] absolute inset-x-0 bottom-24 z-10 mx-auto flex px-5 opacity-0 transition ease-linear group-hover:opacity-100">
+            <Button
+              className="relative z-20 w-full"
+              onClick={(e) => handleInstallClick(feature.key)}
+              iconRight={<ArrowDownOnSquareIcon className="h-4 w-4" />}
+            >
+              Install
+            </Button>
+            {feature.preview_link && feature.preview_link && (
+              <>
+                <Button
+                  onClick={() =>
+                    router.push(`${feature.preview_link}?tab=preview`)
+                  }
+                  iconRight={<EyeIcon className="h-4 w-4" />}
+                  className={cn(
+                    "ml-2 w-full",
+                    buttonVariants({
+                      variant: "secondary",
+                    })
+                  )}
+                >
+                  Preview
+                </Button>
+                <Button
+                  onClick={() =>
+                    router.push(`${feature.preview_link}?tab=code`)
+                  }
+                  iconRight={<CodeBracketIcon className="h-4 w-4" />}
+                  className={cn(
+                    "ml-2 w-full",
+                    buttonVariants({
+                      variant: "secondary",
+                    })
+                  )}
+                >
+                  Code
+                </Button>
+              </>
+            )}
+          </div>
         )}
+        <Link href={feature?.preview_link}>
+          <div className="grid md:grid-cols-1">
+            <div className="overflow-hidden rounded-3xl">
+              <ThemedImage
+                lightSrc={`${feature?.light_thumbnail}?w=1200&auto=format,compression`}
+                darkSrc={`${feature?.dark_thumbnail}?w=1200&auto=format,compression`}
+                className="h-[250px] w-full rounded-3xl object-cover object-top group-hover:blur-[5px]"
+                alt={`Feature preview`}
+              />
+            </div>
+            <div>
+              <h2 className="mb-1 mt-4 text-2xl font-bold">{feature.title}</h2>
+              <p className="text-dark-gray-600 dark:text-dark-gray-600">
+                {feature?.object_types}{" "}
+                {feature?.object_types &&
+                  `${pluralize("Object type", feature?.object_types)} •`}{" "}
+                {feature?.objects}{" "}
+                {feature?.objects &&
+                  `${pluralize("Object type", feature?.objects)}`}
+                {feature?.metafields}{" "}
+                {feature?.metafields &&
+                  `${pluralize("Metafield", feature?.metafields)}`}
+              </p>
+            </div>
+          </div>
+        </Link>
       </div>
-    </div>
+    </>
   )
 }

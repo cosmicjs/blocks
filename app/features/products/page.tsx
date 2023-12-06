@@ -8,6 +8,8 @@ import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { ImageGallery } from "@/components/image-gallery"
 import { ProductCard, ProductType } from "@/components/product-card"
 import { SiteHeader } from "@/components/site-header"
+import CodeSteps from "@/components/layouts/CodeSteps"
+import classNames from "classnames"
 
 export async function generateMetadata() {
   return {
@@ -19,12 +21,27 @@ export default async function ProductsPage({
   searchParams,
 }: {
   searchParams: {
-    tab?: "preview" | "tab"
+    tab?: "preview" | "code"
   }
 }) {
   let tab = searchParams.tab
   if (!tab) tab = "preview"
 
+  return (
+    <>
+      <section
+        className={classNames("container m-auto grid items-center pb-8", {
+          "max-w-[800px]": tab !== "preview",
+          "max-w-[1200px]": tab === "preview",
+        })}
+      >
+        {tab === "preview" ? <Preview /> : <Code />}
+      </section>
+    </>
+  )
+}
+
+async function Preview() {
   const cosmic = cosmicSourceBucketConfig
   const { objects: products } = await cosmic.objects
     .find({
@@ -33,82 +50,82 @@ export default async function ProductsPage({
     .props("id,slug,title,metadata")
     .depth(1)
 
-  function Preview() {
-    const product = products[0]
-    return (
-      <>
-        <section className="container m-auto grid items-center py-8 px-4">
-          <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2 mb-20">
-            <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-              Shop Page
-            </h1>
-            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-              {products.map((product: ProductType) => {
-                return <ProductCard key={product.id} product={product} />
-              })}
-            </div>
+  const product = products[0]
+  return (
+    <>
+      <section className="container m-auto grid items-center px-4 py-8">
+        <div className="relative m-auto mb-20 flex max-w-[950px] flex-col items-start gap-2">
+          <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+            Shop Page
+          </h1>
+          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            {products.map((product: ProductType) => {
+              return <ProductCard key={product.id} product={product} />
+            })}
           </div>
-          <div className="relative m-auto max-w-[950px]">
-            <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-              Single Product Page
-            </h1>
-            <nav aria-label="Breadcrumb" className="mb-6">
-              <ol role="list" className="flex space-x-2">
-                <li>
-                  <div className="flex items-center">
-                    <span className="mr-2 text-sm font-medium text-gray-900 dark:text-white">
-                      Shop
-                    </span>
-                    <svg
-                      width="16"
-                      height="20"
-                      viewBox="0 0 16 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                      className="h-5 w-4 text-gray-300"
-                    >
-                      <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                    </svg>
-                  </div>
-                </li>
-                <li className="text-sm font-medium text-gray-500 hover:text-gray-600">
-                  {product.title}
-                </li>
-              </ol>
-            </nav>
-            <div className="grid md:grid-cols-2 md:gap-x-8">
-              <div>
-                <ImageGallery items={product.metadata.gallery} />
-              </div>
-              <div>
-                <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-                  {product.title}
-                </h1>
-                <p className="text-3xl tracking-tight text-gray-900 dark:text-white mb-6">
-                  ${product.metadata.price.toLocaleString("en-US")}
-                </p>
-                <div className="mb-8">
-                  <Button type="submit">Add to cart</Button>
+        </div>
+        <div className="relative m-auto max-w-[950px]">
+          <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+            Single Product Page
+          </h1>
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol role="list" className="flex space-x-2">
+              <li>
+                <div className="flex items-center">
+                  <span className="mr-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Shop
+                  </span>
+                  <svg
+                    width="16"
+                    height="20"
+                    viewBox="0 0 16 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                    className="h-5 w-4 text-gray-300"
+                  >
+                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                  </svg>
                 </div>
-                <h2 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
-                  Details
-                </h2>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: product.metadata.description,
-                  }}
-                  className="mb-6 text-sm text-gray-700 dark:text-white"
-                />
+              </li>
+              <li className="text-sm font-medium text-gray-500 hover:text-gray-600">
+                {product.title}
+              </li>
+            </ol>
+          </nav>
+          <div className="grid md:grid-cols-2 md:gap-x-8">
+            <div>
+              <ImageGallery items={product.metadata.gallery} />
+            </div>
+            <div>
+              <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+                {product.title}
+              </h1>
+              <p className="mb-6 text-3xl tracking-tight text-gray-900 dark:text-white">
+                ${product.metadata.price.toLocaleString("en-US")}
+              </p>
+              <div className="mb-8">
+                <Button type="submit">Add to cart</Button>
               </div>
+              <h2 className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Details
+              </h2>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: product.metadata.description,
+                }}
+                className="mb-6 text-sm text-gray-700 dark:text-white"
+              />
             </div>
           </div>
-        </section>
-      </>
-    )
-  }
-  function Code() {
-    const codeString = dedent`
-      \`\`\`jsx
+        </div>
+      </section>
+    </>
+  )
+}
+
+function Code() {
+  const codeString = dedent`
+    \`\`\`jsx
       // app/shop/page.tsx
       import { cosmic } from "@/lib/cosmic";
       import { ProductCard, ProductType } from "@/components/product-card";
@@ -137,10 +154,10 @@ export default async function ProductsPage({
           </>
         );
       }
-      \`\`\`
-      `
-    const codeProductCardString = dedent`
-    \`\`\`jsx
+    \`\`\`
+    `
+  const codeProductCardString = dedent`
+  \`\`\`jsx
     // components/product-card.tsx
     import Link from "next/link";
 
@@ -181,10 +198,10 @@ export default async function ProductsPage({
         </Link>
       );
     }
-    \`\`\`
-    `
-    const codeImageGalleryString = dedent`
-    \`\`\`jsx
+  \`\`\`
+  `
+  const codeImageGalleryString = dedent`
+  \`\`\`jsx
     // components/image-gallery.tsx
     "use client";
 
@@ -234,11 +251,11 @@ export default async function ProductsPage({
         </>
       );
     }
-    \`\`\`
-    `
+  \`\`\`
+  `
 
-    const codeSingleProductString = dedent`
-      \`\`\`jsx
+  const codeSingleProductString = dedent`
+    \`\`\`jsx
       // app/shop/[slug]/page.tsx
       import { cosmic } from "@/lib/cosmic";
       import Link from "next/link";
@@ -311,123 +328,34 @@ export default async function ProductsPage({
           </section>
         );
       }
-      \`\`\`
-      `
-    return (
-      <div className="pt-6">
-        <div className="mb-6">
-          The following code example uses Next.js, Tailwind CSS, and the Cosmic
-          JavaScript SDK. Feel free to skip any steps that have already been
-          completed.
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 1. Install a new Next.js project
-          </h3>
-          <div className="py-2">
-            Note: Be sure to include TypeScript and Tailwind CSS in the
-            installation options.
-          </div>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bunx create-next-app@latest cosmic-app
-            \`\`\`
-          `)}
-          </Markdown>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            cd cosmic-app
-            \`\`\`
-          `)}
-          </Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 2. Add the Cosmic JavaScript SDK the React Markdown packages.
-          </h3>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bun add @cosmicjs/sdk
-            \`\`\`
-          `)}
-          </Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 3. Create a new file located at `lib/cosmic.ts` with the
-            following
-          </h3>
-          <div className="py-2">
-            Note: You will need to swap `BUCKET_SLUG` and `BUCKET_READ_KEY` with
-            your Bucket API keys found in <BucketAPILink />.
-          </div>
-          <Markdown>
-            {dedent(`\`\`\`ts
-            // lib/cosmic.ts
-            import { createBucketClient } from "@cosmicjs/sdk";
-            export const cosmic = createBucketClient({
-              bucketSlug: "BUCKET_SLUG",
-              readKey: "BUCKET_READ_KEY",
-            });
-            \`\`\`
-            `)}
-          </Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 4. Add a new file located at `components/product-card.tsx` with
-            the following
-          </h3>
-          <Markdown>{codeProductCardString}</Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 5. Add a new file located at `app/shop/page.tsx` with the
-            following
-          </h3>
-          <Markdown>{codeString}</Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 6. Add a new file located at `components/image-gallery.tsx`
-            with the following
-          </h3>
-          <Markdown>{codeImageGalleryString}</Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">
-            Step 6. Add a new file located at `app/shop/[slug]/page.tsx` with
-            the following
-          </h3>
-          <Markdown>{codeSingleProductString}</Markdown>
-        </div>
-        <div className="mb-10">
-          <h3 className="text-2xl font-semibold">Step 4. Run your app</h3>
-          <Markdown>
-            {dedent(`\`\`\`bash
-            bun dev
-            \`\`\`
-          `)}
-          </Markdown>
-        </div>
-        <div className="mb-6">
-          <h3 className="text-2xl font-semibold">
-            Step 7. Go to http://localhost:3000/shop to see your shop. It should
-            look like this:
-          </h3>
-        </div>
-        <div className="mb-6">
-          <Preview />
-        </div>
-      </div>
-    )
-  }
+    \`\`\`
+    `
+
+  const steps = [
+    {
+      title:
+        "Add a new file located at `components/product-card.tsx` with the following",
+      code: codeProductCardString,
+    },
+    {
+      title: "Add a new file located at `app/shop/page.tsx` with the following",
+      code: codeString,
+    },
+    {
+      title:
+        "Add a new file located at `components/image-gallery.tsx` with the following",
+      code: codeImageGalleryString,
+    },
+    {
+      title:
+        "Add a new file located at `app/shop/[slug]/page.tsx` with the following",
+      code: codeSingleProductString,
+    },
+  ]
+
   return (
     <>
-      <SiteHeader tab={tab} featureKey="products" />
-      <section className="max-w-2000 container m-auto grid items-center pb-8">
-        {tab === "preview" ? <Preview /> : <Code />}
-      </section>
+      <CodeSteps steps={steps} preview={<Preview />} />
     </>
   )
 }

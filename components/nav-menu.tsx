@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import Link from "next/link"
+import Link from 'next/link';
 
 import {
   NavigationMenu,
@@ -8,9 +8,9 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+} from '@/components/ui/navigation-menu';
 
-type Item = { title: string; link: string; open_in_new_tab: boolean }
+type Item = { title: string; link: string; open_in_new_tab: boolean };
 
 export function NavMenu({ items }: { items: Item[] }) {
   return (
@@ -22,15 +22,15 @@ export function NavMenu({ items }: { items: Item[] }) {
               <Link href={item.link} legacyBehavior passHref key={item.title}>
                 <NavigationMenuLink
                   className={navigationMenuTriggerStyle()}
-                  target={item.open_in_new_tab ? "_blank" : ""}
+                  target={item.open_in_new_tab ? '_blank' : ''}
                 >
                   {item.title}
                 </NavigationMenuLink>
               </Link>
-            )
+            );
           })}
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }

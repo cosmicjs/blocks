@@ -2,30 +2,30 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeftIcon } from "@heroicons/react/24/solid"
-
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { InstallDialog } from "@/components/install-dialog"
+import { useSearchParams, usePathname } from "next/navigation"
 
-export function SiteHeader({
-  tab,
-  featureKey,
-}: {
-  tab?: string
-  featureKey: string
-}) {
+export function SiteHeader() {
   const [showModal, setShowModal] = useState<boolean>(false)
+
+  const searchParams = useSearchParams()
+  let tab = searchParams.get("tab")
+
+  const pathname = usePathname()
+  const pageKey = pathname?.split("/")?.[2]
+
+  if (pathname === "/") return null
+
   if (!tab) tab = "preview"
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-light-background dark:bg-dark-background">
-      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-        <Link href="/" className="flex items-center space-x-4">
-          <ArrowLeftIcon className="mr-4 h-4 w-4" /> Back
-        </Link>
-        <div className="flex flex-1 justify-center text-center">
+    <header className="absolute inset-0 top-[60px] z-40 mx-auto w-full max-w-[53%] lg:sticky lg:inset-auto lg:top-0 lg:mx-0">
+      <div className="container flex h-16 items-center justify-center sm:space-x-0 lg:flex-row lg:justify-between lg:space-x-4">
+        <div className="relative flex grow justify-center text-center lg:left-[-128px] lg:flex-1">
           <div
-            className="flex rounded-lg bg-gray-100 p-[2px] dark:bg-dark-gray-100"
+            className="flex rounded-lg bg-gray-100 p-[2px] text-xs dark:bg-dark-gray-100 lg:text-base"
             role="tablist"
           >
             <Link
@@ -55,12 +55,15 @@ export function SiteHeader({
             </Link>
           </div>
         </div>
-        <div>
-          <Button onClick={() => setShowModal(true)}>Install</Button>
-        </div>
+        <Button
+          className="relative z-[10] !h-8 text-xs md:right-0 lg:!h-10 lg:w-[112px] lg:text-base"
+          onClick={() => setShowModal(true)}
+        >
+          Install
+        </Button>
       </div>
       {showModal && (
-        <InstallDialog featureKey={featureKey} setShowModal={setShowModal} />
+        <InstallDialog featureKey={pageKey} setShowModal={setShowModal} />
       )}
     </header>
   )

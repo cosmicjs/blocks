@@ -4,15 +4,15 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "imgix.cosmicjs.com",
+        protocol: 'https',
+        hostname: 'imgix.cosmicjs.com',
       },
       {
-        protocol: "https",
-        hostname: "cdn.cosmicjs.com",
+        protocol: 'https',
+        hostname: 'cdn.cosmicjs.com',
       },
     ],
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

@@ -38,20 +38,45 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  renderAs?: string
+  iconRight?: React.ReactElement
+  href?: string
+  target?: string
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      renderAs = "button",
+      href,
+      target,
+      iconRight,
+      ...props
+    },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : href ? "a" : renderAs
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      />
+        {...(Comp === "a" ? { href, target } : {})}
+      >
+        {props.children}
+        {iconRight && (
+          <span className="relative -top-px ml-1">{iconRight}</span>
+        )}
+      </Comp>
     )
   }
 )
+
 Button.displayName = "Button"
 
 export { Button, buttonVariants }
