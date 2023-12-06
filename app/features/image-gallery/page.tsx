@@ -12,7 +12,7 @@ export async function generateMetadata() {
   }
 }
 
-export default async function ImageGallery({
+export default async function ImageGalleryPage({
   searchParams,
 }: {
   searchParams: {
