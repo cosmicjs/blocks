@@ -6,7 +6,7 @@ import { DEMO_URL, WEBSITE_URL } from "@/constants"
 
 const Header: React.FC = () => {
   return (
-    <div className="dark:dark-header-image light-header-image container mx-auto px-5 lg:h-[631px]">
+    <div className="dark:dark-header-image min-w-screen light-header-image container mx-auto px-5 lg:h-[631px]">
       <div className="relative flex w-full flex-col-reverse items-center lg:flex-row">
         <div className="lg:w-[50%]">
           <h1 className="header-gradient relative z-10 mb-4 mt-56 text-center text-5xl font-[900] text-transparent md:mt-72 lg:mt-28 lg:text-left lg:text-8xl">

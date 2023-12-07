@@ -26,7 +26,7 @@ export const features = [
     type: "object_type",
     slug: "blog-posts",
     emoji: "📝",
-    description: `Adds a Blog Posts Object type to your Project. Blo, which includes`,
+    description: `Adds a Blog Posts Object type to your Project, which includes`,
     field_list: [
       "Hero image",
       "Content in Markdown",
@@ -124,10 +124,7 @@ export const features = [
     slug: "image-gallery",
     emoji: "🏞",
     description: `Adds an image gallery to any existing Object type, which includes`,
-    field_list: [
-      "Image",
-      "Description"
-    ],
+    field_list: ["Image", "Description"],
     confirmation: `This will add a new Metafield with key \`image_gallery\` to the selected Object types.`,
     preview_link: "/features/image-gallery",
     metafields: 1,

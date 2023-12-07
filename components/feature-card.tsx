@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/solid"
 import { useRouter } from "next/navigation"
 import { ThemedImage } from "./elements/ThemedImage/ThemedImage"
+import FeatureStats from "./FeatureStats"
 
 type Feature = {
   key: string
@@ -96,17 +97,11 @@ export function FeatureCard({
             </div>
             <div>
               <h2 className="mb-1 mt-4 text-2xl font-bold">{feature.title}</h2>
-              <p className="text-dark-gray-600 dark:text-dark-gray-600">
-                {feature?.object_types}{" "}
-                {feature?.object_types &&
-                  `${pluralize("Object type", feature?.object_types)} •`}{" "}
-                {feature?.objects}{" "}
-                {feature?.objects &&
-                  `${pluralize("Object type", feature?.objects)}`}
-                {feature?.metafields}{" "}
-                {feature?.metafields &&
-                  `${pluralize("Metafield", feature?.metafields)}`}
-              </p>
+              <FeatureStats
+                objectTypes={feature?.object_types}
+                objects={feature?.objects}
+                metafields={feature?.metafields}
+              />
             </div>
           </div>
         </Link>

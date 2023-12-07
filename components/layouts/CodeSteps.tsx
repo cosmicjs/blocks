@@ -20,6 +20,7 @@ type CodeStepsProps = {
   step2?: string[]
   steps: StepProps[]
   scratch?: boolean
+  writeKey?: boolean
 }
 
 const managers = {
@@ -114,6 +115,7 @@ function CodeSteps(props: CodeStepsProps) {
     preview,
     step1 = ["npx create-next-app@latest cosmic-app", "cd cosmic-app"],
     step2 = ["bun add @cosmicjs/sdk"],
+    writeKey,
     steps,
     scratch = false,
     title,
@@ -126,7 +128,7 @@ function CodeSteps(props: CodeStepsProps) {
 
   const [step1WithPm, setStep1WithPm] = useState<string[]>(step1)
   const [step2WithPm, setStep2WithPm] = useState<string[]>(step2)
-  const [step3WithPm, setStep3WithPm] = useState<string>(
+  const [runStep, setRunStep] = useState<string>(
     dedent(`\`\`\`bash
     ${managers[pm || "bun"]["run"]} dev
     \`\`\`
@@ -148,7 +150,7 @@ function CodeSteps(props: CodeStepsProps) {
 
       setStep1WithPm(step1Updated)
       setStep2WithPm(step2Updated)
-      setStep3WithPm(step3Updated)
+      setRunStep(step3Updated)
     }
 
     replaceSteps()
@@ -227,7 +229,13 @@ function CodeSteps(props: CodeStepsProps) {
             export const cosmic = createBucketClient({
               bucketSlug: "BUCKET_SLUG",
               readKey: "BUCKET_READ_KEY",
-            });
+              ${
+                writeKey
+                  ? `writeKey: BUCKET_WRITE_KEY
+            });`
+                  : "});"
+              }
+            
             \`\`\`
             `)}
             </Markdown>
@@ -253,7 +261,7 @@ function CodeSteps(props: CodeStepsProps) {
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">Run the app</h3>
             </div>
-            <Markdown>{step3WithPm}</Markdown>
+            <Markdown>{runStep}</Markdown>
           </div>
           <div className="relative mb-10">
             <div className="relative flex">

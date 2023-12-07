@@ -86,7 +86,7 @@ export const Markdown = (props: ReactMarkdownOptions) => {
     <ReactMarkdown
       components={components}
       remarkPlugins={[remarkGfm, remarkSlug]}
-      className={`markdown text-gray-900 dark:text-dark-gray-700 ${className}`}
+      className={`markdown min-w-[260px] text-gray-900 dark:text-dark-gray-700 ${className}`}
       {...restProps}
     />
   )
