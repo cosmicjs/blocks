@@ -170,12 +170,11 @@ function Code({ manager }: { manager: PackageManagers }) {
 
   const steps = [
     {
-      title:
-        "Create a new file at `components/testimonials.tsx` with the following",
+      title: "Create a new file at `components/events.tsx` with the following",
       code: step4code,
     },
     {
-      title: "Add the following to any page that needs testimonials.",
+      title: "Add the following to any page that needs events.",
       code: dedent(`\`\`\`jsx
             // app/page.tsx
             import { Events } from "@/components/events";
