@@ -46,7 +46,7 @@ export default function FeaturesMenu() {
                         onClick={() => close()}
                       >
                         <div className="flex h-10 w-5 shrink-0 items-center justify-center text-white sm:h-9 sm:w-6">
-                          {item.emoji}
+                          {item.icon}
                         </div>
                         <div className="ml-2">
                           <p className="text-sm font-medium text-gray-900 dark:text-dark-gray-900">

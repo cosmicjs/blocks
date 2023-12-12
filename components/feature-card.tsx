@@ -11,7 +11,7 @@ import { Code2Icon, DownloadIcon, EyeIcon } from "lucide-react"
 type Feature = {
   key: string
   title: string
-  emoji: string
+  icon: React.ReactNode
   type: string
   description: string
   field_list: string[]
