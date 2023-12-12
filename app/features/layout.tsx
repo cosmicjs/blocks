@@ -1,7 +1,6 @@
 "use client"
 
 import SelectMenu from "@/components/elements/SelectMenu/SelectMenu"
-import { ArrowLeftIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback } from "react"
@@ -9,6 +8,7 @@ import { Features } from "@/components/features"
 import { features } from "@/config/features"
 import classNames from "classnames"
 import FeatureStats from "@/components/FeatureStats"
+import { ArrowLeftIcon } from "lucide-react"
 
 const options = [
   { title: "bun", value: "bun" },

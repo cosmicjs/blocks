@@ -11,6 +11,7 @@ import NextTopLoader from "nextjs-toploader"
 import Footer from "@/components/layouts/Footer"
 import ThemeProvider from "@/components/layouts/Providers"
 import Providers from "@/components/layouts/Providers"
+// import Providers from "@/components/layouts/Providers"
 
 export const metadata: Metadata = {
   title: {
@@ -36,7 +37,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en">
         <head />
         <body
           className={cn(

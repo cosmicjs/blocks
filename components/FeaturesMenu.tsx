@@ -1,6 +1,6 @@
 import { features } from "@/config/features"
 import { Popover, Transition } from "@headlessui/react"
-import { ChevronDownIcon } from "@heroicons/react/20/solid"
+import { ChevronDownIcon } from "lucide-react"
 import Link from "next/link"
 import { Fragment } from "react"
 

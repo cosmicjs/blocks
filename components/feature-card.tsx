@@ -1,16 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 
-import { cn, pluralize } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
-import {
-  ArrowDownOnSquareIcon,
-  CodeBracketIcon,
-  EyeIcon,
-} from "@heroicons/react/24/solid"
 import { useRouter } from "next/navigation"
 import { ThemedImage } from "./elements/ThemedImage/ThemedImage"
 import FeatureStats from "./FeatureStats"
+import { Code2Icon, DownloadIcon, EyeIcon } from "lucide-react"
 
 type Feature = {
   key: string
@@ -47,7 +43,7 @@ export function FeatureCard({
             <Button
               className="relative z-20 w-full"
               onClick={(e) => handleInstallClick(feature.key)}
-              iconRight={<ArrowDownOnSquareIcon className="h-4 w-4" />}
+              iconRight={<DownloadIcon className="h-4 w-4" />}
             >
               Install
             </Button>
@@ -71,7 +67,7 @@ export function FeatureCard({
                   onClick={() =>
                     router.push(`${feature.preview_link}?tab=code`)
                   }
-                  iconRight={<CodeBracketIcon className="h-4 w-4" />}
+                  iconRight={<Code2Icon className="h-4 w-4" />}
                   className={cn(
                     "ml-2 w-full",
                     buttonVariants({

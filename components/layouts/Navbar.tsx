@@ -3,12 +3,12 @@
 import React from "react"
 import ThemeSwitch from "../elements/ThemeSwitch/ThemeSwitch"
 import { Button } from "../ui/button"
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
 import { SiteHeader } from "../site-header"
 import Link from "next/link"
 import FeaturesMenu from "../FeaturesMenu"
 import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
 import { DOCS_URL } from "@/constants"
+import { ExternalLinkIcon } from "lucide-react"
 
 const Navbar: React.FC = () => {
   return (
@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
             target="_blank"
             variant={"ghost"}
             className="mr-2 whitespace-nowrap text-cosmic-blue"
-            iconRight={<ArrowTopRightOnSquareIcon className="h-4 w-4" />}
+            iconRight={<ExternalLinkIcon className="h-4 w-4" />}
           >
             Cosmic Docs
           </Button>
