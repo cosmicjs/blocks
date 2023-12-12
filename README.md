@@ -1,23 +1,29 @@
 # Cosmic Blocks
 
-Use Cosmic Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
+Beautifully designed, data-infused components to help you build Cosmic-powered web applications faster. Use Cosmic Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
 
 ## Blocks include:
 
-- Blog
 - Pages
+- Blog
 - FAQs
 - Testimonials
 - Navigation
-- Reviews
+- Comments
+- Image gallery
+- and more!
 
 ## Built with:
 
-- Next.js 13 App Directory
-- Radix UI Primitives
+- React Server Components
+- Next.js
 - Tailwind CSS
+
+## Features
+
+- Type safe
+- Accessible
 - Dark mode ready
-- Tailwind CSS class sorting, merging and linting
 
 ## Contributing
 
