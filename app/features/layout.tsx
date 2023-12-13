@@ -107,7 +107,7 @@ export default function FeatureLayout({
           objects={objects}
           metafields={metafields}
         />
-        <p className="mt-5 max-w-[600px] text-center text-base text-gray-700 dark:text-dark-gray-600">
+        {/* <p className="mt-5 max-w-[600px] text-center text-base text-gray-700 dark:text-dark-gray-600">
           {description}{" "}
           {field_list?.map((field, index) => (
             <span className="mx-[3px]">
@@ -117,7 +117,7 @@ export default function FeatureLayout({
               {index !== field_list.length - 1 && ","}
             </span>
           ))}
-        </p>
+        </p> */}
         <div className="relative">{children}</div>
         <div className="relative">
           <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">
