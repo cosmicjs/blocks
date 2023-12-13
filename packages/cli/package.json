@@ -1,0 +1,12 @@
+{
+    "name": "@cosmicjs/blocks",
+    "version": "1.0.0",
+    "description": "CosmicJS Blocks Setup",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "author": "CosmicJS",
+    "license": "MIT"
+  }
+  
