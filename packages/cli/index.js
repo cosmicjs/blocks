@@ -1,14 +1,19 @@
-const fs = require("fs")
-const path = require("path")
-const { exec } = require("child_process")
+import fs from "fs"
+import path, { dirname } from "path"
+import { Command, program } from "commander"
+import { fileURLToPath } from "url"
 
-const componentName = process.argv[2]
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-function addComponent(component) {
+async function addComponent(component) {
+  console.log("component", component)
   const componentPath = path.join(__dirname, "components", component)
   const componentCommandsPath = path.join(componentPath, "index.js")
   const componentCodePath = path.join(componentPath, "component.tsx")
   const blocksFolderPath = path.join(__dirname, "blocks")
+
+  console.log("componentCommandsPath", componentCommandsPath)
 
   if (!fs.existsSync(blocksFolderPath)) {
     fs.mkdirSync(blocksFolderPath)
@@ -16,9 +21,10 @@ function addComponent(component) {
   }
 
   if (fs.existsSync(componentCommandsPath)) {
-    const commands = require(componentCommandsPath)
+    const commands = await import(componentCommandsPath)
     if (commands && typeof commands.installPackages === "function") {
-      commands.installPackages()
+      // Execute the install command
+      await commands.installPackages()
     }
 
     if (fs.existsSync(componentCodePath)) {
@@ -36,12 +42,15 @@ function addComponent(component) {
       console.error(`Component code (${component}.tsx) not found.`)
     }
   } else {
-    console.error(`Commands file (${component}/commands.js) not found.`)
+    console.error(`Commands file (${component}/index.js) not found.`)
   }
 }
 
-if (componentName) {
-  addComponent(componentName)
-} else {
-  console.error("Please specify a block name.")
-}
+const addCommand = new Command()
+  .name("add")
+  .description("add a block to your project")
+  .argument("<component>", "the component to add")
+  .action((component) => addComponent(component))
+
+program.addCommand(addCommand)
+program.parse()

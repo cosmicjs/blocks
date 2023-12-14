@@ -1,12 +1,17 @@
 {
-    "name": "@cosmicjs/blocks",
-    "version": "1.0.0",
-    "description": "CosmicJS Blocks Setup",
-    "main": "index.js",
-    "scripts": {
-      "start": "node index.js"
-    },
-    "author": "CosmicJS",
-    "license": "MIT"
+  "type": "module",
+  "name": "@cosmicjs/blocks",
+  "version": "1.0.0",
+  "description": "CosmicJS Blocks Setup",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "CosmicJS",
+  "license": "MIT",
+  "dependencies": {
+    "@antfu/ni": "^0.21.12",
+    "commander": "^11.1.0",
+    "execa": "^8.0.1"
   }
-  
+}
