@@ -11,32 +11,59 @@ async function addComponent(component) {
   const componentPath = path.join(__dirname, "components", component)
   const componentCommandsPath = path.join(componentPath, "index.js")
   const componentCodePath = path.join(componentPath, "component.tsx")
-  const blocksFolderPath = path.join(__dirname, "blocks")
-
-  console.log("componentCommandsPath", componentCommandsPath)
-
-  if (!fs.existsSync(blocksFolderPath)) {
-    fs.mkdirSync(blocksFolderPath)
-    console.log("Blocks folder created successfully.")
-  }
 
   if (fs.existsSync(componentCommandsPath)) {
-    const commands = await import(componentCommandsPath)
-    if (commands && typeof commands.installPackages === "function") {
-      // Execute the install command
-      await commands.installPackages()
-    }
+    const { generateBlock } = await import(componentCommandsPath)
 
     if (fs.existsSync(componentCodePath)) {
-      const componentCode = commands.getComponentCode()
+      // Execute the component/block copying steps
+      const componentCode = await generateBlock()
+
+      // Check if cosmic-app folder exists & get the blocksFolderPath
+      const cosmicAppPath = path.join(process.cwd(), "cosmic-app")
+      let blocksFolderPath
+      if (fs.existsSync(cosmicAppPath)) {
+        blocksFolderPath = path.join(cosmicAppPath, "blocks")
+      } else {
+        blocksFolderPath = path.join(process.cwd(), "blocks")
+      }
+
+      // Create blocks folder in the blocksFolderPath
+      if (!fs.existsSync(blocksFolderPath)) {
+        fs.mkdirSync(blocksFolderPath)
+        console.log("-> Blocks folder created successfully.")
+      }
+
+      // Create the block component file
       const componentFilePath = path.join(blocksFolderPath, `${component}.tsx`)
+
+      // Copy the component code to it
       try {
         fs.writeFileSync(componentFilePath, componentCode)
-        console.log(
-          `Component code added to ${component}.tsx in blocks folder.`
-        )
+        console.log(`-> Block file ${component}.tsx added successfully.`)
       } catch (error) {
-        console.error(`Error writing component code to file: ${error}`)
+        console.error(`Error writing block code to file: ${error}`)
+      }
+
+      // Check if cosmic.ts file exists in the blocks folder
+      const cosmicFilePath = path.join(blocksFolderPath, "cosmic.ts")
+      if (!fs.existsSync(cosmicFilePath)) {
+        // If not, copy the cosmic.ts file from the current directory
+        const currentCosmicFilePath = path.join(__dirname, "cosmic.ts")
+        if (fs.existsSync(currentCosmicFilePath)) {
+          try {
+            fs.copyFileSync(currentCosmicFilePath, cosmicFilePath)
+            console.log(
+              "-> cosmic.ts file created successfully. Make sure to add your ENV variables!"
+            )
+          } catch (error) {
+            console.error(`Error copying cosmic.ts file: ${error}`)
+          }
+        } else {
+          console.error(
+            "cosmic.ts file does not exist in the current directory."
+          )
+        }
       }
     } else {
       console.error(`Component code (${component}.tsx) not found.`)
@@ -49,7 +76,7 @@ async function addComponent(component) {
 const addCommand = new Command()
   .name("add")
   .description("add a block to your project")
-  .argument("<component>", "the component to add")
+  .argument("<component>", "the block to add")
   .action((component) => addComponent(component))
 
 program.addCommand(addCommand)
