@@ -2,27 +2,47 @@ import fs from "fs"
 import { execa } from "execa"
 import { getPackageManager } from "./get-package-manager.js"
 import { getCommand } from "@antfu/ni"
+import { execSync } from "child_process"
 import path from "path"
 
-async function blockGenerator(executeArgs, installArgs, componentCodePath) {
+async function blockGenerator({
+  executionSteps,
+  installationSteps,
+  componentCodePath,
+}) {
   const packageManager = await getPackageManager()
 
   try {
     console.log("Installing required packages...")
-
     const executeCommand = getCommand(packageManager, "execute")
-    const installCommand = getCommand(packageManager, "install")
 
-    await execa(executeCommand, executeArgs, {
-      stdio: "inherit",
-    })
+    if (executionSteps) {
+      for (const arg of executionSteps) {
+        execSync(`${executeCommand} ${arg}`, { stdio: "inherit" })
+      }
+    }
 
-    await execa(installCommand, installArgs, {
-      cwd: "cosmic-app",
-      stdio: "inherit",
-    })
+    if (fs.existsSync(path.join("cosmic-app"))) {
+      await execa(
+        packageManager,
+        [packageManager === "npm" ? "install" : "add", ...installationSteps],
+        {
+          cwd: "cosmic-app",
+        }
+      )
+    } else {
+      for (const step of installationSteps) {
+        await execa(
+          packageManager,
+          [packageManager === "npm" ? "install" : "add", step],
+          {
+            cwd: process.cwd(), // current cli directory
+          }
+        )
+      }
+    }
 
-    console.log("Required packages installed successfully.")
+    console.log("Block installed successfully!")
   } catch (error) {
     console.error("Error installing required packages:", error)
   }

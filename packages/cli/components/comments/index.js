@@ -8,8 +8,11 @@ const __dirname = dirname(__filename)
 const componentCodePath = path.join(__dirname, "component.tsx")
 
 // Dynamic
-// const executionSteps = ["shadcn-ui@latest init", "shadcn-ui@latest add button"]
 const installationSteps = ["@cosmicjs/sdk"]
+const executionSteps = [
+  "shadcn-ui@latest init",
+  "shadcn-ui@latest add button input label textarea",
+]
 
 // Generator function, remains same for all blocks
 async function generateBlock() {
@@ -17,7 +20,7 @@ async function generateBlock() {
   try {
     componentCode = await blockGenerator({
       installationSteps,
-      // executionSteps,
+      executionSteps,
       componentCodePath,
     })
     return componentCode

@@ -1,6 +1,9 @@
 {
   "type": "module",
   "name": "@cosmicjs/blocks",
+  "bin": {
+    "@cosmicjs/blocks": "./index.js"
+  },
   "version": "1.0.0",
   "description": "CosmicJS Blocks Setup",
   "main": "index.js",
@@ -11,6 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "@antfu/ni": "^0.21.12",
+    "@cosmicjs/sdk": "^1.0.11",
     "commander": "^11.1.0",
     "execa": "^8.0.1"
   }

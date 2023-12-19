@@ -1,13 +1,18 @@
+#!/usr/bin/env node
+
 import fs from "fs"
 import path, { dirname } from "path"
 import { Command, program } from "commander"
 import { fileURLToPath } from "url"
+import { capitalize } from "./utils/capitalize.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
+const validBlocks = ["gallery", "blog", "page"]
+
 async function addComponent(component) {
-  console.log("component", component)
+  console.log(`Initiating installation of ${capitalize(component)} Block...`)
   const componentPath = path.join(__dirname, "components", component)
   const componentCommandsPath = path.join(componentPath, "index.js")
   const componentCodePath = path.join(componentPath, "component.tsx")
@@ -77,7 +82,15 @@ const addCommand = new Command()
   .name("add")
   .description("add a block to your project")
   .argument("<component>", "the block to add")
-  .action((component) => addComponent(component))
+  .action((component) => {
+    if (!validBlocks.includes(component)) {
+      console.error(
+        `"${component}" is an invalid Block name. Please find a valid list of Blocks on cosmicjs.com/blocks`
+      )
+    } else addComponent(component)
+  })
 
 program.addCommand(addCommand)
 program.parse()
+
+export { addComponent }
