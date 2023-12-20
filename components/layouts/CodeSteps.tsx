@@ -187,58 +187,6 @@ function CodeSteps(props: CodeStepsProps) {
               </Markdown>
             ))}
           </div>
-          <div className="relative mb-10">
-            <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
-            <div className="relative flex">
-              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                2
-              </div>
-              <h3 className="text-lg font-semibold lg:text-2xl">
-                Add the Cosmic JavaScript SDK & required packages
-              </h3>
-            </div>
-            {(step2WithPm || step2)?.map((step) => (
-              <Markdown>
-                {dedent(`\`\`\`bash
-          ${step}
-          \`\`\`
-          `)}
-              </Markdown>
-            ))}
-          </div>
-          <div className="relative mb-10">
-            <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
-            <div className="relative flex">
-              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                3
-              </div>
-              <h3 className="text-lg font-semibold lg:text-2xl">
-                Create a new file located at <Title text="lib/cosmic.ts" /> with
-                the following
-              </h3>
-            </div>
-            <div className="py-2">
-              Note: You will need to swap <Title text={"`BUCKET_SLUG`"} /> and{" "}
-              <Title text="`BUCKET_READ_KEY`" />
-              with your Bucket API keys found in <BucketAPILink />.
-            </div>
-            <Markdown>
-              {dedent(`\`\`\`ts
-            // lib/cosmic.ts
-            import { createBucketClient } from "@cosmicjs/sdk";
-            export const cosmic = createBucketClient({
-              bucketSlug: "BUCKET_SLUG",
-              readKey: "BUCKET_READ_KEY",
-${
-  writeKey
-    ? `writeKey: BUCKET_WRITE_KEY
-            });`
-    : "});"
-}
-            \`\`\`
-            `)}
-            </Markdown>
-          </div>
         </div>
       )}
       {steps.map((step, index) => (

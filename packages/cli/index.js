@@ -10,6 +10,10 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const blocks = {
+  blog: {
+    name: "Blog",
+    installationSteps: ["@cosmicjs/sdk", "react-markdown", "lucide-react"],
+  },
   faqs: {
     name: "FAQs",
     installationSteps: ["@cosmicjs/sdk", "@radix-ui/react-accordion"],
