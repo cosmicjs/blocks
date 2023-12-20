@@ -161,12 +161,27 @@ function Code() {
     \`\`\`
     `
 
+  const envVarsCode = dedent`
+    \`\`\`
+      // .local.env
+      COSMIC_BUCKET_SLUG=change_to_your_bucket_slug
+      COSMIC_READ_KEY=change_to_your_bucket_read_key
+      COSMIC_WRITE_KEY=change_to_your_bucket_write_key
+    \`\`\`
+    `
+
   const steps = [
     {
       title: "Install the Cosmic Blog block",
       code: blockCommand,
       description:
         "This will add the files `blog/BlogCard.tsx` and `blog/SingleBlogPage.tsx` to your blocks folder.",
+    },
+    {
+      title: "Create your ENV vars file",
+      code: envVarsCode,
+      description:
+        "Go to Project / Bucket / Settings / API keys to add your API keys to your project.",
     },
     {
       title: "Create the blog roll page",
