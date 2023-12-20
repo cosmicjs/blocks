@@ -1,5 +1,4 @@
 {
-  "private": false,
   "type": "module",
   "name": "@cosmicjs/blocks",
   "bin": {
@@ -11,8 +10,26 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Cosmic",
+  "author": "Tony Spiro <tony@cosmicjs.com>",
   "license": "MIT",
+  "keywords": [
+    "headlesscms",
+    "cms",
+    "node",
+    "content",
+    "api",
+    "react",
+    "reactjs",
+    "nextjs"
+  ],
+  "homepage": "https://www.cosmicjs.com",
+  "bugs": {
+    "url": "https://github.com/cosmicjs/cosmic-blocks/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmicjs/cosmic-blocks.git"
+  },
   "dependencies": {
     "@antfu/ni": "^0.21.12",
     "@cosmicjs/sdk": "^1.0.11",
