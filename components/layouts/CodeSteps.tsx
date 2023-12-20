@@ -229,13 +229,12 @@ function CodeSteps(props: CodeStepsProps) {
             export const cosmic = createBucketClient({
               bucketSlug: "BUCKET_SLUG",
               readKey: "BUCKET_READ_KEY",
-              ${
-                writeKey
-                  ? `writeKey: BUCKET_WRITE_KEY
+${
+  writeKey
+    ? `writeKey: BUCKET_WRITE_KEY
             });`
-                  : "});"
-              }
-            
+    : "});"
+}
             \`\`\`
             `)}
             </Markdown>

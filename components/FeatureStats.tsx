@@ -16,7 +16,7 @@ const FeatureStats: React.FC<FeatureStatsProps> = ({
     <p className="text-gray-600 dark:text-dark-gray-600">
       {objectTypes}{" "}
       {objectTypes && `${pluralize("Object type", objectTypes)} •`} {objects}{" "}
-      {objects && `${pluralize("Object type", objects)}`}
+      {objects && `${pluralize("Object", objects)}`}
       {metafields} {metafields && `${pluralize("Metafield", metafields)}`}
     </p>
   )
