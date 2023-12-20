@@ -148,22 +148,16 @@ function Code() {
   const codeSinglePageString = dedent`
     \`\`\`jsx
       // app/blog/[slug]/page.tsx
-      import Link from "next/link";
-      import { SingleBlogPage } from "@/blocks/blog/SingleBlogPage";
-
-      export default async function SingleBlogPage({
-        params,
-      }: {
-        params: { slug: string };
-      }) {
-        return <SingleBlogPage slug={slug} type="blog-posts" locale="" />
+      import { SingleBlogBlock } from "@/blocks/blog/SingleBlogBlock";
+      export default async function SingleBlogPage({ slug }: { slug: string }) {
+        return <SingleBlogBlock slug={slug} type="blog-posts" locale="" />;
       }
     \`\`\`
     `
 
   const envVarsCode = dedent`
     \`\`\`
-      // .local.env
+      # .local.env
       COSMIC_BUCKET_SLUG=change_to_your_bucket_slug
       COSMIC_READ_KEY=change_to_your_bucket_read_key
       COSMIC_WRITE_KEY=change_to_your_bucket_write_key
