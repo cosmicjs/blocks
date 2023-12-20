@@ -5,12 +5,12 @@
     "@cosmicjs/blocks": "./index.js"
   },
   "version": "1.0.0",
-  "description": "CosmicJS Blocks Setup",
+  "description": "Cosmic Blocks Setup",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "CosmicJS",
+  "author": "Cosmic",
   "license": "MIT",
   "dependencies": {
     "@antfu/ni": "^0.21.12",
