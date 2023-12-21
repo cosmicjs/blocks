@@ -9,6 +9,12 @@ export const cosmicSourceBucketConfig = createBucketClient({
   writeKey: process.env.NEXT_PUBLIC_SOURCE_WRITE_KEY || "",
 })
 
+export const cosmic = createBucketClient({
+  bucketSlug: process.env.COSMIC_BUCKET_SLUG || "COSMIC_BUCKET_SLUG",
+  readKey: process.env.COSMIC_READ_KEY || "COSMIC_READ_KEY",
+  writeKey: process.env.COSMIC_WRITE_KEY || "COSMIC_WRITE_KEY",
+})
+
 export const cosmicTargetBucketConfig = (
   bucketSlug: string,
   readKey: string,
@@ -319,9 +325,7 @@ export async function addEvents(cosmic: CosmicConfig, events: any) {
     event.type = "events"
     const media = await getMediaBlobFromURL(
       event.metadata.image.imgix_url,
-      event.title +
-        "." +
-        event.metadata.image.imgix_url.split(".").pop()
+      event.title + "." + event.metadata.image.imgix_url.split(".").pop()
     )
     // Upload media
     const mediaRes = await cosmic.media.insertOne({ media })
