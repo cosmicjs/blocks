@@ -34,6 +34,9 @@ async function Preview() {
   return (
     <>
       <section className="container m-auto grid items-center px-4 py-8">
+        <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+          Blog Grid
+        </h1>
         <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
           <div className="mx-auto grid w-full max-w-screen-lg grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
             {posts.map((post: PostType) => {
@@ -117,20 +120,11 @@ function Code() {
       import { BlogGrid } from "@/cosmic/blocks/blog/BlogGrid";
 
       export default async function BlogPage() {
-        return (
-          <>
-            <section className="container pb-8 m-auto">
-              <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
-                <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-                  Blog
-                </h1>
-                <div className="mx-auto grid w-full max-w-screen-lg grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
-                  <BlogGrid type="blog-posts" locale="" limit={10} skip={0} />
-                </div>
-              </div>
-            </section>
-          </>
-        );
+        const query = { 
+          type: "blog-posts",
+          locale: ""
+        }
+        return <BlogGrid query={query} sort="-created_at" limit={10} skip={0} />
       }
     \`\`\`
     `
@@ -140,7 +134,12 @@ function Code() {
       // app/blog/[slug]/page.tsx
       import { SingleBlogBlock } from "@/cosmic/blocks/blog/SingleBlog";
       export default async function SingleBlogPage({ slug }: { slug: string }) {
-        return <SingleBlogBlock slug={slug} type="blog-posts" locale="" />;
+        const query = { 
+          slug,
+          locale: "",
+          type: "blog-posts",
+        }
+        return <SingleBlogBlock query={query} />
       }
     \`\`\`
     `
@@ -168,7 +167,7 @@ function Code() {
         "Go to Project / Bucket / Settings / API keys to add your API keys to your project.",
     },
     {
-      title: "Create the blog roll page",
+      title: "Create the blog grid page",
       code: codeString,
       description:
         "Add a new file located at `app/blog/page.tsx` with the following",

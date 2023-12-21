@@ -1,13 +1,25 @@
 import { BlogCard, PostType } from "./BlogCard"
 import { cosmic } from "@/cosmic/config"
 
-export async function BlogGrid({ type }: { type: string }) {
+export async function BlogGrid({
+  query,
+  sort,
+  limit,
+  skip,
+}: {
+  query: any
+  sort?: string
+  limit?: number
+  skip?: number
+}) {
   const { objects: posts } = await cosmic.objects
-    .find({
-      type,
-    })
+    .find(query)
     .props("id,slug,title,metadata")
     .depth(1)
+    .sort(sort)
+    .limit(limit)
+    .skip(skip)
+
   return (
     <>
       {posts.map((post: PostType) => {
