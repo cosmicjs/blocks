@@ -5,24 +5,39 @@ import { Command, program } from "commander"
 import { fileURLToPath } from "url"
 import { capitalize } from "./utils/capitalize.js"
 import { blockGenerator } from "./utils/block-generator.js"
+import chalk from "chalk"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const blocks = {
+  blog: {
+    name: "Blog",
+    installationSteps: ["@cosmicjs/sdk", "react-markdown", "lucide-react"],
+  },
   faqs: {
     name: "FAQs",
-    installationSteps: ["@cosmicjs/sdk", "@radix-ui/react-accordion"],
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "@radix-ui/react-accordion",
+      "@radix-ui/react-icons",
+    ],
   },
 }
 
 async function addComponent(component) {
-  console.log(`-> Initiating installation of ${capitalize(component)} Block...`)
-
-  const blockCodePath = path.join(__dirname, "components", component)
   const blockData = blocks[component]
 
-  await blockGenerator(blockData, blockCodePath)
+  console.log(
+    chalk.yellow(
+      `-> Initiating installation of ${capitalize(blockData.name)} Block...`
+    )
+  )
+
+  // source code for the block
+  const sourceFolderPath = path.join(__dirname, "components", component)
+
+  await blockGenerator(blockData, sourceFolderPath)
 }
 
 const addCommand = new Command()
