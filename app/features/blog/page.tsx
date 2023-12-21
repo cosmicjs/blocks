@@ -114,17 +114,9 @@ function Code() {
   const codeString = dedent`
     \`\`\`jsx
       // app/blog/page.tsx
-      import { cosmic } from "@/lib/cosmic";
-      import { BlogCard, PostType } from "@/blocks/blog/BlogCard";
+      import { BlogGrid } from "@/cosmic/blocks/blog/BlogGrid";
 
       export default async function BlogPage() {
-        const { objects: posts } = await cosmic.objects
-          .find({
-            type: "blog-posts",
-          })
-          .props("id,slug,title,metadata")
-          .depth(1);
-
         return (
           <>
             <section className="container pb-8 m-auto">
@@ -133,9 +125,7 @@ function Code() {
                   Blog
                 </h1>
                 <div className="mx-auto grid w-full max-w-screen-lg grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
-                  {posts.map((post: PostType) => {
-                    return <BlogCard key={post.id} post={post} />;
-                  })}
+                  <BlogGrid type="blog-posts" locale="" limit={10} skip={0} />
                 </div>
               </div>
             </section>
@@ -148,7 +138,7 @@ function Code() {
   const codeSinglePageString = dedent`
     \`\`\`jsx
       // app/blog/[slug]/page.tsx
-      import { SingleBlogBlock } from "@/blocks/blog/SingleBlogBlock";
+      import { SingleBlogBlock } from "@/cosmic/blocks/blog/SingleBlog";
       export default async function SingleBlogPage({ slug }: { slug: string }) {
         return <SingleBlogBlock slug={slug} type="blog-posts" locale="" />;
       }
@@ -169,7 +159,7 @@ function Code() {
       title: "Install the Cosmic Blog block",
       code: blockCommand,
       description:
-        "This will add the files `blog/BlogCard.tsx` and `blog/SingleBlogPage.tsx` to your blocks folder.",
+        "This will add the files `BlogCard.tsx` and `SingleBlogPage.tsx` to your blocks folder located in `cosmic/blocks/blog`.",
     },
     {
       title: "Create your ENV vars file",

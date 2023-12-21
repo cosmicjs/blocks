@@ -27,7 +27,7 @@ export function BlogCard({ post }: { post: PostType }) {
     <article>
       <Link
         className="dark:bg-background group relative flex h-full w-full flex-col overflow-hidden rounded-lg shadow-2xl shadow-gray-500/20 transition hover:bg-gray-50 dark:shadow-none dark:hover:bg-gray-900/40"
-        href={``}
+        href={`/blog/${post.slug}`}
       >
         <div className="relative aspect-video h-full">
           <img

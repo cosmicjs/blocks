@@ -1,5 +1,5 @@
 // app/blog/[slug]/page.tsx
-import { cosmic } from "@/lib/cosmic"
+import { cosmic } from "@/cosmic/config"
 import Markdown from "react-markdown"
 import { ArrowLeftIcon } from "lucide-react"
 import Link from "next/link"
