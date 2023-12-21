@@ -5,14 +5,16 @@ import { getCommand } from "@antfu/ni"
 import { execSync } from "child_process"
 import path from "path"
 import { fileURLToPath } from "url"
+import chalk from "chalk"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-async function blockGenerator(blockObject, blockCodePath) {
+async function blockGenerator(blockObject, sourceFolderPath) {
   const { installationSteps, executionSteps, name } = blockObject
   const packageManager = await getPackageManager()
 
+  // Step 1. Installing and executing packages & scripts
   try {
     console.log("Installing required packages...")
     const executeCommand = getCommand(packageManager, "execute")
@@ -24,109 +26,108 @@ async function blockGenerator(blockObject, blockCodePath) {
     }
 
     if (installationSteps) {
-      if (fs.existsSync(path.join("cosmic-app"))) {
+      for (const step of installationSteps) {
         await execa(
           packageManager,
-          [packageManager === "npm" ? "install" : "add", ...installationSteps],
+          [packageManager === "npm" ? "install" : "add", step],
           {
-            cwd: "cosmic-app",
+            cwd: process.cwd(), // current cli directory
           }
         )
-      } else {
-        for (const step of installationSteps) {
-          await execa(
-            packageManager,
-            [packageManager === "npm" ? "install" : "add", step],
-            {
-              cwd: process.cwd(), // current cli directory
-            }
-          )
-        }
       }
-      console.log("Block installed successfully!")
+
+      console.log(chalk.green("Packages installed successfully!"))
     }
   } catch (error) {
-    console.error("Error installing required packages:", error)
+    console.error(chalk.red("Error installing required packages:"), error)
   }
 
+  // Step 2. Copying the files
   try {
-    // Check if cosmic-app folder exists & get the blocksFolderPath
-    const cosmicAppPath = path.join(process.cwd(), "cosmic-app")
-    let blocksFolderPath
-    if (fs.existsSync(cosmicAppPath)) {
-      blocksFolderPath = path.join(cosmicAppPath, "blocks")
-    } else {
-      blocksFolderPath = path.join(process.cwd(), "blocks")
-    }
-
-    // Create blocks folder in the blocksFolderPath
-    if (!fs.existsSync(blocksFolderPath)) {
-      fs.mkdirSync(blocksFolderPath)
-      console.log("-> Blocks folder created successfully.")
-    }
+    const blocksPath = createBlocksFolder()
 
     // After the Blocks folder is created
-    if (blocksFolderPath) {
+    if (blocksPath) {
       // Create cosmic.ts file and lib folder if it doesn't exist
       createCosmicFile()
 
-      // Create a folder with the folderName parameter
-      const newFolderPath = path.join(blocksFolderPath, name.toLowerCase())
-      fs.mkdirSync(newFolderPath)
+      // Create a folder with the block's name key
+      let destinationFolderPath = path.join(blocksPath, name.toLowerCase())
+      // If a folder with same block/name exists, create a new folder with a number next to it, else create the folder
+      if (fs.existsSync(destinationFolderPath)) {
+        let counter = 2
+        let newFolderPath = destinationFolderPath
+        while (fs.existsSync(newFolderPath)) {
+          newFolderPath = `${destinationFolderPath}-${counter}`
+          counter++
+        }
+        fs.mkdirSync(newFolderPath)
+        destinationFolderPath = newFolderPath
+      } else fs.mkdirSync(destinationFolderPath)
 
-      // Create a folder with the files from Block source folder
-      const sourceFolderPath = blockCodePath
-      const destinationFolderPath = newFolderPath
-      console.log(
-        "destinationFolderPath, sourceFolderPath",
-        destinationFolderPath,
-        sourceFolderPath
-      )
+      // Copy the files from source folder into the newly created destination folder
       fs.readdirSync(sourceFolderPath).forEach((file) => {
-        console.log("file", file)
+        console.log("-> Copying", file, "...")
         const sourceFile = path.join(sourceFolderPath, file)
         const destinationFile = path.join(destinationFolderPath, file)
         fs.copyFileSync(sourceFile, destinationFile)
       })
     }
 
-    console.log(`Block ${name} added successfully`)
+    console.log(chalk.green(`Block ${name} added successfully!`))
+    console.log(chalk.yellow(`View more blocks at cosmicjs.com/blocks.`))
   } catch (error) {
-    console.error("Error copying block code:", error)
+    if (error.code === "EEXIST")
+      console.error(
+        chalk.red(
+          `ERROR: Installation failed. Looks like Block "${name}" or a folder with the same name already exists.`
+        )
+      )
+    else console.error(chalk.red("Error copying block code:"), error)
     return ""
   }
 }
 
 function createCosmicFile() {
   const currentDir = process.cwd()
-  const cosmicAppPath = path.join(currentDir, "cosmic-app")
-  const cosmicAppLibFolder = path.join(cosmicAppPath, "lib")
   const libFolderPath = path.join(currentDir, "lib")
   const parentCosmicTsPath = path.join(__dirname, "../cosmic.ts")
 
-  // If cosmic-app folder exists
-  if (fs.existsSync(cosmicAppPath)) {
-    if (fs.existsSync(cosmicAppLibFolder))
-      fs.copyFileSync(
-        parentCosmicTsPath,
-        path.join(cosmicAppLibFolder, "cosmic.ts")
-      )
-    else {
-      const newFolderPath = path.join(cosmicAppPath, "lib")
-      fs.mkdirSync(newFolderPath)
-      fs.copyFileSync(parentCosmicTsPath, path.join(newFolderPath, "cosmic.ts"))
-    }
-  } else if (fs.existsSync(libFolderPath)) {
-    // If lib folder exists
+  if (fs.existsSync(libFolderPath)) {
     fs.copyFileSync(parentCosmicTsPath, path.join(libFolderPath, "cosmic.ts"))
   } else {
-    // If lib folder doesn't exist, create a new folder and place cosmic.ts there
-    let newFolderPath
-    if (fs.existsSync(cosmicAppPath))
-      newFolderPath = path.join(cosmicAppPath, "lib")
-    else newFolderPath = path.join(currentDir, "lib")
+    const newFolderPath = path.join(currentDir, "lib")
     fs.mkdirSync(newFolderPath)
     fs.copyFileSync(parentCosmicTsPath, path.join(newFolderPath, "cosmic.ts"))
+  }
+}
+
+function createBlocksFolder() {
+  const currentDir = process.cwd()
+  const srcFolderPath = path.join(currentDir, "src")
+  const componentsFolderPath = path.join(currentDir, "components")
+  let blocksFolderPath = path.join(currentDir, "blocks")
+
+  if (fs.existsSync(srcFolderPath)) {
+    blocksFolderPath = path.join(srcFolderPath, "blocks")
+    fs.mkdirSync(blocksFolderPath)
+    console.log("-> Blocks folder created successfully inside 'src' folder.")
+    return blocksFolderPath
+  } else if (fs.existsSync(componentsFolderPath)) {
+    blocksFolderPath = path.join(componentsFolderPath, "blocks")
+    fs.mkdirSync(blocksFolderPath, { recursive: true })
+    console.log(
+      "-> Blocks folder created successfully inside 'components' folder."
+    )
+    return blocksFolderPath
+  } else {
+    fs.mkdirSync(blocksFolderPath)
+    console.log(
+      `-> Blocks folder created successfully in root path. ${chalk.red(
+        "Make sure to include it in your tailwind.config and tsconfig."
+      )} `
+    )
+    return blocksFolderPath
   }
 }
 
