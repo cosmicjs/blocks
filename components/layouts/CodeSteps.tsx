@@ -9,7 +9,7 @@ import classNames from "classnames"
 
 type StepProps = {
   title: string
-  description?: React.ReactNode
+  description?: string | React.ReactNode
   code?: string
 }
 
@@ -98,13 +98,21 @@ function Step({
       ></div>
       <div className="relative flex">
         <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-          {scratch ? index + 1 : index + 4}
+          {scratch ? index + 1 : index + 2}
         </div>
         <h3 className="text-lg font-semibold lg:text-2xl">
           <Title text={title} />{" "}
         </h3>
       </div>
-      {description && <div className="py-2 text-base">{description}</div>}
+      {description && (
+        <div className="py-2 text-base">
+          {typeof description == "string" ? (
+            <Title text={description} />
+          ) : (
+            description
+          )}
+        </div>
+      )}
       {code && <Markdown>{dedent(code)}</Markdown>}
     </div>
   )
@@ -114,8 +122,6 @@ function CodeSteps(props: CodeStepsProps) {
   const {
     preview,
     step1 = ["npx create-next-app@latest cosmic-app", "cd cosmic-app"],
-    step2 = ["bun add @cosmicjs/sdk"],
-    writeKey,
     steps,
     scratch = false,
     title,
@@ -126,8 +132,7 @@ function CodeSteps(props: CodeStepsProps) {
 
   const pm = (manager || "bun") as PackageManager
 
-  const [step1WithPm, setStep1WithPm] = useState<string[]>(step1)
-  const [step2WithPm, setStep2WithPm] = useState<string[]>(step2)
+  const [newProjectStep, setNewProjectStep] = useState<string[]>(step1)
   const [runStep, setRunStep] = useState<string>(
     dedent(`\`\`\`bash
     ${managers[pm || "bun"]["run"]} dev
@@ -140,17 +145,14 @@ function CodeSteps(props: CodeStepsProps) {
       const step1Updated = step1.map((command) =>
         replacePackageManagerCommand(command, pm)
       )
-      const step2Updated = step2.map((command) =>
-        replacePackageManagerCommand(command, pm)
-      )
-      const step3Updated = dedent(`\`\`\`bash
+
+      const runStepUpdated = dedent(`\`\`\`bash
       ${managers[pm || "bun"]["run"]} dev
       \`\`\`
     `)
 
-      setStep1WithPm(step1Updated)
-      setStep2WithPm(step2Updated)
-      setRunStep(step3Updated)
+      setNewProjectStep(step1Updated)
+      setRunStep(runStepUpdated)
     }
 
     replaceSteps()
@@ -178,7 +180,7 @@ function CodeSteps(props: CodeStepsProps) {
               Note: Be sure to include TypeScript and Tailwind CSS in the
               installation options.
             </div>
-            {(step1WithPm || step1)?.map((step) => (
+            {(newProjectStep || step1)?.map((step) => (
               <Markdown>
                 {dedent(`\`\`\`bash
           ${step}
@@ -204,7 +206,7 @@ function CodeSteps(props: CodeStepsProps) {
             <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                {steps.length + 4}
+                {steps.length + 2}
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">Run the app</h3>
             </div>
@@ -213,7 +215,7 @@ function CodeSteps(props: CodeStepsProps) {
           <div className="relative mb-10">
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                {steps.length + 5}
+                {steps.length + 3}
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
                 Go to http://localhost:3000 and any page where this component
