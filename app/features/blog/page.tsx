@@ -124,7 +124,9 @@ function Code() {
           type: "blog-posts",
           locale: ""
         }
-        return <BlogGrid query={query} sort="-created_at" limit={10} skip={0} />
+        return <div className="container max-w-6xl m-auto grid grid-cols-3 space-x-3 py-10">
+          <BlogGrid query={query} sort="-created_at" limit={10} skip={0} />
+        </div>
       }
     \`\`\`
     `
@@ -132,14 +134,14 @@ function Code() {
   const codeSinglePageString = dedent`
     \`\`\`jsx
       // app/blog/[slug]/page.tsx
-      import { SingleBlogBlock } from "@/cosmic/blocks/blog/SingleBlog";
+      import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
       export default async function SingleBlogPage({ slug }: { slug: string }) {
         const query = { 
           slug,
           locale: "",
           type: "blog-posts",
         }
-        return <SingleBlogBlock query={query} />
+        return <SingleBlog query={query} />
       }
     \`\`\`
     `
