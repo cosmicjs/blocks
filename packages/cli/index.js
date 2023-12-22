@@ -42,14 +42,17 @@ async function addComponent(component) {
 
 const addCommand = new Command()
   .name("add")
-  .description("add a block to your project")
-  .argument("<component>", "the block to add")
-  .action((component) => {
-    if (!Object.keys(blocks).includes(component)) {
-      console.error(
-        `"${component}" is an invalid Block name. Please find a valid list of Blocks on cosmicjs.com/blocks`
-      )
-    } else addComponent(component)
+  .description("add blocks to your project")
+  .argument("<components...>", "the blocks to add")
+  .action((components) => {
+    components.forEach((component) => {
+      // Iterate through the blocks
+      if (!Object.keys(blocks).includes(component)) {
+        console.error(
+          `"${component}" is an invalid Block name. Please find a valid list of Blocks on cosmicjs.com/blocks`
+        )
+      } else addComponent(component)
+    })
   })
 
 program.addCommand(addCommand)
