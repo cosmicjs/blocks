@@ -4,7 +4,7 @@ import Markdown from "react-markdown"
 import { ArrowLeftIcon } from "lucide-react"
 import Link from "next/link"
 
-export default function SingleBlog({ query }: { query: any }) {
+export async function SingleBlog({ query }: { query: any }) {
   const { object: blog } = await cosmic.objects
     .findOne(query)
     .props("id,slug,title,metadata")
