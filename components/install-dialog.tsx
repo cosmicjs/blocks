@@ -51,6 +51,10 @@ import {
   getTeamMetafields,
   getTestimonials,
   getTestimonialsMetafields,
+  getEventsMetafields,
+  getEvents,
+  addEventsObjectType,
+  addEvents,
 } from "@/lib/cosmic"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -197,6 +201,13 @@ export function InstallDialog({
       // Add testimonials
       const testimonials = await getTestimonials(cosmicSourceBucketConfig)
       await addTestimonials(cosmicTargetBucket, testimonials)
+    }
+    if (featureKey === "events") {
+      metafields = await getEventsMetafields()
+      await addEventsObjectType(cosmicTargetBucket, metafields)
+      // Add events
+      const events = await getEvents(cosmicSourceBucketConfig)
+      await addEvents(cosmicTargetBucket, events)
     }
     if (featureKey === "comments") {
       metafields = await getCommentsMetafields()

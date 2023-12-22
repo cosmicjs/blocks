@@ -9,6 +9,12 @@ export const cosmicSourceBucketConfig = createBucketClient({
   writeKey: process.env.NEXT_PUBLIC_SOURCE_WRITE_KEY || "",
 })
 
+export const cosmic = createBucketClient({
+  bucketSlug: process.env.COSMIC_BUCKET_SLUG || "COSMIC_BUCKET_SLUG",
+  readKey: process.env.COSMIC_READ_KEY || "COSMIC_READ_KEY",
+  writeKey: process.env.COSMIC_WRITE_KEY || "COSMIC_WRITE_KEY",
+})
+
 export const cosmicTargetBucketConfig = (
   bucketSlug: string,
   readKey: string,
@@ -51,6 +57,10 @@ export async function getPageBuilderMetafields() {
 
 export async function getTestimonialsMetafields() {
   return await getMetafieldsFromObjectType("testimonials")
+}
+
+export async function getEventsMetafields() {
+  return await getMetafieldsFromObjectType("events")
 }
 
 export async function getTeamMetafields() {
@@ -122,6 +132,15 @@ export async function getTestimonials(cosmic: CosmicConfig) {
   const { objects } = await cosmic.objects
     .find({
       type: "testimonials",
+    })
+    .props("slug,title,type,metadata,thumbnail")
+  return objects
+}
+
+export async function getEvents(cosmic: CosmicConfig) {
+  const { objects } = await cosmic.objects
+    .find({
+      type: "events",
     })
     .props("slug,title,type,metadata,thumbnail")
   return objects
@@ -301,6 +320,21 @@ export async function addTestimonials(cosmic: CosmicConfig, testimonials: any) {
   }
 }
 
+export async function addEvents(cosmic: CosmicConfig, events: any) {
+  for (let event of events) {
+    event.type = "events"
+    const media = await getMediaBlobFromURL(
+      event.metadata.image.imgix_url,
+      event.title + "." + event.metadata.image.imgix_url.split(".").pop()
+    )
+    // Upload media
+    const mediaRes = await cosmic.media.insertOne({ media })
+    event.metadata.image = mediaRes.media.name
+    event.thumbnail = mediaRes.media.name
+    await cosmic.objects.insertOne(event)
+  }
+}
+
 export async function addTeamMembers(cosmic: CosmicConfig, teamMembers: any) {
   for (let member of teamMembers) {
     member.type = "team-members"
@@ -431,6 +465,22 @@ export async function addTestimonialsObjectType(
     title: "Testimonials",
     slug: "testimonials",
     emoji: "🗣️",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
+    metafields,
+  })
+}
+export async function addEventsObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Event",
+    title: "Events",
+    slug: "events",
+    emoji: "📆",
     options: {
       slug_field: true,
       content_editor: false,

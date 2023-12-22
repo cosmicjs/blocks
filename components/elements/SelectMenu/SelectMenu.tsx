@@ -2,8 +2,8 @@
 
 import { Listbox, Transition } from "@headlessui/react"
 import classNames from "classnames"
+import { ChevronDownIcon } from "lucide-react"
 import React, { Fragment, useEffect, useState } from "react"
-import { ChevronDownIcon } from "@heroicons/react/24/outline"
 
 export type SelectOption = {
   title: React.ReactNode

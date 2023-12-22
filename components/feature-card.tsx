@@ -1,20 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 
-import { cn, pluralize } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
-import {
-  ArrowDownOnSquareIcon,
-  CodeBracketIcon,
-  EyeIcon,
-} from "@heroicons/react/24/solid"
 import { useRouter } from "next/navigation"
 import { ThemedImage } from "./elements/ThemedImage/ThemedImage"
+import FeatureStats from "./FeatureStats"
+import { Code2Icon, DownloadIcon, EyeIcon } from "lucide-react"
 
 type Feature = {
   key: string
   title: string
-  emoji: string
+  icon: React.ReactNode
   type: string
   description: string
   field_list: string[]
@@ -46,7 +43,7 @@ export function FeatureCard({
             <Button
               className="relative z-20 w-full"
               onClick={(e) => handleInstallClick(feature.key)}
-              iconRight={<ArrowDownOnSquareIcon className="h-4 w-4" />}
+              iconRight={<DownloadIcon className="h-4 w-4" />}
             >
               Install
             </Button>
@@ -70,7 +67,7 @@ export function FeatureCard({
                   onClick={() =>
                     router.push(`${feature.preview_link}?tab=code`)
                   }
-                  iconRight={<CodeBracketIcon className="h-4 w-4" />}
+                  iconRight={<Code2Icon className="h-4 w-4" />}
                   className={cn(
                     "ml-2 w-full",
                     buttonVariants({
@@ -96,17 +93,11 @@ export function FeatureCard({
             </div>
             <div>
               <h2 className="mb-1 mt-4 text-2xl font-bold">{feature.title}</h2>
-              <p className="text-dark-gray-600 dark:text-dark-gray-600">
-                {feature?.object_types}{" "}
-                {feature?.object_types &&
-                  `${pluralize("Object type", feature?.object_types)} •`}{" "}
-                {feature?.objects}{" "}
-                {feature?.objects &&
-                  `${pluralize("Object type", feature?.objects)}`}
-                {feature?.metafields}{" "}
-                {feature?.metafields &&
-                  `${pluralize("Metafield", feature?.metafields)}`}
-              </p>
+              <FeatureStats
+                objectTypes={feature?.object_types}
+                objects={feature?.objects}
+                metafields={feature?.metafields}
+              />
             </div>
           </div>
         </Link>

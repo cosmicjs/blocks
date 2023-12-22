@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { Switch } from "@headlessui/react"
 import { useTheme } from "next-themes"
-import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
+import { MoonIcon, SunIcon } from "lucide-react"
 
 const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false)
@@ -14,7 +14,7 @@ const ThemeSwitch = () => {
   }, [])
 
   if (!mounted) {
-    return null
+    return <div className="h-5 w-5" />
   }
 
   const changeTheme = (isLightMode: boolean) => {
@@ -23,7 +23,7 @@ const ThemeSwitch = () => {
   }
 
   return (
-    <div className="relative h-5">
+    <div className="relative h-5 w-5">
       <Switch
         checked={isLightTheme}
         onChange={changeTheme}

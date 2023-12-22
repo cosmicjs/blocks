@@ -296,27 +296,6 @@ function Code() {
 
   const steps = [
     {
-      title: "Create a new file located at `lib/cosmic.ts` with the following",
-      description: (
-        <div className="py-2">
-          Note: You will need to swap `BUCKET_SLUG`, `BUCKET_READ_KEY`, and
-          `BUCKET_WRITE_KEY` with your Bucket API keys found in{" "}
-          <BucketAPILink />. Be careful not to expose your write key to any
-          client-side code.
-        </div>
-      ),
-      code: dedent(`\`\`\`ts
-      // lib/cosmic.ts
-      import { createBucketClient } from "@cosmicjs/sdk";
-      export const cosmic = createBucketClient({
-        bucketSlug: "BUCKET_SLUG",
-        readKey: "BUCKET_READ_KEY",
-        writeKey: "BUCKET_WRITE_KEY",
-      });
-      \`\`\`
-      `),
-    },
-    {
       title:
         "Create a new file at `components/comment-form.tsx` with the following",
       code: commentsFormCodeString,
@@ -362,6 +341,7 @@ function Code() {
         ]}
         steps={steps}
         preview={<Preview />}
+        writeKey
       />
     </>
   )

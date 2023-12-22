@@ -17,11 +17,19 @@ export function ThemedImage({
   className,
 }: ThemedImageProps) {
   const { resolvedTheme: theme } = useTheme()
-  const [imageSrc, setImageSrc] = useState("")
+  const [imageSrc, setImageSrc] = useState(darkSrc)
 
   useEffect(() => {
     setImageSrc(theme === "dark" ? darkSrc : lightSrc)
   }, [theme, darkSrc, lightSrc])
 
-  return <img src={imageSrc} className={className} alt={alt} />
+  return (
+    <img
+      width={400}
+      height={400}
+      src={imageSrc || darkSrc}
+      className={className}
+      alt={alt}
+    />
+  )
 }

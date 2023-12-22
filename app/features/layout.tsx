@@ -1,13 +1,14 @@
 "use client"
 
 import SelectMenu from "@/components/elements/SelectMenu/SelectMenu"
-import { ArrowLeftIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback } from "react"
 import { Features } from "@/components/features"
 import { features } from "@/config/features"
 import classNames from "classnames"
+import FeatureStats from "@/components/FeatureStats"
+import { ArrowLeftIcon } from "lucide-react"
 
 const options = [
   { title: "bun", value: "bun" },
@@ -62,7 +63,7 @@ export default function FeatureLayout({
 
   return (
     <div className="container relative flex w-[80%] flex-col items-center justify-center lg:w-full lg:max-w-[1400px] lg:flex-row">
-      <aside className="relative mx-auto mt-10 w-20 rounded-xl lg:fixed lg:mx-4 lg:mt-8">
+      <aside className="top-16 mt-10 flex w-full max-w-[1200px] flex-col items-center justify-center space-y-2 rounded-xl lg:fixed lg:mx-4 lg:mt-8 lg:flex-row lg:items-start lg:justify-between lg:space-y-0">
         <nav>
           <Link
             href="/#features"
@@ -74,12 +75,9 @@ export default function FeatureLayout({
         </nav>
         {tab === "code" && (
           <div
-            className={classNames(
-              "relative -left-8 z-50 mx-auto mt-8 w-32 rounded-xl lg:absolute lg:-right-[1250px] lg:-top-7 lg:left-auto lg:mx-4",
-              {
-                "pointer-events-none opacity-0": tab !== "code",
-              }
-            )}
+            className={classNames("w-32 rounded-xl", {
+              "pointer-events-none opacity-0": tab !== "code",
+            })}
           >
             <nav className="pl-4">
               <div className="mb-px shrink-0 whitespace-nowrap text-xs uppercase text-gray-400 dark:text-dark-gray-400">
@@ -104,12 +102,12 @@ export default function FeatureLayout({
         <h1 className="sticky mb-2 mt-6 bg-white text-3xl font-extrabold leading-tight tracking-tighter dark:bg-dark-background md:text-4xl">
           {title}
         </h1>
-        <p className="text-gray-600 dark:text-dark-gray-600">
-          {object_types} {object_types && "Object types •"} {objects}
-          {objects && " Objects"}
-          {metafields} {metafields && "Metafield"}
-        </p>
-        <p className="mt-5 max-w-[600px] text-center text-base text-dark-gray-600 dark:text-dark-gray-600">
+        <FeatureStats
+          objectTypes={object_types}
+          objects={objects}
+          metafields={metafields}
+        />
+        {/* <p className="mt-5 max-w-[600px] text-center text-base text-gray-700 dark:text-dark-gray-600">
           {description}{" "}
           {field_list?.map((field, index) => (
             <span className="mx-[3px]">
@@ -119,7 +117,7 @@ export default function FeatureLayout({
               {index !== field_list.length - 1 && ","}
             </span>
           ))}
-        </p>
+        </p> */}
         <div className="relative">{children}</div>
         <div className="relative">
           <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">
