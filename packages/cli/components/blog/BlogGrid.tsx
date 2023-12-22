@@ -1,5 +1,5 @@
 import { BlogCard, PostType } from "./BlogCard"
-import { cosmic } from "@/cosmic/config"
+import { cosmic } from "@/cosmic/client"
 
 export async function BlogGrid({
   query,
