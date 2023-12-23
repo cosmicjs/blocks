@@ -206,8 +206,9 @@ function CodeSteps(props: CodeStepsProps) {
               </h3>
             </div>
             <div className="py-2">
-              Note: Be sure to include TypeScript and Tailwind CSS in the
-              installation options.
+              You may skip this step if you are installing the Block to an
+              existing Next.js app. Note: Be sure to include TypeScript and
+              Tailwind CSS in the installation options.
             </div>
             {(newProjectStep || step1)?.map((step) => (
               <Markdown>
@@ -245,11 +246,11 @@ function CodeSteps(props: CodeStepsProps) {
           <div className="relative mb-10">
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                {steps.length + 3}
+                {steps.length + 2}
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
-                Go to http://localhost:3000 and any page where this component
-                has been added. It should look like this:
+                Open http://localhost:3000 and go to any page where this
+                component has been added. It should look like this:
               </h3>
             </div>
           </div>
