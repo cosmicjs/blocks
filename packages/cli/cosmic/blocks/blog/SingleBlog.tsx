@@ -1,24 +1,12 @@
 // app/blog/[slug]/page.tsx
-import { cosmic } from "@/lib/cosmic"
+import { cosmic } from "@/cosmic/client"
 import Markdown from "react-markdown"
 import { ArrowLeftIcon } from "lucide-react"
 import Link from "next/link"
 
-export default async function SingleBlogPage({
-  type,
-  slug,
-  locale,
-}: {
-  type: string
-  slug: string
-  locale: string
-}) {
+export async function SingleBlog({ query }: { query: any }) {
   const { object: blog } = await cosmic.objects
-    .findOne({
-      type,
-      slug,
-      locale,
-    })
+    .findOne(query)
     .props("id,slug,title,metadata")
     .depth(1)
 
