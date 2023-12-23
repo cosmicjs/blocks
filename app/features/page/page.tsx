@@ -355,19 +355,11 @@ function Code() {
 
   return (
     <div>
-      <CodeSteps
-        step2={[
-          "bun add @cosmicjs/sdk",
-          "npx shadcn-ui@latest init",
-          "npx shadcn-ui@latest add button",
-        ]}
-        steps={steps}
-        preview={<Preview />}
-      />
+      <CodeSteps steps={steps} preview={<Preview />} />
       <div className="mb-2 border-t pt-10">
         <h3 className="text-3xl font-semibold">Dynamic pages</h3>
       </div>
-      <CodeSteps scratch steps={dynamicPagesSteps} />
+      <CodeSteps scratch steps={dynamicPagesSteps} featureKey="pages" />
     </div>
   )
 }
