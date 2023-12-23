@@ -150,7 +150,7 @@ function Code() {
       title: "Install the Block content model",
       code: blockCommand,
       description:
-        "This will create the `blogs`, `authors`, and `categories` in your Bucket and add demo content.",
+        "This will add the `faqs` repeater Metafield to the Object type(s) of your your choice.",
       installButton: true,
     },
     {
@@ -175,6 +175,7 @@ function Code() {
         ]}
         steps={steps}
         preview={<Preview />}
+        featureKey="faqs"
       />
     </>
   )
