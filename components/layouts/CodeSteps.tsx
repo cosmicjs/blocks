@@ -129,7 +129,7 @@ function Step({
       )}
       {apiKeysLink && (
         <div className="mt-2">
-          Go to <BucketAPILink /> to get your API keys and add them to a
+          Go to <BucketAPILink /> to get your API keys and add them to a{" "}
           {wrapWithSpan(`\`.env.local\``)} file.
         </div>
       )}
