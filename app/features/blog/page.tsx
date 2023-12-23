@@ -135,14 +135,19 @@ function Code() {
     \`\`\`jsx
       // app/blog/[slug]/page.tsx
       import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
-      export default async function SingleBlogPage({ slug }: { slug: string }) {
-        const query = { 
-          slug,
+      export default async function SingleBlogPage({
+        params,
+      }: {
+        params: { slug: string };
+      }) {
+        const query = {
+          slug: params.slug,
           locale: "",
           type: "blog-posts",
-        }
-        return <SingleBlog query={query} />
+        };
+        return <SingleBlog query={query} />;
       }
+    
     \`\`\`
     `
 
