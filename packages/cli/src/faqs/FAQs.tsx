@@ -1,5 +1,5 @@
 // components/faqs.tsx
-import { cosmic } from "@/cosmic/config"
+import { cosmic } from "@/cosmic/client"
 import {
   Accordion,
   AccordionContent,
@@ -12,21 +12,15 @@ type FAQ = {
   answer: string
 }
 
-export async function FAQs({ faqs }: { faqs?: FAQ[] }) {
+export async function FAQs({ query }: { query: any }) {
   const { object: page } = await cosmic.objects
-    .findOne({
-      type: "pages",
-      slug: "home",
-    })
+    .findOne(query)
     .props("slug,title,metadata")
     .depth(1)
 
   return (
     <>
-      <h2 className="mb-4 text-2xl font-semibold">
-        Frequently Asked Questions
-      </h2>
-      {(faqs || page?.metadata?.faqs).map((faq: FAQ) => {
+      {(page?.metadata?.faqs).map((faq: FAQ) => {
         return (
           <Accordion type="single" collapsible key={faq.question}>
             <AccordionItem value="item-1">

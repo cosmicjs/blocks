@@ -21,6 +21,8 @@ const blocks = {
       "@cosmicjs/sdk",
       "@radix-ui/react-accordion",
       "@radix-ui/react-icons",
+      "clsx",
+      "tailwind-merge",
     ],
   },
 }
