@@ -35,7 +35,7 @@ async function addComponent(component) {
   )
 
   // source code for the block
-  const sourceFolderPath = path.join(__dirname, "components", component)
+  const sourceFolderPath = path.join(__dirname, "src", component)
 
   await blockGenerator(blockData, sourceFolderPath)
 }

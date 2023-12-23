@@ -151,7 +151,7 @@ function createBlocksFolder(cosmicFolderPath) {
 }
 
 function createConfigFile(cosmicFolderPath) {
-  const sourceConfigFilePath = path.join(__dirname, "../cosmic/client.ts")
+  const sourceConfigFilePath = path.join(__dirname, "../src/client.ts")
   const configFilePath = path.join(cosmicFolderPath, "client.ts")
 
   if (fs.existsSync(cosmicFolderPath) && !fs.existsSync(configFilePath)) {
@@ -164,7 +164,7 @@ function createConfigFile(cosmicFolderPath) {
 }
 
 function createUtilsFile(cosmicFolderPath) {
-  const sourceUtilsPath = path.join(__dirname, "../cosmic/utils.ts")
+  const sourceUtilsPath = path.join(__dirname, "../src/utils.ts")
   const utilsFilePath = path.join(cosmicFolderPath, "utils.ts")
 
   if (fs.existsSync(cosmicFolderPath) && !fs.existsSync(utilsFilePath)) {
