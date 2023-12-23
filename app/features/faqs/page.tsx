@@ -167,16 +167,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps
-        step2={[
-          "bun add @cosmicjs/sdk",
-          "npx shadcn-ui@latest init",
-          "npx shadcn-ui@latest add accordion",
-        ]}
-        steps={steps}
-        preview={<Preview />}
-        featureKey="faqs"
-      />
+      <CodeSteps steps={steps} preview={<Preview />} featureKey="faqs" />
     </>
   )
 }
