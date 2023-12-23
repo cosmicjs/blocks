@@ -1,3 +1,3 @@
-export const DOCS_URL = "https://cosmicjs.com/docs"
+export const DOCS_URL = "https://www.cosmicjs.com/docs"
 export const DEMO_URL = "https://blocks-demo.vercel.app/"
-export const WEBSITE_URL = "https://cosmicjs.com"
+export const WEBSITE_URL = "https://www.cosmicjs.com"
