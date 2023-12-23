@@ -191,10 +191,6 @@ function CodeSteps(props: CodeStepsProps) {
     <div className="w-auto max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-[750px]">
       {!scratch && (
         <div>
-          <div className="mb-6">
-            {title ||
-              "The following code example uses Next.js, Tailwind CSS, and the Cosmic JavaScript SDK. Feel free to skip any steps that have already been completed."}
-          </div>
           <div className="relative mb-10">
             <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200" />
             <div className="relative flex">
