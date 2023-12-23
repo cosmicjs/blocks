@@ -162,16 +162,22 @@ function Code() {
 
   const steps = [
     {
-      title: "Install the Cosmic Blog block",
-      code: blockCommand,
-      description:
-        "This will add the files `BlogCard.tsx` and `SingleBlogPage.tsx` to your blocks folder located in `cosmic/blocks/blog`.",
-    },
-    {
       title: "Create your ENV vars file",
       code: envVarsCode,
+      apiKeysLink: true,
+    },
+    {
+      title: "Install the Block content model",
+      code: blockCommand,
       description:
-        "Go to Project / Bucket / Settings / API keys to add your API keys to your project.",
+        "This will create the `blogs`, `authors`, and `categories` in your Bucket and add demo content.",
+      installButton: true,
+    },
+    {
+      title: "Install the Block code",
+      code: blockCommand,
+      description:
+        "This will add the files `BlogCard.tsx`,`BlogGrid.tsx`, and `SingleBlog.tsx` to your blocks folder located in `cosmic/blocks/blog`.",
     },
     {
       title: "Create the blog grid page",
@@ -189,7 +195,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps steps={steps} preview={<Preview />} />
+      <CodeSteps steps={steps} preview={<Preview />} featureKey="blog" />
     </>
   )
 }

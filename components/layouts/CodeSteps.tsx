@@ -6,6 +6,8 @@ import dedent from "dedent"
 import { BucketAPILink } from "../bucket-api-link"
 import { useSearchParams } from "next/navigation"
 import classNames from "classnames"
+import { Button } from "@/components/ui/button"
+import { InstallDialog } from "@/components/install-dialog"
 
 type StepProps = {
   title: string
@@ -21,6 +23,7 @@ type CodeStepsProps = {
   steps: StepProps[]
   scratch?: boolean
   writeKey?: boolean
+  featureKey?: string
 }
 
 const managers = {
@@ -88,7 +91,18 @@ function Step({
   code,
   index,
   scratch,
-}: StepProps & { index: number; length: number; scratch: boolean }) {
+  installButton,
+  featureKey,
+  apiKeysLink,
+}: StepProps & {
+  index: number
+  length: number
+  scratch: boolean
+  installButton?: boolean
+  featureKey?: string
+  apiKeysLink?: boolean
+}) {
+  const [showModal, setShowModal] = useState<boolean>(false)
   return (
     <div className="relative mb-10">
       <div
@@ -98,7 +112,7 @@ function Step({
       ></div>
       <div className="relative flex">
         <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-          {scratch ? index + 1 : index + 2}
+          {index + 1}
         </div>
         <h3 className="text-lg font-semibold lg:text-2xl">
           <Title text={title} />{" "}
@@ -113,7 +127,21 @@ function Step({
           )}
         </div>
       )}
-      {code && <Markdown>{dedent(code)}</Markdown>}
+      {apiKeysLink && (
+        <div className="mt-2">
+          Go to <BucketAPILink /> to get your API keys and add them to a
+          {wrapWithSpan(`\`.env.local\``)} file.
+        </div>
+      )}
+      {installButton && (
+        <>
+          <Button onClick={() => setShowModal(true)}>Install Block</Button>
+        </>
+      )}
+      {!installButton && code && <Markdown>{dedent(code)}</Markdown>}
+      {showModal && (
+        <InstallDialog featureKey={featureKey} setShowModal={setShowModal} />
+      )}
     </div>
   )
 }
@@ -125,6 +153,7 @@ function CodeSteps(props: CodeStepsProps) {
     steps,
     scratch = false,
     title,
+    featureKey,
   } = props
 
   const searchParams = useSearchParams()
@@ -170,7 +199,7 @@ function CodeSteps(props: CodeStepsProps) {
             <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200" />
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                1
+                0
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
                 Install a new Next.js project
@@ -197,6 +226,7 @@ function CodeSteps(props: CodeStepsProps) {
           key={index}
           index={index}
           length={steps.length}
+          featureKey={featureKey}
           {...step}
         />
       ))}
@@ -206,7 +236,7 @@ function CodeSteps(props: CodeStepsProps) {
             <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                {steps.length + 2}
+                {steps.length + 1}
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">Run the app</h3>
             </div>
