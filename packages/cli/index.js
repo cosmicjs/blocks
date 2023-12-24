@@ -29,6 +29,10 @@ const blocks = {
     name: "Pages",
     installationSteps: ["@cosmicjs/sdk", "@radix-ui/react-slot", "class-variance-authority"],
   },
+  comments: {
+    name: "Comments",
+    installationSteps: ["@cosmicjs/sdk", "lucide-react", "@radix-ui/react-slot", "class-variance-authority", "@radix-ui/react-label"],
+  },
 }
 
 async function addComponent(component) {
