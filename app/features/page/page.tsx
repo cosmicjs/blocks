@@ -150,13 +150,17 @@ function Code() {
       title:
         "You can create dynamic pages by creating a new file at `app/[slug]/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
-      
-              import { Page } from "@/cosmic/blocks/pages/Page";
-              
-              export default async function Page({ params }: { params: { slug: string } }) {
-                return return <Page query={{ slug, type: "pages" }} />;
-              }   
-            \`\`\`
+        // app/[slug]/page.tsx
+        import { Page } from "@/cosmic/blocks/pages/Page";
+        
+        export default async function DynamicPage({
+          params,
+        }: {
+          params: { slug: string };
+        }) {
+          return <Page query={{ slug: params.slug, type: "pages" }} />;
+        }
+      \`\`\`
       `),
     },
     {

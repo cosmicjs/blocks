@@ -253,9 +253,17 @@ export async function addPage(cosmic: CosmicConfig, page: any) {
     page.metadata.image.imgix_url,
     page.title + ".jpg"
   )
+  // Upload dark media image
+  const darkMedia = await getMediaBlobFromURL(
+    page.metadata.dark_image.imgix_url,
+    page.title + ".jpg"
+  )
   // Add hero image
   const mediaRes = await cosmic.media.insertOne({ media })
   page.metadata.image = mediaRes.media.name
+  // Add hero image
+  const darkMediaRes = await cosmic.media.insertOne({ media: darkMedia })
+  page.metadata.dark_image = darkMediaRes.media.name
   // Upload thumbnail image
   const thumbnail = await getMediaBlobFromURL(
     page.thumbnail,
