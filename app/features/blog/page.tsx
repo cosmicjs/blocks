@@ -170,7 +170,7 @@ function Code() {
       title: "Install the Block content model",
       code: blockCommand,
       description:
-        "This will create the `blogs`, `authors`, and `categories` in your Bucket and add demo content.",
+        "This will create the `blog-posts`, `authors`, and `categories` Object types in your Bucket and add demo content.",
       installButton: true,
     },
     {

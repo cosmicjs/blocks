@@ -135,7 +135,9 @@ function Step({
       )}
       {installButton && (
         <>
-          <Button onClick={() => setShowModal(true)}>Install Block</Button>
+          <Button onClick={() => setShowModal(true)}>
+            Install Block content
+          </Button>
         </>
       )}
       {!installButton && code && <Markdown>{dedent(code)}</Markdown>}

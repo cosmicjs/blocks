@@ -10,6 +10,7 @@ import {
   SettingsIcon,
   ShoppingCartIcon,
   UsersRoundIcon,
+  CalendarIcon,
 } from "lucide-react"
 
 export const features = [
@@ -231,7 +232,7 @@ export const features = [
     title: "Events",
     type: "object_type",
     slug: "events",
-    icon: "📆",
+    icon: <CalendarIcon className="h-5 w-5 text-cosmic-blue" />,
     description: `Adds an Events Object type to your Bucket, which includes`,
     field_list: [
       "Image",
