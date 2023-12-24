@@ -93,14 +93,12 @@ function Step({
   scratch,
   installButton,
   featureKey,
-  apiKeysLink,
 }: StepProps & {
   index: number
   length: number
   scratch: boolean
   installButton?: boolean
   featureKey?: string
-  apiKeysLink?: boolean
 }) {
   const [showModal, setShowModal] = useState<boolean>(false)
   return (
@@ -125,12 +123,6 @@ function Step({
           ) : (
             description
           )}
-        </div>
-      )}
-      {apiKeysLink && (
-        <div className="mt-2">
-          Go to <BucketAPILink /> to get your API keys and add them to a{" "}
-          {wrapWithSpan(`\`.env.local\``)} file.
         </div>
       )}
       {installButton && (
@@ -216,6 +208,22 @@ function CodeSteps(props: CodeStepsProps) {
           `)}
               </Markdown>
             ))}
+            <h3 className="mt-8 text-lg font-semibold lg:text-2xl">
+              Create your ENV vars file
+            </h3>
+            <div className="mt-2">
+              Go to <BucketAPILink /> to get your API keys and add them to a{" "}
+              {wrapWithSpan(`\`.env.local\``)} file.
+            </div>
+            <Markdown>
+              {dedent(`\`\`\`
+          # .env.local
+          COSMIC_BUCKET_SLUG=change_to_your_bucket_slug
+          COSMIC_READ_KEY=change_to_your_bucket_read_key
+          COSMIC_WRITE_KEY=change_to_your_bucket_write_key
+          \`\`\`
+          `)}
+            </Markdown>
           </div>
         </div>
       )}

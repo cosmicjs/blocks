@@ -109,16 +109,6 @@ function Code() {
     bunx @cosmicjs/blocks add pages
     \`\`\`
     `
-
-  const envVarsCode = dedent`
-    \`\`\`
-      # .env.local
-      COSMIC_BUCKET_SLUG=change_to_your_bucket_slug
-      COSMIC_READ_KEY=change_to_your_bucket_read_key
-      COSMIC_WRITE_KEY=change_to_your_bucket_write_key
-    \`\`\`
-    `
-
   const steps = [
     {
       title: "Install the Block content model",
