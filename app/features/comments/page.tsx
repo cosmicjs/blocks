@@ -155,7 +155,12 @@ function Code() {
 
   return (
     <>
-      <CodeSteps steps={steps} preview={<Preview />} writeKey />
+      <CodeSteps
+        steps={steps}
+        preview={<Preview />}
+        writeKey
+        featureKey="comments"
+      />
     </>
   )
 }
