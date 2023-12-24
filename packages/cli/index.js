@@ -25,6 +25,10 @@ const blocks = {
       "tailwind-merge",
     ],
   },
+  pages: {
+    name: "Pages",
+    installationSteps: ["@cosmicjs/sdk", "@radix-ui/react-slot", "class-variance-authority"],
+  },
 }
 
 async function addComponent(component) {

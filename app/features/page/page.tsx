@@ -288,15 +288,39 @@ function Code() {
     \`\`\`
     `
 
+  const blockCommand = dedent`
+    \`\`\`bash
+    bunx @cosmicjs/blocks add blog
+    \`\`\`
+    `
+
+  const envVarsCode = dedent`
+    \`\`\`
+      # .env.local
+      COSMIC_BUCKET_SLUG=change_to_your_bucket_slug
+      COSMIC_READ_KEY=change_to_your_bucket_read_key
+      COSMIC_WRITE_KEY=change_to_your_bucket_write_key
+    \`\`\`
+    `
+
   const steps = [
     {
-      title:
-        "Create a file located at `components/page-section.tsx` with the following",
-      code: codeSectionString,
+      title: "Create your ENV vars file",
+      code: envVarsCode,
+      apiKeysLink: true,
     },
     {
-      title: "Update the file located at `app/page.tsx` with the following",
-      code: codeString,
+      title: "Install the Block content model",
+      code: blockCommand,
+      description:
+        "This will create the `blogs`, `authors`, and `categories` in your Bucket and add demo content.",
+      installButton: true,
+    },
+    {
+      title: "Install the Block code",
+      code: blockCommand,
+      description:
+        "This will add the files `BlogCard.tsx`,`BlogGrid.tsx`, and `SingleBlog.tsx` to your blocks folder located in `cosmic/blocks/blog`.",
     },
   ]
 
