@@ -121,11 +121,6 @@ function Code() {
 
   const steps = [
     {
-      title: "Create your ENV vars file",
-      code: envVarsCode,
-      apiKeysLink: true,
-    },
-    {
       title: "Install the Block content model",
       code: blockCommand,
       description:

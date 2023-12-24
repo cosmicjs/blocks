@@ -99,21 +99,7 @@ function Code() {
     \`\`\`
     `
 
-  const envVarsCode = dedent`
-    \`\`\`
-      # .env.local
-      COSMIC_BUCKET_SLUG=change_to_your_bucket_slug
-      COSMIC_READ_KEY=change_to_your_bucket_read_key
-      COSMIC_WRITE_KEY=change_to_your_bucket_write_key
-    \`\`\`
-    `
-
   const steps = [
-    {
-      title: "Create your ENV vars file",
-      code: envVarsCode,
-      apiKeysLink: true,
-    },
     {
       title: "Install the Block content model",
       code: blockCommand,
@@ -138,8 +124,21 @@ function Code() {
       code: dedent(`\`\`\`jsx
         // app/blog/[slug]/page.tsx
         import { Comments } from "@/cosmic/blocks/comments/Comments";
+        import { cosmic } from "@/cosmic/client";
         
-        export default function BlogPost() {
+        export default async function BlogPost({
+          params,
+        }: {
+          params: { slug: string };
+        }) {
+          const { object: blog } = await cosmic.objects
+            .findOne({
+              slug: params.slug,
+              type: "blog-posts"
+            })
+            .props("id")
+            .depth(1);
+            
           return (
             <main className="container">
               {/* page content above */}
