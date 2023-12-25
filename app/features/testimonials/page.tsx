@@ -119,5 +119,7 @@ function Code({ manager }: { manager: PackageManagers }) {
     },
   ]
 
-  return <CodeSteps steps={steps} preview={<Preview />} />
+  return (
+    <CodeSteps steps={steps} preview={<Preview />} featureKey="testimonials" />
+  )
 }
