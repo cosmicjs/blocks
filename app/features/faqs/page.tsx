@@ -135,9 +135,8 @@ function Code() {
   const steps = [
     {
       title: "Install the Block content model",
-      code: blockCommand,
       description:
-        "This will add the `faqs` repeater Metafield to the Object type(s) of your your choice.",
+        "This will add the `faqs` repeater Metafield to the Object type(s) of your choice.",
       installButton: true,
     },
     {

@@ -61,8 +61,8 @@ function Code() {
   const codeString = dedent`
       \`\`\`jsx
         // app/page.tsx
-        import { cosmic } from "@/lib/cosmic";
-        import { ImageGallery } from "@/components/image-gallery";
+        import { cosmic } from "@/cosmic/client";
+        import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery";
         
         export default async function Home() {
           
@@ -86,77 +86,39 @@ function Code() {
         }    
       \`\`\`
       `
-  const codeImageGalleryString = dedent`
-  \`\`\`jsx
-    // components/image-gallery.tsx
-    "use client";
-
-    import { useState } from "react";
-    import { cn } from "@/lib/utils";
-
-    export type GalleryItemType = {
-      image: {
-        imgix_url: string;
-      };
-      description: string;
-    };
-
-    export function ImageGallery({ items }: { items: GalleryItemType[] }) {
-      const [mainItem, setMainItem] = useState(items[0]);
-
-      return (
-        <>
-          <div>
-            <img
-              src={\`\${mainItem.image.imgix_url}?w=1200&auto=format,compression\`}
-              alt={mainItem.description}
-              className="rounded-xl mb-4 h-80 w-full object-cover object-center"
-            />
-          </div>
-          <div className="flex gap-x-2">
-            {items.map((item: GalleryItemType) => {
-              return (
-                <div
-                  onClick={() => setMainItem(item)}
-                  key={item.image.imgix_url}
-                  className={cn(
-                    \`rounded-xl overflow-hidden border-4\`,
-                    item.image.imgix_url === mainItem.image.imgix_url
-                      ? "border-blue-500"
-                      : ""
-                  )}
-                >
-                  <img
-                    src={\`\${item.image.imgix_url}?w=200&auto=format,compression\`}
-                    className="h-20 w-20 object-cover object-center cursor-pointer"
-                    alt={item.description}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </>
-      );
-    }
+  const blockCommand = dedent`
+  \`\`\`bash
+  bunx @cosmicjs/blocks add image-gallery
   \`\`\`
   `
 
   const steps = [
     {
-      title:
-        "Add a new file located at `components/image-gallery.tsx` with the following",
-      code: codeImageGalleryString,
+      title: "Install the Block content model",
+      description:
+        "This will add the `image_gallery` repeater Metafield to the Object type(s) of your choice.",
+      installButton: true,
+    },
+    {
+      title: "Install the Block code",
+      code: blockCommand,
+      description:
+        "This will add the file `ImageGallery.tsx` to `cosmic/blocks/ImageGallery`.",
     },
     {
       title:
-        "Add the Image Gallery component to any file that needs an image gallery",
+        "Add the Image Gallery block to any file that needs an image gallery",
       code: codeString,
     },
   ]
 
   return (
     <>
-      <CodeSteps steps={steps} preview={<Preview />} />
+      <CodeSteps
+        steps={steps}
+        preview={<Preview />}
+        featureKey="image-gallery"
+      />
     </>
   )
 }

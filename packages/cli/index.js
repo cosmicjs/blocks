@@ -33,6 +33,10 @@ const blocks = {
     name: "Comments",
     installationSteps: ["@cosmicjs/sdk", "lucide-react", "@radix-ui/react-slot", "class-variance-authority", "@radix-ui/react-label"],
   },
+  "image-gallery": {
+    name: "Image Gallery",
+    installationSteps: ["@cosmicjs/sdk", "tailwind-merge"],
+  },
 }
 
 async function addComponent(component) {
