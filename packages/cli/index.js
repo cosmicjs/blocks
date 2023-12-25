@@ -41,6 +41,10 @@ const blocks = {
     name: "Testimonials",
     installationSteps: ["@cosmicjs/sdk"],
   },
+  "team": {
+    name: "Team",
+    installationSteps: ["@cosmicjs/sdk"],
+  }
 }
 
 async function addComponent(component) {

@@ -1,29 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
-import dedent from "dedent"
-
-import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import CodeSteps from "@/components/layouts/CodeSteps"
-
-export default async function Team({
-  searchParams,
-}: {
-  searchParams: {
-    tab?: "preview" | "tab"
-  }
-}) {
-  let tab = searchParams.tab
-  if (!tab) tab = "preview"
-
-  return (
-    <>
-      <section className="container m-auto grid  items-center pb-8">
-        {tab === "preview" ? <Preview /> : <Code />}
-      </section>
-    </>
-  )
-}
-
-type MemberType = {
+// components/team-card.tsx
+export type MemberType = {
   title: string
   slug: string
   metadata: {
@@ -38,8 +14,7 @@ type MemberType = {
     }
   }
 }
-
-function TeamCard({ member }: { member: MemberType }) {
+export function TeamCard({ member }: { member: MemberType }) {
   return (
     <div className="flex w-full flex-col overflow-hidden rounded-lg bg-slate-100 shadow-lg dark:bg-slate-800 md:flex-row">
       <div className="h-full w-full md:w-2/5">
@@ -103,70 +78,6 @@ function TeamCard({ member }: { member: MemberType }) {
           )}
         </div>
       </div>
-    </div>
-  )
-}
-async function Preview() {
-  const cosmic = cosmicSourceBucketConfig
-  const { objects: members } = await cosmic.objects
-    .find({
-      type: "team-members",
-    })
-    .props("title,slug,metadata")
-    .depth(1)
-  return (
-    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-4">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {members.map((member: MemberType) => {
-          return <TeamCard key={member.slug} member={member} />
-        })}
-      </div>
-    </section>
-  )
-}
-function Code() {
-  const blockCommand = dedent`
-  \`\`\`bash
-  bunx @cosmicjs/blocks add team
-  \`\`\`
-  `
-
-  const steps = [
-    {
-      title: "Install the Block content model",
-      description:
-        "This will add the `team-members` Object type to your Bucket.",
-      installButton: true,
-    },
-    {
-      title: "Install the Block code",
-      code: blockCommand,
-      description:
-        "This will add the `TeamCard.tsx` and `TeamGrid.tsx` files to `cosmic/blocks/team`.",
-    },
-    {
-      title: "Add the following to any page that needs team.",
-      code: dedent(`\`\`\`jsx
-      // app/about/page.tsx
-      import { TeamGrid } from "@/cosmic/blocks/team/TeamGrid";
-      
-      export default function Home() {
-        return (
-          <main className="container">
-            {/* page content above */}
-            <Team query={{ type: "team-members" }}/>
-            {/* page content below */}
-          </main>
-        );
-      }
-    \`\`\`
-    `),
-    },
-  ]
-
-  return (
-    <div className="max-w-[800px]">
-      <CodeSteps steps={steps} preview={<Preview />} featureKey="team" />
     </div>
   )
 }
