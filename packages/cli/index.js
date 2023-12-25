@@ -37,6 +37,10 @@ const blocks = {
     name: "Image Gallery",
     installationSteps: ["@cosmicjs/sdk", "tailwind-merge"],
   },
+  "testimonials": {
+    name: "Testimonials",
+    installationSteps: ["@cosmicjs/sdk"],
+  },
 }
 
 async function addComponent(component) {
