@@ -154,7 +154,7 @@ function Code() {
         return (
           <main className="container">
             {/* page content above */}
-            <Team query={{ type: "team-members" }}/>
+            <TeamGrid query={{ type: "team-members" }}/>
             {/* page content below */}
           </main>
         );
