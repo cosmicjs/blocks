@@ -48,7 +48,7 @@ function Code() {
   const codeString = dedent`
     \`\`\`jsx
       // app/layout.tsx
-      import { NavMenu } from "@/cosmic/NavMenu";
+      import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
       export default async function RootLayout({ children }: RootLayoutProps) {
         return (
           <>
