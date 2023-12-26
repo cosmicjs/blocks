@@ -127,7 +127,7 @@ function Code() {
   const codeString = dedent`
     \`\`\`jsx
       // app/shop/page.tsx
-      import { ProductGrid } from "@/cosmic/blocks/ProductGrid";
+      import { ProductGrid } from "@/cosmic/blocks/products/ProductGrid";
 
       export default async function ShopPage() {
         return (
@@ -151,6 +151,8 @@ function Code() {
   const codeSingleProductString = dedent`
     \`\`\`jsx
       // app/shop/[slug]/page.tsx
+      import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
+      
       export default async function SingleProductPage({
         params,
       }: {
