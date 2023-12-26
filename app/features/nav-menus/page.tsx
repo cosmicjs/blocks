@@ -82,7 +82,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the files `NavMenu.tsx` and `NavigationMenu.tsx` to your blocks folder located in `cosmic/blocks/navigation-menu`.",
+        "This will add the files `NavMenu.tsx` and `MobileNav.tsx` to your blocks folder located in `cosmic/blocks/navigation-menu`.",
     },
     {
       title:
