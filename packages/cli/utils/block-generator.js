@@ -63,7 +63,11 @@ async function blockGenerator(blockObject, sourceFolderPath) {
       createUtilsFile(cosmicFolderPath)
 
       // Create a folder with the block's name key
-      let destinationFolderPath = path.join(blocksPath, name.toLowerCase())
+      let destinationFolderPath = path.join(
+        blocksPath,
+        name.toLowerCase().replace(" ", "-")
+      )
+      console.log(destinationFolderPath)
       if (fs.existsSync(destinationFolderPath)) {
         const response = await prompts({
           type: "select",
@@ -162,7 +166,6 @@ function updateTailwindFile() {
 function createCosmicFolder() {
   const currentDir = process.cwd()
   let cosmicFolderPath = path.join(currentDir, "cosmic")
-
   if (!fs.existsSync(cosmicFolderPath)) {
     fs.mkdirSync(cosmicFolderPath)
     console.log("-> Cosmic folder created successfully.")
@@ -173,7 +176,6 @@ function createCosmicFolder() {
 
 function createBlocksFolder(cosmicFolderPath) {
   const blocksFolderPath = path.join(cosmicFolderPath, "blocks")
-
   if (!fs.existsSync(blocksFolderPath)) {
     fs.mkdirSync(blocksFolderPath)
     console.log("-> Blocks folder created successfully.")
