@@ -59,6 +59,14 @@ const blocks = {
     name: "Navigation Menu",
     installationSteps: ["@cosmicjs/sdk", "lucide-react"],
   },
+  products: {
+    name: "products",
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "@radix-ui/react-slot",
+      "class-variance-authority",
+    ],
+  },
 }
 
 async function addComponent(component) {
