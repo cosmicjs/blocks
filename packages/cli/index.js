@@ -67,6 +67,10 @@ const blocks = {
       "class-variance-authority",
     ],
   },
+  events: {
+    name: "events",
+    installationSteps: ["@cosmicjs/sdk"],
+  },
 }
 
 async function addComponent(component) {
