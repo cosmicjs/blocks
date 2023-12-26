@@ -156,7 +156,7 @@ function updateTailwindFile() {
     }
   } else {
     console.log(
-      chalk.orange(
+      chalk.red(
         "Error locating tailwind.config.js file. Please add cosmic folder to your content path manually."
       )
     )
