@@ -2,7 +2,7 @@
 import { cosmic } from "@/cosmic/client"
 import Link from "next/link"
 import { Button } from "./button"
-import { ImageGallery } from "@/cosmic/blocks/image-gallery"
+import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery"
 
 export async function SingleProduct({ query }: { query: any }) {
   const { object: product } = await cosmic.objects
