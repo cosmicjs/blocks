@@ -124,20 +124,30 @@ function updateTailwindFile() {
   const tailwindConfigPath = path.join(process.cwd(), "tailwind.config.js")
   if (fs.existsSync(tailwindConfigPath)) {
     const content = fs.readFileSync(tailwindConfigPath, "utf8")
+
     const regex = /content:\s*\[["'].*["']\]/g
     const match = content.match(regex)
-    if (match) {
-      const arrayString = match[0].match(/\[["'](.*)["']\]/)[1]
-      let parsedArray = arrayString.split('", "')
+
+    if (match.length > 0) {
+      let arrayString = match[0].replace("content: ", "")
+      arrayString = arrayString.replace(/'/g, '"')
+      let parsedArray = JSON.parse(arrayString)
       const hasCosmicPath = parsedArray.includes(cosmicTailwindPath)
       if (!hasCosmicPath) {
         console.log("-> Adding cosmic folder to tailwind config file...")
+
         parsedArray.push(cosmicTailwindPath)
         let newContent = `content: ${JSON.stringify(parsedArray)}`
-        newContent = newContent.replace(/'/g, '"')
         const oldContent = match[0]
         const updatedTailwindConfig = content.replace(oldContent, newContent)
+
         fs.writeFileSync(tailwindConfigPath, updatedTailwindConfig, "utf8")
+
+        console.log(
+          chalk.yellowBright(
+            "Tailwind config updated. Please restart your server."
+          )
+        )
       }
     }
   } else {
