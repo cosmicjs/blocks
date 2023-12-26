@@ -27,24 +27,38 @@ const blocks = {
   },
   pages: {
     name: "Pages",
-    installationSteps: ["@cosmicjs/sdk", "@radix-ui/react-slot", "class-variance-authority"],
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "@radix-ui/react-slot",
+      "class-variance-authority",
+    ],
   },
   comments: {
     name: "Comments",
-    installationSteps: ["@cosmicjs/sdk", "lucide-react", "@radix-ui/react-slot", "class-variance-authority", "@radix-ui/react-label"],
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "lucide-react",
+      "@radix-ui/react-slot",
+      "class-variance-authority",
+      "@radix-ui/react-label",
+    ],
   },
   "image-gallery": {
     name: "Image Gallery",
     installationSteps: ["@cosmicjs/sdk", "tailwind-merge"],
   },
-  "testimonials": {
+  testimonials: {
     name: "Testimonials",
     installationSteps: ["@cosmicjs/sdk"],
   },
-  "team": {
+  team: {
     name: "Team",
     installationSteps: ["@cosmicjs/sdk"],
-  }
+  },
+  "navigation-menu": {
+    name: "Navigation Menu",
+    installationSteps: ["@cosmicjs/sdk", "lucide-react"],
+  },
 }
 
 async function addComponent(component) {

@@ -1,12 +1,11 @@
-// components/nav-menu.tsx
 import Link from "next/link"
-import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import { MobileNav } from "@/components/MobileNav"
+import { cosmic } from "@/cosmic/client"
+import { MobileNav } from "./MobileNav"
 
 export type ItemType = { title: string; link: string; open_in_new_tab: boolean }
 
 export async function NavMenu({ query }: { query: any }) {
-  const { object: nav } = await cosmicSourceBucketConfig.objects
+  const { object: nav } = await cosmic.objects
     .findOne(query)
     .props("metadata")
     .depth(1)

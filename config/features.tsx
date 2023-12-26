@@ -92,11 +92,11 @@ export const features = [
   },
   {
     key: "navigation_menus",
-    title: "Navigation Menus",
+    title: "Navigation Menu",
     type: "object_type",
     slug: "navigation-menus",
     icon: <MenuIcon className="h-5 w-5 text-cosmic-blue" />,
-    description: `Adds a Navigation Menus Object type to your Bucket, which includes`,
+    description: `Adds a Navigation Menu Object type to your Bucket, which includes`,
     field_list: [
       "Links repeater with title, link, and option to open in a new browser tab",
     ],
