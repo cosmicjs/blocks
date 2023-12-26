@@ -1,4 +1,5 @@
 import fs from "fs"
+
 import { execa } from "execa"
 import { getPackageManager } from "./get-package-manager.js"
 import { getCommand } from "@antfu/ni"
@@ -99,6 +100,9 @@ async function blockGenerator(blockObject, sourceFolderPath) {
       })
     }
 
+    // Update tailwind config to include Cosmic folder
+    updateTailwindFile()
+
     console.log(chalk.green(`Block ${name} added successfully!`))
     console.log(chalk.yellow(`View more blocks at cosmicjs.com/blocks.`))
   } catch (error) {
@@ -114,15 +118,35 @@ async function blockGenerator(blockObject, sourceFolderPath) {
   }
 }
 
-function updateTailwindFile(cosmicFolderPath) {
-  // content.push(path.join(cosmicFolderPath, "**/*.ts"))
-  // content.push(path.join(cosmicFolderPath, "**/*.tsx"))
-  // content.push(path.join(cosmicFolderPath, "**/*.js"))
-  // console.log("content", content)
-  // fs.writeFileSync(
-  //   tailwindConfigPath,
-  //   `module.exports = ${JSON.stringify(tailwindConfig, null, 2)};`
-  // )
+function updateTailwindFile() {
+  const cosmicTailwindPath = "cosmic/**/*.{ts,tsx,js,jsx}"
+
+  const tailwindConfigPath = path.join(process.cwd(), "tailwind.config.js")
+  if (fs.existsSync(tailwindConfigPath)) {
+    const content = fs.readFileSync(tailwindConfigPath, "utf8")
+    const regex = /content:\s*\[["'].*["']\]/g
+    const match = content.match(regex)
+    if (match) {
+      const arrayString = match[0].match(/\[["'](.*)["']\]/)[1]
+      let parsedArray = arrayString.split('", "')
+      const hasCosmicPath = parsedArray.includes(cosmicTailwindPath)
+      if (!hasCosmicPath) {
+        console.log("-> Adding cosmic folder to tailwind config file...")
+        parsedArray.push(cosmicTailwindPath)
+        let newContent = `content: ${JSON.stringify(parsedArray)}`
+        newContent = newContent.replace(/'/g, '"')
+        const oldContent = match[0]
+        const updatedTailwindConfig = content.replace(oldContent, newContent)
+        fs.writeFileSync(tailwindConfigPath, updatedTailwindConfig, "utf8")
+      }
+    }
+  } else {
+    console.log(
+      chalk.orange(
+        "Error locating tailwind.config.js file. Please add cosmic folder to your content path manually."
+      )
+    )
+  }
 }
 
 function createCosmicFolder() {
@@ -133,8 +157,6 @@ function createCosmicFolder() {
     fs.mkdirSync(cosmicFolderPath)
     console.log("-> Cosmic folder created successfully.")
   }
-
-  updateTailwindFile(cosmicFolderPath)
 
   return cosmicFolderPath
 }
