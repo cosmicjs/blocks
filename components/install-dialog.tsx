@@ -73,7 +73,7 @@ export function InstallDialog({
   featureKey,
   setShowModal,
 }: {
-  featureKey: string
+  featureKey?: string
   setShowModal: any
 }) {
   const [showLoginMessage, setShowLoginMessage] = useState(false)

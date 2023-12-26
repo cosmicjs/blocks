@@ -6,6 +6,8 @@ import dedent from "dedent"
 import { BucketAPILink } from "../bucket-api-link"
 import { useSearchParams } from "next/navigation"
 import classNames from "classnames"
+import { Button } from "@/components/ui/button"
+import { InstallDialog } from "@/components/install-dialog"
 
 type StepProps = {
   title: string
@@ -21,6 +23,7 @@ type CodeStepsProps = {
   steps: StepProps[]
   scratch?: boolean
   writeKey?: boolean
+  featureKey?: string
 }
 
 const managers = {
@@ -88,7 +91,16 @@ function Step({
   code,
   index,
   scratch,
-}: StepProps & { index: number; length: number; scratch: boolean }) {
+  installButton,
+  featureKey,
+}: StepProps & {
+  index: number
+  length: number
+  scratch: boolean
+  installButton?: boolean
+  featureKey?: string
+}) {
+  const [showModal, setShowModal] = useState<boolean>(false)
   return (
     <div className="relative mb-10">
       <div
@@ -98,7 +110,7 @@ function Step({
       ></div>
       <div className="relative flex">
         <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-          {scratch ? index + 1 : index + 2}
+          {index + 1}
         </div>
         <h3 className="text-lg font-semibold lg:text-2xl">
           <Title text={title} />{" "}
@@ -113,7 +125,17 @@ function Step({
           )}
         </div>
       )}
-      {code && <Markdown>{dedent(code)}</Markdown>}
+      {installButton && (
+        <>
+          <Button onClick={() => setShowModal(true)}>
+            Install Block content
+          </Button>
+        </>
+      )}
+      {!installButton && code && <Markdown>{dedent(code)}</Markdown>}
+      {showModal && (
+        <InstallDialog featureKey={featureKey} setShowModal={setShowModal} />
+      )}
     </div>
   )
 }
@@ -125,6 +147,7 @@ function CodeSteps(props: CodeStepsProps) {
     steps,
     scratch = false,
     title,
+    featureKey,
   } = props
 
   const searchParams = useSearchParams()
@@ -162,23 +185,20 @@ function CodeSteps(props: CodeStepsProps) {
     <div className="w-auto max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-[750px]">
       {!scratch && (
         <div>
-          <div className="mb-6">
-            {title ||
-              "The following code example uses Next.js, Tailwind CSS, and the Cosmic JavaScript SDK. Feel free to skip any steps that have already been completed."}
-          </div>
           <div className="relative mb-10">
             <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200" />
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                1
+                0
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
                 Install a new Next.js project
               </h3>
             </div>
             <div className="py-2">
-              Note: Be sure to include TypeScript and Tailwind CSS in the
-              installation options.
+              You may skip this step if you are installing the Block to an
+              existing Next.js app. Note: Be sure to include TypeScript and
+              Tailwind CSS in the installation options.
             </div>
             {(newProjectStep || step1)?.map((step) => (
               <Markdown>
@@ -188,6 +208,22 @@ function CodeSteps(props: CodeStepsProps) {
           `)}
               </Markdown>
             ))}
+            <h3 className="mt-8 text-lg font-semibold lg:text-2xl">
+              Create your ENV vars file
+            </h3>
+            <div className="mt-2">
+              Go to <BucketAPILink /> to get your API keys and add them to a{" "}
+              {wrapWithSpan(`\`.env.local\``)} file.
+            </div>
+            <Markdown>
+              {dedent(`\`\`\`
+          # .env.local
+          COSMIC_BUCKET_SLUG=change_to_your_bucket_slug
+          COSMIC_READ_KEY=change_to_your_bucket_read_key
+          COSMIC_WRITE_KEY=change_to_your_bucket_write_key
+          \`\`\`
+          `)}
+            </Markdown>
           </div>
         </div>
       )}
@@ -197,6 +233,7 @@ function CodeSteps(props: CodeStepsProps) {
           key={index}
           index={index}
           length={steps.length}
+          featureKey={featureKey}
           {...step}
         />
       ))}
@@ -206,7 +243,7 @@ function CodeSteps(props: CodeStepsProps) {
             <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"></div>
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                {steps.length + 2}
+                {steps.length + 1}
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">Run the app</h3>
             </div>
@@ -215,11 +252,11 @@ function CodeSteps(props: CodeStepsProps) {
           <div className="relative mb-10">
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                {steps.length + 3}
+                {steps.length + 2}
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
-                Go to http://localhost:3000 and any page where this component
-                has been added. It should look like this:
+                Open http://localhost:3000 and go to any page where this
+                component has been added. It should look like this:
               </h3>
             </div>
           </div>

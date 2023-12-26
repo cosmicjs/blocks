@@ -108,37 +108,42 @@ function Code() {
   const codeString = dedent`
       \`\`\`jsx
         // app/page.tsx
-        import { cosmic } from "@/lib/cosmic";
-        import { FAQs } from "@/components/faqs";
+        import { FAQs } from "@/cosmic/blocks/faqs/FAQs";
         
         export default async function Home() {
-          
-          const { object: page } = await cosmic.objects
-            .findOne({
-              type: "pages",
-              slug: "home",
-            })
-            .props("slug,title,metadata")
-            .depth(1)
-          
+          const query = {
+            slug: "home",
+            type: "pages"
+          }
           return (
             <main className="container">
-              {/* page content above */}
-              {page.metadata.faqs && ( // check if exists
-                <FAQs faqs={page.metadata.faqs} />
-              )}
-              {/* page content below */}
+              <h2 className="mb-4 text-2xl font-semibold">
+                Frequently Asked Questions
+              </h2>
+              <FAQs query={query} />
             </main>
           );
         }    
       \`\`\`
       `
+  const blockCommand = dedent`
+    \`\`\`bash
+    bunx @cosmicjs/blocks add faqs
+    \`\`\`
+    `
 
   const steps = [
     {
-      title:
-        " Create a new file located at `components/faqs.tsx` with the following",
-      code: componentCodeString,
+      title: "Install the Block content model",
+      description:
+        "This will add the `faqs` repeater Metafield to the Object type(s) of your choice.",
+      installButton: true,
+    },
+    {
+      title: "Install the Block code",
+      code: blockCommand,
+      description:
+        "This will add the files `Accordion.tsx` and `FAQs.tsx` to your blocks folder located in `cosmic/blocks/faqs`.",
     },
     {
       title: "Add the FAQs component to any file that needs FAQs",
@@ -148,15 +153,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps
-        step2={[
-          "bun add @cosmicjs/sdk",
-          "npx shadcn-ui@latest init",
-          "npx shadcn-ui@latest add accordion",
-        ]}
-        steps={steps}
-        preview={<Preview />}
-      />
+      <CodeSteps steps={steps} preview={<Preview />} featureKey="faqs" />
     </>
   )
 }

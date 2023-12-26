@@ -21,8 +21,30 @@ const blocks = {
       "@cosmicjs/sdk",
       "@radix-ui/react-accordion",
       "@radix-ui/react-icons",
+      "clsx",
+      "tailwind-merge",
     ],
   },
+  pages: {
+    name: "Pages",
+    installationSteps: ["@cosmicjs/sdk", "@radix-ui/react-slot", "class-variance-authority"],
+  },
+  comments: {
+    name: "Comments",
+    installationSteps: ["@cosmicjs/sdk", "lucide-react", "@radix-ui/react-slot", "class-variance-authority", "@radix-ui/react-label"],
+  },
+  "image-gallery": {
+    name: "Image Gallery",
+    installationSteps: ["@cosmicjs/sdk", "tailwind-merge"],
+  },
+  "testimonials": {
+    name: "Testimonials",
+    installationSteps: ["@cosmicjs/sdk"],
+  },
+  "team": {
+    name: "Team",
+    installationSteps: ["@cosmicjs/sdk"],
+  }
 }
 
 async function addComponent(component) {
@@ -35,7 +57,7 @@ async function addComponent(component) {
   )
 
   // source code for the block
-  const sourceFolderPath = path.join(__dirname, "components", component)
+  const sourceFolderPath = path.join(__dirname, "src", component)
 
   await blockGenerator(blockData, sourceFolderPath)
 }
