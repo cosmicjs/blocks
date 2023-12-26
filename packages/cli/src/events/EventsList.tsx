@@ -1,8 +1,7 @@
-// components/events.tsx
 import { cosmic } from "@/cosmic/client"
 import { EventCard, EventCardType } from "./EventCard"
 
-export async function Events({ query }: { query: any }) {
+export async function EventsList({ query }: { query: any }) {
   const { objects: events } = await cosmic.objects
     .find(query)
     .props("title,slug,metadata")
