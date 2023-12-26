@@ -85,8 +85,9 @@ function Code() {
         "This will add the files `NavMenu.tsx` and `MobileNav.tsx` to your blocks folder located in `cosmic/blocks/navigation-menu`.",
     },
     {
-      title:
-        "Add the Navigation component to any file that needs navigation links. For example, adding it to the `app/layout.tsx` file will make sure all pages include the header and footer links.",
+      title: "Add the NavMenu block to any file that needs navigation links.",
+      description:
+        "For example, adding it to the `app/layout.tsx` file will make sure all pages include the header and footer links.",
       code: codeString,
     },
   ]
