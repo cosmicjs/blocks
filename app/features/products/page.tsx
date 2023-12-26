@@ -190,7 +190,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps steps={steps} preview={<Preview />} />
+      <CodeSteps steps={steps} preview={<Preview />} featureKey="products" />
     </>
   )
 }
