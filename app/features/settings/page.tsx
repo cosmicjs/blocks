@@ -101,20 +101,12 @@ async function Preview() {
 function Code() {
   const codeHeaderString = dedent`
     \`\`\`jsx
-      // components/header.tsx
+      // components/Header.tsx
       import Link from "next/link";
-      import { cosmic } from "@/lib/cosmic";
-      import { NavMenu } from "@/components/nav-menu";
+      import { cosmic } from "@/cosmic/client";
+      import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
 
       export default async function Header() {
-        // Header data
-        const { object: header } = await cosmic.objects
-          .findOne({
-            type: "navigation-menus",
-            slug: "header",
-          })
-          .props("metadata")
-          .depth(1);
         
         const { object: settings } = await cosmic.objects
           .findOne({
@@ -133,7 +125,7 @@ function Code() {
                 className="h-20 m-auto"
               />
             </Link>
-            <NavMenu items={header.metadata.items} />
+            <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
           </div>
         );
       }
@@ -141,20 +133,11 @@ function Code() {
     `
   const codeFooterString = dedent`
     \`\`\`jsx
-      // components/footer.tsx
-      import { cosmic } from "@/lib/cosmic";
-      import { NavMenu } from "@/components/nav-menu";
+      // components/Footer.tsx
+      import { cosmic } from "@/cosmic/client";
+      import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
 
       export default async function Footer() {
-        // Footer data
-        const { object: footer } = await cosmic.objects
-          .findOne({
-            type: "navigation-menus",
-            slug: "footer",
-          })
-          .props("metadata")
-          .depth(1);
-
         const { object: settings } = await cosmic.objects
           .findOne({
             type: "global-settings",
@@ -174,7 +157,7 @@ function Code() {
         return (
           <div className="my-10">
             <div className="my-8">
-              <NavMenu items={footer.metadata.items} />
+              <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
             </div>
             <div className="mb-8 flex gap-x-8 justify-center">
               {settings.metadata.links.map((link: Link) => {
@@ -206,7 +189,7 @@ function Code() {
   const steps = [
     {
       title:
-        "The Global Settings data is meant to be used in multiple locations. For example, add the following to the `components/header.tsx` file ",
+        "The Global Settings data is meant to be used in multiple locations. For example, add the following to the a `Header.tsx` file ",
       description: (
         <>
           Note: this assumes you have installed the{" "}
@@ -218,12 +201,12 @@ function Code() {
       code: codeHeaderString,
     },
     {
-      title: "Add the following to the `components/footer.tsx` file",
+      title: "Add the following to a `Footer.tsx` file",
       description: (
         <>
           Note: this assumes you have installed the{" "}
           <Link href="/features/nav-menus" className="text-cosmic-blue">
-            Nav Menu feature template
+            Navigation Menu block
           </Link>
         </>
       ),
