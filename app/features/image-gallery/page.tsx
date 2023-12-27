@@ -61,25 +61,13 @@ function Code() {
   const codeString = dedent`
       \`\`\`jsx
         // app/page.tsx
-        import { cosmic } from "@/cosmic/client";
         import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery";
         
         export default async function Home() {
-          
-          const { object: page } = await cosmic.objects
-            .findOne({
-              type: "pages",
-              slug: "home",
-            })
-            .props("slug,title,metadata")
-            .depth(1)
-          
           return (
             <main className="container">
               {/* page content above */}
-              {page.metadata.gallery && ( // check if exists
-                <ImageGallery items={page.metadata.gallery} />
-              )}
+              <ImageGallery query={{ type: "pages", slug: "home" }} />
               {/* page content below */}
             </main>
           );
@@ -103,7 +91,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the file `ImageGallery.tsx` to `cosmic/blocks/ImageGallery`.",
+        "This will add the file `ImageGallery.tsx` and `ImageGalleryClient.tsx` to `cosmic/blocks/image-gallery`.",
     },
     {
       title:
