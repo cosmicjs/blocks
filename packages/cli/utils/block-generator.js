@@ -46,7 +46,7 @@ async function blockGenerator(blockObject, sourceFolderPath) {
       fs.rmSync(destinationFolderPath, { recursive: true })
     } else {
       console.log(
-        chalk.red(`✗ Installation for ${chalk.bold(name)} Block  cancelled.`)
+        chalk.red(`✗ Installation for ${chalk.bold(name)} Block cancelled.`)
       )
       console.log(" ")
       return
@@ -143,7 +143,15 @@ async function blockGenerator(blockObject, sourceFolderPath) {
     // Update tailwind config to include Cosmic folder
     updateTailwindFile()
 
-    console.log(chalk.green(`✔ ${chalk.bold(name)} Block added successfully!`))
+    console.log(
+      chalk.green(
+        `✔ ${chalk.bold(
+          name
+        )} Block added successfully! Find it at /cosmic/blocks/${name
+          .toLowerCase()
+          .replace(" ", "-")}`
+      )
+    )
     console.log(" ")
   } catch (error) {
     if (error.code === "EEXIST")
