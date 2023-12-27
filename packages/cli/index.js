@@ -117,7 +117,7 @@ const addCommand = new Command()
       chalk.greenBright(
         `ϟ Executed superfast in ${((endTime - startTime) / 1000).toFixed(
           2
-        )} seconds.`
+        )} seconds!`
       )
     )
 
