@@ -124,25 +124,16 @@ function Code() {
       code: dedent(`\`\`\`jsx
         // app/blog/[slug]/page.tsx
         import { Comments } from "@/cosmic/blocks/comments/Comments";
-        import { cosmic } from "@/cosmic/client";
         
         export default async function BlogPost({
           params,
         }: {
           params: { slug: string };
         }) {
-          const { object: blog } = await cosmic.objects
-            .findOne({
-              slug: params.slug,
-              type: "blog-posts"
-            })
-            .props("id")
-            .depth(1);
-            
           return (
             <main className="container">
               {/* page content above */}
-              <Comments resourceId={blog.id} />
+              <Comments query={{ slug: params.slug, type: "blog-posts" }} />
               {/* page content below */}
             </main>
           );
