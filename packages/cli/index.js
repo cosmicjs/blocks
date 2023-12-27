@@ -33,6 +33,7 @@ const blocks = {
       "@cosmicjs/sdk",
       "@radix-ui/react-slot",
       "class-variance-authority",
+      "tailwind-merge",
     ],
     elements: ["Button"],
   },
@@ -104,8 +105,10 @@ const addCommand = new Command()
     const startTime = performance.now()
     for (const component of components) {
       if (!Object.keys(blocks).includes(component)) {
-        console.error(
-          `"${component}" is an invalid Block name. Please find a valid list of Blocks on cosmicjs.com/blocks`
+        return console.error(
+          chalk.red(
+            `"${component}" is an invalid Block name. Please find a valid list of Blocks on cosmicjs.com/blocks`
+          )
         )
       } else {
         await addComponent(component)
