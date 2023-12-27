@@ -69,58 +69,18 @@ async function Preview() {
   )
 }
 function Code() {
-  const componentCodeString = dedent`
-      \`\`\`jsx
-        // components/faqs.tsx
-        import {
-          Accordion,
-          AccordionContent,
-          AccordionItem,
-          AccordionTrigger,
-        } from "@/components/ui/accordion";
-        
-        type FAQ = {
-          question: string;
-          answer: string;
-        };
-        
-        export async function FAQs({ faqs }: { faqs: FAQ[] }) {
-          return (
-            <>
-              <h2 className="text-2xl font-semibold mb-4">
-                Frequently Asked Questions
-              </h2>
-              {faqs.map((faq: FAQ) => {
-                return (
-                  <Accordion type="single" collapsible key={faq.question}>
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger>{faq.question}</AccordionTrigger>
-                      <AccordionContent>{faq.answer}</AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                );
-              })}
-            </>
-          );
-        }      
-      \`\`\`
-      `
   const codeString = dedent`
       \`\`\`jsx
         // app/page.tsx
         import { FAQs } from "@/cosmic/blocks/faqs/FAQs";
         
         export default async function Home() {
-          const query = {
-            slug: "home",
-            type: "pages"
-          }
           return (
             <main className="container">
               <h2 className="mb-4 text-2xl font-semibold">
                 Frequently Asked Questions
               </h2>
-              <FAQs query={query} />
+              <FAQs query={{ slug: "home", type: "pages" }} />
             </main>
           );
         }    

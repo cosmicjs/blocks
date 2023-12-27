@@ -1,6 +1,6 @@
 // app/page.tsx
 import { cn } from "@/cosmic/utils"
-import { buttonVariants } from "./button"
+import { buttonVariants } from "@/cosmic/elements/Button"
 import { Section } from "./PageSection"
 import { cosmic } from "@/cosmic/client"
 

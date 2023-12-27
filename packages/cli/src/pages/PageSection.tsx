@@ -1,6 +1,6 @@
 // components/page-section.tsx
 import { cn } from "@/cosmic/utils"
-import { buttonVariants } from "./button"
+import { buttonVariants } from "@/cosmic/elements/Button"
 
 type SectionType = {
   heading: string

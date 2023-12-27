@@ -36,9 +36,17 @@ function Comment({ comment }: { comment: Comment }) {
   )
 }
 
-export async function Comments({ resourceId }: { resourceId: string }) {
+export async function Comments({ query }: { query: any }) {
   let comments = []
+  let resourceId
   try {
+    // Get the id
+    const { object: resource } = await cosmic.objects
+      .findOne(query)
+      .props("id")
+      .depth(1)
+    resourceId = resource.id
+
     const { objects } = await cosmic.objects
       .find({
         type: "comments",
@@ -49,7 +57,9 @@ export async function Comments({ resourceId }: { resourceId: string }) {
       .depth(1)
       .sort("created_at")
     comments = objects
-  } catch (err) {}
+  } catch (err) {
+    return
+  }
   return (
     <>
       <h2 className="mb-4 text-2xl">Comments</h2>
