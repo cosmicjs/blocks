@@ -75,16 +75,12 @@ function Code() {
         import { FAQs } from "@/cosmic/blocks/faqs/FAQs";
         
         export default async function Home() {
-          const query = {
-            slug: "home",
-            type: "pages"
-          }
           return (
             <main className="container">
               <h2 className="mb-4 text-2xl font-semibold">
                 Frequently Asked Questions
               </h2>
-              <FAQs query={query} />
+              <FAQs query={{ slug: "home", type: "pages" }} />
             </main>
           );
         }    
