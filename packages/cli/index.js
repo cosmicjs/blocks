@@ -5,6 +5,8 @@ import { Command, program } from "commander"
 import { fileURLToPath } from "url"
 import { capitalize } from "./utils/capitalize.js"
 import { blockGenerator } from "./utils/block-generator.js"
+import { performance } from "perf_hooks"
+
 import chalk from "chalk"
 
 const __filename = fileURLToPath(import.meta.url)
@@ -32,6 +34,7 @@ const blocks = {
       "@radix-ui/react-slot",
       "class-variance-authority",
     ],
+    elements: ["Button"],
   },
   comments: {
     name: "Comments",
@@ -42,6 +45,7 @@ const blocks = {
       "class-variance-authority",
       "@radix-ui/react-label",
     ],
+    elements: ["Button", "Input", "Label", "TextArea"],
   },
   "image-gallery": {
     name: "Image Gallery",
@@ -60,12 +64,13 @@ const blocks = {
     installationSteps: ["@cosmicjs/sdk", "lucide-react"],
   },
   products: {
-    name: "products",
+    name: "Products",
     installationSteps: [
       "@cosmicjs/sdk",
       "@radix-ui/react-slot",
       "class-variance-authority",
     ],
+    elements: ["Button"],
   },
   events: {
     name: "events",
@@ -78,9 +83,12 @@ async function addComponent(component) {
 
   console.log(
     chalk.yellow(
-      `-> Initiating installation of ${capitalize(blockData.name)} Block...`
+      `➤ Initiating installation of ${chalk.bold(
+        capitalize(blockData.name)
+      )} Block...`
     )
   )
+  console.log(" ")
 
   // source code for the block
   const sourceFolderPath = path.join(__dirname, "src", component)
@@ -92,15 +100,32 @@ const addCommand = new Command()
   .name("add")
   .description("add blocks to your project")
   .argument("<components...>", "the blocks to add")
-  .action((components) => {
-    components.forEach((component) => {
-      // Iterate through the blocks
+  .action(async (components) => {
+    const startTime = performance.now()
+    for (const component of components) {
       if (!Object.keys(blocks).includes(component)) {
         console.error(
           `"${component}" is an invalid Block name. Please find a valid list of Blocks on cosmicjs.com/blocks`
         )
-      } else addComponent(component)
-    })
+      } else {
+        await addComponent(component)
+      }
+    }
+    const endTime = performance.now()
+
+    console.log(
+      chalk.greenBright(
+        `ϟ Executed superfast in ${((endTime - startTime) / 1000).toFixed(
+          2
+        )} seconds.`
+      )
+    )
+
+    console.log(
+      chalk.yellow(
+        `➤ View more Blocks at ${chalk.bold("cosmicjs.com/blocks.")}`
+      )
+    )
   })
 
 program.addCommand(addCommand)

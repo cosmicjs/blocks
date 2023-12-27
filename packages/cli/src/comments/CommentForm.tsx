@@ -4,10 +4,10 @@
 import { useState } from "react"
 import { CheckCircle, Loader2, XCircle } from "lucide-react"
 
-import { Button } from "./button"
-import { Input } from "./input"
-import { Label } from "./label"
-import { Textarea } from "./textarea"
+import { Button } from "@/cosmic/elements/Button"
+import { Input } from "@/cosmic/elements/Input"
+import { Label } from "@/cosmic/elements/Label"
+import { Textarea } from "@/cosmic/elements/TextArea"
 
 export function CommentForm({ resourceId }: { resourceId: string }) {
   const [name, setName] = useState("")

@@ -1,7 +1,7 @@
 // app/shop/[slug]/page.tsx
 import { cosmic } from "@/cosmic/client"
 import Link from "next/link"
-import { Button } from "./button"
+import { Button } from "@/cosmic/elements/Button"
 import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery"
 
 export async function SingleProduct({ query }: { query: any }) {
