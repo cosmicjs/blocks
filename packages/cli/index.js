@@ -33,6 +33,7 @@ const blocks = {
       "@cosmicjs/sdk",
       "@radix-ui/react-slot",
       "class-variance-authority",
+      "tailwind-merge",
     ],
     elements: ["Button"],
   },
