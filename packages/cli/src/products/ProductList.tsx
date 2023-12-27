@@ -1,7 +1,7 @@
 import { cosmic } from "@/cosmic/client"
 import { ProductCard, ProductType } from "./ProductCard"
 
-export async function ProductGrid({ query }: { query: any }) {
+export async function ProductList({ query }: { query: any }) {
   const { objects: products } = await cosmic.objects
     .find(query)
     .props("id,slug,title,metadata")
