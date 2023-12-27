@@ -57,9 +57,7 @@ export async function Comments({ query }: { query: any }) {
       .depth(1)
       .sort("created_at")
     comments = objects
-  } catch (err) {
-    return
-  }
+  } catch (err) {}
   return (
     <>
       <h2 className="mb-4 text-2xl">Comments</h2>
