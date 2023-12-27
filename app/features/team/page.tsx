@@ -142,19 +142,19 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the `TeamCard.tsx` and `TeamGrid.tsx` files to `cosmic/blocks/team`.",
+        "This will add the `TeamCard.tsx` and `TeamList.tsx` files to `cosmic/blocks/team`.",
     },
     {
       title: "Add the following to any page that needs team.",
       code: dedent(`\`\`\`jsx
       // app/about/page.tsx
-      import { TeamGrid } from "@/cosmic/blocks/team/TeamGrid";
+      import { TeamList } from "@/cosmic/blocks/team/TeamList";
       
       export default function Home() {
         return (
           <main className="container">
             {/* page content above */}
-            <TeamGrid query={{ type: "team-members" }}/>
+            <TeamList query={{ type: "team-members" }}/>
             {/* page content below */}
           </main>
         );

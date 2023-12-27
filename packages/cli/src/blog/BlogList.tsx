@@ -1,7 +1,7 @@
+import { BlogCard, PostType } from "./BlogCard"
 import { cosmic } from "@/cosmic/client"
-import { TeamCard, MemberType } from "./TeamCard"
 
-export async function TeamGrid({
+export async function BlogList({
   query,
   sort,
   limit,
@@ -12,14 +12,19 @@ export async function TeamGrid({
   limit?: number
   skip?: number
 }) {
-  const { objects: members } = await cosmic.objects
+  const { objects: posts } = await cosmic.objects
     .find(query)
     .props("id,slug,title,metadata")
     .depth(1)
     .sort(sort)
     .limit(limit)
     .skip(skip)
-  return members.map((member: MemberType) => {
-    return <TeamCard key={member.slug} member={member} />
-  })
+
+  return (
+    <>
+      {posts.map((post: PostType) => {
+        return <BlogCard key={post.id} post={post} />
+      })}
+    </>
+  )
 }

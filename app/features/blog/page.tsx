@@ -43,7 +43,7 @@ async function Preview() {
     <>
       <section className="container m-auto grid items-center px-4 py-8">
         <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Blog Grid
+          Blog List
         </h1>
         <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
           <div className="mx-auto grid w-full max-w-screen-lg grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
@@ -117,7 +117,7 @@ function Code() {
   const codeString = dedent`
     \`\`\`jsx
       // app/blog/page.tsx
-      import { BlogGrid } from "@/cosmic/blocks/blog/BlogGrid";
+      import { BlogList } from "@/cosmic/blocks/blog/BlogList";
 
       export default async function BlogPage() {
         const query = { 
@@ -125,7 +125,7 @@ function Code() {
           locale: ""
         }
         return <div className="container max-w-6xl m-auto grid grid-cols-3 space-x-3 py-10">
-          <BlogGrid query={query} sort="-created_at" limit={10} skip={0} />
+          <BlogList query={query} sort="-created_at" limit={10} skip={0} />
         </div>
       }
     \`\`\`
@@ -162,7 +162,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the files `BlogCard.tsx`,`BlogGrid.tsx`, and `SingleBlog.tsx` to your blocks folder located in `cosmic/blocks/blog`.",
+        "This will add the files `BlogCard.tsx`,`BlogList.tsx`, and `SingleBlog.tsx` to your blocks folder located in `cosmic/blocks/blog`.",
     },
     {
       title: "Create the blog grid page",

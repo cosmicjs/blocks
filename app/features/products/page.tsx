@@ -127,7 +127,7 @@ function Code() {
   const codeString = dedent`
     \`\`\`jsx
       // app/shop/page.tsx
-      import { ProductGrid } from "@/cosmic/blocks/products/ProductGrid";
+      import { ProductList } from "@/cosmic/blocks/products/ProductList";
 
       export default async function ShopPage() {
         return (
@@ -138,7 +138,7 @@ function Code() {
                   Shop
                 </h1>
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                  <ProductGrid query={{ type: "products" }} />
+                  <ProductList query={{ type: "products" }} />
                 </div>
               </div>
             </section>
@@ -182,7 +182,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the `ProductCard.tsx`,`ProductGrid.tsx`, and `SingleProduct.tsx` files to `cosmic/blocks/products`. This will also add the image-gallery block to be used in the single product page.",
+        "This will add the `ProductCard.tsx`,`ProductList.tsx`, and `SingleProduct.tsx` files to `cosmic/blocks/products`. This will also add the image-gallery block to be used in the single product page.",
     },
     {
       title: "Add a new file located at `app/shop/page.tsx` with the following",
