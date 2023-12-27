@@ -112,14 +112,12 @@ const addCommand = new Command()
       }
     }
     const endTime = performance.now()
+    const speed = ((endTime - startTime) / 1000).toFixed(2)
 
-    console.log(
-      chalk.greenBright(
-        `ϟ Executed superfast in ${((endTime - startTime) / 1000).toFixed(
-          2
-        )} seconds!`
+    if (speed < 10)
+      console.log(
+        chalk.greenBright(`ϟ Executed superfast in ${speed} seconds!`)
       )
-    )
 
     console.log(
       chalk.yellow(

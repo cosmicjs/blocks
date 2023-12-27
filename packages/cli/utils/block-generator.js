@@ -173,24 +173,19 @@ function updateTailwindFile() {
     updateTailwindConfig(tailwindConfigPath, cosmicTailwindPath)
   } else if (fs.existsSync(tailwindConfigTSPath)) {
     updateTailwindConfig(tailwindConfigTSPath, cosmicTailwindPath)
-  } else {
-    console.log(
-      chalk.red(
-        "✗ Error locating tailwind config file. Please add cosmic folder to your content path manually."
-      )
-    )
   }
 }
 
 function updateTailwindConfig(configPath, cosmicPath) {
   const content = fs.readFileSync(configPath, "utf8")
 
-  const regex = /content:\s*\[["'].*["']\]/g
+  const regex = /content:\s*\[\s*[\s\S]*?\s*\]/g
   const match = content.match(regex)
 
-  if (match.length > 0) {
+  if (match?.length > 0) {
     let arrayString = match[0].replace("content: ", "")
     arrayString = arrayString.replace(/'/g, '"')
+    arrayString = arrayString.replace(/'/g, '"').replace(/,(?=[^,]*$)/, "")
     let parsedArray = JSON.parse(arrayString)
     const hasCosmicPath = parsedArray.includes(cosmicPath)
     if (!hasCosmicPath) {
@@ -209,6 +204,12 @@ function updateTailwindConfig(configPath, cosmicPath) {
         )
       )
     }
+  } else {
+    console.log(
+      chalk.red(
+        "✗ Error locating tailwind config file. Please add cosmic folder to your content path manually."
+      )
+    )
   }
 }
 
