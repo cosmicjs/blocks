@@ -107,7 +107,7 @@ const addCommand = new Command()
       if (!Object.keys(blocks).includes(component)) {
         return console.error(
           chalk.red(
-            `"${component}" is an invalid Block name. Please find a valid list of Blocks on https://blocks.cosmicjs.com`
+            `"${component}" is an invalid Block name. Please find a valid list of Blocks on cosmicjs.com/blocks`
           )
         )
       } else {
