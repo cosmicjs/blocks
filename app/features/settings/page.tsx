@@ -136,6 +136,13 @@ function Code() {
       // components/Footer.tsx
       import { cosmic } from "@/cosmic/client";
       import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
+      type Link = {
+        url: string;
+        company: string;
+        icon: {
+          imgix_url: string;
+        };
+      };
 
       export default async function Footer() {
         const { object: settings } = await cosmic.objects
@@ -145,14 +152,6 @@ function Code() {
           })
           .props("metadata")
           .depth(1);
-
-        type Link = {
-          url: string;
-          company: string;
-          icon: {
-            imgix_url: string;
-          };
-        };
 
         return (
           <div className="my-10">

@@ -86,7 +86,7 @@ function Code() {
   const codeString = dedent`
       \`\`\`jsx
         // app/page.tsx
-        import { cosmic } from "@/lib/cosmic";
+        import { cosmic } from "@/cosmic/client";
 
         export async function generateMetadata() {
           const { object: page } = await cosmic.objects
