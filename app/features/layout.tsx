@@ -1,12 +1,9 @@
 "use client"
 
-import SelectMenu from "@/components/elements/SelectMenu/SelectMenu"
 import Link from "next/link"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useCallback } from "react"
+import { usePathname, useSearchParams } from "next/navigation"
 import { Features } from "@/components/features"
 import { features } from "@/config/features"
-import classNames from "classnames"
 import FeatureStats from "@/components/FeatureStats"
 import { ArrowLeftIcon } from "lucide-react"
 
@@ -24,11 +21,8 @@ export default function FeatureLayout({
 }: {
   children: React.ReactNode
 }) {
-  const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const manager = searchParams.get("pm")
-  const tab = searchParams.get("tab")
   const featurePathname = pathname.includes("features")
     ? pathname.split("/")[2]
     : "null"
@@ -51,16 +45,6 @@ export default function FeatureLayout({
     write_key: writeKey,
   }
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams)
-      params.set(name, value)
-
-      return params.toString()
-    },
-    [searchParams]
-  )
-
   return (
     <div className="container relative flex w-[80%] flex-col items-center justify-center lg:w-full lg:max-w-[1400px] lg:flex-row">
       <aside className="top-16 mt-10 flex w-full max-w-[1200px] flex-col items-center justify-center space-y-2 rounded-xl lg:fixed lg:mx-4 lg:mt-8 lg:flex-row lg:items-start lg:justify-between lg:space-y-0">
@@ -73,30 +57,6 @@ export default function FeatureLayout({
             Back
           </Link>
         </nav>
-        {/* {tab === "code" && (
-          <div
-            className={classNames("w-32 rounded-xl", {
-              "pointer-events-none opacity-0": tab !== "code",
-            })}
-          >
-            <nav className="pl-4">
-              <div className="mb-px shrink-0 whitespace-nowrap text-xs uppercase text-gray-400 dark:text-dark-gray-400">
-                Package manager
-              </div>
-              <SelectMenu
-                packageManagers={packageManagers}
-                value={
-                  manager ? { title: manager, value: manager } : packageManagers[0]
-                }
-                onChange={(option) => {
-                  router.push(
-                    pathname + "?" + createQueryString("pm", option.value)
-                  )
-                }}
-              />
-            </nav>
-          </div>
-        )} */}
       </aside>
       <main className="flex flex-col items-center justify-center">
         <h1 className="sticky mb-2 mt-6 bg-white text-3xl font-extrabold leading-tight tracking-tighter dark:bg-dark-background md:text-4xl">
@@ -107,17 +67,6 @@ export default function FeatureLayout({
           objects={objects}
           metafields={metafields}
         />
-        {/* <p className="mt-5 max-w-[600px] text-center text-base text-gray-700 dark:text-dark-gray-600">
-          {description}{" "}
-          {field_list?.map((field, index) => (
-            <span className="mx-[3px]">
-              <span className="bg-gray-100 p-px dark:bg-dark-gray-100">
-                {field}
-              </span>
-              {index !== field_list.length - 1 && ","}
-            </span>
-          ))}
-        </p> */}
         <div className="relative">{children}</div>
         <div className="relative">
           <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">

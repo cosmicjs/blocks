@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Loader2 } from "lucide-react"
+import { CheckCircle2, ExternalLink, Loader2 } from "lucide-react"
 
 import { features } from "@/config/features"
 import {
@@ -68,6 +68,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { useToast } from "@/components/ui/use-toast"
+import { DASHBOARD_URL } from "@/constants"
 
 export function InstallDialog({
   featureKey,
@@ -80,16 +81,18 @@ export function InstallDialog({
   let bucket_slug = ""
   let read_key = ""
   let write_key = ""
-  if (typeof window !== "undefined" && localStorage.getItem("bucket_slug")) {
-    bucket_slug = localStorage.getItem("bucket_slug") || ""
-    read_key = localStorage.getItem("read_key") || ""
-    write_key = localStorage.getItem("write_key") || ""
-    if (showLoginMessage) setShowLoginMessage(false)
-  } else {
-    // TODO: add messaging to send user to extension in dashboard
-    // alert("NO BUCKET INFO. Installing features will not work.")
-    if (!showLoginMessage) setShowLoginMessage(true)
-  }
+  // if (typeof window !== "undefined" && localStorage.getItem("bucket_slug")) {
+  //   bucket_slug = localStorage.getItem("bucket_slug") || ""
+  //   read_key = localStorage.getItem("read_key") || ""
+  //   write_key = localStorage.getItem("write_key") || ""
+  //   if (showLoginMessage) setShowLoginMessage(false)
+  // } else {
+  //   // TODO: add messaging to send user to extension in dashboard
+  //   // alert("NO BUCKET INFO. Installing features will not work.")
+  //   if (!showLoginMessage) setShowLoginMessage(true)
+  // }
+
+  const [installationSuccess, setInstallationSuccess] = useState(true)
 
   const cosmicTargetBucket = cosmicTargetBucketConfig(
     bucket_slug,
@@ -109,6 +112,8 @@ export function InstallDialog({
       setSelectedObjectTypes(removedTypeArr)
     }
   }
+
+  console.log("feature", feature)
 
   async function installMetafields(selectedObjectTypes: string[]) {
     if (!selectedObjectTypes?.length) return alert("No Object types selected")
@@ -141,10 +146,7 @@ export function InstallDialog({
         })
       }
     }
-    toast({
-      title: "Success!",
-      description: `${feature?.title} installed`,
-    })
+    setInstallationSuccess(true)
   }
 
   async function installObjectType() {
@@ -230,10 +232,7 @@ export function InstallDialog({
       const products = await getProducts(cosmicSourceBucketConfig)
       await addProducts(cosmicTargetBucket, products)
     }
-    toast({
-      title: "Success!",
-      description: `${feature?.title} installed`,
-    })
+    setInstallationSuccess(true)
   }
 
   async function installFeature(selectedObjectTypes: string[]) {
@@ -281,6 +280,45 @@ export function InstallDialog({
               Log in
             </Link>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    )
+  }
+
+  if (installationSuccess) {
+    return (
+      <Dialog open onOpenChange={() => setShowModal(false)}>
+        <DialogContent
+          className="sm:max-w-[425px]"
+          onInteractOutside={() => setShowModal(false)}
+          onEscapeKeyDown={() => setShowModal(false)}
+        >
+          <DialogHeader>
+            <DialogTitle className="flex items-center">
+              {" "}
+              <CheckCircle2 className="mr-2 text-green-500" />
+              {feature?.title} installed successfully!
+            </DialogTitle>
+            <DialogDescription>
+              <div className="mb-4">
+                You can continue with the steps to install code for the Block or
+                view the installed Object Type for your Block.
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+          {/* {bucket_slug && ( */}
+          <DialogFooter>
+            <a
+              href={`${DASHBOARD_URL}/${bucket_slug}/objects?query={"type":"${feature?.slug}"}`}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants())}
+            >
+              View Object Type
+              <ExternalLink className="ml-2 h-4 w-4" />
+            </a>
+          </DialogFooter>
+          {/* )} */}
         </DialogContent>
       </Dialog>
     )

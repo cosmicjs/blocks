@@ -8,6 +8,7 @@ import { useSearchParams } from "next/navigation"
 import classNames from "classnames"
 import { Button } from "@/components/ui/button"
 import { InstallDialog } from "@/components/install-dialog"
+import { managers } from "../elements/CodeBlock/CodeBlock"
 
 type StepProps = {
   title: string
@@ -24,50 +25,6 @@ type CodeStepsProps = {
   scratch?: boolean
   writeKey?: boolean
   featureKey?: string
-}
-
-const managers = {
-  yarn: {
-    install: "yarn add",
-    run: "yarn",
-    executable: "npx",
-  },
-  bun: {
-    install: "bun add",
-    run: "bun",
-    executable: "bunx",
-  },
-  npm: {
-    install: "npm install",
-    run: "npm run",
-    executable: "npx",
-  },
-  pnpm: {
-    install: "pnpm install",
-    run: "pnpm run",
-    executable: "pnpm dlx",
-  },
-}
-
-type PackageManager = keyof typeof managers
-
-function replacePackageManagerCommand(command: string, pm: PackageManager) {
-  // Iterate over all package managers
-  for (const [_, manager] of Object.entries(managers)) {
-    // If the command contains a package manager install command, replace it
-    if (command.includes(manager.install)) {
-      const installRegex = new RegExp(`\\b${manager.install}\\b`, "g")
-      command = command.replace(installRegex, managers[pm].install)
-    }
-
-    // If the command contains a package manager executable command, replace it
-    if (command.includes(manager.executable)) {
-      const executableRegex = new RegExp(`\\b${manager.executable}\\b`, "g")
-      command = command.replace(executableRegex, managers[pm].executable)
-    }
-  }
-
-  return command
 }
 
 function wrapWithSpan(text: string) {
@@ -90,7 +47,6 @@ function Step({
   description,
   code,
   index,
-  scratch,
   installButton,
   featureKey,
 }: StepProps & {
@@ -146,47 +102,20 @@ function CodeSteps(props: CodeStepsProps) {
     step1 = ["bunx create-next-app@latest cosmic-app", "cd cosmic-app"],
     steps,
     scratch = false,
-    title,
     featureKey,
   } = props
 
   const searchParams = useSearchParams()
   const manager = useMemo(() => searchParams.get("pm"), [searchParams])
 
-  const pm = (manager || "bun") as PackageManager
-
-  const [newProjectStep, setNewProjectStep] = useState<string[]>(step1)
-  const [runStep, setRunStep] = useState<string>(
-    dedent(`\`\`\`bash
-    ${managers[pm || "bun"]["run"]} dev
-    \`\`\`
-  `)
-  )
-
-  // useEffect(() => {
-  //   const replaceSteps = () => {
-  //     const step1Updated = step1.map((command) =>
-  //       replacePackageManagerCommand(command, pm)
-  //     )
-
-  //     const runStepUpdated = dedent(`\`\`\`bash
-  //     ${managers[pm || "bun"]["run"]} dev
-  //     \`\`\`
-  //   `)
-
-  //     setNewProjectStep(step1Updated)
-  //     setRunStep(runStepUpdated)
-  //   }
-
-  //   replaceSteps()
-  // }, [pm])
+  const pm = manager || "bun"
 
   return (
     <div className="w-auto max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-[750px]">
       {!scratch && (
         <div>
           <div className="relative mb-10">
-            <div className="absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200" />
+            <div className="absolute left-[-42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200" />
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
                 0
@@ -200,7 +129,7 @@ function CodeSteps(props: CodeStepsProps) {
               existing Next.js app. Note: Be sure to include TypeScript and
               Tailwind CSS in the installation options.
             </div>
-            {(newProjectStep || step1)?.map((step) => (
+            {step1?.map((step) => (
               <Markdown>
                 {dedent(`\`\`\`bash
           ${step}
@@ -247,7 +176,12 @@ function CodeSteps(props: CodeStepsProps) {
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">Run the app</h3>
             </div>
-            <Markdown>{runStep}</Markdown>
+            <Markdown>
+              {dedent(`\`\`\`bash
+    ${managers[pm || "bun"]["run"]} dev
+    \`\`\`
+  `)}
+            </Markdown>
           </div>
           <div className="relative mb-10">
             <div className="relative flex">

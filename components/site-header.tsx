@@ -62,9 +62,9 @@ export function SiteHeader() {
           Install
         </Button>
       </div>
-      {showModal && (
-        <InstallDialog featureKey={pageKey} setShowModal={setShowModal} />
-      )}
+      {/* {showModal && ( */}
+      <InstallDialog featureKey={pageKey} setShowModal={setShowModal} />
+      {/* )} */}
     </header>
   )
 }
