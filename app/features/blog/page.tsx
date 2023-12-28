@@ -114,20 +114,18 @@ function Code() {
   \`\`\`
   `
 
-  const codeString = dedent`
+  const importBlogListCode = dedent`
     \`\`\`jsx
-      // app/blog/page.tsx
-      import { BlogList } from "@/cosmic/blocks/blog/BlogList";
-
-      export default async function BlogPage() {
-        return <div className="container max-w-6xl m-auto grid grid-cols-3 space-x-3 py-10">
-          <BlogList query={{ type: "blog-posts" }} sort="-created_at" limit={10} skip={0} />
-        </div>
-      }
+    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
+    \`\`\`
+    `
+  const usageCode = dedent`
+    \`\`\`jsx
+    <BlogList query={{ type: "blog-posts" }} sort="-created_at" limit={10} skip={0} />
     \`\`\`
     `
 
-  const codeSinglePageString = dedent`
+  const singlePageCode = dedent`
     \`\`\`jsx
       // app/blog/[slug]/page.tsx
       import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
@@ -156,16 +154,22 @@ function Code() {
         "This will add the files `BlogCard.tsx`,`BlogList.tsx`, and `SingleBlog.tsx` to your blocks folder located in `cosmic/blocks/blog`.",
     },
     {
-      title: "Create the blog grid page",
-      code: codeString,
+      title: "Import Block",
+      code: importBlogListCode,
+      description: "Import the BlogList block into your app.",
+    },
+    {
+      title: "Usage",
+      code: usageCode,
+
       description:
-        "Add a new file located at `app/blog/page.tsx` with the following",
+        "Add the block to your app with the `query` property set to fetch your specific content.You can also set `sort`, `limit`, and `skip` properties.",
     },
     {
       title: "Create the single blog page",
-      code: codeSinglePageString,
+      code: singlePageCode,
       description:
-        "Add a new file located at `app/blog/[slug]/page.tsx` with the following",
+        "Add a new file located at `app/blog/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the blog content.",
     },
   ]
 
