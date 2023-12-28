@@ -10,14 +10,14 @@ import classNames from "classnames"
 import FeatureStats from "@/components/FeatureStats"
 import { ArrowLeftIcon } from "lucide-react"
 
-const options = [
+export const packageManagers = [
   { title: "bun", value: "bun" },
   { title: "npm", value: "npm" },
   { title: "yarn", value: "yarn" },
   { title: "pnpm", value: "pnpm" },
 ]
 
-export type PackageManagers = (typeof options)[number]["value"]
+export type PackageManagers = (typeof packageManagers)[number]["value"]
 
 export default function FeatureLayout({
   children,
@@ -73,7 +73,7 @@ export default function FeatureLayout({
             Back
           </Link>
         </nav>
-        {tab === "code" && (
+        {/* {tab === "code" && (
           <div
             className={classNames("w-32 rounded-xl", {
               "pointer-events-none opacity-0": tab !== "code",
@@ -84,9 +84,9 @@ export default function FeatureLayout({
                 Package manager
               </div>
               <SelectMenu
-                options={options}
+                packageManagers={packageManagers}
                 value={
-                  manager ? { title: manager, value: manager } : options[0]
+                  manager ? { title: manager, value: manager } : packageManagers[0]
                 }
                 onChange={(option) => {
                   router.push(
@@ -96,7 +96,7 @@ export default function FeatureLayout({
               />
             </nav>
           </div>
-        )}
+        )} */}
       </aside>
       <main className="flex flex-col items-center justify-center">
         <h1 className="sticky mb-2 mt-6 bg-white text-3xl font-extrabold leading-tight tracking-tighter dark:bg-dark-background md:text-4xl">

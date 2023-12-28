@@ -132,7 +132,7 @@ function Step({
           </Button>
         </>
       )}
-      {!installButton && code && <Markdown>{dedent(code)}</Markdown>}
+      {!installButton && code && <Markdown>{code}</Markdown>}
       {showModal && (
         <InstallDialog featureKey={featureKey} setShowModal={setShowModal} />
       )}
@@ -143,7 +143,7 @@ function Step({
 function CodeSteps(props: CodeStepsProps) {
   const {
     preview,
-    step1 = ["npx create-next-app@latest cosmic-app", "cd cosmic-app"],
+    step1 = ["bunx create-next-app@latest cosmic-app", "cd cosmic-app"],
     steps,
     scratch = false,
     title,
@@ -163,23 +163,23 @@ function CodeSteps(props: CodeStepsProps) {
   `)
   )
 
-  useEffect(() => {
-    const replaceSteps = () => {
-      const step1Updated = step1.map((command) =>
-        replacePackageManagerCommand(command, pm)
-      )
+  // useEffect(() => {
+  //   const replaceSteps = () => {
+  //     const step1Updated = step1.map((command) =>
+  //       replacePackageManagerCommand(command, pm)
+  //     )
 
-      const runStepUpdated = dedent(`\`\`\`bash
-      ${managers[pm || "bun"]["run"]} dev
-      \`\`\`
-    `)
+  //     const runStepUpdated = dedent(`\`\`\`bash
+  //     ${managers[pm || "bun"]["run"]} dev
+  //     \`\`\`
+  //   `)
 
-      setNewProjectStep(step1Updated)
-      setRunStep(runStepUpdated)
-    }
+  //     setNewProjectStep(step1Updated)
+  //     setRunStep(runStepUpdated)
+  //   }
 
-    replaceSteps()
-  }, [pm])
+  //   replaceSteps()
+  // }, [pm])
 
   return (
     <div className="w-auto max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-[750px]">
