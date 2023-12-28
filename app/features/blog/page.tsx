@@ -120,12 +120,8 @@ function Code() {
       import { BlogList } from "@/cosmic/blocks/blog/BlogList";
 
       export default async function BlogPage() {
-        const query = { 
-          type: "blog-posts",
-          locale: ""
-        }
         return <div className="container max-w-6xl m-auto grid grid-cols-3 space-x-3 py-10">
-          <BlogList query={query} sort="-created_at" limit={10} skip={0} />
+          <BlogList query={{ type: "blog-posts" }} sort="-created_at" limit={10} skip={0} />
         </div>
       }
     \`\`\`
@@ -140,12 +136,7 @@ function Code() {
       }: {
         params: { slug: string };
       }) {
-        const query = {
-          slug: params.slug,
-          locale: "",
-          type: "blog-posts",
-        };
-        return <SingleBlog query={query} />;
+        return <SingleBlog query={{ slug: params.slug, type: "blog-posts" }} />;
       }
     
     \`\`\`

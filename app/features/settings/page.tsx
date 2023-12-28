@@ -194,7 +194,7 @@ function Code() {
         <>
           Note: this assumes you have installed the{" "}
           <Link href="/features/nav-menus" className="text-cosmic-blue">
-            Nav Menu feature template
+            Nav Menu block
           </Link>
         </>
       ),

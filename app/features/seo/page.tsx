@@ -118,7 +118,7 @@ function Code() {
           
           return (
             <>
-              { /* Page content here. See Page feature template. */ }
+              { /* Page content here. See Page block. */ }
             </>
           );
         }

@@ -61,10 +61,7 @@ function TeamCard({ member }: { member: MemberType }) {
         </p>
         <div className="flex justify-start space-x-4 py-4">
           {member.metadata.links.x && (
-            <a
-              href={member.metadata.links.x}
-              className="text-gray-500 hover:text-gray-600"
-            >
+            <a href="" className="text-gray-500 hover:text-gray-600">
               <svg
                 color="currentColor"
                 aria-label="X"
@@ -81,10 +78,7 @@ function TeamCard({ member }: { member: MemberType }) {
             </a>
           )}
           {member.metadata.links.linkedin && (
-            <a
-              href={member.metadata.links.linkedin}
-              className="text-gray-500 hover:text-gray-600"
-            >
+            <a href="" className="text-gray-500 hover:text-gray-600">
               <svg
                 width="24"
                 height="24"
@@ -116,7 +110,7 @@ async function Preview() {
     .depth(1)
   return (
     <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-4">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6">
         {members.map((member: MemberType) => {
           return <TeamCard key={member.slug} member={member} />
         })}
