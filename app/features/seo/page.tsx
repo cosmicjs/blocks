@@ -5,25 +5,6 @@ import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
-export async function generateMetadata() {
-  const { object: page } = await cosmicSourceBucketConfig.objects
-    .findOne({
-      type: "seo-fields",
-      slug: "seo",
-    })
-    .props("title,metadata")
-    .depth(1)
-  return {
-    title: page.metadata.seo?.title || page.title,
-    description: page.metadata?.seo.description,
-    openGraph: {
-      title: page.metadata.seo?.og_title,
-      description: page.metadata.seo?.og_description,
-      images: [page.metadata.seo?.og_image?.imgix_url],
-    },
-  }
-}
-
 export default async function SEO({
   searchParams,
 }: {
@@ -119,6 +100,12 @@ function Code() {
 
   const steps = [
     {
+      title: "Install the Block content model",
+      description:
+        "This will add the `seo` parent Metafield to the Object type(s) of your choice.",
+      installButton: true,
+    },
+    {
       title:
         " Add the following `generateMetadata` function to any file that needs SEO",
       code: codeString,
@@ -127,7 +114,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps steps={steps} preview={<Preview />} />
+      <CodeSteps steps={steps} preview={<Preview />} featureKey="seo" />
       <div className="mb-6">
         <h3 className="mb-6 text-2xl font-semibold">Next steps</h3>
         <div className="mb-6">
