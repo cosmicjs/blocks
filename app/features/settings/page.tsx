@@ -134,9 +134,10 @@ function Code() {
   const codeFooterString = dedent`
     \`\`\`jsx
       // components/Footer.tsx
+      import Link from "next/link";
       import { cosmic } from "@/cosmic/client";
       import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
-      type Link = {
+      type LinkType = {
         url: string;
         company: string;
         icon: {
@@ -159,15 +160,15 @@ function Code() {
               <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
             </div>
             <div className="mb-8 flex gap-x-8 justify-center">
-              {settings.metadata.links.map((link: Link) => {
+              {settings.metadata.links.map((link: LinkType) => {
                 return (
-                  <a href={link.url} key={link.url} target="_blank" rel="noreferrer">
+                  <Link href={link.url} key={link.url} target="_blank" rel="noreferrer">
                     <img
                       className="h-[26px]"
                       src={\`\${link.icon.imgix_url}?w=500&auto=format,compression\`}
                       alt={link.company}
                     />
-                  </a>
+                  </Link>
                 );
               })}
             </div>
