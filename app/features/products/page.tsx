@@ -54,11 +54,11 @@ async function Preview() {
   return (
     <>
       <section className="container m-auto grid items-center px-4 py-8">
-        <div className="relative m-auto mb-20 flex max-w-[950px] flex-col items-start gap-2">
+        <div className="relative mb-20 flex max-w-[950px] flex-col items-start">
           <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
             Shop Page
           </h1>
-          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          <div className="grid w-full grid-cols-3 gap-x-2 gap-y-10">
             {products.map((product: ProductType) => {
               return <ProductCard key={product.id} product={product} />
             })}
@@ -159,9 +159,7 @@ function Code() {
         params: { slug: string };
       }) {
         return (
-          <SingleProduct
-            query={{ slug: params.slug, type: "products", locale: "" }}
-          />
+          <SingleProduct query={{ slug: params.slug, type: "products" }} />
         );
       }
 
