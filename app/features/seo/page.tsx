@@ -108,14 +108,6 @@ function Code() {
         }
         
         export default async function HomePage() {
-          const { object: page } = await cosmic.objects
-            .findOne({
-              type: "pages",
-              slug: "home",
-            })
-            .props("slug,title,metadata")
-            .depth(1);
-          
           return (
             <>
               { /* Page content here. See Page block. */ }
