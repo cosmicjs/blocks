@@ -106,7 +106,7 @@ function Code() {
       import { cosmic } from "@/cosmic/client";
       import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
 
-      export default async function Header() {
+      export async function Header() {
         
         const { object: settings } = await cosmic.objects
           .findOne({
@@ -145,7 +145,7 @@ function Code() {
         };
       };
 
-      export default async function Footer() {
+      export async function Footer() {
         const { object: settings } = await cosmic.objects
           .findOne({
             type: "global-settings",
@@ -186,7 +186,38 @@ function Code() {
     \`\`\`
     `
 
+  const codeLayoutString = dedent`
+    \`\`\`jsx
+    // app/layout.tsx
+    import "./globals.css";
+    import { Header } from "@/components/Header";
+    import { Footer } from "@/components/Footer";
+    
+    export default function RootLayout({
+      children,
+    }: {
+      children: React.ReactNode;
+    }) {
+      return (
+        <html lang="en">
+          <body>
+            <Header />
+            {children}
+            <Footer />
+          </body>
+        </html>
+      );
+    }    
+    \`\`\`
+    `
+
   const steps = [
+    {
+      title: "Install the Block content model",
+      description:
+        "This will add the `global-settings` Object type to your Bucket.",
+      installButton: true,
+    },
     {
       title:
         "The Global Settings data is meant to be used in multiple locations. For example, add the following to the a `Header.tsx` file ",
@@ -212,11 +243,19 @@ function Code() {
       ),
       code: codeFooterString,
     },
+    {
+      title: "Then include the components in your `layout.tsx` file",
+      code: codeLayoutString,
+    },
   ]
 
   return (
     <>
-      <CodeSteps steps={steps} preview={<Preview />} />
+      <CodeSteps
+        steps={steps}
+        preview={<Preview />}
+        featureKey="global_settings"
+      />
     </>
   )
 }
