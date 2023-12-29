@@ -4,14 +4,20 @@ import { buttonVariants } from "@/cosmic/elements/Button"
 import { Section } from "./PageSection"
 import { cosmic } from "@/cosmic/client"
 
-export async function Page({ query }: { query: any }) {
+export async function Page({
+  query,
+  className,
+}: {
+  query: any
+  className?: string
+}) {
   const { object: page } = await cosmic.objects
     .findOne(query)
     .props("slug,title,metadata")
     .depth(1)
 
   return (
-    <div>
+    <div className={className}>
       <div className="pb-4 pt-20">
         <h1 className="text-center text-4xl font-bold">{page.metadata.h1}</h1>
       </div>
