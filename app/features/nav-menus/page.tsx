@@ -49,19 +49,20 @@ function Code() {
     \`\`\`jsx
       // app/layout.tsx
       import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
-      export default async function RootLayout({ children }: RootLayoutProps) {
+      export default function RootLayout({
+        children,
+      }: {
+        children: React.ReactNode;
+      }) {
         return (
-          <>
-            <html lang="en">
-              <head />
-              <body>
-                <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
-                { /* page content */ }
-                <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
-              </body>
-            </html>
-          </>
-        )
+          <html lang="en">
+            <body className={inter.className}>
+              <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+              {children}
+              <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
+            </body>
+          </html>
+        );
       }
     \`\`\`
     `
