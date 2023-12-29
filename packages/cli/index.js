@@ -33,6 +33,7 @@ const blocks = {
       "@cosmicjs/sdk",
       "@radix-ui/react-slot",
       "class-variance-authority",
+      "clsx",
       "tailwind-merge",
     ],
     elements: ["Button"],
@@ -52,7 +53,7 @@ const blocks = {
   },
   "image-gallery": {
     name: "Image Gallery",
-    installationSteps: ["@cosmicjs/sdk", "tailwind-merge"],
+    installationSteps: ["@cosmicjs/sdk", "clsx", "tailwind-merge"],
   },
   testimonials: {
     name: "Testimonials",
@@ -84,7 +85,7 @@ const blocks = {
   },
   events: {
     name: "events",
-    installationSteps: ["@cosmicjs/sdk"],
+    installationSteps: ["@cosmicjs/sdk", "clsx", "tailwind-merge"],
   },
 }
 
