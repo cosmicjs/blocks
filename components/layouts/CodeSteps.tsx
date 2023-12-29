@@ -38,7 +38,7 @@ function wrapWithSpan(text: string) {
   })
 }
 
-const Title = ({ text }: { text: string }) => {
+export const Highlight = ({ text }: { text: string }) => {
   return wrapWithSpan(text)
 }
 
@@ -69,13 +69,13 @@ function Step({
           {index + 1}
         </div>
         <h3 className="text-lg font-semibold lg:text-2xl">
-          <Title text={title} />{" "}
+          <Highlight text={title} />{" "}
         </h3>
       </div>
       {description && (
         <div className="py-2 text-base">
           {typeof description == "string" ? (
-            <Title text={description} />
+            <Highlight text={description} />
           ) : (
             description
           )}

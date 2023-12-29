@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { CheckCircle2, ExternalLink, Loader2 } from "lucide-react"
+import { AlertCircle, CheckCircle2, ExternalLink, Loader2 } from "lucide-react"
 
 import { features } from "@/config/features"
 import {
@@ -68,6 +68,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { DASHBOARD_URL } from "@/constants"
+import { Highlight } from "./layouts/CodeSteps"
 
 export function InstallDialog({
   featureKey,
@@ -103,6 +104,8 @@ export function InstallDialog({
   const [installing, setInstalling] = useState<boolean>(false)
   const [objectTypes, setObjectTypes] = useState<string[]>([])
   const [selectedObjectTypes, setSelectedObjectTypes] = useState<string[]>([])
+  const [conflict, setConflict] = useState(false)
+
   function handleObjectTypeSelected(typeSlug: string) {
     if (selectedObjectTypes.indexOf(typeSlug) === -1)
       setSelectedObjectTypes([...selectedObjectTypes, typeSlug])
@@ -111,8 +114,6 @@ export function InstallDialog({
       setSelectedObjectTypes(removedTypeArr)
     }
   }
-
-  console.log("feature", feature)
 
   async function installMetafields(selectedObjectTypes: string[]) {
     if (!selectedObjectTypes?.length) return alert("No Object types selected")
@@ -157,7 +158,7 @@ export function InstallDialog({
         (objectType: any) => objectType.slug === feature?.slug
       )[0]
     )
-      return alert(`Object type "${feature?.slug}" already exists.`)
+      return setConflict(true)
     if (featureKey === "pages") {
       metafields = await getPageBuilderMetafields()
       await addPagesObjectType(cosmicTargetBucket, metafields)
@@ -254,13 +255,18 @@ export function InstallDialog({
     }
   })
 
+  const closeModal = () => {
+    setShowModal(false)
+    setConflict(false)
+  }
+
   if (showLoginMessage) {
     return (
-      <Dialog open onOpenChange={() => setShowModal(false)}>
+      <Dialog open onOpenChange={() => closeModal()}>
         <DialogContent
           className="sm:max-w-[425px]"
-          onInteractOutside={() => setShowModal(false)}
-          onEscapeKeyDown={() => setShowModal(false)}
+          onInteractOutside={() => closeModal()}
+          onEscapeKeyDown={() => closeModal()}
         >
           <DialogHeader>
             <DialogTitle>Log in required</DialogTitle>
@@ -284,32 +290,50 @@ export function InstallDialog({
     )
   }
 
-  if (installationSuccess) {
+  if (installationSuccess || conflict) {
     const objectTypeSlug =
       feature?.type === "object_type" ? feature?.slug : selectedObjectTypes?.[0]
 
     return (
-      <Dialog open onOpenChange={() => setShowModal(false)}>
+      <Dialog open onOpenChange={() => closeModal()}>
         <DialogContent
           className="sm:max-w-[425px]"
-          onInteractOutside={() => setShowModal(false)}
-          onEscapeKeyDown={() => setShowModal(false)}
+          onInteractOutside={() => closeModal()}
+          onEscapeKeyDown={() => closeModal()}
         >
           <DialogHeader>
-            <DialogTitle className="flex items-center">
-              {" "}
-              <CheckCircle2 className="mr-2 text-green-500" />
-              {feature?.title} installed successfully!
-            </DialogTitle>
+            {conflict ? (
+              <DialogTitle className="flex items-center">
+                {" "}
+                <AlertCircle className="mr-2 text-orange-500" />
+                {feature?.title} already exists!
+              </DialogTitle>
+            ) : (
+              <DialogTitle className="flex items-center">
+                {" "}
+                <CheckCircle2 className="mr-2 text-green-500" />
+                {feature?.title} installed successfully!
+              </DialogTitle>
+            )}
             <DialogDescription>
               <div className="mb-4">
-                You can continue with the steps to install code for the Block or
-                view the installed Object Type for your Block.
+                {conflict
+                  ? `An object type with slug ${feature?.slug} already exists. Please rename or delete the existing Object Type if you'd like to install ${feature?.title} Block.`
+                  : "You can continue with the steps to install code for the Block or view the installed Object Type for your Block."}
               </div>
             </DialogDescription>
           </DialogHeader>
-          {bucket_slug && (
-            <DialogFooter>
+          <DialogFooter>
+            {installationSuccess && (
+              <Link
+                href={`${feature?.preview_link}?tab=code`}
+                className={cn(buttonVariants({ variant: "secondary" }))}
+                onClick={() => closeModal()}
+              >
+                View Code
+              </Link>
+            )}
+            {bucket_slug && (
               <a
                 href={`${DASHBOARD_URL}/${bucket_slug}/objects?query={"type":"${objectTypeSlug}"}`}
                 target="_blank"
@@ -319,19 +343,19 @@ export function InstallDialog({
                 View Object Type
                 <ExternalLink className="ml-2 h-4 w-4" />
               </a>
-            </DialogFooter>
-          )}
+            )}
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     )
   }
 
   return (
-    <Dialog open onOpenChange={() => setShowModal(false)}>
+    <Dialog open onOpenChange={() => closeModal()}>
       <DialogContent
         className="sm:max-w-[425px]"
-        onInteractOutside={() => setShowModal(false)}
-        onEscapeKeyDown={() => setShowModal(false)}
+        onInteractOutside={() => closeModal()}
+        onEscapeKeyDown={() => closeModal()}
       >
         <DialogHeader>
           <DialogTitle>Install {feature?.title}</DialogTitle>
@@ -395,7 +419,9 @@ export function InstallDialog({
                 <>Are you sure you want to add this feature to your Project?</>
               )}
             </div>
-            <div>{feature?.confirmation}</div>
+            <div>
+              <Highlight text={feature?.confirmation} />
+            </div>{" "}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -412,7 +438,6 @@ export function InstallDialog({
                 } catch (err) {}
                 setInstalling(false)
                 setInstallationSuccess(true)
-                // setShowModal(false)
               }}
             >
               {installing ? (
