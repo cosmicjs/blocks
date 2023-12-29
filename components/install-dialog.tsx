@@ -67,7 +67,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { useToast } from "@/components/ui/use-toast"
 import { DASHBOARD_URL } from "@/constants"
 
 export function InstallDialog({
@@ -81,18 +80,19 @@ export function InstallDialog({
   let bucket_slug = ""
   let read_key = ""
   let write_key = ""
-  // if (typeof window !== "undefined" && localStorage.getItem("bucket_slug")) {
-  //   bucket_slug = localStorage.getItem("bucket_slug") || ""
-  //   read_key = localStorage.getItem("read_key") || ""
-  //   write_key = localStorage.getItem("write_key") || ""
-  //   if (showLoginMessage) setShowLoginMessage(false)
-  // } else {
-  //   // TODO: add messaging to send user to extension in dashboard
-  //   // alert("NO BUCKET INFO. Installing features will not work.")
-  //   if (!showLoginMessage) setShowLoginMessage(true)
-  // }
 
-  const [installationSuccess, setInstallationSuccess] = useState(true)
+  if (typeof window !== "undefined" && localStorage.getItem("bucket_slug")) {
+    bucket_slug = localStorage.getItem("bucket_slug") || ""
+    read_key = localStorage.getItem("read_key") || ""
+    write_key = localStorage.getItem("write_key") || ""
+    if (showLoginMessage) setShowLoginMessage(false)
+  } else {
+    // TODO: add messaging to send user to extension in dashboard
+    // alert("NO BUCKET INFO. Installing features will not work.")
+    if (!showLoginMessage) setShowLoginMessage(true)
+  }
+
+  const [installationSuccess, setInstallationSuccess] = useState(false)
 
   const cosmicTargetBucket = cosmicTargetBucketConfig(
     bucket_slug,
@@ -103,7 +103,6 @@ export function InstallDialog({
   const [installing, setInstalling] = useState<boolean>(false)
   const [objectTypes, setObjectTypes] = useState<string[]>([])
   const [selectedObjectTypes, setSelectedObjectTypes] = useState<string[]>([])
-  const { toast } = useToast()
   function handleObjectTypeSelected(typeSlug: string) {
     if (selectedObjectTypes.indexOf(typeSlug) === -1)
       setSelectedObjectTypes([...selectedObjectTypes, typeSlug])
@@ -286,6 +285,9 @@ export function InstallDialog({
   }
 
   if (installationSuccess) {
+    const objectTypeSlug =
+      feature?.type === "object_type" ? feature?.slug : selectedObjectTypes?.[0]
+
     return (
       <Dialog open onOpenChange={() => setShowModal(false)}>
         <DialogContent
@@ -306,19 +308,19 @@ export function InstallDialog({
               </div>
             </DialogDescription>
           </DialogHeader>
-          {/* {bucket_slug && ( */}
-          <DialogFooter>
-            <a
-              href={`${DASHBOARD_URL}/${bucket_slug}/objects?query={"type":"${feature?.slug}"}`}
-              target="_blank"
-              rel="noreferrer"
-              className={cn(buttonVariants())}
-            >
-              View Object Type
-              <ExternalLink className="ml-2 h-4 w-4" />
-            </a>
-          </DialogFooter>
-          {/* )} */}
+          {bucket_slug && (
+            <DialogFooter>
+              <a
+                href={`${DASHBOARD_URL}/${bucket_slug}/objects?query={"type":"${objectTypeSlug}"}`}
+                target="_blank"
+                rel="noreferrer"
+                className={cn(buttonVariants())}
+              >
+                View Object Type
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
+            </DialogFooter>
+          )}
         </DialogContent>
       </Dialog>
     )

@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode, useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import classNames from "classnames"
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter"
 import css from "react-syntax-highlighter/dist/cjs/languages/prism/css"
