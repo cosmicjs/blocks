@@ -49,6 +49,7 @@ function Code() {
     \`\`\`jsx
       // app/layout.tsx
       import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
+      import './globals.css'
       export default function RootLayout({
         children,
       }: {
