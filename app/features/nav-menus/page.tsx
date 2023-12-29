@@ -71,6 +71,18 @@ function Code() {
   \`\`\`
   `
 
+  const importCode = dedent`
+  \`\`\`bash
+  import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
+  \`\`\`
+  `
+
+  const usageCode = dedent`
+    \`\`\`jsx
+    <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+    \`\`\`
+    `
+
   const steps = [
     {
       title: "Install the Block content model",
@@ -83,6 +95,17 @@ function Code() {
       code: blockCommand,
       description:
         "This will add the files `NavMenu.tsx` and `MobileNav.tsx` to your blocks folder located in `cosmic/blocks/navigation-menu`.",
+    },
+    {
+      title: "Import Block",
+      code: importCode,
+      description: "Import the block into your app.",
+    },
+    {
+      title: "Usage",
+      code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
     },
     {
       title: "Add the NavMenu block to any file that needs navigation links.",
