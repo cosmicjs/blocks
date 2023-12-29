@@ -60,7 +60,7 @@ const blocks = {
   },
   team: {
     name: "Team",
-    installationSteps: ["@cosmicjs/sdk"],
+    installationSteps: ["@cosmicjs/sdk", "clsx", "tailwind-merge"],
   },
   "navigation-menu": {
     name: "Navigation Menu",

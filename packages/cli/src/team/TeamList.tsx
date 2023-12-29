@@ -6,11 +6,13 @@ export async function TeamList({
   sort,
   limit,
   skip,
+  className,
 }: {
   query: any
   sort?: string
   limit?: number
   skip?: number
+  className?: string
 }) {
   const { objects: members } = await cosmic.objects
     .find(query)
@@ -19,7 +21,11 @@ export async function TeamList({
     .sort(sort)
     .limit(limit)
     .skip(skip)
-  return members.map((member: MemberType) => {
-    return <TeamCard key={member.slug} member={member} />
-  })
+  return (
+    <div className={className}>
+      {members.map((member: MemberType) => {
+        return <TeamCard key={member.slug} member={member} />
+      })}
+    </div>
+  )
 }

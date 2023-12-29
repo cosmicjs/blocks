@@ -1,4 +1,6 @@
 // components/team-card.tsx
+import { cn } from "@/cosmic/utils"
+
 export type MemberType = {
   title: string
   slug: string
@@ -14,9 +16,20 @@ export type MemberType = {
     }
   }
 }
-export function TeamCard({ member }: { member: MemberType }) {
+export function TeamCard({
+  member,
+  className,
+}: {
+  member: MemberType
+  className?: string
+}) {
   return (
-    <div className="flex w-full flex-col overflow-hidden rounded-lg bg-slate-100 shadow-lg dark:bg-slate-800 md:flex-row">
+    <div
+      className={cn(
+        "flex w-full flex-col overflow-hidden rounded-lg bg-slate-100 shadow-lg dark:bg-slate-800 md:flex-row",
+        className
+      )}
+    >
       <div className="h-full w-full md:w-2/5">
         <img
           className="h-full w-full object-cover object-center"
