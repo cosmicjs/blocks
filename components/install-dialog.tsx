@@ -411,7 +411,8 @@ export function InstallDialog({
                   await installFeature(selectedObjectTypes)
                 } catch (err) {}
                 setInstalling(false)
-                setShowModal(false)
+                setInstallationSuccess(true)
+                // setShowModal(false)
               }}
             >
               {installing ? (
