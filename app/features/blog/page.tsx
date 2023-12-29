@@ -173,7 +173,7 @@ function Code() {
       code: usageCode,
 
       description:
-        "Add the block to your app with the `query` property set to fetch your specific content.You can also set `sort`, `limit`, and `skip` properties.",
+        "Add the block to your app with the `query` property set to fetch your specific content. You can also set `sort`, `limit`, and `skip` properties.",
     },
     {
       title: "Example: blog list page",
