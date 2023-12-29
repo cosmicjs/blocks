@@ -324,7 +324,7 @@ export function InstallDialog({
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            {installationSuccess && (
+            {!conflict && (
               <Link
                 href={`${feature?.preview_link}?tab=code`}
                 className={cn(buttonVariants({ variant: "secondary" }))}
