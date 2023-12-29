@@ -72,7 +72,7 @@ function Code() {
   `
 
   const importCode = dedent`
-  \`\`\`bash
+  \`\`\`jsx
   import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
   \`\`\`
   `
