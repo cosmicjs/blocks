@@ -49,19 +49,20 @@ function Code() {
     \`\`\`jsx
       // app/layout.tsx
       import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
-      export default async function RootLayout({ children }: RootLayoutProps) {
+      export default function RootLayout({
+        children,
+      }: {
+        children: React.ReactNode;
+      }) {
         return (
-          <>
-            <html lang="en">
-              <head />
-              <body>
-                <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
-                { /* page content */ }
-                <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
-              </body>
-            </html>
-          </>
-        )
+          <html lang="en">
+            <body className={inter.className}>
+              <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+              {children}
+              <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
+            </body>
+          </html>
+        );
       }
     \`\`\`
     `
@@ -70,6 +71,18 @@ function Code() {
   bunx @cosmicjs/blocks add navigation-menu
   \`\`\`
   `
+
+  const importCode = dedent`
+  \`\`\`jsx
+  import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
+  \`\`\`
+  `
+
+  const usageCode = dedent`
+    \`\`\`jsx
+    <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+    \`\`\`
+    `
 
   const steps = [
     {
@@ -83,6 +96,17 @@ function Code() {
       code: blockCommand,
       description:
         "This will add the files `NavMenu.tsx` and `MobileNav.tsx` to your blocks folder located in `cosmic/blocks/navigation-menu`.",
+    },
+    {
+      title: "Import Block",
+      code: importCode,
+      description: "Import the block into your app.",
+    },
+    {
+      title: "Usage",
+      code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
     },
     {
       title: "Add the NavMenu block to any file that needs navigation links.",

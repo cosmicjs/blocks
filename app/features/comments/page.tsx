@@ -84,6 +84,21 @@ function Code() {
   bunx @cosmicjs/blocks add comments
   \`\`\`
   `
+  const importCode = dedent`
+    \`\`\`jsx
+      import { Comments } from "@/cosmic/blocks/comments/Comments";
+    \`\`\`
+    `
+  const usageCode = dedent`
+    \`\`\`jsx
+      <Comments query={{
+          slug: "blog-post-slug",
+          type: "blog-posts",
+          "metadata.approved": true
+        }}
+      />
+    \`\`\`
+    `
 
   const commentsAPICodeString = dedent`
     \`\`\`ts
@@ -119,27 +134,15 @@ function Code() {
       code: commentsAPICodeString,
     },
     {
-      title:
-        "Add the following to any page that needs comments and pass the Object id to connect to this specific resource. For example at a specific blog page `app/blog/[slug]/page.tsx`",
-      code: dedent(`\`\`\`jsx
-        // app/blog/[slug]/page.tsx
-        import { Comments } from "@/cosmic/blocks/comments/Comments";
-        
-        export default async function BlogPost({
-          params,
-        }: {
-          params: { slug: string };
-        }) {
-          return (
-            <main className="container">
-              {/* page content above */}
-              <Comments query={{ slug: params.slug, type: "blog-posts" }} />
-              {/* page content below */}
-            </main>
-          );
-        }
-      \`\`\`
-    `),
+      title: "Import Block",
+      code: importCode,
+      description: "Import the block into your app.",
+    },
+    {
+      title: "Usage",
+      code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
     },
   ]
 

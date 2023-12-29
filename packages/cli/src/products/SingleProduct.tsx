@@ -41,7 +41,7 @@ export async function SingleProduct({ query }: { query: any }) {
         </nav>
         <div className="grid md:grid-cols-2 md:gap-x-8">
           <div>
-            <ImageGallery items={product.metadata.gallery} />
+            <ImageGallery query={query} />
           </div>
           <div>
             <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
