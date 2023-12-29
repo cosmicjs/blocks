@@ -56,7 +56,7 @@ function Code() {
       }) {
         return (
           <html lang="en">
-            <body className={inter.className}>
+            <body>
               <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
               {children}
               <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
