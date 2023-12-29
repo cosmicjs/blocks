@@ -55,22 +55,13 @@ export async function Comments({
   let resourceId
   try {
     // Get the id
-    const { object: resource } = await cosmic.objects
-      .findOne(query)
-      .props("id")
-      .depth(1)
-    resourceId = resource.id
-
     const { objects } = await cosmic.objects
-      .find({
-        type: "comments",
-        "metadata.approved": true,
-        "metadata.resource": resourceId, // Add resource id here such as blog post or product id
-      })
+      .find(query)
       .props("title,slug,metadata,created_at")
       .depth(1)
       .sort("created_at")
     comments = objects
+    resourceId = query["metadata.resource"]
   } catch (err) {}
   return (
     <div className={className}>
