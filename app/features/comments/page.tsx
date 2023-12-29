@@ -91,12 +91,7 @@ function Code() {
     `
   const usageCode = dedent`
     \`\`\`jsx
-      <Comments query={{
-          slug: "blog-post-slug",
-          type: "blog-posts",
-          "metadata.approved": true
-        }}
-      />
+      <Comments query={{ slug: "blog-post-slug", type: "blog-posts" }} />
     \`\`\`
     `
 
