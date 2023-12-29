@@ -56,7 +56,7 @@ const blocks = {
   },
   testimonials: {
     name: "Testimonials",
-    installationSteps: ["@cosmicjs/sdk"],
+    installationSteps: ["@cosmicjs/sdk", "clsx", "tailwind-merge"],
   },
   team: {
     name: "Team",
