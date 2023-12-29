@@ -124,6 +124,16 @@ function Code() {
     <BlogList query={{ type: "blog-posts" }} sort="-created_at" limit={10} skip={0} />
     \`\`\`
     `
+  const blogListPageCode = dedent`
+  \`\`\`jsx
+    // app/blog/page.tsx
+    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
+    export default async function BlogListPage() {
+      return <BlogList query={{ type: "blog-posts" }} sort="-created_at" limit={10} skip={0} />;
+    }
+  
+  \`\`\`
+  `
 
   const singlePageCode = dedent`
     \`\`\`jsx
@@ -166,7 +176,13 @@ function Code() {
         "Add the block to your app with the `query` property set to fetch your specific content.You can also set `sort`, `limit`, and `skip` properties.",
     },
     {
-      title: "Create the single blog page",
+      title: "Example: blog list page",
+      code: blogListPageCode,
+      description:
+        "Add a new file located at `app/blog/page.tsx` with the following:",
+    },
+    {
+      title: "Example: single blog page",
       code: singlePageCode,
       description:
         "Add a new file located at `app/blog/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the blog content.",

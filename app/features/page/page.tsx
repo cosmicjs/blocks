@@ -130,11 +130,26 @@ function Code() {
       description:
         "Add the block to your app with the `query` property set to fetch your specific content.",
     },
+    {
+      title: "Example: Home page",
+      description:
+        "You can create a home page by creating a new file at `app/page.tsx` with the following:",
+      code: dedent(`\`\`\`jsx
+        // app/page.tsx
+        import { Page } from "@/cosmic/blocks/pages/Page";
+        
+        export default async function HomePage() {
+          return <Page query={{ slug: "home", type: "pages" }} />;
+        }
+      \`\`\`
+      `),
+    },
   ]
 
   const dynamicPagesSteps = [
     {
-      title:
+      title: "Example: Dynamic pages",
+      description:
         "You can create dynamic pages by creating a new file at `app/[slug]/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
         // app/[slug]/page.tsx
@@ -151,8 +166,9 @@ function Code() {
       `),
     },
     {
-      title:
-        "Then go to Bucket > Objects > Pages and add new pages. For example create a new Page with title `Features` and slug `features` and see it available at `https://localhost:3000/features`",
+      title: "Create dynamic pages in Cosmic",
+      description:
+        "Go to Bucket > Objects > Pages and add new pages. For example create a new Page with title`Features` and slug `features` and see it available at `https://localhost:3000/features`",
     },
   ]
 
