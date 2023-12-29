@@ -6,11 +6,13 @@ export async function BlogList({
   sort,
   limit,
   skip,
+  className,
 }: {
   query: any
   sort?: string
   limit?: number
   skip?: number
+  className?: string
 }) {
   const { objects: posts } = await cosmic.objects
     .find(query)
@@ -21,10 +23,10 @@ export async function BlogList({
     .skip(skip)
 
   return (
-    <>
+    <div className={className}>
       {posts.map((post: PostType) => {
         return <BlogCard key={post.id} post={post} />
       })}
-    </>
+    </div>
   )
 }
