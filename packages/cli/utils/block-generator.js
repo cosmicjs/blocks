@@ -12,10 +12,13 @@ import prompts from "prompts"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+let hasRanOnce = false
+
 async function blockGenerator(blockObject, sourceFolderPath) {
   const { installationSteps, executionSteps, name, elements } = blockObject
   const packageManager = await getPackageManager()
 
+  // Step 0. Check to make sure the block isn't already installed
   const cosmicFolderPath = createCosmicFolder()
   const blocksPath = createBlocksFolder(cosmicFolderPath)
 
@@ -25,6 +28,7 @@ async function blockGenerator(blockObject, sourceFolderPath) {
     name.toLowerCase().replace(" ", "-")
   )
 
+  // Overwrite prompt
   if (fs.existsSync(destinationFolderPath)) {
     const response = await prompts({
       type: "select",
@@ -153,6 +157,8 @@ async function blockGenerator(blockObject, sourceFolderPath) {
       )
     )
     console.log(" ")
+    hasRanOnce = true
+    return "success"
   } catch (error) {
     if (error.code === "EEXIST")
       console.error(
@@ -167,12 +173,15 @@ async function blockGenerator(blockObject, sourceFolderPath) {
         chalk.red(`✗ Error copying code for ${chalk.bold(name)} Block:`),
         error
       )
-    return ""
+    hasRanOnce = true
+    return "failure"
   }
 }
 
 function updateTailwindFile() {
-  const cosmicTailwindPath = "cosmic/**/*.{ts,tsx,js,jsx}"
+  if (hasRanOnce) return
+
+  const cosmicTailwindPath = "./cosmic/**/*.{ts,tsx,js,jsx}"
 
   const tailwindConfigPath = path.join(process.cwd(), "tailwind.config.js")
   const tailwindConfigTSPath = path.join(process.cwd(), "tailwind.config.ts")
@@ -193,9 +202,11 @@ function updateTailwindConfig(configPath, cosmicPath) {
   if (match?.length > 0) {
     let arrayString = match[0].replace("content: ", "")
     arrayString = arrayString.replace(/'/g, '"')
-    arrayString = arrayString.replace(/'/g, '"').replace(/,(?=[^,]*$)/, "")
+    arrayString = arrayString.replace(/,(?=[^,]*$)/, "")
     let parsedArray = JSON.parse(arrayString)
-    const hasCosmicPath = parsedArray.includes(cosmicPath)
+    const hasCosmicPath = Boolean(
+      parsedArray.filter((arr) => arr.includes("/cosmic/")).length > 0
+    )
     if (!hasCosmicPath) {
       console.log("➤ Adding cosmic folder to tailwind config file...")
 
@@ -206,11 +217,7 @@ function updateTailwindConfig(configPath, cosmicPath) {
 
       fs.writeFileSync(configPath, updatedTailwindConfig, "utf8")
 
-      console.log(
-        chalk.yellowBright(
-          "➤ Tailwind config updated. Please restart your server."
-        )
-      )
+      console.log(chalk.green("✔ Tailwind config updated successfully!"))
     }
   } else {
     console.log(
