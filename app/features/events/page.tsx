@@ -45,6 +45,18 @@ function Code({ manager }: { manager: PackageManagers }) {
   \`\`\`
   `
 
+  const importCode = dedent`
+    \`\`\`jsx
+    import { EventsList } from "@/cosmic/blocks/events/EventsList";
+    \`\`\`
+    `
+
+  const usageCode = dedent`
+    \`\`\`jsx
+    <EventsList query={{ type: "events" }} />
+    \`\`\`
+    `
+
   const steps = [
     {
       title: "Install the Block content model",
@@ -58,22 +70,15 @@ function Code({ manager }: { manager: PackageManagers }) {
         "This will add the `EventCard.tsx` and `EventsList.tsx` files to `cosmic/blocks/events`.",
     },
     {
-      title: "Add the following to any page that needs events.",
-      code: dedent(`\`\`\`jsx
-            // app/page.tsx
-            import { EventsList } from "@/cosmic/blocks/events/EventsList";
-            
-            export default function Home() {
-              return (
-                <main className="container">
-                  {/* page content above */}
-                  <EventsList query={{ type: "events" }} />
-                  {/* page content below */}
-                </main>
-              );
-            }
-      \`\`\`
-      `),
+      title: "Import Block",
+      code: importCode,
+      description: "Import the block into your app.",
+    },
+    {
+      title: "Usage",
+      code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
     },
   ]
 

@@ -120,10 +120,22 @@ async function Preview() {
 }
 function Code() {
   const blockCommand = dedent`
-  \`\`\`bash
-  bunx @cosmicjs/blocks add team
-  \`\`\`
-  `
+    \`\`\`bash
+    bunx @cosmicjs/blocks add team
+    \`\`\`
+    `
+
+  const importCode = dedent`
+    \`\`\`jsx
+    import { TeamList } from "@/cosmic/blocks/team/TeamList";
+    \`\`\`
+    `
+
+  const usageCode = dedent`
+    \`\`\`jsx
+    <TeamList query={{ type: "team-members" }}/>
+    \`\`\`
+    `
 
   const steps = [
     {
@@ -139,22 +151,15 @@ function Code() {
         "This will add the `TeamCard.tsx` and `TeamList.tsx` files to `cosmic/blocks/team`.",
     },
     {
-      title: "Add the following to any page that needs team.",
-      code: dedent(`\`\`\`jsx
-      // app/about/page.tsx
-      import { TeamList } from "@/cosmic/blocks/team/TeamList";
-      
-      export default function Home() {
-        return (
-          <main className="container">
-            {/* page content above */}
-            <TeamList query={{ type: "team-members" }}/>
-            {/* page content below */}
-          </main>
-        );
-      }
-    \`\`\`
-    `),
+      title: "Import Block",
+      code: importCode,
+      description: "Import the block into your app.",
+    },
+    {
+      title: "Usage",
+      code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
     },
   ]
 

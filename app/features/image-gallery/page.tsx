@@ -80,6 +80,18 @@ function Code() {
   \`\`\`
   `
 
+  const importCode = dedent`
+  \`\`\`jsx
+  import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery";
+  \`\`\`
+  `
+
+  const usageCode = dedent`
+    \`\`\`jsx
+    <ImageGallery query={{ type: "pages", slug: "home" }} />
+    \`\`\`
+    `
+
   const steps = [
     {
       title: "Install the Block content model",
@@ -94,9 +106,15 @@ function Code() {
         "This will add the file `ImageGallery.tsx` and `ImageGalleryClient.tsx` to `cosmic/blocks/image-gallery`.",
     },
     {
-      title:
-        "Add the Image Gallery block to any file that needs an image gallery",
-      code: codeString,
+      title: "Import Block",
+      code: importCode,
+      description: "Import the block into your app.",
+    },
+    {
+      title: "Usage",
+      code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
     },
   ]
 

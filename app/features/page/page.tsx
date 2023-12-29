@@ -4,15 +4,12 @@ import dedent from "dedent"
 import { fetchPageData } from "@/lib/cosmic"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { BucketAPILink } from "@/components/bucket-api-link"
-import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { Section } from "@/components/page-section"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
 export async function generateMetadata() {
-  const page = await fetchPageData("home")
   return {
-    title: `${page.title}`,
+    title: `Page Block`,
   }
 }
 
@@ -93,14 +90,14 @@ async function Preview() {
 }
 
 function Code() {
-  const codeString = dedent`
+  const importCode = dedent`
     \`\`\`jsx
-      // app/page.tsx
       import { Page } from "@/cosmic/blocks/pages/Page";
-      
-      export default async function HomePage() {
-        return <Page query={{ slug: "home", type: "pages" }} />
-      }
+    \`\`\`
+    `
+  const usageCode = dedent`
+    \`\`\`jsx
+      <Page query={{ slug: "home", type: "pages" }} />
     \`\`\`
     `
 
@@ -112,7 +109,6 @@ function Code() {
   const steps = [
     {
       title: "Install the Block content model",
-      code: blockCommand,
       description:
         "This will create the `pages` Object type in your Bucket and add demo content.",
       installButton: true,
@@ -121,12 +117,18 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the files `Page.tsx`,`PageSection.tsx`, and `button.tsx` to your blocks folder located in `cosmic/blocks/pages`.",
+        "This will add the files `Page.tsx` and `PageSection.tsx` to your blocks folder located in `cosmic/blocks/pages`.",
     },
     {
-      title: "Add the code to your app",
-      code: codeString,
-      description: "Add the following code to `app/page.tsx`.",
+      title: "Import Block",
+      code: importCode,
+      description: "Import the block into your app.",
+    },
+    {
+      title: "Usage",
+      code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
     },
   ]
 

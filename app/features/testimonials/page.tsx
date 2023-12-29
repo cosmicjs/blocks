@@ -86,6 +86,18 @@ function Code({ manager }: { manager: PackageManagers }) {
     \`\`\`
     `
 
+  const importCode = dedent`
+    \`\`\`jsx
+    import { Testimonials } from "@/cosmic/blocks/testimonials/Testimonials";
+    \`\`\`
+    `
+
+  const usageCode = dedent`
+    \`\`\`jsx
+    <Testimonials query={{ type: "testimonials" }}/>
+    \`\`\`
+    `
+
   const steps = [
     {
       title: "Install the Block content model",
@@ -100,22 +112,15 @@ function Code({ manager }: { manager: PackageManagers }) {
         "This will add the `Testimonial.tsx` and `Testimonials.tsx` files to `cosmic/blocks/testimonials`.",
     },
     {
-      title: "Add the following to any page that needs testimonials.",
-      code: dedent(`\`\`\`jsx
-        // app/page.tsx
-        import { Testimonials } from "@/cosmic/blocks/testimonials/Testimonials";
-        
-        export default function Home() {
-          return (
-            <main className="container">
-              {/* page content above */}
-              <Testimonials query={{ type: "testimonials" }}/>
-              {/* page content below */}
-            </main>
-          );
-        }
-      \`\`\`
-      `),
+      title: "Import Block",
+      code: importCode,
+      description: "Import the block into your app.",
+    },
+    {
+      title: "Usage",
+      code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
     },
   ]
 

@@ -69,26 +69,19 @@ async function Preview() {
   )
 }
 function Code() {
-  const codeString = dedent`
-      \`\`\`jsx
-        // app/page.tsx
-        import { FAQs } from "@/cosmic/blocks/faqs/FAQs";
-        
-        export default async function Home() {
-          return (
-            <main className="container">
-              <h2 className="mb-4 text-2xl font-semibold">
-                Frequently Asked Questions
-              </h2>
-              <FAQs query={{ slug: "home", type: "pages" }} />
-            </main>
-          );
-        }    
-      \`\`\`
-      `
   const blockCommand = dedent`
     \`\`\`bash
     bunx @cosmicjs/blocks add faqs
+    \`\`\`
+    `
+  const importCode = dedent`
+    \`\`\`jsx
+    import { FAQs } from "@/cosmic/blocks/faqs/FAQs";
+    \`\`\`
+    `
+  const usageCode = dedent`
+    \`\`\`jsx
+    <FAQs query={{ slug: "home", type: "pages" }} />
     \`\`\`
     `
 
@@ -106,8 +99,15 @@ function Code() {
         "This will add the files `Accordion.tsx` and `FAQs.tsx` to your blocks folder located in `cosmic/blocks/faqs`.",
     },
     {
-      title: "Add the FAQs component to any file that needs FAQs",
-      code: codeString,
+      title: "Import Block",
+      code: importCode,
+      description: "Import the block into your app.",
+    },
+    {
+      title: "Usage",
+      code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
     },
   ]
 

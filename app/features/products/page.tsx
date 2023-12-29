@@ -124,31 +124,19 @@ async function Preview() {
 }
 
 function Code() {
-  const codeString = dedent`
+  const importCode = dedent`
     \`\`\`jsx
-      // app/shop/page.tsx
       import { ProductList } from "@/cosmic/blocks/products/ProductList";
-
-      export default async function ShopPage() {
-        return (
-          <>
-            <section className="container pb-8 m-auto">
-              <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
-                <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-                  Shop
-                </h1>
-                <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                  <ProductList query={{ type: "products" }} />
-                </div>
-              </div>
-            </section>
-          </>
-        );
-      }
     \`\`\`
     `
 
-  const codeSingleProductString = dedent`
+  const usageCode = dedent`
+    \`\`\`jsx
+      <ProductList query={{ type: "products" }} />
+    \`\`\`
+    `
+
+  const singleProductCode = dedent`
     \`\`\`jsx
       // app/shop/[slug]/page.tsx
       import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
@@ -162,7 +150,6 @@ function Code() {
           <SingleProduct query={{ slug: params.slug, type: "products" }} />
         );
       }
-
     \`\`\`
     `
   const blockCommand = dedent`
@@ -183,13 +170,21 @@ function Code() {
         "This will add the `ProductCard.tsx`,`ProductList.tsx`, and `SingleProduct.tsx` files to `cosmic/blocks/products`. This will also add the image-gallery block to be used in the single product page.",
     },
     {
-      title: "Add a new file located at `app/shop/page.tsx` with the following",
-      code: codeString,
+      title: "Import Block",
+      code: importCode,
+      description: "Import the block into your app.",
     },
     {
-      title:
+      title: "Product List Usage",
+      code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
+    },
+    {
+      title: "Single Product page usage",
+      code: singleProductCode,
+      description:
         "Add a new file located at `app/shop/[slug]/page.tsx` with the following",
-      code: codeSingleProductString,
     },
   ]
 
