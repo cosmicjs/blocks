@@ -94,7 +94,8 @@ async function addComponent(component) {
   // source code for the block
   const sourceFolderPath = path.join(__dirname, "src", component)
 
-  await blockGenerator(blockData, sourceFolderPath)
+  const response = await blockGenerator(blockData, sourceFolderPath)
+  return response
 }
 
 const addCommand = new Command()
@@ -102,31 +103,36 @@ const addCommand = new Command()
   .description("add blocks to your project")
   .argument("<components...>", "the blocks to add")
   .action(async (components) => {
+    let response
     const startTime = performance.now()
     for (const component of components) {
       if (!Object.keys(blocks).includes(component)) {
         return console.error(
           chalk.red(
-            `"${component}" is an invalid Block name. Please find a valid list of Blocks on cosmicjs.com/blocks`
+            `"${component}" is an invalid Block name. Please find a valid list of Blocks on ${chalk.bold(
+              "https://cosmicjs.com/blocks."
+            )}`
           )
         )
       } else {
-        await addComponent(component)
+        response = await addComponent(component)
       }
     }
     const endTime = performance.now()
     const speed = ((endTime - startTime) / 1000).toFixed(2)
 
-    if (speed < 10)
-      console.log(
-        chalk.greenBright(`ϟ Executed superfast in ${speed} seconds!`)
-      )
+    if (response === "success") {
+      if (speed < 5)
+        console.log(
+          chalk.greenBright(`ϟ Executed superfast in ${speed} seconds!`)
+        )
 
-    console.log(
-      chalk.yellow(
-        `➤ View more Blocks at ${chalk.bold("cosmicjs.com/blocks.")}`
+      console.log(
+        chalk.yellow(
+          `➤ View more Blocks at ${chalk.bold("https://cosmicjs.com/blocks.")}`
+        )
       )
-    )
+    }
   })
 
 program.addCommand(addCommand)
