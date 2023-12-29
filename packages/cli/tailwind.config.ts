@@ -6,7 +6,7 @@ module.exports = {
   content: [
     "app/**/*.{ts,tsx}",
     "components/**/*.{ts,tsx}",
-    "cosmic/**/*.{ts,tsx,js,jsx}",
+    "./cosmic/**/*.{ts,tsx,js,jsx}",
   ],
   theme: {
     extend: {
