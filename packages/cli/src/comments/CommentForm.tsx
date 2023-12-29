@@ -3,6 +3,7 @@
 
 import { useState } from "react"
 import { CheckCircle, Loader2, XCircle } from "lucide-react"
+import { cn } from "@/cosmic/utils"
 
 import { Button } from "@/cosmic/elements/Button"
 import { Input } from "@/cosmic/elements/Input"
@@ -71,69 +72,66 @@ export function CommentForm({
     setComment(target.value)
   }
   return (
-    <div className={className}>
-      <div className="mb-8">
-        <h2 className="mb-4 text-2xl">Add a new comment</h2>
-        {error && (
-          <div className="mb-4 flex rounded-xl border border-red-500 p-8">
-            <XCircle className="relative top-1 mr-4 h-4 w-4 text-red-500" />
-            There was an error with your request. Make sure all fields are
-            valid.
+    <div className={cn("mb-8", className)}>
+      <h2 className="mb-4 text-2xl">Add a new comment</h2>
+      {error && (
+        <div className="mb-4 flex rounded-xl border border-red-500 p-8">
+          <XCircle className="relative top-1 mr-4 h-4 w-4 text-red-500" />
+          There was an error with your request. Make sure all fields are valid.
+        </div>
+      )}
+      {sumbitted ? (
+        <div className="flex rounded-xl border border-green-500 p-8">
+          <CheckCircle className="relative top-1 mr-4 h-4 w-4 text-green-500" />
+          Comment submitted for approval.
+        </div>
+      ) : (
+        <>
+          <div className="mb-4">
+            <Label htmlFor="name">Your name</Label>
+            <Input
+              id="name"
+              placeholder="Name"
+              onChange={handleChangeName}
+              value={name}
+            />
           </div>
-        )}
-        {sumbitted ? (
-          <div className="flex rounded-xl border border-green-500 p-8">
-            <CheckCircle className="relative top-1 mr-4 h-4 w-4 text-green-500" />
-            Comment submitted for approval.
+          <div className="mb-4">
+            <Label htmlFor="email">Your email</Label>
+            <Input
+              id="email"
+              placeholder="Email"
+              onChange={handleChangeEmail}
+              value={email}
+            />
           </div>
-        ) : (
-          <>
-            <div className="mb-4">
-              <Label htmlFor="name">Your name</Label>
-              <Input
-                id="name"
-                placeholder="Name"
-                onChange={handleChangeName}
-                value={name}
-              />
-            </div>
-            <div className="mb-4">
-              <Label htmlFor="email">Your email</Label>
-              <Input
-                id="email"
-                placeholder="Email"
-                onChange={handleChangeEmail}
-                value={email}
-              />
-            </div>
-            <div className="mb-4">
-              <Label htmlFor="comment">Comment</Label>
-              <Textarea
-                id="comment"
-                placeholder="Comment"
-                onChange={handleChangeComment}
-                value={comment}
-              />
-            </div>
-            <div>
-              <Button
-                onClick={handleSubmitComment}
-                type="submit"
-                disabled={submitting}
-              >
-                {submitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Submitting...
-                  </>
-                ) : (
-                  `Submit`
-                )}
-              </Button>
-            </div>
-          </>
-        )}
-      </div>
+          <div className="mb-4">
+            <Label htmlFor="comment">Comment</Label>
+            <Textarea
+              id="comment"
+              placeholder="Comment"
+              onChange={handleChangeComment}
+              value={comment}
+            />
+          </div>
+          <div>
+            <Button
+              onClick={handleSubmitComment}
+              type="submit"
+              disabled={submitting}
+            >
+              {submitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                `Submit`
+              )}
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   )
 }

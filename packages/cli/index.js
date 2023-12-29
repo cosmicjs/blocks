@@ -45,6 +45,8 @@ const blocks = {
       "@radix-ui/react-slot",
       "class-variance-authority",
       "@radix-ui/react-label",
+      "clsx",
+      "tailwind-merge",
     ],
     elements: ["Button", "Input", "Label", "TextArea"],
   },
@@ -62,7 +64,12 @@ const blocks = {
   },
   "navigation-menu": {
     name: "Navigation Menu",
-    installationSteps: ["@cosmicjs/sdk", "lucide-react"],
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge",
+    ],
   },
   products: {
     name: "Products",
@@ -70,6 +77,8 @@ const blocks = {
       "@cosmicjs/sdk",
       "@radix-ui/react-slot",
       "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
     ],
     elements: ["Button"],
   },

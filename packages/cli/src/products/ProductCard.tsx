@@ -1,5 +1,6 @@
 // components/product-card.tsx
 import Link from "next/link"
+import { cn } from "@/cosmic/utils"
 
 export type ProductType = {
   id: string
@@ -14,9 +15,18 @@ export type ProductType = {
   }
 }
 
-export function ProductCard({ product }: { product: ProductType }) {
+export function ProductCard({
+  product,
+  className,
+}: {
+  product: ProductType
+  className?: string
+}) {
   return (
-    <Link href={`/shop/${product.slug}`} className="group relative w-56">
+    <Link
+      href={`/shop/${product.slug}`}
+      className={cn("group relative w-56", className)}
+    >
       <div className="h-52 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
         <img
           src={`${product.metadata.image.imgix_url}?w=1200&auto=format,compression`}
