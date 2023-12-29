@@ -4,13 +4,19 @@ import { MobileNav } from "./MobileNav"
 
 export type ItemType = { title: string; link: string; open_in_new_tab: boolean }
 
-export async function NavMenu({ query }: { query: any }) {
+export async function NavMenu({
+  query,
+  className,
+}: {
+  query: any
+  className?: string
+}) {
   const { object: nav } = await cosmic.objects
     .findOne(query)
     .props("metadata")
     .depth(1)
   return (
-    <>
+    <div className={className}>
       {/* Desktop */}
       <div className="hidden md:block">
         <div>
@@ -30,6 +36,6 @@ export async function NavMenu({ query }: { query: any }) {
       </div>
       {/* Mobile */}
       <MobileNav items={nav.metadata.items} />
-    </>
+    </div>
   )
 }
