@@ -54,7 +54,7 @@ export async function Page({
           className="w-full"
         />
       </div>
-      <section className="container grid items-center py-10">
+      <section className="container m-auto grid items-center py-10">
         <div className="relative m-auto flex max-w-3xl flex-col items-start gap-2">
           <div
             dangerouslySetInnerHTML={{ __html: page.metadata.content }}
