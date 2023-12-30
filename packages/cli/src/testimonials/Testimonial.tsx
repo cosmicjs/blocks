@@ -1,3 +1,5 @@
+import { cn } from "@/cosmic/utils"
+
 export type TestimonialType = {
   title: string
   slug: string
@@ -11,9 +13,20 @@ export type TestimonialType = {
   }
 }
 
-export function Testimonial({ testimonial }: { testimonial: TestimonialType }) {
+export function Testimonial({
+  testimonial,
+  className,
+}: {
+  testimonial: TestimonialType
+  className?: string
+}) {
   return (
-    <figure className="mb-6 overflow-hidden rounded-xl bg-slate-100 p-8 dark:bg-slate-800 md:flex md:p-0">
+    <figure
+      className={cn(
+        "mb-6 overflow-hidden rounded-xl bg-slate-100 p-8 dark:bg-slate-800 md:flex md:p-0",
+        className
+      )}
+    >
       <img
         className="mx-auto h-24 w-24 rounded-full object-cover md:h-auto md:w-48 md:rounded-none"
         src={`${testimonial.metadata.image.imgix_url}?w=500&h=500&auto=format,compression&fit=facearea&facepad=3`}

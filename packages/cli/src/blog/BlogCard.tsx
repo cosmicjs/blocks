@@ -22,9 +22,15 @@ export type PostType = {
   }
 }
 
-export function BlogCard({ post }: { post: PostType }) {
+export function BlogCard({
+  post,
+  className,
+}: {
+  post: PostType
+  className?: string
+}) {
   return (
-    <article>
+    <article className={className}>
       <Link
         className="dark:bg-background group relative flex h-full w-full flex-col overflow-hidden rounded-lg shadow-2xl shadow-gray-500/20 transition hover:bg-gray-50 dark:shadow-none dark:hover:bg-gray-900/40"
         href={`/blog/${post.slug}`}

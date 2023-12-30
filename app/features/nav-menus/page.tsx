@@ -49,6 +49,7 @@ function Code() {
     \`\`\`jsx
       // app/layout.tsx
       import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
+      import './globals.css'
       export default function RootLayout({
         children,
       }: {
@@ -56,7 +57,7 @@ function Code() {
       }) {
         return (
           <html lang="en">
-            <body className={inter.className}>
+            <body>
               <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
               {children}
               <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />

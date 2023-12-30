@@ -4,14 +4,20 @@ import Markdown from "react-markdown"
 import { ArrowLeftIcon } from "lucide-react"
 import Link from "next/link"
 
-export async function SingleBlog({ query }: { query: any }) {
+export async function SingleBlog({
+  query,
+  className,
+}: {
+  query: any
+  className?: string
+}) {
   const { object: blog } = await cosmic.objects
     .findOne(query)
     .props("id,slug,title,metadata")
     .depth(1)
 
   return (
-    <>
+    <div className={className}>
       <div className="mb-10 max-h-[500px] w-full overflow-hidden">
         <img
           src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
@@ -68,6 +74,6 @@ export async function SingleBlog({ query }: { query: any }) {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

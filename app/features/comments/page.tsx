@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import dedent from "dedent"
 import { User } from "lucide-react"
+import Link from "next/link"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import { BucketAPILink } from "@/components/bucket-api-link"
 import { CommentForm } from "@/components/comment-form"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
@@ -91,12 +91,45 @@ function Code() {
     `
   const usageCode = dedent`
     \`\`\`jsx
-      <Comments query={{
-          slug: "blog-post-slug",
-          type: "blog-posts",
-          "metadata.approved": true
+      <Comments
+        query={{
+          type: "comments",
+          "metadata.resource": "object-id",
+          "metadata.approved": true,
         }}
       />
+    \`\`\`
+    `
+  const exampleCode = dedent`
+    \`\`\`jsx
+      // app/blog/[slug]/page.tsx
+      import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
+      import { Comments } from "@/cosmic/blocks/comments/Comments";
+      import { cosmic } from "@/cosmic/client";
+      
+      export default async function SingleBlogPage({
+        params,
+      }: {
+        params: { slug: string };
+      }) {
+        const { object } = await cosmic.objects.findOne({
+          slug: params.slug,
+          type: "blog-posts",
+        }).props("id");
+        return (
+          <>
+            <SingleBlog query={{ slug: params.slug, type: "blog-posts" }} />
+            <Comments
+              className="m-auto max-w-[750px] mt-4 w-full"
+              query={{
+                type: "comments",
+                "metadata.resource": object.id,
+                "metadata.approved": true,
+              }}
+            />
+          </>
+        );
+      }
     \`\`\`
     `
 
@@ -143,6 +176,20 @@ function Code() {
       code: usageCode,
       description:
         "Add the block to your app with the `query` property set to fetch your specific content.",
+    },
+    {
+      title: "Example",
+      code: exampleCode,
+      description: (
+        <>
+          Add the following to a single blog post file
+          `app/blog/[slug]/page.tsx`. Note: this assumes you have installed the{" "}
+          <Link href="/features/blog" className="text-cosmic-blue">
+            Blog Block
+          </Link>
+          .
+        </>
+      ),
     },
   ]
 

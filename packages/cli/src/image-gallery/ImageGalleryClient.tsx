@@ -11,11 +11,17 @@ export type GalleryItemType = {
   description: string
 }
 
-export function ImageGalleryClient({ items }: { items: GalleryItemType[] }) {
+export function ImageGalleryClient({
+  items,
+  className,
+}: {
+  items: GalleryItemType[]
+  className?: string
+}) {
   const [mainItem, setMainItem] = useState(items[0])
 
   return (
-    <>
+    <div className={className}>
       <div>
         <img
           src={`${mainItem.image.imgix_url}?w=1200&auto=format,compression`}
@@ -32,7 +38,7 @@ export function ImageGalleryClient({ items }: { items: GalleryItemType[] }) {
               className={cn(
                 `overflow-hidden rounded-xl border-4`,
                 item.image.imgix_url === mainItem.image.imgix_url
-                  ? "border-cosmic-blue"
+                  ? "border-blue-500"
                   : ""
               )}
             >
@@ -45,6 +51,6 @@ export function ImageGalleryClient({ items }: { items: GalleryItemType[] }) {
           )
         })}
       </div>
-    </>
+    </div>
   )
 }

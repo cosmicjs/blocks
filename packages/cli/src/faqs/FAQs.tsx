@@ -12,14 +12,20 @@ type FAQ = {
   answer: string
 }
 
-export async function FAQs({ query }: { query: any }) {
+export async function FAQs({
+  query,
+  className,
+}: {
+  query: any
+  className?: string
+}) {
   const { object: page } = await cosmic.objects
     .findOne(query)
     .props("slug,title,metadata")
     .depth(1)
 
   return (
-    <>
+    <div className={className}>
       {(page?.metadata?.faqs).map((faq: FAQ) => {
         return (
           <Accordion type="single" collapsible key={faq.question}>
@@ -30,6 +36,6 @@ export async function FAQs({ query }: { query: any }) {
           </Accordion>
         )
       })}
-    </>
+    </div>
   )
 }

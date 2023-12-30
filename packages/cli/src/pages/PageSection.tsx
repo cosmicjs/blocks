@@ -17,9 +17,15 @@ type SectionType = {
   cta_text: string
 }
 
-export function Section({ section }: { section: SectionType }) {
+export function Section({
+  section,
+  className,
+}: {
+  section: SectionType
+  className?: string
+}) {
   return (
-    <div key={section.heading}>
+    <div key={section.heading} className={className}>
       {section.layout.key === "1-column-center" && (
         <div className="m-auto max-w-[800px]">
           <div className="mb-6 text-center">
