@@ -1,7 +1,7 @@
 // components/comments.tsx
 import { cosmic } from "@/cosmic/client"
-import { User } from "lucide-react"
-
+import { UserRound } from "lucide-react"
+import { cn } from "@/cosmic/utils"
 import { CommentForm } from "./CommentForm"
 
 type Comment = {
@@ -20,25 +20,29 @@ function Comment({
   comment: Comment
   className?: string
 }) {
+  const date = new Date(comment.created_at).toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  })
   return (
-    <div className={className}>
-      <div className="mb-6 flex rounded-xl border p-4 pb-6">
-        <div className="mr-2 pt-[2px] text-gray-500 dark:text-gray-200">
-          <User className="h-6 w-6" />
+    <div
+      className={cn(
+        "mb-6 flex flex-col rounded-xl border border-zinc-300 p-4 pb-6 dark:border-zinc-700",
+        className
+      )}
+    >
+      <div className="mb-4 flex w-full items-center justify-between gap-2 text-gray-500 dark:text-gray-200">
+        <div className="flex items-center gap-2 text-black dark:text-white">
+          <UserRound className="h-4 w-4" />
+          <div className="text-lg">{comment.title}</div>
         </div>
-        <div>
-          <div className="mb-2 text-lg">{comment.title}</div>
-          <div className="mb-4 text-xs">
-            {new Date(comment.created_at).toLocaleDateString("en-us", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "numeric",
-              minute: "numeric",
-            })}
-          </div>
-          <div className="pr-6">{comment.metadata.comment}</div>
-        </div>
+        <div className="text-xs">{date}</div>
+      </div>
+      <div className="pr-6 text-zinc-700 dark:text-zinc-300">
+        {comment.metadata.comment}
       </div>
     </div>
   )
