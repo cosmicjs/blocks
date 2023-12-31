@@ -56,7 +56,7 @@ export async function Comments({
   className?: string
 }) {
   let comments = []
-  let resourceId
+  const resourceId = query["metadata.resource"]
   try {
     // Get the id
     const { objects } = await cosmic.objects
@@ -65,7 +65,6 @@ export async function Comments({
       .depth(1)
       .sort("created_at")
     comments = objects
-    resourceId = query["metadata.resource"]
   } catch (err) {}
   return (
     <div className={className}>
