@@ -41,27 +41,30 @@ type MemberType = {
 
 function TeamCard({ member }: { member: MemberType }) {
   return (
-    <div className="flex w-full flex-col overflow-hidden rounded-lg bg-slate-100 shadow-lg dark:bg-slate-800 md:flex-row">
-      <div className="h-full w-full md:w-2/5">
+    <div className="flex w-full flex-col overflow-hidden rounded-lg border  border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-800 md:flex-row">
+      <div className="md:w-2/5">
         <img
           className="h-full w-full object-cover object-center"
           src={`${member.metadata.image.imgix_url}?w=600&h=600&auto=format,compression&fit=crop&crop=faces}`}
           alt={member.title}
         />
       </div>
-      <div className="w-full space-y-2 p-6 text-left md:w-3/5 md:p-4">
-        <p className="text-xl font-bold text-slate-700 dark:text-slate-100">
+      <div className="w-full space-y-2 p-4 text-left md:w-3/5">
+        <p className="text-xl font-bold text-zinc-700 dark:text-zinc-100">
           {member.title}
         </p>
-        <p className="text-base font-normal text-slate-700 dark:text-slate-100">
+        <p className="font-normal text-zinc-700 dark:text-zinc-100">
           {member.metadata.position}
         </p>
-        <p className="text-base font-normal leading-relaxed text-slate-700 dark:text-gray-300">
+        <p className="text-sm font-normal leading-relaxed text-zinc-700 dark:text-gray-300">
           {member.metadata.bio}
         </p>
         <div className="flex justify-start space-x-4 py-4">
           {member.metadata.links.x && (
-            <a href="" className="text-gray-500 hover:text-gray-600">
+            <a
+              href={member.metadata.links.x}
+              className="text-gray-500 hover:text-gray-600"
+            >
               <svg
                 color="currentColor"
                 aria-label="X"
@@ -78,7 +81,10 @@ function TeamCard({ member }: { member: MemberType }) {
             </a>
           )}
           {member.metadata.links.linkedin && (
-            <a href="" className="text-gray-500 hover:text-gray-600">
+            <a
+              href={member.metadata.links.linkedin}
+              className="text-gray-500 hover:text-gray-600"
+            >
               <svg
                 width="24"
                 height="24"

@@ -4,7 +4,7 @@
   "bin": {
     "@cosmicjs/blocks": "./index.js"
   },
-  "version": "0.0.827",
+  "version": "0.0.829",
   "description": "Cosmic blocks setup",
   "main": "index.js",
   "scripts": {

@@ -2,8 +2,6 @@
 import dedent from "dedent"
 
 import { fetchFeature } from "@/lib/cosmic"
-import { BucketAPILink } from "@/components/bucket-api-link"
-import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { PackageManagers } from "../layout"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
@@ -42,7 +40,7 @@ type Testimonial = {
 
 function Testimonial({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <figure className="mb-6 overflow-hidden rounded-xl bg-slate-100 p-8 dark:bg-slate-800 md:flex md:p-0">
+    <figure className="mb-6 flex flex-col gap-4 overflow-hidden rounded-xl bg-zinc-100 p-8 dark:bg-zinc-800 md:flex-row md:p-0">
       <img
         className="mx-auto h-24 w-24 rounded-full object-cover md:h-auto md:w-48 md:rounded-none"
         src={`${testimonial.metadata.image.imgix_url}?w=500&h=500&auto=format,compression&fit=facearea&facepad=3`}
@@ -50,7 +48,7 @@ function Testimonial({ testimonial }: { testimonial: Testimonial }) {
       />
       <div className="space-y-4 text-center md:p-8 md:text-left">
         <blockquote className="relative">
-          <p className="relative z-10 text-lg font-medium">
+          <p className="relative z-10 text-lg text-zinc-600 dark:text-zinc-300">
             &quot;{testimonial.metadata.quote}&quot;
           </p>
         </blockquote>
@@ -58,7 +56,7 @@ function Testimonial({ testimonial }: { testimonial: Testimonial }) {
           <div className="text-sky-500 dark:text-sky-400">
             {testimonial.title}
           </div>
-          <div className="text-slate-700 dark:text-slate-500">
+          <div className="text-zinc-500 dark:text-zinc-400">
             {testimonial.metadata.position}, {testimonial.metadata.company}
           </div>
         </figcaption>
