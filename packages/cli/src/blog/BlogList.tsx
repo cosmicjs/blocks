@@ -18,9 +18,9 @@ export async function BlogList({
     .find(query)
     .props("id,slug,title,metadata")
     .depth(1)
-    .sort(sort)
-    .limit(limit)
-    .skip(skip)
+    .sort(sort ? sort : "-order")
+    .limit(limit ? limit : 0)
+    .skip(skip ? skip : 0)
 
   return (
     <div className={className}>
