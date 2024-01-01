@@ -27,7 +27,7 @@ export const features = [
       "Repeating layouts in: 1 column and alternating 2 columns with headline, image, and rich text content.",
     ],
     confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/features/page",
+    preview_link: "/blocks/pages",
     object_types: 1,
     objects: 1,
     dark_thumbnail:
@@ -49,7 +49,7 @@ export const features = [
       "Categories multiple Object relationship Metafield",
     ],
     confirmation: `This will install the following Object types: \`blog-posts\`,\`authors\`, and \`categories\` as well as demo content.`,
-    preview_link: "/features/blog",
+    preview_link: "/blocks/blog",
     object_types: 3,
     objects: 2,
     dark_thumbnail:
@@ -66,7 +66,7 @@ export const features = [
     description: `Adds a Comments Object type to your Bucket, which includes`,
     field_list: ["Email", "Comment", "Resource", "Approved"],
     confirmation: `This will install a \`comments\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/features/comments",
+    preview_link: "/blocks/comments",
     object_types: 1,
     objects: 5,
     dark_thumbnail:
@@ -83,7 +83,7 @@ export const features = [
     description: `Adds an FAQs feature to any existing Object type, which includes`,
     field_list: ["Question", "Answer"],
     confirmation: `This will add a new Metafield with key \`faqs\` to the selected Object types.`,
-    preview_link: "/features/faqs",
+    preview_link: "/blocks/faqs",
     metafields: 1,
     dark_thumbnail:
       "https://imgix.cosmicjs.com/feffea80-9416-11ee-b62d-5b90a0a1bade-FAQs-Dark.png",
@@ -101,7 +101,7 @@ export const features = [
       "Links repeater with title, link, and option to open in a new browser tab",
     ],
     confirmation: `This will install a \`navigation-menus\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/features/nav-menus",
+    preview_link: "/blocks/nav-menus",
     object_types: 1,
     objects: 2,
     dark_thumbnail:
@@ -124,7 +124,7 @@ export const features = [
       "Description",
     ],
     confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/features/products",
+    preview_link: "/blocks/products",
     object_types: 1,
     objects: 4,
     dark_thumbnail:
@@ -141,7 +141,7 @@ export const features = [
     description: `Adds an image gallery to any existing Object type, which includes`,
     field_list: ["Image", "Description"],
     confirmation: `This will add a new Metafield with key \`image_gallery\` to the selected Object types.`,
-    preview_link: "/features/image-gallery",
+    preview_link: "/blocks/image-gallery",
     metafields: 1,
     dark_thumbnail:
       "https://imgix.cosmicjs.com/0ac07720-a8fa-11ee-b417-db331415685f-Image-Gallery-dark.png",
@@ -163,7 +163,7 @@ export const features = [
       "OG image",
     ],
     confirmation: `This will add a new Metafield with key \`seo\` to the selected Object types.`,
-    preview_link: "/features/seo",
+    preview_link: "/blocks/seo",
     metafields: 1,
     dark_thumbnail:
       "https://imgix.cosmicjs.com/feb94490-9416-11ee-b62d-5b90a0a1bade-SEO-Dark.png",
@@ -185,7 +185,7 @@ export const features = [
       "Repeater Metafield with fields for social links: title, URL, and logo.",
     ],
     confirmation: `This will install a \`global-settings\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/features/settings",
+    preview_link: "/blocks/settings",
     object_types: 1,
     objects: 1,
     dark_thumbnail:
@@ -202,7 +202,7 @@ export const features = [
     description: `Adds a Team Members Object type to your Bucket, which includes`,
     field_list: ["Image", "Position", "Bio", "Links for X and LinkedIn"],
     confirmation: `This will install a \`team-members\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/features/team",
+    preview_link: "/blocks/team",
     object_types: 1,
     objects: 4,
     dark_thumbnail:
@@ -219,7 +219,7 @@ export const features = [
     description: `Adds a Testimonials Object type to your Bucket, which includes`,
     field_list: ["Company", "Position", "Image", "Quote"],
     confirmation: `This will install a \`testimonials\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/features/testimonials",
+    preview_link: "/blocks/testimonials",
     object_types: 1,
     objects: 4,
     dark_thumbnail:
@@ -243,7 +243,7 @@ export const features = [
       "End Time",
     ],
     confirmation: `This will install an \`events\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/features/events",
+    preview_link: "/blocks/events",
     object_types: 1,
     objects: 3,
     dark_thumbnail:
