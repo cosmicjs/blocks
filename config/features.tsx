@@ -144,9 +144,9 @@ export const features = [
     preview_link: "/features/image-gallery",
     metafields: 1,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/27d87800-8de1-11ee-b62d-5b90a0a1bade-SEO-1.png",
+      "https://imgix.cosmicjs.com/0ac07720-a8fa-11ee-b417-db331415685f-Image-Gallery-dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/27d7b4b0-8de1-11ee-b62d-5b90a0a1bade-SEO.png",
+      "https://imgix.cosmicjs.com/0ac902a0-a8fa-11ee-b417-db331415685f-Image-Gallery.png",
   },
   {
     key: "seo",
@@ -247,8 +247,8 @@ export const features = [
     object_types: 1,
     objects: 3,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/fedf9140-9416-11ee-b62d-5b90a0a1bade-Testimonials-Dark.png",
+      "https://imgix.cosmicjs.com/0ac1d6b0-a8fa-11ee-b417-db331415685f-Events-dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/feddbc80-9416-11ee-b62d-5b90a0a1bade-Testimonials.png",
+      "https://imgix.cosmicjs.com/0ab9e770-a8fa-11ee-b417-db331415685f-Events.png",
   },
 ]
