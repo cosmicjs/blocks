@@ -69,6 +69,7 @@ import {
 } from "@/components/ui/dialog"
 import { DASHBOARD_URL } from "@/constants"
 import { Highlight } from "./layouts/CodeSteps"
+import { useSearchParams } from "next/navigation"
 
 export function InstallDialog({
   featureKey,
@@ -105,6 +106,10 @@ export function InstallDialog({
   const [objectTypes, setObjectTypes] = useState<string[]>([])
   const [selectedObjectTypes, setSelectedObjectTypes] = useState<string[]>([])
   const [conflict, setConflict] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const searchParams = useSearchParams()
+  const tab = searchParams.get("tab")
 
   function handleObjectTypeSelected(typeSlug: string) {
     if (selectedObjectTypes.indexOf(typeSlug) === -1)
@@ -247,13 +252,15 @@ export function InstallDialog({
   useEffect(() => {
     if (feature?.type !== "metafields") return
     if (!objectTypes?.length) {
+      setLoading(true)
       const fetchObjectTypes = async () => {
         const newObjectTypes = await getObjectTypes(cosmicTargetBucket)
         setObjectTypes(newObjectTypes)
+        setLoading(false)
       }
       fetchObjectTypes()
     }
-  })
+  }, [feature, objectTypes, cosmicTargetBucket])
 
   const closeModal = () => {
     setShowModal(false)
@@ -324,7 +331,7 @@ export function InstallDialog({
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            {!conflict && (
+            {!conflict && tab !== "code" && (
               <Link
                 href={`${feature?.preview_link}?tab=code`}
                 className={cn(buttonVariants({ variant: "secondary" }))}
@@ -332,6 +339,14 @@ export function InstallDialog({
               >
                 View Code
               </Link>
+            )}
+            {!conflict && tab === "code" && (
+              <Button
+                className={cn(buttonVariants({ variant: "secondary" }))}
+                onClick={() => closeModal()}
+              >
+                Continue
+              </Button>
             )}
             {bucket_slug && (
               <a
@@ -364,7 +379,7 @@ export function InstallDialog({
               {feature?.type === "metafields" ? (
                 <>
                   <div className="mb-4">
-                    {objectTypes.length ? (
+                    {objectTypes?.length ? (
                       <>
                         Which existing Object type would you like to add this
                         feature to? Or
@@ -385,9 +400,19 @@ export function InstallDialog({
                     .
                   </div>
                   <div className="mb-4">
-                    {objectTypes.length ? (
+                    {loading && (
+                      <div className="space-y-2">
+                        {new Array(4).fill(0).map((arr) => (
+                          <div className="flex animate-pulse space-x-1">
+                            <div className="rounded-md bg-gray-100 p-2 dark:bg-dark-gray-50"></div>
+                            <div className="rounded-lg bg-gray-100 px-20 dark:bg-dark-gray-50"></div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {objectTypes?.length ? (
                       <>
-                        {objectTypes.map((type: any) => {
+                        {objectTypes?.map((type: any) => {
                           return (
                             <div className="flex h-8" key={type.slug}>
                               <Checkbox
@@ -425,7 +450,7 @@ export function InstallDialog({
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          {feature?.type === "metafields" && !objectTypes.length ? (
+          {feature?.type === "metafields" && !objectTypes?.length ? (
             <></>
           ) : (
             <Button
