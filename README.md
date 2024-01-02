@@ -36,4 +36,4 @@ bun dev
 
 ## License
 
-Licensed under the [MIT license](https://github.com/cosmicjs/cosmic-blocks/blob/main/LICENSE.md).
+Licensed under the [MIT license](https://github.com/cosmicjs/cosmic-blocks/blob/main/LICENSE).
