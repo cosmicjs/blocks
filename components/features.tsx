@@ -7,7 +7,6 @@ import { useTheme } from "next-themes"
 
 import { features } from "@/config/features"
 import { FeatureCard } from "@/components/feature-card"
-import { InstallDialog } from "@/components/install-dialog"
 import { selectRandomValuesFromArray } from "@/lib/utils"
 
 // Types
@@ -21,7 +20,6 @@ export type FeaturesProps = {
   limit?: number
   randomOrder?: boolean
   excludeSelf?: boolean
-  disableBlur?: boolean
 }
 
 export function Features({
@@ -29,14 +27,13 @@ export function Features({
   limit,
   randomOrder,
   excludeSelf,
-  disableBlur,
 }: FeaturesProps) {
   const searchParams = useSearchParams()
   const dashboardTheme = searchParams.get("theme")
   const { setTheme } = useTheme()
   const pathname = usePathname()
 
-  const featurePathname = pathname.includes("features")
+  const featurePathname = pathname.includes("blocks")
     ? pathname.split("/")[2]
     : "null"
 
@@ -52,14 +49,6 @@ export function Features({
       localStorage.setItem("read_key", read_key)
       localStorage.setItem("write_key", write_key)
     }
-  }
-
-  const [showModal, setShowModal] = useState<boolean>(false)
-  const [featureKey, setFeatureKey] = useState<string>("")
-
-  function handleInstallClick(key: string) {
-    setShowModal(true)
-    setFeatureKey(key)
   }
 
   const [mappedFeatures, setMappedFeatures] = useState(features)
@@ -87,16 +76,10 @@ export function Features({
       {mappedFeatures?.map((feature) => {
         return (
           <div key={feature?.key}>
-            <FeatureCard
-              feature={feature}
-              handleInstallClick={targetBucket ? handleInstallClick : undefined}
-            />
+            <FeatureCard feature={feature} />
           </div>
         )
       })}
-      {showModal && (
-        <InstallDialog featureKey={featureKey} setShowModal={setShowModal} />
-      )}
     </div>
   )
 }

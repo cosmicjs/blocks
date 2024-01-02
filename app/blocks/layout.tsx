@@ -29,7 +29,7 @@ export default function FeatureLayout({
   const searchParams = useSearchParams()
   const manager = searchParams.get("pm")
   const tab = searchParams.get("tab")
-  const featurePathname = pathname.includes("features")
+  const featurePathname = pathname.includes("pages")
     ? pathname.split("/")[2]
     : "null"
 

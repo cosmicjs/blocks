@@ -3,14 +3,21 @@ import { cosmic } from "@/cosmic/client"
 import Link from "next/link"
 import { Button } from "@/cosmic/elements/Button"
 import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery"
+import { cn } from "@/cosmic/utils"
 
-export async function SingleProduct({ query }: { query: any }) {
+export async function SingleProduct({
+  query,
+  className,
+}: {
+  query: any
+  className?: string
+}) {
   const { object: product } = await cosmic.objects
     .findOne(query)
     .props("id,slug,title,metadata")
     .depth(1)
   return (
-    <section className="container m-auto pb-8">
+    <section className={cn("container m-auto pb-8", className)}>
       <div className="relative m-auto max-w-[950px]">
         <nav aria-label="Breadcrumb" className="mb-6">
           <ol role="list" className="flex space-x-2">

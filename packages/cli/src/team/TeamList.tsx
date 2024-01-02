@@ -18,9 +18,9 @@ export async function TeamList({
     .find(query)
     .props("id,slug,title,metadata")
     .depth(1)
-    .sort(sort)
-    .limit(limit)
-    .skip(skip)
+    .sort(sort ? sort : "-order")
+    .limit(limit ? limit : 100)
+    .skip(skip ? skip : 0)
   return (
     <div className={className}>
       {members.map((member: MemberType) => {

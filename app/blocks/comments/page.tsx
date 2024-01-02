@@ -186,7 +186,7 @@ function Code() {
         <>
           Add the following to a single blog post file
           `app/blog/[slug]/page.tsx`. Note: this assumes you have installed the{" "}
-          <Link href="/features/blog" className="text-cosmic-blue">
+          <Link href="/blocks/blog" className="text-cosmic-blue">
             Blog Block
           </Link>
           .

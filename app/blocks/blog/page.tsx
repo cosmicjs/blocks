@@ -3,7 +3,6 @@ import dedent from "dedent"
 
 import { fetchFeature } from "@/lib/cosmic"
 import { BlogCard, PostType } from "@/components/blog-card"
-import { BucketAPILink } from "@/components/bucket-api-link"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
@@ -129,9 +128,16 @@ function Code() {
     // app/blog/page.tsx
     import { BlogList } from "@/cosmic/blocks/blog/BlogList";
     export default async function BlogListPage() {
-      return <BlogList query={{ type: "blog-posts" }} sort="-created_at" limit={10} skip={0} />;
+      return (
+        <BlogList
+          query={{ type: "blog-posts" }}
+          sort="-created_at"
+          limit={10}
+          skip={0}
+          className="flex gap-4 max-w-[900px] m-auto"
+        />
+      );
     }
-  
   \`\`\`
   `
 
