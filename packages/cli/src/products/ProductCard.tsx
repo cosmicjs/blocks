@@ -1,5 +1,6 @@
 // components/product-card.tsx
 import Link from "next/link"
+import { cn } from "@/cosmic/utils"
 
 export type ProductType = {
   id: string
@@ -14,24 +15,33 @@ export type ProductType = {
   }
 }
 
-export function ProductCard({ product }: { product: ProductType }) {
+export function ProductCard({
+  product,
+  className,
+}: {
+  product: ProductType
+  className?: string
+}) {
   return (
-    <Link href={`/shop/${product.slug}`} className="group relative w-56">
+    <Link
+      href={`/shop/${product.slug}`}
+      className={cn("group relative w-56", className)}
+    >
       <div className="h-52 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
         <img
           src={`${product.metadata.image.imgix_url}?w=1200&auto=format,compression`}
           alt={product.title}
-          className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+          className="h-full w-full border border-zinc-100 object-cover object-center dark:border-zinc-800 lg:h-full lg:w-full"
         />
       </div>
-      <div className="mt-4 flex justify-between">
+      <div className="mt-2 flex justify-between">
         <div>
-          <h3 className="text-sm text-gray-700">
+          <h3 className="text-sm text-zinc-700 dark:text-zinc-300">
             <span aria-hidden="true" className="absolute inset-0"></span>
             {product.title}
           </h3>
         </div>
-        <p className="text-sm font-medium text-gray-900">
+        <p className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
           ${product.metadata.price.toLocaleString("en-US")}
         </p>
       </div>

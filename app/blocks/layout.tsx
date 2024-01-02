@@ -23,7 +23,7 @@ export default function FeatureLayout({
 }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const featurePathname = pathname.includes("features")
+  const featurePathname = pathname.includes("blocks")
     ? pathname.split("/")[2]
     : "null"
 

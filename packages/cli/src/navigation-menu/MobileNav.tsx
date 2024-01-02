@@ -2,14 +2,21 @@
 
 import React from "react"
 import Link from "next/link"
+import { cn } from "@/cosmic/utils"
 
 import { MenuIcon, XIcon } from "lucide-react"
 import { ItemType } from "./NavMenu"
 
-export function MobileNav({ items }: { items: ItemType[] }) {
+export function MobileNav({
+  items,
+  className,
+}: {
+  items: ItemType[]
+  className?: string
+}) {
   const [isOpen, setIsOpen] = React.useState(false)
   return (
-    <div className="relative md:hidden">
+    <div className={cn("relative md:hidden", className)}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="h-6 w-6 cursor-pointer"

@@ -14,7 +14,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 import "@/components/elements/CodeBlock/cosmic-code-theme.css"
 import CopyButton from "@/components/elements/CopyButton/CopyButton"
-import { packageManagers } from "@/app/features/layout"
+import { packageManagers } from "@/app/blocks/layout"
 
 SyntaxHighlighter.registerLanguage("tsx", tsx)
 SyntaxHighlighter.registerLanguage("jsx", jsx)

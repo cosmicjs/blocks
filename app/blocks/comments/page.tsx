@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import dedent from "dedent"
-import { User } from "lucide-react"
+import { UserRound } from "lucide-react"
+import Link from "next/link"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import { BucketAPILink } from "@/components/bucket-api-link"
 import { CommentForm } from "@/components/comment-form"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
@@ -35,23 +35,25 @@ type Comment = {
 }
 
 function Comment({ comment }: { comment: Comment }) {
+  const date = new Date(comment.created_at).toLocaleDateString("en-us", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  })
+
   return (
-    <div className="mb-6 flex rounded-xl border p-4 pb-6">
-      <div className="mr-2 pt-[2px] text-gray-500 dark:text-gray-200">
-        <User className="h-6 w-6" />
-      </div>
-      <div>
-        <div className="mb-2 text-lg">{comment.title}</div>
-        <div className="mb-4 text-xs">
-          {new Date(comment.created_at).toLocaleDateString("en-us", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-          })}
+    <div className="mb-6 flex flex-col rounded-xl border border-zinc-300 p-4 pb-6 dark:border-zinc-700">
+      <div className="mb-4 flex w-full items-center justify-between gap-2 text-gray-500 dark:text-gray-200">
+        <div className="flex items-center gap-2 text-black dark:text-white">
+          <UserRound className="h-4 w-4" />
+          <div className="text-lg">{comment.title}</div>
         </div>
-        <div className="pr-6">{comment.metadata.comment}</div>
+        <div className="text-xs">{date}</div>
+      </div>
+      <div className="pr-6 text-zinc-700 dark:text-zinc-300">
+        {comment.metadata.comment}
       </div>
     </div>
   )
@@ -91,12 +93,45 @@ function Code() {
     `
   const usageCode = dedent`
     \`\`\`jsx
-      <Comments query={{
-          slug: "blog-post-slug",
-          type: "blog-posts",
-          "metadata.approved": true
+      <Comments
+        query={{
+          type: "comments",
+          "metadata.resource": "object-id",
+          "metadata.approved": true,
         }}
       />
+    \`\`\`
+    `
+  const exampleCode = dedent`
+    \`\`\`jsx
+      // app/blog/[slug]/page.tsx
+      import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
+      import { Comments } from "@/cosmic/blocks/comments/Comments";
+      import { cosmic } from "@/cosmic/client";
+      
+      export default async function SingleBlogPage({
+        params,
+      }: {
+        params: { slug: string };
+      }) {
+        const { object } = await cosmic.objects.findOne({
+          slug: params.slug,
+          type: "blog-posts",
+        }).props("id");
+        return (
+          <>
+            <SingleBlog query={{ slug: params.slug, type: "blog-posts" }} />
+            <Comments
+              className="m-auto max-w-[750px] mt-4 w-full"
+              query={{
+                type: "comments",
+                "metadata.resource": object.id,
+                "metadata.approved": true,
+              }}
+            />
+          </>
+        );
+      }
     \`\`\`
     `
 
@@ -143,6 +178,20 @@ function Code() {
       code: usageCode,
       description:
         "Add the block to your app with the `query` property set to fetch your specific content.",
+    },
+    {
+      title: "Example",
+      code: exampleCode,
+      description: (
+        <>
+          Add the following to a single blog post file
+          `app/blog/[slug]/page.tsx`. Note: this assumes you have installed the{" "}
+          <Link href="/blocks/blog" className="text-cosmic-blue">
+            Blog Block
+          </Link>
+          .
+        </>
+      ),
     },
   ]
 
