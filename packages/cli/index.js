@@ -32,6 +32,7 @@ const blocks = {
       "@cosmicjs/sdk",
       "@radix-ui/react-slot",
       "class-variance-authority",
+      "clsx",
       "tailwind-merge",
     ],
     elements: ["Button"],
@@ -44,24 +45,31 @@ const blocks = {
       "@radix-ui/react-slot",
       "class-variance-authority",
       "@radix-ui/react-label",
+      "clsx",
+      "tailwind-merge",
     ],
     elements: ["Button", "Input", "Label", "TextArea"],
   },
   "image-gallery": {
     name: "Image Gallery",
-    installationSteps: ["@cosmicjs/sdk", "tailwind-merge"],
+    installationSteps: ["@cosmicjs/sdk", "clsx", "tailwind-merge"],
   },
   testimonials: {
     name: "Testimonials",
-    installationSteps: ["@cosmicjs/sdk"],
+    installationSteps: ["@cosmicjs/sdk", "clsx", "tailwind-merge"],
   },
   team: {
     name: "Team",
-    installationSteps: ["@cosmicjs/sdk"],
+    installationSteps: ["@cosmicjs/sdk", "clsx", "tailwind-merge"],
   },
   "navigation-menu": {
     name: "Navigation Menu",
-    installationSteps: ["@cosmicjs/sdk", "lucide-react"],
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge",
+    ],
   },
   products: {
     name: "Products",
@@ -69,12 +77,14 @@ const blocks = {
       "@cosmicjs/sdk",
       "@radix-ui/react-slot",
       "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
     ],
     elements: ["Button"],
   },
   events: {
     name: "events",
-    installationSteps: ["@cosmicjs/sdk"],
+    installationSteps: ["@cosmicjs/sdk", "clsx", "tailwind-merge"],
   },
 }
 

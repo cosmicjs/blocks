@@ -224,7 +224,7 @@ function Code() {
       description: (
         <>
           Note: this assumes you have installed the{" "}
-          <Link href="/features/nav-menus" className="text-cosmic-blue">
+          <Link href="/blocks/nav-menus" className="text-cosmic-blue">
             Nav Menu block
           </Link>
         </>
@@ -236,7 +236,7 @@ function Code() {
       description: (
         <>
           Note: this assumes you have installed the{" "}
-          <Link href="/features/nav-menus" className="text-cosmic-blue">
+          <Link href="/blocks/nav-menus" className="text-cosmic-blue">
             Navigation Menu block
           </Link>
         </>

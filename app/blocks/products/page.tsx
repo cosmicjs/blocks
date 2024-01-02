@@ -135,7 +135,21 @@ function Code() {
       <ProductList query={{ type: "products" }} />
     \`\`\`
     `
+  const productListCode = dedent`
+    \`\`\`jsx
+      // app/shop/page.tsx
+      import { ProductList } from "@/cosmic/blocks/products/ProductList";
 
+      export default async function Shop() {
+        return (
+          <ProductList
+            className="max-w-[900px] m-auto flex gap-4"
+            query={{ type: "products" }}
+          />
+        );
+      }
+    \`\`\`
+    `
   const singleProductCode = dedent`
     \`\`\`jsx
       // app/shop/[slug]/page.tsx
@@ -181,7 +195,13 @@ function Code() {
         "Add the block to your app with the `query` property set to fetch your specific content.",
     },
     {
-      title: "Single Product page usage",
+      title: "Example: Product List page",
+      code: productListCode,
+      description:
+        "Add a new file located at `app/shop/page.tsx` with the following",
+    },
+    {
+      title: "Example: Single Product page",
       code: singleProductCode,
       description:
         "Add a new file located at `app/shop/[slug]/page.tsx` with the following",

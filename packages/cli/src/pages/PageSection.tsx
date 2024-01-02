@@ -1,6 +1,7 @@
-// components/page-section.tsx
+// cosmic/blocks/pages/PageSection.tsx
 import { cn } from "@/cosmic/utils"
 import { buttonVariants } from "@/cosmic/elements/Button"
+import Link from "next/link"
 
 type SectionType = {
   heading: string
@@ -17,9 +18,15 @@ type SectionType = {
   cta_text: string
 }
 
-export function Section({ section }: { section: SectionType }) {
+export function Section({
+  section,
+  className,
+}: {
+  section: SectionType
+  className?: string
+}) {
   return (
-    <div key={section.heading}>
+    <div key={section.heading} className={className}>
       {section.layout.key === "1-column-center" && (
         <div className="m-auto max-w-[800px]">
           <div className="mb-6 text-center">
@@ -29,7 +36,7 @@ export function Section({ section }: { section: SectionType }) {
               dangerouslySetInnerHTML={{ __html: section.content }}
             />
             <div>
-              <a
+              <Link
                 className={cn(
                   "ml-2",
                   buttonVariants({
@@ -39,7 +46,7 @@ export function Section({ section }: { section: SectionType }) {
                 href={section.cta_link}
               >
                 {section.cta_text}
-              </a>
+              </Link>
             </div>
           </div>
           <div>
@@ -67,7 +74,7 @@ export function Section({ section }: { section: SectionType }) {
               dangerouslySetInnerHTML={{ __html: section.content }}
             />
             <div>
-              <a
+              <Link
                 className={cn(
                   "ml-2",
                   buttonVariants({
@@ -77,7 +84,7 @@ export function Section({ section }: { section: SectionType }) {
                 href={section.cta_link}
               >
                 {section.cta_text}
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -91,7 +98,7 @@ export function Section({ section }: { section: SectionType }) {
               dangerouslySetInnerHTML={{ __html: section.content }}
             />
             <div>
-              <a
+              <Link
                 className={cn(
                   "ml-2",
                   buttonVariants({
@@ -101,7 +108,7 @@ export function Section({ section }: { section: SectionType }) {
                 href={section.cta_link}
               >
                 {section.cta_text}
-              </a>
+              </Link>
             </div>
           </div>
           <div>

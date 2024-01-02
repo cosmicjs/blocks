@@ -3,13 +3,20 @@
 
 import { useState } from "react"
 import { CheckCircle, Loader2, XCircle } from "lucide-react"
+import { cn } from "@/cosmic/utils"
 
 import { Button } from "@/cosmic/elements/Button"
 import { Input } from "@/cosmic/elements/Input"
 import { Label } from "@/cosmic/elements/Label"
 import { Textarea } from "@/cosmic/elements/TextArea"
 
-export function CommentForm({ resourceId }: { resourceId: string }) {
+export function CommentForm({
+  resourceId,
+  className,
+}: {
+  resourceId: string
+  className?: string
+}) {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [comment, setComment] = useState("")
@@ -65,7 +72,7 @@ export function CommentForm({ resourceId }: { resourceId: string }) {
     setComment(target.value)
   }
   return (
-    <div className="mb-8">
+    <div className={cn("mb-8", className)}>
       <h2 className="mb-4 text-2xl">Add a new comment</h2>
       {error && (
         <div className="mb-4 flex rounded-xl border border-red-500 p-8">
