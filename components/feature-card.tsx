@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 
-import { useRouter } from "next/navigation"
 import { ThemedImage } from "./elements/ThemedImage/ThemedImage"
 import FeatureStats from "./FeatureStats"
 
