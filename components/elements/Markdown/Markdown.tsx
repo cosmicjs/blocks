@@ -13,7 +13,7 @@ import CodeBlock from "@/components/elements/CodeBlock/CodeBlock"
 import { VideoProps } from "@/components/elements/Markdown/markdown.types"
 
 export const Markdown = (props: ReactMarkdownOptions) => {
-  const { className, ...restProps } = props
+  const { className, children, ...restProps } = props
 
   const components: object = {
     img: (image: { src: string; alt: string }) => {
@@ -76,7 +76,7 @@ export const Markdown = (props: ReactMarkdownOptions) => {
     }) {
       return (
         <CodeBlock node={node} inline={inline} className={className}>
-          {children}
+          {Array.isArray(children) ? children?.[0] : children}
         </CodeBlock>
       )
     },
@@ -88,6 +88,8 @@ export const Markdown = (props: ReactMarkdownOptions) => {
       remarkPlugins={[remarkGfm, remarkSlug]}
       className={`markdown min-w-[260px] text-gray-900 dark:text-dark-gray-700 ${className}`}
       {...restProps}
-    />
+    >
+      {children}
+    </ReactMarkdown>
   )
 }

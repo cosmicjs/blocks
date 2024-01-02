@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-pre {
+/* pre {
   @apply w-full overflow-x-auto break-words rounded-xl bg-gray-800;
-}
+} */
 
 @layer components {
   .markdown {
@@ -106,7 +106,7 @@ pre {
     @apply mx-auto my-8 max-w-[xl] rounded-lg;
   }
 
-  .markdown pre {
+  /* .markdown pre {
     @apply mt-5 overflow-x-auto overflow-y-hidden;
-  }
+  } */
 }

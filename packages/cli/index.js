@@ -5,7 +5,6 @@ import { Command, program } from "commander"
 import { fileURLToPath } from "url"
 import { capitalize } from "./utils/capitalize.js"
 import { blockGenerator } from "./utils/block-generator.js"
-import { performance } from "perf_hooks"
 
 import chalk from "chalk"
 
@@ -114,7 +113,6 @@ const addCommand = new Command()
   .argument("<components...>", "the blocks to add")
   .action(async (components) => {
     let response
-    const startTime = performance.now()
     for (const component of components) {
       if (!Object.keys(blocks).includes(component)) {
         return console.error(
@@ -127,21 +125,6 @@ const addCommand = new Command()
       } else {
         response = await addComponent(component)
       }
-    }
-    const endTime = performance.now()
-    const speed = ((endTime - startTime) / 1000).toFixed(2)
-
-    if (response === "success") {
-      if (speed < 5)
-        console.log(
-          chalk.greenBright(`ϟ Executed superfast in ${speed} seconds!`)
-        )
-
-      console.log(
-        chalk.yellow(
-          `➤ View more Blocks at ${chalk.bold("https://cosmicjs.com/blocks.")}`
-        )
-      )
     }
   })
 
