@@ -65,12 +65,17 @@ async function Preview() {
 
   return (
     <div className="m-auto mt-10 w-full md:min-w-[1000px]">
-      <div className="my-10 h-[60px]">
+      <div className="my-6 h-[60px]">
         <a href="/">
           <img
             src={`${settings.metadata.logo.imgix_url}?w=500&auto=format,compression`}
             alt={settings.metadata.company}
-            className="m-auto h-full"
+            className="m-auto h-14 dark:hidden"
+          />
+          <img
+            src={`${settings.metadata.dark_logo.imgix_url}?w=500&auto=format,compression`}
+            alt={settings.metadata.company}
+            className="m-auto hidden h-14 dark:block"
           />
         </a>
       </div>
@@ -101,34 +106,38 @@ async function Preview() {
 function Code() {
   const codeHeaderString = dedent`
     \`\`\`jsx
-      // components/Header.tsx
-      import Link from "next/link";
-      import { cosmic } from "@/cosmic/client";
-      import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
+    // components/Header.tsx
+    import Link from "next/link";
+    import { cosmic } from "@/cosmic/client";
+    import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
 
-      export async function Header() {
-        
-        const { object: settings } = await cosmic.objects
-          .findOne({
-            type: "global-settings",
-            slug: "settings",
-          })
-          .props("metadata")
-          .depth(1);
+    export async function Header() {
+      const { object: settings } = await cosmic.objects
+        .findOne({
+          type: "global-settings",
+          slug: "settings",
+        })
+        .props("metadata")
+        .depth(1);
 
-        return (
-          <div className="my-4 flex items-center justify-between container space-x-4">
-            <Link href="/">
-              <img
-                src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
-                alt={settings.metadata.company}
-                className="h-20 m-auto"
-              />
-            </Link>
-            <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
-          </div>
-        );
-      }
+      return (
+        <div className="my-4 flex items-center justify-between container space-x-4">
+          <Link href="/">
+            <img
+              src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
+              alt={settings.metadata.company}
+              className="h-10 m-auto dark:hidden"
+            />
+            <img
+              src={\`\${settings.metadata.dark_logo.imgix_url}?w=500&auto=format,compression\`}
+              alt={settings.metadata.company}
+              className="h-10 m-auto hidden dark:block"
+            />
+          </Link>
+          <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+        </div>
+      );
+    }
     \`\`\`
     `
   const codeFooterString = dedent`

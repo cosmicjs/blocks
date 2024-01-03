@@ -139,7 +139,23 @@ function Code() {
 
   const usageCode = dedent`
     \`\`\`jsx
-    <TeamList query={{ type: "team-members" }}/>
+    <TeamList query={{ type: "team-members" }} />
+    \`\`\`
+    `
+
+  const exampleCode = dedent`
+    \`\`\`jsx
+    // app/about/page.tsx
+    import { TeamList } from "@/cosmic/blocks/team/TeamList";
+
+    export default async function AboutPage() {
+      return (
+        <TeamList
+          query={{ type: "team-members" }}
+          className="max-w-[900px] m-auto grid grid-cols-1 gap-6 lg:grid-cols-2"
+        />
+      );
+    }
     \`\`\`
     `
 
@@ -166,6 +182,12 @@ function Code() {
       code: usageCode,
       description:
         "Add the block to your app with the `query` property set to fetch your specific content.",
+    },
+    {
+      title: "Example: about page",
+      code: exampleCode,
+      description:
+        "Add a new file located at `app/about/page.tsx` with the following:",
     },
   ]
 
