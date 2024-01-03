@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { InstallDialog } from "@/components/install-dialog"
+import { InstallDialog } from "@/components/InstallDialog"
 import { useSearchParams, usePathname } from "next/navigation"
 
 export function SiteHeader() {

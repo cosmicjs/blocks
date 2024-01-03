@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
-import { Features } from "@/components/features"
+import { Features } from "@/components/Features"
 import { features } from "@/config/features"
 import FeatureStats from "@/components/FeatureStats"
 import { ArrowLeftIcon } from "lucide-react"
@@ -46,7 +46,7 @@ export default function FeatureLayout({
   }
 
   return (
-    <div className="container relative flex w-[80%] flex-col items-center justify-center lg:w-full lg:max-w-[1400px] lg:flex-row">
+    <div className="container relative mx-auto flex w-[80%] flex-col items-center justify-center lg:w-full lg:max-w-[1400px] lg:flex-row">
       <aside className="top-16 mt-10 flex w-full max-w-[1200px] flex-col items-center justify-center space-y-2 rounded-xl lg:fixed lg:mx-4 lg:mt-8 lg:flex-row lg:items-start lg:justify-between lg:space-y-0">
         <nav>
           <Link

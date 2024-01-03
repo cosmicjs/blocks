@@ -25,7 +25,7 @@ export function FeatureCard({ feature }: { feature: Feature }) {
 
   return (
     <>
-      <div className="pointer-cursor relative overflow-hidden">
+      <div className="relative !cursor-pointer overflow-hidden">
         <Link href={feature?.preview_link}>
           <div className="grid md:grid-cols-1">
             <div className="overflow-hidden rounded-3xl">

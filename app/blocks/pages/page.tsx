@@ -4,7 +4,7 @@ import dedent from "dedent"
 import { fetchPageData } from "@/lib/cosmic"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import { Section } from "@/components/page-section"
+import { Section } from "@/components/PageSection"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
 export async function generateMetadata() {

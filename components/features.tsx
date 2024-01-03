@@ -6,7 +6,7 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { useTheme } from "next-themes"
 
 import { features } from "@/config/features"
-import { FeatureCard } from "@/components/feature-card"
+import { FeatureCard } from "@/components/FeatureCard"
 import { selectRandomValuesFromArray } from "@/lib/utils"
 
 // Types

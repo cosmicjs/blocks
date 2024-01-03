@@ -4,7 +4,7 @@ import { UserRound } from "lucide-react"
 import Link from "next/link"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import { CommentForm } from "@/components/comment-form"
+import { CommentForm } from "@/components/CommentForm"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
 export default async function Testimonials({

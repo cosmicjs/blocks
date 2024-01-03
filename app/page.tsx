@@ -1,5 +1,5 @@
 import BigHeading from "@/components/BigHeading"
-import { Features } from "@/components/features"
+import { Features } from "@/components/Features"
 import Header from "@/components/layouts/Header"
 
 export default async function IndexPage({

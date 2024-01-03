@@ -3,7 +3,7 @@
 import React from "react"
 import ThemeSwitch from "../elements/ThemeSwitch/ThemeSwitch"
 import { Button } from "../ui/button"
-import { SiteHeader } from "../site-header"
+import { SiteHeader } from "../SiteHeader"
 import Link from "next/link"
 import FeaturesMenu from "../FeaturesMenu"
 import { ThemedImage } from "../elements/ThemedImage/ThemedImage"

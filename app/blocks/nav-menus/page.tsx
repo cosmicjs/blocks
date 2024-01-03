@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import dedent from "dedent"
 
-import { NavMenu } from "@/components/nav-menu"
+import { NavMenu } from "@/components/NavMenu"
 import CodeSteps from "@/components/layouts/CodeSteps"
 
 export async function generateMetadata() {

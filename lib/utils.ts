@@ -29,3 +29,19 @@ export function selectRandomValuesFromArray(arr: any[], limit: number) {
 export function pluralize(singular: string, count: number) {
   return count > 1 ? `${singular}s` : singular
 }
+
+export function generateNumberFromString(inputString: string) {
+  let hash = 0
+
+  if (inputString.length === 0) {
+    return hash
+  }
+
+  for (let i = 0; i < inputString.length; i++) {
+    const char = inputString.charCodeAt(i)
+    hash = (hash << 5) - hash + char
+    hash |= 0 // Convert to 32-bit integer
+  }
+
+  return hash
+}
