@@ -1,13 +1,13 @@
 import { pluralize } from "@/lib/utils"
 import React from "react"
 
-type FeatureStatsProps = {
+type BlockStatsProps = {
   objectTypes?: number
   objects?: number
   metafields?: number
 }
 
-const FeatureStats: React.FC<FeatureStatsProps> = ({
+const BlockStats: React.FC<BlockStatsProps> = ({
   objectTypes,
   objects,
   metafields,
@@ -21,4 +21,4 @@ const FeatureStats: React.FC<FeatureStatsProps> = ({
     </p>
   )
 }
-export default FeatureStats
+export default BlockStats

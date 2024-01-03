@@ -1,5 +1,5 @@
 import BigHeading from "@/components/BigHeading"
-import { Features } from "@/components/Features"
+import { Blocks } from "@/components/Blocks"
 import Header from "@/components/layouts/Header"
 
 export default async function IndexPage({
@@ -31,7 +31,7 @@ export default async function IndexPage({
 then copy & paste the code into your website codebase."
             className="mb-12 mt-10 md:my-20 xl:mt-0"
           />
-          <Features targetBucket={targetBucket} />
+          <Blocks targetBucket={targetBucket} />
         </div>
       </section>
     </>

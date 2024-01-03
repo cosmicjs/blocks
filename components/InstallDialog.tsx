@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { AlertCircle, CheckCircle2, ExternalLink, Loader2 } from "lucide-react"
 
-import { features } from "@/config/features"
+import { blocksData } from "@/config/blocks.data"
 import {
   addAuthorObjectType,
   addAuthors,
@@ -101,7 +101,7 @@ export function InstallDialog({
     read_key,
     write_key
   )
-  const feature = features.filter((feature) => feature?.key === featureKey)[0]
+  const feature = blocksData.filter((block) => block?.key === featureKey)[0]
   const [installing, setInstalling] = useState<boolean>(false)
   const [objectTypes, setObjectTypes] = useState<string[]>([])
   const [selectedObjectTypes, setSelectedObjectTypes] = useState<string[]>([])

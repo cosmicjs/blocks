@@ -2,9 +2,9 @@
 
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
-import { Features } from "@/components/Features"
-import { features } from "@/config/features"
-import FeatureStats from "@/components/FeatureStats"
+import { Blocks } from "@/components/Blocks"
+import { blocksData } from "@/config/blocks.data"
+import FeatureStats from "@/components/BlockStats"
 import { ArrowLeftIcon } from "lucide-react"
 
 export const packageManagers = [
@@ -28,8 +28,8 @@ export default function FeatureLayout({
     : "null"
 
   const currentFeature =
-    features?.filter(
-      (feature) => feature?.preview_link.includes(featurePathname)
+    blocksData?.filter(
+      (block) => block?.preview_link.includes(featurePathname)
     )?.[0] || {}
 
   const { title, object_types, objects, metafields, description, field_list } =
@@ -72,7 +72,7 @@ export default function FeatureLayout({
           <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">
             More to explore
           </h3>
-          <Features
+          <Blocks
             targetBucket={targetBucket}
             randomOrder
             limit={3}

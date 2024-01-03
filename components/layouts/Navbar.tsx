@@ -5,7 +5,7 @@ import ThemeSwitch from "../elements/ThemeSwitch/ThemeSwitch"
 import { Button } from "../ui/button"
 import { SiteHeader } from "../SiteHeader"
 import Link from "next/link"
-import FeaturesMenu from "../FeaturesMenu"
+import BlocksMenu from "../BlocksMenu"
 import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
 import { DOCS_URL } from "@/constants"
 import { ExternalLinkIcon } from "lucide-react"
@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
             />
           </Link>
         </div>
-        <FeaturesMenu />
+        <BlocksMenu />
         <div className="grow" />
         <SiteHeader />
         <div className="grow" />
