@@ -65,12 +65,17 @@ async function Preview() {
 
   return (
     <div className="m-auto mt-10 w-full md:min-w-[1000px]">
-      <div className="my-10 h-[60px]">
+      <div className="my-6 h-[60px]">
         <a href="/">
           <img
             src={`${settings.metadata.logo.imgix_url}?w=500&auto=format,compression`}
             alt={settings.metadata.company}
-            className="m-auto h-full"
+            className="m-auto h-14 dark:hidden"
+          />
+          <img
+            src={`${settings.metadata.dark_logo.imgix_url}?w=500&auto=format,compression`}
+            alt={settings.metadata.company}
+            className="m-auto hidden h-14 dark:block"
           />
         </a>
       </div>
