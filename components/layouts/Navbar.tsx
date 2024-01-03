@@ -16,11 +16,15 @@ const Navbar: React.FC = () => {
       <div className="mx-auto flex h-full items-center md:max-w-[1500px]">
         <div className="w-32 shrink-0">
           <Link href="/">
-            <ThemedImage
-              lightSrc={`/assets/logo-light.png`}
-              darkSrc={`/assets/logo-dark.png`}
-              alt="nav logo"
-              className="w-32"
+            <img
+              alt="Cosmic Blocks"
+              className="w-32 dark:hidden"
+              src="https://imgix.cosmicjs.com/30de9890-aa64-11ee-b417-db331415685f-logo_light.png"
+            />
+            <img
+              alt="Cosmic Blocks"
+              className="hidden w-32 dark:block"
+              src="https://imgix.cosmicjs.com/30dc4ea0-aa64-11ee-b417-db331415685f-logo_dark.png"
             />
           </Link>
         </div>

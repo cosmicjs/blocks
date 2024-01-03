@@ -154,12 +154,12 @@ function Code() {
       description:
         "You can create a home page by creating a new file at `app/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
-        // app/page.tsx
-        import { Page } from "@/cosmic/blocks/pages/Page";
-        
-        export default async function HomePage() {
-          return <Page query={{ slug: "home", type: "pages" }} />;
-        }
+      // app/page.tsx
+      import { Page } from "@/cosmic/blocks/pages/Page";
+      
+      export default async function HomePage() {
+        return <Page query={{ slug: "home", type: "pages" }} />;
+      }
       \`\`\`
       `),
     },
@@ -171,16 +171,16 @@ function Code() {
       description:
         "You can create dynamic pages by creating a new file at `app/[slug]/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
-        // app/[slug]/page.tsx
-        import { Page } from "@/cosmic/blocks/pages/Page";
-        
-        export default async function DynamicPage({
-          params,
-        }: {
-          params: { slug: string };
-        }) {
-          return <Page query={{ slug: params.slug, type: "pages" }} />;
-        }
+      // app/[slug]/page.tsx
+      import { Page } from "@/cosmic/blocks/pages/Page";
+      
+      export default async function DynamicPage({
+        params,
+      }: {
+        params: { slug: string };
+      }) {
+        return <Page query={{ slug: params.slug, type: "pages" }} />;
+      }
       \`\`\`
       `),
     },

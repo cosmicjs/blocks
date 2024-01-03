@@ -51,7 +51,7 @@ async function Preview() {
     .depth(1)
 
   return (
-    <div className="m-auto mt-10 w-full md:min-w-[1000px]">
+    <div className="m-auto mt-10 w-full">
       <h2 className="mb-4 text-2xl font-semibold">
         Frequently Asked Questions
       </h2>

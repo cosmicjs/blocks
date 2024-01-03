@@ -125,34 +125,33 @@ function Code() {
     `
   const blogListPageCode = dedent`
   \`\`\`jsx
-    // app/blog/page.tsx
-    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
-    export default async function BlogListPage() {
-      return (
-        <BlogList
-          query={{ type: "blog-posts" }}
-          sort="-created_at"
-          limit={10}
-          skip={0}
-          className="flex gap-4 max-w-[900px] m-auto"
-        />
-      );
-    }
+  // app/blog/page.tsx
+  import { BlogList } from "@/cosmic/blocks/blog/BlogList";
+  export default async function BlogListPage() {
+    return (
+      <BlogList
+        query={{ type: "blog-posts" }}
+        sort="-created_at"
+        limit={10}
+        skip={0}
+        className="flex gap-4 max-w-[900px] m-auto"
+      />
+    );
+  }
   \`\`\`
   `
 
   const singlePageCode = dedent`
     \`\`\`jsx
-      // app/blog/[slug]/page.tsx
-      import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
-      export default async function SingleBlogPage({
-        params,
-      }: {
-        params: { slug: string };
-      }) {
-        return <SingleBlog query={{ slug: params.slug, type: "blog-posts" }} />;
-      }
-    
+    // app/blog/[slug]/page.tsx
+    import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
+    export default async function SingleBlogPage({
+      params,
+    }: {
+      params: { slug: string };
+    }) {
+      return <SingleBlog query={{ slug: params.slug, type: "blog-posts" }} />;
+    }
     \`\`\`
     `
   const steps = [
