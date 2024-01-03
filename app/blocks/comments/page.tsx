@@ -88,64 +88,64 @@ function Code() {
   `
   const importCode = dedent`
     \`\`\`jsx
-      import { Comments } from "@/cosmic/blocks/comments/Comments";
+    import { Comments } from "@/cosmic/blocks/comments/Comments";
     \`\`\`
     `
   const usageCode = dedent`
     \`\`\`jsx
-      <Comments
-        query={{
-          type: "comments",
-          "metadata.resource": "object-id",
-          "metadata.approved": true,
-        }}
-      />
+    <Comments
+      query={{
+        type: "comments",
+        "metadata.resource": "object-id",
+        "metadata.approved": true,
+      }}
+    />
     \`\`\`
     `
   const exampleCode = dedent`
     \`\`\`jsx
-      // app/blog/[slug]/page.tsx
-      import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
-      import { Comments } from "@/cosmic/blocks/comments/Comments";
-      import { cosmic } from "@/cosmic/client";
-      
-      export default async function SingleBlogPage({
-        params,
-      }: {
-        params: { slug: string };
-      }) {
-        const { object } = await cosmic.objects.findOne({
-          slug: params.slug,
-          type: "blog-posts",
-        }).props("id");
-        return (
-          <>
-            <SingleBlog query={{ slug: params.slug, type: "blog-posts" }} />
-            <Comments
-              className="m-auto max-w-[750px] mt-4 w-full"
-              query={{
-                type: "comments",
-                "metadata.resource": object.id,
-                "metadata.approved": true,
-              }}
-            />
-          </>
-        );
-      }
+    // app/blog/[slug]/page.tsx
+    import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
+    import { Comments } from "@/cosmic/blocks/comments/Comments";
+    import { cosmic } from "@/cosmic/client";
+    
+    export default async function SingleBlogPage({
+      params,
+    }: {
+      params: { slug: string };
+    }) {
+      const { object } = await cosmic.objects.findOne({
+        slug: params.slug,
+        type: "blog-posts",
+      }).props("id");
+      return (
+        <>
+          <SingleBlog query={{ slug: params.slug, type: "blog-posts" }} />
+          <Comments
+            className="m-auto max-w-[750px] mt-4 w-full"
+            query={{
+              type: "comments",
+              "metadata.resource": object.id,
+              "metadata.approved": true,
+            }}
+          />
+        </>
+      );
+    }
     \`\`\`
     `
 
   const commentsAPICodeString = dedent`
     \`\`\`ts
-      // app/api/comments/route.ts
-      import { type NextRequest } from "next/server";
-      import { cosmic } from "@/cosmic/client";
-      
-      export async function POST(request: NextRequest) {
-        const res = await request.json();
-        const data = await cosmic.objects.insertOne(res.comment);
-        return Response.json(data);
-      }
+    // app/api/comments/route.ts
+    import { type NextRequest } from "next/server";
+    import { cosmic } from "@/cosmic/client";
+    
+    export async function POST(request: NextRequest) {
+      const res = await request.json();
+      const data = await cosmic.objects.insertOne(res.comment);
+      return Response.json(data);
+    }
     \`\`\`
     `
 
