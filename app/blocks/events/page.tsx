@@ -56,6 +56,17 @@ function Code({ manager }: { manager: PackageManagers }) {
     <EventsList query={{ type: "events" }} />
     \`\`\`
     `
+  const exampleCode = dedent`
+    \`\`\`jsx
+    // app/events/page.tsx
+    import { EventsList } from "@/cosmic/blocks/events/EventsList";
+    export default async function EventListPage() {
+      return (
+        <EventsList className="max-w-[900px] m-auto" query={{ type: "events" }} />
+      );
+    }
+    \`\`\`
+    `
 
   const steps = [
     {
@@ -79,6 +90,12 @@ function Code({ manager }: { manager: PackageManagers }) {
       code: usageCode,
       description:
         "Add the block to your app with the `query` property set to fetch your specific content.",
+    },
+    {
+      title: "Example: events page",
+      code: exampleCode,
+      description:
+        "Add a new file located at `app/events/page.tsx` with the following:",
     },
   ]
 
