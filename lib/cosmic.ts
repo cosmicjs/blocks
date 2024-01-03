@@ -383,6 +383,17 @@ export async function addGlobalSettings(cosmic: CosmicConfig, settings: any) {
   // Upload media
   const mediaRes = await cosmic.media.insertOne({ media })
   settings.metadata.logo = mediaRes.media.name
+
+  const darkMedia = await getMediaBlobFromURL(
+    settings.metadata.dark_logo.imgix_url,
+    settings.metadata.company +
+      "." +
+      settings.metadata.dark_logo.imgix_url.split(".").pop()
+  )
+  // Upload dark media
+  const darkMediaRes = await cosmic.media.insertOne({ media: darkMedia })
+  settings.metadata.dark_logo = darkMediaRes.media.name
+
   settings.thumbnail = mediaRes.media.name
   for (let link of settings.metadata.links) {
     const media = await getMediaBlobFromURL(
