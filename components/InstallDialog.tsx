@@ -164,79 +164,142 @@ export function InstallDialog({
       )[0]
     )
       return setConflict(true)
+
     if (featureKey === "pages") {
-      metafields = await getPageBuilderMetafields()
+      let page
+      await Promise.all([
+        getPageBuilderMetafields().then((result) => (metafields = result)),
+        getPage(cosmicSourceBucketConfig).then((result) => (page = result)),
+      ])
       await addPagesObjectType(cosmicTargetBucket, metafields)
-      // Add page
-      const page = await getPage(cosmicSourceBucketConfig)
       await addPage(cosmicTargetBucket, page)
     }
+
     if (featureKey === "blog") {
-      await addAuthorObjectType(cosmicTargetBucket)
-      const authors = await getAuthors(cosmicSourceBucketConfig)
-      const categories = await getCategories(cosmicSourceBucketConfig)
-      metafields = await getCategoriesMetafields()
-      await addCategoriesObjectType(cosmicTargetBucket, metafields)
-      await addAuthors(cosmicTargetBucket, authors)
-      await addCategories(cosmicTargetBucket, categories)
+      let authors, categories, newAuthors, newCategories, blogs
+
+      await Promise.all([
+        addAuthorObjectType(cosmicTargetBucket),
+        getAuthors(cosmicSourceBucketConfig).then(
+          (result) => (authors = result)
+        ),
+        getCategories(cosmicSourceBucketConfig).then(
+          (result) => (categories = result)
+        ),
+        getCategoriesMetafields().then((result) => (metafields = result)),
+      ])
+
+      await Promise.all([
+        addCategoriesObjectType(cosmicTargetBucket, metafields),
+        addAuthors(cosmicTargetBucket, authors),
+        addCategories(cosmicTargetBucket, categories),
+      ])
+
       // Update authors and categories
-      const newAuthors = await getAuthors(cosmicTargetBucket)
-      const newCategories = await getCategories(cosmicTargetBucket)
-      metafields = await getBlogMetafields()
+      await Promise.all([
+        getAuthors(cosmicTargetBucket).then((result) => (newAuthors = result)),
+        getCategories(cosmicTargetBucket).then(
+          (result) => (newCategories = result)
+        ),
+        getBlogMetafields().then((result) => (metafields = result)),
+        getBlogs(cosmicSourceBucketConfig).then((result) => (blogs = result)),
+      ])
+
       await addBlogObjectType(cosmicTargetBucket, metafields)
+
       // Add blog
-      let blogs = await getBlogs(cosmicSourceBucketConfig)
       await addBlogs(cosmicTargetBucket, blogs, newAuthors, newCategories)
     }
+
     if (featureKey === "navigation_menus") {
-      metafields = await getNavMenuMetafields()
+      let menus
+      await Promise.all([
+        getNavMenuMetafields().then((result) => (metafields = result)),
+        getNavMenus(cosmicSourceBucketConfig).then(
+          (result) => (menus = result)
+        ),
+      ])
       await addNavMenusObjectType(cosmicTargetBucket, metafields)
       // Add navigation menus
-      const settings = await getNavMenus(cosmicSourceBucketConfig)
-      await addNavMenus(cosmicTargetBucket, settings)
+      await addNavMenus(cosmicTargetBucket, menus)
     }
+
     if (featureKey === "global_settings") {
-      metafields = await getGlobalSettingsMetafields()
+      let settings
+      await Promise.all([
+        getGlobalSettingsMetafields().then((result) => (metafields = result)),
+        getGlobalSettings(cosmicSourceBucketConfig).then(
+          (result) => (settings = result)
+        ),
+      ])
       await addGlobalSettingsObjectType(cosmicTargetBucket, metafields)
       // Add settings
-      const settings = await getGlobalSettings(cosmicSourceBucketConfig)
       await addGlobalSettings(cosmicTargetBucket, settings)
     }
+
     if (featureKey === "testimonials") {
-      metafields = await getTestimonialsMetafields()
+      let testimonials
+      await Promise.all([
+        getTestimonialsMetafields().then((result) => (metafields = result)),
+        getTestimonials(cosmicSourceBucketConfig).then(
+          (result) => (testimonials = result)
+        ),
+      ])
       await addTestimonialsObjectType(cosmicTargetBucket, metafields)
       // Add testimonials
-      const testimonials = await getTestimonials(cosmicSourceBucketConfig)
       await addTestimonials(cosmicTargetBucket, testimonials)
     }
+
     if (featureKey === "events") {
-      metafields = await getEventsMetafields()
-      await addEventsObjectType(cosmicTargetBucket, metafields)
+      let events
+      await Promise.all([
+        getEventsMetafields().then((result) => (metafields = result)),
+        getEvents(cosmicSourceBucketConfig).then((result) => (events = result)),
+      ])
+      metafields = await addEventsObjectType(cosmicTargetBucket, metafields)
       // Add events
-      const events = await getEvents(cosmicSourceBucketConfig)
       await addEvents(cosmicTargetBucket, events)
     }
+
     if (featureKey === "comments") {
-      metafields = await getCommentsMetafields()
+      let comments
+      await Promise.all([
+        getCommentsMetafields().then((result) => (metafields = result)),
+        getComments(cosmicSourceBucketConfig).then(
+          (result) => (comments = result)
+        ),
+      ])
       await addCommentsObjectType(cosmicTargetBucket, metafields)
       // Add comments
-      const comments = await getComments(cosmicSourceBucketConfig)
       await addComments(cosmicTargetBucket, comments)
     }
+
     if (featureKey === "team") {
-      metafields = await getTeamMetafields()
+      let teamMembers
+      await Promise.all([
+        getTeamMetafields().then((result) => (metafields = result)),
+        getTeamMembers(cosmicSourceBucketConfig).then(
+          (result) => (teamMembers = result)
+        ),
+      ])
       await addTeamObjectType(cosmicTargetBucket, metafields)
       // Add team
-      const teamMembers = await getTeamMembers(cosmicSourceBucketConfig)
       await addTeamMembers(cosmicTargetBucket, teamMembers)
     }
+
     if (featureKey === "products") {
-      metafields = await getProductsMetafields()
+      let products
+      await Promise.all([
+        getProductsMetafields().then((result) => (metafields = result)),
+        getProducts(cosmicSourceBucketConfig).then(
+          (result) => (products = result)
+        ),
+      ])
       await addProductsObjectType(cosmicTargetBucket, metafields)
       // Add products
-      const products = await getProducts(cosmicSourceBucketConfig)
       await addProducts(cosmicTargetBucket, products)
     }
+
     setInstallationSuccess(true)
   }
 
