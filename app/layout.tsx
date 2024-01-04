@@ -5,13 +5,11 @@ import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
+import { TailwindIndicator } from "@/components/TailwindIndicator"
 import Navbar from "@/components/layouts/Navbar"
 import NextTopLoader from "nextjs-toploader"
 import Footer from "@/components/layouts/Footer"
-import ThemeProvider from "@/components/layouts/Providers"
 import Providers from "@/components/layouts/Providers"
-// import Providers from "@/components/layouts/Providers"
 
 export const metadata: Metadata = {
   title: {
@@ -41,7 +39,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "mx-auto flex min-h-screen w-full justify-center bg-light-background font-sans antialiased dark:bg-dark-background",
+            "mx-auto flex min-h-screen w-screen justify-center bg-light-background font-sans antialiased dark:bg-dark-background",
             fontSans.variable
           )}
         >
@@ -49,7 +47,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Providers>
             <div className="relative flex min-h-screen flex-col">
               <Navbar />
-              <div className="mx-auto flex w-screen grow flex-col items-center justify-center overflow-x-hidden">
+              <div className="grow flex-col items-center justify-center overflow-x-hidden">
                 {children}
               </div>
               <Footer />

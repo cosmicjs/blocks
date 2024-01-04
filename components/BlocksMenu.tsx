@@ -1,10 +1,10 @@
-import { features } from "@/config/features"
+import { blocksData } from "@/config/blocks.data"
 import { Popover, Transition } from "@headlessui/react"
 import { ChevronDownIcon } from "lucide-react"
 import Link from "next/link"
 import { Fragment } from "react"
 
-export default function FeaturesMenu() {
+export default function BlocksMenu() {
   return (
     <div className="hidden w-full max-w-sm px-4 lg:block">
       <Popover className="relative">
@@ -38,7 +38,7 @@ export default function FeaturesMenu() {
               <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform rounded-xl px-4 shadow-lg shadow-gray-50 dark:shadow-gray-800 sm:px-0 lg:max-w-xl">
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                   <div className="relative grid gap-x-8 gap-y-5 bg-white p-7 dark:bg-dark-background lg:grid-cols-3">
-                    {features.map((item) => (
+                    {blocksData?.map((item) => (
                       <Link
                         className="-m-3 flex items-center rounded-lg transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none hover:dark:bg-dark-gray-50"
                         key={item.key}

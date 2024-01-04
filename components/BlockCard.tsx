@@ -2,9 +2,9 @@
 import Link from "next/link"
 
 import { ThemedImage } from "./elements/ThemedImage/ThemedImage"
-import FeatureStats from "./FeatureStats"
+import BlockStats from "./BlockStats"
 
-type Feature = {
+type BlockData = {
   key: string
   title: string
   icon: React.ReactNode
@@ -20,12 +20,12 @@ type Feature = {
   metafields?: number
 }
 
-export function FeatureCard({ feature }: { feature: Feature }) {
+export function BlockCard({ feature }: { feature: BlockData }) {
   if (!feature?.preview_link) return null
 
   return (
     <>
-      <div className="pointer-cursor relative overflow-hidden">
+      <div className="relative !cursor-pointer overflow-hidden">
         <Link href={feature?.preview_link}>
           <div className="grid md:grid-cols-1">
             <div className="overflow-hidden rounded-3xl">
@@ -38,7 +38,7 @@ export function FeatureCard({ feature }: { feature: Feature }) {
             </div>
             <div>
               <h2 className="mb-1 mt-4 text-2xl font-bold">{feature.title}</h2>
-              <FeatureStats
+              <BlockStats
                 objectTypes={feature?.object_types}
                 objects={feature?.objects}
                 metafields={feature?.metafields}

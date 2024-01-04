@@ -2,7 +2,7 @@
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import { ImageGallery } from "@/components/image-gallery"
+import { ImageGallery } from "@/components/ImageGallery"
 import CodeSteps from "@/components/layouts/CodeSteps"
 import classNames from "classnames"
 

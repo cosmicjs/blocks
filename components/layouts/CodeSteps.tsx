@@ -3,11 +3,11 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { Markdown } from "../elements/Markdown/Markdown"
 import dedent from "dedent"
-import { BucketAPILink } from "../bucket-api-link"
+import { BucketAPILink } from "../BucketAPILink"
 import { useSearchParams } from "next/navigation"
 import classNames from "classnames"
 import { Button } from "@/components/ui/button"
-import { InstallDialog } from "@/components/install-dialog"
+import { InstallDialog } from "@/components/InstallDialog"
 import { managers } from "../elements/CodeBlock/CodeBlock"
 
 type StepProps = {

@@ -2,7 +2,7 @@
 import dedent from "dedent"
 
 import { fetchFeature } from "@/lib/cosmic"
-import { BlogCard, PostType } from "@/components/blog-card"
+import { BlogCard, PostType } from "@/components/BlogCard"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import CodeSteps from "@/components/layouts/CodeSteps"
 

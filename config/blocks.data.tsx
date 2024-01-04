@@ -13,7 +13,7 @@ import {
   CalendarIcon,
 } from "lucide-react"
 
-export const features = [
+export const blocksData = [
   {
     key: "pages",
     title: "Pages",

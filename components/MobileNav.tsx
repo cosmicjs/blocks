@@ -4,7 +4,7 @@ import React from "react"
 import Link from "next/link"
 
 import { MenuIcon, XIcon } from "lucide-react"
-import { ItemType } from "@/components/nav-menu"
+import { ItemType } from "@/components/NavMenu"
 
 export function MobileNav({ items }: { items: ItemType[] }) {
   const [isOpen, setIsOpen] = React.useState(false)

@@ -142,7 +142,7 @@ const CodeBlock = ({
                 router.push(
                   pathname + "?" + createQueryString("pm", pm.value),
                   {
-                    scroll: true,
+                    scroll: false,
                   }
                 )
               }

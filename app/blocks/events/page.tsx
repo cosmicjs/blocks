@@ -4,7 +4,7 @@ import dedent from "dedent"
 import { fetchFeature } from "@/lib/cosmic"
 import { PackageManagers } from "../layout"
 import CodeSteps from "@/components/layouts/CodeSteps"
-import { EventCard, EventCardType } from "@/components/event-card"
+import { EventCard, EventCardType } from "@/components/EventCard"
 
 export default async function EventsPage({
   searchParams,

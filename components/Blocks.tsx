@@ -5,8 +5,8 @@ import { useEffect, useState } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
 import { useTheme } from "next-themes"
 
-import { features } from "@/config/features"
-import { FeatureCard } from "@/components/feature-card"
+import { blocksData } from "@/config/blocks.data"
+import { BlockCard } from "@/components/BlockCard"
 import { selectRandomValuesFromArray } from "@/lib/utils"
 
 // Types
@@ -15,25 +15,25 @@ export type TargetBucketType = {
   read_key: string
   write_key: string
 }
-export type FeaturesProps = {
+export type BlocksProps = {
   targetBucket?: TargetBucketType
   limit?: number
   randomOrder?: boolean
   excludeSelf?: boolean
 }
 
-export function Features({
+export function Blocks({
   targetBucket,
   limit,
   randomOrder,
   excludeSelf,
-}: FeaturesProps) {
+}: BlocksProps) {
   const searchParams = useSearchParams()
   const dashboardTheme = searchParams.get("theme")
   const { setTheme } = useTheme()
   const pathname = usePathname()
 
-  const featurePathname = pathname.includes("blocks")
+  const blockPathname = pathname.includes("blocks")
     ? pathname.split("/")[2]
     : "null"
 
@@ -51,32 +51,32 @@ export function Features({
     }
   }
 
-  const [mappedFeatures, setMappedFeatures] = useState(features)
+  const [mappedBlocks, setMappedBlocks] = useState(blocksData)
 
   useEffect(() => {
-    let mappedFeatures = features
+    let mappedBlocks = blocksData
 
     if (excludeSelf) {
-      mappedFeatures = mappedFeatures.filter(
-        (feature) => !feature?.preview_link?.includes(featurePathname)
+      mappedBlocks = mappedBlocks.filter(
+        (feature) => !feature?.preview_link?.includes(blockPathname)
       )
     }
 
     if (randomOrder) {
-      mappedFeatures = selectRandomValuesFromArray(mappedFeatures, limit || 3)
+      mappedBlocks = selectRandomValuesFromArray(mappedBlocks, limit || 3)
     }
 
-    setMappedFeatures(mappedFeatures)
-  }, [randomOrder, limit, excludeSelf, featurePathname])
+    setMappedBlocks(mappedBlocks)
+  }, [randomOrder, limit, excludeSelf, blockPathname])
 
-  useEffect(() => {}, [excludeSelf, featurePathname])
+  useEffect(() => {}, [excludeSelf, blockPathname])
 
   return (
     <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-      {mappedFeatures?.map((feature) => {
+      {mappedBlocks?.map((block) => {
         return (
-          <div key={feature?.key}>
-            <FeatureCard feature={feature} />
+          <div key={block?.key}>
+            <BlockCard feature={block} />
           </div>
         )
       })}
