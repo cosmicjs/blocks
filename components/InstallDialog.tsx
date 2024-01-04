@@ -211,7 +211,7 @@ export function InstallDialog({
       await addBlogs(cosmicTargetBucket, blogs, newAuthors, newCategories)
     }
 
-    if (featureKey === "navigation_menus") {
+    if (featureKey === "nav-menus") {
       let menus
       await Promise.all([
         getNavMenuMetafields().then((result) => (metafields = result)),
@@ -224,7 +224,7 @@ export function InstallDialog({
       await addNavMenus(cosmicTargetBucket, menus)
     }
 
-    if (featureKey === "global_settings") {
+    if (featureKey === "settings") {
       let settings
       await Promise.all([
         getGlobalSettingsMetafields().then((result) => (metafields = result)),
