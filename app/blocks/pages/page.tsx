@@ -93,7 +93,7 @@ async function Preview() {
           <h2 className="font-display m-auto max-w-[800px] pt-8 text-center text-3xl text-zinc-900 dark:text-zinc-100 md:text-6xl">
             {page.metadata.section_title}
           </h2>
-          <p
+          <div
             dangerouslySetInnerHTML={{ __html: page.metadata.content }}
             className="m-auto mb-16 max-w-[800px] text-center text-zinc-700 dark:text-zinc-300"
           />
