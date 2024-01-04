@@ -173,9 +173,10 @@ export function InstallDialog({
 
     if (featureKey === "pages") {
       promises.push(
-        getPageBuilderMetafields().then((result) => (metafields = result))
+        getPageBuilderMetafields().then((metafields) => {
+          addPagesObjectType(cosmicTargetBucket, metafields)
+        })
       )
-      promises.push(addPagesObjectType(cosmicTargetBucket, metafields))
       promises.push(
         getPage(cosmicSourceBucketConfig).then((page) =>
           addPage(cosmicTargetBucket, page)
@@ -185,44 +186,47 @@ export function InstallDialog({
 
     if (featureKey === "blog") {
       promises.push(addAuthorObjectType(cosmicTargetBucket))
+
       promises.push(
-        getAuthors(cosmicSourceBucketConfig).then(
-          (result) => (authors = result)
-        )
-      )
-      promises.push(
-        getCategories(cosmicSourceBucketConfig).then(
-          (result) => (categories = result)
-        )
-      )
-      promises.push(
-        getCategoriesMetafields().then((result) => (metafields = result))
-      )
-      promises.push(addCategoriesObjectType(cosmicTargetBucket, metafields))
-      promises.push(
-        getAuthors(cosmicTargetBucket).then(
-          (newAuthors) => (authors = newAuthors)
-        )
-      )
-      promises.push(
-        getCategories(cosmicTargetBucket).then(
-          (newCategories) => (categories = newCategories)
-        )
-      )
-      promises.push(getBlogMetafields().then((result) => (metafields = result)))
-      promises.push(addBlogObjectType(cosmicTargetBucket, metafields))
-      promises.push(
-        getBlogs(cosmicSourceBucketConfig).then((blogs) =>
-          addBlogs(cosmicTargetBucket, blogs, authors, categories)
-        )
+        getAuthors(cosmicSourceBucketConfig)
+          .then((result) => {
+            authors = result
+            return getCategories(cosmicSourceBucketConfig)
+          })
+          .then((result) => {
+            categories = result
+            return getCategoriesMetafields()
+          })
+          .then((result) => {
+            metafields = result
+            return addCategoriesObjectType(cosmicTargetBucket, metafields)
+          })
+          .then(() => getAuthors(cosmicTargetBucket))
+          .then((newAuthors) => {
+            authors = newAuthors
+            return getCategories(cosmicTargetBucket)
+          })
+          .then((newCategories) => {
+            categories = newCategories
+            return getBlogMetafields()
+          })
+          .then((result) => {
+            metafields = result
+            return addBlogObjectType(cosmicTargetBucket, metafields)
+          })
+          .then(() => getBlogs(cosmicSourceBucketConfig))
+          .then((blogs) =>
+            addBlogs(cosmicTargetBucket, blogs, authors, categories)
+          )
       )
     }
 
     if (featureKey === "navigation_menus") {
       promises.push(
-        getNavMenuMetafields().then((result) => (metafields = result))
+        getNavMenuMetafields().then((metafields) =>
+          addNavMenusObjectType(cosmicTargetBucket, metafields)
+        )
       )
-      promises.push(addNavMenusObjectType(cosmicTargetBucket, metafields))
       promises.push(
         getNavMenus(cosmicSourceBucketConfig).then((settings) =>
           addNavMenus(cosmicTargetBucket, settings)
@@ -232,9 +236,10 @@ export function InstallDialog({
 
     if (featureKey === "global_settings") {
       promises.push(
-        getGlobalSettingsMetafields().then((result) => (metafields = result))
+        getGlobalSettingsMetafields().then((metafields) =>
+          addGlobalSettingsObjectType(cosmicTargetBucket, metafields)
+        )
       )
-      promises.push(addGlobalSettingsObjectType(cosmicTargetBucket, metafields))
       promises.push(
         getGlobalSettings(cosmicSourceBucketConfig).then((settings) =>
           addGlobalSettings(cosmicTargetBucket, settings)
@@ -244,9 +249,10 @@ export function InstallDialog({
 
     if (featureKey === "testimonials") {
       promises.push(
-        getTestimonialsMetafields().then((result) => (metafields = result))
+        getTestimonialsMetafields().then((metafields) =>
+          addTestimonialsObjectType(cosmicTargetBucket, metafields)
+        )
       )
-      promises.push(addTestimonialsObjectType(cosmicTargetBucket, metafields))
       promises.push(
         getTestimonials(cosmicSourceBucketConfig).then((testimonials) =>
           addTestimonials(cosmicTargetBucket, testimonials)
@@ -256,9 +262,10 @@ export function InstallDialog({
 
     if (featureKey === "events") {
       promises.push(
-        getEventsMetafields().then((result) => (metafields = result))
+        getEventsMetafields().then((metafields) =>
+          addEventsObjectType(cosmicTargetBucket, metafields)
+        )
       )
-      promises.push(addEventsObjectType(cosmicTargetBucket, metafields))
       promises.push(
         getEvents(cosmicSourceBucketConfig).then((events) =>
           addEvents(cosmicTargetBucket, events)
@@ -268,9 +275,10 @@ export function InstallDialog({
 
     if (featureKey === "comments") {
       promises.push(
-        getCommentsMetafields().then((result) => (metafields = result))
+        getCommentsMetafields().then((metafields) =>
+          addCommentsObjectType(cosmicTargetBucket, metafields)
+        )
       )
-      promises.push(addCommentsObjectType(cosmicTargetBucket, metafields))
       promises.push(
         getComments(cosmicSourceBucketConfig).then((comments) =>
           addComments(cosmicTargetBucket, comments)
@@ -279,8 +287,11 @@ export function InstallDialog({
     }
 
     if (featureKey === "team") {
-      promises.push(getTeamMetafields().then((result) => (metafields = result)))
-      promises.push(addTeamObjectType(cosmicTargetBucket, metafields))
+      promises.push(
+        getTeamMetafields().then((metafields) =>
+          addTeamObjectType(cosmicTargetBucket, metafields)
+        )
+      )
       promises.push(
         getTeamMembers(cosmicSourceBucketConfig).then((teamMembers) =>
           addTeamMembers(cosmicTargetBucket, teamMembers)
@@ -290,9 +301,10 @@ export function InstallDialog({
 
     if (featureKey === "products") {
       promises.push(
-        getProductsMetafields().then((result) => (metafields = result))
+        getProductsMetafields().then((metafields) =>
+          addProductsObjectType(cosmicTargetBucket, metafields)
+        )
       )
-      promises.push(addProductsObjectType(cosmicTargetBucket, metafields))
       promises.push(
         getProducts(cosmicSourceBucketConfig).then((products) =>
           addProducts(cosmicTargetBucket, products)
