@@ -1,29 +1,35 @@
+"use client"
+
 import { ExternalLinkIcon } from "lucide-react"
+import { useEffect, useState } from "react"
 
 export function BucketAPILink() {
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("bucket_slug")) {
-      return (
-        <a
-          href={`https://app.cosmicjs.com/${localStorage.getItem(
-            "bucket_slug"
-          )}/settings/api-access`}
-          className="text-cosmic-blue"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Bucket {`>`} Setting {`>`} API keys{" "}
-          <ExternalLinkIcon className="-mt-2 inline h-3 w-3" />
-        </a>
-      )
-    } else {
-      return (
-        <>
-          Bucket {`>`} Setting {`>`} API keys
-        </>
-      )
+  const [bucketSlug, setBucketSlug] = useState<string>()
+
+  useEffect(() => {
+    const storedBucketSlug = localStorage.getItem("bucket_slug")
+    if (storedBucketSlug) {
+      setBucketSlug(storedBucketSlug)
     }
+  }, [])
+
+  if (bucketSlug) {
+    return (
+      <a
+        href={`https://app.cosmicjs.com/${bucketSlug}/settings/api-access`}
+        className="text-cosmic-blue"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Bucket {`>`} Setting {`>`} API keys{" "}
+        <ExternalLinkIcon className="-mt-2 inline h-3 w-3" />
+      </a>
+    )
   } else {
-    return null // or handle the case when window is not available
+    return (
+      <>
+        Bucket {`>`} Setting {`>`} API keys
+      </>
+    )
   }
 }
