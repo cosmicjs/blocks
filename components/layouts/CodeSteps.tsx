@@ -28,7 +28,7 @@ type CodeStepsProps = {
 }
 
 function wrapWithSpan(text: string) {
-  return text.split("`").map((item, index) => {
+  return text?.split("`")?.map((item, index) => {
     if (index % 2 === 0) return item
     return (
       <span
