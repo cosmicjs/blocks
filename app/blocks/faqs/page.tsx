@@ -28,7 +28,7 @@ export default async function FAQs({
 
   return (
     <>
-      <section className="container m-auto grid max-w-[800px] items-center pb-8">
+      <section className="container m-auto grid max-w-[800px] items-center pb-8 lg:min-w-[800px]">
         {tab === "preview" ? <Preview /> : <Code />}
       </section>
     </>

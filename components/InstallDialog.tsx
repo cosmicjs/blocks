@@ -379,7 +379,7 @@ export function InstallDialog({
               {feature?.type === "metafields" ? (
                 <>
                   <div className="mb-4">
-                    {objectTypes?.length ? (
+                    {!loading && objectTypes?.length ? (
                       <>
                         Which existing Object type would you like to add this
                         feature to? Or
