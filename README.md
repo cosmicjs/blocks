@@ -1,4 +1,4 @@
-# Cosmic Blocks
+# Blocks
 
 Beautifully designed, data-infused components to help you build Cosmic-powered web applications faster. Use Cosmic Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
 
@@ -28,12 +28,12 @@ Beautifully designed, data-infused components to help you build Cosmic-powered w
 ## Contributing
 
 ```bash
-git clone https://github.com/cosmicjs/cosmic-blocks
-cd cosmic-blocks
+git clone https://github.com/cosmicjs/blocks
+cd blocks
 bun install
 bun dev
 ```
 
 ## License
 
-Licensed under the [MIT license](https://github.com/cosmicjs/cosmic-blocks/blob/main/LICENSE).
+Licensed under the [MIT license](https://github.com/cosmicjs/blocks/blob/main/LICENSE).
