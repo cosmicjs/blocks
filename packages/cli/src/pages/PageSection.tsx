@@ -53,7 +53,7 @@ export function Section({
             <img
               alt={section.heading}
               className="rounded-xl"
-              src={section.image.imgix_url}
+              src={`${section.image.imgix_url}?w=1200&auto=format,compression`}
             />
           </div>
         </div>
@@ -64,7 +64,7 @@ export function Section({
             <img
               alt={section.heading}
               className="rounded-xl"
-              src={section.image.imgix_url}
+              src={`${section.image.imgix_url}?w=1200&auto=format,compression`}
             />
           </div>
           <div>
@@ -115,7 +115,7 @@ export function Section({
             <img
               alt={section.heading}
               className="rounded-xl"
-              src={section.image.imgix_url}
+              src={`${section.image.imgix_url}?w=1200&auto=format,compression`}
             />
           </div>
         </div>
