@@ -5,7 +5,7 @@ import { fetchFeature } from "@/lib/cosmic"
 import { PackageManagers } from "../layout"
 import CodeSteps from "@/components/layouts/CodeSteps"
 import { EventCard, EventCardType } from "@/components/EventCard"
-import { Button } from "@/components/ui/Button"
+import { Button } from "@/components/ui/button"
 
 export default async function EventsPage({
   searchParams,
