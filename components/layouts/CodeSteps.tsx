@@ -28,10 +28,13 @@ type CodeStepsProps = {
 }
 
 function wrapWithSpan(text: string) {
-  return text.split("`").map((item, index) => {
+  return text?.split("`")?.map((item, index) => {
     if (index % 2 === 0) return item
     return (
-      <span className="bg-gray-100 px-1 py-px font-mono dark:bg-dark-gray-100">
+      <span
+        key={item}
+        className="bg-gray-100 px-1 py-px font-mono dark:bg-dark-gray-100"
+      >
         {item}
       </span>
     )
@@ -130,7 +133,7 @@ function CodeSteps(props: CodeStepsProps) {
               Tailwind CSS in the installation options.
             </div>
             {step1?.map((step) => (
-              <Markdown>
+              <Markdown key={step}>
                 {dedent(`\`\`\`bash
           ${step}
           \`\`\`

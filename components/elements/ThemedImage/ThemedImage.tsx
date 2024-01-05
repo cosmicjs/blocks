@@ -1,13 +1,12 @@
-"use client"
-
-import { useEffect, useState } from "react"
-import { useTheme } from "next-themes"
+import classNames from "classnames"
 
 type ThemedImageProps = {
   darkSrc: string
   lightSrc: string
   alt: string
   className?: string
+  width?: number
+  height?: number
 }
 
 export function ThemedImage({
@@ -15,21 +14,25 @@ export function ThemedImage({
   lightSrc,
   alt,
   className,
+  width,
+  height,
 }: ThemedImageProps) {
-  const { resolvedTheme: theme } = useTheme()
-  const [imageSrc, setImageSrc] = useState(darkSrc)
-
-  useEffect(() => {
-    setImageSrc(theme === "dark" ? darkSrc : lightSrc)
-  }, [theme, darkSrc, lightSrc])
-
   return (
-    <img
-      width={400}
-      height={400}
-      src={imageSrc || darkSrc}
-      className={className}
-      alt={alt}
-    />
+    <>
+      <img
+        width={width ?? 400}
+        height={height ?? 400}
+        src={lightSrc}
+        className={classNames("block dark:hidden", className)}
+        alt={alt}
+      />
+      <img
+        width={width ?? 400}
+        height={height ?? 400}
+        src={darkSrc}
+        className={classNames("hidden dark:block", className)}
+        alt={alt}
+      />
+    </>
   )
 }

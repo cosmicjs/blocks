@@ -91,7 +91,7 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/fefa6c40-9416-11ee-b62d-5b90a0a1bade-FAQs.png",
   },
   {
-    key: "navigation_menus",
+    key: "nav-menus",
     title: "Navigation Menu",
     type: "object_type",
     slug: "navigation-menus",
@@ -171,7 +171,7 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/fed81730-9416-11ee-b62d-5b90a0a1bade-SEO.png",
   },
   {
-    key: "global_settings",
+    key: "settings",
     title: "Global Settings",
     type: "object_type",
     slug: "global-settings",

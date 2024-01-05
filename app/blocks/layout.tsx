@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import { Blocks } from "@/components/Blocks"
 import { blocksData } from "@/config/blocks.data"
-import FeatureStats from "@/components/BlockStats"
+import BlockStats from "@/components/BlockStats"
 import { ArrowLeftIcon } from "lucide-react"
 
 export const packageManagers = [
@@ -32,12 +32,11 @@ export default function FeatureLayout({
       (block) => block?.preview_link.includes(featurePathname)
     )?.[0] || {}
 
-  const { title, object_types, objects, metafields, description, field_list } =
-    currentFeature
+  const { title, object_types, objects, metafields } = currentFeature
 
   const bucketSlug = searchParams.get("bucket_slug") || ""
-  const readKey = searchParams.get("bucket_slug") || ""
-  const writeKey = searchParams.get("bucket_slug") || ""
+  const readKey = searchParams.get("read_key") || ""
+  const writeKey = searchParams.get("write_key") || ""
 
   const targetBucket = {
     bucket_slug: bucketSlug,
@@ -62,7 +61,7 @@ export default function FeatureLayout({
         <h1 className="sticky mb-2 mt-6 bg-white text-3xl font-extrabold leading-tight tracking-tighter dark:bg-dark-background md:text-4xl">
           {title}
         </h1>
-        <FeatureStats
+        <BlockStats
           objectTypes={object_types}
           objects={objects}
           metafields={metafields}
