@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     <div className="dark:dark-header-image min-w-screen light-header-image container mx-auto mb-48 px-5">
       <div className="relative w-full text-center">
         <div className="z-10 text-center">
-          <h1 className="header-gradient relative z-10 mb-4 mt-28 w-full text-5xl text-8xl font-[900] text-transparent md:mt-24 lg:mt-28">
+          <h1 className="header-gradient relative z-10 mb-4 mt-28 w-full text-5xl font-[900] text-transparent md:mt-24 md:text-8xl lg:mt-28">
             Build Faster
           </h1>
           <p className="m-auto max-w-[629px] text-center text-lg md:text-2xl">
