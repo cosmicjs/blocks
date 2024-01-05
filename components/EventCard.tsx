@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils"
 import { Calendar, Clock, Pin } from "lucide-react"
-import Link from "next/link"
 
 export type EventCardType = {
   title: string
@@ -15,6 +14,10 @@ export type EventCardType = {
     image: {
       imgix_url: string
     }
+    agenda: {
+      time: string
+      item: string
+    }[]
   }
 }
 

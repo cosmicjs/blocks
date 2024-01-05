@@ -134,7 +134,7 @@ async function Preview() {
                     </h3>
                     <div className="mb-6 text-sm text-gray-700 dark:text-white">
                       <ul className="flex flex-col gap-4">
-                        {event.metadata.agenda.map((item: any) => (
+                        {event?.metadata?.agenda.map((item: any) => (
                           <li
                             key={item.item}
                             className="flex flex-col space-y-1 rounded-lg bg-gray-50 px-3 py-2 dark:bg-zinc-800"
