@@ -1,3 +1,6 @@
+import { cn } from "@/lib/utils"
+import { Calendar, Clock, Pin } from "lucide-react"
+
 export type EventCardType = {
   title: string
   slug: string
@@ -11,45 +14,66 @@ export type EventCardType = {
     image: {
       imgix_url: string
     }
+    agenda: {
+      time: string
+      item: string
+    }[]
   }
 }
 
-export function EventCard({ event }: { event: EventCardType }) {
+export function EventCard({
+  event,
+  className,
+}: {
+  event: EventCardType
+  className?: string
+}) {
   return (
-    <div className="relative mb-6 justify-start overflow-hidden rounded-xl bg-slate-100 p-8 dark:bg-slate-800 md:flex md:p-0">
-      <img
-        className="mx-auto h-auto w-[260px] rounded-full object-cover md:rounded-none"
-        src={`${event.metadata.image.imgix_url}?w=500&h=500&auto=format,compression&fit=facearea&facepad=3`}
-        alt={event.title}
-      />
-      <div className="w-full space-y-4 text-center md:p-8 md:text-left">
-        <div className="text-xl font-bold text-gray-700 dark:text-gray-200">
+    <div
+      className={cn("group relative mb-auto w-full cursor-pointer", className)}
+    >
+      <div className="w-full overflow-hidden group-hover:opacity-75">
+        <img
+          className="aspect-square h-full w-full rounded-xl border border-zinc-100 object-cover object-center dark:border-zinc-800 lg:h-full lg:w-full"
+          src={`${event.metadata.image.imgix_url}?w=1000&h=1000&auto=format,compression`}
+          alt={event.title}
+        />
+      </div>
+      <div className="mt-4">
+        <div className="text-lg font-medium leading-tight text-zinc-700 dark:text-zinc-300">
           {event.title}
         </div>
-        <div
-          className="relative z-10 text-lg font-medium text-slate-700 dark:text-slate-300"
-          dangerouslySetInnerHTML={{ __html: event.metadata.description }}
-        />
-        <div className="absolute bottom-4 font-medium">
-          <div className="mb-2 text-slate-700 dark:text-slate-300">
-            📆{" "}
-            {new Date(event.metadata.start_date).toLocaleDateString("en-us", {
-              weekday: "short",
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}{" "}
-            {event.metadata.start_time} -{" "}
-            {new Date(event.metadata.end_date).toLocaleDateString("en-us", {
-              weekday: "short",
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}{" "}
-            {event.metadata.end_time}
-          </div>
-          <div className="text-slate-700 dark:text-slate-300">
-            📍 {event.metadata.location}
+        <div className="flex h-full flex-col space-y-4 font-medium">
+          <div
+            className="pt-2 text-sm font-medium text-zinc-500 dark:text-zinc-300"
+            dangerouslySetInnerHTML={{ __html: event.metadata.description }}
+          />
+          <div className="flex h-full flex-col justify-end space-y-1">
+            <div className="flex items-center space-x-2 text-sm font-medium text-zinc-900 dark:text-zinc-50">
+              <Calendar className="h-4 w-4 shrink-0" />
+              <span>
+                {new Date(event.metadata.start_date).toLocaleDateString(
+                  "en-us",
+                  {
+                    weekday: "short",
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  }
+                )}
+              </span>
+            </div>
+            <div className="flex items-center space-x-1 text-sm font-medium text-zinc-900 dark:text-zinc-50">
+              <Clock className="mr-1 h-4 w-4 shrink-0" />
+              <span>From</span>
+              <span>{event.metadata.start_time}</span>
+              <span>until</span>
+              <span>{event.metadata.end_time}</span>
+            </div>
+            <div className="flex items-center space-x-2 text-sm font-medium text-zinc-900 dark:text-zinc-50">
+              <Pin className="h-4 w-4 shrink-0" />
+              <span>{event.metadata.location}</span>
+            </div>
           </div>
         </div>
       </div>

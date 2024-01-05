@@ -35,11 +35,11 @@ export default async function Page({
 async function Preview() {
   const page = await fetchPageData("home")
   return (
-    <div>
+    <>
       <div className="mx-auto flex w-full max-w-6xl flex-col-reverse justify-between pb-16 text-zinc-950 dark:text-zinc-50 md:flex-row md:gap-12">
         <div className="flex w-full flex-col items-start justify-start md:w-1/2">
           <div className="py-4 md:pt-20">
-            <h1 className="font-display text-4xl tracking-tight md:text-8xl">
+            <h1 className="font-display text-4xl font-bold tracking-tight">
               {page.metadata.h1}
             </h1>
           </div>
@@ -104,7 +104,7 @@ async function Preview() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   )
 }
 
