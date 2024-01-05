@@ -147,10 +147,10 @@ const CodeBlock = ({
                 )
               }
               className={classNames(
-                "duration-[50] w-fit rounded-t-lg border border-gray-800 px-3 pb-2 text-sm transition-all ease-linear",
+                "duration-[50] w-fit rounded-t-lg px-3 pb-2 text-sm transition-all ease-linear",
                 {
                   "h-[42px] bg-gray-800 text-gray-50": manager === pm.value,
-                  "h-10 text-gray-400": manager !== pm.value,
+                  "h-10 text-gray-700 dark:text-gray-300": manager !== pm.value,
                 }
               )}
             >
