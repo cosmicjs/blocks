@@ -6,13 +6,12 @@ import { Button } from "../ui/button"
 import { SiteHeader } from "../SiteHeader"
 import Link from "next/link"
 import BlocksMenu from "../BlocksMenu"
-import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
 import { DOCS_URL } from "@/constants"
 import { ExternalLinkIcon } from "lucide-react"
 
 const Navbar: React.FC = () => {
   return (
-    <div className="lg:flex-center glassmorphism sticky top-0 z-50 h-[76px] border-b border-gray-50 bg-white/70 px-5 dark:border-dark-gray-100 dark:bg-black/50 md:w-screen">
+    <div className="lg:flex-center glassmorphism sticky top-0 z-50 h-[72px] bg-white/10 px-5 dark:bg-black/10 md:w-screen">
       <div className="mx-auto flex h-full items-center md:max-w-[1500px]">
         <div className="w-32 shrink-0">
           <Link href="/">

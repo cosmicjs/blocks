@@ -28,12 +28,28 @@
   background: linear-gradient(
     80.27deg,
     #0093d1 0.03%,
-    #ad80ff 20.22%,
-    #54bce8 60.25%,
-    #37dda5 80.86%
+    #8a5ede 20.22%,
+    #3da5d2 60.25%,
+    #29c591 80.86%
   );
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  .header-gradient {
+    background: linear-gradient(
+      80.27deg,
+      #0093d1 0.03%,
+      #ad80ff 20.22%,
+      #54bce8 60.25%,
+      #37dda5 80.86%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 .fade-out {
