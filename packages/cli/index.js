@@ -84,7 +84,15 @@ const blocks = {
   },
   events: {
     name: "events",
-    installationSteps: ["@cosmicjs/sdk", "clsx", "tailwind-merge"],
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "@radix-ui/react-slot",
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "lucide-react",
+    ],
+    elements: ["Button"],
   },
 }
 

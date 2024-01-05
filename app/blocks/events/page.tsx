@@ -183,24 +183,29 @@ function Code({ manager }: { manager: PackageManagers }) {
     export default async function EventListPage() {
       return (
         <EventsList
-          className="m-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8"
+          className="max-w-[900px] mt-8 m-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8"
           query={{ type: "events" }}
         />
       );
-    }
+    }    
     \`\`\`
     `
   const exampleSingleCode = dedent`
     \`\`\`jsx
     // app/events/[slug]/page.tsx
-    import { SingleEvent } from "@/cosmic/blocks/events/SingleEvent"
+    import { SingleEvent } from "@/cosmic/blocks/events/SingleEvent";
     export default async function SingleEventPage({
       params,
     }: {
-      params: { slug: string }
+      params: { slug: string };
     }) {
-      return <SingleEvent query={{ slug: params.slug, type: "events" }} />
-    }
+      return (
+        <SingleEvent
+          className="max-w-[900px] mt-8"
+          query={{ slug: params.slug, type: "events" }}
+        />
+      );
+    }    
     \`\`\`
     `
 
