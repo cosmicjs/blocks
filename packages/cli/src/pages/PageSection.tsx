@@ -40,7 +40,7 @@ export function Section({
                 className={cn(
                   "ml-2",
                   buttonVariants({
-                    variant: "default",
+                    variant: "secondary",
                   })
                 )}
                 href={section.cta_link}
@@ -78,7 +78,7 @@ export function Section({
                 className={cn(
                   "ml-2",
                   buttonVariants({
-                    variant: "default",
+                    variant: "secondary",
                   })
                 )}
                 href={section.cta_link}
@@ -102,7 +102,7 @@ export function Section({
                 className={cn(
                   "ml-2",
                   buttonVariants({
-                    variant: "default",
+                    variant: "secondary",
                   })
                 )}
                 href={section.cta_link}
