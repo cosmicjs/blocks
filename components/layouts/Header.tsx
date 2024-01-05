@@ -33,14 +33,6 @@ const Header: React.FC = () => {
             </Button>
           </div>
         </div>
-        {/* <div className="z-0 w-[50%]">
-          <ThemedImage
-            darkSrc="https://imgix.cosmicjs.com/b8597df0-9419-11ee-b62d-5b90a0a1bade-blocks-dark.png?w=1920&h=1080&auto=format"
-            lightSrc="https://imgix.cosmicjs.com/b8a0e730-9419-11ee-b62d-5b90a0a1bade-blocks-light.png?w=1920&h=1080&auto=format"
-            alt="blocks illustration"
-            className="absolute -left-2 top-4 z-20 scale-[2] sm:left-auto sm:scale-100 md:-top-24 lg:relative lg:right-[-96px] lg:top-32 lg:w-full lg:scale-[1.8] 2xl:right-[-104px]"
-          />
-        </div> */}
       </div>
       <ThemedImage
         darkSrc="https://imgix.cosmicjs.com/b96bff60-9419-11ee-b62d-5b90a0a1bade-gradient-dark.png?w=1200&h=800&auto=format"
