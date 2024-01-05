@@ -30,7 +30,7 @@ async function Preview() {
   const events = await fetchFeature<EventCardType>("events")
 
   return (
-    <div className="py-10">
+    <div className="m-auto grid grid-cols-1 place-items-center gap-8 py-8 md:grid-cols-2 xl:grid-cols-2">
       {events?.map((event: EventCardType) => {
         return <EventCard event={event} key={event.slug} />
       })}
