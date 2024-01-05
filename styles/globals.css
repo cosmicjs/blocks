@@ -26,14 +26,30 @@
 
 .header-gradient {
   background: linear-gradient(
-    80.27deg,
-    #0093d1 0.03%,
-    #ad80ff 20.22%,
-    #54bce8 60.25%,
-    #37dda5 80.86%
+    80deg,
+    #007aad 30.03%,
+    #8c4dff 38.64%,
+    #27aae2 64.25%,
+    #21c08b 69.86%
   );
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+  .header-gradient {
+    background: linear-gradient(
+      80deg,
+      #0eacef 30.03%,
+      #ad80ff 35.22%,
+      #54bce8 70.25%,
+      #37dda5 89.86%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 .fade-out {
