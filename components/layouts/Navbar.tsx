@@ -33,15 +33,6 @@ const Navbar: React.FC = () => {
         <div className="grow" />
         <div className="flex items-center">
           <Button
-            href={DOCS_URL}
-            target="_blank"
-            variant={"ghost"}
-            className="mr-2 whitespace-nowrap text-cosmic-blue"
-            iconRight={<ExternalLinkIcon className="h-4 w-4" />}
-          >
-            Cosmic Docs
-          </Button>
-          <Button
             variant={"ghost"}
             href={"https://github.com/cosmicjs/blocks"}
             className="mr-2"
