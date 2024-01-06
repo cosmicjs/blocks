@@ -1,6 +1,6 @@
 # Blocks
 
-Beautifully designed, data-infused components to help you build Cosmic-powered web applications faster. Use Cosmic Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
+Data infused components to help you build Cosmic-powered web applications faster. Use Cosmic Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
 
 ## Blocks include
 
