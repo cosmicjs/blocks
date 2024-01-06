@@ -1,11 +1,12 @@
 # Blocks
 
-Data infused components to help you build Cosmic-powered web applications faster. Use Cosmic Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
+Data infused components to help you build Cosmic-powered apps faster. Use Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
 
 ## Blocks include
 
 - Pages
 - Blog
+- Events
 - FAQs
 - Testimonials
 - Navigation
@@ -20,10 +21,12 @@ Data infused components to help you build Cosmic-powered web applications faster
 - Tailwind CSS
 
 ## Features
-
-- Type safe
-- Accessible
+- Performance optimized
+- Mobile responsive
 - Dark mode ready
+- Customizable
+- Accessible
+- Type safe
 
 ## Contributing
 
