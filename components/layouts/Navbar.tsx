@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
             href={"https://github.com/cosmicjs/blocks"}
             className="mr-2"
           >
-            <Github />
+            <Github className="h-5 w-5" />
           </Button>
           <ThemeSwitch />
         </div>
