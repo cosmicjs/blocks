@@ -58,22 +58,6 @@ async function Preview() {
 }
 
 function Code() {
-  const codeString = dedent`
-      \`\`\`jsx
-        // app/page.tsx
-        import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery";
-        
-        export default async function Home() {
-          return (
-            <main className="container">
-              {/* page content above */}
-              <ImageGallery query={{ type: "pages", slug: "home" }} />
-              {/* page content below */}
-            </main>
-          );
-        }    
-      \`\`\`
-      `
   const blockCommand = dedent`
   \`\`\`bash
   bunx @cosmicjs/blocks add image-gallery
@@ -87,10 +71,10 @@ function Code() {
   `
 
   const usageCode = dedent`
-    \`\`\`jsx
-    <ImageGallery query={{ type: "pages", slug: "home" }} />
-    \`\`\`
-    `
+  \`\`\`jsx
+  <ImageGallery query={{ type: "pages", slug: "home" }} />
+  \`\`\`
+  `
 
   const steps = [
     {

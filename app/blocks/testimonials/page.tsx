@@ -79,22 +79,22 @@ async function Preview() {
 
 function Code({ manager }: { manager: PackageManagers }) {
   const blockCommand = dedent`
-    \`\`\`bash
-    bunx @cosmicjs/blocks add testimonials
-    \`\`\`
-    `
+  \`\`\`bash
+  bunx @cosmicjs/blocks add testimonials
+  \`\`\`
+  `
 
   const importCode = dedent`
-    \`\`\`jsx
-    import { Testimonials } from "@/cosmic/blocks/testimonials/Testimonials";
-    \`\`\`
-    `
+  \`\`\`jsx
+  import { Testimonials } from "@/cosmic/blocks/testimonials/Testimonials";
+  \`\`\`
+  `
 
   const usageCode = dedent`
-    \`\`\`jsx
-    <Testimonials query={{ type: "testimonials" }}/>
-    \`\`\`
-    `
+  \`\`\`jsx
+  <Testimonials query={{ type: "testimonials" }}/>
+  \`\`\`
+  `
 
   const steps = [
     {

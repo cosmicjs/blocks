@@ -105,124 +105,123 @@ async function Preview() {
 }
 function Code() {
   const codeHeaderString = dedent`
-    \`\`\`jsx
-    // components/Header.tsx
-    import Link from "next/link";
-    import { cosmic } from "@/cosmic/client";
-    import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
+  \`\`\`jsx
+  // components/Header.tsx
+  import Link from "next/link";
+  import { cosmic } from "@/cosmic/client";
+  import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
 
-    export async function Header() {
-      // Header data
-      const { object: settings } = await cosmic.objects
-        .findOne({
-          type: "global-settings",
-          slug: "settings",
-        })
-        .props("metadata")
-        .depth(1);
+  export async function Header() {
+    // Header data
+    const { object: settings } = await cosmic.objects
+      .findOne({
+        type: "global-settings",
+        slug: "settings",
+      })
+      .props("metadata")
+      .depth(1);
 
-      return (
-        <div className="space-x-4 sticky top-0 bg-white/20 dark:bg-black/20 backdrop-blur-lg py-2 w-full z-[9999]">
-          <div className="m-auto flex items-center md:container justify-between pl-2 pr-4">
-            <Link href="/">
-              <img
-                src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
-                alt={settings.metadata.company}
-                className="h-10 m-auto dark:hidden"
-              />
-              <img
-                src={\`\${settings.metadata.dark_logo.imgix_url}?w=500&auto=format,compression\`}
-                alt={settings.metadata.company}
-                className="h-10 m-auto hidden dark:block"
-              />
-            </Link>
-            <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+    return (
+      <div className="space-x-4 sticky top-0 bg-white/20 dark:bg-black/20 backdrop-blur-lg py-2 w-full z-[9999]">
+        <div className="m-auto flex items-center md:container justify-between pl-2 pr-4">
+          <Link href="/">
+            <img
+              src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
+              alt={settings.metadata.company}
+              className="h-10 m-auto dark:hidden"
+            />
+            <img
+              src={\`\${settings.metadata.dark_logo.imgix_url}?w=500&auto=format,compression\`}
+              alt={settings.metadata.company}
+              className="h-10 m-auto hidden dark:block"
+            />
+          </Link>
+          <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+        </div>
+      </div>
+    );
+  }
+  \`\`\`
+  `
+  const codeFooterString = dedent`
+  \`\`\`jsx
+  // components/Footer.tsx
+  import Link from "next/link";
+  import { cosmic } from "@/cosmic/client";
+  import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
+  type LinkType = {
+    url: string;
+    company: string;
+    icon: {
+      imgix_url: string;
+    };
+  };
+
+  export async function Footer() {
+    const { object: settings } = await cosmic.objects
+      .findOne({
+        type: "global-settings",
+        slug: "settings",
+      })
+      .props("metadata")
+      .depth(1);
+
+    return (
+      <div className="my-10">
+        <div className="my-8">
+          <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
+        </div>
+        <div className="mb-8 flex gap-x-8 justify-center">
+          {settings.metadata.links.map((link: LinkType) => {
+            return (
+              <Link href={link.url} key={link.url} target="_blank" rel="noreferrer">
+                <img
+                  className="h-[26px]"
+                  src={\`\${link.icon.imgix_url}?w=500&auto=format,compression\`}
+                  alt={link.company}
+                />
+              </Link>
+            );
+          })}
+        </div>
+        <div className="flex gap-x-8 justify-center">
+          <div>
+            <a href={\`mailto:\${settings.metadata.email}\`}>Email us</a>
+          </div>
+          <div>
+            <a href={\`tel:\${settings.metadata.phone}\`}>Call us</a>
           </div>
         </div>
-      );
-    }
-
-    \`\`\`
-    `
-  const codeFooterString = dedent`
-    \`\`\`jsx
-      // components/Footer.tsx
-      import Link from "next/link";
-      import { cosmic } from "@/cosmic/client";
-      import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
-      type LinkType = {
-        url: string;
-        company: string;
-        icon: {
-          imgix_url: string;
-        };
-      };
-
-      export async function Footer() {
-        const { object: settings } = await cosmic.objects
-          .findOne({
-            type: "global-settings",
-            slug: "settings",
-          })
-          .props("metadata")
-          .depth(1);
-
-        return (
-          <div className="my-10">
-            <div className="my-8">
-              <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
-            </div>
-            <div className="mb-8 flex gap-x-8 justify-center">
-              {settings.metadata.links.map((link: LinkType) => {
-                return (
-                  <Link href={link.url} key={link.url} target="_blank" rel="noreferrer">
-                    <img
-                      className="h-[26px]"
-                      src={\`\${link.icon.imgix_url}?w=500&auto=format,compression\`}
-                      alt={link.company}
-                    />
-                  </Link>
-                );
-              })}
-            </div>
-            <div className="flex gap-x-8 justify-center">
-              <div>
-                <a href={\`mailto:\${settings.metadata.email}\`}>Email us</a>
-              </div>
-              <div>
-                <a href={\`tel:\${settings.metadata.phone}\`}>Call us</a>
-              </div>
-            </div>
-          </div>
-        );
-      }
-    \`\`\`
-    `
+      </div>
+    );
+  }
+  \`\`\`
+  `
 
   const codeLayoutString = dedent`
-    \`\`\`jsx
-      // app/layout.tsx
-      import "./globals.css";
-      import { Header } from "@/components/Header";
-      import { Footer } from "@/components/Footer";
-      
-      export default function RootLayout({
-        children,
-      }: {
-        children: React.ReactNode;
-      }) {
-        return (
-          <html lang="en">
-            <body>
-              <Header />
-              {children}
-              <Footer />
-            </body>
-          </html>
-        );
-      }    
-    \`\`\`
-    `
+  \`\`\`jsx
+  // app/layout.tsx
+  import "./globals.css";
+  import { Header } from "@/components/Header";
+  import { Footer } from "@/components/Footer";
+  
+  export default function RootLayout({
+    children,
+  }: {
+    children: React.ReactNode;
+  }) {
+    return (
+      <html lang="en">
+        <body>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    );
+  }    
+  \`\`\`
+  `
 
   const steps = [
     {

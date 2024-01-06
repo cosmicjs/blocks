@@ -46,27 +46,27 @@ async function Preview() {
 
 function Code() {
   const codeString = dedent`
-    \`\`\`jsx
-      // app/layout.tsx
-      import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
-      import './globals.css'
-      export default function RootLayout({
-        children,
-      }: {
-        children: React.ReactNode;
-      }) {
-        return (
-          <html lang="en">
-            <body>
-              <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
-              {children}
-              <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
-            </body>
-          </html>
-        );
-      }
-    \`\`\`
-    `
+  \`\`\`jsx
+  // app/layout.tsx
+  import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
+  import './globals.css'
+  export default function RootLayout({
+    children,
+  }: {
+    children: React.ReactNode;
+  }) {
+    return (
+      <html lang="en">
+        <body>
+          <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+          {children}
+          <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
+        </body>
+      </html>
+    );
+  }
+  \`\`\`
+  `
   const blockCommand = dedent`
   \`\`\`bash
   bunx @cosmicjs/blocks add navigation-menu
@@ -80,10 +80,10 @@ function Code() {
   `
 
   const usageCode = dedent`
-    \`\`\`jsx
-    <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
-    \`\`\`
-    `
+  \`\`\`jsx
+  <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+  \`\`\`
+  `
 
   const steps = [
     {
