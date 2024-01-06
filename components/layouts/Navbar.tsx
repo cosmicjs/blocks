@@ -7,7 +7,7 @@ import { SiteHeader } from "../SiteHeader"
 import Link from "next/link"
 import BlocksMenu from "../BlocksMenu"
 import { DOCS_URL } from "@/constants"
-import { ExternalLinkIcon } from "lucide-react"
+import { ExternalLinkIcon, Github } from "lucide-react"
 
 const Navbar: React.FC = () => {
   return (
@@ -40,6 +40,13 @@ const Navbar: React.FC = () => {
             iconRight={<ExternalLinkIcon className="h-4 w-4" />}
           >
             Cosmic Docs
+          </Button>
+          <Button
+            variant={"ghost"}
+            href={"https://github.com/cosmicjs/blocks"}
+            className="mr-2"
+          >
+            <Github />
           </Button>
           <ThemeSwitch />
         </div>
