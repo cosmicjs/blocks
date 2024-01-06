@@ -126,44 +126,44 @@ async function Preview() {
 function Code() {
   const importCode = dedent`
     \`\`\`jsx
-      import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/products/ProductList";
     \`\`\`
     `
 
   const usageCode = dedent`
     \`\`\`jsx
-      <ProductList query={{ type: "products" }} />
+    <ProductList query={{ type: "products" }} />
     \`\`\`
     `
   const productListCode = dedent`
     \`\`\`jsx
-      // app/shop/page.tsx
-      import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    // app/shop/page.tsx
+    import { ProductList } from "@/cosmic/blocks/products/ProductList";
 
-      export default async function Shop() {
-        return (
-          <ProductList
-            className="max-w-[900px] m-auto flex gap-4"
-            query={{ type: "products" }}
-          />
-        );
-      }
+    export default async function Shop() {
+      return (
+        <ProductList
+          className="max-w-[900px] m-auto flex gap-4"
+          query={{ type: "products" }}
+        />
+      );
+    }
     \`\`\`
     `
   const singleProductCode = dedent`
     \`\`\`jsx
-      // app/shop/[slug]/page.tsx
-      import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
+    // app/shop/[slug]/page.tsx
+    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
 
-      export default async function SingleProductPage({
-        params,
-      }: {
-        params: { slug: string };
-      }) {
-        return (
-          <SingleProduct query={{ slug: params.slug, type: "products" }} />
-        );
-      }
+    export default async function SingleProductPage({
+      params,
+    }: {
+      params: { slug: string };
+    }) {
+      return (
+        <SingleProduct query={{ slug: params.slug, type: "products" }} />
+      );
+    }
     \`\`\`
     `
   const blockCommand = dedent`

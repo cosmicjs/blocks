@@ -126,38 +126,38 @@ async function Preview() {
 }
 function Code() {
   const blockCommand = dedent`
-    \`\`\`bash
-    bunx @cosmicjs/blocks add team
-    \`\`\`
-    `
+  \`\`\`bash
+  bunx @cosmicjs/blocks add team
+  \`\`\`
+  `
 
   const importCode = dedent`
-    \`\`\`jsx
-    import { TeamList } from "@/cosmic/blocks/team/TeamList";
-    \`\`\`
-    `
+  \`\`\`jsx
+  import { TeamList } from "@/cosmic/blocks/team/TeamList";
+  \`\`\`
+  `
 
   const usageCode = dedent`
-    \`\`\`jsx
-    <TeamList query={{ type: "team-members" }} />
-    \`\`\`
-    `
+  \`\`\`jsx
+  <TeamList query={{ type: "team-members" }} />
+  \`\`\`
+  `
 
   const exampleCode = dedent`
-    \`\`\`jsx
-    // app/about/page.tsx
-    import { TeamList } from "@/cosmic/blocks/team/TeamList";
+  \`\`\`jsx
+  // app/about/page.tsx
+  import { TeamList } from "@/cosmic/blocks/team/TeamList";
 
-    export default async function AboutPage() {
-      return (
-        <TeamList
-          query={{ type: "team-members" }}
-          className="max-w-[900px] m-auto grid grid-cols-1 gap-6 lg:grid-cols-2"
-        />
-      );
-    }
-    \`\`\`
-    `
+  export default async function AboutPage() {
+    return (
+      <TeamList
+        query={{ type: "team-members" }}
+        className="max-w-[900px] m-auto grid grid-cols-1 gap-6 lg:grid-cols-2"
+      />
+    );
+  }
+  \`\`\`
+  `
 
   const steps = [
     {
