@@ -31,8 +31,9 @@ const Header: React.FC = () => {
             Build Faster
           </h1>
           <p className="m-auto max-w-[629px] text-center text-lg md:text-2xl">
-            Beautifully designed, data-infused components to help you build
-            Cosmic-powered web applications faster.
+            Data infused components to help you
+            <br />
+            build Cosmic-powered apps faster.
           </p>
           <div className="relative z-30 m-auto mt-8 flex max-w-[629px] flex-wrap justify-center space-x-4 lg:mt-14">
             <Button href="#features">Browse Blocks</Button>
