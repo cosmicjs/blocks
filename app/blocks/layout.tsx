@@ -56,7 +56,7 @@ export default function FeatureLayout({
           metafields={metafields}
         />
         <div className="relative">{children}</div>
-        <div className="relative">
+        <div className="relative px-4">
           <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">
             More to explore
           </h3>
