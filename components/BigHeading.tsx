@@ -75,8 +75,8 @@ const BigHeading: React.FC<BigHeadingProps> = ({
               Create your ENV vars file
             </h3>
             <div className="mt-2">
-              Go to <BucketAPILink /> to get your API keys and add them to a{" "}
-              {wrapWithSpan(`\`.env.local\``)} file.
+              Create a {wrapWithSpan(`\`.env.local\``)} file. Go to{" "}
+              <BucketAPILink /> to add your Cosmic API keys.
             </div>
             <Markdown>
               {dedent(`\`\`\`
