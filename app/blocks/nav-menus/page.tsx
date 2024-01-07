@@ -122,7 +122,7 @@ function Code() {
       <CodeSteps
         steps={steps}
         preview={<Preview />}
-        featureKey="navigation_menus"
+        featureKey="nav-menus"
       />
     </>
   )
