@@ -168,7 +168,7 @@ function Code() {
 
     return (
       <div className="my-10">
-        <div className="my-8">
+        <div className="my-8 text-center">
           <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
         </div>
         <div className="mb-8 flex gap-x-8 justify-center">
