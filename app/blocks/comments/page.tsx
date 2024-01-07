@@ -5,7 +5,8 @@ import Link from "next/link"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { CommentForm } from "@/components/CommentForm"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export default async function Testimonials({
   searchParams,
@@ -71,7 +72,8 @@ async function Preview() {
     .sort("created_at")
 
   return (
-    <div className="py-10">
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
       <h2 className="mb-4 text-2xl">Comments</h2>
       {comments.map((comment: Comment) => {
         return <Comment comment={comment} key={comment.slug} />

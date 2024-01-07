@@ -3,8 +3,9 @@ import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { ImageGallery } from "@/components/ImageGallery"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
 import classNames from "classnames"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
   return {
@@ -47,13 +48,14 @@ async function Preview() {
 
   const gallery = galleries[0]
   return (
-    <>
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
       <section className="container m-auto grid items-center px-4 py-8">
         <div className="relative m-auto w-full">
           <ImageGallery items={gallery.metadata.gallery} />
         </div>
       </section>
-    </>
+    </div>
   )
 }
 

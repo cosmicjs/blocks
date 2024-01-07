@@ -8,7 +8,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
   return {
@@ -51,7 +52,8 @@ async function Preview() {
     .depth(1)
 
   return (
-    <div className="m-auto mt-10 w-full">
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
       <h2 className="mb-4 text-2xl font-semibold">
         Frequently Asked Questions
       </h2>

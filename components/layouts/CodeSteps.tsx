@@ -1,14 +1,14 @@
 "use client"
 
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 import { Markdown } from "../elements/Markdown/Markdown"
 import dedent from "dedent"
-import { BucketAPILink } from "../BucketAPILink"
 import { useSearchParams } from "next/navigation"
 import classNames from "classnames"
 import { Button } from "@/components/ui/button"
 import { InstallDialog } from "@/components/InstallDialog"
 import { managers } from "../elements/CodeBlock/CodeBlock"
+import Link from "next/link"
 
 type StepProps = {
   title: string
@@ -27,7 +27,7 @@ type CodeStepsProps = {
   featureKey?: string
 }
 
-function wrapWithSpan(text: string) {
+export function wrapWithSpan(text: string) {
   return text?.split("`")?.map((item, index) => {
     if (index % 2 === 0) return item
     return (
@@ -99,14 +99,8 @@ function Step({
   )
 }
 
-function CodeSteps(props: CodeStepsProps) {
-  const {
-    preview,
-    step1 = ["bunx create-next-app@latest cosmic-app", "cd cosmic-app"],
-    steps,
-    scratch = false,
-    featureKey,
-  } = props
+export function CodeSteps(props: CodeStepsProps) {
+  const { preview, steps, scratch = false, featureKey } = props
 
   const searchParams = useSearchParams()
   const manager = useMemo(() => searchParams.get("pm"), [searchParams])
@@ -115,50 +109,14 @@ function CodeSteps(props: CodeStepsProps) {
 
   return (
     <div className="w-auto max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-[750px]">
-      {!scratch && (
-        <div>
-          <div className="relative mb-10">
-            <div className="absolute left-[-42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200" />
-            <div className="relative flex">
-              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                0
-              </div>
-              <h3 className="text-lg font-semibold lg:text-2xl">
-                Install a new Next.js project
-              </h3>
-            </div>
-            <div className="py-2">
-              You may skip this step if you are installing the Block to an
-              existing Next.js app. Note: Be sure to include TypeScript and
-              Tailwind CSS in the installation options.
-            </div>
-            {step1?.map((step) => (
-              <Markdown key={step}>
-                {dedent(`\`\`\`bash
-          ${step}
-          \`\`\`
-          `)}
-              </Markdown>
-            ))}
-            <h3 className="mt-8 text-lg font-semibold lg:text-2xl">
-              Create your ENV vars file
-            </h3>
-            <div className="mt-2">
-              Go to <BucketAPILink /> to get your API keys and add them to a{" "}
-              {wrapWithSpan(`\`.env.local\``)} file.
-            </div>
-            <Markdown>
-              {dedent(`\`\`\`
-          # .env.local
-          COSMIC_BUCKET_SLUG=change_to_your_bucket_slug
-          COSMIC_READ_KEY=change_to_your_bucket_read_key
-          COSMIC_WRITE_KEY=change_to_your_bucket_write_key
-          \`\`\`
-          `)}
-            </Markdown>
-          </div>
-        </div>
-      )}
+      <div className="mb-12">
+        Follow the steps to install this Block. Make sure you have already
+        followed the{" "}
+        <Link href="/#get-started" className="text-cosmic-blue">
+          Get Started
+        </Link>{" "}
+        steps to set up your project codebase and Cosmic access keys.
+      </div>
       {steps.map((step, index) => (
         <Step
           scratch={scratch}
@@ -203,5 +161,3 @@ function CodeSteps(props: CodeStepsProps) {
     </div>
   )
 }
-
-export default CodeSteps

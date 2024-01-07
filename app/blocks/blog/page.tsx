@@ -4,7 +4,8 @@ import dedent from "dedent"
 import { fetchFeature } from "@/lib/cosmic"
 import { BlogCard, PostType } from "@/components/BlogCard"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export const generateMetadata = async () => ({ title: `Blog` })
 
@@ -39,70 +40,69 @@ async function Preview() {
     }
   )
   return (
-    <>
-      <section className="container m-auto grid items-center px-4 py-8">
-        <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Blog List
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
+      <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+        Blog List
+      </h1>
+      <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
+        <div className="mx-auto grid w-full max-w-screen-lg grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
+          {posts.map((post: PostType) => {
+            return <BlogCard key={post.id} post={post} />
+          })}
+        </div>
+      </div>
+      <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
+        <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+          Single Post Page
         </h1>
-        <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
-          <div className="mx-auto grid w-full max-w-screen-lg grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
-            {posts.map((post: PostType) => {
-              return <BlogCard key={post.id} post={post} />
-            })}
-          </div>
-        </div>
-        <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
-          <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-            Single Post Page
+        <>
+          <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter text-black dark:text-white md:text-4xl">
+            {blog.title}
           </h1>
-          <>
-            <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter text-black dark:text-white md:text-4xl">
-              {blog.title}
-            </h1>
-            <div className="mb-10 w-full overflow-hidden rounded-xl">
-              <img
-                src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
-                alt={blog.title}
-                className="w-full object-cover"
-              />
+          <div className="mb-10 w-full overflow-hidden rounded-xl">
+            <img
+              src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
+              alt={blog.title}
+              className="w-full object-cover"
+            />
+          </div>
+          <div className="mb-2 md:flex">
+            <img
+              className="mr-2 h-[60px] w-[60px] rounded-full object-cover"
+              src={`${blog.metadata.author.metadata.image.imgix_url}?w=120&auto=format,compression`}
+              alt={blog.metadata.author.title}
+            />
+            <div className="mb-4 flex flex-col">
+              <span className="font-semibold text-zinc-800 dark:text-zinc-200">
+                {blog.metadata.author.title}
+              </span>
+              <span className="text-zinc-500 dark:text-zinc-400">{date}</span>
             </div>
-            <div className="mb-2 md:flex">
-              <img
-                className="mr-2 h-[60px] w-[60px] rounded-full object-cover"
-                src={`${blog.metadata.author.metadata.image.imgix_url}?w=120&auto=format,compression`}
-                alt={blog.metadata.author.title}
-              />
-              <div className="mb-4 flex flex-col">
-                <span className="font-semibold text-zinc-800 dark:text-zinc-200">
-                  {blog.metadata.author.title}
-                </span>
-                <span className="text-zinc-500 dark:text-zinc-400">{date}</span>
-              </div>
-              <div className="md:absolute md:right-0">
-                {blog.metadata.categories.map((category: any) => {
-                  const categoryBackgroundColor = `${category.metadata.color}22`
-                  return (
-                    <span
-                      className="mb-1 mr-1 rounded-xl px-3 py-1 text-black/70 dark:text-white/70"
-                      style={{
-                        backgroundColor: categoryBackgroundColor,
-                        border: `1px solid ${category.metadata.color}`,
-                      }}
-                      key={category.slug}
-                    >
-                      {category.title}
-                    </span>
-                  )
-                })}
-              </div>
+            <div className="md:absolute md:right-0">
+              {blog.metadata.categories.map((category: any) => {
+                const categoryBackgroundColor = `${category.metadata.color}22`
+                return (
+                  <span
+                    className="mb-1 mr-1 rounded-xl px-3 py-1 text-black/70 dark:text-white/70"
+                    style={{
+                      backgroundColor: categoryBackgroundColor,
+                      border: `1px solid ${category.metadata.color}`,
+                    }}
+                    key={category.slug}
+                  >
+                    {category.title}
+                  </span>
+                )
+              })}
             </div>
-            <Markdown className="space-y-4 text-zinc-700 dark:text-zinc-300">
-              {blog.metadata.content}
-            </Markdown>
-          </>
-        </div>
-      </section>
-    </>
+          </div>
+          <Markdown className="space-y-4 text-zinc-700 dark:text-zinc-300">
+            {blog.metadata.content}
+          </Markdown>
+        </>
+      </div>
+    </div>
   )
 }
 

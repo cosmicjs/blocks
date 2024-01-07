@@ -2,7 +2,8 @@
 import dedent from "dedent"
 
 import { NavMenu } from "@/components/NavMenu"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
   return {
@@ -31,7 +32,8 @@ export default async function NavMenus({
 
 async function Preview() {
   return (
-    <div className="m-auto mt-10">
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
       <div className="my-10">
         <h2 className="mb-6 text-center text-3xl">Header</h2>
         <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
@@ -119,11 +121,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps
-        steps={steps}
-        preview={<Preview />}
-        featureKey="nav-menus"
-      />
+      <CodeSteps steps={steps} preview={<Preview />} featureKey="nav-menus" />
     </>
   )
 }

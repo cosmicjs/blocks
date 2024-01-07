@@ -3,13 +3,11 @@ import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { Button } from "@/components/ui/button"
-import { BucketAPILink } from "@/components/BucketAPILink"
-import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { ImageGallery } from "@/components/ImageGallery"
 import { ProductCard, ProductType } from "@/components/ProductCard"
-import { SiteHeader } from "@/components/SiteHeader"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
 import classNames from "classnames"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
   return {
@@ -52,7 +50,8 @@ async function Preview() {
 
   const product = products[0]
   return (
-    <>
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
       <section className="container m-auto grid items-center px-4 py-8">
         <div className="relative mb-20 flex max-w-[950px] flex-col items-start">
           <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
@@ -119,7 +118,7 @@ async function Preview() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
 

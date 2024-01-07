@@ -50,7 +50,7 @@ export default async function IndexPage({
         <Header />
         <div className="container relative z-30 mx-auto">
           <BigHeading
-            scrollId="features"
+            scrollId="get-started"
             subheading="Get Started"
             heading={page?.metadata?.get_started?.headline}
             description={page?.metadata?.get_started?.subheadline}

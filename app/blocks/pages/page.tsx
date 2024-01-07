@@ -5,7 +5,8 @@ import { fetchPageData } from "@/lib/cosmic"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Section } from "@/components/PageSection"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
   return {
@@ -35,7 +36,8 @@ export default async function Page({
 async function Preview() {
   const page = await fetchPageData("home")
   return (
-    <>
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
       <div className="mx-auto flex w-full max-w-6xl flex-col-reverse justify-between pb-16 text-zinc-950 dark:text-zinc-50 md:flex-row md:gap-12">
         <div className="flex w-full flex-col items-start justify-start md:w-1/2">
           <div className="py-4 md:pt-20">
@@ -104,7 +106,7 @@ async function Preview() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
 

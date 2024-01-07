@@ -41,9 +41,9 @@ const Header: React.FC = async () => {
             dangerouslySetInnerHTML={{ __html: page?.metadata?.tag }}
           />
           <div className="relative z-30 m-auto mt-8 flex max-w-[629px] flex-wrap justify-center space-x-4 lg:mt-14">
-            <Button href="#features">Browse Blocks</Button>
+            <Button href="#get-started">Get started</Button>
             <Button href={DEMO_URL} target="_blank" variant="outline">
-              Explore the Demo
+              Explore the demo
             </Button>
             <Button
               href={WEBSITE_URL}

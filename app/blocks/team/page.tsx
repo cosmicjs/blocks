@@ -2,7 +2,8 @@
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export default async function Team({
   searchParams,
@@ -115,13 +116,14 @@ async function Preview() {
     .props("title,slug,metadata")
     .depth(1)
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-4">
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {members.map((member: MemberType) => {
           return <TeamCard key={member.slug} member={member} />
         })}
       </div>
-    </section>
+    </div>
   )
 }
 function Code() {

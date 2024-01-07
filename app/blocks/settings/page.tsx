@@ -4,7 +4,8 @@ import Link from "next/link"
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
   const cosmic = cosmicSourceBucketConfig
@@ -64,7 +65,8 @@ async function Preview() {
     .depth(1)
 
   return (
-    <div className="m-auto mt-10 w-full md:min-w-[1000px]">
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
       <div className="my-6 h-[60px]">
         <a href="/">
           <img
