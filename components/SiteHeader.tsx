@@ -1,20 +1,14 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { InstallDialog } from "@/components/InstallDialog"
 import { useSearchParams, usePathname } from "next/navigation"
 
 export function SiteHeader() {
-  const [showModal, setShowModal] = useState<boolean>(false)
-
   const searchParams = useSearchParams()
   let tab = searchParams.get("tab")
 
   const pathname = usePathname()
-  const pageKey = pathname?.split("/")?.[2]
 
   if (pathname === "/") return null
 
@@ -55,16 +49,7 @@ export function SiteHeader() {
             </Link>
           </div>
         </div>
-        <Button
-          className="relative z-[10] !h-8 text-xs md:right-0 lg:!h-10 lg:w-[112px] lg:text-base"
-          onClick={() => setShowModal(true)}
-        >
-          Install
-        </Button>
       </div>
-      {showModal && (
-        <InstallDialog featureKey={pageKey} setShowModal={setShowModal} />
-      )}
     </header>
   )
 }
