@@ -35,6 +35,7 @@ const Navbar: React.FC = () => {
           <Button
             variant={"ghost"}
             href={"https://github.com/cosmicjs/blocks"}
+            target="_blank"
             className="mr-2"
           >
             <Github className="h-5 w-5" />
