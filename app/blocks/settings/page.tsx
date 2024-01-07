@@ -263,11 +263,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps
-        steps={steps}
-        preview={<Preview />}
-        featureKey="global_settings"
-      />
+      <CodeSteps steps={steps} preview={<Preview />} featureKey="settings" />
     </>
   )
 }
