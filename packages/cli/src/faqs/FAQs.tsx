@@ -23,7 +23,7 @@ export async function FAQs({
     .findOne(query)
     .props("slug,title,metadata")
     .depth(1)
-
+  if (!page?.metadata?.faqs) return <></>
   return (
     <div className={className}>
       {(page?.metadata?.faqs).map((faq: FAQ) => {
