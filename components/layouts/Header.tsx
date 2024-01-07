@@ -1,12 +1,18 @@
-"use client"
-
 import React from "react"
 import { Button } from "../ui/button"
 import classNames from "classnames"
 import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
 import { DEMO_URL, WEBSITE_URL } from "@/constants"
+import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 
-const Header: React.FC = () => {
+const Header: React.FC = async () => {
+  const { object: page } = await cosmicSourceBucketConfig.objects
+    .findOne({
+      type: "landing-pages",
+      slug: "home",
+    })
+    .props("title,metadata")
+    .depth(1)
   return (
     <div className="dark:dark-header-image min-w-screen light-header-image container mx-auto mb-48 px-5">
       <div className="opacity-50">
@@ -28,13 +34,12 @@ const Header: React.FC = () => {
       <div className="relative w-full text-center">
         <div className="z-10 text-center">
           <h1 className="header-gradient relative z-10 mb-4 mt-28 w-full text-5xl font-[900] text-transparent md:mt-24 md:text-8xl lg:mt-28">
-            Build Faster
+            {page.metadata.headline}
           </h1>
-          <p className="m-auto max-w-[629px] text-center text-lg md:text-2xl">
-            Data infused components to help you
-            <br />
-            build Cosmic-powered apps faster.
-          </p>
+          <div
+            className="m-auto max-w-[629px] text-center text-lg md:text-2xl"
+            dangerouslySetInnerHTML={{ __html: page?.metadata?.tag }}
+          />
           <div className="relative z-30 m-auto mt-8 flex max-w-[629px] flex-wrap justify-center space-x-4 lg:mt-14">
             <Button href="#features">Browse Blocks</Button>
             <Button href={DEMO_URL} target="_blank" variant="outline">
