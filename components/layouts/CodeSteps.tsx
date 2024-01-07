@@ -110,10 +110,10 @@ export function CodeSteps(props: CodeStepsProps) {
   return (
     <div className="w-auto max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-[750px]">
       <div className="mb-12">
-        Follow the steps to install this Block. Make sure you have already
+        Follow the steps to install this Block below. Make sure you have already
         followed the{" "}
         <Link href="/#get-started" className="text-cosmic-blue">
-          Get Started
+          get started
         </Link>{" "}
         steps to set up your project codebase and Cosmic access keys.
       </div>
