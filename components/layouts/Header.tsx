@@ -56,7 +56,7 @@ const Header: React.FC = async () => {
               href={WEBSITE_URL}
               target="_blank"
               variant="ghost"
-              className="text-cosmic-blue"
+              className="border-none !bg-transparent text-cosmic-blue"
             >
               What is Cosmic?
             </Button>
