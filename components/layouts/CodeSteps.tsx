@@ -109,7 +109,7 @@ export function CodeSteps(props: CodeStepsProps) {
   return (
     <div className="w-auto max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-[750px]">
       {!scratch && (
-        <div className="mb-12">
+        <div className="mb-12 text-center">
           Follow the steps below to install this Block. Make sure you have
           reviewed the{" "}
           <Link href="/#get-started" className="text-cosmic-blue">
