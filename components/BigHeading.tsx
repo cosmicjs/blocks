@@ -79,13 +79,8 @@ const BigHeading: React.FC<BigHeadingProps> = ({
                 2
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
-                Create your ENV vars file
+                Create your .env file
               </h3>
-            </div>
-            <div className="py-2">
-              You can skip this step if you are installing Blocks to an existing
-              Next.js app (v13+). Note: Be sure to include TypeScript and
-              Tailwind CSS in the installation options.
             </div>
             <div className="mt-2">
               Create a {wrapWithSpan(`\`.env.local\``)} file. Go to{" "}
