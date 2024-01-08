@@ -12,24 +12,18 @@ export function BucketAPILink() {
       setBucketSlug(storedBucketSlug)
     }
   }, [])
-
-  if (bucketSlug) {
-    return (
-      <a
-        href={`https://app.cosmicjs.com/${bucketSlug}/settings/api-access`}
-        className="text-cosmic-blue"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Bucket {`>`} Setting {`>`} API keys{" "}
-        <ExternalLinkIcon className="-mt-2 inline h-3 w-3" />
-      </a>
-    )
-  } else {
-    return (
-      <>
-        Bucket {`>`} Setting {`>`} API keys
-      </>
-    )
-  }
+  let link = `https://app.cosmicjs.com/login`
+  if (bucketSlug)
+    link = `https://app.cosmicjs.com/${bucketSlug}/settings/api-access`
+  return (
+    <a
+      href={link}
+      className="text-cosmic-blue"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Bucket {`>`} Setting {`>`} API keys{" "}
+      <ExternalLinkIcon className="-mt-2 inline h-3 w-3" />
+    </a>
+  )
 }
