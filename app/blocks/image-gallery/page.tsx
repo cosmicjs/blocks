@@ -17,7 +17,7 @@ export default async function ImageGalleryPage({
   searchParams,
 }: {
   searchParams: {
-    tab?: "preview" | "code"
+    tab?: "preview" | "install"
   }
 }) {
   let tab = searchParams.tab

@@ -39,13 +39,13 @@ export function SiteHeader() {
             <Link
               className={cn(
                 "cursor-pointer rounded-lg px-4 py-2 text-center font-semibold text-gray-500 dark:text-dark-gray-500",
-                tab === "code"
+                tab === "install"
                   ? "bg-white dark:bg-dark-background"
                   : "bg-transparent"
               )}
-              href="?tab=code"
+              href="?tab=install"
             >
-              Code
+              Install
             </Link>
           </div>
         </div>

@@ -19,7 +19,7 @@ export default async function ProductsPage({
   searchParams,
 }: {
   searchParams: {
-    tab?: "preview" | "code"
+    tab?: "preview" | "install"
   }
 }) {
   let tab = searchParams.tab
@@ -57,7 +57,7 @@ async function Preview() {
           <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
             Shop Page
           </h1>
-          <div className="grid w-full grid-cols-3 gap-x-2 gap-y-10">
+          <div className="grid w-full grid-cols-2 gap-10 md:grid-cols-3">
             {products.map((product: ProductType) => {
               return <ProductCard key={product.id} product={product} />
             })}
