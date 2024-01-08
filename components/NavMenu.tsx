@@ -1,5 +1,4 @@
-// components/nav-menu.tsx
-import Link from "next/link"
+// components/NavMenu.tsx
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { MobileNav } from "@/components/MobileNav"
 
