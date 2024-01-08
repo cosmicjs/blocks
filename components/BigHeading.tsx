@@ -46,11 +46,11 @@ const BigHeading: React.FC<BigHeadingProps> = ({
           </h4>
         )}
         <div className="m-auto mb-20 w-auto max-w-[60vw] whitespace-pre-line pt-8 text-left lg:max-w-[750px]">
-          <div className="relative">
+          <div className="relative mb-8">
             <div className="absolute left-[-42px] top-7 h-[95%] w-px bg-gray-200 dark:bg-dark-gray-200" />
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                0
+                1
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
                 Install a new Next.js project
@@ -71,9 +71,22 @@ const BigHeading: React.FC<BigHeadingProps> = ({
                 </Markdown>
               )
             )}
-            <h3 className="mt-8 text-lg font-semibold lg:text-2xl">
-              Create your ENV vars file
-            </h3>
+          </div>
+          <div className="relative mb-8">
+            <div className="absolute left-[-42px] top-7 h-[95%] w-px bg-gray-200 dark:bg-dark-gray-200" />
+            <div className="relative flex">
+              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
+                2
+              </div>
+              <h3 className="text-lg font-semibold lg:text-2xl">
+                Create your ENV vars file
+              </h3>
+            </div>
+            <div className="py-2">
+              You can skip this step if you are installing Blocks to an existing
+              Next.js app (v13+). Note: Be sure to include TypeScript and
+              Tailwind CSS in the installation options.
+            </div>
             <div className="mt-2">
               Create a {wrapWithSpan(`\`.env.local\``)} file. Go to{" "}
               <BucketAPILink /> to add your Cosmic API keys.
@@ -88,8 +101,18 @@ const BigHeading: React.FC<BigHeadingProps> = ({
           `)}
             </Markdown>
           </div>
+          <div className="relative mb-8">
+            <div className="relative flex">
+              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
+                3
+              </div>
+              <h3 className="text-lg font-semibold lg:text-2xl">
+                Select your Blocks
+              </h3>
+            </div>
+          </div>
         </div>
-        <h2 className="mt-12 bg-gradient-to-r from-dark-purple-gradient to-cosmic-bright-blue bg-clip-text pb-4 text-3xl font-extrabold text-transparent md:text-5xl">
+        <h2 className="mt-[120px] bg-gradient-to-r from-dark-purple-gradient to-cosmic-bright-blue bg-clip-text pb-4 text-3xl font-extrabold text-transparent md:text-5xl">
           {heading}
         </h2>
         {description && <p className="mx-auto max-w-[540px]">{description}</p>}
