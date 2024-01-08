@@ -32,7 +32,7 @@ export function wrapWithSpan(text: string) {
     return (
       <span
         key={item}
-        className="bg-gray-100 px-1 py-px font-mono dark:bg-dark-gray-100"
+        className="rounded-sm bg-gray-100 px-1 py-px font-mono dark:bg-dark-gray-100"
       >
         {item}
       </span>
