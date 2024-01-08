@@ -57,7 +57,7 @@ const BigHeading: React.FC<BigHeadingProps> = ({
               </h3>
             </div>
             <div className="py-2">
-              You may skip this step if you are installing Blocks to an existing
+              You can skip this step if you are installing Blocks to an existing
               Next.js app (v13+). Note: Be sure to include TypeScript and
               Tailwind CSS in the installation options.
             </div>
