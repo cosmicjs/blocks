@@ -348,7 +348,7 @@ export function InstallDialog({
           </DialogHeader>
           <DialogFooter>
             <Link
-              href="https://app.cosmicjs.com/login"
+              href="https://app.cosmicjs.com/login?redirect_to=?install_extension=blocks"
               target="_parent"
               className={cn(buttonVariants())}
             >
