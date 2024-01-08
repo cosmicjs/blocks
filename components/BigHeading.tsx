@@ -57,9 +57,9 @@ const BigHeading: React.FC<BigHeadingProps> = ({
               </h3>
             </div>
             <div className="py-2">
-              You can skip this step if you are installing Blocks to an existing
-              Next.js app (v13+). Note: Be sure to include TypeScript and
-              Tailwind CSS in the installation options.
+              You can skip this step if you are installing Blocks into an
+              existing Next.js app (v13+). Note: Be sure to include TypeScript
+              and Tailwind CSS in the installation options.
             </div>
             {["bunx create-next-app@latest cosmic-app", "cd cosmic-app"]?.map(
               (step) => (

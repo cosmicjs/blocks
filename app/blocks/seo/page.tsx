@@ -116,7 +116,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps steps={steps} preview={<Preview />} featureKey="seo" />
+      <CodeSteps steps={steps} featureKey="seo" />
       <div className="mb-6">
         <h3 className="mb-6 text-2xl font-semibold">Next steps</h3>
         <div className="mb-6">

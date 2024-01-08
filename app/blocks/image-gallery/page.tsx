@@ -106,11 +106,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps
-        steps={steps}
-        preview={<Preview />}
-        featureKey="image-gallery"
-      />
+      <CodeSteps steps={steps} featureKey="image-gallery" />
     </>
   )
 }

@@ -195,7 +195,7 @@ function Code() {
 
   return (
     <div>
-      <CodeSteps steps={steps} preview={<Preview />} featureKey="pages" />
+      <CodeSteps steps={steps} featureKey="pages" />
       <div className="mb-2 border-t pt-10">
         <h3 className="text-3xl font-semibold">Dynamic pages</h3>
       </div>

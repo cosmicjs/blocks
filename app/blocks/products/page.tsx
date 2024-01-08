@@ -209,7 +209,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps steps={steps} preview={<Preview />} featureKey="products" />
+      <CodeSteps steps={steps} featureKey="products" />
     </>
   )
 }

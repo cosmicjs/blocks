@@ -246,5 +246,5 @@ function Code({ manager }: { manager: PackageManagers }) {
     },
   ]
 
-  return <CodeSteps steps={steps} preview={<Preview />} featureKey="events" />
+  return <CodeSteps steps={steps} featureKey="events" />
 }

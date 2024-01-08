@@ -195,7 +195,7 @@ function Code() {
 
   return (
     <div className="max-w-[800px]">
-      <CodeSteps steps={steps} preview={<Preview />} featureKey="team" />
+      <CodeSteps steps={steps} featureKey="team" />
     </div>
   )
 }

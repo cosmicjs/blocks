@@ -18,7 +18,6 @@ type StepProps = {
 
 type CodeStepsProps = {
   title?: React.ReactNode
-  preview?: React.ReactNode
   step1?: string[]
   step2?: string[]
   steps: StepProps[]
@@ -100,7 +99,7 @@ function Step({
 }
 
 export function CodeSteps(props: CodeStepsProps) {
-  const { preview, steps, scratch = false, featureKey } = props
+  const { steps, scratch = false, featureKey } = props
 
   const searchParams = useSearchParams()
   const manager = useMemo(() => searchParams.get("pm"), [searchParams])
@@ -130,7 +129,7 @@ export function CodeSteps(props: CodeStepsProps) {
       {!scratch && (
         <div>
           <div className="relative mb-10">
-            <div className="absolute left-[-42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200" />
+            <div className="absolute left-[-42px] top-7 h-[100%] w-px bg-gray-200 dark:bg-dark-gray-200" />
             <div className="relative flex">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
                 {steps.length + 1}
@@ -143,19 +142,15 @@ export function CodeSteps(props: CodeStepsProps) {
     \`\`\`
   `)}
             </Markdown>
-          </div>
-          <div className="relative mb-10">
-            <div className="relative flex">
-              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                {steps.length + 2}
-              </div>
-              <h3 className="text-lg font-semibold lg:text-2xl">
-                Open http://localhost:3000 and go to any page where this
-                component has been added. It should look like this:
-              </h3>
+            <div>
+              Open http://localhost:3000 and go to any page where this component
+              has been added. It should look like{" "}
+              <Link href="?tab=preview" className="text-cosmic-blue">
+                the preview
+              </Link>
+              .
             </div>
           </div>
-          {preview && <div>{preview}</div>}
         </div>
       )}
     </div>

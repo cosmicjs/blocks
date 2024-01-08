@@ -121,7 +121,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps steps={steps} preview={<Preview />} featureKey="nav-menus" />
+      <CodeSteps steps={steps} featureKey="nav-menus" />
     </>
   )
 }
