@@ -6,8 +6,8 @@ import { Fragment } from "react"
 
 export default function BlocksMenu() {
   return (
-    <div className="max-w-sm px-4 lg:mr-10">
-      <Popover className="z-1 relative">
+    <div className="hidden max-w-sm px-4 lg:mr-10 lg:block">
+      <Popover className="relative">
         {({ open, close }) => (
           <>
             <Popover.Button
