@@ -6,7 +6,7 @@ import { Fragment } from "react"
 
 export default function BlocksMenu() {
   return (
-    <div className="relative z-10 max-w-sm px-4 lg:mr-10">
+    <div className="relative z-10 max-w-sm sm:px-4 lg:mr-10">
       <Popover className="relative">
         {({ open, close }) => (
           <>
