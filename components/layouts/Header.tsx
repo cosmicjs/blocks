@@ -40,7 +40,7 @@ const Header: React.FC = async () => {
             className="m-auto max-w-[629px] text-center text-lg md:text-2xl"
             dangerouslySetInnerHTML={{ __html: page?.metadata?.tag }}
           />
-          <div className="relative z-30 m-auto mt-8 flex max-w-[629px] flex-wrap justify-center space-x-4 lg:mt-14">
+          <div className="relative z-30 m-auto mt-8 flex max-w-[629px] flex-wrap justify-center space-x-4 space-y-2 lg:mt-14 lg:space-y-0">
             <Button href="#get-started" className="px-7">
               Get started
             </Button>

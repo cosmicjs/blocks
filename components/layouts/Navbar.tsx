@@ -6,8 +6,7 @@ import { Button } from "../ui/button"
 import { SiteHeader } from "../SiteHeader"
 import Link from "next/link"
 import BlocksMenu from "../BlocksMenu"
-import { DOCS_URL } from "@/constants"
-import { ExternalLinkIcon, Github } from "lucide-react"
+import { Github } from "lucide-react"
 
 const Navbar: React.FC = () => {
   return (
