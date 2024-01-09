@@ -16,14 +16,8 @@ export async function SingleBlog({
     .props("id,slug,title,metadata")
     .depth(1)
 
-  const date = new Date(blog.metadata.published_date).toLocaleDateString(
-    "en-us",
-    {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }
-  )
+  const date = getFormattedDate(blog.metadata.published_date)
+
   return (
     <div className={className}>
       <section className="m-auto grid items-center pb-8 md:container">
@@ -85,4 +79,25 @@ export async function SingleBlog({
       </section>
     </div>
   )
+}
+
+const getFormattedDate = (inputDate: string) => {
+  const dateParts = inputDate.split("-")
+
+  const year = parseInt(dateParts[0])
+  const month = parseInt(dateParts[1]) - 1
+  const day = parseInt(dateParts[2])
+
+  // Create a new Date object using UTC timezone
+  const date = new Date(Date.UTC(year, month, day))
+
+  // Format the date in UTC
+  const formattedDate = date.toLocaleDateString("en-US", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+
+  return formattedDate
 }
