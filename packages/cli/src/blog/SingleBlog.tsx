@@ -34,7 +34,7 @@ export async function SingleBlog({
             <img
               src={`${blog.metadata.image.imgix_url}?w=2000&auto=format,compression`}
               alt={blog.title}
-              className="w-full object-cover"
+              className="aspect-video w-full object-cover"
             />
           </div>
           <div className="mb-8 md:flex">
