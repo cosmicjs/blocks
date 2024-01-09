@@ -1,11 +1,9 @@
 "use client"
 
-import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import { Blocks } from "@/components/Blocks"
 import { blocksData } from "@/config/blocks.data"
 import BlockStats from "@/components/BlockStats"
-import { ArrowLeftIcon } from "lucide-react"
 
 export const packageManagers = [
   { title: "bun", value: "bun" },
@@ -47,7 +45,7 @@ export default function FeatureLayout({
   return (
     <div className="container relative mx-auto flex w-[80%] flex-col items-center justify-center lg:w-full lg:max-w-[1400px] lg:flex-row">
       <main className="flex flex-col items-center justify-center">
-        <h1 className="sticky mb-2 mt-20 bg-white text-3xl font-extrabold leading-tight tracking-tighter dark:bg-dark-background md:mt-6 md:text-4xl">
+        <h1 className="sticky mb-2 mt-20 bg-white pt-10 text-3xl font-extrabold leading-tight tracking-tighter dark:bg-dark-background md:mt-6 md:text-4xl lg:pt-0">
           {title}
         </h1>
         <BlockStats

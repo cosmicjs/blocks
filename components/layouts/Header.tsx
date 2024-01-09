@@ -14,7 +14,7 @@ const Header: React.FC = async () => {
     .props("title,metadata")
     .depth(1)
   return (
-    <div className="dark:dark-header-image min-w-screen light-header-image container mx-auto mb-48 px-5">
+    <div className="dark:dark-header-image min-w-screen light-header-image container mx-auto mb-20 px-5 md:mb-48">
       <div className="opacity-50">
         <ThemedImage
           darkSrc="https://imgix.cosmicjs.com/b96bff60-9419-11ee-b62d-5b90a0a1bade-gradient-dark.png?w=1200&h=800&auto=format"
@@ -40,7 +40,7 @@ const Header: React.FC = async () => {
             className="m-auto max-w-[629px] text-center text-lg md:text-2xl"
             dangerouslySetInnerHTML={{ __html: page?.metadata?.tag }}
           />
-          <div className="relative z-30 m-auto mt-8 flex flex-col justify-center space-y-4 md:max-w-[629px] md:flex-wrap md:space-x-4 lg:mt-14">
+          <div className="relative z-30 m-auto mt-8 flex max-w-[629px] flex-col flex-wrap justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 lg:mt-14 lg:space-y-0">
             <Button href="#get-started" className="px-7">
               Get started
             </Button>

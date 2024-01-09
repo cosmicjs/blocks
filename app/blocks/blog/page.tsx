@@ -31,14 +31,8 @@ export default async function BlogPage({
 async function Preview() {
   const posts = await fetchFeature<PostType>("blog-posts")
   const blog = posts[0]
-  const date = new Date(blog.metadata.published_date).toLocaleDateString(
-    "en-us",
-    {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }
-  )
+  const date = getFormattedDate(blog.metadata.published_date)
+
   return (
     <div className="container m-auto grid items-center px-4 py-8">
       <PreviewCopy />
@@ -199,4 +193,25 @@ function Code() {
       <CodeSteps steps={steps} featureKey="blog" />
     </>
   )
+}
+
+const getFormattedDate = (inputDate: string) => {
+  const dateParts = inputDate.split("-")
+
+  const year = parseInt(dateParts[0])
+  const month = parseInt(dateParts[1]) - 1
+  const day = parseInt(dateParts[2])
+
+  // Create a new Date object using UTC timezone
+  const date = new Date(Date.UTC(year, month, day))
+
+  // Format the date in UTC
+  const formattedDate = date.toLocaleDateString("en-US", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+
+  return formattedDate
 }
