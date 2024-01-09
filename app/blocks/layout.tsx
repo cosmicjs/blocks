@@ -4,6 +4,7 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { Blocks } from "@/components/Blocks"
 import { blocksData } from "@/config/blocks.data"
 import BlockStats from "@/components/BlockStats"
+import Link from "next/link"
 
 export const packageManagers = [
   { title: "bun", value: "bun" },
@@ -54,6 +55,13 @@ export default function FeatureLayout({
           metafields={metafields}
         />
         <div className="relative">{children}</div>
+        <div className="mb-10">
+          Look good? Follow the steps to{" "}
+          <Link href="?tab=install" className="text-cosmic-blue">
+            install this Block
+          </Link>
+          .
+        </div>
         <div className="relative px-4">
           <h3 className="mb-10 pt-10 text-center text-3xl font-extrabold text-gray-700 dark:text-dark-gray-700">
             More to explore
