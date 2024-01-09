@@ -6,8 +6,8 @@ import { Fragment } from "react"
 
 export default function BlocksMenu() {
   return (
-    <div className="hidden max-w-sm px-4 lg:mr-10 lg:block">
-      <Popover className="relative">
+    <div className="max-w-sm px-4 lg:mr-10">
+      <Popover className="z-1 relative">
         {({ open, close }) => (
           <>
             <Popover.Button
@@ -35,7 +35,7 @@ export default function BlocksMenu() {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute left-[140px] z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform rounded-xl px-4 shadow-lg shadow-gray-50 dark:shadow-gray-800 sm:px-0 lg:max-w-xl">
+              <Popover.Panel className="absolute left-[140px] z-10 mt-3 w-screen max-w-sm -translate-x-1/2 rounded-xl px-4 shadow-lg shadow-gray-50 dark:shadow-gray-800 sm:px-0 lg:max-w-xl">
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                   <div className="relative grid gap-x-8 gap-y-5 bg-white p-7 dark:bg-dark-background lg:grid-cols-3">
                     {blocksData?.map((item) => (
