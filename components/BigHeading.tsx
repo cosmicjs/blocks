@@ -10,7 +10,7 @@ export function wrapWithSpan(text: string) {
     return (
       <span
         key={item}
-        className="bg-gray-100 px-1 py-px font-mono dark:bg-dark-gray-100"
+        className="rounded-sm bg-gray-100 px-1 py-px font-mono dark:bg-dark-gray-100"
       >
         {item}
       </span>
@@ -53,7 +53,7 @@ const BigHeading: React.FC<BigHeadingProps> = ({
                 1
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
-                Install a new Next.js project
+                Create a new Next.js project
               </h3>
             </div>
             <div className="py-2">
@@ -79,12 +79,12 @@ const BigHeading: React.FC<BigHeadingProps> = ({
                 2
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
-                Create your .env file
+                Create a .env file
               </h3>
             </div>
             <div className="mt-2">
               Create a {wrapWithSpan(`\`.env.local\``)} file. Go to{" "}
-              <BucketAPILink /> to add your Cosmic API keys.
+              <BucketAPILink /> to get your Cosmic API keys.
             </div>
             <Markdown>
               {dedent(`\`\`\`
