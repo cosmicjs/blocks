@@ -112,9 +112,9 @@ function Code() {
         "Add the block to your app with the `query` property set to fetch your specific content.",
     },
     {
-      title: "Add the NavMenu block to any file that needs navigation links.",
+      title: "Example",
       description:
-        "For example, adding it to the `app/layout.tsx` file will make sure all pages include the header and footer links.",
+        "Add the following to the `app/layout.tsx` file to make sure all pages include the header and footer links.",
       code: codeString,
     },
   ]
