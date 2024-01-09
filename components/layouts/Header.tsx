@@ -14,7 +14,7 @@ const Header: React.FC = async () => {
     .props("title,metadata")
     .depth(1)
   return (
-    <div className="dark:dark-header-image min-w-screen light-header-image container mx-auto mb-20 px-5 md:mb-48">
+    <div className="dark:dark-header-image min-w-screen light-header-image container mx-auto mb-20 px-5 md:mb-36 lg:mb-60">
       <div className="opacity-50">
         <ThemedImage
           darkSrc="https://imgix.cosmicjs.com/b96bff60-9419-11ee-b62d-5b90a0a1bade-gradient-dark.png?w=1200&h=800&auto=format"

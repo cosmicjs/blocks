@@ -41,11 +41,14 @@ const BigHeading: React.FC<BigHeadingProps> = ({
       />
       <div className={classNames("mx-auto text-center", className)}>
         {subheading && (
-          <h4 className="text-lg font-extrabold uppercase tracking-wider text-gray-400 dark:text-gray-400 md:text-3xl">
+          <h4 className="mb-6 text-lg font-extrabold uppercase tracking-wider text-gray-400 dark:text-gray-400 md:text-3xl">
             {subheading}
           </h4>
         )}
-        <div className="m-auto mb-20 w-auto max-w-[60vw] whitespace-pre-line pt-8 text-left lg:max-w-[750px]">
+        <h2 className="bg-gradient-to-r from-dark-purple-gradient to-cosmic-bright-blue bg-clip-text pb-4 text-3xl font-extrabold text-transparent md:text-5xl">
+          {heading}
+        </h2>
+        <div className="m-auto mb-20 mt-6 w-auto max-w-[60vw] whitespace-pre-line pt-8 text-left lg:max-w-[750px]">
           <div className="relative pb-8">
             <div className="absolute left-[-42px] top-7 h-[95%] w-px bg-gray-200 dark:bg-dark-gray-200" />
             <div className="relative flex">
@@ -97,20 +100,21 @@ const BigHeading: React.FC<BigHeadingProps> = ({
             </Markdown>
           </div>
           <div className="relative mb-8">
-            <div className="relative flex">
+            <div className="relative flex flex-col">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
                 3
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
                 Select your Blocks
               </h3>
+              {description && (
+                <div className="mt-2">
+                  <p>{description}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
-        <h2 className="mt-[120px] bg-gradient-to-r from-dark-purple-gradient to-cosmic-bright-blue bg-clip-text pb-4 text-3xl font-extrabold text-transparent md:text-5xl">
-          {heading}
-        </h2>
-        {description && <p className="mx-auto max-w-[540px]">{description}</p>}
       </div>
     </div>
   )
