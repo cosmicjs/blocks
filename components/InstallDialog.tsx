@@ -384,7 +384,7 @@ export function InstallDialog({
               <div>
                 Fetch your API keys from{" "}
                 <a
-                  href={`${DASHBOARD_URL}?highlight=api-keys`}
+                  href={`${DASHBOARD_URL}?redirect_to=?highlight=api-keys`}
                   className="text-cosmic-blue"
                   target="_blank"
                   rel="noreferrer"
@@ -392,7 +392,7 @@ export function InstallDialog({
                   Project {`>`} API keys{" "}
                   <ExternalLinkIcon className="-mt-2 inline h-3 w-3" />{" "}
                 </a>
-                in the dashboard and add them to the following inputs. You only
+                in the dashboard and add them to the following fields. You only
                 need to do this setup once.
               </div>
             </DialogDescription>
