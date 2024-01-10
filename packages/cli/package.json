@@ -5,7 +5,7 @@
     "@cosmicjs/blocks": "./index.js"
   },
   "version": "0.0.839",
-  "description": "Cosmic blocks CLI",
+  "description": "Blocks CLI",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
