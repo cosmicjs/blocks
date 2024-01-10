@@ -1,4 +1,6 @@
-![image](https://github.com/cosmicjs/blocks/assets/26257029/2e2962f4-37e7-479e-9588-ddd261d11790)
+<a href="https://blocks.cosmicjs.com">
+  <img src="https://github.com/cosmicjs/blocks/assets/26257029/2e2962f4-37e7-479e-9588-ddd261d11790" />
+</a>
 
 # Blocks
 
