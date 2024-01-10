@@ -4,8 +4,8 @@
   "bin": {
     "@cosmicjs/blocks": "./index.js"
   },
-  "version": "0.0.838",
-  "description": "Cosmic blocks setup",
+  "version": "0.0.839",
+  "description": "Cosmic blocks CLI",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -24,11 +24,11 @@
   ],
   "homepage": "https://www.cosmicjs.com",
   "bugs": {
-    "url": "https://github.com/cosmicjs/cosmic-blocks/issues"
+    "url": "https://github.com/cosmicjs/blocks/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cosmicjs/cosmic-blocks.git"
+    "url": "git+https://github.com/cosmicjs/blocks.git"
   },
   "dependencies": {
     "@antfu/ni": "^0.21.12",
