@@ -1,3 +1,5 @@
+![image](https://github.com/cosmicjs/blocks/assets/26257029/2e2962f4-37e7-479e-9588-ddd261d11790)
+
 # Blocks
 
 Data infused components to help you build Cosmic-powered apps faster. Use Blocks to build common content-powered features for your website or app. Save development time and learn content modeling best practices.
