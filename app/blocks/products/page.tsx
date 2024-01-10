@@ -57,7 +57,7 @@ async function Preview() {
           <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
             Shop Page
           </h1>
-          <div className="grid w-full grid-cols-2 gap-10 md:grid-cols-3">
+          <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product: ProductType) => {
               return <ProductCard key={product.id} product={product} />
             })}
@@ -92,7 +92,7 @@ async function Preview() {
             </ol>
           </nav>
           <div className="grid md:grid-cols-2 md:gap-x-8">
-            <div>
+            <div className="mb-8 md:mb-0">
               <ImageGallery items={product.metadata.gallery} />
             </div>
             <div>

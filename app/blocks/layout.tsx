@@ -44,9 +44,9 @@ export default function FeatureLayout({
   }
 
   return (
-    <div className="container relative mx-auto flex w-[80%] flex-col items-center justify-center lg:w-full lg:max-w-[1400px] lg:flex-row">
+    <div className="container relative mx-auto flex flex-col items-center justify-center sm:w-[80%] lg:w-full lg:max-w-[1400px] lg:flex-row">
       <main className="flex flex-col items-center justify-center">
-        <h1 className="sticky mb-2 mt-20 bg-white pt-10 text-3xl font-extrabold leading-tight tracking-tighter dark:bg-dark-background md:mt-6 md:text-4xl lg:pt-0">
+        <h1 className="sticky mb-2 mt-20 bg-white text-3xl font-extrabold leading-tight tracking-tighter dark:bg-dark-background md:mt-6 md:text-4xl lg:pt-0">
           {title}
         </h1>
         <BlockStats
@@ -56,7 +56,7 @@ export default function FeatureLayout({
         />
         <div className="relative">{children}</div>
         {searchParams.get("tab") !== "install" && (
-          <div className="mb-10">
+          <div className="mb-10 px-4 sm:px-0">
             Look good? Follow the steps to{" "}
             <Link href="?tab=install" className="text-cosmic-blue">
               install this Block

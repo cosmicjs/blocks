@@ -48,7 +48,7 @@ const BigHeading: React.FC<BigHeadingProps> = ({
         <h2 className="bg-gradient-to-r from-dark-purple-gradient to-cosmic-bright-blue bg-clip-text pb-4 text-3xl font-extrabold text-transparent md:text-5xl">
           {heading}
         </h2>
-        <div className="m-auto mb-20 mt-6 w-auto max-w-[60vw] whitespace-pre-line pt-8 text-left lg:max-w-[750px]">
+        <div className="m-auto mb-20 mt-6 w-auto max-w-[60vw] whitespace-pre-line text-left lg:max-w-[750px]">
           <div className="relative pb-8">
             <div className="absolute left-[-42px] top-7 h-[95%] w-px bg-gray-200 dark:bg-dark-gray-200" />
             <div className="relative flex">
