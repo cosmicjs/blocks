@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { AlertCircle, CheckCircle2, ExternalLink, Loader2 } from "lucide-react"
+import {
+  AlertCircle,
+  CheckCircle2,
+  ExternalLink,
+  ExternalLinkIcon,
+  Loader2,
+} from "lucide-react"
 
 import { blocksData } from "@/config/blocks.data"
 import {
@@ -70,6 +76,8 @@ import {
 import { DASHBOARD_URL } from "@/constants"
 import { Highlight } from "./layouts/CodeSteps"
 import { useSearchParams } from "next/navigation"
+import { Label } from "./ui/label"
+import { Input } from "./ui/input"
 
 export function InstallDialog({
   featureKey,
@@ -78,7 +86,7 @@ export function InstallDialog({
   featureKey?: string
   setShowModal: any
 }) {
-  const [showLoginMessage, setShowLoginMessage] = useState(false)
+  const [showKeysModal, setShowKeysModal] = useState(false)
   let bucket_slug = ""
   let read_key = ""
   let write_key = ""
@@ -87,11 +95,11 @@ export function InstallDialog({
     bucket_slug = localStorage.getItem("bucket_slug") || ""
     read_key = localStorage.getItem("read_key") || ""
     write_key = localStorage.getItem("write_key") || ""
-    if (showLoginMessage) setShowLoginMessage(false)
+    if (showKeysModal) setShowKeysModal(false)
   } else {
     // TODO: add messaging to send user to extension in dashboard
     // alert("NO BUCKET INFO. Installing features will not work.")
-    if (!showLoginMessage) setShowLoginMessage(true)
+    if (!showKeysModal) setShowKeysModal(true)
   }
 
   const [installationSuccess, setInstallationSuccess] = useState(false)
@@ -330,7 +338,39 @@ export function InstallDialog({
     setConflict(false)
   }
 
-  if (showLoginMessage) {
+  const [bucketSlug, setBucketSlug] = useState("")
+  const [readKey, setReadKey] = useState("")
+  const [writeKey, setWriteKey] = useState("")
+
+  if (showKeysModal) {
+    const APIKeyInputs = [
+      {
+        id: "bucket-slug",
+        label: "Bucket Slug",
+        onChange: (input: string) => setBucketSlug(input),
+        value: bucketSlug,
+      },
+      {
+        id: "read-key",
+        label: "Read Key",
+        onChange: (input: string) => setReadKey(input),
+        value: readKey,
+      },
+      {
+        id: "write-key",
+        label: "Write Key",
+        onChange: (input: string) => setWriteKey(input),
+        value: writeKey,
+      },
+    ]
+
+    const saveKeys = () => {
+      localStorage.setItem("bucket_slug", bucketSlug)
+      localStorage.setItem("read_key", readKey)
+      localStorage.setItem("write_key", writeKey)
+      setShowKeysModal(false)
+    }
+
     return (
       <Dialog open onOpenChange={() => closeModal()}>
         <DialogContent
@@ -339,21 +379,45 @@ export function InstallDialog({
           onEscapeKeyDown={() => closeModal()}
         >
           <DialogHeader>
-            <DialogTitle>Log in required</DialogTitle>
+            <DialogTitle>Please enter your keys</DialogTitle>
             <DialogDescription>
-              <div className="mb-4">
-                Log in to the Cosmic dashboard to install this Block.
+              <div>
+                Fetch your API keys from{" "}
+                <a
+                  href={`${DASHBOARD_URL}?highlight=api-keys`}
+                  className="text-cosmic-blue"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Project {`>`} API keys{" "}
+                  <ExternalLinkIcon className="-mt-2 inline h-3 w-3" />{" "}
+                </a>
+                in the dashboard and add them to the following inputs. You only
+                need to do this setup once.
               </div>
             </DialogDescription>
           </DialogHeader>
+          <div className="mt-2">
+            {APIKeyInputs.map(({ id, label, onChange, value }) => (
+              <div className="mb-2 flex items-center justify-between" key={id}>
+                <Label htmlFor={id} className="w-fit shrink-0">
+                  {label}
+                </Label>
+                <Input
+                  id={id}
+                  placeholder={`Paste your ${label} here`}
+                  onChange={(e) => onChange(e.target.value)}
+                  value={value}
+                  className="w-[272px]"
+                />
+              </div>
+            ))}
+          </div>
+
           <DialogFooter>
-            <Link
-              href="https://app.cosmicjs.com/login?redirect_to=?install_extension=blocks"
-              target="_parent"
-              className={cn(buttonVariants())}
-            >
-              Log in
-            </Link>
+            <Button onClick={saveKeys} className={cn(buttonVariants())}>
+              Save & proceed
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -389,7 +453,7 @@ export function InstallDialog({
               <div className="mb-4">
                 {conflict
                   ? `An Object type with slug ${feature?.slug} already exists. Please rename or delete the existing Object type if you'd like to install ${feature?.title} Block.`
-                  : "You can continue with the steps to install this Block or view the installed Object type for your Block."}
+                  : "You can continue with the steps to install the Block code or view the installed Object type for your Block in the dashboard, from where you can change it's contents."}
               </div>
             </DialogDescription>
           </DialogHeader>

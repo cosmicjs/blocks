@@ -7,8 +7,10 @@ import { SiteHeader } from "../SiteHeader"
 import Link from "next/link"
 import BlocksMenu from "../BlocksMenu"
 import { Github } from "lucide-react"
+import { useSearchParams } from "next/navigation"
 
 const Navbar: React.FC = () => {
+  const params = useSearchParams()
   return (
     <div className="lg:flex-center glassmorphism sticky top-0 z-50 h-[72px] bg-white/10 px-5 dark:bg-black/10 md:w-screen">
       <div className="mx-auto flex h-full items-center md:max-w-[1500px]">
@@ -39,7 +41,7 @@ const Navbar: React.FC = () => {
           >
             <Github className="h-5 w-5" />
           </Button>
-          <ThemeSwitch />
+          {!params.get("bucket_slug") && <ThemeSwitch />}
         </div>
       </div>
     </div>
