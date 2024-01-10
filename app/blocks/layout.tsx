@@ -56,7 +56,7 @@ export default function FeatureLayout({
         />
         <div className="relative">{children}</div>
         {searchParams.get("tab") !== "install" && (
-          <div className="mb-10">
+          <div className="mb-10 px-4 sm:px-0">
             Look good? Follow the steps to{" "}
             <Link href="?tab=install" className="text-cosmic-blue">
               install this Block
