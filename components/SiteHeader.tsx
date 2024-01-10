@@ -15,7 +15,7 @@ export function SiteHeader() {
   if (!tab) tab = "preview"
 
   return (
-    <header className="absolute inset-0 top-[60px] z-40 mx-auto w-full max-w-[53%] lg:sticky lg:inset-auto lg:top-0 lg:mx-0">
+    <header className="absolute inset-0 top-[60px] z-0 mx-auto w-full max-w-[53%] lg:sticky lg:inset-auto lg:top-0 lg:mx-0">
       <div className="container flex h-16 items-center justify-center sm:space-x-0 lg:flex-row lg:justify-between lg:space-x-4">
         <div className="relative flex grow justify-center text-center lg:left-[-112px] lg:flex-1">
           <div
@@ -39,13 +39,13 @@ export function SiteHeader() {
             <Link
               className={cn(
                 "cursor-pointer rounded-lg px-4 py-2 text-center font-semibold text-gray-500 dark:text-dark-gray-500",
-                tab === "code"
+                tab === "install"
                   ? "bg-white dark:bg-dark-background"
                   : "bg-transparent"
               )}
-              href="?tab=code"
+              href="?tab=install"
             >
-              Code
+              Install
             </Link>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { Fragment } from "react"
 
 export default function BlocksMenu() {
   return (
-    <div className="hidden w-full max-w-sm px-4 lg:block">
+    <div className="relative z-10 max-w-sm sm:px-4 lg:mr-10">
       <Popover className="relative">
         {({ open, close }) => (
           <>
@@ -19,7 +19,7 @@ export default function BlocksMenu() {
                 }
                 group inline-flex items-center rounded-md px-3 py-2 text-base font-medium focus:outline-none`}
             >
-              <span>Blocks</span>
+              <span className="hidden sm:block">Blocks</span>
               <ChevronDownIcon
                 className={`${open ? "rotate-180 " : ""}
                   ml-2 h-5 w-5 transition duration-150 ease-in-out`}
@@ -35,7 +35,7 @@ export default function BlocksMenu() {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform rounded-xl px-4 shadow-lg shadow-gray-50 dark:shadow-gray-800 sm:px-0 lg:max-w-xl">
+              <Popover.Panel className="absolute left-10 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 rounded-xl px-4 shadow-gray-50 sm:left-[140px] sm:px-0 sm:shadow-lg sm:dark:shadow-gray-800 lg:max-w-xl">
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
                   <div className="relative grid gap-x-8 gap-y-5 bg-white p-7 dark:bg-dark-background lg:grid-cols-3">
                     {blocksData?.map((item) => (

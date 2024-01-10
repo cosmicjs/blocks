@@ -3,7 +3,8 @@ import dedent from "dedent"
 
 import { fetchFeature } from "@/lib/cosmic"
 import { PackageManagers } from "../layout"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export default async function Testimonials({
   searchParams,
@@ -69,7 +70,8 @@ async function Preview() {
   const testimonials = await fetchFeature<Testimonial>("testimonials")
 
   return (
-    <div className="py-10">
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
       {testimonials?.map((testimonial: Testimonial) => {
         return <Testimonial testimonial={testimonial} key={testimonial.slug} />
       })}
@@ -122,7 +124,5 @@ function Code({ manager }: { manager: PackageManagers }) {
     },
   ]
 
-  return (
-    <CodeSteps steps={steps} preview={<Preview />} featureKey="testimonials" />
-  )
+  return <CodeSteps steps={steps} featureKey="testimonials" />
 }

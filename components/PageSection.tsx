@@ -32,7 +32,7 @@ export function Section({ section }: { section: SectionType }) {
                 className={cn(
                   "ml-2",
                   buttonVariants({
-                    variant: "default",
+                    variant: "secondary",
                   })
                 )}
                 href="#"
@@ -70,7 +70,7 @@ export function Section({ section }: { section: SectionType }) {
                 className={cn(
                   "ml-2",
                   buttonVariants({
-                    variant: "default",
+                    variant: "secondary",
                   })
                 )}
                 href="#"
@@ -94,7 +94,7 @@ export function Section({ section }: { section: SectionType }) {
                 className={cn(
                   "ml-2",
                   buttonVariants({
-                    variant: "default",
+                    variant: "secondary",
                   })
                 )}
                 href="#"

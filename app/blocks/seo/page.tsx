@@ -3,7 +3,8 @@ import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
-import CodeSteps from "@/components/layouts/CodeSteps"
+import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { PreviewCopy } from "@/components/PreviewCopy"
 
 export default async function SEO({
   searchParams,
@@ -35,7 +36,8 @@ async function Preview() {
     .depth(1)
 
   return (
-    <div className="m-auto mt-10 w-full md:min-w-[200px]">
+    <div className="container m-auto grid items-center px-4 py-8">
+      <PreviewCopy />
       <h2 className="mb-4 text-2xl font-semibold">SEO fields</h2>
       <div className="mb-8">
         <h3 className="text-xl font-semibold">Title</h3>
@@ -114,7 +116,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps steps={steps} preview={<Preview />} featureKey="seo" />
+      <CodeSteps steps={steps} featureKey="seo" />
       <div className="mb-6">
         <h3 className="mb-6 text-2xl font-semibold">Next steps</h3>
         <div className="mb-6">

@@ -348,7 +348,7 @@ export function InstallDialog({
           </DialogHeader>
           <DialogFooter>
             <Link
-              href="https://app.cosmicjs.com/login"
+              href="https://app.cosmicjs.com/login?redirect_to=?install_extension=blocks"
               target="_parent"
               className={cn(buttonVariants())}
             >
@@ -388,22 +388,22 @@ export function InstallDialog({
             <DialogDescription>
               <div className="mb-4">
                 {conflict
-                  ? `An object type with slug ${feature?.slug} already exists. Please rename or delete the existing Object Type if you'd like to install ${feature?.title} Block.`
-                  : "You can continue with the steps to install code for the Block or view the installed Object Type for your Block."}
+                  ? `An Object type with slug ${feature?.slug} already exists. Please rename or delete the existing Object type if you'd like to install ${feature?.title} Block.`
+                  : "You can continue with the steps to install this Block or view the installed Object type for your Block."}
               </div>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            {!conflict && tab !== "code" && (
+            {!conflict && tab !== "install" && (
               <Link
-                href={`${feature?.preview_link}?tab=code`}
+                href={`${feature?.preview_link}?tab=install`}
                 className={cn(buttonVariants({ variant: "secondary" }))}
                 onClick={() => closeModal()}
               >
-                View Code
+                Install
               </Link>
             )}
-            {!conflict && tab === "code" && (
+            {!conflict && tab === "install" && (
               <Button
                 className={cn(buttonVariants({ variant: "secondary" }))}
                 onClick={() => closeModal()}
@@ -418,7 +418,7 @@ export function InstallDialog({
                 rel="noreferrer"
                 className={cn(buttonVariants())}
               >
-                View Object Type
+                View Object type
                 <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             )}
