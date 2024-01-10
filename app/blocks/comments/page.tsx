@@ -46,7 +46,7 @@ function Comment({ comment }: { comment: Comment }) {
 
   return (
     <div className="mb-6 flex flex-col rounded-xl border border-zinc-300 p-4 pb-6 dark:border-zinc-700">
-      <div className="mb-4 flex w-full items-center justify-between gap-2 text-gray-500 dark:text-gray-200">
+      <div className="mb-4 flex w-full flex-col justify-between gap-2 text-gray-500 dark:text-gray-200 sm:flex-row">
         <div className="flex items-center gap-2 text-black dark:text-white">
           <UserRound className="h-4 w-4" />
           <div className="text-lg">{comment.title}</div>
