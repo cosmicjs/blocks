@@ -4,7 +4,12 @@
 
 # Blocks
 
-Blocks are data infused components for building Cosmic-powered apps. Use Blocks to build common features for your website or app. Save development time and learn content modeling best practices. [View all Blocks](https://blocks.cosmicjs.com).
+Blocks are data infused components for building Cosmic-powered apps. Use Blocks to build common features for your website or app. Save development time and learn content modeling best practices.
+
+## Links
+[View all Blocks](https://blocks.cosmicjs.com)
+
+[Explore the demo](https://cosmic-agency-template.vercel.app)
 
 ## Blocks include
 
