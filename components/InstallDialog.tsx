@@ -389,7 +389,7 @@ export function InstallDialog({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Project {`>`} API keys{" "}
+                  Project {`>`} Bucket {`>`} API keys{" "}
                   <ExternalLinkIcon className="-mt-2 inline h-3 w-3" />{" "}
                 </a>
                 in the dashboard and add them to the following fields. You only
