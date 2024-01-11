@@ -1,5 +1,6 @@
 "use client"
 
+import { DASHBOARD_URL } from "@/constants"
 import { ExternalLinkIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 
@@ -12,7 +13,7 @@ export function BucketAPILink() {
       setBucketSlug(storedBucketSlug)
     }
   }, [])
-  let link = `https://app.cosmicjs.com/login`
+  let link = `${DASHBOARD_URL}?redirect_to=?highlight=api-keys`
   if (bucketSlug)
     link = `https://app.cosmicjs.com/${bucketSlug}/settings/api-access`
   return (
@@ -22,7 +23,7 @@ export function BucketAPILink() {
       target="_blank"
       rel="noreferrer"
     >
-      Bucket {`>`} Setting {`>`} API keys{" "}
+      Project {`>`} Bucket {`>`} API keys{" "}
       <ExternalLinkIcon className="-mt-2 inline h-3 w-3" />
     </a>
   )

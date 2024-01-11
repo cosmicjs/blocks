@@ -12,7 +12,9 @@ import remarkSlug from "remark-slug"
 import CodeBlock from "@/components/elements/CodeBlock/CodeBlock"
 import { VideoProps } from "@/components/elements/Markdown/markdown.types"
 
-export const Markdown = (props: ReactMarkdownOptions) => {
+export const Markdown = (
+  props: { showCopy?: boolean } & ReactMarkdownOptions
+) => {
   const { className, children, ...restProps } = props
 
   const components: object = {
@@ -75,7 +77,12 @@ export const Markdown = (props: ReactMarkdownOptions) => {
       children: React.ReactNode
     }) {
       return (
-        <CodeBlock node={node} inline={inline} className={className}>
+        <CodeBlock
+          showCopy={props.showCopy}
+          node={node}
+          inline={inline}
+          className={className}
+        >
           {Array.isArray(children) ? children?.[0] : children}
         </CodeBlock>
       )

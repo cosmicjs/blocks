@@ -78,6 +78,7 @@ import { Highlight } from "./layouts/CodeSteps"
 import { useSearchParams } from "next/navigation"
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
+import APIKeysDialog from "./APIKeysDialog"
 
 export function InstallDialog({
   featureKey,
@@ -163,152 +164,162 @@ export function InstallDialog({
   }
 
   async function installObjectType() {
-    const existingObjectTypes = await getObjectTypes(cosmicTargetBucket)
-    let metafields
-    // Check for Object type slug exists
-    if (
-      existingObjectTypes?.filter(
-        (objectType: any) => objectType.slug === feature?.slug
-      )[0]
-    )
-      return setConflict(true)
+    try {
+      const existingObjectTypes = await getObjectTypes(cosmicTargetBucket)
+      let metafields
+      // Check for Object type slug exists
+      if (
+        existingObjectTypes?.filter(
+          (objectType: any) => objectType.slug === feature?.slug
+        )[0]
+      )
+        return setConflict(true)
 
-    if (featureKey === "pages") {
-      let page
-      await Promise.all([
-        getPageBuilderMetafields().then((result) => (metafields = result)),
-        getPage(cosmicSourceBucketConfig).then((result) => (page = result)),
-      ])
-      await addPagesObjectType(cosmicTargetBucket, metafields)
-      await addPage(cosmicTargetBucket, page)
+      if (featureKey === "pages") {
+        let page
+        await Promise.all([
+          getPageBuilderMetafields().then((result) => (metafields = result)),
+          getPage(cosmicSourceBucketConfig).then((result) => (page = result)),
+        ])
+        await addPagesObjectType(cosmicTargetBucket, metafields)
+        await addPage(cosmicTargetBucket, page)
+      }
+
+      if (featureKey === "blog") {
+        let authors, categories, newAuthors, newCategories, blogs
+
+        await Promise.all([
+          addAuthorObjectType(cosmicTargetBucket),
+          getAuthors(cosmicSourceBucketConfig).then(
+            (result) => (authors = result)
+          ),
+          getCategories(cosmicSourceBucketConfig).then(
+            (result) => (categories = result)
+          ),
+          getCategoriesMetafields().then((result) => (metafields = result)),
+        ])
+
+        await Promise.all([
+          addCategoriesObjectType(cosmicTargetBucket, metafields),
+          addAuthors(cosmicTargetBucket, authors),
+          addCategories(cosmicTargetBucket, categories),
+        ])
+
+        // Update authors and categories
+        await Promise.all([
+          getAuthors(cosmicTargetBucket).then(
+            (result) => (newAuthors = result)
+          ),
+          getCategories(cosmicTargetBucket).then(
+            (result) => (newCategories = result)
+          ),
+          getBlogMetafields().then((result) => (metafields = result)),
+          getBlogs(cosmicSourceBucketConfig).then((result) => (blogs = result)),
+        ])
+
+        await addBlogObjectType(cosmicTargetBucket, metafields)
+
+        // Add blog
+        await addBlogs(cosmicTargetBucket, blogs, newAuthors, newCategories)
+      }
+
+      if (featureKey === "nav-menus") {
+        let menus
+        await Promise.all([
+          getNavMenuMetafields().then((result) => (metafields = result)),
+          getNavMenus(cosmicSourceBucketConfig).then(
+            (result) => (menus = result)
+          ),
+        ])
+        await addNavMenusObjectType(cosmicTargetBucket, metafields)
+        // Add navigation menus
+        await addNavMenus(cosmicTargetBucket, menus)
+      }
+
+      if (featureKey === "settings") {
+        let settings
+        await Promise.all([
+          getGlobalSettingsMetafields().then((result) => (metafields = result)),
+          getGlobalSettings(cosmicSourceBucketConfig).then(
+            (result) => (settings = result)
+          ),
+        ])
+        await addGlobalSettingsObjectType(cosmicTargetBucket, metafields)
+        // Add settings
+        await addGlobalSettings(cosmicTargetBucket, settings)
+      }
+
+      if (featureKey === "testimonials") {
+        let testimonials
+        await Promise.all([
+          getTestimonialsMetafields().then((result) => (metafields = result)),
+          getTestimonials(cosmicSourceBucketConfig).then(
+            (result) => (testimonials = result)
+          ),
+        ])
+        await addTestimonialsObjectType(cosmicTargetBucket, metafields)
+        // Add testimonials
+        await addTestimonials(cosmicTargetBucket, testimonials)
+      }
+
+      if (featureKey === "events") {
+        let events
+        await Promise.all([
+          getEventsMetafields().then((result) => (metafields = result)),
+          getEvents(cosmicSourceBucketConfig).then(
+            (result) => (events = result)
+          ),
+        ])
+        metafields = await addEventsObjectType(cosmicTargetBucket, metafields)
+        // Add events
+        await addEvents(cosmicTargetBucket, events)
+      }
+
+      if (featureKey === "comments") {
+        let comments
+        await Promise.all([
+          getCommentsMetafields().then((result) => (metafields = result)),
+          getComments(cosmicSourceBucketConfig).then(
+            (result) => (comments = result)
+          ),
+        ])
+        await addCommentsObjectType(cosmicTargetBucket, metafields)
+        // Add comments
+        await addComments(cosmicTargetBucket, comments)
+      }
+
+      if (featureKey === "team") {
+        let teamMembers
+        await Promise.all([
+          getTeamMetafields().then((result) => (metafields = result)),
+          getTeamMembers(cosmicSourceBucketConfig).then(
+            (result) => (teamMembers = result)
+          ),
+        ])
+        await addTeamObjectType(cosmicTargetBucket, metafields)
+        // Add team
+        await addTeamMembers(cosmicTargetBucket, teamMembers)
+      }
+
+      if (featureKey === "products") {
+        let products
+        await Promise.all([
+          getProductsMetafields().then((result) => (metafields = result)),
+          getProducts(cosmicSourceBucketConfig).then(
+            (result) => (products = result)
+          ),
+        ])
+        await addProductsObjectType(cosmicTargetBucket, metafields)
+        // Add products
+        await addProducts(cosmicTargetBucket, products)
+      }
+
+      setInstallationSuccess(true)
+    } catch (error) {
+      console.error("An error occurred:", error)
+      alert("Something went wrong. Please try again later.")
+      throw error
     }
-
-    if (featureKey === "blog") {
-      let authors, categories, newAuthors, newCategories, blogs
-
-      await Promise.all([
-        addAuthorObjectType(cosmicTargetBucket),
-        getAuthors(cosmicSourceBucketConfig).then(
-          (result) => (authors = result)
-        ),
-        getCategories(cosmicSourceBucketConfig).then(
-          (result) => (categories = result)
-        ),
-        getCategoriesMetafields().then((result) => (metafields = result)),
-      ])
-
-      await Promise.all([
-        addCategoriesObjectType(cosmicTargetBucket, metafields),
-        addAuthors(cosmicTargetBucket, authors),
-        addCategories(cosmicTargetBucket, categories),
-      ])
-
-      // Update authors and categories
-      await Promise.all([
-        getAuthors(cosmicTargetBucket).then((result) => (newAuthors = result)),
-        getCategories(cosmicTargetBucket).then(
-          (result) => (newCategories = result)
-        ),
-        getBlogMetafields().then((result) => (metafields = result)),
-        getBlogs(cosmicSourceBucketConfig).then((result) => (blogs = result)),
-      ])
-
-      await addBlogObjectType(cosmicTargetBucket, metafields)
-
-      // Add blog
-      await addBlogs(cosmicTargetBucket, blogs, newAuthors, newCategories)
-    }
-
-    if (featureKey === "nav-menus") {
-      let menus
-      await Promise.all([
-        getNavMenuMetafields().then((result) => (metafields = result)),
-        getNavMenus(cosmicSourceBucketConfig).then(
-          (result) => (menus = result)
-        ),
-      ])
-      await addNavMenusObjectType(cosmicTargetBucket, metafields)
-      // Add navigation menus
-      await addNavMenus(cosmicTargetBucket, menus)
-    }
-
-    if (featureKey === "settings") {
-      let settings
-      await Promise.all([
-        getGlobalSettingsMetafields().then((result) => (metafields = result)),
-        getGlobalSettings(cosmicSourceBucketConfig).then(
-          (result) => (settings = result)
-        ),
-      ])
-      await addGlobalSettingsObjectType(cosmicTargetBucket, metafields)
-      // Add settings
-      await addGlobalSettings(cosmicTargetBucket, settings)
-    }
-
-    if (featureKey === "testimonials") {
-      let testimonials
-      await Promise.all([
-        getTestimonialsMetafields().then((result) => (metafields = result)),
-        getTestimonials(cosmicSourceBucketConfig).then(
-          (result) => (testimonials = result)
-        ),
-      ])
-      await addTestimonialsObjectType(cosmicTargetBucket, metafields)
-      // Add testimonials
-      await addTestimonials(cosmicTargetBucket, testimonials)
-    }
-
-    if (featureKey === "events") {
-      let events
-      await Promise.all([
-        getEventsMetafields().then((result) => (metafields = result)),
-        getEvents(cosmicSourceBucketConfig).then((result) => (events = result)),
-      ])
-      metafields = await addEventsObjectType(cosmicTargetBucket, metafields)
-      // Add events
-      await addEvents(cosmicTargetBucket, events)
-    }
-
-    if (featureKey === "comments") {
-      let comments
-      await Promise.all([
-        getCommentsMetafields().then((result) => (metafields = result)),
-        getComments(cosmicSourceBucketConfig).then(
-          (result) => (comments = result)
-        ),
-      ])
-      await addCommentsObjectType(cosmicTargetBucket, metafields)
-      // Add comments
-      await addComments(cosmicTargetBucket, comments)
-    }
-
-    if (featureKey === "team") {
-      let teamMembers
-      await Promise.all([
-        getTeamMetafields().then((result) => (metafields = result)),
-        getTeamMembers(cosmicSourceBucketConfig).then(
-          (result) => (teamMembers = result)
-        ),
-      ])
-      await addTeamObjectType(cosmicTargetBucket, metafields)
-      // Add team
-      await addTeamMembers(cosmicTargetBucket, teamMembers)
-    }
-
-    if (featureKey === "products") {
-      let products
-      await Promise.all([
-        getProductsMetafields().then((result) => (metafields = result)),
-        getProducts(cosmicSourceBucketConfig).then(
-          (result) => (products = result)
-        ),
-      ])
-      await addProductsObjectType(cosmicTargetBucket, metafields)
-      // Add products
-      await addProducts(cosmicTargetBucket, products)
-    }
-
-    setInstallationSuccess(true)
   }
 
   async function installFeature(selectedObjectTypes: string[]) {
@@ -338,91 +349,16 @@ export function InstallDialog({
     setConflict(false)
   }
 
-  const [bucketSlug, setBucketSlug] = useState("")
-  const [readKey, setReadKey] = useState("")
-  const [writeKey, setWriteKey] = useState("")
-
-  if (showKeysModal) {
-    const APIKeyInputs = [
-      {
-        id: "bucket-slug",
-        label: "Bucket Slug",
-        onChange: (input: string) => setBucketSlug(input),
-        value: bucketSlug,
-      },
-      {
-        id: "read-key",
-        label: "Read Key",
-        onChange: (input: string) => setReadKey(input),
-        value: readKey,
-      },
-      {
-        id: "write-key",
-        label: "Write Key",
-        onChange: (input: string) => setWriteKey(input),
-        value: writeKey,
-      },
-    ]
-
-    const saveKeys = () => {
-      localStorage.setItem("bucket_slug", bucketSlug)
-      localStorage.setItem("read_key", readKey)
-      localStorage.setItem("write_key", writeKey)
-      setShowKeysModal(false)
-    }
-
+  if (showKeysModal)
     return (
-      <Dialog open onOpenChange={() => closeModal()}>
-        <DialogContent
-          className="sm:max-w-[425px]"
-          onInteractOutside={() => closeModal()}
-          onEscapeKeyDown={() => closeModal()}
-        >
-          <DialogHeader>
-            <DialogTitle>Please enter your keys</DialogTitle>
-            <DialogDescription>
-              <div>
-                Fetch your API keys from{" "}
-                <a
-                  href={`${DASHBOARD_URL}?redirect_to=?highlight=api-keys`}
-                  className="text-cosmic-blue"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Project {`>`} Bucket {`>`} API keys{" "}
-                  <ExternalLinkIcon className="-mt-2 inline h-3 w-3" />{" "}
-                </a>
-                in the dashboard and add them to the following fields. You only
-                need to do this setup once.
-              </div>
-            </DialogDescription>
-          </DialogHeader>
-          <div className="mt-2">
-            {APIKeyInputs.map(({ id, label, onChange, value }) => (
-              <div className="mb-2 flex items-center justify-between" key={id}>
-                <Label htmlFor={id} className="w-fit shrink-0">
-                  {label}
-                </Label>
-                <Input
-                  id={id}
-                  placeholder={`Paste your ${label} here`}
-                  onChange={(e) => onChange(e.target.value)}
-                  value={value}
-                  className="w-[272px]"
-                />
-              </div>
-            ))}
-          </div>
-
-          <DialogFooter>
-            <Button onClick={saveKeys} className={cn(buttonVariants())}>
-              Save & proceed
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <APIKeysDialog
+        open={showKeysModal}
+        onClose={() => {
+          setShowKeysModal(false)
+          closeModal()
+        }}
+      />
     )
-  }
 
   if (installationSuccess || conflict) {
     const objectTypeSlug =
@@ -453,7 +389,7 @@ export function InstallDialog({
               <div className="mb-4">
                 {conflict
                   ? `An Object type with slug ${feature?.slug} already exists. Please rename or delete the existing Object type if you'd like to install ${feature?.title} Block.`
-                  : "You can continue with the steps to install the Block code or view the installed Object type for your Block in the dashboard, from where you can change it's contents."}
+                  : "Continue to install the Block code or go to the dashboard to view and update the Block content."}
               </div>
             </DialogDescription>
           </DialogHeader>

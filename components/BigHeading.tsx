@@ -1,8 +1,15 @@
+"use client"
+
 import classNames from "classnames"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import dedent from "dedent"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { BucketAPILink } from "@/components/BucketAPILink"
+import APIKeysDialog from "./APIKeysDialog"
+import { Button } from "./ui/button"
+import { hideMiddleOfString } from "@/lib/utils"
+import CodeBlock from "./elements/CodeBlock/CodeBlock"
+import CopyButton from "./elements/CopyButton/CopyButton"
 // import { wrapWithSpan } from "@/components/layouts/CodeSteps" Can't seem to get this to work
 export function wrapWithSpan(text: string) {
   return text?.split("`")?.map((item, index) => {
@@ -33,6 +40,23 @@ const BigHeading: React.FC<BigHeadingProps> = ({
   className,
   scrollId,
 }) => {
+  const [openKeysModal, setOpenKeysModal] = useState(false)
+
+  const [bucketSlug, setBucketSlug] = useState("")
+  const [readKey, setReadKey] = useState("")
+  const [writeKey, setWriteKey] = useState("")
+
+  useEffect(() => {
+    const bucketSlug = localStorage.getItem("bucket_slug") || ""
+    const readKey = localStorage.getItem("read_key") || ""
+    const writeKey = localStorage.getItem("write_key") || ""
+    setBucketSlug(bucketSlug)
+    setReadKey(readKey)
+    setWriteKey(writeKey)
+  }, [])
+
+  const hasKeysConfigured = !!bucketSlug && !!readKey && !!writeKey
+
   return (
     <div className="relative">
       <div
@@ -82,19 +106,61 @@ const BigHeading: React.FC<BigHeadingProps> = ({
                 2
               </div>
               <h3 className="text-lg font-semibold lg:text-2xl">
-                Create a .env file
+                Get and save your API keys
               </h3>
             </div>
-            <div className="mt-2">
-              Create a {wrapWithSpan(`\`.env.local\``)} file. Go to{" "}
-              <BucketAPILink /> to get your Cosmic API keys.
-            </div>
-            <Markdown>
+            {!hasKeysConfigured && (
+              <>
+                <APIKeysDialog
+                  open={openKeysModal}
+                  onClose={() => setOpenKeysModal(false)}
+                  onSave={(bucketSlug, readKey, writeKey) => {
+                    setBucketSlug(bucketSlug)
+                    setReadKey(readKey)
+                    setWriteKey(writeKey)
+                  }}
+                />
+                <Button
+                  onClick={() => setOpenKeysModal(true)}
+                  className="absolute inset-0 top-[18%] z-10 m-auto w-fit"
+                >
+                  Setup API Keys
+                </Button>
+              </>
+            )}
+            {!bucketSlug ? (
+              <div className="mt-2">
+                Get your API keys by going to <BucketAPILink />, add them by
+                clicking the button below & copy your{" "}
+                {wrapWithSpan(`\`.env.local\``)} file.
+              </div>
+            ) : (
+              <div className="mt-2">
+                Your API Keys have been saved. Use the copy button to get the
+                following code with your keys pre-filled & add it into your{" "}
+                {wrapWithSpan(`\`.env.local\``)} file.
+              </div>
+            )}
+            <CopyButton
+              className="absolute right-3 top-[108px] z-10 !bg-gray-800"
+              iconOnly
+              text={`
+            # .env.local
+            COSMIC_BUCKET_SLUG=${bucketSlug}
+            COSMIC_READ_KEY=${readKey}
+            COSMIC_WRITE_KEY=${writeKey}`}
+            />
+            <Markdown
+              showCopy={false}
+              className={classNames({
+                "opacity-50 blur-sm": !hasKeysConfigured,
+              })}
+            >
               {dedent(`\`\`\`
           # .env.local
-          COSMIC_BUCKET_SLUG=change_to_your_bucket_slug
-          COSMIC_READ_KEY=change_to_your_bucket_read_key
-          COSMIC_WRITE_KEY=change_to_your_bucket_write_key
+          COSMIC_BUCKET_SLUG=${bucketSlug}
+          COSMIC_READ_KEY=${hideMiddleOfString(readKey)}
+          COSMIC_WRITE_KEY=${hideMiddleOfString(writeKey)}
           \`\`\`
           `)}
             </Markdown>
