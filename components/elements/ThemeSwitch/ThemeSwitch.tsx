@@ -7,13 +7,20 @@ const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
+  const [isInsideIFrame, setIsInsideIFrame] = useState(false)
+
+  useEffect(() => {
+    const iframe = window.self !== window.top
+    setIsInsideIFrame(iframe)
+  }, [])
+
   const isLightTheme = theme === "light"
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  if (!mounted) {
+  if (!mounted || isInsideIFrame) {
     return <div className="h-5 w-5" />
   }
 

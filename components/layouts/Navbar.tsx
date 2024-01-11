@@ -7,12 +7,10 @@ import { SiteHeader } from "../SiteHeader"
 import Link from "next/link"
 import BlocksMenu from "../BlocksMenu"
 import { Github, KeyIcon } from "lucide-react"
-import { useSearchParams } from "next/navigation"
 import APIKeysDialog from "../APIKeysDialog"
 
 const Navbar: React.FC = () => {
   const [showKeysModal, setShowKeysModal] = useState(false)
-  const params = useSearchParams()
 
   return (
     <div className="lg:flex-center glassmorphism sticky top-0 z-50 h-[72px] bg-white/10 px-5 dark:bg-black/10 md:w-screen">
@@ -47,7 +45,7 @@ const Navbar: React.FC = () => {
           >
             <Github className="h-5 w-5" />
           </Button>
-          {!params.get("bucket_slug") && <ThemeSwitch />}
+          <ThemeSwitch />
         </div>
       </div>
       <APIKeysDialog
