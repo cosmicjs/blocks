@@ -95,7 +95,7 @@ async function blockGenerator(blockObject, sourceFolderPath) {
     )
   }
 
-  // Step 2. Copying the files
+  // Step 2. Adding the files
   try {
     // After the Blocks folder is created
     if (blocksPath) {
@@ -108,7 +108,7 @@ async function blockGenerator(blockObject, sourceFolderPath) {
 
       // Copy the files from source folder into the newly created or replaced destination folder
       fs.readdirSync(sourceFolderPath).forEach((file) => {
-        console.log("➤ Copying", file, "...")
+        console.log("➤ Adding", file, "...")
         const sourceFile = path.join(sourceFolderPath, file)
         const destinationFile = path.join(destinationFolderPath, file)
         fs.copyFileSync(sourceFile, destinationFile)
@@ -137,7 +137,7 @@ async function blockGenerator(blockObject, sourceFolderPath) {
 
         if (fs.existsSync(elementFilePath)) {
           if (!fs.existsSync(cosmicElementsFilePath)) {
-            console.log(`➤ Copying ${element} element...`)
+            console.log(`➤ Adding ${element} element...`)
             fs.copyFileSync(elementFilePath, cosmicElementsFilePath)
           }
         }
@@ -170,7 +170,7 @@ async function blockGenerator(blockObject, sourceFolderPath) {
       )
     else
       console.error(
-        chalk.red(`✗ Error copying code for ${chalk.bold(name)} Block:`),
+        chalk.red(`✗ Error adding code for ${chalk.bold(name)} Block:`),
         error
       )
     hasRanOnce = true
@@ -254,7 +254,7 @@ function createConfigFile(cosmicFolderPath) {
   const configFilePath = path.join(cosmicFolderPath, "client.ts")
 
   if (fs.existsSync(cosmicFolderPath) && !fs.existsSync(configFilePath)) {
-    console.log("➤ Copying client file...")
+    console.log("➤ Adding client file...")
     fs.copyFileSync(
       sourceConfigFilePath,
       path.join(cosmicFolderPath, "client.ts")
@@ -267,7 +267,7 @@ function createUtilsFile(cosmicFolderPath) {
   const utilsFilePath = path.join(cosmicFolderPath, "utils.ts")
 
   if (fs.existsSync(cosmicFolderPath) && !fs.existsSync(utilsFilePath)) {
-    console.log("➤ Copying utils file...")
+    console.log("➤ Adding utils file...")
     fs.copyFileSync(sourceUtilsPath, path.join(cosmicFolderPath, "utils.ts"))
   }
 }
