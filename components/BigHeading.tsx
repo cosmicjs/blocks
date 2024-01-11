@@ -124,46 +124,48 @@ const BigHeading: React.FC<BigHeadingProps> = ({
                   onClick={() => setOpenKeysModal(true)}
                   className="absolute inset-0 top-[18%] z-10 m-auto w-fit"
                 >
-                  Setup API Keys
+                  Add API Keys
                 </Button>
               </>
             )}
             {!bucketSlug ? (
               <div className="mt-2">
-                Get your API keys by going to <BucketAPILink />, add them by
-                clicking the button below & copy your{" "}
-                {wrapWithSpan(`\`.env.local\``)} file.
+                Get your API keys by going to <BucketAPILink /> then add them by
+                clicking the button below.
               </div>
             ) : (
               <div className="mt-2">
-                Your API Keys have been saved. Use the copy button to get the
-                following code with your keys pre-filled & add it into your{" "}
-                {wrapWithSpan(`\`.env.local\``)} file.
+                Use the copy button to paste the following code with your keys
+                pre-filled to your {wrapWithSpan(`\`.env.local\``)} file.
               </div>
             )}
-            <CopyButton
-              className="absolute right-3 top-[108px] z-10 !bg-gray-800"
-              iconOnly
-              text={`
+            <div className="relative">
+              {bucketSlug && (
+                <CopyButton
+                  className="absolute right-3 top-[20px] z-10 !bg-gray-800"
+                  iconOnly
+                  text={`
             # .env.local
             COSMIC_BUCKET_SLUG=${bucketSlug}
             COSMIC_READ_KEY=${readKey}
             COSMIC_WRITE_KEY=${writeKey}`}
-            />
-            <Markdown
-              showCopy={false}
-              className={classNames({
-                "opacity-50 blur-sm": !hasKeysConfigured,
-              })}
-            >
-              {dedent(`\`\`\`
+                />
+              )}
+              <Markdown
+                showCopy={false}
+                className={classNames({
+                  "opacity-50 blur-sm": !hasKeysConfigured,
+                })}
+              >
+                {dedent(`\`\`\`
           # .env.local
           COSMIC_BUCKET_SLUG=${bucketSlug}
           COSMIC_READ_KEY=${hideMiddleOfString(readKey)}
           COSMIC_WRITE_KEY=${hideMiddleOfString(writeKey)}
           \`\`\`
           `)}
-            </Markdown>
+              </Markdown>
+            </div>
           </div>
           <div className="relative mb-8">
             <div className="relative flex flex-col">
