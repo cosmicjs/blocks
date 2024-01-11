@@ -20,12 +20,12 @@ const Navbar: React.FC = () => {
             <img
               alt="Cosmic Blocks"
               className="w-32 dark:hidden"
-              src="https://imgix.cosmicjs.com/30de9890-aa64-11ee-b417-db331415685f-logo_light.png"
+              src="https://imgix.cosmicjs.com/30de9890-aa64-11ee-b417-db331415685f-logo_light.png?w=300&auto=format,compression"
             />
             <img
               alt="Cosmic Blocks"
               className="hidden w-32 dark:block"
-              src="https://imgix.cosmicjs.com/30dc4ea0-aa64-11ee-b417-db331415685f-logo_dark.png"
+              src="https://imgix.cosmicjs.com/30dc4ea0-aa64-11ee-b417-db331415685f-logo_dark.png?w=300&auto=format,compression"
             />
           </Link>
         </div>

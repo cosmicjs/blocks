@@ -1,8 +1,15 @@
-![image](https://github.com/cosmicjs/blocks/assets/26257029/2e2962f4-37e7-479e-9588-ddd261d11790)
+<a href="https://blocks.cosmicjs.com">
+  <img src="https://github.com/cosmicjs/blocks/assets/26257029/2e2962f4-37e7-479e-9588-ddd261d11790" />
+</a>
 
 # Blocks
 
-Data infused components for building Cosmic-powered apps. Use Blocks to build common features for your website or app. Save development time and learn content modeling best practices. [View all Blocks](https://blocks.cosmicjs.com).
+Blocks are data infused components for building Cosmic-powered apps. Use Blocks to build common features for your website or app. Save development time and learn content modeling best practices.
+
+## Get started
+[View all Blocks](https://blocks.cosmicjs.com)
+
+[Explore the demo](https://cosmic-agency-template.vercel.app)
 
 ## Blocks include
 

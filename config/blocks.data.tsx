@@ -15,6 +15,25 @@ import {
 
 export const blocksData = [
   {
+    key: "nav-menus",
+    title: "Navigation Menu",
+    type: "object_type",
+    slug: "navigation-menus",
+    icon: <MenuIcon className="h-5 w-5 text-cosmic-blue" />,
+    description: `Adds a Navigation Menu Object type to your Bucket, which includes`,
+    field_list: [
+      "Links repeater with title, link, and option to open in a new browser tab",
+    ],
+    confirmation: `This will install a \`navigation-menus\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/blocks/nav-menus",
+    object_types: 1,
+    objects: 2,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/feec1460-9416-11ee-b62d-5b90a0a1bade-HeadersFooters-Dark.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/fedd4750-9416-11ee-b62d-5b90a0a1bade-HeadersFooters.png",
+  },
+  {
     key: "pages",
     title: "Pages",
     type: "object_type",
@@ -153,25 +172,6 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/feffea80-9416-11ee-b62d-5b90a0a1bade-FAQs-Dark.png",
     light_thumbnail:
       "https://imgix.cosmicjs.com/fefa6c40-9416-11ee-b62d-5b90a0a1bade-FAQs.png",
-  },
-  {
-    key: "nav-menus",
-    title: "Navigation Menu",
-    type: "object_type",
-    slug: "navigation-menus",
-    icon: <MenuIcon className="h-5 w-5 text-cosmic-blue" />,
-    description: `Adds a Navigation Menu Object type to your Bucket, which includes`,
-    field_list: [
-      "Links repeater with title, link, and option to open in a new browser tab",
-    ],
-    confirmation: `This will install a \`navigation-menus\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/blocks/nav-menus",
-    object_types: 1,
-    objects: 2,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/feec1460-9416-11ee-b62d-5b90a0a1bade-HeadersFooters-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/fedd4750-9416-11ee-b62d-5b90a0a1bade-HeadersFooters.png",
   },
   {
     key: "comments",
