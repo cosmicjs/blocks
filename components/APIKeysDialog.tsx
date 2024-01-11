@@ -72,7 +72,6 @@ const APIKeysDialog: React.FC<APIKeysDialogProps> = ({
     localStorage.setItem("read_key", readKey)
     localStorage.setItem("write_key", writeKey)
     onSave?.(bucketSlug, readKey, writeKey)
-    onClose()
   }
 
   return (
