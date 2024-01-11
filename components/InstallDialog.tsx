@@ -408,24 +408,24 @@ export function InstallDialog({
                 Install
               </Link>
             )}
-            {!conflict && tab === "install" && (
-              <Button
-                className={cn(buttonVariants({ variant: "secondary" }))}
-                onClick={() => closeModal()}
-              >
-                Continue
-              </Button>
-            )}
             {bucketSlug && (
               <a
                 href={`${DASHBOARD_URL}/${bucketSlug}/objects?query={"type":"${objectTypeSlug}"}`}
                 target="_blank"
                 rel="noreferrer"
-                className={cn(buttonVariants())}
+                className={cn(buttonVariants({ variant: "secondary" }))}
               >
-                View Object type
+                View Block content
                 <ExternalLink className="ml-2 h-4 w-4" />
               </a>
+            )}
+            {!conflict && tab === "install" && (
+              <Button
+                className={cn(buttonVariants())}
+                onClick={() => closeModal()}
+              >
+                Continue
+              </Button>
             )}
           </DialogFooter>
         </DialogContent>

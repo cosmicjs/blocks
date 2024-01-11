@@ -98,9 +98,9 @@ const APIKeysDialog: React.FC<APIKeysDialogProps> = ({
           <DialogDescription>
             {!hasKeysConfigured && (
               <div>
-                Fetch your API keys from <BucketAPILink />
-                in the dashboard and add them to the following fields. You only
-                need to do this setup once.
+                Get your API keys from <BucketAPILink /> in the dashboard and
+                add them to the following fields. You only need to do this setup
+                once.
               </div>
             )}
           </DialogDescription>
