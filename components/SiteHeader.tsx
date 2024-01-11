@@ -17,7 +17,7 @@ export function SiteHeader() {
   return (
     <header className="absolute inset-0 top-[60px] z-0 mx-auto w-full max-w-[53%] md:top-0 lg:sticky lg:inset-auto lg:mx-0">
       <div className="container flex h-16 items-center justify-center sm:space-x-0 lg:flex-row lg:justify-between lg:space-x-4">
-        <div className="relative flex grow justify-center text-center lg:left-[-112px] lg:flex-1">
+        <div className="relative flex grow justify-center text-center lg:left-[-88px] lg:flex-1">
           <div
             className="flex rounded-lg bg-gray-100 p-[2px] text-xs dark:bg-dark-gray-100 lg:text-base"
             role="tablist"

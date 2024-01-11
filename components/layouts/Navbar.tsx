@@ -11,7 +11,6 @@ import APIKeysDialog from "../APIKeysDialog"
 
 const Navbar: React.FC = () => {
   const [showKeysModal, setShowKeysModal] = useState(false)
-  const bucketSlug = localStorage.getItem("bucket_slug") || ""
   return (
     <div className="lg:flex-center glassmorphism sticky top-0 z-50 h-[72px] bg-white/10 px-5 dark:bg-black/10 md:w-screen">
       <div className="mx-auto flex h-full items-center md:max-w-[1500px]">
@@ -34,11 +33,9 @@ const Navbar: React.FC = () => {
         <SiteHeader />
         <div className="grow" />
         <div className="flex items-center">
-          {bucketSlug && (
-            <Button variant={"ghost"} onClick={() => setShowKeysModal(true)}>
-              <KeyIcon className="h-5 w-5" />
-            </Button>
-          )}
+          <Button variant={"ghost"} onClick={() => setShowKeysModal(true)}>
+            <KeyIcon className="h-5 w-5" />
+          </Button>
           <Button
             variant={"ghost"}
             href={"https://github.com/cosmicjs/blocks"}
