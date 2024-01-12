@@ -348,14 +348,12 @@ export function InstallDialog({
     setConflict(false)
   }
 
-  console.log("showKeysModal", showKeysModal)
-
   if (showKeysModal)
     return (
       <APIKeysDialog
-        open={showKeysModal}
         onClose={() => {
           setShowKeysModal(false)
+          closeModal()
         }}
         onSave={() => {
           setShowKeysModal(false)

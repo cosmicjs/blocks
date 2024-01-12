@@ -17,15 +17,10 @@ import { BucketAPILink } from "./BucketAPILink"
 
 type APIKeysDialogProps = {
   onSave?: (bucketSlug: string, readKey: string, writeKey: string) => void
-  open: boolean
   onClose: () => void
 }
 
-const APIKeysDialog: React.FC<APIKeysDialogProps> = ({
-  onClose,
-  onSave,
-  open,
-}) => {
+const APIKeysDialog: React.FC<APIKeysDialogProps> = ({ onClose, onSave }) => {
   const [bucketSlug, setBucketSlug] = useState("")
   const [readKey, setReadKey] = useState("")
   const [writeKey, setWriteKey] = useState("")
@@ -83,7 +78,7 @@ const APIKeysDialog: React.FC<APIKeysDialogProps> = ({
   }
 
   return (
-    <Dialog open={open} onOpenChange={() => onClose()}>
+    <Dialog open onOpenChange={() => onClose()}>
       <DialogContent
         className="sm:max-w-[425px]"
         onInteractOutside={() => onClose()}

@@ -47,10 +47,9 @@ const Navbar: React.FC = () => {
           <ThemeSwitch />
         </div>
       </div>
-      <APIKeysDialog
-        open={showKeysModal}
-        onClose={() => setShowKeysModal(false)}
-      />
+      {showKeysModal && (
+        <APIKeysDialog onClose={() => setShowKeysModal(false)} />
+      )}
     </div>
   )
 }
