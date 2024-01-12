@@ -211,7 +211,7 @@ function Code() {
       title: "Example: preview enabled",
       code: previewPageCode,
       description:
-        "Enable preview by setting the `preview` property on the Block. View the draft preview content by setting the `?preview=true` in the URL.",
+        "Enable preview by setting the `preview` property on the Block. View the draft preview content by setting the `?preview=true` in the URL. Go to Object type > Settings to set up your preview link in the dashboard.",
     },
   ]
 
