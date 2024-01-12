@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   Dialog,
   DialogContent,
@@ -9,8 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog"
-import { DASHBOARD_URL } from "@/constants"
-import { ExternalLinkIcon } from "lucide-react"
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
 import { Button, buttonVariants } from "./ui/button"
@@ -19,15 +17,10 @@ import { BucketAPILink } from "./BucketAPILink"
 
 type APIKeysDialogProps = {
   onSave?: (bucketSlug: string, readKey: string, writeKey: string) => void
-  open: boolean
   onClose: () => void
 }
 
-const APIKeysDialog: React.FC<APIKeysDialogProps> = ({
-  onClose,
-  onSave,
-  open,
-}) => {
+const APIKeysDialog: React.FC<APIKeysDialogProps> = ({ onClose, onSave }) => {
   const [bucketSlug, setBucketSlug] = useState("")
   const [readKey, setReadKey] = useState("")
   const [writeKey, setWriteKey] = useState("")
@@ -72,10 +65,20 @@ const APIKeysDialog: React.FC<APIKeysDialogProps> = ({
     localStorage.setItem("read_key", readKey)
     localStorage.setItem("write_key", writeKey)
     onSave?.(bucketSlug, readKey, writeKey)
+    onClose()
+  }
+  const removeKeys = () => {
+    setBucketSlug("")
+    setReadKey("")
+    setWriteKey("")
+    localStorage.removeItem("bucket_slug")
+    localStorage.removeItem("read_key")
+    localStorage.removeItem("write_key")
+    onClose()
   }
 
   return (
-    <Dialog open={open} onOpenChange={() => onClose()}>
+    <Dialog open onOpenChange={() => onClose()}>
       <DialogContent
         className="sm:max-w-[425px]"
         onInteractOutside={() => onClose()}
@@ -84,15 +87,15 @@ const APIKeysDialog: React.FC<APIKeysDialogProps> = ({
         <DialogHeader>
           <DialogTitle>
             {hasKeysConfigured
-              ? "API Keys configured"
+              ? "API keys configured"
               : "Please enter your keys"}
           </DialogTitle>
           <DialogDescription>
             {!hasKeysConfigured && (
               <div>
-                Fetch your API keys from <BucketAPILink />
-                in the dashboard and add them to the following fields. You only
-                need to do this setup once.
+                Get your API keys from <BucketAPILink /> in the dashboard and
+                add them to the following fields. You only need to do this setup
+                once.
               </div>
             )}
           </DialogDescription>
@@ -116,11 +119,21 @@ const APIKeysDialog: React.FC<APIKeysDialogProps> = ({
 
         <DialogFooter>
           <Button
+            onClick={removeKeys}
+            className={cn(
+              buttonVariants({
+                variant: "secondary",
+              })
+            )}
+          >
+            Clear and cancel
+          </Button>
+          <Button
             disabled={!bucketSlug || !readKey || !writeKey}
             onClick={saveKeys}
             className={cn(buttonVariants())}
           >
-            Save & proceed
+            Save
           </Button>
         </DialogFooter>
       </DialogContent>

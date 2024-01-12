@@ -1,29 +1,8 @@
-"use client"
-
 import classNames from "classnames"
-import React, { useEffect, useState } from "react"
+import React from "react"
 import dedent from "dedent"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
-import { BucketAPILink } from "@/components/BucketAPILink"
-import APIKeysDialog from "./APIKeysDialog"
-import { Button } from "./ui/button"
-import { hideMiddleOfString } from "@/lib/utils"
-import CodeBlock from "./elements/CodeBlock/CodeBlock"
-import CopyButton from "./elements/CopyButton/CopyButton"
-// import { wrapWithSpan } from "@/components/layouts/CodeSteps" Can't seem to get this to work
-export function wrapWithSpan(text: string) {
-  return text?.split("`")?.map((item, index) => {
-    if (index % 2 === 0) return item
-    return (
-      <span
-        key={item}
-        className="rounded-sm bg-gray-100 px-1 py-px font-mono dark:bg-dark-gray-100"
-      >
-        {item}
-      </span>
-    )
-  })
-}
+import ENVKeys from "./ENVKeys"
 
 type BigHeadingProps = {
   subheading?: string
@@ -40,23 +19,6 @@ const BigHeading: React.FC<BigHeadingProps> = ({
   className,
   scrollId,
 }) => {
-  const [openKeysModal, setOpenKeysModal] = useState(false)
-
-  const [bucketSlug, setBucketSlug] = useState("")
-  const [readKey, setReadKey] = useState("")
-  const [writeKey, setWriteKey] = useState("")
-
-  useEffect(() => {
-    const bucketSlug = localStorage.getItem("bucket_slug") || ""
-    const readKey = localStorage.getItem("read_key") || ""
-    const writeKey = localStorage.getItem("write_key") || ""
-    setBucketSlug(bucketSlug)
-    setReadKey(readKey)
-    setWriteKey(writeKey)
-  }, [])
-
-  const hasKeysConfigured = !!bucketSlug && !!readKey && !!writeKey
-
   return (
     <div className="relative">
       <div
@@ -99,72 +61,7 @@ const BigHeading: React.FC<BigHeadingProps> = ({
               )
             )}
           </div>
-          <div className="relative pb-8">
-            <div className="absolute left-[-42px] top-7 h-[95%] w-px bg-gray-200 dark:bg-dark-gray-200" />
-            <div className="relative flex">
-              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                2
-              </div>
-              <h3 className="text-lg font-semibold lg:text-2xl">
-                Get and save your API keys
-              </h3>
-            </div>
-            {!hasKeysConfigured && (
-              <>
-                <APIKeysDialog
-                  open={openKeysModal}
-                  onClose={() => setOpenKeysModal(false)}
-                  onSave={(bucketSlug, readKey, writeKey) => {
-                    setBucketSlug(bucketSlug)
-                    setReadKey(readKey)
-                    setWriteKey(writeKey)
-                  }}
-                />
-                <Button
-                  onClick={() => setOpenKeysModal(true)}
-                  className="absolute inset-0 top-[18%] z-10 m-auto w-fit"
-                >
-                  Setup API Keys
-                </Button>
-              </>
-            )}
-            {!bucketSlug ? (
-              <div className="mt-2">
-                Get your API keys by going to <BucketAPILink />, add them by
-                clicking the button below & copy your{" "}
-                {wrapWithSpan(`\`.env.local\``)} file.
-              </div>
-            ) : (
-              <div className="mt-2">
-                Your API Keys have been saved. Use the copy button to get the
-                following code with your keys pre-filled & add it into your{" "}
-                {wrapWithSpan(`\`.env.local\``)} file.
-              </div>
-            )}
-            <CopyButton
-              className="absolute right-3 top-[108px] z-10 !bg-gray-800"
-              iconOnly
-              text={`
-            # .env.local
-            COSMIC_BUCKET_SLUG=${bucketSlug}
-            COSMIC_READ_KEY=${readKey}
-            COSMIC_WRITE_KEY=${writeKey}`}
-            />
-            <Markdown
-              showCopy={false}
-              className={classNames({
-                "opacity-50 blur-sm": !hasKeysConfigured,
-              })}
-            >
-              {dedent(`\`\`\`
-          # .env.local
-          COSMIC_BUCKET_SLUG=${bucketSlug}
-          COSMIC_READ_KEY=${hideMiddleOfString(readKey)}
-          COSMIC_WRITE_KEY=${hideMiddleOfString(writeKey)}
-          \`\`\`
-          `)}
-            </Markdown>
-          </div>
+          <ENVKeys />
           <div className="relative mb-8">
             <div className="relative flex flex-col">
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
@@ -173,11 +70,7 @@ const BigHeading: React.FC<BigHeadingProps> = ({
               <h3 className="text-lg font-semibold lg:text-2xl">
                 Select your Blocks
               </h3>
-              {description && (
-                <div className="mt-2">
-                  <p>{description}</p>
-                </div>
-              )}
+              {description && <div className="mt-2">{description}</div>}
             </div>
           </div>
         </div>
