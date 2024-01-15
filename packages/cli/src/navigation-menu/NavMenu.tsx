@@ -7,14 +7,17 @@ export type ItemType = { title: string; link: string; open_in_new_tab: boolean }
 export async function NavMenu({
   query,
   className,
+  preview,
 }: {
   query: any
   className?: string
+  preview?: boolean
 }) {
   const { object: nav } = await cosmic.objects
     .findOne(query)
     .props("metadata")
     .depth(1)
+    .status(preview ? "any" : "published")
   return (
     <div className={className}>
       {/* Desktop */}

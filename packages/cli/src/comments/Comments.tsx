@@ -51,9 +51,11 @@ function Comment({
 export async function Comments({
   query,
   className,
+  preview,
 }: {
   query: any
   className?: string
+  preview?: boolean
 }) {
   let comments = []
   const resourceId = query["metadata.resource"]
@@ -64,6 +66,7 @@ export async function Comments({
       .props("title,slug,metadata,created_at")
       .depth(1)
       .sort("created_at")
+      .status(preview ? "any" : "published")
     comments = objects
   } catch (err) {}
   return (
