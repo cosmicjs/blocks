@@ -147,6 +147,24 @@ function Code() {
     }
     \`\`\`
     `
+  const localizationCode = dedent`
+    \`\`\`jsx
+    // app/[locale]/[slug]/page.tsx
+    import { Page } from "@/cosmic/blocks/pages/Page";
+    export default async function DynamicPage({
+      params,
+    }: {
+      params: { slug: string, locale: string };
+    }) {
+      return (
+        <Page
+          query={{ slug: params.slug, type: "pages", locale: locale }}
+          preview={searchParams.preview}
+        />
+      );
+    }
+    \`\`\`
+    `
   const steps = [
     {
       title: "Install the Block content model",
@@ -221,6 +239,12 @@ function Code() {
       title: "Draft preview link in the dashboard",
       description:
         "To add the draft preview link in the dashboard, go to Pages Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/[object_slug]?preview=true` will add a Preview button to each page.",
+    },
+    {
+      title: "Example: localization",
+      code: localizationCode,
+      description:
+        "First, enable localization in the dashboard by going to Page Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content.",
     },
   ]
 

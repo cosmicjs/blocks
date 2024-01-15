@@ -168,6 +168,27 @@ function Code() {
     }
     \`\`\`
     `
+  const localizationCode = dedent`
+    \`\`\`jsx
+    // app/[locale]/blog/page.tsx
+    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
+    export default async function BlogListPage({
+      params,
+    }: {
+      params: { locale: string };
+    }) {
+      return (
+        <BlogList
+          query={{ type: "blog-posts", locale: locale }}
+          sort="-created_at"
+          limit={10}
+          skip={0}
+          className="flex gap-4 max-w-[900px] m-auto"
+        />
+      );
+    }
+    \`\`\`
+    `
 
   const steps = [
     {
@@ -216,6 +237,12 @@ function Code() {
       title: "Draft preview link in the dashboard",
       description:
         "To add the draft preview link in the dashboard, go to Blog Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/blog/[object_slug]?preview=true` will add a Preview button to each blog post.",
+    },
+    {
+      title: "Example: localization",
+      code: localizationCode,
+      description:
+        "First, enable localization in the dashboard by going to Blog Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content.",
     },
   ]
 
