@@ -138,7 +138,6 @@ function Code() {
     \`\`\`jsx
     // app/shop/page.tsx
     import { ProductList } from "@/cosmic/blocks/products/ProductList";
-
     export default async function Shop() {
       return (
         <ProductList
@@ -153,7 +152,6 @@ function Code() {
     \`\`\`jsx
     // app/shop/[slug]/page.tsx
     import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
-
     export default async function SingleProductPage({
       params,
     }: {
@@ -168,6 +166,26 @@ function Code() {
   const blockCommand = dedent`
     \`\`\`bash
     bunx @cosmicjs/blocks add products image-gallery
+    \`\`\`
+    `
+  const draftPreviewCode = dedent`
+    \`\`\`jsx
+    // app/shop/[slug]/page.tsx
+    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
+    export default async function SingleProductPage({
+      params,
+      searchParams,
+    }: {
+      params: { slug: string };
+      searchParams?: any;
+    }) {
+      return (
+        <SingleProduct
+          query={{ slug: params.slug, type: "products" }}
+          preview={searchParams.preview}
+        />
+      );
+    }
     \`\`\`
     `
   const steps = [
@@ -204,6 +222,17 @@ function Code() {
       code: singleProductCode,
       description:
         "Add a new file located at `app/shop/[slug]/page.tsx` with the following",
+    },
+    {
+      title: "Example: draft preview",
+      description:
+        "Enable draft preview by setting the `preview` property on the Block. View the draft preview content by setting the `?preview=true` in the URL.",
+      code: draftPreviewCode,
+    },
+    {
+      title: "Draft preview link in the dashboard",
+      description:
+        "To add the draft preview link in the dashboard, go to Products Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/shop/[object_slug]?preview=true` will add a Preview button to each product.",
     },
   ]
 

@@ -8,14 +8,18 @@ import { cn } from "@/cosmic/utils"
 export async function SingleProduct({
   query,
   className,
+  preview,
 }: {
   query: any
   className?: string
+  preview?: boolean
 }) {
   const { object: product } = await cosmic.objects
     .findOne(query)
     .props("id,slug,title,metadata")
     .depth(1)
+    .status(preview ? "any" : "published")
+
   return (
     <section className={cn("container m-auto pb-8", className)}>
       <div className="relative m-auto max-w-[950px]">
