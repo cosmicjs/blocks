@@ -34,6 +34,7 @@ Blocks are data infused components for building Cosmic-powered features for your
 
 - Performance optimized
 - Draft preview ready
+- Localization ready
 - Mobile responsive
 - Dark mode ready
 - Customizable
