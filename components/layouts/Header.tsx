@@ -68,6 +68,7 @@ const Header: React.FC = async () => {
           <div className="mt-20 flex items-center justify-center space-x-6 opacity-75 dark:opacity-50">
             {["next", "react", "tailwind", "typescript"].map((tech) => (
               <img
+                key={tech}
                 className="h-10 w-10 lg:h-14 lg:w-14"
                 src={`/assets/tech/${tech}.svg`}
                 alt={tech}

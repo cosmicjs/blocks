@@ -2,13 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import {
-  AlertCircle,
-  CheckCircle2,
-  ExternalLink,
-  ExternalLinkIcon,
-  Loader2,
-} from "lucide-react"
+import { AlertCircle, CheckCircle2, ExternalLink, Loader2 } from "lucide-react"
 
 import { blocksData } from "@/config/blocks.data"
 import {
@@ -76,8 +70,6 @@ import {
 import { DASHBOARD_URL } from "@/constants"
 import { Highlight } from "./layouts/CodeSteps"
 import { useSearchParams } from "next/navigation"
-import { Label } from "./ui/label"
-import { Input } from "./ui/input"
 import APIKeysDialog from "./APIKeysDialog"
 
 export function InstallDialog({

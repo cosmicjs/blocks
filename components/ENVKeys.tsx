@@ -14,8 +14,6 @@ import { hideMiddleOfString } from "@/lib/utils"
 const ENVKeys: React.FC = () => {
   const [openKeysModal, setOpenKeysModal] = useState(false)
 
-  console.log("openKeysModal", openKeysModal)
-
   const [bucketSlug, setBucketSlug] = useState("")
   const [readKey, setReadKey] = useState("")
   const [writeKey, setWriteKey] = useState("")
