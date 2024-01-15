@@ -188,6 +188,24 @@ function Code() {
     }
     \`\`\`
     `
+  const localizationCode = dedent`
+    \`\`\`jsx
+    // app/[locale]/shop/page.tsx
+    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    export default async function Shop({
+      params,
+    }: {
+      params: { locale: string };
+    }) {
+      return (
+        <ProductList
+          className="max-w-[900px] m-auto flex gap-4"
+          query={{ type: "products", locale: locale }}
+        />
+      );
+    }
+    \`\`\`
+    `
   const steps = [
     {
       title: "Install the Block content model",
@@ -233,6 +251,12 @@ function Code() {
       title: "Draft preview link in the dashboard",
       description:
         "To add the draft preview link in the dashboard, go to Products Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/shop/[object_slug]?preview=true` will add a Preview button to each product.",
+    },
+    {
+      title: "Example: localization",
+      code: localizationCode,
+      description:
+        "First, enable localization in the dashboard by going to Blog Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content.",
     },
   ]
 

@@ -229,6 +229,25 @@ function Code({ manager }: { manager: PackageManagers }) {
     }
     \`\`\`
     `
+  const localizationCode = dedent`
+    \`\`\`jsx
+    // app/[locale]/events/page.tsx
+    import { EventsList } from "@/cosmic/blocks/events/EventsList";
+    export default async function EventListPage({
+      params,
+    }: {
+      params: { locale: string };
+    }) {
+      return (
+        <EventsList
+          className="max-w-[900px] mt-8 m-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8"
+          query={{ type: "events", locale: locale }}
+        />
+      );
+    }
+    \`\`\`
+    `
+
   const steps = [
     {
       title: "Install the Block content model",
@@ -274,6 +293,12 @@ function Code({ manager }: { manager: PackageManagers }) {
       title: "Draft preview link in the dashboard",
       description:
         "To add the draft preview link in the dashboard, go to Events Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/events/[object_slug]?preview=true` will add a Preview button to each event.",
+    },
+    {
+      title: "Example: localization",
+      code: localizationCode,
+      description:
+        "First, enable localization in the dashboard by going to Blog Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content.",
     },
   ]
 
