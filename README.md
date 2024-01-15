@@ -27,8 +27,9 @@ Blocks are data infused components for building Cosmic-powered websites and apps
 ## Built with
 
 - React Server Components
-- Next.js
 - Tailwind CSS
+- TypeScript
+- Next.js
 
 ## Features
 
