@@ -7,12 +7,14 @@ export async function BlogList({
   limit,
   skip,
   className,
+  preview,
 }: {
   query: any
   sort?: string
   limit?: number
   skip?: number
   className?: string
+  preview?: boolean
 }) {
   const { objects: posts } = await cosmic.objects
     .find(query)
@@ -21,6 +23,7 @@ export async function BlogList({
     .sort(sort ? sort : "-order")
     .limit(limit ? limit : 100)
     .skip(skip ? skip : 0)
+    .status(preview ? "any" : "published")
 
   return (
     <div className={className}>
