@@ -7,6 +7,7 @@
 Blocks are data infused components for building Cosmic-powered features for your websites and apps. Save development time and learn content modeling best practices.
 
 ## Get started
+
 [View all Blocks](https://blocks.cosmicjs.com)
 
 [Explore the demo](https://cosmic-agency-template.vercel.app)
@@ -30,7 +31,9 @@ Blocks are data infused components for building Cosmic-powered features for your
 - Tailwind CSS
 
 ## Features
+
 - Performance optimized
+- Draft preview ready
 - Mobile responsive
 - Dark mode ready
 - Customizable
