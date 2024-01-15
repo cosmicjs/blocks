@@ -8,14 +8,17 @@ import Link from "next/link"
 export async function Page({
   query,
   className,
+  preview,
 }: {
   query: any
   className?: string
+  preview?: boolean
 }) {
   const { object: page } = await cosmic.objects
     .findOne(query)
     .props("slug,title,metadata")
     .depth(1)
+    .status(preview ? "any" : "published")
 
   return (
     <div className={className}>

@@ -127,6 +127,26 @@ function Code() {
     bunx @cosmicjs/blocks add pages
     \`\`\`
     `
+  const draftPreviewCode = dedent`
+    \`\`\`jsx
+    // app/[slug]/page.tsx
+    import { Page } from "@/cosmic/blocks/pages/Page";
+    export default async function DynamicPage({
+      params,
+      searchParams,
+    }: {
+      params: { slug: string };
+      searchParams?: any;
+    }) {
+      return (
+        <Page
+          query={{ slug: params.slug, type: "pages" }}
+          preview={searchParams.preview}
+        />
+      );
+    }
+    \`\`\`
+    `
   const steps = [
     {
       title: "Install the Block content model",
@@ -190,6 +210,17 @@ function Code() {
       title: "Create dynamic pages in Cosmic",
       description:
         "Go to Bucket > Objects > Pages and add new pages. For example create a new Page with title`Features` and slug `features` and see it available at `https://localhost:3000/features`",
+    },
+    {
+      title: "Example: draft preview",
+      description:
+        "Enable draft preview by setting the `preview` property on the Block. View the draft preview content by setting the `?preview=true` in the URL.",
+      code: draftPreviewCode,
+    },
+    {
+      title: "Draft preview link in the dashboard",
+      description:
+        "To add the draft preview link in the dashboard, go to Pages Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/[object_slug]?preview=true` will add a Preview button to each page.",
     },
   ]
 

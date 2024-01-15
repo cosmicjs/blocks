@@ -191,7 +191,6 @@ function Code() {
     {
       title: "Usage",
       code: usageCode,
-
       description:
         "Add the block to your app with the `query` property set to fetch your specific content. You can also set `sort`, `limit`, and `skip` properties.",
     },
