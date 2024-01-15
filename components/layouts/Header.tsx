@@ -65,7 +65,7 @@ const Header: React.FC = async () => {
               What is Cosmic?
             </Button>
           </div>
-          <div className="mt-20 flex items-center justify-center space-x-6 opacity-75 dark:opacity-50">
+          <div className="mt-20 flex items-center justify-center space-x-8 opacity-75 dark:opacity-50 md:space-x-12">
             {["next", "react", "tailwind", "typescript"].map((tech) => (
               <img
                 key={tech}
