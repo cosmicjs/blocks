@@ -148,6 +148,27 @@ function Code() {
     }
     \`\`\`
     `
+  const previewPageCode = dedent`
+    \`\`\`jsx
+    // app/blog/[slug]/page.tsx
+    import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
+    export default async function SingleBlogPage({
+      params,
+      searchParams,
+    }: {
+      params: { slug: string };
+      searchParams?: any;
+    }) {
+      return (
+        <SingleBlog
+          query={{ slug: params.slug, type: "blog-posts" }}
+          preview={searchParams.preview}
+        />
+      );
+    }
+    \`\`\`
+    `
+
   const steps = [
     {
       title: "Install the Block content model",
@@ -185,6 +206,12 @@ function Code() {
       code: singlePageCode,
       description:
         "Add a new file located at `app/blog/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the blog content.",
+    },
+    {
+      title: "Example: preview enabled",
+      code: previewPageCode,
+      description:
+        "Enable preview by setting the `preview` property on the Block. View the draft preview content by setting the `?preview=true` in the URL. Go to Object type > Settings to set up your preview link in the dashboard.",
     },
   ]
 

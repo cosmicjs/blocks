@@ -70,6 +70,7 @@ import {
 import { DASHBOARD_URL } from "@/constants"
 import { Highlight } from "./layouts/CodeSteps"
 import { useSearchParams } from "next/navigation"
+import APIKeysDialog from "./APIKeysDialog"
 
 export function InstallDialog({
   featureKey,
@@ -78,28 +79,35 @@ export function InstallDialog({
   featureKey?: string
   setShowModal: any
 }) {
-  const [showLoginMessage, setShowLoginMessage] = useState(false)
-  let bucket_slug = ""
-  let read_key = ""
-  let write_key = ""
+  const [showKeysModal, setShowKeysModal] = useState(false)
+  const [bucketSlug, setBucketSlug] = useState("")
+  const [readKey, setReadKey] = useState("")
+  const [writeKey, setWriteKey] = useState("")
 
-  if (typeof window !== "undefined" && localStorage.getItem("bucket_slug")) {
-    bucket_slug = localStorage.getItem("bucket_slug") || ""
-    read_key = localStorage.getItem("read_key") || ""
-    write_key = localStorage.getItem("write_key") || ""
-    if (showLoginMessage) setShowLoginMessage(false)
-  } else {
-    // TODO: add messaging to send user to extension in dashboard
-    // alert("NO BUCKET INFO. Installing features will not work.")
-    if (!showLoginMessage) setShowLoginMessage(true)
-  }
+  useEffect(() => {
+    const initializeKeys = () => {
+      if (localStorage.getItem("bucket_slug")) {
+        setBucketSlug(localStorage.getItem("bucket_slug") || "")
+        setReadKey(localStorage.getItem("read_key") || "")
+        setWriteKey(localStorage.getItem("write_key") || "")
+        if (showKeysModal) setShowKeysModal(false)
+      } else {
+        // TODO: add messaging to send the user to the extension in the dashboard
+        // alert("NO BUCKET INFO. Installing features will not work.")
+        if (!showKeysModal) setShowKeysModal(true)
+      }
+    }
+
+    initializeKeys()
+  }, [])
 
   const [installationSuccess, setInstallationSuccess] = useState(false)
+  const [installationFailed, setInstallationFailed] = useState(false)
 
   const cosmicTargetBucket = cosmicTargetBucketConfig(
-    bucket_slug,
-    read_key,
-    write_key
+    bucketSlug,
+    readKey,
+    writeKey
   )
   const feature = blocksData.filter((block) => block?.key === featureKey)[0]
   const [installing, setInstalling] = useState<boolean>(false)
@@ -308,7 +316,9 @@ export function InstallDialog({
       if (feature?.type === "metafields")
         await installMetafields(selectedObjectTypes)
       else await installObjectType()
-    } catch (err) {}
+    } catch (err) {
+      throw err
+    }
   }
 
   // Fetch Object Types
@@ -330,35 +340,20 @@ export function InstallDialog({
     setConflict(false)
   }
 
-  if (showLoginMessage) {
+  if (showKeysModal)
     return (
-      <Dialog open onOpenChange={() => closeModal()}>
-        <DialogContent
-          className="sm:max-w-[425px]"
-          onInteractOutside={() => closeModal()}
-          onEscapeKeyDown={() => closeModal()}
-        >
-          <DialogHeader>
-            <DialogTitle>Log in required</DialogTitle>
-            <DialogDescription>
-              <div className="mb-4">
-                Log in to the Cosmic dashboard to install this Block.
-              </div>
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Link
-              href="https://app.cosmicjs.com/login?redirect_to=?install_extension=blocks"
-              target="_parent"
-              className={cn(buttonVariants())}
-            >
-              Log in
-            </Link>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <APIKeysDialog
+        onClose={() => {
+          setShowKeysModal(false)
+          closeModal()
+        }}
+        onSave={() => {
+          setShowKeysModal(false)
+          setInstallationFailed(false)
+          setInstalling(false)
+        }}
+      />
     )
-  }
 
   if (installationSuccess || conflict) {
     const objectTypeSlug =
@@ -389,7 +384,7 @@ export function InstallDialog({
               <div className="mb-4">
                 {conflict
                   ? `An Object type with slug ${feature?.slug} already exists. Please rename or delete the existing Object type if you'd like to install ${feature?.title} Block.`
-                  : "You can continue with the steps to install this Block or view the installed Object type for your Block."}
+                  : "Continue to install the Block code or go to the dashboard to view and update the Block content."}
               </div>
             </DialogDescription>
           </DialogHeader>
@@ -403,25 +398,62 @@ export function InstallDialog({
                 Install
               </Link>
             )}
+            {bucketSlug && (
+              <a
+                href={`${DASHBOARD_URL}/${bucketSlug}/objects?query={"type":"${objectTypeSlug}"}`}
+                target="_blank"
+                rel="noreferrer"
+                className={cn(buttonVariants({ variant: "secondary" }))}
+              >
+                View Block content
+                <ExternalLink className="ml-2 h-4 w-4" />
+              </a>
+            )}
             {!conflict && tab === "install" && (
               <Button
-                className={cn(buttonVariants({ variant: "secondary" }))}
+                className={cn(buttonVariants())}
                 onClick={() => closeModal()}
               >
                 Continue
               </Button>
             )}
-            {bucket_slug && (
-              <a
-                href={`${DASHBOARD_URL}/${bucket_slug}/objects?query={"type":"${objectTypeSlug}"}`}
-                target="_blank"
-                rel="noreferrer"
-                className={cn(buttonVariants())}
-              >
-                View Object type
-                <ExternalLink className="ml-2 h-4 w-4" />
-              </a>
-            )}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    )
+  }
+
+  if (installationFailed) {
+    return (
+      <Dialog open onOpenChange={() => closeModal()}>
+        <DialogContent
+          className="sm:max-w-[425px]"
+          onInteractOutside={() => closeModal()}
+          onEscapeKeyDown={() => closeModal()}
+        >
+          <DialogHeader>
+            <DialogTitle className="flex items-center">
+              {" "}
+              <AlertCircle className="mr-2 text-red-500" />
+              Installation failed!
+            </DialogTitle>
+            <DialogDescription>
+              <div className="mb-4">
+                Looks like the installation for {feature.title} failed. Please
+                make sure your API keys are correct and try again.
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button
+              className={cn(buttonVariants({ variant: "secondary" }))}
+              onClick={() => closeModal()}
+            >
+              Cancel
+            </Button>
+            <Button onClick={() => setShowKeysModal(true)}>
+              Check API Keys
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -454,7 +486,7 @@ export function InstallDialog({
                       </>
                     )}{" "}
                     <a
-                      href={`https://app.cosmicjs.com/${bucket_slug}/object-types/new`}
+                      href={`https://app.cosmicjs.com/${bucketSlug}/object-types/new`}
                       target="_parent"
                       className="text-cosmic-blue"
                     >
@@ -523,9 +555,11 @@ export function InstallDialog({
                 setInstalling(true)
                 try {
                   await installFeature(selectedObjectTypes)
-                } catch (err) {}
+                } catch (error) {
+                  setInstallationFailed(true)
+                  throw error
+                }
                 setInstalling(false)
-                setInstallationSuccess(true)
               }}
             >
               {installing ? (

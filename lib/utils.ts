@@ -45,3 +45,17 @@ export function generateNumberFromString(inputString: string) {
 
   return hash
 }
+
+export function hideMiddleOfString(input: string): string {
+  if (!input) return input
+  if (input.length <= 26) {
+    // If the string has 6 or fewer characters, don't hide anything
+    return input
+  }
+
+  const firstThree = input.slice(0, 8)
+  const lastThree = input.slice(-8)
+  const middleHidden = "x".repeat(input.length - 10) // Number of 'X' equals the length of middle part to be hidden
+
+  return firstThree + middleHidden + lastThree
+}
