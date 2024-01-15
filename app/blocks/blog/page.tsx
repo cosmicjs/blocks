@@ -148,7 +148,7 @@ function Code() {
     }
     \`\`\`
     `
-  const previewPageCode = dedent`
+  const draftPreviewCode = dedent`
     \`\`\`jsx
     // app/blog/[slug]/page.tsx
     import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
@@ -208,10 +208,15 @@ function Code() {
         "Add a new file located at `app/blog/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the blog content.",
     },
     {
-      title: "Example: preview enabled",
-      code: previewPageCode,
+      title: "Example: draft preview",
+      code: draftPreviewCode,
       description:
-        "Enable preview by setting the `preview` property on the Block. View the draft preview content by setting the `?preview=true` in the URL. Go to Object type > Settings to set up your preview link in the dashboard.",
+        "Enable draft preview by setting the `preview` property on the Block. View the draft preview content by setting the `?preview=true` in the URL.",
+    },
+    {
+      title: "Draft preview link in the dashboard",
+      description:
+        "To add the draft preview link in the dashboard, go to Blog Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/blog/[object_slug]?preview=true` will add a Preview button to each blog post.",
     },
   ]
 
