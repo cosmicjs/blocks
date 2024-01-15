@@ -4,6 +4,10 @@ import classNames from "classnames"
 import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
 import { DEMO_URL, WEBSITE_URL } from "@/constants"
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
+import NextIcon from "../../public/assets/tech/next.svg"
+import ReactIcon from "../../public/assets/tech/react.svg"
+import TailwindIcon from "../../public/assets/tech/tailwind.svg"
+import TypescriptIcon from "../../public/assets/tech/typescript.svg"
 
 const Header: React.FC = async () => {
   const { object: page } = await cosmicSourceBucketConfig.objects
@@ -60,6 +64,15 @@ const Header: React.FC = async () => {
             >
               What is Cosmic?
             </Button>
+          </div>
+          <div className="mt-20 flex items-center justify-center space-x-6 opacity-75 dark:opacity-50">
+            {["next", "react", "tailwind", "typescript"].map((tech) => (
+              <img
+                className="h-10 w-10 lg:h-14 lg:w-14"
+                src={`/assets/tech/${tech}.svg`}
+                alt={tech}
+              />
+            ))}
           </div>
         </div>
       </div>
