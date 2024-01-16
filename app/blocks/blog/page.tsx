@@ -209,7 +209,8 @@ function Code() {
     {
       title: "Import Block",
       code: importBlogListCode,
-      description: "Import the BlogList block into your app.",
+      description:
+        "Import the `BlogList` and/or `SingleBlog` Block into your app.",
     },
     {
       title: "Usage",
@@ -257,7 +258,7 @@ function Code() {
       <div className="mb-2 border-t pt-10">
         <h3 className="text-3xl font-semibold">Examples</h3>
       </div>
-      <CodeSteps scratch steps={examples} featureKey="pages" />
+      <CodeSteps scratch steps={examples} featureKey="blog" />
     </>
   )
 }

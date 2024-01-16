@@ -108,8 +108,9 @@ function Code() {
       installButton: true,
     },
     {
-      title:
-        " Add the following `generateMetadata` function to any file that needs SEO",
+      title: "Usage",
+      description:
+        "Include the Cosmic client and add the `generateMetadata` function to any file that needs SEO.",
       code: codeString,
     },
   ]
