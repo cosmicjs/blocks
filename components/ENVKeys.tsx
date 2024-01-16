@@ -81,11 +81,10 @@ const ENVKeys: React.FC = () => {
           <CopyButton
             className="absolute right-3 top-[20px] z-10 !bg-gray-800"
             iconOnly
-            text={`
-    # .env.local
-    COSMIC_BUCKET_SLUG=${bucketSlug}
-    COSMIC_READ_KEY=${readKey}
-    COSMIC_WRITE_KEY=${writeKey}`}
+            text={`# .env.local
+COSMIC_BUCKET_SLUG=${bucketSlug}
+COSMIC_READ_KEY=${readKey}
+COSMIC_WRITE_KEY=${writeKey}`}
           />
         )}
         <Markdown
@@ -94,13 +93,12 @@ const ENVKeys: React.FC = () => {
             "opacity-50 blur-sm": !hasKeysConfigured,
           })}
         >
-          {dedent(`\`\`\`
-  # .env.local
-  COSMIC_BUCKET_SLUG=${bucketSlug}
-  COSMIC_READ_KEY=${hideMiddleOfString(readKey)}
-  COSMIC_WRITE_KEY=${hideMiddleOfString(writeKey)}
-  \`\`\`
-  `)}
+          {dedent(`\`\`\`# .env.local
+COSMIC_BUCKET_SLUG=${bucketSlug}
+COSMIC_READ_KEY=${hideMiddleOfString(readKey)}
+COSMIC_WRITE_KEY=${hideMiddleOfString(writeKey)}
+\`\`\`
+`)}
         </Markdown>
       </div>
     </div>
