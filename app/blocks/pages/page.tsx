@@ -198,7 +198,6 @@ function Code() {
       code: dedent(`\`\`\`jsx
       // app/page.tsx
       import { Page } from "@/cosmic/blocks/pages/Page";
-      
       export default async function HomePage() {
         return <Page query={{ slug: "home", type: "pages" }} />;
       }
@@ -212,7 +211,6 @@ function Code() {
       code: dedent(`\`\`\`jsx
       // app/[slug]/page.tsx
       import { Page } from "@/cosmic/blocks/pages/Page";
-      
       export default async function DynamicPage({
         params,
       }: {

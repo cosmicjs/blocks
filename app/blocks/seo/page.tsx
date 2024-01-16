@@ -93,7 +93,7 @@ function Code() {
   export default async function HomePage() {
     return (
       <>
-        { /* Page content here. See Page block. */ }
+        { /* Page content here. See Pages block. */ }
       </>
     );
   }

@@ -229,36 +229,42 @@ function Code() {
     {
       title: "Install the Block content model",
       description:
-        "This will add the `global-settings` Object type to your Bucket.",
+        "This will add the `global-settings` singleton Object type to your Bucket.",
       installButton: true,
     },
     {
-      title:
-        "The Global Settings data is meant to be used in multiple locations. For example, add the following to the a `Header.tsx` file ",
+      title: "Usage: Header",
       description: (
         <>
-          Note: this assumes you have installed the{" "}
+          The Global Settings data is meant to be used in multiple locations.
+          For example, add the following to a file located at
+          `components/Header.tsx` file. Note: this assumes you have installed
+          the{" "}
           <Link href="/blocks/nav-menus" className="text-cosmic-blue">
-            Nav Menu block
+            Nav Menu Block
           </Link>
+          .
         </>
       ),
       code: codeHeaderString,
     },
     {
-      title: "Add the following to a `Footer.tsx` file",
+      title: "Usage: Footer",
       description: (
         <>
-          Note: this assumes you have installed the{" "}
+          Add the following to a file located at `components/Footer.tsx`. Note:
+          this assumes you have installed the{" "}
           <Link href="/blocks/nav-menus" className="text-cosmic-blue">
-            Navigation Menu block
+            Navigation Menu Block
           </Link>
+          .
         </>
       ),
       code: codeFooterString,
     },
     {
-      title: "Then include the components in your `layout.tsx` file",
+      title: "Usage: Layout",
+      description: "Then include the components in your `layout.tsx` file.",
       code: codeLayoutString,
     },
   ]
