@@ -110,11 +110,13 @@ function Code() {
   const importBlogListCode = dedent`
     \`\`\`jsx
     import { BlogList } from "@/cosmic/blocks/blog/BlogList";
+    import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
     \`\`\`
     `
   const usageCode = dedent`
     \`\`\`jsx
     <BlogList query={{ type: "blog-posts" }} sort="-created_at" limit={10} skip={0} />
+    <SingleBlog query={{ slug: "blog-post-slug", type: "blog-posts" }} />
     \`\`\`
     `
   const blogListPageCode = dedent`
@@ -213,22 +215,25 @@ function Code() {
       title: "Usage",
       code: usageCode,
       description:
-        "Add the block to your app with the `query` property set to fetch your specific content. You can also set `sort`, `limit`, and `skip` properties.",
+        "Add the block to your app with the `query` property set to fetch your specific content. You can also set `sort`, `limit`, and `skip` properties on the `BlogList` Block.",
     },
+  ]
+
+  const examples = [
     {
-      title: "Example: blog list page",
+      title: "Blog list page",
       code: blogListPageCode,
       description:
         "Add a new file located at `app/blog/page.tsx` with the following:",
     },
     {
-      title: "Example: single blog page",
+      title: "Single blog page",
       code: singlePageCode,
       description:
         "Add a new file located at `app/blog/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the blog content.",
     },
     {
-      title: "Example: draft preview",
+      title: "Draft preview",
       code: draftPreviewCode,
       description:
         "Enable draft preview by setting the `status` property on the Block. View the draft preview content by setting the `?status=any` in the URL. Note: This is a basic example. It is advisable to consider a security strategy if you intend to keep your preview private.",
@@ -239,16 +244,20 @@ function Code() {
         "To add the draft preview link in the dashboard, go to Blog Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/blog/[object_slug]?status=any` will add a Preview button to each blog post.",
     },
     {
-      title: "Example: localization",
+      title: "Localization",
       code: localizationCode,
       description:
-        "First, enable localization in the dashboard by going to Blog Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content.",
+        "First, enable localization in the dashboard by going to Blog Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content. Create a new file at `app/[locale]/blog/page.tsx` with the following:",
     },
   ]
 
   return (
     <>
       <CodeSteps steps={steps} featureKey="blog" />
+      <div className="mb-2 border-t pt-10">
+        <h3 className="text-3xl font-semibold">Examples</h3>
+      </div>
+      <CodeSteps scratch steps={examples} featureKey="pages" />
     </>
   )
 }
