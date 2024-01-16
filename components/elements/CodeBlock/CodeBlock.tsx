@@ -161,7 +161,7 @@ const CodeBlock = ({
       )}
       <div
         className={classNames(
-          "w-full overflow-x-auto break-words rounded-lg bg-gray-800 px-2 py-2",
+          "w-full break-words rounded-lg bg-gray-800 px-2 py-2",
           {
             "px-5": inline,
           }
@@ -189,7 +189,7 @@ const CodeBlock = ({
             </SyntaxHighlighter>
           </div>
         ) : (
-          <code className="rounded bg-gray-200 px-1 py-px dark:bg-dark-gray-200">
+          <code className="overflow-x-auto rounded bg-gray-200 px-1 py-px dark:bg-dark-gray-200">
             {value}
           </code>
         )}
