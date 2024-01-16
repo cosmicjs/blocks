@@ -60,7 +60,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({
         <div
           ref={tooltipRef}
           className={classNames(
-            "absolute left-0 top-0 z-[99999] -translate-x-1/2 -translate-y-full transform rounded bg-gray-700 px-2 py-1 text-xs text-white transition-opacity duration-100",
+            "absolute -top-2 left-0 z-[99999] w-max -translate-x-1/4 -translate-y-full transform rounded border border-gray-300 bg-gray-200 px-2 py-1 text-xs text-black transition-opacity duration-100 dark:border-gray-600 dark:bg-gray-700 dark:text-white",
             {
               "opacity-100": copied,
               "pointer-events-none opacity-0": !copied,
