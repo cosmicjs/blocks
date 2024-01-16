@@ -7,17 +7,17 @@ import { cn } from "@/cosmic/utils"
 export async function SingleEvent({
   query,
   className,
-  preview,
+  status,
 }: {
   query: any
   className?: string
-  preview?: boolean
+  status?: "draft" | "published" | "any"
 }) {
   const { object: event } = await cosmic.objects
     .findOne(query)
     .props("id,slug,title,metadata")
     .depth(1)
-    .status(preview ? "any" : "published")
+    .status(status ? status : "published")
 
   return (
     <section className={cn("m-auto pb-8 md:container", className)}>

@@ -8,17 +8,17 @@ import { cn } from "@/cosmic/utils"
 export async function SingleProduct({
   query,
   className,
-  preview,
+  status,
 }: {
   query: any
   className?: string
-  preview?: boolean
+  status?: "draft" | "published" | "any"
 }) {
   const { object: product } = await cosmic.objects
     .findOne(query)
     .props("id,slug,title,metadata")
     .depth(1)
-    .status(preview ? "any" : "published")
+    .status(status ? status : "published")
 
   return (
     <section className={cn("container m-auto pb-8", className)}>

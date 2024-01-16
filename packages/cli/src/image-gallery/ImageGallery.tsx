@@ -4,17 +4,17 @@ import { cosmic } from "@/cosmic/client"
 export async function ImageGallery({
   query,
   className,
-  preview,
+  status,
 }: {
   query: any
   className?: string
-  preview?: boolean
+  status?: "draft" | "published" | "any"
 }) {
   const { object: page } = await cosmic.objects
     .findOne(query)
     .props("slug,title,metadata")
     .depth(1)
-    .status(preview ? "any" : "published")
+    .status(status ? status : "published")
   if (!page.metadata.gallery?.length) return <></>
   return (
     <ImageGalleryClient items={page.metadata.gallery} className={className} />

@@ -7,17 +7,17 @@ import Link from "next/link"
 export async function SingleBlog({
   query,
   className,
-  preview,
+  status,
 }: {
   query: any
   className?: string
-  preview?: boolean
+  status?: "draft" | "published" | "any"
 }) {
   const { object: blog } = await cosmic.objects
     .findOne(query)
     .props("id,slug,title,metadata")
     .depth(1)
-    .status(preview ? "any" : "published")
+    .status(status ? status : "published")
 
   const date = getFormattedDate(blog.metadata.published_date)
 

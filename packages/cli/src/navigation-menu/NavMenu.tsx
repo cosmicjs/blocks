@@ -11,13 +11,13 @@ export async function NavMenu({
 }: {
   query: any
   className?: string
-  status?: "draft" | "published"
+  status?: "draft" | "published" | "any"
 }) {
   const { object: nav } = await cosmic.objects
     .findOne(query)
     .props("metadata")
     .depth(1)
-    .status(status === "draft" ? "any" : "published")
+    .status(status ? status : "published")
   return (
     <div className={className}>
       {/* Desktop */}
