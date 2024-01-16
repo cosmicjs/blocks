@@ -159,7 +159,6 @@ function Code() {
       return (
         <Page
           query={{ slug: params.slug, type: "pages", locale: locale }}
-          status={searchParams.status}
         />
       );
     }
