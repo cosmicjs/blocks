@@ -18,7 +18,7 @@ const Header: React.FC = async () => {
     .props("title,metadata")
     .depth(1)
   return (
-    <div className="dark:dark-header-image min-w-screen light-header-image container mx-auto mb-20 px-5 md:mb-36 lg:mb-60">
+    <div className="dark:dark-header-image min-w-screen light-header-image md:mb-26 container mx-auto mb-16 px-5 lg:mb-40">
       <div className="opacity-50">
         <ThemedImage
           darkSrc="https://imgix.cosmicjs.com/b96bff60-9419-11ee-b62d-5b90a0a1bade-gradient-dark.png?w=1200&h=800&auto=format"
@@ -65,11 +65,11 @@ const Header: React.FC = async () => {
               What is Cosmic?
             </Button>
           </div>
-          <div className="mt-20 flex items-center justify-center space-x-6 opacity-75 dark:opacity-50">
+          <div className="mt-20 flex items-center justify-center space-x-8 opacity-75 dark:opacity-50 md:space-x-12">
             {["next", "react", "tailwind", "typescript"].map((tech) => (
               <img
                 key={tech}
-                className="h-10 w-10 lg:h-14 lg:w-14"
+                className="h-10 w-10 opacity-75 grayscale-[50%] lg:h-14 lg:w-14"
                 src={`/assets/tech/${tech}.svg`}
                 alt={tech}
               />

@@ -127,6 +127,43 @@ function Code() {
     bunx @cosmicjs/blocks add pages
     \`\`\`
     `
+  const draftPreviewCode = dedent`
+    \`\`\`jsx
+    // app/[slug]/page.tsx
+    import { Page } from "@/cosmic/blocks/pages/Page";
+    export default async function DynamicPage({
+      params,
+      searchParams,
+    }: {
+      params: { slug: string };
+      searchParams?: any;
+    }) {
+      return (
+        <Page
+          query={{ slug: params.slug, type: "pages" }}
+          status={searchParams.status}
+        />
+      );
+    }
+    \`\`\`
+    `
+  const localizationCode = dedent`
+    \`\`\`jsx
+    // app/[locale]/[slug]/page.tsx
+    import { Page } from "@/cosmic/blocks/pages/Page";
+    export default async function DynamicPage({
+      params,
+    }: {
+      params: { slug: string, locale: string };
+    }) {
+      return (
+        <Page
+          query={{ slug: params.slug, type: "pages", locale: locale }}
+        />
+      );
+    }
+    \`\`\`
+    `
   const steps = [
     {
       title: "Install the Block content model",
@@ -151,31 +188,29 @@ function Code() {
       description:
         "Add the block to your app with the `query` property set to fetch your specific content.",
     },
+  ]
+
+  const examples = [
     {
-      title: "Example: Home page",
+      title: "Home page",
       description:
         "You can create a home page by creating a new file at `app/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
       // app/page.tsx
       import { Page } from "@/cosmic/blocks/pages/Page";
-      
       export default async function HomePage() {
         return <Page query={{ slug: "home", type: "pages" }} />;
       }
       \`\`\`
       `),
     },
-  ]
-
-  const dynamicPagesSteps = [
     {
-      title: "Example: Dynamic pages",
+      title: "Dynamic pages",
       description:
         "You can create dynamic pages by creating a new file at `app/[slug]/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
       // app/[slug]/page.tsx
       import { Page } from "@/cosmic/blocks/pages/Page";
-      
       export default async function DynamicPage({
         params,
       }: {
@@ -191,15 +226,32 @@ function Code() {
       description:
         "Go to Bucket > Objects > Pages and add new pages. For example create a new Page with title`Features` and slug `features` and see it available at `https://localhost:3000/features`",
     },
+    {
+      title: "Draft preview",
+      description:
+        "Enable draft preview by setting the `status` property on the Block. View the draft preview content by setting the `?status=any` in the URL. Note: This is a basic example. It is advisable to consider a security strategy if you intend to keep your preview private.",
+      code: draftPreviewCode,
+    },
+    {
+      title: "Draft preview link in the dashboard",
+      description:
+        "To add the draft preview link in the dashboard, go to Pages Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/[object_slug]?status=any` will add a Preview button to each page.",
+    },
+    {
+      title: "Localization",
+      code: localizationCode,
+      description:
+        "First, enable localization in the dashboard by going to Page Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content. Create a new file at `app/[locale]/[slug]/page.tsx` with the following:",
+    },
   ]
 
   return (
     <div>
       <CodeSteps steps={steps} featureKey="pages" />
       <div className="mb-2 border-t pt-10">
-        <h3 className="text-3xl font-semibold">Dynamic pages</h3>
+        <h3 className="text-3xl font-semibold">Examples</h3>
       </div>
-      <CodeSteps scratch steps={dynamicPagesSteps} featureKey="pages" />
+      <CodeSteps scratch steps={examples} featureKey="pages" />
     </div>
   )
 }

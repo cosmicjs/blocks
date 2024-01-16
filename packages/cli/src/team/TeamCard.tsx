@@ -33,7 +33,7 @@ export function TeamCard({
       <div className="md:w-2/5">
         <img
           className="h-full w-full object-cover object-center"
-          src={`${member.metadata.image.imgix_url}?w=600&h=600&auto=format,compression&fit=crop&crop=faces}`}
+          src={`${member.metadata.image.imgix_url}?w=600&h=600&auto=format,compression&fit=crop&crop=faces`}
           alt={member.title}
         />
       </div>

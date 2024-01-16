@@ -110,11 +110,13 @@ function Code() {
   const importBlogListCode = dedent`
     \`\`\`jsx
     import { BlogList } from "@/cosmic/blocks/blog/BlogList";
+    import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
     \`\`\`
     `
   const usageCode = dedent`
     \`\`\`jsx
     <BlogList query={{ type: "blog-posts" }} sort="-created_at" limit={10} skip={0} />
+    <SingleBlog query={{ slug: "blog-post-slug", type: "blog-posts" }} />
     \`\`\`
     `
   const blogListPageCode = dedent`
@@ -148,7 +150,7 @@ function Code() {
     }
     \`\`\`
     `
-  const previewPageCode = dedent`
+  const draftPreviewCode = dedent`
     \`\`\`jsx
     // app/blog/[slug]/page.tsx
     import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
@@ -162,7 +164,28 @@ function Code() {
       return (
         <SingleBlog
           query={{ slug: params.slug, type: "blog-posts" }}
-          preview={searchParams.preview}
+          status={searchParams.status}
+        />
+      );
+    }
+    \`\`\`
+    `
+  const localizationCode = dedent`
+    \`\`\`jsx
+    // app/[locale]/blog/page.tsx
+    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
+    export default async function BlogListPage({
+      params,
+    }: {
+      params: { locale: string };
+    }) {
+      return (
+        <BlogList
+          query={{ type: "blog-posts", locale: locale }}
+          sort="-created_at"
+          limit={10}
+          skip={0}
+          className="flex gap-4 max-w-[900px] m-auto"
         />
       );
     }
@@ -186,38 +209,56 @@ function Code() {
     {
       title: "Import Block",
       code: importBlogListCode,
-      description: "Import the BlogList block into your app.",
+      description:
+        "Import the `BlogList` and/or `SingleBlog` Block into your app.",
     },
     {
       title: "Usage",
       code: usageCode,
-
       description:
-        "Add the block to your app with the `query` property set to fetch your specific content. You can also set `sort`, `limit`, and `skip` properties.",
+        "Add the block to your app with the `query` property set to fetch your specific content. You can also set `sort`, `limit`, and `skip` properties on the `BlogList` Block.",
     },
+  ]
+
+  const examples = [
     {
-      title: "Example: blog list page",
+      title: "Blog list page",
       code: blogListPageCode,
       description:
         "Add a new file located at `app/blog/page.tsx` with the following:",
     },
     {
-      title: "Example: single blog page",
+      title: "Single blog page",
       code: singlePageCode,
       description:
         "Add a new file located at `app/blog/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the blog content.",
     },
     {
-      title: "Example: preview enabled",
-      code: previewPageCode,
+      title: "Draft preview",
+      code: draftPreviewCode,
       description:
-        "Enable preview by setting the `preview` property on the Block. View the draft preview content by setting the `?preview=true` in the URL. Go to Object type > Settings to set up your preview link in the dashboard.",
+        "Enable draft preview by setting the `status` property on the Block. View the draft preview content by setting the `?status=any` in the URL. Note: This is a basic example. It is advisable to consider a security strategy if you intend to keep your preview private.",
+    },
+    {
+      title: "Draft preview link in the dashboard",
+      description:
+        "To add the draft preview link in the dashboard, go to Blog Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/blog/[object_slug]?status=any` will add a Preview button to each blog post.",
+    },
+    {
+      title: "Localization",
+      code: localizationCode,
+      description:
+        "First, enable localization in the dashboard by going to Blog Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content. Create a new file at `app/[locale]/blog/page.tsx` with the following:",
     },
   ]
 
   return (
     <>
       <CodeSteps steps={steps} featureKey="blog" />
+      <div className="mb-2 border-t pt-10">
+        <h3 className="text-3xl font-semibold">Examples</h3>
+      </div>
+      <CodeSteps scratch steps={examples} featureKey="blog" />
     </>
   )
 }

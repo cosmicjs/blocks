@@ -51,9 +51,11 @@ function Comment({
 export async function Comments({
   query,
   className,
+  status,
 }: {
   query: any
   className?: string
+  status?: "draft" | "published" | "any"
 }) {
   let comments = []
   const resourceId = query["metadata.resource"]
@@ -64,6 +66,7 @@ export async function Comments({
       .props("title,slug,metadata,created_at")
       .depth(1)
       .sort("created_at")
+      .status(status ? status : "published")
     comments = objects
   } catch (err) {}
   return (

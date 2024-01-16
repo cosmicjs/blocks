@@ -168,12 +168,14 @@ function Code({ manager }: { manager: PackageManagers }) {
   const importCode = dedent`
     \`\`\`jsx
     import { EventsList } from "@/cosmic/blocks/events/EventsList";
+    import { SingleEvent } from "@/cosmic/blocks/events/SingleEvent";
     \`\`\`
     `
 
   const usageCode = dedent`
     \`\`\`jsx
     <EventsList query={{ type: "events" }} />
+    <SingleEvent query={{ type: "events", slug: "event-slug" }} />
     \`\`\`
     `
   const exampleListCode = dedent`
@@ -208,6 +210,45 @@ function Code({ manager }: { manager: PackageManagers }) {
     }    
     \`\`\`
     `
+  const draftPreviewCode = dedent`
+    \`\`\`jsx
+    // app/events/[slug]/page.tsx
+    import { SingleEvent } from "@/cosmic/blocks/events/SingleEvent";
+    export default async function SingleEventPage({
+      params,
+      searchParams,
+    }: {
+      params: { slug: string };
+      searchParams?: any;
+    }) {
+      return (
+        <SingleEvent
+          className="max-w-[900px] mt-8"
+          query={{ slug: params.slug, type: "events" }}
+          status={searchParams.status}
+        />
+      );
+    }
+    \`\`\`
+    `
+  const localizationCode = dedent`
+    \`\`\`jsx
+    // app/[locale]/events/page.tsx
+    import { EventsList } from "@/cosmic/blocks/events/EventsList";
+    export default async function EventListPage({
+      params,
+    }: {
+      params: { locale: string };
+    }) {
+      return (
+        <EventsList
+          className="max-w-[900px] mt-8 m-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8"
+          query={{ type: "events", locale: locale }}
+        />
+      );
+    }
+    \`\`\`
+    `
 
   const steps = [
     {
@@ -219,12 +260,13 @@ function Code({ manager }: { manager: PackageManagers }) {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the `EventCard.tsx` and `EventsList.tsx` files to `cosmic/blocks/events`.",
+        "This will add the `EventCard.tsx`, `EventsList.tsx`, and `SingleEvent.tsx` files to `cosmic/blocks/events`.",
     },
     {
       title: "Import Block",
       code: importCode,
-      description: "Import the block into your app.",
+      description:
+        "Import the `EventsList` and/or `SingleEvent` Block into your app.",
     },
     {
       title: "Usage",
@@ -232,19 +274,46 @@ function Code({ manager }: { manager: PackageManagers }) {
       description:
         "Add the block to your app with the `query` property set to fetch your specific content.",
     },
+  ]
+  const examples = [
     {
-      title: "Example: events page",
+      title: "Events page",
       code: exampleListCode,
       description:
         "Add a new file located at `app/events/page.tsx` with the following:",
     },
     {
-      title: "Example: single event page",
+      title: "Single event page",
       code: exampleSingleCode,
       description:
         "Add a new file located at `app/events/[slug]/page.tsx` with the following:",
     },
+    {
+      title: "Draft preview",
+      description:
+        "Enable draft preview by setting the `status` property on the Block. View the draft preview content by setting the `?status=any` in the URL. Note: This is a basic example. It is advisable to consider a security strategy if you intend to keep your preview private.",
+      code: draftPreviewCode,
+    },
+    {
+      title: "Draft preview link in the dashboard",
+      description:
+        "To add the draft preview link in the dashboard, go to Events Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/events/[object_slug]?status=any` will add a Preview button to each event.",
+    },
+    {
+      title: "Localization",
+      code: localizationCode,
+      description:
+        "First, enable localization in the dashboard by going to Blog Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content.",
+    },
   ]
 
-  return <CodeSteps steps={steps} featureKey="events" />
+  return (
+    <>
+      <CodeSteps steps={steps} featureKey="events" />
+      <div className="mb-2 border-t pt-10">
+        <h3 className="text-3xl font-semibold">Examples</h3>
+      </div>
+      <CodeSteps scratch steps={examples} featureKey="events" />
+    </>
+  )
 }

@@ -4,9 +4,10 @@
 
 # Blocks
 
-Blocks are data infused components for building Cosmic-powered features for your websites and apps. Save development time and learn content modeling best practices.
+Blocks are data infused components for building Cosmic-powered websites and apps. Save development time and learn content modeling best practices.
 
 ## Get started
+
 [View all Blocks](https://blocks.cosmicjs.com)
 
 [Explore the demo](https://cosmic-agency-template.vercel.app)
@@ -26,11 +27,15 @@ Blocks are data infused components for building Cosmic-powered features for your
 ## Built with
 
 - React Server Components
-- Next.js
 - Tailwind CSS
+- TypeScript
+- Next.js
 
 ## Features
+
 - Performance optimized
+- Draft preview ready
+- Localization ready
 - Mobile responsive
 - Dark mode ready
 - Customizable

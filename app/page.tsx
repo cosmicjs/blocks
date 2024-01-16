@@ -2,6 +2,12 @@ import BigHeading from "@/components/BigHeading"
 import { Blocks } from "@/components/Blocks"
 import Header from "@/components/layouts/Header"
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 export async function generateMetadata() {
   const { object: page } = await cosmicSourceBucketConfig.objects
@@ -21,7 +27,10 @@ export async function generateMetadata() {
     },
   }
 }
-
+type FAQ = {
+  question: string
+  answer: string
+}
 export default async function IndexPage({
   searchParams,
 }: {
@@ -57,6 +66,25 @@ export default async function IndexPage({
             className="mb-12 mt-10 md:my-20 xl:mt-0"
           />
           <Blocks targetBucket={targetBucket} />
+          {page?.metadata?.faqs && (
+            <div className="m-auto mb-6 mt-32 w-full max-w-[700px]">
+              <h2 className="mb-6 text-center text-2xl font-semibold">
+                Frequently Asked Questions
+              </h2>
+              {page?.metadata?.faqs?.map((faq: FAQ) => {
+                return (
+                  <Accordion type="single" collapsible key={faq.question}>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger>{faq.question}</AccordionTrigger>
+                      <AccordionContent>
+                        <div dangerouslySetInnerHTML={{ __html: faq.answer }} />
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                )
+              })}
+            </div>
+          )}
         </div>
       </section>
     </>
