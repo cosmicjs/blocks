@@ -141,7 +141,7 @@ function Code() {
       return (
         <Page
           query={{ slug: params.slug, type: "pages" }}
-          preview={searchParams.preview}
+          status={searchParams.status}
         />
       );
     }
@@ -159,7 +159,7 @@ function Code() {
       return (
         <Page
           query={{ slug: params.slug, type: "pages", locale: locale }}
-          preview={searchParams.preview}
+          status={searchParams.status}
         />
       );
     }
@@ -189,8 +189,11 @@ function Code() {
       description:
         "Add the block to your app with the `query` property set to fetch your specific content.",
     },
+  ]
+
+  const examples = [
     {
-      title: "Example: Home page",
+      title: "Home page",
       description:
         "You can create a home page by creating a new file at `app/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
@@ -203,11 +206,8 @@ function Code() {
       \`\`\`
       `),
     },
-  ]
-
-  const dynamicPagesSteps = [
     {
-      title: "Example: Dynamic pages",
+      title: "Dynamic pages",
       description:
         "You can create dynamic pages by creating a new file at `app/[slug]/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
@@ -230,18 +230,18 @@ function Code() {
         "Go to Bucket > Objects > Pages and add new pages. For example create a new Page with title`Features` and slug `features` and see it available at `https://localhost:3000/features`",
     },
     {
-      title: "Example: draft preview",
+      title: "Draft preview",
       description:
-        "Enable draft preview by setting the `preview` property on the Block. View the draft preview content by setting the `?preview=true` in the URL.",
+        "Enable draft preview by setting the `status` property on the Block. View the draft preview content by setting the `?status=draft` in the URL. Note: This is a basic example. It is advisable to consider a security strategy if you intend to keep your preview private.",
       code: draftPreviewCode,
     },
     {
       title: "Draft preview link in the dashboard",
       description:
-        "To add the draft preview link in the dashboard, go to Pages Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/[object_slug]?preview=true` will add a Preview button to each page.",
+        "To add the draft preview link in the dashboard, go to Pages Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/[object_slug]?status=draft` will add a Preview button to each page.",
     },
     {
-      title: "Example: localization",
+      title: "Localization",
       code: localizationCode,
       description:
         "First, enable localization in the dashboard by going to Page Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content.",
@@ -252,9 +252,9 @@ function Code() {
     <div>
       <CodeSteps steps={steps} featureKey="pages" />
       <div className="mb-2 border-t pt-10">
-        <h3 className="text-3xl font-semibold">Dynamic pages</h3>
+        <h3 className="text-3xl font-semibold">Examples</h3>
       </div>
-      <CodeSteps scratch steps={dynamicPagesSteps} featureKey="pages" />
+      <CodeSteps scratch steps={examples} featureKey="pages" />
     </div>
   )
 }

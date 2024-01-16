@@ -128,33 +128,6 @@ export function CodeSteps(props: CodeStepsProps) {
           {...step}
         />
       ))}
-      {!scratch && (
-        <div>
-          <div className="relative mb-10">
-            <div className="absolute left-[-42px] top-7 h-[100%] w-px bg-gray-200 dark:bg-dark-gray-200" />
-            <div className="relative flex">
-              <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-                {steps.length + 1}
-              </div>
-              <h3 className="text-lg font-semibold lg:text-2xl">Run the app</h3>
-            </div>
-            <Markdown>
-              {dedent(`\`\`\`bash
-    ${managers[pm || "bun"]["run"]} dev
-    \`\`\`
-  `)}
-            </Markdown>
-            <div>
-              Open http://localhost:3000 and go to any page where this component
-              has been added. It should look like{" "}
-              <Link href="?tab=preview" className="text-cosmic-blue">
-                the preview
-              </Link>
-              .
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
