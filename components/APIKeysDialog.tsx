@@ -102,7 +102,7 @@ const APIKeysDialog: React.FC<APIKeysDialogProps> = ({ onClose, onSave }) => {
         </DialogHeader>
         <div className="mt-2">
           {APIKeyInputs.map(({ id, label, onChange, value }) => (
-            <div className="mb-2 flex items-center justify-between" key={id}>
+            <div className="mb-2 items-center justify-between md:flex" key={id}>
               <Label htmlFor={id} className="w-fit shrink-0">
                 {label}
               </Label>

@@ -58,7 +58,7 @@ const ENVKeys: React.FC = () => {
         <>
           <Button
             onClick={() => setOpenKeysModal(true)}
-            className="absolute inset-0 top-[18%] z-10 m-auto w-fit"
+            className="absolute inset-0 top-[40%] z-10 m-auto w-fit sm:top-[18%]"
           >
             Add API Keys
           </Button>
