@@ -286,13 +286,13 @@ function Code({ manager }: { manager: PackageManagers }) {
     {
       title: "Example: draft preview",
       description:
-        "Enable draft preview by setting the `status` property on the Block. View the draft preview content by setting the `?status=draft` in the URL. Note: This is a basic example. It is advisable to consider a security strategy if you intend to keep your preview private.",
+        "Enable draft preview by setting the `status` property on the Block. View the draft preview content by setting the `?status=any` in the URL. Note: This is a basic example. It is advisable to consider a security strategy if you intend to keep your preview private.",
       code: draftPreviewCode,
     },
     {
       title: "Draft preview link in the dashboard",
       description:
-        "To add the draft preview link in the dashboard, go to Events Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/events/[object_slug]?status=draft` will add a Preview button to each event.",
+        "To add the draft preview link in the dashboard, go to Events Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/events/[object_slug]?status=any` will add a Preview button to each event.",
     },
     {
       title: "Example: localization",

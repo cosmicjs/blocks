@@ -231,12 +231,12 @@ function Code() {
       title: "Example: draft preview",
       code: draftPreviewCode,
       description:
-        "Enable draft preview by setting the `status` property on the Block. View the draft preview content by setting the `?status=draft` in the URL. Note: This is a basic example. It is advisable to consider a security strategy if you intend to keep your preview private.",
+        "Enable draft preview by setting the `status` property on the Block. View the draft preview content by setting the `?status=any` in the URL. Note: This is a basic example. It is advisable to consider a security strategy if you intend to keep your preview private.",
     },
     {
       title: "Draft preview link in the dashboard",
       description:
-        "To add the draft preview link in the dashboard, go to Blog Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/blog/[object_slug]?status=draft` will add a Preview button to each blog post.",
+        "To add the draft preview link in the dashboard, go to Blog Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/blog/[object_slug]?status=any` will add a Preview button to each blog post.",
     },
     {
       title: "Example: localization",

@@ -12,13 +12,13 @@ export async function Page({
 }: {
   query: any
   className?: string
-  status?: "draft" | "published"
+  status?: "draft" | "published" | "any"
 }) {
   const { object: page } = await cosmic.objects
     .findOne(query)
     .props("slug,title,metadata")
     .depth(1)
-    .status(status === "draft" ? "any" : "published")
+    .status(status ? status : "published")
 
   return (
     <div className={className}>
