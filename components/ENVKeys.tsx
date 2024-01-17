@@ -51,7 +51,7 @@ const ENVKeys: React.FC = () => {
           2
         </div>
         <h3 className="text-lg font-semibold lg:text-2xl">
-          Get and save your API keys
+          Get and save your API keys as environment variables
         </h3>
       </div>
       {!hasKeysConfigured && (
