@@ -50,7 +50,7 @@ const BigHeading: React.FC<BigHeadingProps> = ({
               existing Next.js app (v13+). Note: Be sure to include TypeScript
               and Tailwind CSS in the installation options.
             </div>
-            {["bunx create-next-app@latest cosmic-app", "cd cosmic-app"]?.map(
+            {["bunx create-next-app@latest cosmic-app; cd cosmic-app"]?.map(
               (step) => (
                 <Markdown key={step}>
                   {dedent(`\`\`\`bash
