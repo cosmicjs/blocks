@@ -34,6 +34,29 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/fedd4750-9416-11ee-b62d-5b90a0a1bade-HeadersFooters.png",
   },
   {
+    key: "settings",
+    title: "Global Settings",
+    type: "object_type",
+    slug: "global-settings",
+    icon: <SettingsIcon className="h-5 w-5 text-cosmic-blue" />,
+    description: `Adds a Global Settings Object type to your Bucket, which includes`,
+    field_list: [
+      "Company name",
+      "Logo image",
+      "Contact email",
+      "Phone number",
+      "Repeater Metafield with fields for social links: title, URL, and logo.",
+    ],
+    confirmation: `This will install a \`global-settings\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/blocks/settings",
+    object_types: 1,
+    objects: 1,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/fef710e0-9416-11ee-b62d-5b90a0a1bade-Socials-Dark.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/fe9ac010-9416-11ee-b62d-5b90a0a1bade-Socials.png",
+  },
+  {
     key: "pages",
     title: "Pages",
     type: "object_type",
@@ -227,28 +250,5 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/feb94490-9416-11ee-b62d-5b90a0a1bade-SEO-Dark.png",
     light_thumbnail:
       "https://imgix.cosmicjs.com/fed81730-9416-11ee-b62d-5b90a0a1bade-SEO.png",
-  },
-  {
-    key: "settings",
-    title: "Global Settings",
-    type: "object_type",
-    slug: "global-settings",
-    icon: <SettingsIcon className="h-5 w-5 text-cosmic-blue" />,
-    description: `Adds a Global Settings Object type to your Bucket, which includes`,
-    field_list: [
-      "Company name",
-      "Logo image",
-      "Contact email",
-      "Phone number",
-      "Repeater Metafield with fields for social links: title, URL, and logo.",
-    ],
-    confirmation: `This will install a \`global-settings\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/blocks/settings",
-    object_types: 1,
-    objects: 1,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/fef710e0-9416-11ee-b62d-5b90a0a1bade-Socials-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/fe9ac010-9416-11ee-b62d-5b90a0a1bade-Socials.png",
   },
 ]
