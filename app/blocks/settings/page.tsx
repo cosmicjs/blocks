@@ -8,16 +8,8 @@ import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
-  const cosmic = cosmicSourceBucketConfig
-  const { object: settings } = await cosmic.objects
-    .findOne({
-      type: "global-settings",
-      slug: "settings",
-    })
-    .props("title")
-    .depth(1)
   return {
-    title: `${settings.title}`,
+    title: `Global Settings`,
   }
 }
 

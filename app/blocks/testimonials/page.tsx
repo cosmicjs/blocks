@@ -6,6 +6,12 @@ import { PackageManagers } from "../layout"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
+export async function generateMetadata() {
+  return {
+    title: `Testimonials`,
+  }
+}
+
 export default async function Testimonials({
   searchParams,
 }: {

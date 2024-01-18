@@ -231,7 +231,7 @@ export const blocksData = [
   },
   {
     key: "seo",
-    title: "SEO fields",
+    title: "SEO Fields",
     type: "metafields",
     slug: "seo-fields",
     icon: <SearchIcon className="h-5 w-5 text-cosmic-blue" />,

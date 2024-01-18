@@ -8,6 +8,12 @@ import { CommentForm } from "@/components/CommentForm"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
+export async function generateMetadata() {
+  return {
+    title: `Comments`,
+  }
+}
+
 export default async function Testimonials({
   searchParams,
 }: {
