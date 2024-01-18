@@ -51,6 +51,7 @@ function Step({
   index,
   installButton,
   featureKey,
+  scratch,
 }: StepProps & {
   index: number
   length: number
@@ -61,15 +62,19 @@ function Step({
   const [showModal, setShowModal] = useState<boolean>(false)
   return (
     <div className="relative mb-10">
-      <div
-        className={classNames(
-          "absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"
-        )}
-      ></div>
+      {!scratch && (
+        <div
+          className={classNames(
+            "absolute -left-[42px] top-7 h-[110%] w-px bg-gray-200 dark:bg-dark-gray-200"
+          )}
+        ></div>
+      )}
       <div className="relative flex">
-        <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
-          {index + 1}
-        </div>
+        {!scratch && (
+          <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
+            {index + 1}
+          </div>
+        )}
         <h3 className="text-lg font-semibold lg:text-2xl">
           <Highlight text={title} />{" "}
         </h3>
