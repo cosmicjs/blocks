@@ -185,7 +185,7 @@ function Code() {
     }) {
       return (
         <BlogList
-          query={{ type: "blog-posts", locale: locale }}
+          query={{ type: "blog-posts", locale: params.locale }}
           sort="-created_at"
           limit={10}
           skip={0}

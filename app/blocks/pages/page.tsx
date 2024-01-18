@@ -158,7 +158,7 @@ function Code() {
     }) {
       return (
         <Page
-          query={{ slug: params.slug, type: "pages", locale: locale }}
+          query={{ slug: params.slug, type: "pages", locale: params.locale }}
         />
       );
     }
