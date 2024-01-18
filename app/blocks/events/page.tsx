@@ -249,7 +249,7 @@ function Code({ manager }: { manager: PackageManagers }) {
       return (
         <EventsList
           className="max-w-[900px] mt-8 m-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8"
-          query={{ type: "events", locale: locale }}
+          query={{ type: "events", locale: params.locale }}
         />
       );
     }

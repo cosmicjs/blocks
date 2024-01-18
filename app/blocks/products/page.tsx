@@ -202,7 +202,7 @@ function Code() {
       return (
         <ProductList
           className="max-w-[900px] m-auto flex gap-4"
-          query={{ type: "products", locale: locale }}
+          query={{ type: "products", locale: params.locale }}
         />
       );
     }

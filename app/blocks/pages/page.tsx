@@ -158,7 +158,7 @@ function Code() {
     }) {
       return (
         <Page
-          query={{ slug: params.slug, type: "pages", locale: locale }}
+          query={{ slug: params.slug, type: "pages", locale: params.locale }}
         />
       );
     }
@@ -224,7 +224,7 @@ function Code() {
     {
       title: "Create dynamic pages in Cosmic",
       description:
-        "Go to Bucket > Objects > Pages and add new pages. For example create a new Page with title`Features` and slug `features` and see it available at `https://localhost:3000/features`",
+        "Go to Bucket > Objects > Pages and add new pages. For example create a new Page with title `Features` and slug `features` and see it available at `https://localhost:3000/features`",
     },
     {
       title: "Draft preview",
