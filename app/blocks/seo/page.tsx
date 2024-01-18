@@ -6,6 +6,12 @@ import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
+export async function generateMetadata() {
+  return {
+    title: `SEO Fields`,
+  }
+}
+
 export default async function SEO({
   searchParams,
 }: {
@@ -38,7 +44,7 @@ async function Preview() {
   return (
     <div className="container m-auto grid items-center px-4 py-8">
       <PreviewCopy />
-      <h2 className="mb-4 text-2xl font-semibold">SEO fields</h2>
+      <h2 className="mb-4 text-2xl font-semibold">SEO Fields</h2>
       <div className="mb-8">
         <h3 className="text-xl font-semibold">Title</h3>
         <Markdown>{seo.metadata.seo.title}</Markdown>

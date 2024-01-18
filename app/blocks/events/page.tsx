@@ -8,6 +8,12 @@ import { EventCard, EventCardType } from "@/components/EventCard"
 import { Button } from "@/components/ui/button"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
+export async function generateMetadata() {
+  return {
+    title: `Events`,
+  }
+}
+
 export default async function EventsPage({
   searchParams,
 }: {

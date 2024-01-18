@@ -10,7 +10,7 @@ import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
   return {
-    title: `Page Block`,
+    title: `Pages`,
   }
 }
 

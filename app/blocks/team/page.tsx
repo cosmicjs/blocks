@@ -5,6 +5,12 @@ import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
+export async function generateMetadata() {
+  return {
+    title: `Team`,
+  }
+}
+
 export default async function Team({
   searchParams,
 }: {

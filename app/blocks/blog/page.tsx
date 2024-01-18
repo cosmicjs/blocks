@@ -7,7 +7,11 @@ import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
-export const generateMetadata = async () => ({ title: `Blog` })
+export async function generateMetadata() {
+  return {
+    title: `Blog`,
+  }
+}
 
 export default async function BlogPage({
   searchParams,
