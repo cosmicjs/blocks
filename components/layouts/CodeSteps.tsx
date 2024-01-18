@@ -2,12 +2,10 @@
 
 import React, { useMemo, useState } from "react"
 import { Markdown } from "../elements/Markdown/Markdown"
-import dedent from "dedent"
 import { useSearchParams } from "next/navigation"
 import classNames from "classnames"
 import { Button } from "@/components/ui/button"
 import { InstallDialog } from "@/components/InstallDialog"
-import { managers } from "../elements/CodeBlock/CodeBlock"
 import Link from "next/link"
 
 type StepProps = {
