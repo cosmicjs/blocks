@@ -60,9 +60,15 @@ function Code() {
     return (
       <html lang="en">
         <body>
-          <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+          <NavMenu
+            className="flex justify-center mt-10"
+            query={{ type: "navigation-menus", slug: "header" }}
+          />
           {children}
-          <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
+          <NavMenu
+            className="flex justify-center my-10"
+            query={{ type: "navigation-menus", slug: "footer" }}
+          />
         </body>
       </html>
     );
