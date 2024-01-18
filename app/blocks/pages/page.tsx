@@ -149,16 +149,16 @@ function Code() {
     `
   const localizationCode = dedent`
     \`\`\`jsx
-    // app/[locale]/[slug]/page.tsx
+    // app/[...slug]/page.tsx
     import { Page } from "@/cosmic/blocks/pages/Page";
     export default async function DynamicPage({
       params,
     }: {
-      params: { slug: string, locale: string };
+      params: { slug: string[] };
     }) {
       return (
         <Page
-          query={{ slug: params.slug, type: "pages", locale: params.locale }}
+          query={{ locale: params.slug[0], slug: params.slug[1], type: "pages" }}
         />
       );
     }
@@ -241,7 +241,7 @@ function Code() {
       title: "Localization",
       code: localizationCode,
       description:
-        "First, enable localization in the dashboard by going to Page Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content. Create a new file at `app/[locale]/[slug]/page.tsx` with the following. Then go to any page with localization set, for example: `https://localhost:3000/es/features` or `https://localhost:3000/en/features`.",
+        "First, enable localization in the dashboard by going to Page Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content. Create a new file at `app/[...slug]/page.tsx` with the following. Then go to any page with localization set, for example: `https://localhost:3000/es/features` or `https://localhost:3000/en/features`.",
     },
   ]
 
