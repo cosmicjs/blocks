@@ -61,7 +61,7 @@ function Code() {
       <html lang="en">
         <body>
           <NavMenu
-            className="flex justify-center mt-10"
+            className="flex justify-center my-10"
             query={{ type: "navigation-menus", slug: "header" }}
           />
           {children}
