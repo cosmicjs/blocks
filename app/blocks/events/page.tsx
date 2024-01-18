@@ -309,7 +309,7 @@ function Code({ manager }: { manager: PackageManagers }) {
       title: "Localization",
       code: localizationCode,
       description:
-        "First, enable localization in the dashboard by going to Blog Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content.",
+        "First, enable localization in the dashboard by going to Events Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content. Then go to any page with localization set, for example: `https://localhost:3000/es/events` or `https://localhost:3000/en/events`.",
     },
   ]
 
