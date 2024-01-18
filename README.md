@@ -33,14 +33,21 @@ Blocks are data infused components for building Cosmic-powered websites and apps
 
 ## Features
 
-- Performance optimized
-- Draft preview ready
-- Localization ready
-- Mobile responsive
-- Dark mode ready
-- Customizable
-- Accessible
-- Type safe
+⚡️ Performance optimized
+
+👁 Draft preview ready
+
+📱 Mobile responsive
+
+🌎 Localization ready
+
+🌓 Dark mode ready
+
+🔧 Customizable
+
+♿️ Accessible
+
+🦺 Type safe
 
 ## Contributing
 
