@@ -100,6 +100,23 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/ff078ba0-9416-11ee-b62d-5b90a0a1bade-Blog.png",
   },
   {
+    key: "comments",
+    title: "Comments",
+    type: "object_type",
+    slug: "comments",
+    icon: <MessagesSquareIcon className="h-5 w-5 text-cosmic-blue" />,
+    description: `Adds a Comments Object type to your Bucket, which includes`,
+    field_list: ["Email", "Comment", "Resource", "Approved"],
+    confirmation: `This will install a \`comments\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/blocks/comments",
+    object_types: 1,
+    objects: 5,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/fee05490-9416-11ee-b62d-5b90a0a1bade-Comments-Dark.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/fef0a840-9416-11ee-b62d-5b90a0a1bade-Comments.png",
+  },
+  {
     key: "events",
     title: "Events",
     type: "object_type",
@@ -195,23 +212,6 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/feffea80-9416-11ee-b62d-5b90a0a1bade-FAQs-Dark.png",
     light_thumbnail:
       "https://imgix.cosmicjs.com/fefa6c40-9416-11ee-b62d-5b90a0a1bade-FAQs.png",
-  },
-  {
-    key: "comments",
-    title: "Comments",
-    type: "object_type",
-    slug: "comments",
-    icon: <MessagesSquareIcon className="h-5 w-5 text-cosmic-blue" />,
-    description: `Adds a Comments Object type to your Bucket, which includes`,
-    field_list: ["Email", "Comment", "Resource", "Approved"],
-    confirmation: `This will install a \`comments\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/blocks/comments",
-    object_types: 1,
-    objects: 5,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/fee05490-9416-11ee-b62d-5b90a0a1bade-Comments-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/fef0a840-9416-11ee-b62d-5b90a0a1bade-Comments.png",
   },
   {
     key: "image-gallery",
