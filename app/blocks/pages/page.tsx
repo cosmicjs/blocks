@@ -241,7 +241,7 @@ function Code() {
       title: "Localization",
       code: localizationCode,
       description:
-        "First, enable localization in the dashboard by going to Page Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content. Create a new file at `app/[locale]/[slug]/page.tsx` with the following:",
+        "First, enable localization in the dashboard by going to Page Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content. Create a new file at `app/[locale]/[slug]/page.tsx` with the following. Then go to any page with localization set, for example: `https://localhost:3000/es/features` or `https://localhost:3000/en/features`.",
     },
   ]
 
