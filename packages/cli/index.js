@@ -26,8 +26,8 @@ const blocks = {
       "tailwind-merge",
     ],
   },
-  pages: {
-    name: "Pages",
+  "landing-page": {
+    name: "Landing Page",
     installationSteps: [
       "@cosmicjs/sdk",
       "@radix-ui/react-slot",

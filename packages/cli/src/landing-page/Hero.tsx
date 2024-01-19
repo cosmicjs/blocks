@@ -1,12 +1,11 @@
-// app/page.tsx
+// cosmic/blocks/landing-page/Hero.tsx
 import { cn } from "@/cosmic/utils"
 import { buttonVariants } from "@/cosmic/elements/Button"
-import { Section } from "./PageSection"
 import { cosmic } from "@/cosmic/client"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
-export async function Page({
+export async function Hero({
   query,
   className,
   status,
@@ -45,7 +44,7 @@ export async function Page({
                       variant: "default",
                     })
                   )}
-                  href="https://www.cosmicjs.com"
+                  href="https://blocks.cosmicjs.com"
                 >
                   Get started free
                 </Link>
@@ -76,22 +75,6 @@ export async function Page({
             />
           </div>
         </div>
-        <section className="grid items-center bg-zinc-50 p-4 py-10 dark:bg-zinc-900">
-          <div className="relative m-auto flex max-w-6xl flex-col items-start gap-2">
-            <h2 className="font-display m-auto max-w-[800px] pt-8 text-center text-3xl text-zinc-900 dark:text-zinc-100 md:text-6xl">
-              {page.metadata.section_title}
-            </h2>
-            <div
-              dangerouslySetInnerHTML={{ __html: page.metadata.content }}
-              className="m-auto mb-16 max-w-[800px] text-center text-zinc-700 dark:text-zinc-300"
-            />
-            <div className="grid gap-y-28">
-              {page.metadata.sections.map((section: any) => {
-                return <Section key={section.heading} section={section} />
-              })}
-            </div>
-          </div>
-        </section>
       </div>
     )
   } catch (e: any) {

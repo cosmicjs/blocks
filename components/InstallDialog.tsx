@@ -173,7 +173,7 @@ export function InstallDialog({
     )
       return setConflict(true)
 
-    if (featureKey === "pages") {
+    if (featureKey === "landing-page") {
       let page
       await Promise.all([
         getPageBuilderMetafields().then((result) => (metafields = result)),
