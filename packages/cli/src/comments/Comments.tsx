@@ -70,7 +70,7 @@ export async function Comments({
     comments = objects
   } catch (err) {}
   return (
-    <div className={className}>
+    <div className={`m-auto mt-4 w-full max-w-[750px] ${className}`}>
       <h2 className="mb-4 text-2xl">Comments</h2>
       {comments.map((comment: Comment) => {
         return <Comment comment={comment} key={comment.slug} />

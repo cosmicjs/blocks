@@ -130,7 +130,6 @@ function Code() {
         <>
           <SingleBlog query={{ slug: params.slug, type: "blog-posts" }} />
           <Comments
-            className="m-auto max-w-[750px] mt-4 w-full"
             query={{
               type: "comments",
               "metadata.resource": object.id,
@@ -182,22 +181,18 @@ function Code() {
       description: "Import the block into your app.",
     },
     {
-      title: "Usage",
-      code: usageCode,
-      description:
-        "Add the block to your app with the `query` property set to fetch your specific content.",
-    },
-    {
-      title: "Example",
+      title: "Usage: Blog post",
       code: exampleCode,
       description: (
         <>
           Add the following to a single blog post file
-          `app/blog/[slug]/page.tsx`. Note: this assumes you have installed the{" "}
+          `app/blog/[slug]/page.tsx`. Note 1: this assumes you have installed
+          the{" "}
           <Link href="/blocks/blog" className="text-cosmic-blue">
             Blog Block
           </Link>
-          .
+          . Note 2: this will only show approved comments. Approve the comments
+          from the Cosmic dashboard.
         </>
       ),
     },
