@@ -63,6 +63,7 @@ function Code() {
           <NavMenu
             className="flex justify-center my-10"
             query={{ type: "navigation-menus", slug: "header" }}
+            hasMobileMenu
           />
           {children}
           <NavMenu
