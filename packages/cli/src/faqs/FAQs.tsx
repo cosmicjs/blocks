@@ -26,19 +26,24 @@ export async function FAQs({
     .props("slug,title,metadata")
     .depth(1)
     .status(status ? status : "published")
-  if (!page?.metadata?.faqs) return <></>
   return (
-    <div className={className}>
-      {(page?.metadata?.faqs).map((faq: FAQ) => {
-        return (
-          <Accordion type="single" collapsible key={faq.question}>
-            <AccordionItem value="item-1">
-              <AccordionTrigger>{faq.question}</AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        )
-      })}
+    <div className={`m-auto max-w-[800px] px-4 ${className}`}>
+      {!page?.metadata?.faqs ? (
+        <div className="rounded-xl border border-orange-400 p-6 text-center text-orange-400">
+          No FAQs added yet.
+        </div>
+      ) : (
+        (page?.metadata?.faqs).map((faq: FAQ) => {
+          return (
+            <Accordion type="single" collapsible key={faq.question}>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>{faq.question}</AccordionTrigger>
+                <AccordionContent>{faq.answer}</AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          )
+        })
+      )}
     </div>
   )
 }
