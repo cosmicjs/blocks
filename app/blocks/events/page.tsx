@@ -170,32 +170,13 @@ function Code({ manager }: { manager: PackageManagers }) {
   bunx @cosmicjs/blocks add events
   \`\`\`
   `
-
-  const importCode = dedent`
-    \`\`\`jsx
-    import { EventsList } from "@/cosmic/blocks/events/EventsList";
-    import { SingleEvent } from "@/cosmic/blocks/events/SingleEvent";
-    \`\`\`
-    `
-
-  const usageCode = dedent`
-    \`\`\`jsx
-    <EventsList query={{ type: "events" }} />
-    <SingleEvent query={{ type: "events", slug: "event-slug" }} />
-    \`\`\`
-    `
   const exampleListCode = dedent`
     \`\`\`jsx
     // app/events/page.tsx
     import { EventsList } from "@/cosmic/blocks/events/EventsList";
     export default async function EventListPage() {
-      return (
-        <EventsList
-          className="max-w-[900px] mt-8 m-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8"
-          query={{ type: "events" }}
-        />
-      );
-    }    
+      return <EventsList query={{ type: "events" }} />;
+    }   
     \`\`\`
     `
   const exampleSingleCode = dedent`
@@ -208,10 +189,7 @@ function Code({ manager }: { manager: PackageManagers }) {
       params: { slug: string };
     }) {
       return (
-        <SingleEvent
-          className="max-w-[900px] mt-8"
-          query={{ slug: params.slug, type: "events" }}
-        />
+        <SingleEvent query={{ slug: params.slug, type: "events" }} />
       );
     }    
     \`\`\`
@@ -229,7 +207,6 @@ function Code({ manager }: { manager: PackageManagers }) {
     }) {
       return (
         <SingleEvent
-          className="max-w-[900px] mt-8"
           query={{ slug: params.slug, type: "events" }}
           status={searchParams.status}
         />
@@ -248,7 +225,6 @@ function Code({ manager }: { manager: PackageManagers }) {
     }) {
       return (
         <EventsList
-          className="max-w-[900px] mt-8 m-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-8"
           query={{ type: "events", locale: params.locale }}
         />
       );
@@ -269,31 +245,19 @@ function Code({ manager }: { manager: PackageManagers }) {
         "This will add the `EventCard.tsx`, `EventsList.tsx`, and `SingleEvent.tsx` files to `cosmic/blocks/events`.",
     },
     {
-      title: "Import Block",
-      code: importCode,
-      description:
-        "Import the `EventsList` and/or `SingleEvent` Block into your app.",
-    },
-    {
-      title: "Usage",
-      code: usageCode,
-      description:
-        "Add the block to your app with the `query` property set to fetch your specific content.",
-    },
-  ]
-  const examples = [
-    {
-      title: "Events page",
+      title: "Usage: Events page",
       code: exampleListCode,
       description:
         "Add a new file located at `app/events/page.tsx` with the following:",
     },
     {
-      title: "Single event page",
+      title: "Usage: Single event page",
       code: exampleSingleCode,
       description:
         "Add a new file located at `app/events/[slug]/page.tsx` with the following:",
     },
+  ]
+  const examples = [
     {
       title: "Draft preview",
       description:
