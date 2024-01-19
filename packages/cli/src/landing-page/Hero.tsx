@@ -44,7 +44,7 @@ export async function Hero({
                       variant: "default",
                     })
                   )}
-                  href="https://www.cosmicjs.com"
+                  href="https://blocks.cosmicjs.com"
                 >
                   Get started free
                 </Link>
