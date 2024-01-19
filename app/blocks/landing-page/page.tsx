@@ -289,11 +289,11 @@ function Code() {
 
   return (
     <div>
-      <CodeSteps steps={steps} featureKey="pages" />
+      <CodeSteps steps={steps} featureKey="landing-page" />
       <div className="mb-2 border-t pt-10">
         <h3 className="text-3xl font-semibold">Examples</h3>
       </div>
-      <CodeSteps scratch steps={examples} featureKey="pages" />
+      <CodeSteps scratch steps={examples} featureKey="landing-page" />
     </div>
   )
 }
