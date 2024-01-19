@@ -10,7 +10,7 @@ import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
   return {
-    title: `Pages`,
+    title: `Landing Page`,
   }
 }
 
@@ -40,6 +40,9 @@ async function Preview() {
       <PreviewCopy />
       <div className="mx-auto flex w-full max-w-6xl flex-col-reverse justify-between pb-16 text-zinc-950 dark:text-zinc-50 md:flex-row md:gap-12">
         <div className="flex w-full flex-col items-start justify-start md:w-1/2">
+          <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+            Hero
+          </h1>
           <div className="py-4 md:pt-20">
             <h1 className="font-display text-6xl tracking-tight">
               {page.metadata.h1}
@@ -90,6 +93,9 @@ async function Preview() {
           />
         </div>
       </div>
+      <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+        Sections
+      </h1>
       <section className="-m-4 grid items-center p-4 py-10">
         <div className="relative m-auto flex max-w-6xl flex-col items-start gap-2">
           <h2 className="font-display m-auto max-w-[800px] pt-8 text-center text-3xl text-zinc-900 dark:text-zinc-100 md:text-6xl">
@@ -113,24 +119,30 @@ async function Preview() {
 function Code() {
   const importCode = dedent`
     \`\`\`jsx
-    import { Page } from "@/cosmic/blocks/pages/Page";
+    import { Hero } from "@/cosmic/blocks/landing-page/Hero";
     \`\`\`
     `
   const usageCode = dedent`
     \`\`\`jsx
-    <Page query={{ slug: "home", type: "pages" }} />
+    <Hero query={{ slug: "home", type: "pages" }} />
+    \`\`\`
+    `
+
+  const usageCodeSections = dedent`
+    \`\`\`jsx
+    <Sections query={{ slug: "home", type: "pages" }} />
     \`\`\`
     `
 
   const blockCommand = dedent`
     \`\`\`bash
-    bunx @cosmicjs/blocks add pages
+    bunx @cosmicjs/blocks add landing-page
     \`\`\`
     `
   const draftPreviewCode = dedent`
     \`\`\`jsx
     // app/[slug]/page.tsx
-    import { Page } from "@/cosmic/blocks/pages/Page";
+    import { Hero } from "@/cosmic/blocks/landing-page/Hero";
     export default async function DynamicPage({
       params,
       searchParams,
@@ -139,7 +151,7 @@ function Code() {
       searchParams?: any;
     }) {
       return (
-        <Page
+        <Hero
           query={{ slug: params.slug, type: "pages" }}
           status={searchParams.status}
         />
@@ -150,14 +162,14 @@ function Code() {
   const localizationCode = dedent`
     \`\`\`jsx
     // app/[...slug]/page.tsx
-    import { Page } from "@/cosmic/blocks/pages/Page";
+    import { Page } from "@/cosmic/blocks/landing-page/Hero";
     export default async function DynamicPage({
       params,
     }: {
       params: { slug: string[] };
     }) {
       return (
-        <Page
+        <Hero
           query={{ locale: params.slug[0], slug: params.slug[1], type: "pages" }}
         />
       );
@@ -175,7 +187,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the files `Page.tsx` and `PageSection.tsx` to your blocks folder located in `cosmic/blocks/pages`.",
+        "This will add the files `Hero.tsx`, `Sections.tsx`, and `Section.tsx` to your blocks folder located in `cosmic/blocks/landing-page`.",
     },
     {
       title: "Import Block",
@@ -183,8 +195,14 @@ function Code() {
       description: "Import the block into your app.",
     },
     {
-      title: "Usage",
+      title: "Usage: Hero",
       code: usageCode,
+      description:
+        "Add the block to your app with the `query` property set to fetch your specific content.",
+    },
+    {
+      title: "Usage: Sections",
+      code: usageCodeSections,
       description:
         "Add the block to your app with the `query` property set to fetch your specific content.",
     },
@@ -192,14 +210,33 @@ function Code() {
 
   const examples = [
     {
-      title: "Home page",
+      title: "Hero",
       description:
-        "You can create a home page by creating a new file at `app/page.tsx` with the following:",
+        "You can add a hero to your home page by updating the file at `app/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
       // app/page.tsx
-      import { Page } from "@/cosmic/blocks/pages/Page";
+      import { Page } from "@/cosmic/blocks/landing-page/Hero";
       export default async function HomePage() {
-        return <Page query={{ slug: "home", type: "pages" }} />;
+        return <Hero query={{ slug: "home", type: "pages" }} />;
+      }
+      \`\`\`
+      `),
+    },
+    {
+      title: "Sections",
+      description:
+        "You can add repeating sections to your home page by updating the file at `app/page.tsx` with the following:",
+      code: dedent(`\`\`\`jsx
+      // app/page.tsx
+      import { Page } from "@/cosmic/blocks/landing-page/Hero";
+      import { Sections } from "@/cosmic/blocks/landing-page/Sections";
+      export default async function HomePage() {
+        return (
+          <>
+            <Hero query={{ slug: "home", type: "pages" }} />
+            <Sections query={{ slug: "home", type: "pages" }} />
+          </>
+        );
       }
       \`\`\`
       `),
@@ -210,13 +247,18 @@ function Code() {
         "You can create dynamic pages by creating a new file at `app/[slug]/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
       // app/[slug]/page.tsx
-      import { Page } from "@/cosmic/blocks/pages/Page";
+      import { Page } from "@/cosmic/blocks/landing-page/Hero";
       export default async function DynamicPage({
         params,
       }: {
         params: { slug: string };
       }) {
-        return <Page query={{ slug: params.slug, type: "pages" }} />;
+        return (
+          <>
+            <Hero query={{ slug: params.slug, type: "pages" }} />
+            <Sections query={{ slug: params.slug, type: "pages" }} />
+          </>
+        );
       }
       \`\`\`
       `),

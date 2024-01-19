@@ -15,14 +15,14 @@ import {
 
 export const blocksData = [
   {
-    key: "pages",
-    title: "Pages",
+    key: "landing-page",
+    title: "Landing Page",
     type: "object_type",
-    slug: "pages",
+    slug: "landing-page",
     icon: <MonitorStopIcon className="h-5 w-5 text-cosmic-blue" />,
     description: `Adds a Pages Object type to your Bucket, which includes`,
     confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/blocks/pages",
+    preview_link: "/blocks/landing-page",
     object_types: 1,
     objects: 1,
     dark_thumbnail:

@@ -1,4 +1,4 @@
-// cosmic/blocks/pages/PageSection.tsx
+// cosmic/blocks/landing-page/Section.tsx
 import { cn } from "@/cosmic/utils"
 import { buttonVariants } from "@/cosmic/elements/Button"
 import Link from "next/link"
