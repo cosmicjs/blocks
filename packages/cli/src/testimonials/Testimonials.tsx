@@ -25,7 +25,7 @@ export async function Testimonials({
     .skip(skip ? skip : 0)
     .status(status ? status : "published")
   return (
-    <div className={className}>
+    <div className={`m-auto max-w-[800px] p-4 ${className}`}>
       {testimonials?.map((testimonial: TestimonialType) => {
         return <Testimonial testimonial={testimonial} key={testimonial.slug} />
       })}

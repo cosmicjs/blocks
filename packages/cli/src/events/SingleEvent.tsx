@@ -2,7 +2,7 @@
 import { cosmic } from "@/cosmic/client"
 import Link from "next/link"
 import { Button } from "@/cosmic/elements/Button"
-import { cn, getFormattedDate } from "@/cosmic/utils"
+import { getFormattedDate } from "@/cosmic/utils"
 import { notFound } from "next/navigation"
 
 export async function SingleEvent({
@@ -22,7 +22,9 @@ export async function SingleEvent({
       .status(status ? status : "published")
 
     return (
-      <section className={cn("m-auto pb-8 md:container", className)}>
+      <section
+        className={`m-auto mt-8 max-w-[900px] px-4 pb-8 md:container ${className}`}
+      >
         <div className="relative m-auto max-w-[950px]">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol role="list" className="flex space-x-2">

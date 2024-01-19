@@ -25,7 +25,9 @@ export async function TeamList({
     .skip(skip ? skip : 0)
     .status(status ? status : "published")
   return (
-    <div className={className}>
+    <div
+      className={`m-auto grid max-w-[900px] grid-cols-1 gap-6 px-4 lg:grid-cols-2 ${className}`}
+    >
       {members.map((member: MemberType) => {
         return <TeamCard key={member.slug} member={member} />
       })}

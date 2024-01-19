@@ -26,7 +26,9 @@ export async function BlogList({
     .status(status ? status : "published")
 
   return (
-    <div className={className}>
+    <div
+      className={`m-auto flex max-w-[900px] flex-col gap-4 px-4 md:flex-row ${className}`}
+    >
       {posts.map((post: PostType) => {
         return <BlogCard key={post.id} post={post} />
       })}

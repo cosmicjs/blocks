@@ -17,7 +17,9 @@ export async function ProductList({
     .status(status ? status : "published")
 
   return (
-    <div className={className}>
+    <div
+      className={`m-auto flex max-w-[900px] flex-col gap-4 px-4 md:flex-row ${className}`}
+    >
       {products.map((product: ProductType) => {
         return <ProductCard key={product.id} product={product} />
       })}

@@ -123,19 +123,6 @@ async function Preview() {
 }
 
 function Code() {
-  const importCode = dedent`
-    \`\`\`jsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
-    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
-    \`\`\`
-    `
-
-  const usageCode = dedent`
-    \`\`\`jsx
-    <ProductList query={{ type: "products" }} sort="-created_at" limit={10} skip={0}/>
-    <SingleProduct query={{ slug: "product-slug", type: "products" }} />
-    \`\`\`
-    `
   const productListCode = dedent`
     \`\`\`jsx
     // app/shop/page.tsx
@@ -143,7 +130,6 @@ function Code() {
     export default async function Shop() {
       return (
         <ProductList
-          className="max-w-[900px] m-auto flex gap-4"
           query={{ type: "products" }}
         />
       );
@@ -201,7 +187,6 @@ function Code() {
     }) {
       return (
         <ProductList
-          className="max-w-[900px] m-auto flex gap-4"
           query={{ type: "products", locale: params.locale }}
         />
       );
@@ -221,31 +206,19 @@ function Code() {
         "This will add the `ProductCard.tsx`,`ProductList.tsx`, and `SingleProduct.tsx` files to `cosmic/blocks/products`. This will also add the image-gallery block to be used in the single product page.",
     },
     {
-      title: "Import Block",
-      code: importCode,
-      description:
-        "Import the `ProductList` and/or `SingleProduct` Block into your app. You can also set `sort`, `limit`, and `skip` properties on the `ProductList` Block.",
-    },
-    {
-      title: "Usage",
-      code: usageCode,
-      description:
-        "Add the block to your app with the `query` property set to fetch your specific content.",
-    },
-  ]
-  const examples = [
-    {
-      title: "Shop",
+      title: "Usage: Shop",
       code: productListCode,
       description:
         "Add a new file located at `app/shop/page.tsx` with the following",
     },
     {
-      title: "Single Product page",
+      title: "Usage: Single Product page",
       code: singleProductCode,
       description:
         "Add a new file located at `app/shop/[slug]/page.tsx` with the following",
     },
+  ]
+  const examples = [
     {
       title: "Draft preview",
       description:
