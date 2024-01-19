@@ -3,17 +3,18 @@
 import Link from "next/link"
 import dedent from "dedent"
 
-import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
+import Header from "@/components/Header"
+import Footer from "@/components/Footer"
 
 export async function generateMetadata() {
   return {
-    title: `Global Settings`,
+    title: `Layout`,
   }
 }
 
-export default async function BlogPage({
+export default async function Layout({
   searchParams,
 }: {
   searchParams: {
@@ -47,53 +48,14 @@ type Link = {
 }
 
 async function Preview() {
-  const cosmic = cosmicSourceBucketConfig
-  const { object: settings } = await cosmic.objects
-    .findOne({
-      type: "global-settings",
-      slug: "settings",
-    })
-    .props("metadata")
-    .depth(1)
-
   return (
     <div className="container m-auto grid items-center px-4 py-8">
       <PreviewCopy />
-      <div className="my-6 h-[60px]">
-        <a href="/">
-          <img
-            src={`${settings.metadata.logo.imgix_url}?w=500&auto=format,compression`}
-            alt={settings.metadata.company}
-            className="m-auto h-14 dark:hidden"
-          />
-          <img
-            src={`${settings.metadata.dark_logo.imgix_url}?w=500&auto=format,compression`}
-            alt={settings.metadata.company}
-            className="m-auto hidden h-14 dark:block"
-          />
-        </a>
+      <Header />
+      <div className="my-8 flex h-[400px] items-center justify-center border border-dashed text-center">
+        PAGE CONTENT HERE
       </div>
-      <div className="mb-8 flex justify-center gap-x-8">
-        {settings.metadata.links.map((link: Link) => {
-          return (
-            <a href={link.url} key={link.url} target="_blank" rel="noreferrer">
-              <img
-                className="h-[26px]"
-                src={`${link.icon.imgix_url}?w=500&auto=format,compression`}
-                alt={link.company}
-              />
-            </a>
-          )
-        })}
-      </div>
-      <div className="flex justify-center gap-x-8">
-        <div>
-          <a href={`mailto:${settings.metadata.email}`}>Email us</a>
-        </div>
-        <div>
-          <a href={`tel:${settings.metadata.phone}`}>Call us</a>
-        </div>
-      </div>
+      <Footer />
     </div>
   )
 }
@@ -152,6 +114,7 @@ function Code() {
   };
 
   export async function Footer() {
+    // Footer data
     const { object: settings } = await cosmic.objects
       .findOne({
         type: "global-settings",
@@ -163,7 +126,7 @@ function Code() {
     return (
       <div className="my-10">
         <div className="my-8 text-center">
-          <NavMenu query={{ type: "navigation-menus", slug: "footer" }} />
+          <NavMenu query={{ type: "navigation-menus", slug: "footer" }} hasMobileMenu={false} />
         </div>
         <div className="mb-8 flex gap-x-8 justify-center">
           {settings.metadata.links.map((link: LinkType) => {
@@ -217,41 +180,35 @@ function Code() {
   \`\`\`
   `
 
+  const blockCommand = dedent`
+  \`\`\`bash
+  bunx @cosmicjs/blocks add navigation-menu
+  \`\`\`
+  `
+
   const steps = [
     {
       title: "Install the Block content model",
       description:
-        "This will add the `global-settings` singleton Object type to your Bucket.",
+        "This will add the `navigation-menus` and `global-settings` Object type to your Bucket.",
       installButton: true,
     },
     {
+      title: "Install the Block code",
+      code: blockCommand,
+      description:
+        "This will add the files `NavMenu.tsx` and `MobileNav.tsx` to your blocks folder located in `cosmic/blocks/navigation-menu`.",
+    },
+    {
       title: "Usage: Header",
-      description: (
-        <>
-          The Global Settings data is meant to be used in multiple locations.
-          For example, add the following to a file located at
-          `components/Header.tsx` file. Note: this assumes you have installed
-          the{" "}
-          <Link href="/blocks/nav-menus" className="text-cosmic-blue">
-            Nav Menu Block
-          </Link>
-          .
-        </>
-      ),
+      description:
+        "Add a `components/Header.tsx` file to your code with the following:",
       code: codeHeaderString,
     },
     {
       title: "Usage: Footer",
-      description: (
-        <>
-          Add the following to a file located at `components/Footer.tsx`. Note:
-          this assumes you have installed the{" "}
-          <Link href="/blocks/nav-menus" className="text-cosmic-blue">
-            Navigation Menu Block
-          </Link>
-          .
-        </>
-      ),
+      description:
+        "Add a `components/Footer.tsx` file to your code with the following:",
       code: codeFooterString,
     },
     {
@@ -263,7 +220,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps steps={steps} featureKey="settings" />
+      <CodeSteps steps={steps} featureKey="layout" />
     </>
   )
 }

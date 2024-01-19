@@ -4,15 +4,26 @@ import { MobileNav } from "@/components/MobileNav"
 
 export type ItemType = { title: string; link: string; open_in_new_tab: boolean }
 
-export async function NavMenu({ query }: { query: any }) {
+export async function NavMenu({
+  query,
+  className,
+  status,
+  hasMobileMenu = true,
+}: {
+  query: any
+  className?: string
+  status?: "draft" | "published" | "any"
+  hasMobileMenu?: boolean
+}) {
   const { object: nav } = await cosmicSourceBucketConfig.objects
     .findOne(query)
     .props("metadata")
     .depth(1)
+    .status(status ? status : "published")
   return (
-    <>
+    <div className={className}>
       {/* Desktop */}
-      <div className="hidden justify-center md:flex">
+      <div className={hasMobileMenu ? "hidden md:block" : ""}>
         {nav.metadata.items.map((item: ItemType) => {
           return (
             <div
@@ -25,7 +36,7 @@ export async function NavMenu({ query }: { query: any }) {
         })}
       </div>
       {/* Mobile */}
-      <MobileNav items={nav.metadata.items} />
-    </>
+      {hasMobileMenu && <MobileNav items={nav.metadata.items} />}
+    </div>
   )
 }

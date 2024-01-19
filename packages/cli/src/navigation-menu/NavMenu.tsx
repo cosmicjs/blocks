@@ -8,7 +8,7 @@ export async function NavMenu({
   query,
   className,
   status,
-  hasMobileMenu,
+  hasMobileMenu = true,
 }: {
   query: any
   className?: string

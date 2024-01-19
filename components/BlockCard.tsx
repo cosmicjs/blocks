@@ -10,7 +10,6 @@ type BlockData = {
   icon: React.ReactNode
   type: string
   description: string
-  field_list: string[]
   preview_link?: string
   confirmation?: string
   dark_thumbnail?: string
