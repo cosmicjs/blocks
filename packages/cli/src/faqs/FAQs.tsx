@@ -23,7 +23,7 @@ export async function FAQs({
 }) {
   const { object: page } = await cosmic.objects
     .findOne(query)
-    .props("slug,title,metadata")
+    .props("title,metadata.faqs")
     .depth(1)
     .status(status ? status : "published")
   return (
