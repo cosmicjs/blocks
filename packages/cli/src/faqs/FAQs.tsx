@@ -30,7 +30,7 @@ export async function FAQs({
     <div className={`m-auto max-w-[800px] px-4 ${className}`}>
       {!page?.metadata?.faqs ? (
         <div className="rounded-xl border border-orange-400 p-6 text-center text-orange-400">
-          No FAQs added yet.
+          No FAQs added to the {page.title} Object yet.
         </div>
       ) : (
         (page?.metadata?.faqs).map((faq: FAQ) => {
