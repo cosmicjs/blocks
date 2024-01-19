@@ -96,13 +96,7 @@ function Code() {
     };
   }
   
-  export default async function HomePage() {
-    return (
-      <>
-        { /* Page content here. See Pages block. */ }
-      </>
-    );
-  }
+  // more page code...
   \`\`\`
   `
 
