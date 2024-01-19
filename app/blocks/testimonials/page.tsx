@@ -100,7 +100,7 @@ function Code({ manager }: { manager: PackageManagers }) {
 
   const usageCode = dedent`
   \`\`\`jsx
-  <Testimonials query={{ type: "testimonials" }}/>
+  <Testimonials query={{ type: "testimonials" }} />
   \`\`\`
   `
 
