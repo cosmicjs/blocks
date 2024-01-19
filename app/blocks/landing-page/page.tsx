@@ -162,7 +162,7 @@ function Code() {
   const localizationCode = dedent`
     \`\`\`jsx
     // app/[...slug]/page.tsx
-    import { Page } from "@/cosmic/blocks/landing-page/Hero";
+    import { Hero } from "@/cosmic/blocks/landing-page/Hero";
     export default async function DynamicPage({
       params,
     }: {
@@ -215,7 +215,7 @@ function Code() {
         "You can add a hero to your home page by updating the file at `app/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
       // app/page.tsx
-      import { Page } from "@/cosmic/blocks/landing-page/Hero";
+      import { Hero } from "@/cosmic/blocks/landing-page/Hero";
       export default async function HomePage() {
         return <Hero query={{ slug: "home", type: "pages" }} />;
       }
@@ -228,7 +228,7 @@ function Code() {
         "You can add repeating sections to your home page by updating the file at `app/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
       // app/page.tsx
-      import { Page } from "@/cosmic/blocks/landing-page/Hero";
+      import { Hero } from "@/cosmic/blocks/landing-page/Hero";
       import { Sections } from "@/cosmic/blocks/landing-page/Sections";
       export default async function HomePage() {
         return (
@@ -247,7 +247,7 @@ function Code() {
         "You can create dynamic pages by creating a new file at `app/[slug]/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
       // app/[slug]/page.tsx
-      import { Page } from "@/cosmic/blocks/landing-page/Hero";
+      import { Hero } from "@/cosmic/blocks/landing-page/Hero";
       export default async function DynamicPage({
         params,
       }: {
