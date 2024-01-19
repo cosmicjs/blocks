@@ -12,11 +12,29 @@ export async function ImageGallery({
 }) {
   const { object: page } = await cosmic.objects
     .findOne(query)
-    .props("slug,title,metadata")
+    .props("id,title,metadata")
     .depth(1)
     .status(status ? status : "published")
-  if (!page.metadata.gallery?.length) return <></>
   return (
-    <ImageGalleryClient items={page.metadata.gallery} className={className} />
+    <div className={`m-auto max-w-[800px] p-4 ${className}`}>
+      {!page.metadata?.gallery?.length ? (
+        <div className="rounded-xl border border-orange-400 p-6 text-center text-orange-400">
+          No images added to the {page.title} Object image gallery yet.{" "}
+          <a
+            href={`https://app.cosmicjs.com/${process.env.COSMIC_BUCKET_SLUG}/objects/${page.id}`}
+            className="text-blue-500"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Add images ↗
+          </a>
+        </div>
+      ) : (
+        <ImageGalleryClient
+          items={page.metadata.gallery}
+          className={className}
+        />
+      )}
+    </div>
   )
 }

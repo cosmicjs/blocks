@@ -23,14 +23,22 @@ export async function FAQs({
 }) {
   const { object: page } = await cosmic.objects
     .findOne(query)
-    .props("title,metadata.faqs")
+    .props("id,title,metadata.faqs")
     .depth(1)
     .status(status ? status : "published")
   return (
-    <div className={`m-auto max-w-[800px] px-4 ${className}`}>
-      {!page?.metadata?.faqs ? (
+    <div className={`m-auto max-w-[800px] p-4 ${className}`}>
+      {!page?.metadata?.faqs?.length ? (
         <div className="rounded-xl border border-orange-400 p-6 text-center text-orange-400">
-          No FAQs added to the {page.title} Object yet.
+          No FAQs added to the {page.title} Object yet.{" "}
+          <a
+            href={`https://app.cosmicjs.com/${process.env.COSMIC_BUCKET_SLUG}/objects/${page.id}`}
+            className="text-blue-500"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Add FAQs ↗
+          </a>
         </div>
       ) : (
         (page?.metadata?.faqs).map((faq: FAQ) => {
