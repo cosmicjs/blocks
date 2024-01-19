@@ -23,7 +23,7 @@ export async function SingleProduct({
       .status(status ? status : "published")
 
     return (
-      <section className={cn("container m-auto pb-8", className)}>
+      <section className={cn("m-auto pb-8 md:container", className)}>
         <div className="relative m-auto max-w-[950px]">
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol role="list" className="flex space-x-2">
@@ -53,7 +53,7 @@ export async function SingleProduct({
             </ol>
           </nav>
           <div className="grid md:grid-cols-2 md:gap-x-8">
-            <div>
+            <div className="mb-4">
               <ImageGallery query={query} />
             </div>
             <div>
