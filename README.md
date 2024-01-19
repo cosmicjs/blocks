@@ -4,7 +4,7 @@
 
 # Blocks
 
-Blocks are data infused components for building Cosmic powered websites and apps. With Blocks, you can build data-powered, optimized, and performant Cosmic websites and apps faster than starting from scratch.
+Blocks are data infused components for building Cosmic powered websites and apps. Use Blocks to build data-powered, optimized, and performant content powered website features such as landing pages, blogs, image galleries, events, and more.
 
 ## Get started
 
@@ -14,7 +14,7 @@ Blocks are data infused components for building Cosmic powered websites and apps
 
 ## Blocks include
 
-- Pages
+- Landing page
 - Blog
 - Events
 - FAQs
