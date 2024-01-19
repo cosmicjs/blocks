@@ -25,7 +25,7 @@ export async function SingleBlog({
     const date = getFormattedDate(blog.metadata.published_date)
 
     return (
-      <div className={className}>
+      <div className={`px-4 ${className}`}>
         <section className="m-auto grid items-center pb-8 md:container">
           <div className="relative m-auto flex max-w-[750px] flex-col items-start gap-2">
             <div className="lg:absolute lg:-left-[170px] lg:top-2">

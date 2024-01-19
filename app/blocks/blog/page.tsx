@@ -110,19 +110,6 @@ function Code() {
   bunx @cosmicjs/blocks add blog
   \`\`\`
   `
-
-  const importBlogListCode = dedent`
-    \`\`\`jsx
-    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
-    import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
-    \`\`\`
-    `
-  const usageCode = dedent`
-    \`\`\`jsx
-    <BlogList query={{ type: "blog-posts" }} sort="-created_at" limit={10} skip={0} />
-    <SingleBlog query={{ slug: "blog-post-slug", type: "blog-posts" }} />
-    \`\`\`
-    `
   const blogListPageCode = dedent`
   \`\`\`jsx
   // app/blog/page.tsx
@@ -134,7 +121,6 @@ function Code() {
         sort="-created_at"
         limit={10}
         skip={0}
-        className="flex gap-4 max-w-[900px] m-auto"
       />
     );
   }
@@ -189,7 +175,6 @@ function Code() {
           sort="-created_at"
           limit={10}
           skip={0}
-          className="flex gap-4 max-w-[900px] m-auto"
         />
       );
     }
@@ -211,32 +196,20 @@ function Code() {
         "This will add the files `BlogCard.tsx`,`BlogList.tsx`, and `SingleBlog.tsx` to your blocks folder located in `cosmic/blocks/blog`.",
     },
     {
-      title: "Import Block",
-      code: importBlogListCode,
-      description:
-        "Import the `BlogList` and/or `SingleBlog` Block into your app.",
-    },
-    {
-      title: "Usage",
-      code: usageCode,
-      description:
-        "Add the block to your app with the `query` property set to fetch your specific content. You can also set `sort`, `limit`, and `skip` properties on the `BlogList` Block.",
-    },
-  ]
-
-  const examples = [
-    {
-      title: "Blog list page",
+      title: "Usage: Blog list page",
       code: blogListPageCode,
       description:
         "Add a new file located at `app/blog/page.tsx` with the following:",
     },
     {
-      title: "Single blog page",
+      title: "Usage: Single blog page",
       code: singlePageCode,
       description:
         "Add a new file located at `app/blog/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the blog content.",
     },
+  ]
+
+  const examples = [
     {
       title: "Draft preview",
       code: draftPreviewCode,
