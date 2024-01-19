@@ -160,7 +160,6 @@ function Code() {
     return (
       <TeamList
         query={{ type: "team-members" }}
-        className="max-w-[900px] m-auto grid grid-cols-1 gap-6 lg:grid-cols-2"
       />
     );
   }
