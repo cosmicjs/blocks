@@ -1,7 +1,6 @@
 // components/comments.tsx
 import { cosmic } from "@/cosmic/client"
 import { UserRound } from "lucide-react"
-import { cn } from "@/cosmic/utils"
 import { CommentForm } from "./CommentForm"
 
 type Comment = {
@@ -29,10 +28,7 @@ function Comment({
   })
   return (
     <div
-      className={cn(
-        "mb-6 flex flex-col rounded-xl border border-zinc-300 p-4 pb-6 dark:border-zinc-700",
-        className
-      )}
+      className={`mb-6 flex flex-col rounded-xl border border-zinc-300 p-4 pb-6 dark:border-zinc-700 ${className}`}
     >
       <div className="mb-4 flex w-full flex-col justify-between gap-2 text-gray-500 dark:text-gray-200 sm:flex-row md:items-center">
         <div className="flex items-center gap-2 text-black dark:text-white">
@@ -70,7 +66,7 @@ export async function Comments({
     comments = objects
   } catch (err) {}
   return (
-    <div className={`m-auto mt-4 w-full max-w-[750px] ${className}`}>
+    <div className={`m-auto w-full max-w-[750px] p-4 ${className}`}>
       <h2 className="mb-4 text-2xl">Comments</h2>
       {comments.map((comment: Comment) => {
         return <Comment comment={comment} key={comment.slug} />
