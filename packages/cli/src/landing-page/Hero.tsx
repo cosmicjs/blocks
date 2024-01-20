@@ -44,9 +44,9 @@ export async function Hero({
                       variant: "default",
                     })
                   )}
-                  href="https://blocks.cosmicjs.com"
+                  href={page.metadata?.cta_button_primary?.link}
                 >
-                  Get started free
+                  {page.metadata?.cta_button_primary?.text}
                 </Link>
                 <Link
                   className={cn(
@@ -55,9 +55,9 @@ export async function Hero({
                       variant: "secondary",
                     })
                   )}
-                  href="https://www.cosmicjs.com/contact"
+                  href={page.metadata?.cta_button_secondary?.link}
                 >
-                  Contact us
+                  {page.metadata?.cta_button_secondary?.text}
                 </Link>
               </div>
             </div>

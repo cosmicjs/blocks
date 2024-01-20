@@ -24,13 +24,9 @@ export async function Sections({
         className={`grid items-center bg-zinc-50 p-4 py-10 dark:bg-zinc-900 ${className}`}
       >
         <div className="relative m-auto flex max-w-6xl flex-col items-start gap-2">
-          <h2 className="font-display m-auto max-w-[800px] pt-8 text-center text-3xl text-zinc-900 dark:text-zinc-100 md:text-6xl">
-            {page.metadata.section_title}
+          <h2 className="font-display m-auto mb-10 max-w-[800px] pt-8 text-center text-2xl text-zinc-900 dark:text-zinc-100 md:text-6xl">
+            {page.metadata?.sections_area_title}
           </h2>
-          <div
-            dangerouslySetInnerHTML={{ __html: page.metadata.content }}
-            className="m-auto mb-16 max-w-[800px] text-center text-zinc-700 dark:text-zinc-300"
-          />
           <div className="grid gap-y-28">
             {page.metadata.sections.map((section: any) => {
               return <Section key={section.heading} section={section} />
