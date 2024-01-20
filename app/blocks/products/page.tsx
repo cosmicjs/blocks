@@ -209,13 +209,13 @@ function Code() {
       title: "Usage: Shop",
       code: productListCode,
       description:
-        "Add a new file located at `app/shop/page.tsx` with the following",
+        "Add a new file located at `app/shop/page.tsx` with the following:",
     },
     {
       title: "Usage: Single Product page",
       code: singleProductCode,
       description:
-        "Add a new file located at `app/shop/[slug]/page.tsx` with the following",
+        "Add a new file located at `app/shop/[slug]/page.tsx` with the following:",
     },
   ]
   const examples = [

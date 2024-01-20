@@ -171,8 +171,9 @@ function Code() {
         "This will add the files `CommentForm.tsx`,`Comments.tsx`, and components to your blocks folder located in `cosmic/blocks/comments`.",
     },
     {
-      title:
-        "Create a new file at `app/api/comments/route.ts` with the following",
+      title: "Create the comment post API route",
+      description:
+        "Create a new file at `app/api/comments/route.ts` with the following:",
       code: commentsAPICodeString,
     },
     {
