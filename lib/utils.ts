@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export async function getMediaBlobFromURL(url: string, name: string) {
-  const response = await fetch(url)
+  const response = await fetch(url + "?w=2000&auto=compression,format")
   const blob = await response.blob()
   const media: any = new Blob([blob], {
     type: "image/jpeg",

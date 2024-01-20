@@ -67,8 +67,8 @@ const ENVKeys: React.FC = () => {
       {openKeysModal && Modal}
       {!bucketSlug ? (
         <div className="mt-2">
-          Get your API keys by going to <BucketAPILink /> then add them by
-          clicking the button below.
+          Get your API keys in the Cosmic dashboard at <BucketAPILink /> then
+          add them by clicking the button below.
         </div>
       ) : (
         <div className="mt-2">
