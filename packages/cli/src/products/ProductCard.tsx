@@ -25,7 +25,7 @@ export function ProductCard({
   return (
     <Link
       href={`/shop/${product.slug}`}
-      className={cn("group relative md:w-56", className)}
+      className={cn("group relative w-full", className)}
     >
       <div className="h-52 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
         <img

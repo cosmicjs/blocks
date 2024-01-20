@@ -18,7 +18,7 @@ export async function ProductList({
 
   return (
     <div
-      className={`m-auto grid max-w-[1200px] grid-cols-1 gap-4 px-4 md:grid-cols-4 ${className}`}
+      className={`m-auto grid max-w-[1200px] grid-cols-1 gap-4 px-4 md:grid-cols-3 lg:grid-cols-4 ${className}`}
     >
       {products.map((product: ProductType) => {
         return <ProductCard key={product.id} product={product} />
