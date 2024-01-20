@@ -172,22 +172,22 @@ export const blocksData = [
     light_thumbnail:
       "https://imgix.cosmicjs.com/0ac902a0-a8fa-11ee-b417-db331415685f-Image-Gallery.png",
   },
-  {
-    key: "nav-menus",
-    title: "Navigation Menu",
-    type: "object_type",
-    slug: "navigation-menus",
-    icon: <MenuIcon className="h-5 w-5 text-cosmic-blue" />,
-    description: `Adds a Navigation Menu Object type to your Bucket, which includes`,
-    confirmation: `This will install a \`navigation-menus\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/blocks/nav-menus",
-    object_types: 1,
-    objects: 2,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/feec1460-9416-11ee-b62d-5b90a0a1bade-HeadersFooters-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/fedd4750-9416-11ee-b62d-5b90a0a1bade-HeadersFooters.png",
-  },
+  // {
+  //   key: "nav-menus",
+  //   title: "Navigation Menu",
+  //   type: "object_type",
+  //   slug: "navigation-menus",
+  //   icon: <MenuIcon className="h-5 w-5 text-cosmic-blue" />,
+  //   description: `Adds a Navigation Menu Object type to your Bucket, which includes`,
+  //   confirmation: `This will install a \`navigation-menus\` Object type to your Bucket as well as demo content.`,
+  //   preview_link: "/blocks/nav-menus",
+  //   object_types: 1,
+  //   objects: 2,
+  //   dark_thumbnail:
+  //     "https://imgix.cosmicjs.com/feec1460-9416-11ee-b62d-5b90a0a1bade-HeadersFooters-Dark.png",
+  //   light_thumbnail:
+  //     "https://imgix.cosmicjs.com/fedd4750-9416-11ee-b62d-5b90a0a1bade-HeadersFooters.png",
+  // },
   {
     key: "seo",
     title: "SEO Fields",
