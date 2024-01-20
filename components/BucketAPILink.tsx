@@ -23,7 +23,7 @@ export function BucketAPILink() {
       target="_blank"
       rel="noreferrer"
     >
-      Project {`>`} Bucket {`>`} API keys{" "}
+      Project {`>`} API keys{" "}
       <ExternalLinkIcon className="-mt-2 inline h-3 w-3" />
     </a>
   )
