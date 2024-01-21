@@ -3,18 +3,27 @@ import { EventCard, EventCardType } from "./EventCard"
 
 export async function EventsList({
   query,
+  sort,
+  limit,
+  skip,
   className,
-  preview,
+  status,
 }: {
   query: any
+  sort?: string
+  limit?: number
+  skip?: number
   className?: string
-  preview?: boolean
+  status?: "draft" | "published" | "any"
 }) {
   const { objects: events } = await cosmic.objects
     .find(query)
     .props("title,slug,metadata")
     .depth(1)
-    .status(preview ? "any" : "published")
+    .sort(sort ? sort : "-order")
+    .limit(limit ? limit : 100)
+    .skip(skip ? skip : 0)
+    .status(status ? status : "published")
 
   return (
     <div

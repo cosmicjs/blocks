@@ -46,10 +46,16 @@ function Comment({
 
 export async function Comments({
   query,
+  sort,
+  limit,
+  skip,
   className,
   status,
 }: {
   query: any
+  sort?: string
+  limit?: number
+  skip?: number
   className?: string
   status?: "draft" | "published" | "any"
 }) {
@@ -61,7 +67,9 @@ export async function Comments({
       .find(query)
       .props("title,slug,metadata,created_at")
       .depth(1)
-      .sort("created_at")
+      .sort(sort ? sort : "created_at")
+      .limit(limit ? limit : 100)
+      .skip(skip ? skip : 0)
       .status(status ? status : "published")
     comments = objects
   } catch (err) {}

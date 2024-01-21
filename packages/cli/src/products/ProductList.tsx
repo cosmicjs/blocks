@@ -3,10 +3,16 @@ import { ProductCard, ProductType } from "./ProductCard"
 
 export async function ProductList({
   query,
+  sort,
+  limit,
+  skip,
   className,
   status,
 }: {
   query: any
+  sort?: string
+  limit?: number
+  skip?: number
   className?: string
   status?: "draft" | "published" | "any"
 }) {
@@ -14,6 +20,9 @@ export async function ProductList({
     .find(query)
     .props("id,slug,title,metadata")
     .depth(1)
+    .sort(sort ? sort : "created_at")
+    .limit(limit ? limit : 100)
+    .skip(skip ? skip : 0)
     .status(status ? status : "published")
 
   return (
