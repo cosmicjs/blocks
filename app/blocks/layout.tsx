@@ -6,15 +6,6 @@ import { blocksData } from "@/config/blocks.data"
 import BlockStats from "@/components/BlockStats"
 import Link from "next/link"
 
-export const packageManagers = [
-  { title: "bun", value: "bun" },
-  { title: "npm", value: "npm" },
-  { title: "yarn", value: "yarn" },
-  { title: "pnpm", value: "pnpm" },
-]
-
-export type PackageManagers = (typeof packageManagers)[number]["value"]
-
 export default function FeatureLayout({
   children,
 }: {

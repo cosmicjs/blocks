@@ -2,7 +2,7 @@
 import dedent from "dedent"
 
 import { fetchFeature } from "@/lib/cosmic"
-import { PackageManagers } from "../layout"
+import { PackageManagers } from "@/lib/types"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
@@ -133,6 +133,7 @@ function Code({ manager }: { manager: PackageManagers }) {
             href="https://www.cosmicjs.com/docs/api/queries"
             target="_blank"
             className="text-cosmic-blue"
+            rel="noreferrer"
           >
             Read more about queries in the docs
           </a>
