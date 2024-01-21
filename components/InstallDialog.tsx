@@ -555,8 +555,11 @@ export function InstallDialog({
                 setInstalling(true)
                 try {
                   await installFeature(selectedObjectTypes)
-                } catch (error) {
-                  setInstallationFailed(true)
+                } catch (error: any) {
+                  if (error.status === 409) setConflict(true)
+                  else {
+                    setInstallationFailed(true)
+                  }
                   throw error
                 }
                 setInstalling(false)
