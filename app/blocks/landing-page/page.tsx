@@ -159,15 +159,15 @@ function Code() {
     \`\`\`jsx
     // app/[...slug]/page.tsx
     import { Hero } from "@/cosmic/blocks/landing-page/Hero";
+    import { Sections } from "@/cosmic/blocks/landing-page/Sections";
     export default async function DynamicPage({
       params,
     }: {
       params: { slug: string[] };
     }) {
       return (
-        <Hero
-          query={{ locale: params.slug[0], slug: params.slug[1], type: "pages" }}
-        />
+        <Hero query={{ locale: params.slug[0], slug: params.slug[1], type: "pages" }} />
+        <Sections query={{ locale: params.slug[0], slug: params.slug[1], type: "pages" }} />
       );
     }
     \`\`\`
@@ -270,6 +270,7 @@ function Code() {
       code: dedent(`\`\`\`jsx
       // app/[slug]/page.tsx
       import { Hero } from "@/cosmic/blocks/landing-page/Hero";
+      import { Sections } from "@/cosmic/blocks/landing-page/Sections";
       export default async function DynamicPage({
         params,
       }: {
