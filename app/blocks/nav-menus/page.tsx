@@ -115,8 +115,20 @@ function Code() {
     {
       title: "Usage",
       code: usageCode,
-      description:
-        "Add the block to your app with the `query` property set to fetch your specific content.",
+      description: (
+        <>
+          Add the Block to your app with the `query` property set to fetch your
+          specific content.{" "}
+          <a
+            href="https://www.cosmicjs.com/docs/api/queries"
+            target="_blank"
+            className="text-cosmic-blue"
+          >
+            Read more about queries in the docs
+          </a>
+          .
+        </>
+      ),
     },
     {
       title: "Example",
