@@ -1,5 +1,4 @@
 // components/header.tsx
-import Link from "next/link"
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { NavMenu } from "@/components/NavMenu"
 
@@ -14,7 +13,7 @@ export default async function Header() {
     .depth(1)
 
   return (
-    <nav className="sticky top-0 z-[9999] w-full space-x-4 bg-white/20 py-2 backdrop-blur-lg dark:bg-black/20">
+    <nav className="sticky top-0 w-full space-x-4 bg-white/20 py-2 backdrop-blur-lg dark:bg-black/20">
       <div className="flex w-full items-center justify-between pl-2 pr-4 md:container">
         <div>
           <img
