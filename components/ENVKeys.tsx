@@ -72,8 +72,8 @@ const ENVKeys: React.FC = () => {
         </div>
       ) : (
         <div className="mt-2">
-          Use the copy button to paste the following code with your keys
-          pre-filled to your {wrapWithSpan(`\`.env.local\``)} file.
+          Use the copy button to copy and paste your API keys into a new{" "}
+          {wrapWithSpan(`\`.env.local\``)} file.
         </div>
       )}
       <div className="relative">
