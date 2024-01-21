@@ -17,3 +17,10 @@ export const siteConfig = {
     login: "https://app.cosmicjs.com/login",
   },
 }
+
+export const packageManagers = [
+  { title: "bun", value: "bun" },
+  { title: "npm", value: "npm" },
+  { title: "yarn", value: "yarn" },
+  { title: "pnpm", value: "pnpm" },
+]

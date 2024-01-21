@@ -2,7 +2,7 @@
 import dedent from "dedent"
 
 import { fetchFeature } from "@/lib/cosmic"
-import { PackageManagers } from "../layout"
+import { PackageManagers } from "@/lib/types"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { EventCard, EventCardType } from "@/components/EventCard"
 import { Button } from "@/components/ui/button"

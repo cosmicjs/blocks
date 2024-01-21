@@ -201,6 +201,7 @@ function Code() {
             href="https://www.cosmicjs.com/docs/api/queries"
             target="_blank"
             className="text-cosmic-blue"
+            rel="noreferrer"
           >
             Read more about queries in the docs
           </a>
@@ -219,6 +220,7 @@ function Code() {
             href="https://www.cosmicjs.com/docs/api/queries"
             target="_blank"
             className="text-cosmic-blue"
+            rel="noreferrer"
           >
             Read more about queries in the docs
           </a>
