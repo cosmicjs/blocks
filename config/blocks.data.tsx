@@ -18,7 +18,7 @@ export const blocksData = [
     key: "landing-page",
     title: "Landing Page",
     type: "object_type",
-    slug: "landing-page",
+    slug: "pages",
     icon: <MonitorStopIcon className="h-5 w-5 text-cosmic-blue" />,
     description: `Adds a Pages Object type to your Bucket, which includes`,
     confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
