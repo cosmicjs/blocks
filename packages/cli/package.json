@@ -4,7 +4,7 @@
   "bin": {
     "@cosmicjs/blocks": "./index.js"
   },
-  "version": "0.0.853",
+  "version": "0.0.854",
   "description": "Blocks CLI",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "reactjs",
     "nextjs"
   ],
-  "homepage": "https://www.cosmicjs.com",
+  "homepage": "https://blocks.cosmicjs.com",
   "bugs": {
     "url": "https://github.com/cosmicjs/blocks/issues"
   },
