@@ -71,7 +71,7 @@ NEXT_PUBLIC_SOURCE_BUCKET_SLUG=change_to_your_bucket_slug
 NEXT_PUBLIC_SOURCE_READ_KEY=change_to_your_bucket_read_key
 ```
 
-3. Run the template.
+3. Run the app.
 ```
 bun dev
 ```
