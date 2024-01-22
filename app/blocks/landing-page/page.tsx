@@ -113,9 +113,14 @@ async function Preview() {
 }
 
 function Code() {
-  const importCode = dedent`
+  const importHeroCode = dedent`
     \`\`\`jsx
     import { Hero } from "@/cosmic/blocks/landing-page/Hero";
+    \`\`\`
+    `
+  const importSectionsCode = dedent`
+    \`\`\`jsx
+    import { Sections } from "@/cosmic/blocks/landing-page/Sections";
     \`\`\`
     `
   const usageCode = dedent`
@@ -189,8 +194,8 @@ function Code() {
         "This will add the files `Hero.tsx`, `Sections.tsx`, and `Section.tsx` to your blocks folder located in `cosmic/blocks/landing-page`.",
     },
     {
-      title: "Import Block",
-      code: importCode,
+      title: "Import Hero Block",
+      code: importHeroCode,
       description: "Import the block into your app.",
     },
     {
@@ -211,6 +216,11 @@ function Code() {
           .
         </>
       ),
+    },
+    {
+      title: "Import Sections Block",
+      code: importSectionsCode,
+      description: "Import the block into your app.",
     },
     {
       title: "Usage: Sections",
@@ -235,22 +245,9 @@ function Code() {
 
   const examples = [
     {
-      title: "Hero",
+      title: "Home page",
       description:
-        "You can add a hero to your home page by updating the file at `app/page.tsx` with the following:",
-      code: dedent(`\`\`\`jsx
-      // app/page.tsx
-      import { Hero } from "@/cosmic/blocks/landing-page/Hero";
-      export default async function HomePage() {
-        return <Hero query={{ slug: "home", type: "pages" }} />;
-      }
-      \`\`\`
-      `),
-    },
-    {
-      title: "Sections",
-      description:
-        "You can add repeating sections to your home page by updating the file at `app/page.tsx` with the following:",
+        "You can add a hero and sections to your home page by updating the file at `app/page.tsx` with the following:",
       code: dedent(`\`\`\`jsx
       // app/page.tsx
       import { Hero } from "@/cosmic/blocks/landing-page/Hero";
