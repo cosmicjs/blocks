@@ -85,12 +85,12 @@ const APIKeysDialog: React.FC<APIKeysDialogProps> = ({ onClose, onSave }) => {
         onEscapeKeyDown={() => onClose()}
       >
         <DialogHeader>
-          <DialogTitle>
+          <DialogTitle className="text-left">
             {hasKeysConfigured
               ? "API keys configured"
               : "Please enter your keys"}
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className="text-left">
             {!hasKeysConfigured && (
               <div>
                 Get your API keys from <BucketAPILink /> in the dashboard and
@@ -131,7 +131,7 @@ const APIKeysDialog: React.FC<APIKeysDialogProps> = ({ onClose, onSave }) => {
           <Button
             disabled={!bucketSlug || !readKey || !writeKey}
             onClick={saveKeys}
-            className={cn(buttonVariants())}
+            className={cn(buttonVariants(), "mb-4")}
           >
             Save
           </Button>
