@@ -50,7 +50,7 @@ const BigHeading: React.FC<BigHeadingProps> = ({
               existing Next.js app (v13+). Read the last FAQ at the bottom of
               this page for more instructions on what options to include.
             </div>
-            {["bunx create-next-app@latest cosmic-app; cd cosmic-app"]?.map(
+            {["bunx create-next-app@latest cosmic-app && cd cosmic-app"]?.map(
               (step) => (
                 <Markdown key={step}>
                   {dedent(`\`\`\`bash
