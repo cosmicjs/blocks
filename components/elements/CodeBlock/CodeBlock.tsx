@@ -25,56 +25,38 @@ SyntaxHighlighter.registerLanguage("markdown", markdown)
 SyntaxHighlighter.registerLanguage("json", json)
 SyntaxHighlighter.registerLanguage("css", css)
 
-type Managers = {
-  [key: string]: {
-    install: string
-    run: string
-    executable: string
-  }
+const executableCommands = {
+  yarn: "npx",
+  bun: "bunx",
+  npm: "npx",
+  pnpm: "npx",
 }
 
-export const managers: Managers = {
-  yarn: {
-    install: "yarn add",
-    run: "yarn",
-    executable: "npx",
-  },
-  bun: {
-    install: "bun add",
-    run: "bun",
-    executable: "bunx",
-  },
-  npm: {
-    install: "npm install",
-    run: "npm run",
-    executable: "npx",
-  },
-  pnpm: {
-    install: "pnpm install",
-    run: "pnpm run",
-    executable: "pnpm dlx",
-  },
-}
+type PackageManager = keyof typeof executableCommands
 
-type PackageManager = keyof typeof managers
-
-function replacePackageManagerCommand(command: string, pm: PackageManager) {
-  // Iterate over all package managers
-  for (const [_, manager] of Object.entries(managers)) {
-    // If the command contains a package manager install command, replace it
-    if (command.includes(manager.install)) {
-      const installRegex = new RegExp(`\\b${manager.install}\\b`, "g")
-      command = command.replace(installRegex, managers[pm].install)
-    }
-
-    // If the command contains a package manager executable command, replace it
-    if (command.includes(manager.executable)) {
-      const executableRegex = new RegExp(`\\b${manager.executable}\\b`, "g")
-      command = command.replace(executableRegex, managers[pm].executable)
-    }
+function replaceExecutableCommand(command: string, pm: PackageManager) {
+  // Custom commands for creating a next app with different package managers, temporary implementation - needs to be improved.
+  const customNextAppCommands = {
+    yarn: "yarn create next-app cosmic-app && cd cosmic-app",
+    bun: "bunx create-next-app@latest cosmic-app && cd cosmic-app",
+    npm: "npx create-next-app@latest cosmic-app && cd cosmic-app",
+    pnpm: "pnpm create next-app cosmic-app && cd cosmic-app",
   }
 
-  return String(command).replace(/\n$/, "")
+  // Check if the command contains 'next-app'
+  if (command.includes("next-app")) {
+    // Replace the whole command with the custom command for the selected package manager
+    return customNextAppCommands[pm]
+  } else {
+    // Replace all occurrences of executable commands with the one for the selected package manager
+    Object.entries(executableCommands).forEach(([key, executable]) => {
+      if (command.includes(executable)) {
+        const executableRegex = new RegExp(`\\b${executable}\\b`, "g")
+        command = command.replace(executableRegex, executableCommands[pm])
+      }
+    })
+    return command
+  }
 }
 
 const CodeBlock = ({
@@ -97,6 +79,7 @@ const CodeBlock = ({
   useEffect(() => {
     setHasMounted(true)
   }, [])
+
   const [value, setValue] = useState(children)
 
   const match = /language-(\w+)/.exec(className || "")
@@ -104,20 +87,27 @@ const CodeBlock = ({
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const manager = searchParams.get("pm") || "bun"
+
+  // Check localStorage for a saved package manager value
+  const savedManager =
+    typeof window !== "undefined" ? localStorage.getItem("pm") : null
+  const manager = searchParams.get("pm") || savedManager || "npm"
+
+  useEffect(() => {
+    // Save the current package manager to localStorage
+    if (typeof window !== "undefined") {
+      localStorage.setItem("pm", manager)
+    }
+    // Replace executable commands if necessary
+    const code = replaceExecutableCommand(children, manager as PackageManager)
+    setValue(code)
+  }, [manager, children])
 
   const hasPackageManager =
     typeof children === "string" &&
     packageManagers.some(
       (pm) => children.includes(pm.value) || children.includes("npx")
     )
-
-  useEffect(() => {
-    const code = hasPackageManager
-      ? replacePackageManagerCommand(children, manager as PackageManager)
-      : children
-    setValue(code)
-  }, [manager])
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -194,6 +184,13 @@ const CodeBlock = ({
           </code>
         )}
       </div>
+      {value.includes("@cosmicjs/blocks add") &&
+        (manager === "yarn" || manager === "pnpm") && (
+          <span className="max-w-[80%] font-sans text-sm text-gray-500">
+            Note: Only scripts will be executed using npx. All dependencies will
+            be installed using {manager}&apos;s add command.
+          </span>
+        )}
     </>
   )
 }
