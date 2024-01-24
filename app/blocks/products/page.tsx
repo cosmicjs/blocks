@@ -165,12 +165,14 @@ function Code() {
       searchParams,
     }: {
       params: { slug: string };
-      searchParams?: any;
+      searchParams?: {
+        status: "draft" | "published" | "any";
+      };
     }) {
       return (
         <SingleProduct
           query={{ slug: params.slug, type: "products" }}
-          status={searchParams.status}
+          status={searchParams?.status}
         />
       );
     }

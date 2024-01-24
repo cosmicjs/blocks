@@ -203,12 +203,14 @@ function Code({ manager }: { manager: PackageManagers }) {
       searchParams,
     }: {
       params: { slug: string };
-      searchParams?: any;
+      searchParams?: {
+        status: "draft" | "published" | "any";
+      };
     }) {
       return (
         <SingleEvent
           query={{ slug: params.slug, type: "events" }}
-          status={searchParams.status}
+          status={searchParams?.status}
         />
       );
     }
