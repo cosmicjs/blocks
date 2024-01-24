@@ -150,15 +150,24 @@ function Code() {
       searchParams,
     }: {
       params: { slug: string };
-      searchParams?: any;
+      searchParams?: {
+        status: "draft" | "published" | "any";
+      };
     }) {
       return (
         <>
-          <Hero query={{ slug: params.slug, type: "pages" }} status={searchParams.status} />
-          <Sections query={{ slug: params.slug, type: "pages" }} status={searchParams.status} />
+          <Hero
+            query={{ slug: params.slug, type: "pages" }}
+            status={searchParams?.status}
+          />
+          <Sections
+            query={{ slug: params.slug, type: "pages" }}
+            status={searchParams?.status}
+          />
         </>
       );
     }
+
     \`\`\`
     `
   const localizationCode = dedent`

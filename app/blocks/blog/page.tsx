@@ -149,15 +149,18 @@ function Code() {
       searchParams,
     }: {
       params: { slug: string };
-      searchParams?: any;
+      searchParams?: {
+        status: "draft" | "published" | "any";
+      };
     }) {
       return (
         <SingleBlog
           query={{ slug: params.slug, type: "blog-posts" }}
-          status={searchParams.status}
+          status={searchParams?.status}
         />
       );
     }
+
     \`\`\`
     `
   const localizationCode = dedent`
