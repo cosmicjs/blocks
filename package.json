@@ -27,6 +27,7 @@
     "classnames": "^2.3.2",
     "clsx": "^1.2.1",
     "dedent": "^1.5.1",
+    "embla-carousel-react": "^8.0.0-rc20",
     "isomorphic-dompurify": "^1.9.0",
     "lucide-react": "latest",
     "next": "14.0.0",

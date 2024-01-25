@@ -3,6 +3,7 @@ import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { ImageGallery } from "@/components/ImageGallery"
+import { CarouselGallery } from "@/components/Carousel"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import classNames from "classnames"
 import { PreviewCopy } from "@/components/PreviewCopy"
@@ -50,9 +51,21 @@ async function Preview() {
   return (
     <div className="container m-auto grid items-center px-4 py-8">
       <PreviewCopy />
-      <section className="container m-auto grid items-center px-4 py-8">
-        <div className="relative m-auto w-full">
+      <section className="container m-auto grid max-w-[700px] items-center px-4 py-8">
+        <div className="relative m-auto mb-12 w-full">
+          <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+            Image Gallery
+          </h1>
           <ImageGallery items={gallery.metadata.gallery} />
+        </div>
+        <div className="relative m-auto w-full">
+          <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+            Image Carousel
+          </h1>
+          <CarouselGallery
+            className="px-8 md:px-12"
+            items={gallery.metadata.gallery}
+          />
         </div>
       </section>
     </div>
@@ -66,15 +79,27 @@ function Code() {
   \`\`\`
   `
 
-  const importCode = dedent`
+  const importGalleryCode = dedent`
   \`\`\`jsx
   import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery";
   \`\`\`
   `
 
-  const usageCode = dedent`
+  const usageGalleryCode = dedent`
   \`\`\`jsx
   <ImageGallery query={{ type: "pages", slug: "home" }} />
+  \`\`\`
+  `
+
+  const importCarouselCode = dedent`
+  \`\`\`jsx
+  import { ImageCarousel } from "@/cosmic/blocks/image-gallery/ImageCarousel";
+  \`\`\`
+  `
+
+  const usageCarouselCode = dedent`
+  \`\`\`jsx
+  <ImageCarousel query={{ type: "pages", slug: "home" }} />
   \`\`\`
   `
 
@@ -86,19 +111,43 @@ function Code() {
       installButton: true,
     },
     {
-      title: "Install the Block code",
+      title: "Install the Gallery Block code",
       code: blockCommand,
       description:
-        "This will add the file `ImageGallery.tsx` and `ImageGalleryClient.tsx` to `cosmic/blocks/image-gallery`.",
+        "This will add the file `ImageGallery.tsx`, `ImageGalleryClient.tsx`,`ImageCarousel.tsx`, `ImageCarouselClient.tsx` to `cosmic/blocks/image-gallery`.",
     },
     {
-      title: "Import Block",
-      code: importCode,
+      title: "Import Gallery Block",
+      code: importGalleryCode,
       description: "Import the block into your app.",
     },
     {
-      title: "Usage",
-      code: usageCode,
+      title: "Usage: Gallery",
+      code: usageGalleryCode,
+      description: (
+        <>
+          Add the Block to your app with the `query` property set to fetch your
+          specific content.{" "}
+          <a
+            href="https://www.cosmicjs.com/docs/api/queries"
+            target="_blank"
+            className="text-cosmic-blue"
+            rel="noreferrer"
+          >
+            Read more about queries in the docs
+          </a>
+          .
+        </>
+      ),
+    },
+    {
+      title: "Import Carousel Block",
+      code: importCarouselCode,
+      description: "Import the block into your app.",
+    },
+    {
+      title: "Usage: Carousel",
+      code: usageCarouselCode,
       description: (
         <>
           Add the Block to your app with the `query` property set to fetch your
