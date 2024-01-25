@@ -62,7 +62,10 @@ async function Preview() {
           <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
             Image Carousel
           </h1>
-          <CarouselGallery className="px-12" items={gallery.metadata.gallery} />
+          <CarouselGallery
+            className="px-8 md:px-12"
+            items={gallery.metadata.gallery}
+          />
         </div>
       </section>
     </div>
