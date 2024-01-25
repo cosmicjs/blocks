@@ -17,7 +17,7 @@ export async function ImageCarousel({
     .depth(1)
     .status(status ? status : "published")
   return (
-    <div className={`m-auto max-w-[800px] px-8 md:px-12 ${className}`}>
+    <div className={`m-auto max-w-[800px] px-14 ${className}`}>
       {!page.metadata?.gallery?.length ? (
         <div className="rounded-xl border border-orange-400 p-6 text-center text-orange-400">
           No images added to the {page.title} Object image gallery yet.{" "}
