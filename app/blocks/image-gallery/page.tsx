@@ -3,6 +3,7 @@ import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { ImageGallery } from "@/components/ImageGallery"
+import { CarouselGallery } from "@/components/Carousel"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import classNames from "classnames"
 import { PreviewCopy } from "@/components/PreviewCopy"
@@ -51,8 +52,17 @@ async function Preview() {
     <div className="container m-auto grid items-center px-4 py-8">
       <PreviewCopy />
       <section className="container m-auto grid items-center px-4 py-8">
-        <div className="relative m-auto w-full">
+        <div className="relative m-auto mb-12 w-full">
+          <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+            Image Gallery
+          </h1>
           <ImageGallery items={gallery.metadata.gallery} />
+        </div>
+        <div className="relative m-auto w-full">
+          <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+            Image Carousel
+          </h1>
+          <CarouselGallery className="px-12" items={gallery.metadata.gallery} />
         </div>
       </section>
     </div>
