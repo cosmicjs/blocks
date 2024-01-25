@@ -1,4 +1,4 @@
-// components/image-gallery.tsx
+// ImageGalleryClient.tsx
 "use client";
 
 import { useState } from "react";
@@ -11,22 +11,16 @@ export type GalleryItemType = {
   description: string;
 };
 
-export function ImageGalleryClient({
-  items,
-  className,
-}: {
-  items: GalleryItemType[];
-  className?: string;
-}) {
+export function ImageGalleryClient({ items }: { items: GalleryItemType[] }) {
   const [mainItem, setMainItem] = useState(items[0]);
   let num = 0;
   return (
-    <div className={className}>
+    <>
       <div>
         <img
           src={`${mainItem.image.imgix_url}?w=1200&auto=format,compression`}
           alt={mainItem.description}
-          className="mb-4 h-80 w-full rounded-xl object-cover object-center"
+          className="mb-4 w-full rounded-xl object-cover object-center"
         />
       </div>
       <div className="flex gap-x-2">
@@ -52,6 +46,6 @@ export function ImageGalleryClient({
           );
         })}
       </div>
-    </div>
+    </>
   );
 }
