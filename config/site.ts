@@ -21,6 +21,6 @@ export const siteConfig = {
 export const packageManagers = [
   { title: "bun", value: "bun" },
   { title: "npm", value: "npm" },
-  // { title: "yarn", value: "yarn" },
-  // { title: "pnpm", value: "pnpm" },
+  { title: "yarn", value: "yarn" },
+  { title: "pnpm", value: "pnpm" },
 ]

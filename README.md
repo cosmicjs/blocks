@@ -4,7 +4,7 @@
 
 # Blocks
 
-Blocks are data infused components for building Cosmic-powered websites and apps. Save development time and learn content modeling best practices.
+[Blocks](https://blocks.cosmicjs.com) are data infused components for building Cosmic powered websites and apps. Use Blocks to build website features such as landing pages, blogs, image galleries, events, and more.
 
 ## Get started
 
@@ -14,7 +14,7 @@ Blocks are data infused components for building Cosmic-powered websites and apps
 
 ## Blocks include
 
-- Pages
+- Landing page
 - Blog
 - Events
 - FAQs
@@ -24,6 +24,25 @@ Blocks are data infused components for building Cosmic-powered websites and apps
 - Image gallery
 - and more!
 
+## Features
+
+⚡️ Performance optimized
+
+👁 Draft preview ready
+
+📱 Mobile responsive
+
+🌎 Localization ready
+
+🌓 Dark mode ready
+
+🔧 Customizable
+
+♿️ Accessible
+
+🦺 Type safe
+
+
 ## Built with
 
 - React Server Components
@@ -31,25 +50,34 @@ Blocks are data infused components for building Cosmic-powered websites and apps
 - TypeScript
 - Next.js
 
-## Features
-
-- Performance optimized
-- Draft preview ready
-- Localization ready
-- Mobile responsive
-- Dark mode ready
-- Customizable
-- Accessible
-- Type safe
-
 ## Contributing
 
+1. Download this code repository and install the dependencies.
 ```bash
 git clone https://github.com/cosmicjs/blocks
 cd blocks
 bun install
+```
+
+2. Create a `.env.local` file with your Cosmic API keys. Find these after logging in to the Cosmic dashboard in [Project > API keys](https://app.cosmicjs.com/?redirect_to=?highlight=api-keys). (Ask [Cosmic support](https://www.cosmicjs.com/contact) for a bucket export file to connect Blocks dynamic content.)
+
+```
+cp .env.example .env.local
+```
+
+It will look like this:
+```
+# .env.local
+NEXT_PUBLIC_SOURCE_BUCKET_SLUG=change_to_your_bucket_slug
+NEXT_PUBLIC_SOURCE_READ_KEY=change_to_your_bucket_read_key
+```
+
+3. Run the app.
+```
 bun dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000).
 
 ## License
 
