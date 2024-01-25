@@ -1,25 +1,25 @@
 // components/image-gallery.tsx
-"use client"
+"use client";
 
-import { useState } from "react"
-import { cn } from "@/cosmic/utils"
+import { useState } from "react";
+import { cn } from "@/cosmic/utils";
 
 export type GalleryItemType = {
   image: {
-    imgix_url: string
-  }
-  description: string
-}
+    imgix_url: string;
+  };
+  description: string;
+};
 
 export function ImageGalleryClient({
   items,
   className,
 }: {
-  items: GalleryItemType[]
-  className?: string
+  items: GalleryItemType[];
+  className?: string;
 }) {
-  const [mainItem, setMainItem] = useState(items[0])
-
+  const [mainItem, setMainItem] = useState(items[0]);
+  let num = 0;
   return (
     <div className={className}>
       <div>
@@ -31,10 +31,11 @@ export function ImageGalleryClient({
       </div>
       <div className="flex gap-x-2">
         {items.map((item: GalleryItemType) => {
+          const id = `item-${num++}`;
           return (
             <div
               onClick={() => setMainItem(item)}
-              key={item.image.imgix_url}
+              key={id}
               className={cn(
                 `overflow-hidden rounded-xl border-4`,
                 item.image.imgix_url === mainItem.image.imgix_url
@@ -48,9 +49,9 @@ export function ImageGalleryClient({
                 alt={item.description}
               />
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }

@@ -52,7 +52,14 @@ const blocks = {
   },
   "image-gallery": {
     name: "Image Gallery",
-    installationSteps: ["@cosmicjs/sdk", "clsx", "tailwind-merge"],
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "clsx",
+      "tailwind-merge",
+      "embla-carousel-react",
+      "lucide-react",
+    ],
+    elements: ["Button", "Carousel"],
   },
   testimonials: {
     name: "Testimonials",
