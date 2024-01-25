@@ -1,5 +1,5 @@
 // components/image-gallery.tsx
-"use client";
+"use client"
 
 import {
   Carousel,
@@ -7,29 +7,29 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/cosmic/elements/Carousel";
+} from "@/cosmic/elements/Carousel"
 
 type GalleryItemType = {
   image: {
-    imgix_url: string;
-  };
-  description: string;
-};
+    imgix_url: string
+  }
+  description: string
+}
 
-export function CarouselClient({
+export function ImageCarouselClient({
   items,
   className,
 }: {
-  items: GalleryItemType[];
-  className?: string;
+  items: GalleryItemType[]
+  className?: string
 }) {
-  let num = 0;
+  let num = 0
   return (
     <div className={className}>
       <Carousel>
         <CarouselContent>
           {items.map((item: GalleryItemType) => {
-            const id = `item-${num++}`;
+            const id = `item-${num++}`
             return (
               <CarouselItem key={id} className="cursor-grab">
                 <img
@@ -38,12 +38,12 @@ export function CarouselClient({
                   alt={item.description}
                 />
               </CarouselItem>
-            );
+            )
           })}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
     </div>
-  );
+  )
 }

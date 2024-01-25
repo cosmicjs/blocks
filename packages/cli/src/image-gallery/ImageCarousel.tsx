@@ -1,21 +1,21 @@
 // components/image-gallery.tsx
-import { CarouselClient } from "./CarouselClient";
-import { cosmic } from "@/cosmic/client";
+import { ImageCarouselClient } from "./ImageCarouselClient"
+import { cosmic } from "@/cosmic/client"
 
-export async function Carousel({
+export async function ImageCarousel({
   query,
   className,
   status,
 }: {
-  query: any;
-  className?: string;
-  status?: "draft" | "published" | "any";
+  query: any
+  className?: string
+  status?: "draft" | "published" | "any"
 }) {
   const { object: page } = await cosmic.objects
     .findOne(query)
     .props("id,title,metadata")
     .depth(1)
-    .status(status ? status : "published");
+    .status(status ? status : "published")
   return (
     <div className={`m-auto max-w-[800px] p-16 ${className}`}>
       {!page.metadata?.gallery?.length ? (
@@ -31,8 +31,8 @@ export async function Carousel({
           </a>
         </div>
       ) : (
-        <CarouselClient items={page.metadata.gallery} />
+        <ImageCarouselClient items={page.metadata.gallery} />
       )}
     </div>
-  );
+  )
 }
