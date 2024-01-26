@@ -201,7 +201,7 @@ function Code() {
         page: number;
       };
     }) {
-      const page = Number(searchParams?.page);
+      const page = Number(searchParams?.page ? searchParams?.page : 1);
       const limit = 2;
       const skip = page * limit - limit;
       return (
