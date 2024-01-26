@@ -89,6 +89,16 @@ const blocks = {
     ],
     elements: ["Button"],
   },
+  pagination: {
+    name: "Pagination",
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "clsx",
+      "tailwind-merge",
+      "lucide-react",
+    ],
+    elements: ["Button", "Pagination"],
+  },
   events: {
     name: "events",
     installationSteps: [
