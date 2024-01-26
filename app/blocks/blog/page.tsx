@@ -183,7 +183,47 @@ function Code() {
     }
     \`\`\`
     `
+  const paginationCommand = dedent`
+    \`\`\`bash
+    bunx @cosmicjs/blocks add pagination
+    \`\`\`
+    `
+  const paginationCode = dedent`
+    \`\`\`jsx
+    // app/blog/page.tsx
+    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
+    import { Pagination } from "@/cosmic/blocks/pagination/Pagination";
 
+    export default async function BlogListPage({
+      searchParams,
+    }: {
+      searchParams?: {
+        page: number;
+      };
+    }) {
+      const page = Number(searchParams?.page);
+      const limit = 2;
+      const skip = page * limit - limit;
+      return (
+        <>
+          <BlogList
+            query={{ type: "blog-posts" }}
+            sort="-created_at"
+            limit={limit}
+            skip={skip}
+            className="mb-10"
+          />
+          <Pagination
+            query={{ type: "blog-posts" }}
+            path="/blog"
+            limit={limit}
+            page={page}
+          />
+        </>
+      );
+    }
+    \`\`\`
+    `
   const steps = [
     {
       title: "Install the Block content model",
@@ -210,6 +250,12 @@ function Code() {
       description:
         "Add a new file located at `app/blog/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the blog content.",
     },
+    {
+      title: "Install pagination Block",
+      code: paginationCommand,
+      description:
+        "This will add the files `Pagination.tsx` to your blocks folder located in `cosmic/blocks/pagination`.",
+    },
   ]
 
   const examples = [
@@ -223,6 +269,11 @@ function Code() {
       title: "Draft preview link in the dashboard",
       description:
         "To add the draft preview link in the dashboard, go to Blog Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/blog/[object_slug]?status=any` will add a Preview button to each blog post.",
+    },
+    {
+      title: "Pagination",
+      code: paginationCode,
+      description: "Add pagination with the pagination Block.",
     },
     {
       title: "Localization",
