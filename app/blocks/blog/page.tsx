@@ -188,7 +188,14 @@ function Code() {
     bunx @cosmicjs/blocks add pagination
     \`\`\`
     `
-  const paginationCode = dedent`
+
+  const paginationUsageCode = dedent`
+    \`\`\`jsx
+    <Pagination query={{ type: "blog-posts" }} path="/blog" limit={2} page={1} />
+    \`\`\`
+    `
+
+  const paginationExampleCode = dedent`
     \`\`\`jsx
     // app/blog/page.tsx
     import { BlogList } from "@/cosmic/blocks/blog/BlogList";
@@ -257,6 +264,12 @@ function Code() {
       description:
         "This will add the file `Pagination.tsx` to your blocks folder located in `cosmic/blocks/pagination`.",
     },
+    {
+      title: "Usage: Pagination",
+      code: paginationUsageCode,
+      description:
+        "Add the pagination Block to your code with the following. See how to use this with the `BlogList.tsx` Block in the examples section below.",
+    },
   ]
 
   const examples = [
@@ -273,7 +286,7 @@ function Code() {
     },
     {
       title: "Pagination",
-      code: paginationCode,
+      code: paginationExampleCode,
       description: "Add pagination with the pagination Block.",
     },
     {
