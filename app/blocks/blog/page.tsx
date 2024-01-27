@@ -202,26 +202,27 @@ function Code() {
       };
     }) {
       const page = Number(searchParams?.page ? searchParams?.page : 1);
-      const limit = 2;
-      const skip = page * limit - limit;
+      const LIMIT = 1; // Set the post limit here
+      const skip = page * LIMIT - LIMIT;
       return (
         <>
           <BlogList
             query={{ type: "blog-posts" }}
-            sort="-created_at"
-            limit={limit}
+            sort="-order"
+            limit={LIMIT}
             skip={skip}
             className="mb-10"
           />
           <Pagination
             query={{ type: "blog-posts" }}
             path="/blog"
-            limit={limit}
+            limit={LIMIT}
             page={page}
           />
         </>
       );
     }
+
     \`\`\`
     `
   const steps = [
@@ -254,7 +255,7 @@ function Code() {
       title: "Install pagination Block",
       code: paginationCommand,
       description:
-        "This will add the files `Pagination.tsx` to your blocks folder located in `cosmic/blocks/pagination`.",
+        "This will add the file `Pagination.tsx` to your blocks folder located in `cosmic/blocks/pagination`.",
     },
   ]
 
