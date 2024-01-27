@@ -1,31 +1,31 @@
 // ImageGalleryClient.tsx
-"use client";
+"use client"
 
-import { useState } from "react";
-import { cn } from "@/cosmic/utils";
+import { useState } from "react"
+import { cn } from "@/cosmic/utils"
 
 export type GalleryItemType = {
   image: {
-    imgix_url: string;
-  };
-  description: string;
-};
+    imgix_url: string
+  }
+  description: string
+}
 
 export function ImageGalleryClient({ items }: { items: GalleryItemType[] }) {
-  const [mainItem, setMainItem] = useState(items[0]);
-  let num = 0;
+  const [mainItem, setMainItem] = useState(items[0])
+  let num = 0
   return (
     <>
       <div>
         <img
           src={`${mainItem.image.imgix_url}?w=1200&auto=format,compression`}
           alt={mainItem.description}
-          className="mb-4 w-full rounded-xl object-cover object-center"
+          className="mb-4 h-[350px] w-full rounded-xl object-cover object-center"
         />
       </div>
       <div className="flex gap-x-2">
         {items.map((item: GalleryItemType) => {
-          const id = `item-${num++}`;
+          const id = `item-${num++}`
           return (
             <div
               onClick={() => setMainItem(item)}
@@ -43,9 +43,9 @@ export function ImageGalleryClient({ items }: { items: GalleryItemType[] }) {
                 alt={item.description}
               />
             </div>
-          );
+          )
         })}
       </div>
     </>
-  );
+  )
 }
