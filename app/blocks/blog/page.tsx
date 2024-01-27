@@ -268,7 +268,7 @@ function Code() {
       title: "Usage: Pagination",
       code: paginationUsageCode,
       description:
-        "Add the pagination Block to your code with the following. See how to use this with the `BlogList.tsx` Block in the examples section below.",
+        "Add the pagination Block to your code with the following. See how to use this with the `BlogList.tsx` in the pagination example below.",
     },
   ]
 

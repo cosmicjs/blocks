@@ -233,7 +233,53 @@ function Code({ manager }: { manager: PackageManagers }) {
     }
     \`\`\`
     `
+  const paginationCommand = dedent`
+    \`\`\`bash
+    bunx @cosmicjs/blocks add pagination
+    \`\`\`
+    `
 
+  const paginationUsageCode = dedent`
+    \`\`\`jsx
+    <Pagination query={{ type: "events" }} path="/events" limit={2} page={1} />
+    \`\`\`
+    `
+
+  const paginationExampleCode = dedent`
+    \`\`\`jsx
+    // app/events/page.tsx
+    import { EventsList } from "@/cosmic/blocks/events/EventsList";
+    import { Pagination } from "@/cosmic/blocks/pagination/Pagination";
+    export default async function EventListPage({
+      searchParams,
+    }: {
+      searchParams?: {
+        page: number;
+      };
+    }) {
+      const page = Number(searchParams?.page ? searchParams?.page : 1);
+      const limit = 2;
+      const skip = page * limit - limit;
+      return (
+        <>
+          <EventsList
+            query={{ type: "events" }}
+            sort="-created_at"
+            limit={limit}
+            skip={skip}
+            className="mb-10"
+          />
+          <Pagination
+            query={{ type: "events" }}
+            path="/events"
+            limit={limit}
+            page={page}
+          />
+        </>
+      );
+    }
+    \`\`\`
+    `
   const steps = [
     {
       title: "Install the Block content model",
@@ -258,6 +304,18 @@ function Code({ manager }: { manager: PackageManagers }) {
       description:
         "Add a new file located at `app/events/[slug]/page.tsx` with the following:",
     },
+    {
+      title: "Install pagination Block",
+      code: paginationCommand,
+      description:
+        "This will add the file `Pagination.tsx` to your blocks folder located in `cosmic/blocks/pagination`.",
+    },
+    {
+      title: "Usage: Pagination",
+      code: paginationUsageCode,
+      description:
+        "Add the pagination Block to your code with the following. See how to use this with the `EventsList.tsx` in the pagination example below.",
+    },
   ]
   const examples = [
     {
@@ -270,6 +328,11 @@ function Code({ manager }: { manager: PackageManagers }) {
       title: "Draft preview link in the dashboard",
       description:
         "To add the draft preview link in the dashboard, go to Events Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/events/[object_slug]?status=any` will add a Preview button to each event.",
+    },
+    {
+      title: "Pagination",
+      code: paginationExampleCode,
+      description: "Add pagination with the pagination Block.",
     },
     {
       title: "Localization",
