@@ -1,6 +1,6 @@
 import * as React from "react"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
-
+import Link from "next/link"
 import { cn } from "@/cosmic/utils"
 import { ButtonProps, buttonVariants } from "@/cosmic/elements/Button"
 
@@ -37,7 +37,8 @@ PaginationItem.displayName = "PaginationItem"
 type PaginationLinkProps = {
   isActive?: boolean
 } & Pick<ButtonProps, "size"> &
-  React.ComponentProps<"a">
+  React.ComponentProps<"a"> &
+  any // TODO: I TRIED!
 
 const PaginationLink = ({
   className,
@@ -45,7 +46,7 @@ const PaginationLink = ({
   size = "icon",
   ...props
 }: PaginationLinkProps) => (
-  <a
+  <Link
     aria-current={isActive ? "page" : undefined}
     className={cn(
       buttonVariants({

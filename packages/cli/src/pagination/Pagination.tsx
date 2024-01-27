@@ -5,7 +5,6 @@ import {
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/cosmic/elements/Pagination"
@@ -25,11 +24,10 @@ export async function Pagination({
 }) {
   const { total } = await cosmic.objects.find(query).props("id").limit(1)
   const hasNext = page * limit < total || (!page && total)
-  if (!page) return <></>
   return (
     <PaginationComp className={className}>
       <PaginationContent>
-        {page !== 1 ? (
+        {page && page !== 1 ? (
           <PaginationItem>
             <PaginationPrevious
               href={page === 2 ? path : `${path}?page=${page - 1}`}
@@ -38,11 +36,9 @@ export async function Pagination({
         ) : (
           ""
         )}
+        <PaginationItem>{page || 1}</PaginationItem>
         {hasNext && (
           <>
-            <PaginationItem>
-              <PaginationLink>{page || 1}</PaginationLink>
-            </PaginationItem>
             <PaginationItem>
               <PaginationEllipsis />
             </PaginationItem>
