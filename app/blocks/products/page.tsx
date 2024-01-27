@@ -195,6 +195,53 @@ function Code() {
     }
     \`\`\`
     `
+  const paginationCommand = dedent`
+    \`\`\`bash
+    bunx @cosmicjs/blocks add pagination
+    \`\`\`
+    `
+
+  const paginationUsageCode = dedent`
+    \`\`\`jsx
+    <Pagination query={{ type: "products" }} path="/shop" limit={2} page={1} />
+    \`\`\`
+    `
+
+  const paginationExampleCode = dedent`
+    \`\`\`jsx
+    // app/shop/page.tsx
+    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { Pagination } from "@/cosmic/blocks/pagination/Pagination";
+    export default async function Shop({
+      searchParams,
+    }: {
+      searchParams?: {
+        page: number;
+      };
+    }) {
+      const page = Number(searchParams?.page ? searchParams?.page : 1);
+      const limit = 2;
+      const skip = page * limit - limit;
+      return (
+        <>
+          <ProductList
+            query={{ type: "products" }}
+            sort="-created_at"
+            limit={limit}
+            skip={skip}
+            className="mb-10"
+          />
+          <Pagination
+            query={{ type: "products" }}
+            path="/shop"
+            limit={limit}
+            page={page}
+          />
+        </>
+      );
+    }
+    \`\`\`
+    `
   const steps = [
     {
       title: "Install the Block content model",
@@ -219,6 +266,18 @@ function Code() {
       description:
         "Add a new file located at `app/shop/[slug]/page.tsx` with the following:",
     },
+    {
+      title: "Install pagination Block",
+      code: paginationCommand,
+      description:
+        "This will add the file `Pagination.tsx` to your blocks folder located in `cosmic/blocks/pagination`.",
+    },
+    {
+      title: "Usage: Pagination",
+      code: paginationUsageCode,
+      description:
+        "Add the pagination Block to your code with the following. See how to use this with the `ProductList.tsx` in the pagination example below.",
+    },
   ]
   const examples = [
     {
@@ -231,6 +290,11 @@ function Code() {
       title: "Draft preview link in the dashboard",
       description:
         "To add the draft preview link in the dashboard, go to Products Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/shop/[object_slug]?status=any` will add a Preview button to each product.",
+    },
+    {
+      title: "Pagination",
+      code: paginationExampleCode,
+      description: "Add pagination with the pagination Block.",
     },
     {
       title: "Localization",
