@@ -1,5 +1,4 @@
 import { cosmic } from "@/cosmic/client"
-
 import {
   Pagination as PaginationComp,
   PaginationContent,
@@ -24,10 +23,12 @@ export async function Pagination({
 }) {
   const { total } = await cosmic.objects.find(query).props("id").limit(1)
   const hasNext = page * limit < total || (!page && total)
+  const hasPrev = page && page !== 1
+  if (!hasPrev && !hasNext) return <></>
   return (
     <PaginationComp className={className}>
       <PaginationContent>
-        {page && page !== 1 ? (
+        {hasPrev ? (
           <PaginationItem>
             <PaginationPrevious
               href={page === 2 ? path : `${path}?page=${page - 1}`}
