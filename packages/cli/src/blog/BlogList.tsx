@@ -1,6 +1,16 @@
 import { BlogCard, PostType } from "./BlogCard"
 import { cosmic } from "@/cosmic/client"
 
+function BlogPosts({ posts }: { posts: PostType[] }) {
+  return (
+    <>
+      {posts.map((post: PostType) => {
+        return <BlogCard key={post.id} post={post} />
+      })}
+    </>
+  )
+}
+
 export async function BlogList({
   query,
   sort,
@@ -8,6 +18,7 @@ export async function BlogList({
   skip,
   className,
   status,
+  noWrap = false,
 }: {
   query: any
   sort?: string
@@ -15,6 +26,7 @@ export async function BlogList({
   skip?: number
   className?: string
   status?: "draft" | "published" | "any"
+  noWrap?: boolean
 }) {
   const { objects: posts } = await cosmic.objects
     .find(query)
@@ -24,14 +36,10 @@ export async function BlogList({
     .limit(limit ? limit : 100)
     .skip(skip ? skip : 0)
     .status(status ? status : "published")
-
+  if (noWrap) return <BlogPosts posts={posts} />
   return (
-    <div
-      className={`m-auto flex max-w-[900px] flex-col gap-4 px-4 md:flex-row ${className}`}
-    >
-      {posts.map((post: PostType) => {
-        return <BlogCard key={post.id} post={post} />
-      })}
+    <div className={`m-auto grid max-w-[900px] grid-cols-2 gap-4 ${className}`}>
+      <BlogPosts posts={posts} />
     </div>
   )
 }
