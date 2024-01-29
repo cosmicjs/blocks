@@ -207,6 +207,7 @@ export const blocksData = [
   {
     key: "pagination",
     title: "Pagination",
+    type: "none",
     slug: "pagination",
     icon: <ChevronsRight className="h-5 w-5 text-cosmic-blue" />,
     description: `Add pagination to relevant Blocks.`,
