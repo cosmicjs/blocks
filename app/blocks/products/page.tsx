@@ -264,24 +264,22 @@ function Code() {
         .props("id")
         .limit(1);
       return (
-        <>
-          <LoadMore
-            loadMoreAction={loadMoreProducts}
-            initialOffset={skip}
-            total={total}
+        <LoadMore
+          loadMoreAction={loadMoreProducts}
+          initialOffset={skip}
+          total={total}
+          limit={LIMIT}
+          className="max-w-[1000px] m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10"
+        >
+          <ProductList
+            query={{ type: "products" }}
+            sort="-created_at"
             limit={LIMIT}
-            className="max-w-[1000px] m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10"
-          >
-            <ProductList
-              query={{ type: "products" }}
-              sort="-created_at"
-              limit={LIMIT}
-              skip={skip}
-              className="mb-10"
-              noWrap
-            />
-          </LoadMore>
-        </>
+            skip={skip}
+            className="mb-10"
+            noWrap
+          />
+        </LoadMore>
       );
     }
     \`\`\`
