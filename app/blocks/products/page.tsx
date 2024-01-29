@@ -242,6 +242,60 @@ function Code() {
     }
     \`\`\`
     `
+  const loadMoreExampleCode = dedent`
+    \`\`\`jsx
+    // app/shop/page.tsx
+    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { LoadMore } from "@/cosmic/blocks/pagination/LoadMore";
+    import { cosmic } from "@/cosmic/client";
+
+    const LIMIT = 2;
+
+    async function loadMoreProducts(offset: number = 0) {
+      "use server";
+      const nextOffset = LIMIT + offset;
+      return [
+        <ProductList
+          query={{ type: "products" }}
+          sort="-order"
+          limit={LIMIT}
+          skip={nextOffset}
+          className="mb-10"
+          noWrap
+        />,
+        nextOffset,
+      ] as const;
+    }
+
+    export default async function Shop() {
+      const skip = 0;
+      const { total } = await cosmic.objects
+        .find({ type: "products" })
+        .props("id")
+        .limit(1);
+      return (
+        <>
+          <LoadMore
+            loadMoreAction={loadMoreProducts}
+            initialOffset={skip}
+            total={total}
+            limit={LIMIT}
+            className="m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10"
+          >
+            <ProductList
+              query={{ type: "products" }}
+              sort="-created_at"
+              limit={LIMIT}
+              skip={skip}
+              className="mb-10"
+              noWrap
+            />
+          </LoadMore>
+        </>
+      );
+    }
+    \`\`\`
+    `
   const steps = [
     {
       title: "Install the Block content model",
@@ -270,13 +324,13 @@ function Code() {
       title: "Install pagination Block",
       code: paginationCommand,
       description:
-        "This will add the file `Pagination.tsx` to your blocks folder located in `cosmic/blocks/pagination`.",
+        "This will add `Pagination.tsx` and `LoadMore.tsx` files to your blocks folder located in `cosmic/blocks/pagination`.",
     },
     {
       title: "Usage: Pagination",
       code: paginationUsageCode,
       description:
-        "Add the pagination Block to your code with the following. See how to use this with the `ProductList.tsx` in the pagination example below.",
+        "Add the pagination Block to your code with the following. See how to use this with `ProductList.tsx` in the pagination example below.",
     },
   ]
   const examples = [
@@ -292,9 +346,15 @@ function Code() {
         "To add the draft preview link in the dashboard, go to Products Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/shop/[object_slug]?status=any` will add a Preview button to each product.",
     },
     {
-      title: "Pagination",
+      title: "Pagination: Numbered pages",
       code: paginationExampleCode,
-      description: "Add pagination with the pagination Block.",
+      description: "Add numbered pagination with the pagination Block.",
+    },
+    {
+      title: "Pagination: Load more",
+      code: loadMoreExampleCode,
+      description:
+        "Use the load more pagination Block to fetch additional products using a Server Action.",
     },
     {
       title: "Localization",

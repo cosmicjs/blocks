@@ -260,7 +260,8 @@ function Code() {
       const skip = 0;
       const { total } = await cosmic.objects
         .find({ type: "blog-posts" })
-        .props("id");
+        .props("id")
+        .limit(1);
       return (
         <>
           <LoadMore
@@ -314,13 +315,13 @@ function Code() {
       title: "Install pagination Block",
       code: paginationCommand,
       description:
-        "This will add the file `Pagination.tsx` to your blocks folder located in `cosmic/blocks/pagination`.",
+        "This will add `Pagination.tsx` and `LoadMore.tsx` files to your blocks folder located in `cosmic/blocks/pagination`.",
     },
     {
       title: "Usage: Pagination",
       code: paginationUsageCode,
       description:
-        "Add the pagination Block to your code with the following. See how to use this with the `BlogList.tsx` in the pagination example below.",
+        "Add the pagination Block to your code with the following. See how to use this with `BlogList.tsx` in the pagination example below.",
     },
   ]
 
@@ -342,7 +343,7 @@ function Code() {
       description: "Add pagination with the pagination Block.",
     },
     {
-      title: "Load more",
+      title: "Pagination: Load more",
       code: loadMoreExampleCode,
       description:
         "Use the load more pagination Block to fetch additional blog posts using a Server Action.",
