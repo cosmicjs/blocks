@@ -229,7 +229,59 @@ function Code() {
         </>
       );
     }
+    \`\`\`
+    `
+  const loadMoreExampleCode = dedent`
+    \`\`\`jsx
+    // app/blog/page.tsx
+    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
+    import { LoadMore } from "@/cosmic/blocks/pagination/LoadMore";
+    import { cosmic } from "@/cosmic/client";
 
+    const LIMIT = 3;
+
+    async function loadMorePosts(offset: number = 0) {
+      "use server";
+      const nextOffset = LIMIT + offset;
+      return [
+        <BlogList
+          query={{ type: "blog-posts" }}
+          sort="-order"
+          limit={LIMIT}
+          skip={nextOffset}
+          className="mb-10"
+          noWrap
+        />,
+        nextOffset,
+      ] as const;
+    }
+
+    export default async function BlogListPage() {
+      const skip = 0;
+      const { total } = await cosmic.objects
+        .find({ type: "blog-posts" })
+        .props("id");
+      return (
+        <>
+          <LoadMore
+            loadMoreAction={loadMorePosts}
+            initialOffset={skip}
+            total={total}
+            limit={LIMIT}
+            className="m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10"
+          >
+            <BlogList
+              query={{ type: "blog-posts" }}
+              sort="-order"
+              limit={LIMIT}
+              skip={skip}
+              className="mb-10"
+              noWrap
+            />
+          </LoadMore>
+        </>
+      );
+    }
     \`\`\`
     `
   const steps = [
@@ -285,9 +337,15 @@ function Code() {
         "To add the draft preview link in the dashboard, go to Blog Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/blog/[object_slug]?status=any` will add a Preview button to each blog post.",
     },
     {
-      title: "Pagination",
+      title: "Pagination: Numbered pages",
       code: paginationExampleCode,
       description: "Add pagination with the pagination Block.",
+    },
+    {
+      title: "Load more",
+      code: loadMoreExampleCode,
+      description:
+        "Use the load more pagination Block to fetch additional blog posts using a Server Action.",
     },
     {
       title: "Localization",
