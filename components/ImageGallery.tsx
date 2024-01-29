@@ -20,7 +20,7 @@ export function ImageGallery({ items }: { items: GalleryItemType[] }) {
         <img
           src={`${mainItem.image.imgix_url}?w=1200&auto=format,compression`}
           alt={mainItem.description}
-          className="mb-4 w-full rounded-xl object-cover object-center"
+          className="mb-4 h-[350px] w-full rounded-xl object-cover object-center"
         />
       </div>
       <div className="flex gap-x-2">
