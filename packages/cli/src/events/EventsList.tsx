@@ -41,9 +41,7 @@ export async function EventsList({
     <div
       className={`m-auto mt-8 grid max-w-[900px] grid-cols-1 place-items-center gap-8 px-4 md:grid-cols-2 xl:grid-cols-2 ${className}`}
     >
-      {events?.map((event: EventCardType) => {
-        return <EventCard event={event} key={event.slug} />
-      })}
+      <Events events={events} />
     </div>
   )
 }
