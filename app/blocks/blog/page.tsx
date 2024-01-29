@@ -235,6 +235,7 @@ function Code() {
       const nextOffset = LIMIT + offset;
       return [
         <BlogList
+          key={offset}
           query={{ type: "blog-posts" }}
           sort="-order"
           limit={LIMIT}

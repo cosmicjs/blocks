@@ -44,6 +44,7 @@ async function loadMoreProducts(offset: number = 0) {
   const nextOffset = LIMIT + offset
   return [
     <ProductList
+      key={offset}
       query={{ type: "products" }}
       sort="-order"
       limit={LIMIT}
@@ -166,6 +167,7 @@ function Code() {
       const nextOffset = LIMIT + offset;
       return [
         <ProductList
+          key={offset}
           query={{ type: "products" }}
           sort="-order"
           limit={LIMIT}

@@ -283,6 +283,7 @@ function Code({ manager }: { manager: PackageManagers }) {
       const nextOffset = LIMIT + offset;
       return [
         <EventsList
+          key={offset}
           query={{ type: "events" }}
           sort="-order"
           limit={LIMIT}
