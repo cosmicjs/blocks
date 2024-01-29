@@ -280,7 +280,7 @@ function Code() {
             initialOffset={skip}
             total={total}
             limit={LIMIT}
-            className="m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10"
+            className="max-w-[1000px] m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10"
           >
             <ProductList
               query={{ type: "products" }}
