@@ -8,6 +8,7 @@ import { ProductCard, ProductType } from "@/components/ProductCard"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import classNames from "classnames"
 import { PreviewCopy } from "@/components/PreviewCopy"
+import Link from "next/link"
 
 export async function generateMetadata() {
   return {
@@ -195,18 +196,6 @@ function Code() {
     }
     \`\`\`
     `
-  const paginationCommand = dedent`
-    \`\`\`bash
-    bunx @cosmicjs/blocks add pagination
-    \`\`\`
-    `
-
-  const paginationUsageCode = dedent`
-    \`\`\`jsx
-    <Pagination query={{ type: "products" }} path="/shop" limit={2} page={1} />
-    \`\`\`
-    `
-
   const paginationExampleCode = dedent`
     \`\`\`jsx
     // app/shop/page.tsx
@@ -321,16 +310,16 @@ function Code() {
         "Add a new file located at `app/shop/[slug]/page.tsx` with the following:",
     },
     {
-      title: "Install pagination Block",
-      code: paginationCommand,
-      description:
-        "This will add `Pagination.tsx` and `LoadMore.tsx` files to your blocks folder located in `cosmic/blocks/pagination`.",
-    },
-    {
-      title: "Usage: Pagination",
-      code: paginationUsageCode,
-      description:
-        "Add the pagination Block to your code with the following. See how to use this with `ProductList.tsx` in the pagination example below.",
+      title: "Pagination",
+      description: (
+        <>
+          See the{" "}
+          <Link href="/blocks/pagination" className="text-cosmic-blue">
+            pagination Block
+          </Link>{" "}
+          for installation steps and view the full examples below.
+        </>
+      ),
     },
   ]
   const examples = [

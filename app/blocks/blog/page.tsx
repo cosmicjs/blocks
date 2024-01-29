@@ -6,6 +6,7 @@ import { BlogCard, PostType } from "@/components/BlogCard"
 import { Markdown } from "@/components/elements/Markdown/Markdown"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
+import Link from "next/link"
 
 export async function generateMetadata() {
   return {
@@ -183,17 +184,6 @@ function Code() {
     }
     \`\`\`
     `
-  const paginationCommand = dedent`
-    \`\`\`bash
-    bunx @cosmicjs/blocks add pagination
-    \`\`\`
-    `
-
-  const paginationUsageCode = dedent`
-    \`\`\`jsx
-    <Pagination query={{ type: "blog-posts" }} path="/blog" limit={2} page={1} />
-    \`\`\`
-    `
 
   const paginationExampleCode = dedent`
     \`\`\`jsx
@@ -312,16 +302,16 @@ function Code() {
         "Add a new file located at `app/blog/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the blog content.",
     },
     {
-      title: "Install pagination Block",
-      code: paginationCommand,
-      description:
-        "This will add `Pagination.tsx` and `LoadMore.tsx` files to your blocks folder located in `cosmic/blocks/pagination`.",
-    },
-    {
-      title: "Usage: Pagination",
-      code: paginationUsageCode,
-      description:
-        "Add the pagination Block to your code with the following. See how to use this with `BlogList.tsx` in the pagination example below.",
+      title: "Pagination",
+      description: (
+        <>
+          See the{" "}
+          <Link href="/blocks/pagination" className="text-cosmic-blue">
+            pagination Block
+          </Link>{" "}
+          for installation steps and view the full examples below.
+        </>
+      ),
     },
   ]
 
