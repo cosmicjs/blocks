@@ -6,6 +6,15 @@ import classNames from "classnames"
 import { PreviewCopy } from "@/components/PreviewCopy"
 import { ProductList } from "@/components/ProductList"
 import { LoadMore } from "@/components/LoadMore"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
 export async function generateMetadata() {
   return {
@@ -68,24 +77,56 @@ async function Preview() {
       <section className="container m-auto grid items-center px-4 py-8">
         <div className="relative mb-20 flex w-full max-w-[950px] flex-col items-start">
           <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-            Load more pagination
+            Load more
           </h1>
-          <LoadMore
-            loadMoreAction={loadMoreProducts}
-            initialOffset={skip}
-            total={total}
-            limit={LIMIT}
-            className="m-auto grid w-full grid-cols-1 gap-6 md:w-[600px] md:grid-cols-2"
-          >
+          <div className="mb-16">
+            <LoadMore
+              loadMoreAction={loadMoreProducts}
+              initialOffset={skip}
+              total={total}
+              limit={LIMIT}
+              className="mb-8 grid w-full grid-cols-1 gap-6 md:w-[600px] md:grid-cols-2"
+            >
+              <ProductList
+                query={{ type: "products" }}
+                sort="-created_at"
+                limit={LIMIT}
+                skip={skip}
+                noWrap
+              />
+            </LoadMore>
+          </div>
+          <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+            Numbered pages
+          </h1>
+          <div className="mb-12 grid w-full grid-cols-1 gap-6 md:w-[600px] md:grid-cols-2">
             <ProductList
               query={{ type: "products" }}
               sort="-created_at"
               limit={LIMIT}
               skip={skip}
-              className="mb-10"
               noWrap
             />
-          </LoadMore>
+          </div>
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink>1</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink>2</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         </div>
       </section>
     </div>
@@ -140,7 +181,6 @@ function Code() {
             sort="-created_at"
             limit={limit}
             skip={skip}
-            className="mb-10"
           />
           <Pagination
             query={{ type: "products" }}
@@ -172,7 +212,6 @@ function Code() {
           sort="-order"
           limit={LIMIT}
           skip={nextOffset}
-          className="mb-10"
           noWrap
         />,
         nextOffset,
@@ -198,7 +237,6 @@ function Code() {
             sort="-created_at"
             limit={LIMIT}
             skip={skip}
-            className="mb-10"
             noWrap
           />
         </LoadMore>

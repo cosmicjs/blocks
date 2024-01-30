@@ -240,7 +240,6 @@ function Code() {
           sort="-order"
           limit={LIMIT}
           skip={nextOffset}
-          className="mb-10"
           noWrap
         />,
         nextOffset,
@@ -266,7 +265,6 @@ function Code() {
             sort="-order"
             limit={LIMIT}
             skip={skip}
-            className="mb-10"
             noWrap
           />
         </LoadMore>

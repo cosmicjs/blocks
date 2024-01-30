@@ -314,7 +314,6 @@ function Code({ manager }: { manager: PackageManagers }) {
             sort="-created_at"
             limit={LIMIT}
             skip={skip}
-            className="mb-10"
             noWrap
           />
         </LoadMore>
