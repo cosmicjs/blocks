@@ -214,8 +214,8 @@ export const blocksData = [
     confirmation: ``,
     preview_link: "/blocks/pagination",
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/ff0b0e10-9416-11ee-b62d-5b90a0a1bade-Blog-Dark.png",
+      "https://imgix.cosmicjs.com/90050030-bf80-11ee-9fc1-4bb6168d3a2d-Pagination_Dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/ff078ba0-9416-11ee-b62d-5b90a0a1bade-Blog.png",
+      "https://imgix.cosmicjs.com/900b8fe0-bf80-11ee-9fc1-4bb6168d3a2d-Pagination.png",
   },
 ]
