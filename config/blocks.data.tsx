@@ -11,6 +11,7 @@ import {
   UsersRoundIcon,
   CalendarIcon,
   EditIcon,
+  ChevronsRight,
 } from "lucide-react"
 
 export const blocksData = [
@@ -202,5 +203,19 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/feb94490-9416-11ee-b62d-5b90a0a1bade-SEO-Dark.png",
     light_thumbnail:
       "https://imgix.cosmicjs.com/fed81730-9416-11ee-b62d-5b90a0a1bade-SEO.png",
+  },
+  {
+    key: "pagination",
+    title: "Pagination",
+    type: "none",
+    slug: "pagination",
+    icon: <ChevronsRight className="h-5 w-5 text-cosmic-blue" />,
+    description: `Add pagination to relevant Blocks.`,
+    confirmation: ``,
+    preview_link: "/blocks/pagination",
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/90050030-bf80-11ee-9fc1-4bb6168d3a2d-Pagination_Dark.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/900b8fe0-bf80-11ee-9fc1-4bb6168d3a2d-Pagination.png",
   },
 ]

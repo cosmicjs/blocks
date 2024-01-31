@@ -94,13 +94,13 @@ function Code({ manager }: { manager: PackageManagers }) {
 
   const importCode = dedent`
   \`\`\`jsx
-  import { Testimonials } from "@/cosmic/blocks/testimonials/Testimonials";
+  import { TestimonialList } from "@/cosmic/blocks/testimonials/TestimonialList";
   \`\`\`
   `
 
   const usageCode = dedent`
   \`\`\`jsx
-  <Testimonials query={{ type: "testimonials" }} />
+  <TestimonialList query={{ type: "testimonials" }} />
   \`\`\`
   `
 

@@ -7,6 +7,7 @@ import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { EventCard, EventCardType } from "@/components/EventCard"
 import { Button } from "@/components/ui/button"
 import { PreviewCopy } from "@/components/PreviewCopy"
+import Link from "next/link"
 
 export async function generateMetadata() {
   return {
@@ -233,7 +234,93 @@ function Code({ manager }: { manager: PackageManagers }) {
     }
     \`\`\`
     `
+  const paginationExampleCode = dedent`
+    \`\`\`jsx
+    // app/events/page.tsx
+    import { EventsList } from "@/cosmic/blocks/events/EventsList";
+    import { Pagination } from "@/cosmic/blocks/pagination/Pagination";
+    export default async function EventListPage({
+      searchParams,
+    }: {
+      searchParams?: {
+        page: number;
+      };
+    }) {
+      const page = Number(searchParams?.page ? searchParams?.page : 1);
+      const limit = 2;
+      const skip = page * limit - limit;
+      return (
+        <>
+          <EventsList
+            query={{ type: "events" }}
+            sort="-created_at"
+            limit={limit}
+            skip={skip}
+            className="mb-10"
+          />
+          <Pagination
+            query={{ type: "events" }}
+            path="/events"
+            limit={limit}
+            page={page}
+          />
+        </>
+      );
+    }
+    \`\`\`
+    `
+  const loadMoreExampleCode = dedent`
+    \`\`\`jsx
+    // app/events/page.tsx
+    import { EventsList } from "@/cosmic/blocks/events/EventsList";
+    import { LoadMore } from "@/cosmic/blocks/pagination/LoadMore";
+    import { cosmic } from "@/cosmic/client";
 
+    const LIMIT = 2;
+
+    async function loadMoreEvents(offset: number = 0) {
+      "use server";
+      const nextOffset = LIMIT + offset;
+      return [
+        <EventsList
+          key={offset}
+          query={{ type: "events" }}
+          sort="-order"
+          limit={LIMIT}
+          skip={nextOffset}
+          className="mb-10"
+          noWrap
+        />,
+        nextOffset,
+      ] as const;
+    }
+
+    export default async function EventListPage() {
+      const skip = 0;
+      const { total } = await cosmic.objects
+        .find({ type: "events" })
+        .props("id")
+        .limit(1);
+      return (
+        <LoadMore
+          loadMoreAction={loadMoreEvents}
+          initialOffset={skip}
+          total={total}
+          limit={LIMIT}
+          className="max-w-[1000px] m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10"
+        >
+          <EventsList
+            query={{ type: "events" }}
+            sort="-created_at"
+            limit={LIMIT}
+            skip={skip}
+            noWrap
+          />
+        </LoadMore>
+      );
+    }
+    \`\`\`
+    `
   const steps = [
     {
       title: "Install the Block content model",
@@ -258,6 +345,18 @@ function Code({ manager }: { manager: PackageManagers }) {
       description:
         "Add a new file located at `app/events/[slug]/page.tsx` with the following:",
     },
+    {
+      title: "Pagination",
+      description: (
+        <>
+          See the{" "}
+          <Link href="/blocks/pagination" className="text-cosmic-blue">
+            pagination Block
+          </Link>{" "}
+          for installation steps and view the full examples below.
+        </>
+      ),
+    },
   ]
   const examples = [
     {
@@ -270,6 +369,17 @@ function Code({ manager }: { manager: PackageManagers }) {
       title: "Draft preview link in the dashboard",
       description:
         "To add the draft preview link in the dashboard, go to Events Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/events/[object_slug]?status=any` will add a Preview button to each event.",
+    },
+    {
+      title: "Pagination: Numbered pages",
+      code: paginationExampleCode,
+      description: "Add numbered pagination with the pagination Block.",
+    },
+    {
+      title: "Pagination: Load more",
+      code: loadMoreExampleCode,
+      description:
+        "Use the load more pagination Block to fetch additional events using a Server Action.",
     },
     {
       title: "Localization",

@@ -89,6 +89,16 @@ const blocks = {
     ],
     elements: ["Button"],
   },
+  pagination: {
+    name: "Pagination",
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "clsx",
+      "tailwind-merge",
+      "lucide-react",
+    ],
+    elements: ["Button", "Pagination"],
+  },
   events: {
     name: "events",
     installationSteps: [
@@ -133,7 +143,7 @@ const addCommand = new Command()
         return console.error(
           chalk.red(
             `"${component}" is an invalid Block name. Please find a valid list of Blocks on ${chalk.bold(
-              "https://cosmicjs.com/blocks."
+              "https://blocks.cosmicjs.com."
             )}`
           )
         )

@@ -1,4 +1,4 @@
-import { cosmic } from "@/cosmic/client"
+import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { ProductCard, ProductType } from "./ProductCard"
 
 function Products({ products }: { products: ProductType[] }) {
@@ -28,7 +28,7 @@ export async function ProductList({
   status?: "draft" | "published" | "any"
   noWrap?: boolean
 }) {
-  const { objects: products } = await cosmic.objects
+  const { objects: products } = await cosmicSourceBucketConfig.objects
     .find(query)
     .props("id,slug,title,metadata")
     .depth(1)
