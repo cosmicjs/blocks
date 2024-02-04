@@ -42,6 +42,11 @@ export function ImageGalleryClient({ items }: { items: GalleryItemType[] }) {
                 className="h-20 w-20 cursor-pointer object-cover object-center"
                 alt={item.description}
               />
+              <img
+                src={`${mainItem.image.imgix_url}?w=1200&auto=format,compression`}
+                alt={mainItem.description}
+                className="hidden" // prefetch
+              />
             </div>
           )
         })}
