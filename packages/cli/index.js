@@ -14,7 +14,8 @@ const __dirname = dirname(__filename)
 const blocks = {
   blog: {
     name: "Blog",
-    installationSteps: ["@cosmicjs/sdk", "react-markdown", "lucide-react"],
+    installationSteps: ["@cosmicjs/sdk", "react-markdown", "lucide-react", "clsx",
+      "tailwind-merge"],
   },
   faqs: {
     name: "FAQs",
