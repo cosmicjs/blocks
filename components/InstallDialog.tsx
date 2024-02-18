@@ -55,6 +55,8 @@ import {
   getEvents,
   addEventsObjectType,
   addEvents,
+  getFormSubmittionsMetafields,
+  addFormSubmissionsObjectType,
 } from "@/lib/cosmic"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -280,6 +282,11 @@ export function InstallDialog({
       await addCommentsObjectType(cosmicTargetBucket, metafields)
       // Add comments
       await addComments(cosmicTargetBucket, comments)
+    }
+
+    if (featureKey === "contact-form") {
+      const metafields = await getFormSubmittionsMetafields()
+      await addFormSubmissionsObjectType(cosmicTargetBucket, metafields)
     }
 
     if (featureKey === "team") {

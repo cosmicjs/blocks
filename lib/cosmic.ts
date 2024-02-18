@@ -71,6 +71,10 @@ export async function getCommentsMetafields() {
   return await getMetafieldsFromObjectType("comments")
 }
 
+export async function getFormSubmittionsMetafields() {
+  return await getMetafieldsFromObjectType("form-submissions")
+}
+
 export async function getGlobalSettingsMetafields() {
   return await getMetafieldsFromObjectType("global-settings")
 }
@@ -529,6 +533,22 @@ export async function addCommentsObjectType(
     title: "Comments",
     slug: "comments",
     emoji: "💬",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
+    metafields,
+  })
+}
+export async function addFormSubmissionsObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Form Submission",
+    title: "Form Submissions",
+    slug: "form-submissions",
+    emoji: "✉️",
     options: {
       slug_field: true,
       content_editor: false,
