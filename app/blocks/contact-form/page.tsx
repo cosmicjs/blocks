@@ -62,13 +62,15 @@ function Code() {
     `
   const exampleCode = dedent`
     \`\`\`jsx
-    // app/contact/page.tsx
+    // app/page.tsx
     import { Hero } from "@/cosmic/blocks/landing-page/Hero";
+    import { Sections } from "@/cosmic/blocks/landing-page/Sections";
     import { ContactForm } from "@/cosmic/blocks/contact-form/ContactForm";
-    export default async function ContactPage() {
+    export default async function HomePage() {
       return (
         <>
-          <Hero query={{ slug: "contact", type: "pages" }} />
+          <Hero query={{ slug: "home", type: "pages" }} />
+          <Sections query={{ slug: "home", type: "pages" }} />
           <ContactForm className="w-full max-w-[500px] m-auto" />
         </>
       );
@@ -216,12 +218,12 @@ function Code() {
       code: submissionsAPICodeString,
     },
     {
-      title: "Usage: Contact page",
+      title: "Usage: Home page",
       code: exampleCode,
       description: (
         <>
-          Add the following to a single blog post file `app/contact/page.tsx`.
-          Note: this assumes you have installed the{" "}
+          Add the following to the file `app/page.tsx`. Note: this assumes you
+          have installed the{" "}
           <Link href="/blocks/blog" className="text-cosmic-blue">
             Landing Page Block
           </Link>
