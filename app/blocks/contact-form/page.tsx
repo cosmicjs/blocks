@@ -57,7 +57,7 @@ function Code() {
     `
   const usageCode = dedent`
     \`\`\`jsx
-    <ContactForm className="w-full max-w-[500px]" />
+    <ContactForm className="w-full max-w-[500px] m-auto" />
     \`\`\`
     `
   const exampleCode = dedent`
@@ -69,7 +69,7 @@ function Code() {
       return (
         <>
           <Hero query={{ slug: "contact", type: "pages" }} />
-          <ContactForm className="w-full max-w-[500px]" />
+          <ContactForm className="w-full max-w-[500px] m-auto" />
         </>
       );
     }
