@@ -48,7 +48,7 @@ function Code() {
   `
   const installResend = dedent`
   \`\`\`bash
-  bunx add resend
+  bun add resend
   \`\`\`
   `
   const importCode = dedent`
