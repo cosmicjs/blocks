@@ -224,7 +224,7 @@ function Code() {
         <>
           Add the following to the file `app/page.tsx`. Note: this assumes you
           have installed the{" "}
-          <Link href="/blocks/blog" className="text-cosmic-blue">
+          <Link href="/blocks/landing-page" className="text-cosmic-blue">
             Landing Page Block
           </Link>
           .
