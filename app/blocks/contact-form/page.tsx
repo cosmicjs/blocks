@@ -2,7 +2,6 @@
 import dedent from "dedent"
 import Link from "next/link"
 
-import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { ContactForm } from "@/components/ContactForm"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
@@ -169,29 +168,29 @@ function Code() {
         "This will add the `ContactForm.tsx` file and components to your blocks folder located in `cosmic/blocks/contact-form`.",
     },
     {
-      title: "Import Comment Form Block",
+      title: "Import Block",
       code: importCode,
       description: "Import the block into your app.",
     },
     {
-      title: "Create the form submissions post API route",
-      description:
-        "Create a new file at `app/api/submissions/route.ts` with the following:",
-      code: submissionsAPICodeString,
+      title: "Usage",
+      code: usageCode,
+      description: "Add the block component.",
     },
     {
       title: "Install Resend email client",
       description: (
         <>
-          Run the following command to install the Resend JavaScript client.
-          Learn more about sending emails with Resend on{" "}
+          We will use the Resend email service to send emails. Run the following
+          command to install the Resend JavaScript client. Learn more about
+          sending emails with Resend on the{" "}
           <a
             href="https://resend.com"
             target="_blank"
             className="text-cosmic-blue"
             rel="noreferrer"
           >
-            their website
+            Resend website
           </a>
           .
         </>
@@ -199,16 +198,22 @@ function Code() {
       code: installResend,
     },
     {
-      title:
-        "Add the additional Resend email service key and contact email to the .env.local file.",
+      title: "Add Resend key and contact email.",
       description:
-        "Create a new file at `app/api/submissions/route.ts` and change the values to your key and email:",
+        "Add the following additional keys to the existing `.env.local` file. Change the values to your Resend key and email that you would like to receive the form submissions.",
       code: dedent(`\`\`\`jsx
       // .env.local
+      ...
       RESEND_API_KEY=re_123456
       CONTACT_EMAIL=youremail@domain.com
       \`\`\`
       `),
+    },
+    {
+      title: "Create the form submissions post API route",
+      description:
+        "Create a new file at `app/api/submissions/route.ts` with the following:",
+      code: submissionsAPICodeString,
     },
     {
       title: "Usage: Contact page",
