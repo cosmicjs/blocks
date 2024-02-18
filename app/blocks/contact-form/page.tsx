@@ -189,6 +189,7 @@ function Code() {
             href="https://resend.com"
             target="_blank"
             className="text-cosmic-blue"
+            rel="noreferrer"
           >
             their website
           </a>
