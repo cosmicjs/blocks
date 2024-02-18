@@ -90,7 +90,7 @@ export const blocksData = [
     confirmation: `This will install a \`form-submissions\` Object type to your Bucket.`,
     preview_link: "/blocks/contact-form",
     object_types: 1,
-    objects: "",
+    objects: 0,
     dark_thumbnail:
       "https://imgix.cosmicjs.com/fee05490-9416-11ee-b62d-5b90a0a1bade-Comments-Dark.png",
     light_thumbnail:
