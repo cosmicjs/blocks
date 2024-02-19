@@ -200,7 +200,7 @@ function Code() {
       code: installResend,
     },
     {
-      title: "Add Resend key and contact email.",
+      title: "Add Resend key and contact email",
       description:
         "Add the following additional keys to the existing `.env.local` file. Change the values to your Resend key and email that you would like to receive the form submissions.",
       code: dedent(`\`\`\`jsx
