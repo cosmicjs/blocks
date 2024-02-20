@@ -199,9 +199,9 @@ function Code() {
       title: "Add Resend key and contact email",
       description: (
         <>
-          Add the following additional keys to the existing `.env.local` file.
-          Change the values to your Resend key and email that you would like to
-          receive the form submissions. Find your Resend API key in the{" "}
+          Add the following keys to the `.env.local` file. Change the values to
+          your Resend key and email that you would like to receive the form
+          submissions. Find your Resend API key in the{" "}
           <a
             href="https://resend.com/login"
             target="_blank"
@@ -222,7 +222,7 @@ function Code() {
       `),
     },
     {
-      title: "Create the form submissions post API route",
+      title: "Create the form submissions API route",
       description:
         "Create a new file at `app/api/submissions/route.ts` with the following:",
       code: submissionsAPICodeString,
@@ -233,8 +233,7 @@ function Code() {
       description: (
         <>
           Create a new file at `app/contact/page.tsx` and add the following
-          code. Then go to the page http://localhost:3000/contact to see the
-          form.
+          code. Then go to `http://localhost:3000/contact` to see the form.
         </>
       ),
     },
