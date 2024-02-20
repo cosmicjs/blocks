@@ -92,9 +92,9 @@ export const blocksData = [
     object_types: 1,
     objects: 0,
     dark_thumbnail:
-      "https://imgix.cosmicjs.com/fee05490-9416-11ee-b62d-5b90a0a1bade-Comments-Dark.png",
+      "https://imgix.cosmicjs.com/ee060260-d001-11ee-9ce5-59949019255e-Contact-Form-dark.png",
     light_thumbnail:
-      "https://imgix.cosmicjs.com/fef0a840-9416-11ee-b62d-5b90a0a1bade-Comments.png",
+      "https://imgix.cosmicjs.com/ee000ef0-d001-11ee-9ce5-59949019255e-Contact-Form.png",
   },
   {
     key: "events",
