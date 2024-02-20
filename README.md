@@ -16,6 +16,7 @@
 
 - Landing page
 - Blog
+- Contact form
 - Events
 - FAQs
 - Testimonials
