@@ -14,9 +14,9 @@ const BlockStats: React.FC<BlockStatsProps> = ({
 }) => {
   return (
     <p className="text-gray-600 dark:text-dark-gray-600">
-      {objectTypes}{" "}
-      {objectTypes && `${pluralize("Object type", objectTypes)} •`} {objects}{" "}
-      {objects && `demo ${pluralize("Object", objects)}`}
+      {objectTypes} {objectTypes && `${pluralize("Object type", objectTypes)}`}{" "}
+      {objects ? " • " + objects : ""}{" "}
+      {objects ? `demo ${pluralize("Object", objects)}` : ""}
       {metafields} {metafields && `${pluralize("Metafield", metafields)}`}
     </p>
   )

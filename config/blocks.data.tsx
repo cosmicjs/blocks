@@ -12,6 +12,7 @@ import {
   CalendarIcon,
   EditIcon,
   ChevronsRight,
+  MailIcon,
 } from "lucide-react"
 
 export const blocksData = [
@@ -78,6 +79,22 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/fee05490-9416-11ee-b62d-5b90a0a1bade-Comments-Dark.png",
     light_thumbnail:
       "https://imgix.cosmicjs.com/fef0a840-9416-11ee-b62d-5b90a0a1bade-Comments.png",
+  },
+  {
+    key: "contact-form",
+    title: "Contact Form",
+    type: "object_type",
+    slug: "form-submissions",
+    icon: <MailIcon className="h-5 w-5 text-cosmic-blue" />,
+    description: `Adds a Form Submissions Object type to your Bucket, which includes`,
+    confirmation: `This will install a \`form-submissions\` Object type to your Bucket.`,
+    preview_link: "/blocks/contact-form",
+    object_types: 1,
+    objects: 0,
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/ee060260-d001-11ee-9ce5-59949019255e-Contact-Form-dark.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/ee000ef0-d001-11ee-9ce5-59949019255e-Contact-Form.png",
   },
   {
     key: "events",
