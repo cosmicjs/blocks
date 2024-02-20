@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import dedent from "dedent"
 import Link from "next/link"
+import dedent from "dedent"
 
 import { ContactForm } from "@/components/ContactForm"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
@@ -62,16 +62,12 @@ function Code() {
     `
   const exampleCode = dedent`
     \`\`\`jsx
-    // app/page.tsx
-    import { Hero } from "@/cosmic/blocks/landing-page/Hero";
-    import { Sections } from "@/cosmic/blocks/landing-page/Sections";
+    // app/contact/page.tsx
     import { ContactForm } from "@/cosmic/blocks/contact-form/ContactForm";
     export default async function HomePage() {
       return (
         <>
-          <Hero query={{ slug: "home", type: "pages" }} />
-          <Sections query={{ slug: "home", type: "pages" }} />
-          <ContactForm className="w-full max-w-[500px] m-auto" />
+          <ContactForm className="w-full max-w-[500px] m-auto my-10" />
         </>
       );
     }
@@ -200,9 +196,23 @@ function Code() {
       code: installResend,
     },
     {
-      title: "Add Resend key and contact email.",
-      description:
-        "Add the following additional keys to the existing `.env.local` file. Change the values to your Resend key and email that you would like to receive the form submissions.",
+      title: "Add Resend key and contact email",
+      description: (
+        <>
+          Add the following additional keys to the existing `.env.local` file.
+          Change the values to your Resend key and email that you would like to
+          receive the form submissions. Find your Resend API key in the{" "}
+          <a
+            href="https://resend.com/login"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Resend dashboard
+          </a>
+          .
+        </>
+      ),
       code: dedent(`\`\`\`jsx
       // .env.local
       ...
@@ -218,16 +228,13 @@ function Code() {
       code: submissionsAPICodeString,
     },
     {
-      title: "Usage: Home page",
+      title: "Usage: Contact page",
       code: exampleCode,
       description: (
         <>
-          Add the following to the file `app/page.tsx`. Note: this assumes you
-          have installed the{" "}
-          <Link href="/blocks/landing-page" className="text-cosmic-blue">
-            Landing Page Block
-          </Link>
-          .
+          Create a new file at `app/contact/page.tsx` and add the following
+          code. Then go to the page http://localhost:3000/contact to see the
+          form.
         </>
       ),
     },
