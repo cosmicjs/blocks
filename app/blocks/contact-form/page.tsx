@@ -126,7 +126,7 @@ function Code() {
       return Response.json(data);
     }
 
-    export async function sendEmail({
+    async function sendEmail({
       from,
       to,
       subject,
