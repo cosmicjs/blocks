@@ -4,10 +4,6 @@ import classNames from "classnames"
 import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
 import { DEMO_URL, WEBSITE_URL } from "@/constants"
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import NextIcon from "../../public/assets/tech/next.svg"
-import ReactIcon from "../../public/assets/tech/react.svg"
-import TailwindIcon from "../../public/assets/tech/tailwind.svg"
-import TypescriptIcon from "../../public/assets/tech/typescript.svg"
 
 const Header: React.FC = async () => {
   const { object: page } = await cosmicSourceBucketConfig.objects
@@ -18,7 +14,7 @@ const Header: React.FC = async () => {
     .props("title,metadata")
     .depth(1)
   return (
-    <div className="dark:dark-header-image min-w-screen light-header-image md:mb-26 container mx-auto mb-16 px-5 lg:mb-40">
+    <div className="dark:dark-header-image min-w-screen light-header-image md:mb-26 lg:mb-30 container mx-auto mb-16 px-5">
       <div className="opacity-50">
         <ThemedImage
           darkSrc="https://imgix.cosmicjs.com/b96bff60-9419-11ee-b62d-5b90a0a1bade-gradient-dark.png?w=1200&h=800&auto=format"
@@ -65,7 +61,7 @@ const Header: React.FC = async () => {
               What is Cosmic?
             </Button>
           </div>
-          <div className="mt-20 flex items-center justify-center space-x-8 opacity-75 dark:opacity-50 md:space-x-12">
+          <div className="my-20 flex items-center justify-center space-x-8 opacity-75 dark:opacity-50 md:space-x-12">
             {["next", "react", "tailwind", "typescript"].map((tech) => (
               <img
                 key={tech}
@@ -75,6 +71,14 @@ const Header: React.FC = async () => {
               />
             ))}
           </div>
+          <iframe
+            className="m-auto h-[200px] w-full md:h-[315px] md:w-[560px]"
+            src="https://www.youtube.com/embed/3hTmOlzacrg?si=ASosZ-NLuLDWSigu"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
         </div>
       </div>
     </div>
