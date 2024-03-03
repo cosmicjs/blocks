@@ -2,7 +2,7 @@ import React from "react"
 import { Button } from "../ui/button"
 import classNames from "classnames"
 import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
-import { DEMO_URL, WEBSITE_URL } from "@/constants"
+import { DEMO_URL, WEBSITE_URL, EXTENSION_URL } from "@/constants"
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 
 const Header: React.FC = async () => {
@@ -40,9 +40,17 @@ const Header: React.FC = async () => {
             className="m-auto max-w-[629px] text-center text-lg md:text-2xl"
             dangerouslySetInnerHTML={{ __html: page?.metadata?.tag }}
           />
-          <div className="relative z-30 m-auto mt-8 flex max-w-[629px] flex-col flex-wrap justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 lg:mt-14 lg:space-y-0">
+          <div className="relative z-30 m-auto mt-8 flex flex-col flex-wrap justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 lg:mt-14 lg:space-y-0">
             <Button href="#get-started" className="px-7">
               Get started
+            </Button>
+            <Button
+              href={EXTENSION_URL}
+              target="_blank"
+              variant="outline"
+              className="px-7"
+            >
+              Install the extension
             </Button>
             <Button
               href={DEMO_URL}
