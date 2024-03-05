@@ -1,5 +1,7 @@
 // components/Carousel.tsx
 "use client"
+import Zoom from "react-medium-image-zoom"
+import "react-medium-image-zoom/dist/styles.css"
 
 import {
   Carousel,
@@ -31,12 +33,14 @@ export function CarouselGallery({
           {items.map((item: GalleryItemType) => {
             const id = `item-${num++}`
             return (
-              <CarouselItem key={id} className="cursor-grab">
-                <img
-                  src={`${item.image.imgix_url}?w=1200&auto=format,compression`}
-                  className="w-full object-cover object-center"
-                  alt={item.description}
-                />
+              <CarouselItem key={id} className="flex cursor-grab items-center">
+                <Zoom>
+                  <img
+                    src={`${item.image.imgix_url}?w=1200&auto=format,compression`}
+                    className="w-full object-cover object-center"
+                    alt={item.description}
+                  />
+                </Zoom>
               </CarouselItem>
             )
           })}
