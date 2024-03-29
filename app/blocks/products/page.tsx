@@ -412,10 +412,19 @@ function Code() {
             className="text-cosmic-blue"
           >
             Cosmic dashboard
-          </a>
-          , find and install the Stripe Products extension located in Project /
-          Extensions to connect your Cosmic Objects to Stripe. Follow the steps
-          to add your `stripe_secret_key` to begin adding Products to Stripe.
+          </a>{" "}
+          and install the{" "}
+          <a
+            href="https://www.cosmicjs.com/integrations/stripe"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Stripe Products extension
+          </a>{" "}
+          located in Project / Extensions. Follow the steps to add your
+          `stripe_secret_key` to begin adding products to Stripe from the
+          convenience of the Cosmic dashboard.
         </>
       ),
     },
