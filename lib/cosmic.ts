@@ -311,6 +311,7 @@ export async function addProducts(cosmic: CosmicConfig, products: any) {
       const mediaRes = await cosmic.media.insertOne({ media })
       galleryItem.image = mediaRes.media.name
     }
+    delete product.metadata.recurring
     await cosmic.objects.insertOne(product)
   }
 }
