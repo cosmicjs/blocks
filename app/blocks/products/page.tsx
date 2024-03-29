@@ -400,6 +400,25 @@ function Code() {
         "Create a new file at `app/api/checkout/route.ts` with the following:",
       code: checkoutAPICodeString,
     },
+    {
+      title: "Stripe: Install the Stripe Products extension",
+      description: (
+        <>
+          Log in to the{" "}
+          <a
+            href="https://app.cosmicjs.com/login"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Cosmic dashboard
+          </a>
+          , find and install the Stripe Products extension located in Project /
+          Extensions to connect your Cosmic Objects to Stripe. Follow the steps
+          to add your `stripe_secret_key` to begin adding Products to Stripe.
+        </>
+      ),
+    },
   ]
   const examples = [
     {
