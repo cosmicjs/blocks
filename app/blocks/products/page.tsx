@@ -283,6 +283,35 @@ function Code() {
     }
     \`\`\`
     `
+  const checkoutAPICodeString = dedent`
+    \`\`\`jsx
+    // app/api/checkout/route.ts
+    import { type NextRequest, NextResponse } from "next/server"
+    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
+
+    export async function POST(request: NextRequest) {
+      const res = await request.json()
+      try {
+        const product = await stripe.products.retrieve(res.stripe_product_id)
+        const price = await stripe.prices.retrieve(product.default_price)
+        const session = await stripe.checkout.sessions.create({
+          line_items: [
+            {
+              price: price.id,
+              quantity: 1,
+            },
+          ],
+          mode: price.recurring ? "subscription" : "payment",
+          success_url: \`\${res.redirect_url}/?success=true\`,
+          cancel_url: \`\${res.redirect_url}/?canceled=true\`,
+        })
+        return Response.json({ url: session.url })
+      } catch (err) {
+        return NextResponse.json(err, { status: 500 })
+      }
+    }
+    \`\`\`
+    `
   const steps = [
     {
       title: "Install the Block content model",
@@ -306,6 +335,38 @@ function Code() {
       code: singleProductCode,
       description:
         "Add a new file located at `app/shop/[slug]/page.tsx` with the following:",
+    },
+    {
+      title: "Add your Stripe API keys",
+      description: (
+        <>
+          Add the following Stripe API keys to the `.env.local` file. Change the
+          values to your Stripe public and secret keys. Find your Stripe API
+          keys in the{" "}
+          <a
+            href="https://dashboard.stripe.com/login"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Stripe dashboard
+          </a>
+          .
+        </>
+      ),
+      code: dedent(`\`\`\`jsx
+      // .env.local
+      ...
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=change_to_your_stripe_public_key
+      STRIPE_SECRET_KEY=change_to_your_stripe_secret_key
+      \`\`\`
+      `),
+    },
+    {
+      title: "Create the checkout API route",
+      description:
+        "Create a new file at `app/api/checkout/route.ts` with the following:",
+      code: checkoutAPICodeString,
     },
     {
       title: "Pagination",
