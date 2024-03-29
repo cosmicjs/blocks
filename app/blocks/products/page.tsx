@@ -353,7 +353,7 @@ function Code() {
       title: "Stripe: Install Stripe clients",
       description: (
         <>
-          Using{" "}
+          To use{" "}
           <a
             href="https://stripe.com"
             target="_blank"
@@ -362,8 +362,8 @@ function Code() {
           >
             Stripe
           </a>{" "}
-          to process ecommerce payments, first install the Stripe client
-          packages. Run the following command to install the the Stripe clients.
+          to process ecommerce payments, run the following command to install
+          the Stripe clients.
         </>
       ),
       code: installStripeClients,
