@@ -114,7 +114,7 @@ export const blocksData = [
   },
   {
     key: "products",
-    title: "Products",
+    title: "Ecommerce",
     type: "object_type",
     slug: "products",
     icon: <ShoppingCartIcon className="h-5 w-5 text-cosmic-blue" />,
