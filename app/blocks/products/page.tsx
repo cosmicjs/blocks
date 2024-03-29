@@ -104,7 +104,7 @@ async function Preview() {
                 ${product.metadata.price.toLocaleString("en-US")}
               </p>
               <div className="mb-8">
-                <Button type="submit">Add to cart</Button>
+                <Button type="submit">Buy now</Button>
               </div>
               <h2 className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Details
@@ -140,14 +140,21 @@ function Code() {
   const singleProductCode = dedent`
     \`\`\`jsx
     // app/shop/[slug]/page.tsx
-    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
+    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct"
     export default async function SingleProductPage({
       params,
+      searchParams
     }: {
-      params: { slug: string };
-    }) {
+        params: { slug: string }
+        searchParams: {
+          success?: string
+        }
+      }) {
       return (
-        <SingleProduct query={{ slug: params.slug, type: "products" }} />
+        <SingleProduct
+          query={{ slug: params.slug, type: "products" }}
+          purchased={searchParams.success ? true : false}
+        />
       );
     }
     \`\`\`
@@ -283,6 +290,41 @@ function Code() {
     }
     \`\`\`
     `
+  const checkoutAPICodeString = dedent`
+    \`\`\`jsx
+    // app/api/checkout/route.ts
+    import { type NextRequest, NextResponse } from "next/server"
+    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
+
+    export async function POST(request: NextRequest) {
+      const res = await request.json()
+      try {
+        const product = await stripe.products.retrieve(res.stripe_product_id)
+        const price = await stripe.prices.retrieve(product.default_price)
+        const session = await stripe.checkout.sessions.create({
+          line_items: [
+            {
+              price: price.id,
+              quantity: 1,
+            },
+          ],
+          mode: price.recurring ? "subscription" : "payment",
+          success_url: \`\${res.redirect_url}/?success=true\`,
+          cancel_url: \`\${res.redirect_url}/?canceled=true\`,
+        })
+        return Response.json({ url: session.url })
+      } catch (err) {
+        return NextResponse.json(err, { status: 500 })
+      }
+    }
+    \`\`\`
+    `
+  const installStripeClients = dedent`
+  \`\`\`bash
+  bun add stripe @stripe/stripe-js
+  \`\`\`
+  `
+
   const steps = [
     {
       title: "Install the Block content model",
@@ -308,14 +350,81 @@ function Code() {
         "Add a new file located at `app/shop/[slug]/page.tsx` with the following:",
     },
     {
-      title: "Pagination",
+      title: "Stripe: Install Stripe clients",
       description: (
         <>
-          See the{" "}
-          <Link href="/blocks/pagination" className="text-cosmic-blue">
-            pagination Block
-          </Link>{" "}
-          for installation steps and view the full examples below.
+          To use{" "}
+          <a
+            href="https://stripe.com"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Stripe
+          </a>{" "}
+          to process ecommerce payments, run the following command to install
+          the Stripe clients.
+        </>
+      ),
+      code: installStripeClients,
+    },
+    {
+      title: "Stripe: Add your Stripe API keys",
+      description: (
+        <>
+          Add the following Stripe API keys to the `.env.local` file. Change the
+          values to your Stripe public and secret keys. Find your Stripe API
+          keys in the{" "}
+          <a
+            href="https://dashboard.stripe.com/login"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Stripe dashboard
+          </a>
+          .
+        </>
+      ),
+      code: dedent(`\`\`\`jsx
+      // .env.local
+      ...
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=change_to_your_stripe_public_key
+      STRIPE_SECRET_KEY=change_to_your_stripe_secret_key
+      \`\`\`
+      `),
+    },
+    {
+      title: "Stripe: Create the checkout API route",
+      description:
+        "Create a new file at `app/api/checkout/route.ts` with the following:",
+      code: checkoutAPICodeString,
+    },
+    {
+      title: "Stripe: Install the Stripe Products extension",
+      description: (
+        <>
+          Log in to the{" "}
+          <a
+            href="https://app.cosmicjs.com/login"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Cosmic dashboard
+          </a>{" "}
+          and install the{" "}
+          <a
+            href="https://www.cosmicjs.com/integrations/stripe"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Stripe Products extension
+          </a>{" "}
+          located in Project / Extensions. Follow the steps to add your
+          `stripe_secret_key` to begin adding products to Stripe from the
+          convenience of the Cosmic dashboard.
         </>
       ),
     },
