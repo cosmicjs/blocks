@@ -104,7 +104,7 @@ async function Preview() {
                 ${product.metadata.price.toLocaleString("en-US")}
               </p>
               <div className="mb-8">
-                <Button type="submit">Add to cart</Button>
+                <Button type="submit">Buy now</Button>
               </div>
               <h2 className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Details
@@ -140,14 +140,21 @@ function Code() {
   const singleProductCode = dedent`
     \`\`\`jsx
     // app/shop/[slug]/page.tsx
-    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
+    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct"
     export default async function SingleProductPage({
       params,
+      searchParams
     }: {
-      params: { slug: string };
-    }) {
+        params: { slug: string }
+        searchParams: {
+          success?: string
+        }
+      }) {
       return (
-        <SingleProduct query={{ slug: params.slug, type: "products" }} />
+        <SingleProduct
+          query={{ slug: params.slug, type: "products" }}
+          purchased={searchParams.success ? true : false}
+        />
       );
     }
     \`\`\`
@@ -312,6 +319,12 @@ function Code() {
     }
     \`\`\`
     `
+  const installStripeClients = dedent`
+  \`\`\`bash
+  bun add stripe @stripe/stripe-js
+  \`\`\`
+  `
+
   const steps = [
     {
       title: "Install the Block content model",
@@ -337,7 +350,26 @@ function Code() {
         "Add a new file located at `app/shop/[slug]/page.tsx` with the following:",
     },
     {
-      title: "Add your Stripe API keys",
+      title: "Stripe: Install Stripe clients",
+      description: (
+        <>
+          Using{" "}
+          <a
+            href="https://stripe.com"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Stripe
+          </a>{" "}
+          to process ecommerce payments, first install the Stripe client
+          packages. Run the following command to install the the Stripe clients.
+        </>
+      ),
+      code: installStripeClients,
+    },
+    {
+      title: "Stripe: Add your Stripe API keys",
       description: (
         <>
           Add the following Stripe API keys to the `.env.local` file. Change the
@@ -363,22 +395,10 @@ function Code() {
       `),
     },
     {
-      title: "Create the checkout API route",
+      title: "Stripe: Create the checkout API route",
       description:
         "Create a new file at `app/api/checkout/route.ts` with the following:",
       code: checkoutAPICodeString,
-    },
-    {
-      title: "Pagination",
-      description: (
-        <>
-          See the{" "}
-          <Link href="/blocks/pagination" className="text-cosmic-blue">
-            pagination Block
-          </Link>{" "}
-          for installation steps and view the full examples below.
-        </>
-      ),
     },
   ]
   const examples = [
