@@ -19,7 +19,7 @@ export function ImageGallery({ items }: { items: GalleryItemType[] }) {
   return (
     <>
       <div>
-        <Zoom>
+        <Zoom classDialog="custom-zoom">
           <img
             src={`${mainItem.image.imgix_url}?w=1200&auto=format,compression`}
             alt={mainItem.description}
