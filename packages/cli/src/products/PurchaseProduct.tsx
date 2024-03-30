@@ -1,8 +1,9 @@
 "use client"
-import React from "react"
-import { loadStripe } from "@stripe/stripe-js"
+
+import React, { useState } from "react"
 import { Button } from "@/cosmic/elements/Button"
-import { useState } from "react"
+import { loadStripe } from "@stripe/stripe-js"
+
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
 )
@@ -43,23 +44,6 @@ export function PurchaseProduct({
           There was an error from the API: <br />
           <br />
           {error}
-          <br />
-          <br />
-          View the{" "}
-          <a
-            href="https://github.com/cosmicjs/agency-template"
-            className="text-orange-600"
-          >
-            GitHub readme
-          </a>{" "}
-          for more information or reach out to{" "}
-          <a
-            href="https://www.cosmicjs.com/contact"
-            className="text-orange-600"
-          >
-            Cosmic support
-          </a>
-          .
         </div>
       )}
     </>
