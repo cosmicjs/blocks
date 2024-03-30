@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { DASHBOARD_URL } from "@/constants"
 import { AlertCircle, CheckCircle2, ExternalLink, Loader2 } from "lucide-react"
 
 import { blocksData } from "@/config/blocks.data"
@@ -14,6 +16,9 @@ import {
   addCategoriesObjectType,
   addComments,
   addCommentsObjectType,
+  addEvents,
+  addEventsObjectType,
+  addFormSubmissionsObjectType,
   addGlobalSettings,
   addGlobalSettingsObjectType,
   addNavMenus,
@@ -35,9 +40,13 @@ import {
   getCategoriesMetafields,
   getComments,
   getCommentsMetafields,
+  getEvents,
+  getEventsMetafields,
   getFAQMetafields,
+  getFormSubmittionsMetafields,
   getGlobalSettings,
   getGlobalSettingsMetafields,
+  getImageGalleryMetafields,
   getNavMenuMetafields,
   getNavMenus,
   getObjectTypes,
@@ -46,17 +55,10 @@ import {
   getProducts,
   getProductsMetafields,
   getSEOMetafields,
-  getImageGalleryMetafields,
   getTeamMembers,
   getTeamMetafields,
   getTestimonials,
   getTestimonialsMetafields,
-  getEventsMetafields,
-  getEvents,
-  addEventsObjectType,
-  addEvents,
-  getFormSubmittionsMetafields,
-  addFormSubmissionsObjectType,
 } from "@/lib/cosmic"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -69,10 +71,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { DASHBOARD_URL } from "@/constants"
-import { Highlight } from "./layouts/CodeSteps"
-import { useSearchParams } from "next/navigation"
+
 import APIKeysDialog from "./APIKeysDialog"
+import { Highlight } from "./layouts/CodeSteps"
 
 export function InstallDialog({
   featureKey,
@@ -302,7 +303,7 @@ export function InstallDialog({
       await addTeamMembers(cosmicTargetBucket, teamMembers)
     }
 
-    if (featureKey === "products") {
+    if (featureKey === "ecommerce") {
       let products
       await Promise.all([
         getProductsMetafields().then((result) => (metafields = result)),
