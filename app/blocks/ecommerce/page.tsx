@@ -1,18 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
+import classNames from "classnames"
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { Button } from "@/components/ui/button"
 import { ImageGallery } from "@/components/ImageGallery"
-import { ProductCard, ProductType } from "@/components/ProductCard"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
-import classNames from "classnames"
 import { PreviewCopy } from "@/components/PreviewCopy"
-import Link from "next/link"
+import { ProductCard, ProductType } from "@/components/ProductCard"
 
 export async function generateMetadata() {
   return {
-    title: `Products`,
+    title: `Ecommerce`,
   }
 }
 
@@ -319,6 +318,115 @@ function Code() {
     }
     \`\`\`
     `
+
+  const webhookCodeString = dedent`
+    \`\`\`jsx
+    // app/api/cosmic-webhooks/route.ts
+    import { type NextRequest, NextResponse } from "next/server";
+    import { cosmic } from "@/cosmic/client";
+    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+    
+    type PriceType = {
+      product?: string;
+      currency: string;
+      unit_amount: number;
+      recurring?: { interval: string };
+    };
+    
+    function getDefaultPrice(object: any) {
+      let default_price: PriceType = {
+        currency: "USD",
+        unit_amount: object.metadata.price * 100,
+      };
+      // If recurring add interval
+      if (object.metadata.recurring.is_recurring)
+        default_price.recurring = {
+          interval: object.metadata.recurring.interval.key,
+        };
+      return default_price;
+    }
+    
+    async function editPrice(object: any) {
+      const product = await stripe.products.retrieve(
+        object.metadata.stripe_product_id
+      );
+      const price = await stripe.prices.retrieve(product.default_price);
+      const default_price_data = getDefaultPrice(object);
+      if (price.unit_amount !== object.metadata.price * 100) {
+        default_price_data.product = product.id;
+        // Add new price
+        const newPrice = await stripe.prices.create(default_price_data);
+        await stripe.products.update(product.id, { default_price: newPrice.id });
+        // Archive old price
+        await stripe.prices.update(price.id, { active: false });
+      }
+    }
+    
+    async function addProduct(object: any) {
+      const default_price_data = getDefaultPrice(object);
+      // Create Product
+      const product = await stripe.products.create({
+        name: object.title,
+        metadata: {
+          cosmic_object_id: object.id,
+        },
+        images: [
+          \`\${object.metadata.image.imgix_url}?w=600&auto=format,compression\`,
+        ],
+        default_price_data,
+      });
+      await cosmic.objects.updateOne(object.id, {
+        metadata: {
+          stripe_product_id: product.id,
+        },
+      });
+    }
+    
+    async function editProduct(object: any) {
+      // Edit Product
+      await stripe.products.update(object.metadata.stripe_product_id, {
+        name: object.title,
+        images: [
+          \`\${object.metadata.image.imgix_url}?w=600&auto=format,compression\`,
+        ],
+      });
+      await editPrice(object);
+    }
+    
+    async function archiveProduct(object: any) {
+      // Find product with id
+      const { data: products } = await stripe.products.list({
+        limit: 100,
+      });
+      const product = products.filter(
+        (prod: any) => prod.metadata.cosmic_object_id === object.id
+      )[0];
+      await stripe.products.update(product.id, {
+        active: false,
+      });
+    }
+    
+    export async function POST(request: NextRequest) {
+      const res = await request.json();
+      const event = res.event;
+      const object = res.data.object;
+      try {
+        if (event === "created") {
+          await addProduct(object);
+        }
+        if (event === "edited") {
+          await editProduct(object);
+        }
+        if (event === "deleted") {
+          await archiveProduct(object);
+        }
+        return Response.json({ success: true });
+      } catch (err) {
+        return NextResponse.json(err, { status: 500 });
+      }
+    }
+    \`\`\`
+    `
   const installStripeClients = dedent`
   \`\`\`bash
   bun add stripe @stripe/stripe-js
@@ -353,7 +461,7 @@ function Code() {
       title: "Stripe: Install Stripe clients",
       description: (
         <>
-          To use{" "}
+          This ecommerce block uses{" "}
           <a
             href="https://stripe.com"
             target="_blank"
@@ -362,8 +470,8 @@ function Code() {
           >
             Stripe
           </a>{" "}
-          to process ecommerce payments, run the following command to install
-          the Stripe clients.
+          to process ecommerce payments. Install the Stripe clients with the
+          following commands.
         </>
       ),
       code: installStripeClients,
@@ -425,6 +533,62 @@ function Code() {
           located in Project / Extensions. Follow the steps to add your
           `stripe_secret_key` to begin adding products to Stripe from the
           convenience of the Cosmic dashboard.
+        </>
+      ),
+    },
+    {
+      title: "Stripe: Create the webhooks API route",
+      description: (
+        <>
+          We can use webhooks to keep your products in Cosmic in sync with
+          Stripe automatically. First, upgrade your project to the webhooks
+          add-on located in{" "}
+          <a
+            href="https://app.cosmicjs.com/login"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Project / Billing / Add-ons
+          </a>
+          . Then create a new file at `app/api/cosmic-webhooks/route.ts` with
+          the following:
+        </>
+      ),
+      code: webhookCodeString,
+    },
+    {
+      title: "Add webhooks to Cosmic",
+      description: (
+        <>
+          After deploying your project, you can take this endpoint
+          `https://your-project-domain.xyz/api/cosmic-webhooks` and add it to
+          the Cosmic Webhooks section located in{" "}
+          <a
+            href="https://app.cosmicjs.com/login"
+            target="_blank"
+            rel="noreferrer"
+            className="text-cosmic-blue"
+          >
+            Project / Settings / Webhooks
+          </a>
+          . The configuration should look like this:
+          <br />
+          <br />
+          <img
+            src="https://imgix.cosmicjs.com/4306db20-eeb8-11ee-b074-b5c8fe3ef189-cosmic-webhooks.png?w=1200&auto=format,compression"
+            className="w-[600px]"
+          />
+        </>
+      ),
+    },
+    {
+      title: "Testing Stripe Sync",
+      description: (
+        <>
+          After adding your webhook, you should now see that whenever products
+          are added, updated, or deleted in Cosmic they will be updated in
+          Stripe.
         </>
       ),
     },

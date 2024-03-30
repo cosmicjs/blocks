@@ -1,5 +1,6 @@
-import { pluralize } from "@/lib/utils"
 import React from "react"
+
+import { pluralize } from "@/lib/utils"
 
 type BlockStatsProps = {
   objectTypes?: number
@@ -18,6 +19,7 @@ const BlockStats: React.FC<BlockStatsProps> = ({
       {objects ? " • " + objects : ""}{" "}
       {objects ? `demo ${pluralize("Object", objects)}` : ""}
       {metafields} {metafields && `${pluralize("Metafield", metafields)}`}
+      {!metafields && !objectTypes && !objects && "No content installed"}
     </p>
   )
 }

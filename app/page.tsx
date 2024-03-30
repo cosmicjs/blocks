@@ -1,6 +1,3 @@
-import BigHeading from "@/components/BigHeading"
-import { Blocks } from "@/components/Blocks"
-import Header from "@/components/layouts/Header"
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import {
   Accordion,
@@ -8,6 +5,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import BigHeading from "@/components/BigHeading"
+import { Blocks } from "@/components/Blocks"
+import Header from "@/components/layouts/Header"
 
 export async function generateMetadata() {
   const { object: page } = await cosmicSourceBucketConfig.objects

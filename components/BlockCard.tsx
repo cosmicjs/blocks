@@ -1,19 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 
-import { ThemedImage } from "./elements/ThemedImage/ThemedImage"
 import BlockStats from "./BlockStats"
 
-type BlockData = {
+export type BlockData = {
   key: string
   title: string
-  icon: React.ReactNode
+  icon: any
   type: string
   description: string
   preview_link?: string
   confirmation?: string
-  dark_thumbnail?: string
-  light_thumbnail?: string
   object_types?: number
   objects?: number
   metafields?: number
@@ -23,29 +20,19 @@ export function BlockCard({ feature }: { feature: BlockData }) {
   if (!feature?.preview_link) return null
 
   return (
-    <>
-      <div className="relative !cursor-pointer overflow-hidden">
-        <Link href={feature?.preview_link}>
-          <div className="grid md:grid-cols-1">
-            <div className="overflow-hidden rounded-3xl">
-              <ThemedImage
-                lightSrc={`${feature?.light_thumbnail}?w=1200&auto=format,compression`}
-                darkSrc={`${feature?.dark_thumbnail}?w=1200&auto=format,compression`}
-                className="h-[250px] w-full rounded-3xl object-cover object-top"
-                alt={`Feature preview`}
-              />
-            </div>
-            <div>
-              <h2 className="mb-1 mt-4 text-2xl font-bold">{feature.title}</h2>
-              <BlockStats
-                objectTypes={feature?.object_types}
-                objects={feature?.objects}
-                metafields={feature?.metafields}
-              />
-            </div>
-          </div>
-        </Link>
+    <Link
+      className="flex rounded-lg border border-gray-200 bg-white p-5 text-gray-800 transition-all duration-100 hover:border-gray-300 dark:border-dark-gray-200 dark:bg-gray-800 dark:text-dark-gray-800 hover:dark:bg-gray-700"
+      href={feature?.preview_link}
+    >
+      {feature.icon("h-10 w-10 mr-6")}
+      <div>
+        <h2 className="mb-1 text-2xl font-bold">{feature.title}</h2>
+        <BlockStats
+          objectTypes={feature?.object_types}
+          objects={feature?.objects}
+          metafields={feature?.metafields}
+        />
       </div>
-    </>
+    </Link>
   )
 }

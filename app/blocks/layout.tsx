@@ -1,10 +1,12 @@
 "use client"
 
-import { usePathname, useSearchParams } from "next/navigation"
-import { Blocks } from "@/components/Blocks"
-import { blocksData } from "@/config/blocks.data"
-import BlockStats from "@/components/BlockStats"
 import Link from "next/link"
+import { usePathname, useSearchParams } from "next/navigation"
+import { ArrowLeftIcon } from "lucide-react"
+
+import { blocksData } from "@/config/blocks.data"
+import { Blocks } from "@/components/Blocks"
+import BlockStats from "@/components/BlockStats"
 
 export default function FeatureLayout({
   children,
@@ -65,6 +67,14 @@ export default function FeatureLayout({
             limit={3}
             excludeSelf
           />
+          <div className="mt-10 w-full text-center">
+            <Link
+              href="/#blocks"
+              className="flex justify-center text-cosmic-blue"
+            >
+              <ArrowLeftIcon className="mr-2 mt-1 h-4 w-4" /> Back to all Blocks
+            </Link>
+          </div>
         </div>
       </main>
     </div>

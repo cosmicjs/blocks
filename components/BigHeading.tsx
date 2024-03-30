@@ -1,7 +1,9 @@
-import classNames from "classnames"
 import React from "react"
+import classNames from "classnames"
 import dedent from "dedent"
+
 import { Markdown } from "@/components/elements/Markdown/Markdown"
+
 import ENVKeys from "./ENVKeys"
 
 type BigHeadingProps = {
@@ -67,7 +69,7 @@ const BigHeading: React.FC<BigHeadingProps> = ({
               <div className="absolute -left-14 top-px z-10 flex h-7 w-7 items-center justify-center rounded-full bg-gray-200 font-mono dark:bg-dark-gray-200">
                 3
               </div>
-              <h3 className="text-lg font-semibold lg:text-2xl">
+              <h3 className="text-lg font-semibold lg:text-2xl" id="blocks">
                 Select your Blocks
               </h3>
               {description && <div className="mt-2">{description}</div>}

@@ -6,8 +6,8 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { useTheme } from "next-themes"
 
 import { blocksData } from "@/config/blocks.data"
-import { BlockCard } from "@/components/BlockCard"
 import { selectRandomValuesFromArray } from "@/lib/utils"
+import { BlockCard } from "@/components/BlockCard"
 
 // Types
 export type TargetBucketType = {
@@ -72,13 +72,9 @@ export function Blocks({
   useEffect(() => {}, [excludeSelf, blockPathname])
 
   return (
-    <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+    <div className="m-auto grid max-w-[960px] grid-cols-1 gap-5 md:grid-cols-3">
       {mappedBlocks?.map((block) => {
-        return (
-          <div key={block?.key}>
-            <BlockCard feature={block} />
-          </div>
-        )
+        return <BlockCard key={block?.key} feature={block} />
       })}
     </div>
   )

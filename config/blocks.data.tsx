@@ -8,12 +8,14 @@ import {
   MailIcon,
   MenuIcon,
   MessagesSquareIcon,
-  MonitorStopIcon,
+  PanelTop,
   QuoteIcon,
   SearchIcon,
   ShoppingCartIcon,
   UsersRoundIcon,
 } from "lucide-react"
+
+import { cn } from "@/lib/utils"
 
 export const blocksData = [
   {
@@ -21,7 +23,9 @@ export const blocksData = [
     title: "Landing Page",
     type: "object_type",
     slug: "pages",
-    icon: <MonitorStopIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <PanelTop className={cn("h-5 w-5 text-cosmic-blue", className)} />
+    ),
     description: `Adds a Pages Object type to your Bucket, which includes`,
     confirmation: `This will install a \`pages\` Object type to your Bucket as well as demo content.`,
     preview_link: "/blocks/landing-page",
@@ -37,7 +41,11 @@ export const blocksData = [
     title: "Layout",
     type: "object_type",
     slug: "global-settings",
-    icon: <LayoutPanelTopIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <LayoutPanelTopIcon
+        className={cn("h-5 w-5 text-cosmic-blue", className)}
+      />
+    ),
     description: `Adds a Navigation Menu and Global Settings Object type to your Bucket, which includes`,
     confirmation: `This will install a \`navigation-menus\` and \`global-settings\` Object type to your Bucket as well as demo content.`,
     preview_link: "/blocks/layout",
@@ -53,7 +61,9 @@ export const blocksData = [
     title: "Blog",
     type: "object_type",
     slug: "blog-posts",
-    icon: <EditIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <EditIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
     description: `Adds a Blog Posts Object type to your Project, which includes`,
     confirmation: `This will install the following Object types: \`blog-posts\`,\`authors\`, and \`categories\` as well as demo content.`,
     preview_link: "/blocks/blog",
@@ -69,7 +79,11 @@ export const blocksData = [
     title: "Comments",
     type: "object_type",
     slug: "comments",
-    icon: <MessagesSquareIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <MessagesSquareIcon
+        className={cn(`h-5 w-5 text-cosmic-blue`, className)}
+      />
+    ),
     description: `Adds a Comments Object type to your Bucket, which includes`,
     confirmation: `This will install a \`comments\` Object type to your Bucket as well as demo content.`,
     preview_link: "/blocks/comments",
@@ -85,7 +99,9 @@ export const blocksData = [
     title: "Contact Form",
     type: "object_type",
     slug: "form-submissions",
-    icon: <MailIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <MailIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
     description: `Adds a Form Submissions Object type to your Bucket, which includes`,
     confirmation: `This will install a \`form-submissions\` Object type to your Bucket.`,
     preview_link: "/blocks/contact-form",
@@ -101,7 +117,9 @@ export const blocksData = [
     title: "Events",
     type: "object_type",
     slug: "events",
-    icon: <CalendarIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <CalendarIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
     description: `Adds an Events Object type to your Bucket, which includes`,
     confirmation: `This will install an \`events\` Object type to your Bucket as well as demo content.`,
     preview_link: "/blocks/events",
@@ -113,14 +131,16 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/0ab9e770-a8fa-11ee-b417-db331415685f-Events.png",
   },
   {
-    key: "products",
+    key: "ecommerce",
     title: "Ecommerce",
     type: "object_type",
     slug: "products",
-    icon: <ShoppingCartIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <ShoppingCartIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
     description: `Adds a Products Object type to your Bucket, which includes`,
     confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/blocks/products",
+    preview_link: "/blocks/ecommerce",
     object_types: 1,
     objects: 4,
     dark_thumbnail:
@@ -133,7 +153,9 @@ export const blocksData = [
     title: "Team",
     type: "object_type",
     slug: "team-members",
-    icon: <UsersRoundIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <UsersRoundIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
     description: `Adds a Team Members Object type to your Bucket, which includes`,
     confirmation: `This will install a \`team-members\` Object type to your Bucket as well as demo content.`,
     preview_link: "/blocks/team",
@@ -149,7 +171,9 @@ export const blocksData = [
     title: "Testimonials",
     type: "object_type",
     slug: "testimonials",
-    icon: <QuoteIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <QuoteIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
     description: `Adds a Testimonials Object type to your Bucket, which includes`,
     confirmation: `This will install a \`testimonials\` Object type to your Bucket as well as demo content.`,
     preview_link: "/blocks/testimonials",
@@ -165,7 +189,9 @@ export const blocksData = [
     title: "FAQs",
     type: "metafields",
     slug: "faqs",
-    icon: <HelpCircleIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <HelpCircleIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
     description: `Adds an FAQs feature to any existing Object type, which includes`,
     confirmation: `This will add a new Metafield with key \`faqs\` to the selected Object types.`,
     preview_link: "/blocks/faqs",
@@ -180,7 +206,11 @@ export const blocksData = [
     title: "Image Gallery",
     type: "metafields",
     slug: "image-gallery",
-    icon: <GalleryThumbnailsIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <GalleryThumbnailsIcon
+        className={cn(`h-5 w-5 text-cosmic-blue`, className)}
+      />
+    ),
     description: `Adds an image gallery to any existing Object type, which includes`,
     confirmation: `This will add a new Metafield with key \`image_gallery\` to the selected Object types.`,
     preview_link: "/blocks/image-gallery",
@@ -195,7 +225,9 @@ export const blocksData = [
     title: "Navigation Menu",
     type: "object_type",
     slug: "navigation-menus",
-    icon: <MenuIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <MenuIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
     description: `Adds a Navigation Menu Object type to your Bucket, which includes`,
     confirmation: `This will install a \`navigation-menus\` Object type to your Bucket as well as demo content.`,
     preview_link: "/blocks/nav-menus",
@@ -211,7 +243,9 @@ export const blocksData = [
     title: "SEO Fields",
     type: "metafields",
     slug: "seo-fields",
-    icon: <SearchIcon className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <SearchIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
     description: `Adds SEO fields to any existing Object type, which includes`,
     confirmation: `This will add a new Metafield with key \`seo\` to the selected Object types.`,
     preview_link: "/blocks/seo",
@@ -226,7 +260,9 @@ export const blocksData = [
     title: "Pagination",
     type: "none",
     slug: "pagination",
-    icon: <ChevronsRight className="h-5 w-5 text-cosmic-blue" />,
+    icon: (className?: string) => (
+      <ChevronsRight className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
     description: `Add pagination to relevant Blocks.`,
     confirmation: ``,
     preview_link: "/blocks/pagination",
