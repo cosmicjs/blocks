@@ -1,18 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
+import classNames from "classnames"
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 import { Button } from "@/components/ui/button"
 import { ImageGallery } from "@/components/ImageGallery"
-import { ProductCard, ProductType } from "@/components/ProductCard"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
-import classNames from "classnames"
 import { PreviewCopy } from "@/components/PreviewCopy"
-import Link from "next/link"
+import { ProductCard, ProductType } from "@/components/ProductCard"
 
 export async function generateMetadata() {
   return {
-    title: `Products`,
+    title: `Ecommerce`,
   }
 }
 

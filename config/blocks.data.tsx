@@ -113,14 +113,14 @@ export const blocksData = [
       "https://imgix.cosmicjs.com/0ab9e770-a8fa-11ee-b417-db331415685f-Events.png",
   },
   {
-    key: "products",
+    key: "ecommerce",
     title: "Ecommerce",
     type: "object_type",
     slug: "products",
     icon: <ShoppingCartIcon className="h-5 w-5 text-cosmic-blue" />,
     description: `Adds a Products Object type to your Bucket, which includes`,
     confirmation: `This will install a \`products\` Object type to your Bucket as well as demo content.`,
-    preview_link: "/blocks/products",
+    preview_link: "/blocks/ecommerce",
     object_types: 1,
     objects: 4,
     dark_thumbnail:
