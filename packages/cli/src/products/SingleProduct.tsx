@@ -1,9 +1,10 @@
 // app/shop/[slug]/page.tsx
-import { cosmic } from "@/cosmic/client"
 import Link from "next/link"
-import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery"
 import { notFound } from "next/navigation"
+import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery"
 import { PurchaseProduct } from "@/cosmic/blocks/products/PurchaseProduct"
+import { cosmic } from "@/cosmic/client"
+import { Button } from "@/cosmic/elements/Button"
 import { CheckCircleIcon, XCircleIcon } from "lucide-react"
 
 export async function SingleProduct({
@@ -79,10 +80,13 @@ export async function SingleProduct({
               </p>
               <div className="mb-8">
                 {!product.metadata.quantity ? (
-                  <div className="mt-4 flex rounded-lg border border-red-500 p-4">
-                    <XCircleIcon className="mr-4 text-red-500" />
+                  <Button
+                    variant="outline"
+                    disabled
+                    className="border-gray-500 text-gray-900 dark:text-gray-100"
+                  >
                     Sold out
-                  </div>
+                  </Button>
                 ) : (
                   <>
                     {product.metadata.stripe_product_id ? (
@@ -90,7 +94,7 @@ export async function SingleProduct({
                         stripe_product_id={product.metadata.stripe_product_id}
                       />
                     ) : (
-                      <div className="flex rounded-lg border border-red-500 p-4">
+                      <div className="flex rounded-lg border border-red-500 p-4 text-gray-700 dark:text-white">
                         <XCircleIcon className="mr-4 text-red-500" />
                         Product not available for purchase
                       </div>
