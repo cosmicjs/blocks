@@ -7,6 +7,8 @@ import classNames from "classnames"
 import { Button } from "@/components/ui/button"
 import { InstallDialog } from "@/components/InstallDialog"
 import Link from "next/link"
+import { LinkIcon } from "lucide-react"
+import slugify from "@sindresorhus/slugify"
 
 type StepProps = {
   title: string
@@ -58,8 +60,10 @@ function Step({
   featureKey?: string
 }) {
   const [showModal, setShowModal] = useState<boolean>(false)
+  const slug = slugify(title)
   return (
     <div className="relative mb-10">
+      <div id={`${slug}-${index + 1}`} className="absolute -top-24"></div>
       {!scratch && (
         <div
           className={classNames(
@@ -74,7 +78,10 @@ function Step({
           </div>
         )}
         <h3 className="text-lg font-semibold lg:text-2xl">
-          <Highlight text={title} />{" "}
+          <Link href={`#${slug}-${index + 1}`} className="flex">
+            <Highlight text={title} />{" "}
+            <LinkIcon className="ml-2 mt-2 h-4 w-4 text-gray-500" />
+          </Link>
         </h3>
       </div>
       {description && (
