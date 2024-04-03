@@ -66,7 +66,18 @@ export function CheckOut({
           <div className="mb-2 text-lg">
             ${item.metadata.price.toLocaleString("en-US")}
             {item.metadata?.recurring?.is_recurring && (
-              <span> / {item.metadata.recurring.interval.value}</span>
+              <span>
+                {" "}
+                /{" "}
+                {item.metadata.recurring.interval_count
+                  ? item.metadata.recurring.interval_count
+                  : ""}{" "}
+                {item.metadata.recurring.interval.value}
+                {item.metadata.recurring.interval_count &&
+                item.metadata.recurring.interval_count !== 1
+                  ? "s"
+                  : ""}
+              </span>
             )}
           </div>
           <div className="flex cursor-pointer" onClick={() => removeItem(item)}>
