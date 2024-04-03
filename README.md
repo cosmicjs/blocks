@@ -16,6 +16,7 @@
 
 - Landing page
 - Blog
+- Ecommerce (powered by Stripe 🛒)
 - Contact form
 - Events
 - FAQs
@@ -30,6 +31,8 @@
 ⚡️ Performance optimized
 
 👁 Draft preview ready
+
+🛍 Ecommerce built-in
 
 📱 Mobile responsive
 
