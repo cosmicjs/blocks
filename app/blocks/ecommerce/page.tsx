@@ -352,7 +352,7 @@ function Code() {
               />
             </Link>
             <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
-            <CheckOut className="ml-4" productPath={"/services"} />
+            <CheckOut className="ml-4" productPath={"/shop"} />
           </div>
         </div>
       );
