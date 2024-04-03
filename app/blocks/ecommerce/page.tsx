@@ -325,14 +325,14 @@ function Code() {
     import { type NextRequest, NextResponse } from "next/server";
     import { cosmic } from "@/cosmic/client";
     const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-    
+
     type PriceType = {
       product?: string;
       currency: string;
       unit_amount: number;
-      recurring?: { interval: string };
+      recurring?: { interval: string; interval_count: number };
     };
-    
+
     function getDefaultPrice(object: any) {
       let default_price: PriceType = {
         currency: "USD",
@@ -341,18 +341,32 @@ function Code() {
       // If recurring add interval
       if (object.metadata.recurring.is_recurring)
         default_price.recurring = {
-          interval: object.metadata.recurring.interval.key,
+          interval: object.metadata.recurring.interval.value,
+          interval_count: object.metadata.recurring.interval_count,
         };
       return default_price;
     }
-    
+
+    function priceChanged(price: any, object: any) {
+      if (price.unit_amount !== object.metadata.price * 100) return true;
+      if (price.recurring) {
+        if (
+          price.recurring.interval !== object.metadata.recurring.interval ||
+          price.recurring.interval_count !==
+            object.metadata.recurring.interval_count
+        )
+          return true;
+      }
+      return false;
+    }
+
     async function editPrice(object: any) {
       const product = await stripe.products.retrieve(
         object.metadata.stripe_product_id
       );
       const price = await stripe.prices.retrieve(product.default_price);
       const default_price_data = getDefaultPrice(object);
-      if (price.unit_amount !== object.metadata.price * 100) {
+      if (priceChanged(price, object)) {
         default_price_data.product = product.id;
         // Add new price
         const newPrice = await stripe.prices.create(default_price_data);
@@ -361,7 +375,7 @@ function Code() {
         await stripe.prices.update(price.id, { active: false });
       }
     }
-    
+
     async function addProduct(object: any) {
       const default_price_data = getDefaultPrice(object);
       // Create Product
@@ -381,7 +395,7 @@ function Code() {
         },
       });
     }
-    
+
     async function editProduct(object: any) {
       // Edit Product
       await stripe.products.update(object.metadata.stripe_product_id, {
@@ -392,7 +406,7 @@ function Code() {
       });
       await editPrice(object);
     }
-    
+
     async function archiveProduct(object: any) {
       // Find product with id
       const { data: products } = await stripe.products.list({
@@ -405,7 +419,7 @@ function Code() {
         active: false,
       });
     }
-    
+
     export async function POST(request: NextRequest) {
       const res = await request.json();
       const event = res.event;
@@ -422,6 +436,7 @@ function Code() {
         }
         return Response.json({ success: true });
       } catch (err) {
+        console.log(err);
         return NextResponse.json(err, { status: 500 });
       }
     }
@@ -578,6 +593,7 @@ function Code() {
           <img
             src="https://imgix.cosmicjs.com/4306db20-eeb8-11ee-b074-b5c8fe3ef189-cosmic-webhooks.png?w=1200&auto=format,compression"
             className="w-[600px]"
+            alt="Cosmic webhooks screenshot"
           />
         </>
       ),
