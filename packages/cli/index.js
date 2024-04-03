@@ -98,8 +98,8 @@ const blocks = {
       "tailwind-merge",
     ],
   },
-  products: {
-    name: "Products",
+  ecommerce: {
+    name: "Ecommerce",
     installationSteps: [
       "@cosmicjs/sdk",
       "@radix-ui/react-slot",

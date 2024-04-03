@@ -2,10 +2,10 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ImageGallery } from "@/cosmic/blocks/image-gallery/ImageGallery"
-import { PurchaseProduct } from "@/cosmic/blocks/products/PurchaseProduct"
 import { cosmic } from "@/cosmic/client"
 import { Button } from "@/cosmic/elements/Button"
 import { CheckCircleIcon, XCircleIcon } from "lucide-react"
+import { AddToCart } from "@/cosmic/blocks/ecommerce/AddToCart"
 
 export async function SingleProduct({
   query,
@@ -90,9 +90,7 @@ export async function SingleProduct({
                 ) : (
                   <>
                     {product.metadata.stripe_product_id ? (
-                      <PurchaseProduct
-                        stripe_product_id={product.metadata.stripe_product_id}
-                      />
+                      <AddToCart product={product} />
                     ) : (
                       <div className="flex rounded-lg border border-red-500 p-4 text-gray-700 dark:text-white">
                         <XCircleIcon className="mr-4 text-red-500" />

@@ -126,7 +126,7 @@ function Code() {
   const productListCode = dedent`
     \`\`\`jsx
     // app/shop/page.tsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
     export default async function Shop() {
       return (
         <ProductList
@@ -139,7 +139,7 @@ function Code() {
   const singleProductCode = dedent`
     \`\`\`jsx
     // app/shop/[slug]/page.tsx
-    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct"
+    import { SingleProduct } from "@/cosmic/blocks/ecommerce/SingleProduct"
     export default async function SingleProductPage({
       params,
       searchParams
@@ -160,13 +160,13 @@ function Code() {
     `
   const blockCommand = dedent`
     \`\`\`bash
-    bunx @cosmicjs/blocks add products image-gallery
+    bunx @cosmicjs/blocks add ecommerce image-gallery
     \`\`\`
     `
   const draftPreviewCode = dedent`
     \`\`\`jsx
     // app/shop/[slug]/page.tsx
-    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
+    import { SingleProduct } from "@/cosmic/blocks/ecommerce/SingleProduct";
     export default async function SingleProductPage({
       params,
       searchParams,
@@ -188,7 +188,7 @@ function Code() {
   const localizationCode = dedent`
     \`\`\`jsx
     // app/[locale]/shop/page.tsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
     export default async function Shop({
       params,
     }: {
@@ -205,7 +205,7 @@ function Code() {
   const paginationExampleCode = dedent`
     \`\`\`jsx
     // app/shop/page.tsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
     import { Pagination } from "@/cosmic/blocks/pagination/Pagination";
     export default async function Shop({
       searchParams,
@@ -240,7 +240,7 @@ function Code() {
   const loadMoreExampleCode = dedent`
     \`\`\`jsx
     // app/shop/page.tsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
     import { LoadMore } from "@/cosmic/blocks/pagination/LoadMore";
     import { cosmic } from "@/cosmic/client";
 
@@ -291,31 +291,38 @@ function Code() {
     `
   const checkoutAPICodeString = dedent`
     \`\`\`jsx
-    // app/api/checkout/route.ts
-    import { type NextRequest, NextResponse } from "next/server"
-    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
-
+    /// app/api/checkout/route.ts
+    import { type NextRequest, NextResponse } from "next/server";
+    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+    
     export async function POST(request: NextRequest) {
-      const res = await request.json()
+      const res = await request.json();
+      const stripe_product_ids = res.stripe_product_ids;
       try {
-        const product = await stripe.products.retrieve(res.stripe_product_id)
-        const price = await stripe.prices.retrieve(product.default_price)
+        let line_items = [];
+        let mode = "payment";
+        for (const stripe_product_id of stripe_product_ids) {
+          const product = await stripe.products.retrieve(stripe_product_id);
+          const price = await stripe.prices.retrieve(product.default_price);
+          line_items.push({
+            price: price.id,
+            quantity: 1,
+          });
+          // If any items are recurring
+          if (price.type === "recurring") mode = "subscription";
+        }
         const session = await stripe.checkout.sessions.create({
-          line_items: [
-            {
-              price: price.id,
-              quantity: 1,
-            },
-          ],
-          mode: price.recurring ? "subscription" : "payment",
+          line_items,
+          mode,
           success_url: \`\${res.redirect_url}/?success=true\`,
           cancel_url: \`\${res.redirect_url}/?canceled=true\`,
-        })
-        return Response.json({ url: session.url })
+        });
+        return Response.json({ url: session.url });
       } catch (err) {
-        return NextResponse.json(err, { status: 500 })
+        return NextResponse.json(err, { status: 500 });
       }
     }
+    
     \`\`\`
     `
 
@@ -458,7 +465,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the `ProductCard.tsx`,`ProductList.tsx`, and `SingleProduct.tsx` files to `cosmic/blocks/products`. This will also add the image-gallery block to be used in the single product page.",
+        "This will add the `ProductCard.tsx`,`ProductList.tsx`, and `SingleProduct.tsx` files to `cosmic/blocks/ecommerce`. This will also add the image-gallery block to be used in the single product page.",
     },
     {
       title: "Usage: Shop",

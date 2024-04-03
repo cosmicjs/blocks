@@ -162,7 +162,7 @@ function Code() {
   const paginationExampleCode = dedent`
     \`\`\`jsx
     // app/shop/page.tsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
     import { Pagination } from "@/cosmic/blocks/pagination/Pagination";
     export default async function Shop({
       searchParams,
@@ -196,7 +196,7 @@ function Code() {
   const loadMoreExampleCode = dedent`
     \`\`\`jsx
     // app/shop/page.tsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
     import { LoadMore } from "@/cosmic/blocks/pagination/LoadMore";
     import { cosmic } from "@/cosmic/client";
 
