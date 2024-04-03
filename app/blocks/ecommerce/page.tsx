@@ -15,7 +15,7 @@ export async function generateMetadata() {
   }
 }
 
-export default async function ProductsPage({
+export default async function EcommercePage({
   searchParams,
 }: {
   searchParams: {
@@ -103,7 +103,7 @@ async function Preview() {
                 ${product.metadata.price.toLocaleString("en-US")}
               </p>
               <div className="mb-8">
-                <Button type="submit">Buy now</Button>
+                <Button type="submit">Add to cart</Button>
               </div>
               <h2 className="mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Details
@@ -126,7 +126,7 @@ function Code() {
   const productListCode = dedent`
     \`\`\`jsx
     // app/shop/page.tsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
     export default async function Shop() {
       return (
         <ProductList
@@ -139,7 +139,7 @@ function Code() {
   const singleProductCode = dedent`
     \`\`\`jsx
     // app/shop/[slug]/page.tsx
-    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct"
+    import { SingleProduct } from "@/cosmic/blocks/ecommerce/SingleProduct"
     export default async function SingleProductPage({
       params,
       searchParams
@@ -160,13 +160,13 @@ function Code() {
     `
   const blockCommand = dedent`
     \`\`\`bash
-    bunx @cosmicjs/blocks add products image-gallery
+    bunx @cosmicjs/blocks add ecommerce image-gallery
     \`\`\`
     `
   const draftPreviewCode = dedent`
     \`\`\`jsx
     // app/shop/[slug]/page.tsx
-    import { SingleProduct } from "@/cosmic/blocks/products/SingleProduct";
+    import { SingleProduct } from "@/cosmic/blocks/ecommerce/SingleProduct";
     export default async function SingleProductPage({
       params,
       searchParams,
@@ -188,7 +188,7 @@ function Code() {
   const localizationCode = dedent`
     \`\`\`jsx
     // app/[locale]/shop/page.tsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
     export default async function Shop({
       params,
     }: {
@@ -205,7 +205,7 @@ function Code() {
   const paginationExampleCode = dedent`
     \`\`\`jsx
     // app/shop/page.tsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
     import { Pagination } from "@/cosmic/blocks/pagination/Pagination";
     export default async function Shop({
       searchParams,
@@ -240,7 +240,7 @@ function Code() {
   const loadMoreExampleCode = dedent`
     \`\`\`jsx
     // app/shop/page.tsx
-    import { ProductList } from "@/cosmic/blocks/products/ProductList";
+    import { ProductList } from "@/cosmic/blocks/ecommerce/ProductList";
     import { LoadMore } from "@/cosmic/blocks/pagination/LoadMore";
     import { cosmic } from "@/cosmic/client";
 
@@ -289,31 +289,107 @@ function Code() {
     }
     \`\`\`
     `
+
+  const layoutCodeString = dedent`
+    \`\`\`jsx
+    // app/layout.tsx
+    import "./globals.css";
+    import { Header } from "@/components/Header";
+    import { Footer } from "@/components/Footer";
+    import { CartProvider } from "@/cosmic/blocks/ecommerce/CartProvider";
+    
+    export default function RootLayout({
+      children,
+    }: {
+      children: React.ReactNode;
+    }) {
+      return (
+        <html lang="en">
+          <body>
+            <CartProvider>
+              <Header />
+              {children}
+              <Footer />
+            </CartProvider>
+          </body>
+        </html>
+      );
+    }    
+    \`\`\`
+    `
+
+  const codeHeaderString = dedent`
+    \`\`\`jsx
+    // components/Header.tsx
+    import Link from "next/link";
+    import { cosmic } from "@/cosmic/client";
+    import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
+    import { CheckOut } from "@/cosmic/blocks/ecommerce/CheckOut";
+
+    export async function Header() {
+      // Header data
+      const { object: settings } = await cosmic.objects
+        .findOne({
+          type: "global-settings",
+          slug: "settings",
+        })
+        .props("metadata")
+        .depth(1);
+
+      return (
+        <div className="space-x-4 sticky top-0 bg-white/20 dark:bg-black/20 backdrop-blur-lg py-2 w-full z-[9999]">
+          <div className="m-auto flex items-center md:container justify-between pl-2 pr-4">
+            <Link href="/">
+              <img
+                src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
+                alt={settings.metadata.company}
+                className="h-10 m-auto dark:hidden"
+              />
+              <img
+                src={\`\${settings.metadata.dark_logo.imgix_url}?w=500&auto=format,compression\`}
+                alt={settings.metadata.company}
+                className="h-10 m-auto hidden dark:block"
+              />
+            </Link>
+            <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
+            <CheckOut className="ml-4" productPath={"/shop"} />
+          </div>
+        </div>
+      );
+    }
+    \`\`\`
+    `
   const checkoutAPICodeString = dedent`
     \`\`\`jsx
-    // app/api/checkout/route.ts
-    import { type NextRequest, NextResponse } from "next/server"
-    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
-
+    /// app/api/checkout/route.ts
+    import { type NextRequest, NextResponse } from "next/server";
+    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+    
     export async function POST(request: NextRequest) {
-      const res = await request.json()
+      const res = await request.json();
+      const stripe_product_ids = res.stripe_product_ids;
       try {
-        const product = await stripe.products.retrieve(res.stripe_product_id)
-        const price = await stripe.prices.retrieve(product.default_price)
+        let line_items = [];
+        let mode = "payment";
+        for (const stripe_product_id of stripe_product_ids) {
+          const product = await stripe.products.retrieve(stripe_product_id);
+          const price = await stripe.prices.retrieve(product.default_price);
+          line_items.push({
+            price: price.id,
+            quantity: 1,
+          });
+          // If any items are recurring
+          if (price.type === "recurring") mode = "subscription";
+        }
         const session = await stripe.checkout.sessions.create({
-          line_items: [
-            {
-              price: price.id,
-              quantity: 1,
-            },
-          ],
-          mode: price.recurring ? "subscription" : "payment",
+          line_items,
+          mode,
           success_url: \`\${res.redirect_url}/?success=true\`,
           cancel_url: \`\${res.redirect_url}/?canceled=true\`,
-        })
-        return Response.json({ url: session.url })
+        });
+        return Response.json({ url: session.url });
       } catch (err) {
-        return NextResponse.json(err, { status: 500 })
+        return NextResponse.json(err, { status: 500 });
       }
     }
     \`\`\`
@@ -458,7 +534,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the `ProductCard.tsx`,`ProductList.tsx`, and `SingleProduct.tsx` files to `cosmic/blocks/products`. This will also add the image-gallery block to be used in the single product page.",
+        "This will add the `ProductCard.tsx`,`ProductList.tsx`, and `SingleProduct.tsx` files to `cosmic/blocks/ecommerce`. This will also add the image-gallery block to be used in the single product page.",
     },
     {
       title: "Usage: Shop",
@@ -516,6 +592,18 @@ function Code() {
       STRIPE_SECRET_KEY=change_to_your_stripe_secret_key
       \`\`\`
       `),
+    },
+    {
+      title: "Add the CartProvider",
+      description:
+        "Update your `app/layout.tsx` to include the `CartProvider`:",
+      code: layoutCodeString,
+    },
+    {
+      title: "Add the CheckOut",
+      description:
+        "Update your `app/components/Header.tsx` to include the `CheckOut` component. (Note: this assumes you've already added the Layout Block).:",
+      code: codeHeaderString,
     },
     {
       title: "Stripe: Create the checkout API route",
@@ -644,7 +732,7 @@ function Code() {
     <>
       <CodeSteps steps={steps} featureKey="ecommerce" />
       <div className="mb-2 border-t pt-10">
-        <h3 className="text-3xl font-semibold">Examples</h3>
+        <h3 className="text-3xl font-semibold">More Examples</h3>
       </div>
       <CodeSteps scratch steps={examples} featureKey="ecommerce" />
     </>
