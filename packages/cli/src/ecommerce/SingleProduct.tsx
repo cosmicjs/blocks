@@ -78,7 +78,8 @@ export async function SingleProduct({
                   <span>
                     {" "}
                     /{" "}
-                    {product.metadata.recurring.interval_count
+                    {product.metadata.recurring.interval_count &&
+                    product.metadata.recurring.interval_count !== 1
                       ? product.metadata.recurring.interval_count
                       : ""}{" "}
                     {product.metadata.recurring.interval.value}

@@ -65,11 +65,12 @@ export function CheckOut({
           </div>
           <div className="mb-2 text-lg">
             ${item.metadata.price.toLocaleString("en-US")}
-            {item.metadata?.recurring?.is_recurring && (
+            {item.metadata.recurring.is_recurring && (
               <span>
                 {" "}
                 /{" "}
-                {item.metadata.recurring.interval_count
+                {item.metadata.recurring.interval_count &&
+                item.metadata.recurring.interval_count !== 1
                   ? item.metadata.recurring.interval_count
                   : ""}{" "}
                 {item.metadata.recurring.interval.value}
