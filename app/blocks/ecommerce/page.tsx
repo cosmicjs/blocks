@@ -732,7 +732,7 @@ function Code() {
     <>
       <CodeSteps steps={steps} featureKey="ecommerce" />
       <div className="mb-2 border-t pt-10">
-        <h3 className="text-3xl font-semibold">Examples</h3>
+        <h3 className="text-3xl font-semibold">More Examples</h3>
       </div>
       <CodeSteps scratch steps={examples} featureKey="ecommerce" />
     </>
