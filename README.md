@@ -17,7 +17,7 @@
 - Landing page
 - Blog
 - Ecommerce (powered by Stripe 🛒)
-- Contact form
+- Contact form (powered by Resend ✉️)
 - Events
 - FAQs
 - Testimonials
