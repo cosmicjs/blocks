@@ -534,7 +534,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the `ProductCard.tsx`,`ProductList.tsx`, and `SingleProduct.tsx` files to `cosmic/blocks/ecommerce`. This will also add the image-gallery block to be used in the single product page.",
+        "This will add the `ProductCard.tsx`,`ProductList.tsx`, `SingleProduct.tsx`, and cart files to `cosmic/blocks/ecommerce`. This will also add the image-gallery block to be used in the single product page.",
     },
     {
       title: "Usage: Shop",
