@@ -4,7 +4,7 @@
 
 # Blocks
 
-[Blocks](https://blocks.cosmicjs.com) are data infused components for building Cosmic powered websites and apps. Use Blocks to build website features such as landing pages, blogs, image galleries, events, and more.
+[Blocks](https://blocks.cosmicjs.com) are React components for building Cosmic powered websites and apps. Use Blocks to build website features such as landing pages, blogs, image galleries, events, and more.
 
 ## Get started
 
@@ -46,7 +46,6 @@
 
 🦺 Type safe
 
-
 ## Built with
 
 - React Server Components
@@ -57,6 +56,7 @@
 ## Contributing
 
 1. Download this code repository and install the dependencies.
+
 ```bash
 git clone https://github.com/cosmicjs/blocks
 cd blocks
@@ -70,6 +70,7 @@ cp .env.example .env.local
 ```
 
 It will look like this:
+
 ```
 # .env.local
 NEXT_PUBLIC_SOURCE_BUCKET_SLUG=change_to_your_bucket_slug
@@ -77,6 +78,7 @@ NEXT_PUBLIC_SOURCE_READ_KEY=change_to_your_bucket_read_key
 ```
 
 3. Run the app.
+
 ```
 bun dev
 ```
