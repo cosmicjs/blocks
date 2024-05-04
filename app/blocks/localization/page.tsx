@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link"
 import classNames from "classnames"
 import dedent from "dedent"
 
@@ -75,7 +76,7 @@ function Code() {
     // app/[locale]/blog/[slug]/page.tsx
     import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
     import { LocalizationSelect } from "@/cosmic/blocks/localization/LocalizationSelect";
-    
+
     export default async function SingleBlogPage({
       params,
     }: {
@@ -113,8 +114,16 @@ function Code() {
     {
       title: "Example",
       code: localizationExampleCode,
-      description:
-        "Add the component to any area that needs the ability to switch between locales.",
+      description: (
+        <>
+          Add the component to any area that needs the ability to switch between
+          locales. This example uses the{" "}
+          <Link href="/blocks/blog" className="text-cosmic-blue">
+            Blog block
+          </Link>
+          .
+        </>
+      ),
     },
   ]
 
