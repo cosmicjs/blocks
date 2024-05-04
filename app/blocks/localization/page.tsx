@@ -74,7 +74,8 @@ function Code() {
     \`\`\`jsx
     // app/[locale]/blog/[slug]/page.tsx
     import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
-
+    import { LocalizationSelect } from "@/cosmic/blocks/localization/LocalizationSelect";
+    
     export default async function SingleBlogPage({
       params,
     }: {
