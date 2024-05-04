@@ -305,7 +305,7 @@ function Code() {
     }) {
       return (
         <html lang="en">
-          <body>
+          <body className="dark:bg-black bg-white">
             <CartProvider>
               <Header />
               {children}
