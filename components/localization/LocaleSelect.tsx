@@ -11,7 +11,7 @@ import {
 
 import locales from "./locales.json"
 
-export async function LocalizationSelect({
+export async function LocaleSelect({
   defaultLocale,
   linkPath,
   objectType,

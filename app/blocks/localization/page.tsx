@@ -4,7 +4,7 @@ import classNames from "classnames"
 import dedent from "dedent"
 
 import { CodeSteps } from "@/components/layouts/CodeSteps"
-import { LocalizationSelect } from "@/components/localization/LocalizationSelect"
+import { LocaleSelect } from "@/components/localization/LocaleSelect"
 
 export async function generateMetadata() {
   return {
@@ -44,7 +44,7 @@ async function Preview() {
           <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
             Localization select
           </h1>
-          <LocalizationSelect
+          <LocaleSelect
             defaultLocale={"en"}
             objectType={"localization"}
             className="mb-2"
@@ -61,10 +61,15 @@ function Code() {
     bunx @cosmicjs/blocks add localization
     \`\`\`
     `
+  const localizationImportCode = dedent`
+    \`\`\`jsx
+    import { LocaleSelect } from "@/cosmic/blocks/localization/LocaleSelect";
+    \`\`\`
+    `
 
   const localizationUsageCode = dedent`
     \`\`\`jsx
-    <LocalizationSelect
+    <LocaleSelect
       defaultLocale={"en"}
       linkPath={\`/[locale]/blog/your-object-slug\`}
       objectType={"blog-posts"}
@@ -75,7 +80,7 @@ function Code() {
     \`\`\`jsx
     // app/[locale]/blog/[slug]/page.tsx
     import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
-    import { LocalizationSelect } from "@/cosmic/blocks/localization/LocalizationSelect";
+    import { LocaleSelect } from "@/cosmic/blocks/localization/LocaleSelect";
 
     export default async function SingleBlogPage({
       params,
@@ -84,7 +89,7 @@ function Code() {
     }) {
       return (
         <>
-          <LocalizationSelect
+          <LocaleSelect
             defaultLocale={params.locale}
             linkPath={\`/[locale]/blog/\${params.slug}\`}
             objectType={"blog-posts"}
@@ -103,7 +108,12 @@ function Code() {
       title: "Install the Block code",
       code: localizationCommand,
       description:
-        "This will add `LocalizationSelect.tsx` file to your blocks folder located in `cosmic/blocks/localization`.",
+        "This will add `LocaleSelect.tsx` file to your blocks folder located in `cosmic/blocks/localization`.",
+    },
+    {
+      title: "Import",
+      code: localizationImportCode,
+      description: "Import the block into your app.",
     },
     {
       title: "Usage",
