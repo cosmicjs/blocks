@@ -3,10 +3,10 @@
 import Link from "next/link"
 import dedent from "dedent"
 
+import Footer from "@/components/Footer"
+import Header from "@/components/Header"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
 
 export async function generateMetadata() {
   return {
@@ -169,7 +169,7 @@ function Code() {
   }) {
     return (
       <html lang="en">
-        <body>
+        <body className="dark:bg-black bg-white">
           <Header />
           {children}
           <Footer />

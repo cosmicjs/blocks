@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import dedent from "dedent"
 
-import { NavMenu } from "@/components/NavMenu"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { NavMenu } from "@/components/NavMenu"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
@@ -59,7 +59,7 @@ function Code() {
   }) {
     return (
       <html lang="en">
-        <body>
+        <body className="dark:bg-black bg-white">
           <NavMenu
             className="flex justify-center my-10"
             query={{ type: "navigation-menus", slug: "header" }}
