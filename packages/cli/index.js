@@ -131,6 +131,18 @@ const blocks = {
     ],
     elements: ["Button"],
   },
+  localization: {
+    name: "localization",
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "@radix-ui/react-select",
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "lucide-react",
+    ],
+    elements: ["Select"],
+  },
 }
 
 async function addComponent(component) {

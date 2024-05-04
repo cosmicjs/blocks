@@ -57,7 +57,7 @@ async function Preview() {
 function Code() {
   const localizationCommand = dedent`
     \`\`\`bash
-    bunx @cosmicjs/blocks add localization-select
+    bunx @cosmicjs/blocks add localization
     \`\`\`
     `
 
