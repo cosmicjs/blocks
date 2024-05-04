@@ -47,7 +47,7 @@ async function Preview() {
           <LocaleSelect
             defaultLocale={"en"}
             objectType={"localization"}
-            className="mb-2"
+            className="m-auto"
           />
         </div>
       </section>
