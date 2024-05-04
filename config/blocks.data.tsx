@@ -3,6 +3,7 @@ import {
   ChevronsRight,
   EditIcon,
   GalleryThumbnailsIcon,
+  GlobeIcon,
   HelpCircleIcon,
   LayoutPanelTopIcon,
   MailIcon,
@@ -266,6 +267,22 @@ export const blocksData = [
     description: `Add pagination to relevant Blocks.`,
     confirmation: ``,
     preview_link: "/blocks/pagination",
+    dark_thumbnail:
+      "https://imgix.cosmicjs.com/90050030-bf80-11ee-9fc1-4bb6168d3a2d-Pagination_Dark.png",
+    light_thumbnail:
+      "https://imgix.cosmicjs.com/900b8fe0-bf80-11ee-9fc1-4bb6168d3a2d-Pagination.png",
+  },
+  {
+    key: "localization",
+    title: "Localization",
+    type: "none",
+    slug: "localization",
+    icon: (className?: string) => (
+      <GlobeIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
+    description: `Add localization selector.`,
+    confirmation: ``,
+    preview_link: "/blocks/localization",
     dark_thumbnail:
       "https://imgix.cosmicjs.com/90050030-bf80-11ee-9fc1-4bb6168d3a2d-Pagination_Dark.png",
     light_thumbnail:
