@@ -7,7 +7,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/cosmic/elements/Select"
-import { cn } from "@/cosmic/utils"
 
 export async function LocaleSelect({
   defaultLocale,
