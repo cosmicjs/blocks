@@ -42,11 +42,11 @@ async function Preview() {
       <section className="container m-auto grid items-center px-4 py-8">
         <div className="relative mb-20 flex w-full max-w-[950px] flex-col items-start">
           <h1 className="mb-4 w-full text-center text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-            Localization select
+            Locale select
           </h1>
           <p className="mb-8 w-full text-center">
-            Use the localization select block to switch content between
-            different localized versions.
+            Use the locale select block to switch content between different
+            localized versions.
           </p>
           <LocaleSelect
             defaultLocale={"en"}
