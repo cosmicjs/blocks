@@ -1,9 +1,9 @@
 // Add a tooltip to show "Copied" after successful copying
 
 import React, { useRef, useState } from "react"
-import { Copy, CopyCheck } from "lucide-react"
 import cx from "classnames"
 import classNames from "classnames"
+import { CheckIcon, Copy } from "lucide-react"
 
 type CopyButtonProps = {
   text: string
@@ -53,7 +53,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({
         {customIcon ? (
           customIcon
         ) : copied ? (
-          <CopyCheck className="h-5 w-5 text-green-300" />
+          <CheckIcon className="h-5 w-5 text-green-300" />
         ) : (
           <Copy className="h-5 w-5" />
         )}
