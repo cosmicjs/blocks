@@ -92,16 +92,17 @@ function Code() {
       params: { slug: string; locale: string };
     }) {
       return (
-        <>
+        <div className="m-auto max-w-[700px]">
           <LocaleSelect
             defaultLocale={params.locale}
             linkPath={\`/[locale]/blog/\${params.slug}\`}
             objectType={"blog-posts"}
+            className="my-10 ml-4"
           />
           <SingleBlog
             query={{ slug: params.slug, type: "blog-posts", locale: params.locale }}
           />
-        </>
+        </div>
       );
     }
     \`\`\`
