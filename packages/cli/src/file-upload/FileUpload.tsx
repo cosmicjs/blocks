@@ -93,8 +93,7 @@ export function FileUpload({
           <p>Drop the files here ...</p>
         ) : (
           <p>
-            Drag 'n' drop some files here, or click to select files (max size
-            1MB)
+            Drag & drop some files here, or click to select files (max size 1MB)
           </p>
         )}
       </div>
