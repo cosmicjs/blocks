@@ -14,6 +14,7 @@ import {
   SearchIcon,
   ShoppingCartIcon,
   UsersRoundIcon,
+  UploadIcon,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -32,10 +33,6 @@ export const blocksData = [
     preview_link: "/blocks/landing-page",
     object_types: 1,
     objects: 1,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/fe811d90-9416-11ee-b62d-5b90a0a1bade-Pages-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/fed3d170-9416-11ee-b62d-5b90a0a1bade-Pages.png",
   },
   {
     key: "layout",
@@ -52,10 +49,6 @@ export const blocksData = [
     preview_link: "/blocks/layout",
     object_types: 2,
     objects: 3,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/feec1460-9416-11ee-b62d-5b90a0a1bade-HeadersFooters-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/fedd4750-9416-11ee-b62d-5b90a0a1bade-HeadersFooters.png",
   },
   {
     key: "blog",
@@ -70,10 +63,6 @@ export const blocksData = [
     preview_link: "/blocks/blog",
     object_types: 3,
     objects: 2,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/ff0b0e10-9416-11ee-b62d-5b90a0a1bade-Blog-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/ff078ba0-9416-11ee-b62d-5b90a0a1bade-Blog.png",
   },
   {
     key: "comments",
@@ -90,10 +79,6 @@ export const blocksData = [
     preview_link: "/blocks/comments",
     object_types: 1,
     objects: 5,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/fee05490-9416-11ee-b62d-5b90a0a1bade-Comments-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/fef0a840-9416-11ee-b62d-5b90a0a1bade-Comments.png",
   },
   {
     key: "contact-form",
@@ -108,10 +93,6 @@ export const blocksData = [
     preview_link: "/blocks/contact-form",
     object_types: 1,
     objects: 0,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/ee060260-d001-11ee-9ce5-59949019255e-Contact-Form-dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/ee000ef0-d001-11ee-9ce5-59949019255e-Contact-Form.png",
   },
   {
     key: "events",
@@ -126,10 +107,6 @@ export const blocksData = [
     preview_link: "/blocks/events",
     object_types: 1,
     objects: 3,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/0ac1d6b0-a8fa-11ee-b417-db331415685f-Events-dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/0ab9e770-a8fa-11ee-b417-db331415685f-Events.png",
   },
   {
     key: "ecommerce",
@@ -144,10 +121,6 @@ export const blocksData = [
     preview_link: "/blocks/ecommerce",
     object_types: 1,
     objects: 4,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/fe8192c0-9416-11ee-b62d-5b90a0a1bade-Shop-Dark.png",
-    light_thumbnail:
-      "https://cdn.cosmicjs.com/fedcab10-9416-11ee-b62d-5b90a0a1bade-Shop-Light.png",
   },
   {
     key: "team",
@@ -162,10 +135,6 @@ export const blocksData = [
     preview_link: "/blocks/team",
     object_types: 1,
     objects: 4,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/ff09ae80-9416-11ee-b62d-5b90a0a1bade-Team-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/feff7550-9416-11ee-b62d-5b90a0a1bade-Team.png",
   },
   {
     key: "testimonials",
@@ -180,10 +149,6 @@ export const blocksData = [
     preview_link: "/blocks/testimonials",
     object_types: 1,
     objects: 4,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/fedf9140-9416-11ee-b62d-5b90a0a1bade-Testimonials-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/feddbc80-9416-11ee-b62d-5b90a0a1bade-Testimonials.png",
   },
   {
     key: "faqs",
@@ -197,10 +162,6 @@ export const blocksData = [
     confirmation: `This will add a new Metafield with key \`faqs\` to the selected Object types.`,
     preview_link: "/blocks/faqs",
     metafields: 1,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/feffea80-9416-11ee-b62d-5b90a0a1bade-FAQs-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/fefa6c40-9416-11ee-b62d-5b90a0a1bade-FAQs.png",
   },
   {
     key: "image-gallery",
@@ -216,10 +177,6 @@ export const blocksData = [
     confirmation: `This will add a new Metafield with key \`image_gallery\` to the selected Object types.`,
     preview_link: "/blocks/image-gallery",
     metafields: 1,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/0ac07720-a8fa-11ee-b417-db331415685f-Image-Gallery-dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/0ac902a0-a8fa-11ee-b417-db331415685f-Image-Gallery.png",
   },
   {
     key: "nav-menus",
@@ -234,10 +191,6 @@ export const blocksData = [
     preview_link: "/blocks/nav-menus",
     object_types: 1,
     objects: 2,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/feec1460-9416-11ee-b62d-5b90a0a1bade-HeadersFooters-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/fedd4750-9416-11ee-b62d-5b90a0a1bade-HeadersFooters.png",
   },
   {
     key: "seo",
@@ -251,10 +204,6 @@ export const blocksData = [
     confirmation: `This will add a new Metafield with key \`seo\` to the selected Object types.`,
     preview_link: "/blocks/seo",
     metafields: 1,
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/feb94490-9416-11ee-b62d-5b90a0a1bade-SEO-Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/fed81730-9416-11ee-b62d-5b90a0a1bade-SEO.png",
   },
   {
     key: "pagination",
@@ -267,10 +216,6 @@ export const blocksData = [
     description: `Add pagination to relevant Blocks.`,
     confirmation: ``,
     preview_link: "/blocks/pagination",
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/90050030-bf80-11ee-9fc1-4bb6168d3a2d-Pagination_Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/900b8fe0-bf80-11ee-9fc1-4bb6168d3a2d-Pagination.png",
   },
   {
     key: "localization",
@@ -283,9 +228,17 @@ export const blocksData = [
     description: `Add localization selector.`,
     confirmation: ``,
     preview_link: "/blocks/localization",
-    dark_thumbnail:
-      "https://imgix.cosmicjs.com/90050030-bf80-11ee-9fc1-4bb6168d3a2d-Pagination_Dark.png",
-    light_thumbnail:
-      "https://imgix.cosmicjs.com/900b8fe0-bf80-11ee-9fc1-4bb6168d3a2d-Pagination.png",
+  },
+  {
+    key: "file-upload",
+    title: "File Upload",
+    type: "none",
+    slug: "file-upload",
+    icon: (className?: string) => (
+      <UploadIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
+    description: `Add file uploader.`,
+    confirmation: ``,
+    preview_link: "/blocks/file-upload",
   },
 ]

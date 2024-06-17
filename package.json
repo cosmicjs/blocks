@@ -38,6 +38,7 @@
     "nextjs-toploader": "^1.6.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-markdown": "8.0.7",
     "react-medium-image-zoom": "^5.1.10",
     "react-syntax-highlighter": "^15.5.0",
