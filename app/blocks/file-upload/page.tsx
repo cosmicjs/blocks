@@ -180,7 +180,7 @@ function Code() {
       title: "Example: Add Form to Page",
       code: pageExampleCode,
       description:
-        "Add the `<Form>` component to any page that needs a file upload. This example adds the component to the homepage at `app/pageExampleCode.tsx`.",
+        "Add the `<Form>` component to any page that needs a file upload. This example adds the component to the homepage at `app/page.tsx`.",
     },
   ]
 
