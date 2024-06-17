@@ -151,6 +151,7 @@ const blocks = {
       "clsx",
       "tailwind-merge",
       "lucide-react",
+      "@radix-ui/react-slot",
       "react-dropzone",
     ],
     elements: ["Button"],

@@ -63,14 +63,13 @@ function Code() {
     <FileUpload
       onComplete={(response) => {
         // Do something with the response here
-        if (response.media)
-          setUploadedMedia([...response.media, ...uploadedMedia]);
       }}
     />
     \`\`\`
     `
-  const fileUploadExampleCode = dedent`
+  const formExampleCode = dedent`
     \`\`\`jsx
+    // app/Form.tsx
     /* eslint-disable @next/next/no-img-element */
     "use client";
 
@@ -126,6 +125,20 @@ function Code() {
     \`\`\`
     `
 
+  const pageExampleCode = dedent`
+    \`\`\`jsx
+    // app/page.tsx
+    import { Form } from "./Form";
+    export default function Home() {
+      return (
+        <main>
+          <Form className="w-full" />
+        </main>
+      );
+    }
+    \`\`\`
+    `
+
   const steps = [
     {
       title: "Install the Block code",
@@ -156,12 +169,18 @@ function Code() {
       title: "Usage",
       code: fileUploadUsageCode,
       description:
-        "Configure the component to get the locales from any Object type that has localization enabled. Uses the short code `[locale]` in the linkPath to replace with the selected locale.",
+        "Configure the component to do something with the response using the `onComplete` function.",
     },
     {
-      title: "Example",
-      code: fileUploadExampleCode,
-      description: `Add the component to any page that needs a file upload.`,
+      title: "Example: Create Form",
+      code: formExampleCode,
+      description: "Create the client side `<Form>` component.",
+    },
+    {
+      title: "Example: Add Form to Page",
+      code: pageExampleCode,
+      description:
+        "Add the `<Form>` component to any page that needs a file upload. This example adds the component to the homepage at `app/pageExampleCode.tsx`.",
     },
   ]
 
