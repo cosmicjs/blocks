@@ -42,7 +42,7 @@ export function FileUpload({
   const { getRootProps, getInputProps, isDragActive, fileRejections } =
     useDropzone({
       onDrop,
-      maxSize: maxSize,
+      maxSize,
     })
   const files = filesInQueue.map((file: File) => (
     <li key={file.name} className="mb-4">
@@ -86,15 +86,17 @@ export function FileUpload({
     <div className={className}>
       <div
         {...getRootProps()}
-        className="mb-4 cursor-pointer rounded-xl border-2 border-dashed p-20 text-center"
+        className={`mb-4 cursor-pointer rounded-xl border-2 border-dashed ${
+          isDragActive
+            ? "border-green-600 text-green-600 dark:border-green-400 dark:text-green-400"
+            : ""
+        } p-20 text-center`}
       >
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>Drop the files here ...</p>
+          <p>Drop the files here...</p>
         ) : (
-          <p>
-            Drag & drop some files here, or click to select files (max size 1MB)
-          </p>
+          <p>Drag & drop some files here, or click to select files</p>
         )}
       </div>
       {!uploadSuccess && files.length ? (
@@ -117,7 +119,7 @@ export function FileUpload({
       )}
       {uploadSuccess ? (
         <div className="mb-4 flex rounded-xl border border-green-600 p-4 text-green-600 dark:border-green-400 dark:text-green-400">
-          <Check className="shrink-0 relative top-1 mr-4 h-4 w-4 text-green-500" />{" "}
+          <Check className="relative top-1 mr-4 h-4 w-4 shrink-0 text-green-500" />{" "}
           Upload success!
         </div>
       ) : (
@@ -125,15 +127,15 @@ export function FileUpload({
       )}
       {uploadError ? (
         <div className="mb-4 flex rounded-xl border border-red-600 p-4 text-red-600 dark:border-red-400 dark:text-red-400">
-          <XIcon className="shrink-0 relative top-1 mr-4 h-4 w-4 text-red-500" /> Upload
-          error!
+          <XIcon className="relative top-1 mr-4 h-4 w-4 shrink-0 text-red-500" />{" "}
+          Upload error!
         </div>
       ) : (
         ""
       )}
       {fileRejections.length ? (
         <div className="my-4 flex rounded-xl border border-red-600 p-4 text-red-600 dark:border-red-400 dark:text-red-400">
-          <XIcon className="shrink-0 relative top-1 mr-4 h-4 w-4 text-red-500" />{" "}
+          <XIcon className="relative top-1 mr-4 h-4 w-4 shrink-0 text-red-500" />{" "}
           <div>
             {fileRejections.map(({ file, errors }) => {
               return (

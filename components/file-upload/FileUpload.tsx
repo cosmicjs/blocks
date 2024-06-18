@@ -72,11 +72,15 @@ export function FileUpload({
     <div className={className}>
       <div
         {...getRootProps()}
-        className="mb-4 h-[190px] w-full cursor-pointer rounded-xl border-2 border-dashed p-20 text-center"
+        className={`mb-4 cursor-pointer rounded-xl border-2 border-dashed ${
+          isDragActive
+            ? "border-green-600 text-green-600 dark:border-green-400 dark:text-green-400"
+            : ""
+        } p-20 text-center`}
       >
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>Drop the files here ...</p>
+          <p>Drop the files here...</p>
         ) : (
           <p>
             Drag & drop some files here, or click to select files (max size 1MB)
