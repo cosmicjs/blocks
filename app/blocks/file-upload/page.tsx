@@ -146,17 +146,7 @@ function Code() {
       description: (
         <>
           This will add the `FileUpload.tsx` file to your blocks folder located
-          in `cosmic/blocks/file-upload`. Includes the{" "}
-          <a
-            href="https://react-dropzone.js.org"
-            className="text-cosmic-blue"
-            target="_blank"
-            rel="noreferrer"
-          >
-            React Dropzone
-          </a>{" "}
-          library. Uses React Server Actions and does not expose your Cosmic API
-          keys to the client.
+          in `cosmic/blocks/file-upload`.
         </>
       ),
     },
@@ -184,9 +174,29 @@ function Code() {
     },
   ]
 
+  const description = (
+    <p>
+      Install the file upload Block to upload media to your Cosmic Bucket. Uses{" "}
+      <a
+        href="https://react-dropzone.js.org"
+        className="text-cosmic-blue"
+        target="_blank"
+        rel="noreferrer"
+      >
+        React Dropzone
+      </a>{" "}
+      and React Server Actions and does not expose your Cosmic API keys to the
+      client.
+    </p>
+  )
+
   return (
     <>
-      <CodeSteps steps={steps} featureKey="localization" />
+      <CodeSteps
+        steps={steps}
+        description={description}
+        featureKey="file-upload"
+      />
     </>
   )
 }
