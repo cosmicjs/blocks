@@ -24,6 +24,7 @@ type CodeStepsProps = {
   scratch?: boolean
   writeKey?: boolean
   featureKey?: string
+  description?: React.ReactNode
 }
 
 export function wrapWithSpan(text: string) {
@@ -109,7 +110,7 @@ function Step({
 }
 
 export function CodeSteps(props: CodeStepsProps) {
-  const { steps, scratch = false, featureKey } = props
+  const { steps, scratch = false, featureKey, description = "" } = props
 
   const searchParams = useSearchParams()
   const manager = useMemo(() => searchParams.get("pm"), [searchParams])
@@ -118,8 +119,14 @@ export function CodeSteps(props: CodeStepsProps) {
 
   return (
     <div className="w-auto max-w-[60vw] whitespace-pre-line pt-8 lg:max-w-[750px]">
+      {description && (
+        <div className="mb-4">
+          <h4 className="mb-2 mt-4 text-lg font-semibold">Description</h4>
+          {description}
+        </div>
+      )}
       {!scratch && (
-        <div className="mb-12 text-center">
+        <div className="mb-12">
           Follow the steps below to install this Block. Make sure you have
           reviewed the{" "}
           <Link href="/#get-started" className="text-cosmic-blue">

@@ -143,6 +143,19 @@ const blocks = {
     ],
     elements: ["Select"],
   },
+  "file-upload": {
+    name: "file-upload",
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "lucide-react",
+      "@radix-ui/react-slot",
+      "react-dropzone",
+    ],
+    elements: ["Button"],
+  },
 }
 
 async function addComponent(component) {
