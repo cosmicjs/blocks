@@ -18,7 +18,7 @@ export type FileType = {
 export function FileUpload({
   className,
   onComplete,
-  maxSize = 0,
+  maxSize,
 }: {
   className?: string
   onComplete: (response: {
