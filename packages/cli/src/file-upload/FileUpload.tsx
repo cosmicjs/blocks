@@ -26,7 +26,7 @@ export function FileUpload({
     success?: boolean
     media?: FileType[]
   }) => void
-  maxSize: number
+  maxSize?: number
 }) {
   const [filesInQueue, setFilesInQueue] = useState<File[]>([])
   const [uploading, setUploading] = useState(false)
