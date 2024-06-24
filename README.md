@@ -12,20 +12,6 @@
 
 [Explore the demo](https://cosmic-agency-template.vercel.app)
 
-## Blocks include
-
-- Landing page
-- Blog
-- Ecommerce (powered by Stripe 🛒)
-- Contact form (powered by Resend ✉️)
-- Events
-- FAQs
-- Testimonials
-- Navigation
-- Comments
-- Image gallery
-- and more!
-
 ## Features
 
 ⚡️ Performance optimized
@@ -45,6 +31,21 @@
 ♿️ Accessible
 
 🦺 Type safe
+
+## Blocks include
+
+- Landing page
+- Blog
+- Ecommerce (powered by Stripe 🛒)
+- Contact form (powered by Resend ✉️)
+- Events
+- FAQs
+- Testimonials
+- Navigation
+- Comments
+- Image gallery
+- File upload
+- and more!
 
 ## Built with
 
