@@ -4,7 +4,7 @@
   "bin": {
     "@cosmicjs/blocks": "./index.js"
   },
-  "version": "1.2.38",
+  "version": "1.2.40",
   "description": "Blocks CLI",
   "main": "index.js",
   "scripts": {
@@ -42,7 +42,7 @@
     "clsx": "^2.0.0",
     "commander": "^11.1.0",
     "execa": "^8.0.1",
-    "lucide-react": "^0.302.0",
+    "lucide-react": "^0.397.0",
     "prompts": "^2.4.2",
     "react-markdown": "^9.0.1",
     "tailwind-merge": "^2.2.0"
