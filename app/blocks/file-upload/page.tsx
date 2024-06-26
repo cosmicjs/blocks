@@ -159,7 +159,7 @@ function Code() {
       title: "Usage",
       code: fileUploadUsageCode,
       description:
-        "Configure the component to do something with the response using the `onComplete` function.",
+        "Configure the component to do something with the response using the `onComplete` function. Additional props are available for `autoUpload`, `accept`,`maxSize`, and `maxFiles`. Go to the React Dropzone docs to see more customizations.",
     },
     {
       title: "Example: Create Form",

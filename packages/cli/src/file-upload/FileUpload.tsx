@@ -5,7 +5,7 @@ import React, { useCallback, useState } from "react"
 import { useDropzone } from "react-dropzone"
 import { uploadAllFiles } from "@/cosmic/blocks/file-upload/actions"
 import { Button } from "@/cosmic/elements/Button"
-import { Check, Loader2, XIcon } from "lucide-react"
+import { Check, Loader2, XIcon, LoaderCircleIcon } from "lucide-react"
 
 export type FileType = {
   id: string
@@ -19,6 +19,9 @@ export function FileUpload({
   className,
   onComplete,
   maxSize,
+  autoUpload,
+  accept,
+  maxFiles,
 }: {
   className?: string
   onComplete: (response: {
@@ -27,6 +30,9 @@ export function FileUpload({
     media?: FileType[]
   }) => void
   maxSize?: number
+  autoUpload?: boolean
+  accept?: any
+  maxFiles?: number
 }) {
   const [filesInQueue, setFilesInQueue] = useState<File[]>([])
   const [uploading, setUploading] = useState(false)
@@ -43,6 +49,8 @@ export function FileUpload({
     useDropzone({
       onDrop,
       maxSize,
+      accept,
+      maxFiles,
     })
   const files = filesInQueue.map((file: File) => (
     <li key={file.name} className="mb-4">
@@ -57,6 +65,10 @@ export function FileUpload({
       )}
     </li>
   ))
+
+  // Auto upload
+  if (autoUpload && filesInQueue.length && !uploading && !uploadSuccess)
+    handleSubmit()
 
   async function handleSubmit() {
     setUploading(true)
@@ -93,13 +105,9 @@ export function FileUpload({
         } p-20 text-center`}
       >
         <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop the files here...</p>
-        ) : (
-          <p>Drag & drop some files here, or click to select files</p>
-        )}
+        <p>Drag & drop some files here, or click to select files</p>
       </div>
-      {!uploadSuccess && files.length ? (
+      {!uploadSuccess && !autoUpload && files.length ? (
         <>
           <h4 className="mb-4">Ready to upload</h4>
           <ul className="flex flex-wrap gap-4">{files}</ul>
@@ -116,6 +124,11 @@ export function FileUpload({
         </>
       ) : (
         ""
+      )}
+      {autoUpload && uploading && (
+        <div className="p-10">
+          <LoaderCircleIcon className="m-auto h-10 w-10 animate-spin" />
+        </div>
       )}
       {uploadSuccess ? (
         <div className="mb-4 flex rounded-xl border border-green-600 p-4 text-green-600 dark:border-green-400 dark:text-green-400">
