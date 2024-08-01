@@ -8,6 +8,10 @@ import { Button } from "@/cosmic/elements/Button"
 import { Input } from "@/cosmic/elements/Input"
 import { Label } from "@/cosmic/elements/Label"
 import { Textarea } from "@/cosmic/elements/TextArea"
+import {
+  addSubmission,
+  AddSubmissionType,
+} from "@/cosmic/blocks/contact-form/actions"
 
 export function ContactForm({ className }: { className?: string }) {
   const [name, setName] = useState("")
@@ -25,7 +29,7 @@ export function ContactForm({ className }: { className?: string }) {
       setError(true)
       return
     }
-    const newSubmission = {
+    const newSubmission: AddSubmissionType = {
       type: "form-submissions",
       title: name,
       metadata: {
@@ -35,13 +39,11 @@ export function ContactForm({ className }: { className?: string }) {
       },
     }
     try {
-      const res = await fetch("/api/submissions", {
-        method: "POST",
-        body: JSON.stringify({ submission: newSubmission }),
-      })
-      if (res.status !== 200) {
+      const res = await addSubmission(newSubmission)
+      if (!res.object) {
         setSubmitting(false)
         setError(true)
+        return
       } else {
         setSubmitting(false)
         setSubmitted(true)
