@@ -9,6 +9,7 @@ import { Button } from "@/cosmic/elements/Button"
 import { Input } from "@/cosmic/elements/Input"
 import { Label } from "@/cosmic/elements/Label"
 import { Textarea } from "@/cosmic/elements/TextArea"
+import { addComment, AddCommentType } from "@/cosmic/blocks/comments/actions"
 
 export function CommentForm({
   resourceId,
@@ -31,7 +32,7 @@ export function CommentForm({
       setError(true)
       return
     }
-    const newComment = {
+    const newComment: AddCommentType = {
       type: "comments",
       title: name,
       metadata: {
@@ -41,10 +42,12 @@ export function CommentForm({
       },
     }
     try {
-      await fetch("/api/comments", {
-        method: "POST",
-        body: JSON.stringify({ comment: newComment }),
-      })
+      const res = await addComment(newComment)
+      if (!res.object) {
+        setSubmitting(false)
+        setError(true)
+        return
+      }
     } catch (err) {
       setSubmitting(false)
       setError(true)
@@ -73,16 +76,15 @@ export function CommentForm({
   }
   return (
     <div className={cn("mb-8", className)}>
-      <h2 className="mb-4 text-2xl">Add a new comment</h2>
       {error && (
         <div className="mb-4 flex rounded-xl border border-red-500 p-8">
-          <XCircle className="relative top-1 mr-4 h-4 w-4 text-red-500" />
+          <XCircle className="relative top-1 mr-4 h-4 w-4 shrink-0 text-red-500" />
           There was an error with your request. Make sure all fields are valid.
         </div>
       )}
       {sumbitted ? (
         <div className="flex rounded-xl border border-green-500 p-8">
-          <CheckCircle className="relative top-1 mr-4 h-4 w-4 text-green-500" />
+          <CheckCircle className="relative top-1 mr-4 h-4 w-4 shrink-0 text-green-500" />
           Comment submitted for approval.
         </div>
       ) : (
