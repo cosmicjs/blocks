@@ -8,6 +8,10 @@ import { Button } from "@/cosmic/elements/Button"
 import { Input } from "@/cosmic/elements/Input"
 import { Label } from "@/cosmic/elements/Label"
 import { Textarea } from "@/cosmic/elements/TextArea"
+import {
+  addSubmission,
+  AddSubmissionType,
+} from "@/cosmic/blocks/contact-form/actions"
 
 export function ContactForm({ className }: { className?: string }) {
   const [name, setName] = useState("")
@@ -25,7 +29,7 @@ export function ContactForm({ className }: { className?: string }) {
       setError(true)
       return
     }
-    const newSubmission = {
+    const newSubmission: AddSubmissionType = {
       type: "form-submissions",
       title: name,
       metadata: {
@@ -35,13 +39,11 @@ export function ContactForm({ className }: { className?: string }) {
       },
     }
     try {
-      const res = await fetch("/api/submissions", {
-        method: "POST",
-        body: JSON.stringify({ submission: newSubmission }),
-      })
-      if (res.status !== 200) {
+      const res = await addSubmission(newSubmission)
+      if (!res.object) {
         setSubmitting(false)
         setError(true)
+        return
       } else {
         setSubmitting(false)
         setSubmitted(true)
@@ -80,13 +82,13 @@ export function ContactForm({ className }: { className?: string }) {
       <h2 className="mb-4 text-2xl">Contact us</h2>
       {error && (
         <div className="mb-4 flex rounded-xl border border-red-500 p-8">
-          <XCircle className="relative top-1 mr-4 h-4 w-4 text-red-500" />
+          <XCircle className="relative top-1 mr-4 h-4 w-4 shrink-0 text-red-500" />
           There was an error with your request. Make sure all fields are valid.
         </div>
       )}
       {sumbitted ? (
         <div className="flex rounded-xl border border-green-500 p-8">
-          <CheckCircle className="relative top-1 mr-4 h-4 w-4 text-green-500" />
+          <CheckCircle className="relative top-1 mr-4 h-4 w-4 shrink-0 text-green-500" />
           Message submitted.
         </div>
       ) : (

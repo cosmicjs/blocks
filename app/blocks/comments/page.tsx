@@ -142,20 +142,6 @@ function Code() {
     \`\`\`
     `
 
-  const commentsAPICodeString = dedent`
-    \`\`\`ts
-    // app/api/comments/route.ts
-    import { type NextRequest } from "next/server";
-    import { cosmic } from "@/cosmic/client";
-    
-    export async function POST(request: NextRequest) {
-      const res = await request.json();
-      const data = await cosmic.objects.insertOne(res.comment);
-      return Response.json(data);
-    }
-    \`\`\`
-    `
-
   const steps = [
     {
       title: "Install the Block content model",
@@ -168,13 +154,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the files `CommentForm.tsx`,`Comments.tsx`, and components to your blocks folder located in `cosmic/blocks/comments`.",
-    },
-    {
-      title: "Create the comment post API route",
-      description:
-        "Create a new file at `app/api/comments/route.ts` with the following:",
-      code: commentsAPICodeString,
+        "This will add the files `CommentForm.tsx`,`Comments.tsx`, `actions.tsx` server actions, and components to your blocks folder located in `cosmic/blocks/comments`.",
     },
     {
       title: "Import Block",

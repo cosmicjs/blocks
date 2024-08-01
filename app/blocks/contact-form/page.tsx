@@ -74,83 +74,6 @@ function Code() {
     \`\`\`
     `
 
-  const submissionsAPICodeString = dedent`
-    \`\`\`ts
-    // app/api/submissions/route.ts
-    import { type NextRequest } from "next/server";
-    import { cosmic } from "@/cosmic/client";
-    import { Resend } from "resend";
-    const RESEND_KEY = process.env.RESEND_API_KEY;
-    const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "change_to_your_email@example.com";
-    const resend = new Resend(RESEND_KEY);
-
-    export async function POST(request: NextRequest) {
-      const res = await request.json();
-      const { metadata: metadata, title } = res.submission;
-      const data = await cosmic.objects.insertOne(res.submission);
-      const submitterSubject = \`Form submission received\`;
-      const submitterHTML = \`
-        Hello \${title},<br/><br/>
-        This is a message to confirm that we have received your form submission with the following information:<br/><br/>
-        Name: \${title}<br/>
-        Email: \${metadata.email}<br/>
-        Company: \${metadata.company}<br/>
-        Message: \${metadata.message}<br/>
-        <br/>
-        A representative will be in touch with you soon.
-      \`;
-      // Send confirmation email
-      await sendEmail({
-        to: metadata.email,
-        from: CONTACT_EMAIL,
-        reply_to: CONTACT_EMAIL,
-        subject: submitterSubject,
-        html: submitterHTML,
-      });
-      const adminSubject = \`\${title} submitted the form\`;
-      const adminHTML = \`
-        \${title} submitted the contact form with the following information:<br/><br/>
-        Name: \${title}<br/>
-        Email: \${metadata.email}<br/>
-        Company: \${metadata.company}<br/>
-        Message: \${metadata.message}<br/>
-      \`;
-      // Send email to admin
-      await sendEmail({
-        to: CONTACT_EMAIL,
-        from: CONTACT_EMAIL,
-        reply_to: metadata.email,
-        subject: adminSubject,
-        html: adminHTML,
-      });
-      return Response.json(data);
-    }
-
-    async function sendEmail({
-      from,
-      to,
-      subject,
-      html,
-      reply_to,
-    }: {
-      from: string;
-      to: string;
-      subject: string;
-      html: string;
-      reply_to: string;
-    }) {
-      const data = await resend.emails.send({
-        from,
-        to,
-        subject,
-        html,
-        reply_to,
-      });
-      return data;
-    }
-    \`\`\`
-    `
-
   const steps = [
     {
       title: "Install the Block content model",
@@ -163,7 +86,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the `ContactForm.tsx` file and components to your blocks folder located in `cosmic/blocks/contact-form`.",
+        "This will add the `ContactForm.tsx` and `actions.tsx` server actions file and components to your blocks folder located in `cosmic/blocks/contact-form`.",
     },
     {
       title: "Import Block",
@@ -220,12 +143,6 @@ function Code() {
       CONTACT_EMAIL=youremail@domain.com
       \`\`\`
       `),
-    },
-    {
-      title: "Create the form submissions API route",
-      description:
-        "Create a new file at `app/api/submissions/route.ts` with the following:",
-      code: submissionsAPICodeString,
     },
     {
       title: "Usage: Contact page",
