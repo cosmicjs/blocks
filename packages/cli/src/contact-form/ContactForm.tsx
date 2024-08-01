@@ -82,13 +82,13 @@ export function ContactForm({ className }: { className?: string }) {
       <h2 className="mb-4 text-2xl">Contact us</h2>
       {error && (
         <div className="mb-4 flex rounded-xl border border-red-500 p-8">
-          <XCircle className="relative top-1 mr-4 h-4 w-4 text-red-500" />
+          <XCircle className="relative top-1 mr-4 h-4 w-4 shrink-0 text-red-500" />
           There was an error with your request. Make sure all fields are valid.
         </div>
       )}
       {sumbitted ? (
         <div className="flex rounded-xl border border-green-500 p-8">
-          <CheckCircle className="relative top-1 mr-4 h-4 w-4 text-green-500" />
+          <CheckCircle className="relative top-1 mr-4 h-4 w-4 shrink-0 text-green-500" />
           Message submitted.
         </div>
       ) : (
