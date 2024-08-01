@@ -9,6 +9,7 @@ import { CartContext } from "@/cosmic/blocks/ecommerce/CartProvider"
 import { ProductType } from "@/cosmic/blocks/ecommerce/AddToCart"
 import Link from "next/link"
 import { cn } from "@/cosmic/utils"
+import { useSearchParams } from "next/navigation"
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
@@ -39,6 +40,11 @@ export function CheckOut({
     )
     setCart(newCart)
     localStorage.setItem("cart", JSON.stringify(newCart))
+  }
+
+  function removeCart() {
+    setCart([])
+    localStorage.removeItem("cart")
   }
 
   function CartItem({
@@ -110,6 +116,12 @@ export function CheckOut({
     } else {
       if (data.url) window.location = data.url
     }
+  }
+  // Remove cart
+  const searchParams = useSearchParams()
+  const success = searchParams.get("success")
+  if (success && cart.length) {
+    removeCart()
   }
   return (
     <div className={cn("relative", className)}>
