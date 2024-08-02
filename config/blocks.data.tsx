@@ -15,6 +15,7 @@ import {
   ShoppingCartIcon,
   UsersRoundIcon,
   UploadIcon,
+  VideoIcon,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -121,6 +122,20 @@ export const blocksData = [
     preview_link: "/blocks/ecommerce",
     object_types: 1,
     objects: 4,
+  },
+  {
+    key: "videos",
+    title: "Videos",
+    type: "object_type",
+    slug: "videos",
+    icon: (className?: string) => (
+      <VideoIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
+    description: `Adds a Videos Object type to your Bucket, which includes`,
+    confirmation: `This will install a \`videos\` Object type to your Bucket as well as demo content.`,
+    preview_link: "/blocks/videos",
+    object_types: 3,
+    objects: 9,
   },
   {
     key: "team",
