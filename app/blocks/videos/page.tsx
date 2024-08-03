@@ -186,7 +186,7 @@ function Code() {
     `
   const singleChannelPageCode = dedent`
     \`\`\`jsx
-    // app/videos/[slug]/page.tsx
+    // app/channels/[slug]/page.tsx
     import { SingleChannel } from "@/cosmic/blocks/videos/SingleChannel";
     export default async function SingleChannelPage({
       params,
