@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link"
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import { VideoCard, VideoType } from "@/components/VideoCard"
-import { TimeAgo } from "@/components/TimeAgo"
-import { PlayArea } from "@/components/PlayArea"
 import { CategoryPill, CategoryType } from "@/components/CategoryPill"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
+import { PlayArea } from "@/components/PlayArea"
 import { PreviewCopy } from "@/components/PreviewCopy"
-import Link from "next/link"
+import { TimeAgo } from "@/components/TimeAgo"
+import { VideoCard, VideoType } from "@/components/VideoCard"
 
 export async function generateMetadata() {
   return {
@@ -16,7 +16,7 @@ export async function generateMetadata() {
   }
 }
 
-export default async function BlogPage({
+export default async function VideosPage({
   searchParams,
 }: {
   searchParams: {
@@ -49,9 +49,13 @@ async function Preview() {
   const { objects: videos } = await cosmicSourceBucketConfig.objects
     .find({ type: "videos" })
     .props("id,slug,title,metadata,created_at")
-    .depth(1)
+    .depth(2)
 
   const video = videos[0]
+  const channel = videos[0].metadata.channel
+  const channelVideos = videos.filter(
+    (video: VideoType) => video.metadata.channel.id === channel.id
+  )
 
   return (
     <div className="container m-auto grid items-center px-4 py-8">
@@ -59,12 +63,10 @@ async function Preview() {
       <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
         Video List
       </h1>
-      <div className="relative m-auto flex max-w-[950px] flex-col items-start gap-2">
-        <div className="mx-auto grid w-full max-w-screen-lg grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
-          <Videos videos={videos} />
-        </div>
+      <div className="mx-auto grid w-full grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
+        <Videos videos={videos} />
       </div>
-      <h1 className="mb-8 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+      <h1 className="mb-2 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
         Single Video Page
       </h1>
       <div className="w-full">
@@ -103,6 +105,46 @@ async function Preview() {
           />
         </div>
       </section>
+      <h1 className="mb-2 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+        Single Channel Page
+      </h1>
+      <div className="mb-6 max-h-[300px] w-full overflow-hidden">
+        <img
+          src={`${channel.metadata.backsplash.imgix_url}?w=2000&auto=format,compression`}
+          alt={channel.title}
+          className="aspect-video w-full object-cover"
+        />
+      </div>
+      <section className="relative -top-[55px] h-[44px] max-w-[1650px] px-4 md:px-8">
+        <div className="mb-6 flex items-center gap-6 pb-4">
+          <img
+            alt={channel.title}
+            src={`${channel.metadata.thumbnail.imgix_url}?w=400&auto=format,compression`}
+            className="h-[100px] w-[100px] rounded-full border-4 border-white object-cover"
+          />
+          <h1 className="relative top-[22px] text-3xl font-extrabold leading-tight tracking-tighter text-black dark:text-white md:text-4xl">
+            {channel.title}
+          </h1>
+        </div>
+      </section>
+      <div className="mb-6 flex items-center border-b pb-4 dark:border-gray-800"></div>
+      <section className="relative mb-8 md:px-8">
+        <h2 className="mb-4 text-2xl font-semibold text-black dark:text-white">
+          About
+        </h2>
+        <div
+          className="space-y-4 text-zinc-700 dark:text-zinc-300"
+          dangerouslySetInnerHTML={{ __html: channel.metadata.description }}
+        />
+      </section>
+      <section className="mb-10 md:px-8">
+        <h2 className="mb-4 text-2xl font-extrabold leading-tight tracking-tighter text-black dark:text-white">
+          Videos
+        </h2>
+        <div className="grid w-full grid-cols-1 flex-col gap-5 pb-24 sm:grid-cols-2 lg:gap-10">
+          <Videos videos={channelVideos} />
+        </div>
+      </section>
     </div>
   )
 }
@@ -110,18 +152,17 @@ async function Preview() {
 function Code() {
   const blockCommand = dedent`
   \`\`\`bash
-  bunx @cosmicjs/blocks add blog
+  bunx @cosmicjs/blocks add videos
   \`\`\`
   `
-  const blogListPageCode = dedent`
+  const videoListPageCode = dedent`
   \`\`\`jsx
-  // app/blog/page.tsx
-  import { BlogList } from "@/cosmic/blocks/blog/BlogList";
-  export default async function BlogListPage() {
+  // app/video/page.tsx
+  import { BlogList } from "@/cosmic/blocks/videos/VideoList";
+  export default async function VideoListPage() {
     return (
-      <BlogList
-        query={{ type: "blog-posts" }}
-        sort="-created_at"
+      <VideoList
+        query={{ type: "videos" }}
         limit={10}
         skip={0}
       />
@@ -130,228 +171,70 @@ function Code() {
   \`\`\`
   `
 
-  const singlePageCode = dedent`
+  const singleVideoPageCode = dedent`
     \`\`\`jsx
-    // app/blog/[slug]/page.tsx
-    import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
-    export default async function SingleBlogPage({
+    // app/videos/[slug]/page.tsx
+    import { SingleVideo } from "@/cosmic/blocks/videos/SingleVideo";
+    export default async function SingleVideoPage({
       params,
     }: {
       params: { slug: string };
     }) {
-      return <SingleBlog query={{ slug: params.slug, type: "blog-posts" }} />;
+      return <SingleVideo query={{ slug: params.slug, type: "videos" }} />;
     }
     \`\`\`
     `
-  const draftPreviewCode = dedent`
+  const singleChannelPageCode = dedent`
     \`\`\`jsx
-    // app/blog/[slug]/page.tsx
-    import { SingleBlog } from "@/cosmic/blocks/blog/SingleBlog";
-    export default async function SingleBlogPage({
+    // app/videos/[slug]/page.tsx
+    import { SingleChannel } from "@/cosmic/blocks/videos/SingleChannel";
+    export default async function SingleChannelPage({
       params,
-      searchParams,
     }: {
       params: { slug: string };
-      searchParams?: {
-        status: "draft" | "published" | "any";
-      };
     }) {
-      return (
-        <SingleBlog
-          query={{ slug: params.slug, type: "blog-posts" }}
-          status={searchParams?.status}
-        />
-      );
-    }
-
-    \`\`\`
-    `
-  const localizationCode = dedent`
-    \`\`\`jsx
-    // app/[locale]/blog/page.tsx
-    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
-    export default async function BlogListPage({
-      params,
-    }: {
-      params: { locale: string };
-    }) {
-      return (
-        <BlogList
-          query={{ type: "blog-posts", locale: params.locale }}
-          sort="-created_at"
-          limit={10}
-          skip={0}
-        />
-      );
+      return <SingleChannel query={{ slug: params.slug, type: "channels" }} />;
     }
     \`\`\`
     `
 
-  const paginationExampleCode = dedent`
-    \`\`\`jsx
-    // app/blog/page.tsx
-    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
-    import { Pagination } from "@/cosmic/blocks/pagination/Pagination";
-
-    export default async function BlogListPage({
-      searchParams,
-    }: {
-      searchParams?: {
-        page: number;
-      };
-    }) {
-      const page = Number(searchParams?.page ? searchParams?.page : 1);
-      const LIMIT = 1; // Set the post limit here
-      const skip = page * LIMIT - LIMIT;
-      return (
-        <>
-          <BlogList
-            query={{ type: "blog-posts" }}
-            sort="-order"
-            limit={LIMIT}
-            skip={skip}
-            className="mb-10"
-          />
-          <Pagination
-            query={{ type: "blog-posts" }}
-            path="/blog"
-            limit={LIMIT}
-            page={page}
-          />
-        </>
-      );
-    }
-    \`\`\`
-    `
-  const loadMoreExampleCode = dedent`
-    \`\`\`jsx
-    // app/blog/page.tsx
-    import { BlogList } from "@/cosmic/blocks/blog/BlogList";
-    import { LoadMore } from "@/cosmic/blocks/pagination/LoadMore";
-    import { cosmic } from "@/cosmic/client";
-
-    const LIMIT = 3;
-
-    async function loadMorePosts(offset: number = 0) {
-      "use server";
-      const nextOffset = LIMIT + offset;
-      return [
-        <BlogList
-          key={offset}
-          query={{ type: "blog-posts" }}
-          sort="-order"
-          limit={LIMIT}
-          skip={nextOffset}
-          noWrap
-        />,
-        nextOffset,
-      ] as const;
-    }
-
-    export default async function BlogListPage() {
-      const skip = 0;
-      const { total } = await cosmic.objects
-        .find({ type: "blog-posts" })
-        .props("id")
-        .limit(1);
-      return (
-        <LoadMore
-          loadMoreAction={loadMorePosts}
-          initialOffset={skip}
-          total={total}
-          limit={LIMIT}
-          className="max-w-[1000px] m-auto grid grid-cols-1 md:grid-cols-2 gap-6 px-10"
-        >
-          <BlogList
-            query={{ type: "blog-posts" }}
-            sort="-order"
-            limit={LIMIT}
-            skip={skip}
-            noWrap
-          />
-        </LoadMore>
-      );
-    }
-    \`\`\`
-    `
   const steps = [
     {
       title: "Install the Block content model",
       code: blockCommand,
       description:
-        "This will create the `blog-posts`, `authors`, and `categories` Object types in your Bucket and add demo content.",
+        "This will create the `videos`, `channels`, and `video-categories` Object types in your Bucket and add demo content.",
       installButton: true,
     },
     {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the files `BlogCard.tsx`,`BlogList.tsx`, and `SingleBlog.tsx` to your blocks folder located in `cosmic/blocks/blog`.",
+        "This will add the files `VideoCard.tsx`,`SingleVideo.tsx`,`SingleChannel.tsx`, and more to your blocks folder located in `cosmic/blocks/videos`.",
     },
     {
-      title: "Usage: Blog list page",
-      code: blogListPageCode,
+      title: "Usage: Video list page",
+      code: videoListPageCode,
       description:
-        "Add a new file located at `app/blog/page.tsx` with the following:",
+        "Add a new file located at `app/videos/page.tsx` with the following:",
     },
     {
-      title: "Usage: Single blog page",
-      code: singlePageCode,
+      title: "Usage: Single video page",
+      code: singleVideoPageCode,
       description:
-        "Add a new file located at `app/blog/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the blog content.",
+        "Add a new file located at `app/videos/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the video content.",
     },
     {
-      title: "Pagination",
-      description: (
-        <>
-          See the{" "}
-          <Link href="/blocks/pagination" className="text-cosmic-blue">
-            pagination Block
-          </Link>{" "}
-          for installation steps and view the full examples below.
-        </>
-      ),
-    },
-  ]
-
-  const examples = [
-    {
-      title: "Draft preview",
-      code: draftPreviewCode,
+      title: "Usage: Single channel page",
+      code: singleChannelPageCode,
       description:
-        "Enable draft preview by setting the `status` property on the Block. View the draft preview content by setting the `?status=any` in the URL. Note: This is a basic example. It is advisable to consider a security strategy if you intend to keep your preview private.",
-    },
-    {
-      title: "Draft preview link in the dashboard",
-      description:
-        "To add the draft preview link in the dashboard, go to Blog Object type > Settings and add your preview link in the dashboard under Additional Settings. For example adding the link `http://localhost:3000/blog/[object_slug]?status=any` will add a Preview button to each blog post.",
-    },
-    {
-      title: "Pagination: Numbered pages",
-      code: paginationExampleCode,
-      description: "Add pagination with the pagination Block.",
-    },
-    {
-      title: "Pagination: Load more",
-      code: loadMoreExampleCode,
-      description:
-        "Use the load more pagination Block to fetch additional blog posts using a Server Action.",
-    },
-    {
-      title: "Localization",
-      code: localizationCode,
-      description:
-        "First, enable localization in the dashboard by going to Blog Object type > Settings under Additional Settings. Then set the locale on your specific Object. Finally, pass the `locale` parameter into the query to fetch your localized content. Create a new file at `app/[locale]/blog/page.tsx` with the following. Then go to any page with localization set, for example: `https://localhost:3000/es/blog` or `https://localhost:3000/en/blog`.",
+        "Add a new file located at `app/channels/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the channel content.",
     },
   ]
 
   return (
     <>
       <CodeSteps steps={steps} featureKey="blog" />
-      <div className="mb-2 border-t pt-10">
-        <h3 className="text-3xl font-semibold">Examples</h3>
-      </div>
-      <CodeSteps scratch steps={examples} featureKey="blog" />
     </>
   )
 }

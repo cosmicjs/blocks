@@ -1,14 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
-import { VideoType } from "./VideoCard"
 import { useState } from "react"
+
+import { VideoType } from "./VideoCard"
+
 export function PlayArea({ video }: { video: VideoType }) {
   const [isClicked, setIsClicked] = useState(false)
   return (
     <>
       {!isClicked ? (
-        <div className="relative max-h-[75vh] cursor-pointer overflow-hidden">
+        <div className="relative max-h-[75vh] cursor-pointer overflow-hidden md:h-[420px]">
           <button onClick={() => setIsClicked(true)} className="w-full">
             <img
               src={`${video.metadata.thumbnail.imgix_url}?w=2000&auto=format,compression`}
@@ -37,7 +39,7 @@ export function PlayArea({ video }: { video: VideoType }) {
         <video
           src={video.metadata.video.url}
           controls
-          className="max-h-[75vh] w-full"
+          className="max-h-[75vh] w-full md:h-[420px]"
           autoPlay
         />
       )}

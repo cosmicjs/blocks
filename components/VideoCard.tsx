@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { TimeAgo } from "@/components/TimeAgo"
 import { CategoryType } from "@/components/CategoryPill"
+import { TimeAgo } from "@/components/TimeAgo"
 
 export type VideoType = {
   id: string
@@ -17,6 +17,7 @@ export type VideoType = {
     description: string
     categories: CategoryType[]
     channel: {
+      id: string
       slug: string
       title: string
       metadata: {
