@@ -231,6 +231,22 @@ function Code() {
       description:
         "Add a new file located at `app/channels/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the channel content.",
     },
+    {
+      title: "Example: Podcast Network",
+      description: (
+        <>
+          Check out a full-featured working example{" "}
+          <a
+            target="_blank"
+            className="text-cosmic-blue-link dark:text-cosmic-blue"
+            href="https://cosmic-podcast-network.vercel.app/"
+          >
+            Podcast Network
+          </a>
+          .
+        </>
+      ),
+    },
   ]
 
   return (
