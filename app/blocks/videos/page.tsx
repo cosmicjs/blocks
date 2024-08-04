@@ -165,7 +165,7 @@ function Code() {
         query={{ type: "videos" }}
         limit={10}
         skip={0}
-        className="m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        className="p-10 m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
       />
     );
   }
