@@ -95,6 +95,18 @@ export async function getProductsMetafields() {
   return await getMetafieldsFromObjectType("products")
 }
 
+export async function getVideosMetafields() {
+  return await getMetafieldsFromObjectType("videos")
+}
+
+export async function getVideoCategoryMetafields() {
+  return await getMetafieldsFromObjectType("video-categories")
+}
+
+export async function getChannelMetafields() {
+  return await getMetafieldsFromObjectType("channels")
+}
+
 export async function getBlogs(cosmic: CosmicConfig) {
   const { objects } = await cosmic.objects
     .find({
@@ -194,6 +206,33 @@ export async function getNavMenus(cosmic: CosmicConfig) {
       type: "navigation-menus",
     })
     .props("slug,title,type,metadata")
+  return objects
+}
+
+export async function getVideos(cosmic: CosmicConfig) {
+  const { objects } = await cosmic.objects
+    .find({
+      type: "videos",
+    })
+    .props("slug,title,type,metadata,thumbnail")
+  return objects
+}
+
+export async function getChannels(cosmic: CosmicConfig) {
+  const { objects } = await cosmic.objects
+    .find({
+      type: "channels",
+    })
+    .props("id,slug,title,type,metadata,thumbnail")
+  return objects
+}
+
+export async function getVideoCategories(cosmic: CosmicConfig) {
+  const { objects } = await cosmic.objects
+    .find({
+      type: "video-categories",
+    })
+    .props("id,slug,title,type,metadata,thumbnail")
   return objects
 }
 
@@ -360,6 +399,95 @@ export async function addTeamMembers(cosmic: CosmicConfig, teamMembers: any) {
     member.metadata.image = mediaRes.media.name
     member.thumbnail = mediaRes.media.name
     await cosmic.objects.insertOne(member)
+  }
+}
+
+export async function addVideos(
+  cosmic: CosmicConfig,
+  videos: any,
+  channels: any,
+  categories: any
+) {
+  for (let video of videos) {
+    video.type = "videos"
+    // Upload thumbnail
+    const thumbnailFile = await getMediaBlobFromURL(
+      video.metadata.thumbnail.imgix_url,
+      video.title + "." + video.metadata.thumbnail.imgix_url.split(".").pop()
+    )
+    const mediaRes = await cosmic.media.insertOne({ media: thumbnailFile })
+    video.metadata.thumbnail = mediaRes.media.name
+    video.thumbnail = mediaRes.media.name
+    // Upload video
+    const video_url = video.metadata.video.url.replace(
+      "cdn.cosmicjs.com",
+      "imgix.cosmicjs.com"
+    )
+    const videoFile = await getMediaBlobFromURL(
+      video_url,
+      video.title + "." + video.metadata.video.imgix_url.split(".").pop(),
+      true
+    )
+    const videoRes = await cosmic.media.insertOne({ media: videoFile })
+    video.metadata.video = videoRes.media.name
+    if (video.slug.indexOf("live") !== -1) {
+      video.metadata.channel = channels[0].id
+      video.metadata.categories = [categories[0].id]
+    }
+    if (video.slug.indexOf("surf") !== -1) {
+      video.metadata.channel = channels[1].id
+      video.metadata.categories = [categories[1].id]
+    }
+    if (video.slug.indexOf("pizza") !== -1) {
+      video.metadata.channel = channels[2].id
+      video.metadata.categories = [categories[2].id]
+    }
+    await cosmic.objects.insertOne(video)
+  }
+}
+
+export async function addChannels(cosmic: CosmicConfig, channels: any) {
+  for (let channel of channels) {
+    channel.type = "channels"
+    // Upload thumbnail
+    const thumbnailFile = await getMediaBlobFromURL(
+      channel.metadata.thumbnail.imgix_url,
+      channel.title +
+        "." +
+        channel.metadata.thumbnail.imgix_url.split(".").pop()
+    )
+    const mediaRes = await cosmic.media.insertOne({ media: thumbnailFile })
+    channel.metadata.thumbnail = mediaRes.media.name
+    channel.thumbnail = mediaRes.media.name
+    // Upload video
+    const backsplashFile = await getMediaBlobFromURL(
+      channel.metadata.backsplash.imgix_url,
+      channel.title +
+        "." +
+        channel.metadata.backsplash.imgix_url.split(".").pop()
+    )
+    const backsplashRes = await cosmic.media.insertOne({
+      media: backsplashFile,
+    })
+    channel.metadata.backsplash = backsplashRes.media.name
+    await cosmic.objects.insertOne(channel)
+  }
+}
+
+export async function addVideoCategories(
+  cosmic: CosmicConfig,
+  videoCategories: any
+) {
+  for (let videoCategory of videoCategories) {
+    videoCategory.type = "video-categories"
+    // Upload thumbnail
+    const thumbnailFile = await getMediaBlobFromURL(
+      videoCategory.thumbnail,
+      videoCategory.title + "." + videoCategory.thumbnail.split(".").pop()
+    )
+    const mediaRes = await cosmic.media.insertOne({ media: thumbnailFile })
+    videoCategory.thumbnail = mediaRes.media.name
+    await cosmic.objects.insertOne(videoCategory)
   }
 }
 
@@ -599,6 +727,54 @@ export async function addNavMenusObjectType(
     title: "Navigation Menus",
     slug: "navigation-menus",
     emoji: "🖱",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
+    metafields,
+  })
+}
+export async function addVideosObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Video",
+    title: "Videos",
+    slug: "videos",
+    emoji: "📽️",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
+    metafields,
+  })
+}
+export async function addChannelsObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Channel",
+    title: "Channels",
+    slug: "channels",
+    emoji: "📺",
+    options: {
+      slug_field: true,
+      content_editor: false,
+    },
+    metafields,
+  })
+}
+export async function addVideoCategoriesObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "Video Category",
+    title: "Video Categories",
+    slug: "video-categories",
+    emoji: "📼",
     options: {
       slug_field: true,
       content_editor: false,

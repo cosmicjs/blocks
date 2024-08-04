@@ -5,11 +5,17 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export async function getMediaBlobFromURL(url: string, name: string) {
-  const response = await fetch(url + "?w=2000&auto=compression,format")
+export async function getMediaBlobFromURL(
+  url: string,
+  name: string,
+  isVideo?: boolean
+) {
+  const response = await fetch(
+    url + (!isVideo ? "?w=2000&auto=compression,format" : "")
+  )
   const blob = await response.blob()
   const media: any = new Blob([blob], {
-    type: "image/jpeg",
+    type: isVideo ? "video/mp4" : "image/jpeg",
   })
   media.name = name
   return media
@@ -65,9 +71,9 @@ function getFormattedDate(
   prefomattedDate?: "Today" | "Yesterday" | false,
   hideYear?: boolean
 ) {
-  const date_number = date.getDate();
-  const days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-  const day = days[date.getDay()];
+  const date_number = date.getDate()
+  const days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"]
+  const day = days[date.getDay()]
   const MONTH_NAMES = [
     "Jan",
     "Feb",
@@ -81,25 +87,25 @@ function getFormattedDate(
     "Oct",
     "Nov",
     "Dec",
-  ];
-  const month = MONTH_NAMES[date.getMonth()];
-  const year = date.getFullYear();
-  let hours = date.getHours();
-  let am_pm = "am";
+  ]
+  const month = MONTH_NAMES[date.getMonth()]
+  const year = date.getFullYear()
+  let hours = date.getHours()
+  let am_pm = "am"
   if (hours > 11) {
-    am_pm = "pm";
-    if (hours > 12) hours = hours - 12;
+    am_pm = "pm"
+    if (hours > 12) hours = hours - 12
   }
   if (hours === 0) {
-    hours = 12;
+    hours = 12
   }
-  let minutes: number | string = date.getMinutes();
+  let minutes: number | string = date.getMinutes()
   if (minutes < 10) {
     // Adding leading zero to minutes
-    minutes = "0" + minutes;
+    minutes = "0" + minutes
   }
   if (prefomattedDate)
-    return prefomattedDate + " at " + hours + ":" + minutes + am_pm;
+    return prefomattedDate + " at " + hours + ":" + minutes + am_pm
   if (hideYear) {
     // 10. January at 10:20
     return (
@@ -113,7 +119,7 @@ function getFormattedDate(
       ":" +
       minutes +
       am_pm
-    );
+    )
   }
   // 10. January 2017. at 10:20
   return (
@@ -129,36 +135,36 @@ function getFormattedDate(
     ":" +
     minutes +
     am_pm
-  );
+  )
 }
 
 export function timeAgo(dateParam?: number | string | Date) {
   if (!dateParam) {
-    return null;
+    return null
   }
-  const date = typeof dateParam === "object" ? dateParam : new Date(dateParam);
-  const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
-  const today = new Date();
-  const yesterday = new Date(today.getTime() - DAY_IN_MS);
-  const seconds = Math.round((today.getTime() - date.getTime()) / 1000);
-  const minutes = Math.round(seconds / 60);
-  const isToday = today.toDateString() === date.toDateString();
-  const isYesterday = yesterday.toDateString() === date.toDateString();
-  const isThisYear = today.getFullYear() === date.getFullYear();
+  const date = typeof dateParam === "object" ? dateParam : new Date(dateParam)
+  const DAY_IN_MS = 86400000 // 24 * 60 * 60 * 1000
+  const today = new Date()
+  const yesterday = new Date(today.getTime() - DAY_IN_MS)
+  const seconds = Math.round((today.getTime() - date.getTime()) / 1000)
+  const minutes = Math.round(seconds / 60)
+  const isToday = today.toDateString() === date.toDateString()
+  const isYesterday = yesterday.toDateString() === date.toDateString()
+  const isThisYear = today.getFullYear() === date.getFullYear()
   if (seconds < 5) {
-    return "Just now";
+    return "Just now"
   } else if (seconds < 60) {
-    return seconds + " seconds ago";
+    return seconds + " seconds ago"
   } else if (seconds < 90) {
-    return "about a minute ago";
+    return "about a minute ago"
   } else if (minutes < 60) {
-    return minutes + " minutes ago";
+    return minutes + " minutes ago"
   } else if (isToday) {
-    return getFormattedDate(date, "Today"); // Today at 10:20
+    return getFormattedDate(date, "Today") // Today at 10:20
   } else if (isYesterday) {
-    return getFormattedDate(date, "Yesterday"); // Yesterday at 10:20
+    return getFormattedDate(date, "Yesterday") // Yesterday at 10:20
   } else if (isThisYear) {
-    return getFormattedDate(date, false, true); // 10. January at 10:20
+    return getFormattedDate(date, false, true) // 10. January at 10:20
   }
-  return getFormattedDate(date); // 10. January 2017. at 10:20
+  return getFormattedDate(date) // 10. January 2017. at 10:20
 }

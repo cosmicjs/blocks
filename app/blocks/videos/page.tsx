@@ -234,7 +234,7 @@ function Code() {
 
   return (
     <>
-      <CodeSteps steps={steps} featureKey="blog" />
+      <CodeSteps steps={steps} featureKey="videos" />
     </>
   )
 }

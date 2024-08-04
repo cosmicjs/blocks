@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
-import { TimeAgo } from "@/components/TimeAgo"
+import { TimeAgo } from "@/cosmic/blocks/elements/TimeAgo"
+
 import { CategoryType } from "./CategoryPill"
 
 export type VideoType = {

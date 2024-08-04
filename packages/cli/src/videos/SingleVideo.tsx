@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { cosmic } from "@/cosmic/client"
-import { notFound } from "next/navigation"
-import { TimeAgo } from "@/components/TimeAgo"
-import { VideoType } from "./VideoCard"
-import { PlayArea } from "./PlayArea"
 import Link from "next/link"
+import { notFound } from "next/navigation"
+import { TimeAgo } from "@/cosmic/blocks/elements/TimeAgo"
+import { cosmic } from "@/cosmic/client"
+
 import { CategoryPill, CategoryType } from "./CategoryPill"
+import { PlayArea } from "./PlayArea"
+import { VideoType } from "./VideoCard"
 
 export async function SingleVideo({
   query,
