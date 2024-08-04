@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { TimeAgo } from "@/cosmic/blocks/elements/TimeAgo"
 import { cosmic } from "@/cosmic/client"
+import { TimeAgo } from "@/cosmic/elements/TimeAgo"
 
 import { CategoryPill, CategoryType } from "./CategoryPill"
 import { PlayArea } from "./PlayArea"
