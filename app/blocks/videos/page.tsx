@@ -158,7 +158,7 @@ function Code() {
   const videoListPageCode = dedent`
   \`\`\`jsx
   // app/video/page.tsx
-  import { BlogList } from "@/cosmic/blocks/videos/VideoList";
+  import { VideoList } from "@/cosmic/blocks/videos/VideoList";
   export default async function VideoListPage() {
     return (
       <VideoList
@@ -237,25 +237,4 @@ function Code() {
       <CodeSteps steps={steps} featureKey="videos" />
     </>
   )
-}
-
-const getFormattedDate = (inputDate: string) => {
-  const dateParts = inputDate.split("-")
-
-  const year = parseInt(dateParts[0])
-  const month = parseInt(dateParts[1]) - 1
-  const day = parseInt(dateParts[2])
-
-  // Create a new Date object using UTC timezone
-  const date = new Date(Date.UTC(year, month, day))
-
-  // Format the date in UTC
-  const formattedDate = date.toLocaleDateString("en-US", {
-    timeZone: "UTC",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
-
-  return formattedDate
 }
