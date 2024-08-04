@@ -157,7 +157,7 @@ function Code() {
   `
   const videoListPageCode = dedent`
   \`\`\`jsx
-  // app/video/page.tsx
+  // app/videos/page.tsx
   import { VideoList } from "@/cosmic/blocks/videos/VideoList";
   export default async function VideoListPage() {
     return (
