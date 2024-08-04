@@ -238,6 +238,7 @@ function Code() {
           Check out a full-featured working example{" "}
           <a
             target="_blank"
+            rel="noreferrer"
             className="text-cosmic-blue-link dark:text-cosmic-blue"
             href="https://cosmic-podcast-network.vercel.app/"
           >
