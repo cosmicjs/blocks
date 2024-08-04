@@ -165,6 +165,7 @@ function Code() {
         query={{ type: "videos" }}
         limit={10}
         skip={0}
+        className="m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
       />
     );
   }
@@ -173,7 +174,7 @@ function Code() {
 
   const singleVideoPageCode = dedent`
     \`\`\`jsx
-    // app/videos/[slug]/page.tsx
+    // app/watch/[slug]/page.tsx
     import { SingleVideo } from "@/cosmic/blocks/videos/SingleVideo";
     export default async function SingleVideoPage({
       params,
@@ -222,7 +223,7 @@ function Code() {
       title: "Usage: Single video page",
       code: singleVideoPageCode,
       description:
-        "Add a new file located at `app/videos/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the video content.",
+        "Add a new file located at `app/watch/[slug]/page.tsx` with the following which will use the slug in the URL to fetch the video content.",
     },
     {
       title: "Usage: Single channel page",
