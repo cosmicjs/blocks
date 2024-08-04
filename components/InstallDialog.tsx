@@ -327,7 +327,11 @@ export function InstallDialog({
     }
 
     if (featureKey === "videos") {
-      let videos, videoCategories, channels, newChannels, newVideoCategories
+      let videos,
+        videoCategories: any[] = [],
+        channels: any[] = [],
+        newChannels,
+        newVideoCategories
 
       // Channels
       let channelMetafields, videoCategoryMetafields, videoMetafields
