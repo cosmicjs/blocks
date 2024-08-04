@@ -14,6 +14,8 @@ import {
   addBlogs,
   addCategories,
   addCategoriesObjectType,
+  addChannels,
+  addChannelsObjectType,
   addComments,
   addCommentsObjectType,
   addEvents,
@@ -31,6 +33,10 @@ import {
   addTeamObjectType,
   addTestimonials,
   addTestimonialsObjectType,
+  addVideoCategories,
+  addVideoCategoriesObjectType,
+  addVideos,
+  addVideosObjectType,
   cosmicSourceBucketConfig,
   cosmicTargetBucketConfig,
   getAuthors,
@@ -38,6 +44,8 @@ import {
   getBlogs,
   getCategories,
   getCategoriesMetafields,
+  getChannelMetafields,
+  getChannels,
   getComments,
   getCommentsMetafields,
   getEvents,
@@ -59,6 +67,10 @@ import {
   getTeamMetafields,
   getTestimonials,
   getTestimonialsMetafields,
+  getVideoCategories,
+  getVideoCategoryMetafields,
+  getVideos,
+  getVideosMetafields,
 } from "@/lib/cosmic"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -95,8 +107,6 @@ export function InstallDialog({
         setWriteKey(localStorage.getItem("write_key") || "")
         if (showKeysModal) setShowKeysModal(false)
       } else {
-        // TODO: add messaging to send the user to the extension in the dashboard
-        // alert("NO BUCKET INFO. Installing features will not work.")
         if (!showKeysModal) setShowKeysModal(true)
       }
     }
@@ -314,6 +324,59 @@ export function InstallDialog({
       await addProductsObjectType(cosmicTargetBucket, metafields)
       // Add products
       await addProducts(cosmicTargetBucket, products)
+    }
+
+    if (featureKey === "videos") {
+      let videos,
+        videoCategories: any[] = [],
+        channels: any[] = [],
+        newChannels,
+        newVideoCategories
+
+      // Channels
+      let channelMetafields, videoCategoryMetafields, videoMetafields
+      await Promise.all([
+        getChannelMetafields().then((result) => (channelMetafields = result)),
+        getVideoCategoryMetafields().then(
+          (result) => (videoCategoryMetafields = result)
+        ),
+        getVideosMetafields().then((result) => (videoMetafields = result)),
+        getChannels(cosmicSourceBucketConfig).then(
+          (result) => (channels = result)
+        ),
+        getVideoCategories(cosmicSourceBucketConfig).then(
+          (result) => (videoCategories = result)
+        ),
+        getVideos(cosmicSourceBucketConfig).then((result) => (videos = result)),
+      ])
+      channels = channels.map((channel: any) => {
+        delete channel.id
+        return channel
+      })
+      await addChannelsObjectType(cosmicTargetBucket, channelMetafields)
+      await addChannels(cosmicTargetBucket, channels)
+      newChannels = await getChannels(cosmicTargetBucket)
+
+      // Video categories
+      await addVideoCategoriesObjectType(
+        cosmicTargetBucket,
+        videoCategoryMetafields
+      )
+      videoCategories = videoCategories.map((videoCategory: any) => {
+        delete videoCategory.id
+        return videoCategory
+      })
+      await addVideoCategories(cosmicTargetBucket, videoCategories)
+      newVideoCategories = await getVideoCategories(cosmicTargetBucket)
+
+      // Videos
+      await addVideosObjectType(cosmicTargetBucket, videoMetafields)
+      await addVideos(
+        cosmicTargetBucket,
+        videos,
+        newChannels,
+        newVideoCategories
+      )
     }
 
     setInstallationSuccess(true)

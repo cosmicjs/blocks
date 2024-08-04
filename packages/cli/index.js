@@ -156,6 +156,16 @@ const blocks = {
     ],
     elements: ["Button"],
   },
+  videos: {
+    name: "Videos",
+    installationSteps: [
+      "@cosmicjs/sdk",
+      "lucide-react",
+      "clsx",
+      "tailwind-merge",
+    ],
+    elements: ["TimeAgo"],
+  },
 }
 
 async function addComponent(component) {
