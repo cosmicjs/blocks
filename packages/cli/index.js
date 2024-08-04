@@ -164,6 +164,7 @@ const blocks = {
       "clsx",
       "tailwind-merge",
     ],
+    elements: ["TimeAgo"],
   },
 }
 
