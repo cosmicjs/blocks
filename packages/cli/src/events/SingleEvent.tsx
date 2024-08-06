@@ -1,9 +1,9 @@
 // app/events/[slug]/page.tsx
-import { cosmic } from "@/cosmic/client"
 import Link from "next/link"
-import { Button } from "@/cosmic/elements/Button"
-import { getFormattedDate } from "@/cosmic/utils"
 import { notFound } from "next/navigation"
+import { cosmic } from "@/cosmic/client"
+import { Button } from "@/cosmic/elements/Button"
+import { getFormattedDateFromString } from "@/cosmic/utils"
 
 export async function SingleEvent({
   query,
@@ -72,12 +72,16 @@ export async function SingleEvent({
                 Date and Time
               </h3>
               <div className="flex items-center space-x-1 text-sm text-zinc-900 dark:text-gray-300">
-                <span>{getFormattedDate(event.metadata.start_date)}</span>
+                <span>
+                  {getFormattedDateFromString(event.metadata.start_date)}
+                </span>
                 <span>from</span>
                 <span>{event.metadata.start_time}</span>
                 <span>until</span>
                 {event.metadata.start_date !== event.metadata.end_date && (
-                  <span>{getFormattedDate(event.metadata.end_date)}</span>
+                  <span>
+                    {getFormattedDateFromString(event.metadata.end_date)}
+                  </span>
                 )}
                 <span>{event.metadata.end_time}</span>
               </div>

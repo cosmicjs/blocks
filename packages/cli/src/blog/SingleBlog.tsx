@@ -1,10 +1,10 @@
 // app/blog/[slug]/page.tsx
-import { cosmic } from "@/cosmic/client"
-import Markdown from "react-markdown"
-import { ArrowLeftIcon } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { getFormattedDate } from "@/cosmic/utils"
+import { cosmic } from "@/cosmic/client"
+import { getFormattedDateFromString } from "@/cosmic/utils"
+import { ArrowLeftIcon } from "lucide-react"
+import Markdown from "react-markdown"
 
 export async function SingleBlog({
   query,
@@ -22,7 +22,7 @@ export async function SingleBlog({
       .depth(1)
       .status(status ? status : "published")
 
-    const date = getFormattedDate(blog.metadata.published_date)
+    const date = getFormattedDateFromString(blog.metadata.published_date)
 
     return (
       <div className={`px-4 ${className}`}>
