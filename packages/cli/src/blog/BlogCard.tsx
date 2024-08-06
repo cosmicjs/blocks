@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getFormattedDate } from "@/cosmic/utils"
+import { getFormattedDateFromString } from "@/cosmic/utils"
 
 export type PostType = {
   id: string
@@ -88,7 +88,7 @@ export function BlogCard({
                       {post.metadata.author.title}
                     </span>
                     <br />
-                    {getFormattedDate(post.metadata.published_date)}
+                    {getFormattedDateFromString(post.metadata.published_date)}
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
-import { cn, getFormattedDate } from "@/cosmic/utils"
-import { Calendar, Clock, Pin } from "lucide-react"
 import Link from "next/link"
+import { cn, getFormattedDateFromString } from "@/cosmic/utils"
+import { Calendar, Clock, Pin } from "lucide-react"
 
 export type EventCardType = {
   title: string
@@ -49,7 +49,9 @@ export function EventCard({
           <div className="flex h-full flex-col justify-end space-y-1">
             <div className="flex items-center space-x-2 text-sm font-medium text-zinc-900 dark:text-zinc-50">
               <Calendar className="h-4 w-4 shrink-0" />
-              <span>{getFormattedDate(event.metadata.start_date)}</span>
+              <span>
+                {getFormattedDateFromString(event.metadata.start_date)}
+              </span>
             </div>
             <div className="flex items-center space-x-1 text-sm font-medium text-zinc-900 dark:text-zinc-50">
               <Clock className="mr-1 h-4 w-4 shrink-0" />
@@ -57,7 +59,9 @@ export function EventCard({
               <span>{event.metadata.start_time}</span>
               <span>until</span>
               {event.metadata.start_date !== event.metadata.end_date && (
-                <span>{getFormattedDate(event.metadata.end_date)}</span>
+                <span>
+                  {getFormattedDateFromString(event.metadata.end_date)}
+                </span>
               )}
               <span>{event.metadata.end_time}</span>
             </div>
