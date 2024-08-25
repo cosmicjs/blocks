@@ -1,11 +1,17 @@
 import React from "react"
-import { Button } from "../ui/button"
+import { DEMO_URL, EXTENSION_URL, WEBSITE_URL } from "@/constants"
 import classNames from "classnames"
-import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
-import { DEMO_URL, WEBSITE_URL, EXTENSION_URL } from "@/constants"
+
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
 
-const Header: React.FC = async () => {
+import { ThemedImage } from "../elements/ThemedImage/ThemedImage"
+import { Button } from "../ui/button"
+
+export default async function Header({
+  isExtension,
+}: {
+  isExtension?: boolean
+}) {
   const { object: page } = await cosmicSourceBucketConfig.objects
     .findOne({
       type: "landing-pages",
@@ -44,14 +50,16 @@ const Header: React.FC = async () => {
             <Button href="#get-started" className="px-7">
               Get started
             </Button>
-            <Button
-              href={EXTENSION_URL}
-              target="_blank"
-              variant="outline"
-              className="px-7"
-            >
-              Install the extension
-            </Button>
+            {!isExtension && (
+              <Button
+                href={EXTENSION_URL}
+                target="_blank"
+                variant="outline"
+                className="px-7"
+              >
+                Install the extension
+              </Button>
+            )}
             <Button
               href={DEMO_URL}
               target="_blank"
@@ -92,4 +100,3 @@ const Header: React.FC = async () => {
     </div>
   )
 }
-export default Header
