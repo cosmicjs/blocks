@@ -64,6 +64,7 @@ function Code() {
       onComplete={(response) => {
         // Do something with the response here
       }}
+      autoUpload // set auto upload to true to skip the confirmation step
     />
     \`\`\`
     `
