@@ -56,7 +56,7 @@ export default async function IndexPage({
   return (
     <>
       <section className="grid items-center gap-6 p-4 pb-8 pt-6 md:py-10">
-        <Header />
+        <Header isExtension={searchParams.bucket_slug ? true : false} />
         <div className="container relative z-30 mx-auto">
           <BigHeading
             scrollId="get-started"
