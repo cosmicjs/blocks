@@ -78,6 +78,8 @@ const blocks = {
       "embla-carousel-react",
       "lucide-react",
       "react-medium-image-zoom",
+      "@radix-ui/react-slot",
+      "class-variance-authority",
     ],
     elements: ["Button", "Carousel"],
   },
