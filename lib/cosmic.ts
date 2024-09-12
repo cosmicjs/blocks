@@ -339,7 +339,7 @@ export async function addProducts(cosmic: CosmicConfig, products: any) {
     const mediaRes = await cosmic.media.insertOne({ media })
     product.metadata.image = mediaRes.media.name
     product.thumbnail = mediaRes.media.name
-    for (let galleryItem of product.metadata.gallery_new) {
+    for (let galleryItem of product.metadata.gallery) {
       const media = await getMediaBlobFromURL(
         galleryItem.imgix_url,
         product.title +

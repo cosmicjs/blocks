@@ -98,7 +98,7 @@ async function Preview() {
           </nav>
           <div className="grid md:grid-cols-2 md:gap-x-8">
             <div className="mb-8 md:mb-0">
-              <ImageGallery items={product.metadata.gallery_new} />
+              <ImageGallery items={product.metadata.gallery} />
             </div>
             <div>
               <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">

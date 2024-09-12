@@ -61,7 +61,7 @@ async function Preview() {
           <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
             Image Gallery
           </h1>
-          <ImageGallery items={gallery.metadata.gallery_new} />
+          <ImageGallery items={gallery.metadata.gallery} />
         </div>
         <div className="relative m-auto w-full">
           <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
@@ -69,7 +69,7 @@ async function Preview() {
           </h1>
           <CarouselGallery
             className="px-8 md:px-12"
-            items={gallery.metadata.gallery_new}
+            items={gallery.metadata.gallery}
           />
         </div>
       </section>
