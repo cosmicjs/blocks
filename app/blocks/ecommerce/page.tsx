@@ -47,6 +47,11 @@ async function Preview() {
     })
     .props("id,slug,title,metadata")
     .depth(1)
+    .options({
+      media: {
+        props: "alt_text",
+      },
+    })
 
   const product = products[0]
   return (
@@ -93,7 +98,7 @@ async function Preview() {
           </nav>
           <div className="grid md:grid-cols-2 md:gap-x-8">
             <div className="mb-8 md:mb-0">
-              <ImageGallery items={product.metadata.gallery} />
+              <ImageGallery items={product.metadata.gallery_new} />
             </div>
             <div>
               <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
