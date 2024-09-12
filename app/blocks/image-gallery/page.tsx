@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import classNames from "classnames"
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import { ImageGallery } from "@/components/ImageGallery"
 import { CarouselGallery } from "@/components/Carousel"
+import { ImageGallery } from "@/components/ImageGallery"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
-import classNames from "classnames"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
@@ -46,6 +46,11 @@ async function Preview() {
     })
     .props("id,slug,title,metadata")
     .depth(1)
+    .options({
+      media: {
+        props: "alt_text",
+      },
+    })
 
   const gallery = galleries[0]
   return (
@@ -107,7 +112,7 @@ function Code() {
     {
       title: "Install the Block content model",
       description:
-        "This will add the `gallery` repeater Metafield to the Object type(s) of your choice.",
+        "This will add the `gallery` multi media Metafield to the Object type(s) of your choice.",
       installButton: true,
     },
     {

@@ -12,10 +12,8 @@ import {
 } from "@/cosmic/elements/Carousel"
 
 type GalleryItemType = {
-  image: {
-    imgix_url: string
-  }
-  description: string
+  imgix_url: string
+  alt_text: string
 }
 
 export function ImageCarouselClient({ items }: { items: GalleryItemType[] }) {
@@ -30,9 +28,9 @@ export function ImageCarouselClient({ items }: { items: GalleryItemType[] }) {
               <CarouselItem key={id} className="flex cursor-grab items-center">
                 <Zoom>
                   <img
-                    src={`${item.image.imgix_url}?w=1200&auto=format,compression`}
+                    src={`${item.imgix_url}?w=1200&auto=format,compression`}
                     className="w-full object-cover object-center"
-                    alt={item.description}
+                    alt={item.alt_text}
                   />
                 </Zoom>
               </CarouselItem>

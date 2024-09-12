@@ -14,10 +14,8 @@ import {
 } from "@/components/ui/carousel"
 
 type GalleryItemType = {
-  image: {
-    imgix_url: string
-  }
-  description: string
+  imgix_url: string
+  alt_text: string
 }
 
 export function CarouselGallery({
@@ -38,9 +36,9 @@ export function CarouselGallery({
               <CarouselItem key={id} className="flex cursor-grab items-center">
                 <Zoom classDialog="custom-zoom">
                   <img
-                    src={`${item.image.imgix_url}?w=1200&auto=format,compression`}
+                    src={`${item.imgix_url}?w=1200&auto=format,compression`}
                     className="w-full rounded-xl object-cover object-center"
-                    alt={item.description}
+                    alt={item.alt_text}
                   />
                 </Zoom>
               </CarouselItem>

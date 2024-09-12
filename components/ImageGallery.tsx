@@ -2,15 +2,16 @@
 "use client"
 
 import Zoom from "react-medium-image-zoom"
+
 import "react-medium-image-zoom/dist/styles.css"
+
 import { useState } from "react"
+
 import { cn } from "@/lib/utils"
 
 export type GalleryItemType = {
-  image: {
-    imgix_url: string
-  }
-  description: string
+  imgix_url: string
+  alt_text: string
 }
 
 export function ImageGallery({ items }: { items: GalleryItemType[] }) {
@@ -21,8 +22,8 @@ export function ImageGallery({ items }: { items: GalleryItemType[] }) {
       <div>
         <Zoom classDialog="custom-zoom">
           <img
-            src={`${mainItem.image.imgix_url}?w=1200&auto=format,compression`}
-            alt={mainItem.description}
+            src={`${mainItem.imgix_url}?w=1200&auto=format,compression`}
+            alt={mainItem.alt_text}
             className="mb-4 h-[350px] w-full rounded-xl object-cover object-center"
           />
         </Zoom>
@@ -32,18 +33,18 @@ export function ImageGallery({ items }: { items: GalleryItemType[] }) {
           return (
             <div
               onClick={() => setMainItem(item)}
-              key={item.image.imgix_url}
+              key={item.imgix_url}
               className={cn(
                 `overflow-hidden rounded-xl border-4`,
-                item.image.imgix_url === mainItem.image.imgix_url
+                item.imgix_url === mainItem.imgix_url
                   ? "border-cosmic-blue"
                   : ""
               )}
             >
               <img
-                src={`${item.image.imgix_url}?w=200&auto=format,compression`}
+                src={`${item.imgix_url}?w=200&auto=format,compression`}
                 className="h-20 w-20 cursor-pointer object-cover object-center"
-                alt={item.description}
+                alt={item.alt_text}
               />
             </div>
           )

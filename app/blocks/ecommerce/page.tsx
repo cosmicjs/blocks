@@ -47,6 +47,11 @@ async function Preview() {
     })
     .props("id,slug,title,metadata")
     .depth(1)
+    .options({
+      media: {
+        props: "alt_text",
+      },
+    })
 
   const product = products[0]
   return (
