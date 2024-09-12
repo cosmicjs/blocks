@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import classNames from "classnames"
 import dedent from "dedent"
 
 import { cosmicSourceBucketConfig } from "@/lib/cosmic"
-import { ImageGallery } from "@/components/ImageGallery"
 import { CarouselGallery } from "@/components/Carousel"
+import { ImageGallery } from "@/components/ImageGallery"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
-import classNames from "classnames"
 import { PreviewCopy } from "@/components/PreviewCopy"
 
 export async function generateMetadata() {
@@ -46,6 +46,11 @@ async function Preview() {
     })
     .props("id,slug,title,metadata")
     .depth(1)
+    .options({
+      media: {
+        props: "alt_text",
+      },
+    })
 
   const gallery = galleries[0]
   return (
@@ -56,7 +61,7 @@ async function Preview() {
           <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
             Image Gallery
           </h1>
-          <ImageGallery items={gallery.metadata.gallery} />
+          <ImageGallery items={gallery.metadata.gallery_new} />
         </div>
         <div className="relative m-auto w-full">
           <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
@@ -64,7 +69,7 @@ async function Preview() {
           </h1>
           <CarouselGallery
             className="px-8 md:px-12"
-            items={gallery.metadata.gallery}
+            items={gallery.metadata.gallery_new}
           />
         </div>
       </section>
