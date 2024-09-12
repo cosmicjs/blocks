@@ -339,6 +339,7 @@ export async function addProducts(cosmic: CosmicConfig, products: any) {
     const mediaRes = await cosmic.media.insertOne({ media })
     product.metadata.image = mediaRes.media.name
     product.thumbnail = mediaRes.media.name
+    let gallery = []
     for (let galleryItem of product.metadata.gallery) {
       const media = await getMediaBlobFromURL(
         galleryItem.imgix_url,
@@ -348,8 +349,9 @@ export async function addProducts(cosmic: CosmicConfig, products: any) {
       )
       // Upload media
       const mediaRes = await cosmic.media.insertOne({ media })
-      galleryItem = mediaRes.media.name
+      gallery.push(mediaRes.media.name)
     }
+    product.metadata.gallery = gallery
     delete product.metadata.recurring
     await cosmic.objects.insertOne(product)
   }
