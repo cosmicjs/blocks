@@ -16,6 +16,11 @@ export async function ImageCarousel({
     .props("id,title,metadata")
     .depth(1)
     .status(status ? status : "published")
+    .options({
+      media: {
+        props: "alt_text",
+      },
+    })
   return (
     <div className={`m-auto max-w-[800px] px-14 ${className}`}>
       {!page.metadata?.gallery?.length ? (

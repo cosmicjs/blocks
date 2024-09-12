@@ -112,7 +112,7 @@ function Code() {
     {
       title: "Install the Block content model",
       description:
-        "This will add the `gallery` repeater Metafield to the Object type(s) of your choice.",
+        "This will add the `gallery` multi media Metafield to the Object type(s) of your choice.",
       installButton: true,
     },
     {
