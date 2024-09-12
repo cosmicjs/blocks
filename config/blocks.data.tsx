@@ -189,7 +189,7 @@ export const blocksData = [
       />
     ),
     description: `Adds an image gallery to any existing Object type, which includes`,
-    confirmation: `This will add a new Metafield with key \`image_gallery\` to the selected Object types.`,
+    confirmation: `This will add a new Metafield with key \`gallery\` to the selected Object types.`,
     preview_link: "/blocks/image-gallery",
     metafields: 1,
   },
