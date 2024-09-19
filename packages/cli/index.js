@@ -15,7 +15,7 @@ const blocks = {
   blog: {
     name: "Blog",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "react-markdown",
       "lucide-react",
       "clsx",
@@ -25,7 +25,7 @@ const blocks = {
   faqs: {
     name: "FAQs",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "@radix-ui/react-accordion",
       "@radix-ui/react-icons",
       "clsx",
@@ -35,7 +35,7 @@ const blocks = {
   "landing-page": {
     name: "Landing Page",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "@radix-ui/react-slot",
       "class-variance-authority",
       "clsx",
@@ -46,7 +46,7 @@ const blocks = {
   comments: {
     name: "Comments",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "lucide-react",
       "@radix-ui/react-slot",
       "class-variance-authority",
@@ -59,7 +59,7 @@ const blocks = {
   "contact-form": {
     name: "Contact Form",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "lucide-react",
       "@radix-ui/react-slot",
       "class-variance-authority",
@@ -72,7 +72,7 @@ const blocks = {
   "image-gallery": {
     name: "Image Gallery",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "clsx",
       "tailwind-merge",
       "embla-carousel-react",
@@ -85,16 +85,16 @@ const blocks = {
   },
   testimonials: {
     name: "Testimonials",
-    installationSteps: ["@cosmicjs/sdk@canary", "clsx", "tailwind-merge"],
+    installationSteps: ["@cosmicjs/sdk@1.2.0", "clsx", "tailwind-merge"],
   },
   team: {
     name: "Team",
-    installationSteps: ["@cosmicjs/sdk@canary", "clsx", "tailwind-merge"],
+    installationSteps: ["@cosmicjs/sdk@1.2.0", "clsx", "tailwind-merge"],
   },
   "navigation-menu": {
     name: "Navigation Menu",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "lucide-react",
       "clsx",
       "tailwind-merge",
@@ -103,7 +103,7 @@ const blocks = {
   ecommerce: {
     name: "Ecommerce",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "@radix-ui/react-slot",
       "class-variance-authority",
       "clsx",
@@ -114,7 +114,7 @@ const blocks = {
   pagination: {
     name: "Pagination",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "clsx",
       "tailwind-merge",
       "lucide-react",
@@ -124,7 +124,7 @@ const blocks = {
   events: {
     name: "events",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "@radix-ui/react-slot",
       "class-variance-authority",
       "clsx",
@@ -136,7 +136,7 @@ const blocks = {
   localization: {
     name: "localization",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "@radix-ui/react-select",
       "class-variance-authority",
       "clsx",
@@ -148,7 +148,7 @@ const blocks = {
   "file-upload": {
     name: "file-upload",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "class-variance-authority",
       "clsx",
       "tailwind-merge",
@@ -161,7 +161,7 @@ const blocks = {
   videos: {
     name: "Videos",
     installationSteps: [
-      "@cosmicjs/sdk@canary",
+      "@cosmicjs/sdk@1.2.0",
       "lucide-react",
       "clsx",
       "tailwind-merge",
