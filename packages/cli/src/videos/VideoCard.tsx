@@ -38,7 +38,7 @@ export function VideoCard({
   className?: string
 }) {
   return (
-    <div>
+    <div data-cosmic-object={video.id}>
       <Link href={`/watch/${video.slug}`}>
         <img
           alt={video.title}
