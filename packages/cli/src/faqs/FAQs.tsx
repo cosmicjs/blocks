@@ -27,7 +27,10 @@ export async function FAQs({
     .depth(1)
     .status(status ? status : "published")
   return (
-    <div className={`m-auto max-w-[800px] p-4 ${className}`}>
+    <div
+      className={`m-auto max-w-[800px] p-4 ${className}`}
+      data-cosmic-object={page.id}
+    >
       {!page?.metadata?.faqs?.length ? (
         <div className="rounded-xl border border-orange-400 p-6 text-center text-orange-400">
           No FAQs added to the {page.title} Object yet.{" "}
