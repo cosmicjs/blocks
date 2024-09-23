@@ -27,7 +27,10 @@ export async function SingleProduct({
 
     return (
       <section className={`container m-auto px-4 pb-8 ${className}`}>
-        <div className="relative m-auto max-w-[950px]">
+        <div
+          className="relative m-auto max-w-[950px]"
+          data-cosmic-object={product.id}
+        >
           {purchased && (
             <div className="mb-6 flex rounded-lg border border-green-700 p-4 text-green-700">
               <CheckCircleIcon className="size-4 mr-4 mt-1" />

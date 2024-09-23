@@ -1,3 +1,4 @@
+// ProductList.tsx
 import { cosmic } from "@/cosmic/client"
 import { ProductCard, ProductType } from "./ProductCard"
 
