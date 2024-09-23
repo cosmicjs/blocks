@@ -31,7 +31,7 @@ export function BlogCard({
   className?: string
 }) {
   return (
-    <article className={className}>
+    <article className={className} data-cosmic-object={post.id}>
       <Link
         className="linear group relative flex h-full w-full flex-col overflow-hidden rounded-lg bg-zinc-50 shadow-md 
         shadow-gray-500/20 transition duration-300 hover:bg-white hover:shadow-xl dark:bg-zinc-900 dark:shadow-none dark:hover:bg-zinc-800"
