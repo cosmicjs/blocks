@@ -30,7 +30,7 @@ export async function EventsList({
 }) {
   const { objects: events } = await cosmic.objects
     .find(query)
-    .props("title,slug,metadata")
+    .props("id,title,slug,metadata")
     .depth(1)
     .sort(sort ? sort : "-order")
     .limit(limit ? limit : 100)
