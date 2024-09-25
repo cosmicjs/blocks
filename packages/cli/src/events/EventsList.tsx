@@ -39,7 +39,7 @@ export async function EventsList({
   if (noWrap) return <Events events={events} />
   return (
     <div
-      className={`m-auto mt-8 grid max-w-[900px] grid-cols-1 place-items-center gap-8 px-4 md:grid-cols-2 xl:grid-cols-2 ${className}`}
+      className={`m-auto mt-8 grid max-w-[900px] grid-cols-1 place-items-center items-start gap-8 px-4 md:grid-cols-2 xl:grid-cols-2 ${className}`}
     >
       <Events events={events} />
     </div>
