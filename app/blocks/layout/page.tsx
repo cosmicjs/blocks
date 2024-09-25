@@ -91,7 +91,6 @@ function Code() {
       </div>
     );
   }
-
   \`\`\`
   `
   const codeFooterString = dedent`
@@ -109,53 +108,54 @@ function Code() {
   };
 
   export async function Footer() {
-  // Footer data
-  const { object: settings } = await cosmic.objects
-    .findOne({
-      type: "global-settings",
-      slug: "settings",
-    })
-    .props("id,metadata")
-    .depth(1);
+    // Footer data
+    const { object: settings } = await cosmic.objects
+      .findOne({
+        type: "global-settings",
+        slug: "settings",
+      })
+      .props("id,metadata")
+      .depth(1);
 
-  return (
-    <div className="my-10">
-      <div className="my-8 text-center">
-        <NavMenu
-          query={{ type: "navigation-menus", slug: "footer" }}
-          hasMobileMenu={false}
-        />
-      </div>
-      <div data-cosmic-object={settings.id}>
-        <div className="mb-8 flex gap-x-8 justify-center">
-          {settings.metadata.links.map((link: LinkType) => {
-            return (
-              <Link
-                href={link.url}
-                key={link.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img
-                  className="h-[26px]"
-                  src={\`\${link.icon.imgix_url}?w=500&auto=format,compression\`}
-                  alt={link.company}
-                />
-              </Link>
-            );
-          })}
+    return (
+      <div className="my-10">
+        <div className="my-8 text-center">
+          <NavMenu
+            query={{ type: "navigation-menus", slug: "footer" }}
+            hasMobileMenu={false}
+          />
         </div>
-        <div className="flex gap-x-8 justify-center">
-          <div>
-            <a href={\`mailto:\${settings.metadata.email}\`}>Email us</a>
+        <div data-cosmic-object={settings.id}>
+          <div className="mb-8 flex gap-x-8 justify-center">
+            {settings.metadata.links.map((link: LinkType) => {
+              return (
+                <Link
+                  href={link.url}
+                  key={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    className="h-[26px]"
+                    src={\`\${link.icon.imgix_url}?w=500&auto=format,compression\`}
+                    alt={link.company}
+                  />
+                </Link>
+              );
+            })}
           </div>
-          <div>
-            <a href={\`tel:\${settings.metadata.phone}\`}>Call us</a>
+          <div className="flex gap-x-8 justify-center">
+            <div>
+              <a href={\`mailto:\${settings.metadata.email}\`}>Email us</a>
+            </div>
+            <div>
+              <a href={\`tel:\${settings.metadata.phone}\`}>Call us</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
   `
 
   const codeLayoutString = dedent`
