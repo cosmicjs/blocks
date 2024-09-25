@@ -26,7 +26,7 @@ export async function Sections({
         <div className="relative m-auto flex max-w-6xl flex-col items-start gap-2">
           <h2
             data-cosmic-object={page.id}
-            className="font-display m-auto mb-10 max-w-[800px] pt-8 text-center text-2xl text-zinc-900 dark:text-zinc-100 md:text-6xl"
+            className="font-display m-auto mb-10 mt-8 max-w-[800px] text-center text-2xl text-zinc-900 dark:text-zinc-100 md:text-6xl"
           >
             {page.metadata?.sections_area_title}
           </h2>
