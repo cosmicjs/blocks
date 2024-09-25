@@ -25,7 +25,10 @@ export async function SingleEvent({
       <section
         className={`m-auto mt-8 max-w-[900px] px-4 pb-8 md:container ${className}`}
       >
-        <div className="relative m-auto max-w-[950px]">
+        <div
+          className="relative m-auto max-w-[950px]"
+          data-cosmic-object={event.id}
+        >
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol role="list" className="flex space-x-2">
               <li>

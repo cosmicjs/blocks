@@ -22,7 +22,10 @@ export async function ImageCarousel({
       },
     })
   return (
-    <div className={`m-auto max-w-[800px] px-14 ${className}`}>
+    <div
+      className={`m-auto max-w-[800px] px-14 ${className}`}
+      data-cosmic-object={page.id}
+    >
       {!page.metadata?.gallery?.length ? (
         <div className="rounded-xl border border-orange-400 p-6 text-center text-orange-400">
           No images added to the {page.title} Object image gallery yet.{" "}

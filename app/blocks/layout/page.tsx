@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-
-import Link from "next/link"
 import dedent from "dedent"
 
 import Footer from "@/components/Footer"
@@ -39,14 +37,6 @@ export default async function Layout({
   )
 }
 
-type Link = {
-  url: string
-  company: string
-  icon: {
-    imgix_url: string
-  }
-}
-
 async function Preview() {
   return (
     <div className="container m-auto grid items-center px-4 py-8">
@@ -74,13 +64,17 @@ function Code() {
         type: "global-settings",
         slug: "settings",
       })
-      .props("metadata")
+      .props("id,metadata")
       .depth(1);
 
     return (
       <div className="space-x-4 sticky top-0 bg-white/20 dark:bg-black/20 backdrop-blur-lg py-2 w-full z-[9999]">
+        <div
+          className="w-[280px] z-0 h-12 left-2 absolute top-2"
+          data-cosmic-object={settings.id}
+        ></div>
         <div className="m-auto flex items-center md:container justify-between pl-2 pr-4">
-          <Link href="/">
+          <Link href="/" className="relative z-10">
             <img
               src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
               alt={settings.metadata.company}
@@ -97,6 +91,7 @@ function Code() {
       </div>
     );
   }
+
   \`\`\`
   `
   const codeFooterString = dedent`
@@ -114,24 +109,33 @@ function Code() {
   };
 
   export async function Footer() {
-    // Footer data
-    const { object: settings } = await cosmic.objects
-      .findOne({
-        type: "global-settings",
-        slug: "settings",
-      })
-      .props("metadata")
-      .depth(1);
+  // Footer data
+  const { object: settings } = await cosmic.objects
+    .findOne({
+      type: "global-settings",
+      slug: "settings",
+    })
+    .props("id,metadata")
+    .depth(1);
 
-    return (
-      <div className="my-10">
-        <div className="my-8 text-center">
-          <NavMenu query={{ type: "navigation-menus", slug: "footer" }} hasMobileMenu={false} />
-        </div>
+  return (
+    <div className="my-10">
+      <div className="my-8 text-center">
+        <NavMenu
+          query={{ type: "navigation-menus", slug: "footer" }}
+          hasMobileMenu={false}
+        />
+      </div>
+      <div data-cosmic-object={settings.id}>
         <div className="mb-8 flex gap-x-8 justify-center">
           {settings.metadata.links.map((link: LinkType) => {
             return (
-              <Link href={link.url} key={link.url} target="_blank" rel="noreferrer">
+              <Link
+                href={link.url}
+                key={link.url}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <img
                   className="h-[26px]"
                   src={\`\${link.icon.imgix_url}?w=500&auto=format,compression\`}
@@ -150,9 +154,8 @@ function Code() {
           </div>
         </div>
       </div>
-    );
-  }
-  \`\`\`
+    </div>
+  );
   `
 
   const codeLayoutString = dedent`

@@ -29,7 +29,10 @@ export async function SingleVideo({
         <div className="w-full">
           <PlayArea video={video} />
         </div>
-        <section className="m-auto mb-8 grid items-center p-4 py-8 md:container">
+        <section
+          className="m-auto mb-8 grid items-center p-4 py-8 md:container"
+          data-cosmic-object={video.id}
+        >
           <div className="relative m-auto flex w-full flex-col items-start gap-2 md:w-[750px]">
             <h1 className="mb-4 text-3xl font-extrabold leading-tight tracking-tighter text-black dark:text-white md:text-4xl">
               {video.title}

@@ -2,7 +2,11 @@ import Link from "next/link"
 import { cosmic } from "@/cosmic/client"
 import { MobileNav } from "./MobileNav"
 
-export type ItemType = { title: string; link: string; open_in_new_tab: boolean }
+export type ItemType = {
+  title: string
+  link: string
+  open_in_new_tab: boolean
+}
 
 export async function NavMenu({
   query,
@@ -17,11 +21,11 @@ export async function NavMenu({
 }) {
   const { object: nav } = await cosmic.objects
     .findOne(query)
-    .props("metadata")
+    .props("id,metadata")
     .depth(1)
     .status(status ? status : "published")
   return (
-    <div className={className}>
+    <div className={className} data-cosmic-object={nav.id}>
       {/* Desktop */}
       <div className={hasMobileMenu ? "hidden md:block" : ""}>
         {nav.metadata.items.map((item: ItemType) => {

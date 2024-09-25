@@ -5,6 +5,7 @@ import Link from "next/link"
 
 type SectionType = {
   heading: string
+  objectId: string
   layout: {
     key: string
     value: string
@@ -21,12 +22,18 @@ type SectionType = {
 export function Section({
   section,
   className,
+  objectId,
 }: {
   section: SectionType
   className?: string
+  objectId: string
 }) {
   return (
-    <div key={section.heading} className={className}>
+    <div
+      key={section.heading}
+      className={className}
+      data-cosmic-object={objectId}
+    >
       {section.layout.key === "1-column-center" && (
         <div className="m-auto max-w-[800px]">
           <div className="mb-6 text-center">
