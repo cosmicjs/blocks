@@ -7,6 +7,8 @@ import { Button } from "@/cosmic/elements/Button"
 import { updateUserProfile } from "./actions"
 import { Loader2 } from "lucide-react"
 import { useFormStatus } from "react-dom"
+import { Input } from "@/cosmic/elements/Input"
+import { Label } from "@/cosmic/elements/Label"
 
 interface UserProfileFormProps {
   user: {
@@ -123,44 +125,35 @@ export function UserProfileForm({ user }: UserProfileFormProps) {
       </div>
 
       <div>
-        <label htmlFor="firstName" className="mb-1 block text-sm font-medium">
-          First Name
-        </label>
-        <input
+        <Label htmlFor="firstName">First Name</Label>
+        <Input
           type="text"
           id="firstName"
           name="firstName"
           defaultValue={user.metadata.first_name}
           required
-          className="w-full rounded border p-2 dark:border-zinc-700 dark:bg-zinc-800"
         />
       </div>
 
       <div>
-        <label htmlFor="lastName" className="mb-1 block text-sm font-medium">
-          Last Name
-        </label>
-        <input
+        <Label htmlFor="lastName">Last Name</Label>
+        <Input
           type="text"
           id="lastName"
           name="lastName"
           defaultValue={user.metadata.last_name}
           required
-          className="w-full rounded border p-2 dark:border-zinc-700 dark:bg-zinc-800"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="mb-1 block text-sm font-medium">
-          Email
-        </label>
-        <input
+        <Label htmlFor="email">Email</Label>
+        <Input
           type="email"
           id="email"
           name="email"
           defaultValue={user.metadata.email}
           required
-          className="w-full rounded border p-2 dark:border-zinc-700 dark:bg-zinc-800"
         />
         {!user.metadata.email_verified && (
           <p className="mt-1 text-sm text-amber-600">Email not verified</p>

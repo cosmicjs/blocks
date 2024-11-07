@@ -44,21 +44,6 @@ function Code() {
   bunx @cosmicjs/blocks add user-management
   \`\`\`
   `
-  const installResend = dedent`
-  \`\`\`bash
-  bun add resend
-  \`\`\`
-  `
-  const importCode = dedent`
-    \`\`\`jsx
-    import SignUpClient from "@/cosmic/blocks/user-management/SignUpClient";
-    \`\`\`
-    `
-  const usageCode = dedent`
-    \`\`\`jsx
-    <SignUpClient onSubmit={signUp} />
-    \`\`\`
-    `
   const signupExampleCode = dedent`
     \`\`\`jsx
     // app/signup/page.tsx
@@ -70,6 +55,78 @@ function Code() {
         <div className="container mx-auto py-8 px-4">
           <SignUpClient onSubmit={signUp} />
         </div>
+      );
+    }
+    \`\`\`
+    `
+
+  const verifyEmailPageCode = dedent`
+    \`\`\`jsx
+    // app/verify-email/page.tsx
+    "use client";
+
+    import { verifyEmail } from "@/cosmic/blocks/user-management/actions";
+    import { useSearchParams, useRouter } from "next/navigation";
+    import { useEffect } from "react";
+    import { Loader2 } from "lucide-react";
+    export default function VerifyPage() {
+      const searchParams = useSearchParams();
+      const router = useRouter();
+
+      useEffect(() => {
+        const verifyUserEmail = async () => {
+          const code = searchParams.get("code");
+
+          if (!code) {
+            router.push("/login?error=Invalid verification link");
+            return;
+          }
+
+          try {
+            await verifyEmail(code);
+            router.push(
+              "/login?success=Email verified successfully. You may now log in."
+            );
+          } catch (error) {
+            const errorMessage =
+              error instanceof Error ? error.message : "Verification failed";
+            router.push(\`/login?error=\${encodeURIComponent(errorMessage)}\`);
+            }
+          };
+
+          verifyUserEmail();
+      }, [searchParams, router]);
+
+      return (
+        <div className="h-[400px] flex items-center justify-center">
+          <div className="text-center flex flex-col items-center gap-4">
+            <Loader2 className="text-cosmic-blue w-8 h-8 animate-spin" />
+            <p className="text-gray-600 dark:text-gray-400">
+              Verifying your email...
+            </p>
+          </div>
+        </div>
+      );
+    }
+    \`\`\`
+    `
+
+  const addAuthProviderCode = dedent`
+    \`\`\`jsx
+    // app/layout.tsx
+    import { AuthProvider } from "@/cosmic/blocks/user-management/AuthContext";
+
+    export default function RootLayout({
+      children,
+    }: Readonly<{
+      children: React.ReactNode;
+    }>) {
+      return (
+        <html lang="en">
+          <body>
+            <AuthProvider>{children}</AuthProvider>
+          </body>
+        </html>
       );
     }
     \`\`\`
@@ -170,7 +227,7 @@ function Code() {
       if (isLoading) {
         return (
           <div className="flex justify-center items-center min-h-[50vh] p-4">
-            <Loader2 className="w-8 h-8 text-orange-600 animate-spin" />
+            <Loader2 className="w-8 h-8 text-cosmic-blue animate-spin" />
           </div>
         );
       }
@@ -194,7 +251,7 @@ function Code() {
       if (!userData) {
         return (
           <div className="flex justify-center items-center min-h-[50vh] p-4">
-            <Loader2 className="w-8 h-8 text-orange-600 animate-spin" />
+            <Loader2 className="w-8 h-8 text-cosmic-blue animate-spin" />
           </div>
         );
       }
@@ -243,22 +300,11 @@ function Code() {
         "This will add the components `SignUpClient.tsx`, `LoginClient.tsx`, `ForgotPasswordForm.tsx`, etc. and `actions.ts` server actions file and components to your blocks folder located in `cosmic/blocks/user`.",
     },
     {
-      title: "Import Block",
-      code: importCode,
-      description: "Import the block into your app.",
-    },
-    {
-      title: "Usage",
-      code: usageCode,
-      description: "Add the block component.",
-    },
-    {
-      title: "Install Resend email client",
+      title: "Add Resend key and app details",
       description: (
         <>
-          We will use the Resend email service to send emails. Run the following
-          command to install the Resend JavaScript client. Learn more about
-          sending emails with Resend on the{" "}
+          We will use the Resend email service to send emails (installed
+          automatically). Learn more about sending emails with Resend on the{" "}
           <a
             href="https://resend.com"
             target="_blank"
@@ -267,17 +313,8 @@ function Code() {
           >
             Resend website
           </a>
-          .
-        </>
-      ),
-      code: installResend,
-    },
-    {
-      title: "Add Resend key and app details",
-      description: (
-        <>
-          Add the following keys to the `.env.local` file. Change the values to
-          your Resend key and app details. Find your Resend API key in the{" "}
+          . Add the following keys to the `.env.local` file. Change the values
+          to your Resend key and app details. Find your Resend API key in the{" "}
           <a
             href="https://resend.com/login"
             target="_blank"
@@ -300,6 +337,12 @@ function Code() {
       `),
     },
     {
+      title: "Add the AuthProvider to layout.tsx",
+      code: addAuthProviderCode,
+      description:
+        "Add the `AuthProvider` component to your `layout.tsx` file. This will provide the auth context to your app.",
+    },
+    {
       title: "Usage: Signup page",
       code: signupExampleCode,
       description: (
@@ -308,6 +351,12 @@ function Code() {
           Then go to `http://localhost:3000/signup` to see the form.
         </>
       ),
+    },
+    {
+      title: "Usage: Verify email page",
+      code: verifyEmailPageCode,
+      description:
+        "Create a new file at `app/verify-email/page.tsx` and add the following code.",
     },
     {
       title: "Usage: Login page",

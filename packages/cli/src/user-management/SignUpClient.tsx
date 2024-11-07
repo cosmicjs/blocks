@@ -21,7 +21,7 @@ export default function SignUpClient({ onSubmit }: { onSubmit: any }) {
   if (isLoading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center p-4">
-        <Loader2 className="h-8 w-8 animate-spin text-cosmic-blue" />
+        <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
       </div>
     )
   }
@@ -34,7 +34,7 @@ export default function SignUpClient({ onSubmit }: { onSubmit: any }) {
           We've sent you a verification link. Please check your email to
           complete the signup process.
         </p>
-        <Link href="/login" className="text-cosmic-blue">
+        <Link href="/login" className="text-blue-600">
           Go to login
         </Link>
       </div>

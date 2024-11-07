@@ -6,6 +6,8 @@ import { useAuth } from "@/cosmic/blocks/user-management/AuthContext"
 import { Loader2 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/cosmic/elements/Button"
+import { Input } from "@/cosmic/elements/Input"
+import { Label } from "@/cosmic/elements/Label"
 
 interface AuthFormProps {
   type: "login" | "signup"
@@ -55,54 +57,50 @@ export default function AuthForm({ type, onSubmit }: AuthFormProps) {
       {type === "signup" && (
         <>
           <div>
-            <label htmlFor="firstName">First Name</label>
-            <input
+            <Label htmlFor="firstName">First Name</Label>
+            <Input
               type="text"
               id="firstName"
               name="firstName"
               required
               placeholder="Enter your first name"
-              className="w-full rounded border p-2"
               autoFocus={type === "signup"}
             />
           </div>
           <div>
-            <label htmlFor="lastName">Last Name</label>
-            <input
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input
               type="text"
               id="lastName"
               name="lastName"
               required
               placeholder="Enter your last name"
-              className="w-full rounded border p-2"
             />
           </div>
         </>
       )}
 
       <div>
-        <label htmlFor="email">Email</label>
-        <input
+        <Label htmlFor="email">Email</Label>
+        <Input
           type="email"
           id="email"
           name="email"
           required
           placeholder="Enter your email address"
-          className="w-full rounded border p-2"
           autoFocus={type === "login"}
         />
       </div>
 
       <div>
-        <label htmlFor="password">Password</label>
-        <input
+        <Label htmlFor="password">Password</Label>
+        <Input
           type="password"
           id="password"
           name="password"
           required
           minLength={8}
           placeholder="Enter your password"
-          className="w-full rounded border p-2"
         />
         {type === "signup" ? (
           <p className="mt-1 text-sm text-gray-500">
@@ -112,7 +110,7 @@ export default function AuthForm({ type, onSubmit }: AuthFormProps) {
         ) : (
           <Link
             href="/forgot-password"
-            className="mt-1 inline-block text-sm text-cosmic-blue"
+            className="mt-1 inline-block text-sm text-blue-600"
           >
             Forgot your password?
           </Link>
@@ -133,8 +131,8 @@ export default function AuthForm({ type, onSubmit }: AuthFormProps) {
         {type === "login" ? (
           <>
             <div className="flex items-center gap-2">
-              Don't have an account?
-              <Link href="/signup" className="text-cosmic-blue">
+              Don&apos;t have an account?
+              <Link href="/signup" className="text-blue-600">
                 Sign up
               </Link>
             </div>
@@ -142,7 +140,7 @@ export default function AuthForm({ type, onSubmit }: AuthFormProps) {
         ) : (
           <>
             Already have an account?
-            <Link href="/login" className="text-cosmic-blue">
+            <Link href="/login" className="text-blue-600">
               Login
             </Link>
           </>

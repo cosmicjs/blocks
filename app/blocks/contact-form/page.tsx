@@ -45,11 +45,7 @@ function Code() {
   bunx @cosmicjs/blocks add contact-form
   \`\`\`
   `
-  const installResend = dedent`
-  \`\`\`bash
-  bun add resend
-  \`\`\`
-  `
+
   const importCode = dedent`
     \`\`\`jsx
     import { ContactForm } from "@/cosmic/blocks/contact-form/ContactForm";
@@ -99,12 +95,11 @@ function Code() {
       description: "Add the block component.",
     },
     {
-      title: "Install Resend email client",
+      title: "Add Resend key and contact email",
       description: (
         <>
-          We will use the Resend email service to send emails. Run the following
-          command to install the Resend JavaScript client. Learn more about
-          sending emails with Resend on the{" "}
+          We will use the Resend email service to send emails (installed
+          automatically). Learn more about sending emails with Resend on the{" "}
           <a
             href="https://resend.com"
             target="_blank"
@@ -113,17 +108,8 @@ function Code() {
           >
             Resend website
           </a>
-          .
-        </>
-      ),
-      code: installResend,
-    },
-    {
-      title: "Add Resend key and contact email",
-      description: (
-        <>
-          Add the following keys to the `.env.local` file. Change the values to
-          your Resend key and email that you would like to receive the form
+          . Add the following keys to the `.env.local` file. Change the values
+          to your Resend key and email that you would like to receive the form
           submissions. Find your Resend API key in the{" "}
           <a
             href="https://resend.com/login"
