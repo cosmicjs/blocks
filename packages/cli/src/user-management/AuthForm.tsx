@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/cosmic/blocks/user/AuthContext"
+import { useAuth } from "@/cosmic/blocks/user-management/AuthContext"
 import { Loader2 } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/cosmic/elements/Button"

@@ -51,7 +51,7 @@ function Code() {
   `
   const importCode = dedent`
     \`\`\`jsx
-    import SignUpClient from "@/cosmic/blocks/user/SignUpClient";
+    import SignUpClient from "@/cosmic/blocks/user-management/SignUpClient";
     \`\`\`
     `
   const usageCode = dedent`
@@ -62,8 +62,8 @@ function Code() {
   const signupExampleCode = dedent`
     \`\`\`jsx
     // app/signup/page.tsx
-    import SignUpClient from "@/cosmic/blocks/user/SignUpClient";
-    import { signUp } from "@/cosmic/blocks/user/actions";
+    import SignUpClient from "@/cosmic/blocks/user-management/SignUpClient";
+    import { signUp } from "@/cosmic/blocks/user-management/actions";
 
     export default function SignUpPage() {
       return (
@@ -78,8 +78,8 @@ function Code() {
   const loginExampleCode = dedent`
     \`\`\`jsx
     // app/login/page.tsx
-    import LoginClient from "@/cosmic/blocks/user/LoginClient";
-    import { login } from "@/cosmic/blocks/user/actions";
+    import LoginClient from "@/cosmic/blocks/user-management/LoginClient";
+    import { login } from "@/cosmic/blocks/user-management/actions";
 
     export default function LoginPage() {
       return (
@@ -93,8 +93,8 @@ function Code() {
   const forgotPasswordExampleCode = dedent`
     \`\`\`jsx
     // app/forgot-password/page.tsx
-    import ForgotPasswordForm from "@/cosmic/blocks/user/ForgotPasswordForm";
-    import { forgotPassword } from "@/cosmic/blocks/user/actions";
+    import ForgotPasswordForm from "@/cosmic/blocks/user-management/ForgotPasswordForm";
+    import { forgotPassword } from "@/cosmic/blocks/user-management/actions";
 
     export default function ForgotPasswordPage() {
       return <ForgotPasswordForm onSubmit={forgotPassword} />;
@@ -104,8 +104,8 @@ function Code() {
   const resetPasswordExampleCode = dedent`
     \`\`\`jsx
     // app/reset-password/page.tsx
-    import ResetPasswordForm from "@/cosmic/blocks/user/ResetPasswordForm";
-    import { resetPassword } from "@/cosmic/blocks/user/actions";
+    import ResetPasswordForm from "@/cosmic/blocks/user-management/ResetPasswordForm";
+    import { resetPassword } from "@/cosmic/blocks/user-management/actions";
 
     export default function ResetPasswordPage() {
       return <ResetPasswordForm onSubmit={resetPassword} />;
@@ -115,11 +115,11 @@ function Code() {
   const dashboardExampleCode = dedent`
     \`\`\`jsx
     "use client";
-    import { useAuth } from "@/cosmic/blocks/user/AuthContext";
-    import { UserProfileForm } from "@/cosmic/blocks/user/UserProfileForm";
+    import { useAuth } from "@/cosmic/blocks/user-management/AuthContext";
+    import { UserProfileForm } from "@/cosmic/blocks/user-management/UserProfileForm";
     import { useEffect, useState } from "react";
     import { useRouter } from "next/navigation";
-    import { getUserData } from "@/cosmic/blocks/user/actions";
+    import { getUserData } from "@/cosmic/blocks/user-management/actions";
     import { Loader2 } from "lucide-react";
 
     export default function DashboardPage() {
@@ -216,7 +216,7 @@ function Code() {
     `
   const authButtonsExampleCode = dedent`
     \`\`\`jsx
-    import { AuthButtons } from "@/cosmic/blocks/user/AuthButtons";
+    import { AuthButtons } from "@/cosmic/blocks/user-management/AuthButtons";
     
     export default function NavMenu() {
       return (

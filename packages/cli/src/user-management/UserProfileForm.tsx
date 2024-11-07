@@ -1,52 +1,52 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { useAuth } from "@/cosmic/blocks/user/AuthContext";
-import Image from "next/image";
-import { Button } from "@/cosmic/elements/Button";
-import { updateUserProfile } from "./actions";
-import { Loader2 } from "lucide-react";
-import { useFormStatus } from "react-dom";
+import { useState } from "react"
+import { useAuth } from "@/cosmic/blocks/user-management/AuthContext"
+import Image from "next/image"
+import { Button } from "@/cosmic/elements/Button"
+import { updateUserProfile } from "./actions"
+import { Loader2 } from "lucide-react"
+import { useFormStatus } from "react-dom"
 
 interface UserProfileFormProps {
   user: {
-    id: string;
+    id: string
     metadata: {
-      first_name: string;
-      last_name: string;
-      email: string;
-      email_verified: boolean;
+      first_name: string
+      last_name: string
+      email: string
+      email_verified: boolean
       avatar?: {
-        imgix_url: string;
-      };
-    };
-  };
+        imgix_url: string
+      }
+    }
+  }
 }
 
 function SubmitButton() {
-  const { pending } = useFormStatus();
+  const { pending } = useFormStatus()
 
   return (
     <Button className="w-full" type="submit" disabled={pending}>
       {pending ? (
-        <Loader2 className="w-5 h-5 animate-spin mr-2" />
+        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
       ) : (
         "Update Profile"
       )}
     </Button>
-  );
+  )
 }
 
 export function UserProfileForm({ user }: UserProfileFormProps) {
-  const [isAvatarUploading, setIsAvatarUploading] = useState(false);
-  const [message, setMessage] = useState("");
-  const { login } = useAuth();
+  const [isAvatarUploading, setIsAvatarUploading] = useState(false)
+  const [message, setMessage] = useState("")
+  const { login } = useAuth()
 
   const handleSubmit = async (formData: FormData) => {
-    setMessage("");
+    setMessage("")
 
     try {
-      const result = await updateUserProfile(user.id, formData);
+      const result = await updateUserProfile(user.id, formData)
 
       if (result.success) {
         // Update local storage with new user data
@@ -55,37 +55,37 @@ export function UserProfileForm({ user }: UserProfileFormProps) {
           name: result.data.title,
           email: result.data.metadata.email,
           image: result.data.metadata.avatar?.imgix_url,
-        });
+        })
 
-        setMessage("Profile updated successfully!");
+        setMessage("Profile updated successfully!")
       } else {
-        setMessage("Error updating profile");
+        setMessage("Error updating profile")
       }
     } catch (error) {
-      setMessage("Error updating profile");
+      setMessage("Error updating profile")
     }
-  };
+  }
 
   const [avatarPreview, setAvatarPreview] = useState<string | null>(
     user.metadata.avatar?.imgix_url || null
-  );
+  )
 
   const handleAvatarChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const file = event.target.files?.[0];
+    const file = event.target.files?.[0]
     if (file) {
-      setIsAvatarUploading(true);
-      const url = URL.createObjectURL(file);
-      setAvatarPreview(url);
-      setIsAvatarUploading(false);
+      setIsAvatarUploading(true)
+      const url = URL.createObjectURL(file)
+      setAvatarPreview(url)
+      setIsAvatarUploading(false)
     }
-  };
+  }
 
   return (
     <form action={handleSubmit} className="w-full max-w-md space-y-6">
       <div className="flex flex-col items-center gap-4">
-        <div className="relative w-32 h-32">
+        <div className="relative h-32 w-32">
           <Image
             src={
               avatarPreview ||
@@ -93,12 +93,14 @@ export function UserProfileForm({ user }: UserProfileFormProps) {
             }
             alt="Profile avatar"
             fill
-            className={`rounded-full object-cover ${isAvatarUploading ? "opacity-50" : ""}`}
+            className={`rounded-full object-cover ${
+              isAvatarUploading ? "opacity-50" : ""
+            }`}
             priority
           />
           {isAvatarUploading && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+              <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-white"></div>
             </div>
           )}
         </div>
@@ -113,7 +115,7 @@ export function UserProfileForm({ user }: UserProfileFormProps) {
           />
           <label
             htmlFor="avatar"
-            className="cursor-pointer px-4 py-2 text-sm bg-zinc-100 dark:bg-zinc-800 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+            className="cursor-pointer rounded-md bg-zinc-100 px-4 py-2 text-sm transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700"
           >
             Change Avatar
           </label>
@@ -121,7 +123,7 @@ export function UserProfileForm({ user }: UserProfileFormProps) {
       </div>
 
       <div>
-        <label htmlFor="firstName" className="block text-sm font-medium mb-1">
+        <label htmlFor="firstName" className="mb-1 block text-sm font-medium">
           First Name
         </label>
         <input
@@ -130,12 +132,12 @@ export function UserProfileForm({ user }: UserProfileFormProps) {
           name="firstName"
           defaultValue={user.metadata.first_name}
           required
-          className="w-full p-2 border rounded dark:bg-zinc-800 dark:border-zinc-700"
+          className="w-full rounded border p-2 dark:border-zinc-700 dark:bg-zinc-800"
         />
       </div>
 
       <div>
-        <label htmlFor="lastName" className="block text-sm font-medium mb-1">
+        <label htmlFor="lastName" className="mb-1 block text-sm font-medium">
           Last Name
         </label>
         <input
@@ -144,12 +146,12 @@ export function UserProfileForm({ user }: UserProfileFormProps) {
           name="lastName"
           defaultValue={user.metadata.last_name}
           required
-          className="w-full p-2 border rounded dark:bg-zinc-800 dark:border-zinc-700"
+          className="w-full rounded border p-2 dark:border-zinc-700 dark:bg-zinc-800"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium mb-1">
+        <label htmlFor="email" className="mb-1 block text-sm font-medium">
           Email
         </label>
         <input
@@ -158,16 +160,18 @@ export function UserProfileForm({ user }: UserProfileFormProps) {
           name="email"
           defaultValue={user.metadata.email}
           required
-          className="w-full p-2 border rounded dark:bg-zinc-800 dark:border-zinc-700"
+          className="w-full rounded border p-2 dark:border-zinc-700 dark:bg-zinc-800"
         />
         {!user.metadata.email_verified && (
-          <p className="text-sm text-amber-600 mt-1">Email not verified</p>
+          <p className="mt-1 text-sm text-amber-600">Email not verified</p>
         )}
       </div>
 
       {message && (
         <div
-          className={`text-center ${message.startsWith("Error") ? "text-red-500" : "text-green-500"}`}
+          className={`text-center ${
+            message.startsWith("Error") ? "text-red-500" : "text-green-500"
+          }`}
         >
           {message}
         </div>
@@ -175,5 +179,5 @@ export function UserProfileForm({ user }: UserProfileFormProps) {
 
       <SubmitButton />
     </form>
-  );
+  )
 }
