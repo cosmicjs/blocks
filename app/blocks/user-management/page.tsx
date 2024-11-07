@@ -311,7 +311,7 @@ function Code() {
       title: "Install the Block code",
       code: blockCommand,
       description:
-        "This will add the components `SignUpClient.tsx`, `LoginClient.tsx`, `ForgotPasswordForm.tsx`, etc. and `actions.ts` server actions file and components to your blocks folder located in `cosmic/blocks/user`.",
+        "This will add the components `SignUpClient.tsx`, `LoginClient.tsx`, `ForgotPasswordForm.tsx`, etc. and `actions.ts` server actions file and components to your blocks folder located in `cosmic/blocks/user-management`.",
     },
     {
       title: "Add Resend key and app details",
