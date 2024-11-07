@@ -168,6 +168,19 @@ const blocks = {
     ],
     elements: ["TimeAgo"],
   },
+  "user-management": {
+    name: "User Management",
+    installationSteps: [
+      "@cosmicjs/sdk@1.2.0",
+      "lucide-react",
+      "@radix-ui/react-slot",
+      "class-variance-authority",
+      "@radix-ui/react-label",
+      "clsx",
+      "tailwind-merge",
+    ],
+    elements: ["Button", "Input", "Label"],
+  },
 }
 
 async function addComponent(component) {

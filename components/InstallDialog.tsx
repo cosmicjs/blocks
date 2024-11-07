@@ -71,6 +71,8 @@ import {
   getVideoCategoryMetafields,
   getVideos,
   getVideosMetafields,
+  getUsersMetafields,
+  addUsersObjectType,
 } from "@/lib/cosmic"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -155,7 +157,7 @@ export function InstallDialog({
       if (featureKey === "faqs") newMetafields = await getFAQMetafields()
       if (featureKey === "image-gallery")
         newMetafields = await getImageGalleryMetafields()
-
+      if (featureKey === "users") newMetafields = await getUsersMetafields()
       const keyArr = newMetafields.map((obj: any) => obj.key)
 
       // Check for the metafields existing
@@ -377,6 +379,11 @@ export function InstallDialog({
         newChannels,
         newVideoCategories
       )
+    }
+
+    if (featureKey === "users") {
+      const metafields = await getUsersMetafields()
+      await addUsersObjectType(cosmicTargetBucket, metafields)
     }
 
     setInstallationSuccess(true)
