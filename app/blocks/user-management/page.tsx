@@ -34,7 +34,7 @@ async function Preview() {
   return (
     <div className="container m-auto grid items-center px-4 py-8">
       <PreviewCopy />
-      <SignupForm className="w-full max-w-[500px]" />
+      <SignupForm />
     </div>
   )
 }
