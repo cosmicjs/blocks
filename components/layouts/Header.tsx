@@ -43,8 +43,8 @@ export default async function Header({
             What will you build?
           </h1>
           <div className="m-auto max-w-[629px] text-center text-lg text-gray-600 dark:text-dark-gray-600 md:text-2xl">
-            Pre-built components for website content, user management, contact
-            forms, and more. Build your next project faster with Blocks.
+            Pre-built components for website content, ecommerce, user
+            management, and more. Build your next project faster with Blocks.
           </div>
           <div className="relative z-30 m-auto mt-8 flex flex-col flex-wrap justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 lg:mt-14 lg:space-y-0">
             <Button href="#get-started" className="px-7">
