@@ -397,8 +397,26 @@ function Code() {
     {
       title: "Usage: Dashboard page",
       code: dashboardExampleCode,
-      description:
-        "Create a new file at `app/dashboard/page.tsx` and add the following code. This uses the auth context to check if the user is logged in and fetches the user data from Cosmic.",
+      description: (
+        <>
+          Create a new file at <code>app/dashboard/page.tsx</code> and add the
+          following code. This uses the auth context to check if the user is
+          logged in and fetches the user data from Cosmic. Note: You will need
+          to add <code>imgix.cosmicjs.com</code> to the <code>images</code>{" "}
+          section of your <code>next.config.ts</code> file to enable the avatar
+          image. For larger images, you will need to enable larger body sizes
+          for server actions. See the{" "}
+          <a
+            rel="noreferrer"
+            target="_blank"
+            className="text-cosmic-blue"
+            href="https://nextjs.org/docs/app/api-reference/next-config-js/serverActions#bodysizelimit"
+          >
+            Next.js docs
+          </a>{" "}
+          for more details.
+        </>
+      ),
     },
     {
       title: "Usage: Navigation menu",
