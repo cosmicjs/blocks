@@ -107,6 +107,10 @@ export async function getChannelMetafields() {
   return await getMetafieldsFromObjectType("channels")
 }
 
+export async function getUsersMetafields() {
+  return await getMetafieldsFromObjectType("users")
+}
+
 export async function getBlogs(cosmic: CosmicConfig) {
   const { objects } = await cosmic.objects
     .find({
@@ -781,6 +785,18 @@ export async function addVideoCategoriesObjectType(
       slug_field: true,
       content_editor: false,
     },
+    metafields,
+  })
+}
+export async function addUsersObjectType(
+  cosmic: CosmicConfig,
+  metafields: any
+) {
+  await cosmic.objectTypes.insertOne({
+    singular: "User",
+    title: "Users",
+    slug: "users",
+    emoji: "👤",
     metafields,
   })
 }

@@ -39,13 +39,13 @@ export default async function Header({
       </div>
       <div className="relative w-full text-center">
         <div className="z-10 text-center">
-          <h1 className="header-gradient relative z-10 mb-4 mt-28 w-full text-5xl font-[900] text-transparent md:mt-24 md:text-8xl lg:mt-28">
-            {page.metadata.headline}
+          <h1 className="header-gradient z-10 m-auto mb-4 mt-28 w-full max-w-[760px] text-5xl font-[900] text-transparent md:mt-24 md:text-8xl lg:mt-28">
+            What will you build?
           </h1>
-          <div
-            className="m-auto max-w-[629px] text-center text-lg md:text-2xl"
-            dangerouslySetInnerHTML={{ __html: page?.metadata?.tag }}
-          />
+          <div className="m-auto max-w-[629px] text-center text-lg text-gray-600 dark:text-dark-gray-600 md:text-2xl">
+            Pre-built components for website content, ecommerce, user
+            management, and more. Build your next project faster with Blocks.
+          </div>
           <div className="relative z-30 m-auto mt-8 flex flex-col flex-wrap justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 lg:mt-14 lg:space-y-0">
             <Button href="#get-started" className="px-7">
               Get started
@@ -77,7 +77,7 @@ export default async function Header({
               What is Cosmic?
             </Button>
           </div>
-          <div className="my-20 flex items-center justify-center space-x-8 opacity-75 dark:opacity-50 md:space-x-12">
+          <div className="my-10 flex items-center justify-center space-x-8 opacity-75 dark:opacity-50 md:space-x-12">
             {["next", "react", "tailwind", "typescript"].map((tech) => (
               <img
                 key={tech}
@@ -87,14 +87,6 @@ export default async function Header({
               />
             ))}
           </div>
-          <iframe
-            className="m-auto h-[200px] w-full md:h-[315px] md:w-[560px]"
-            src="https://www.youtube.com/embed/3hTmOlzacrg?si=ASosZ-NLuLDWSigu"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
         </div>
       </div>
     </div>

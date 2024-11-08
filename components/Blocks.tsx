@@ -72,7 +72,7 @@ export function Blocks({
   useEffect(() => {}, [excludeSelf, blockPathname])
 
   return (
-    <div className="m-auto grid max-w-[960px] grid-cols-1 gap-5 md:grid-cols-3">
+    <div className="m-auto grid max-w-[1000px] grid-cols-1 gap-4 md:grid-cols-3">
       {mappedBlocks?.map((block) => {
         return <BlockCard key={block?.key} feature={block} />
       })}

@@ -16,6 +16,7 @@ import {
   UsersRoundIcon,
   UploadIcon,
   VideoIcon,
+  Briefcase,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -143,7 +144,7 @@ export const blocksData = [
     type: "object_type",
     slug: "team-members",
     icon: (className?: string) => (
-      <UsersRoundIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+      <Briefcase className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
     ),
     description: `Adds a Team Members Object type to your Bucket, which includes`,
     confirmation: `This will install a \`team-members\` Object type to your Bucket as well as demo content.`,
@@ -255,5 +256,19 @@ export const blocksData = [
     description: `Add file uploader.`,
     confirmation: ``,
     preview_link: "/blocks/file-upload",
+  },
+  {
+    key: "users",
+    title: "User Management",
+    type: "object_type",
+    slug: "users",
+    icon: (className?: string) => (
+      <UsersRoundIcon className={cn(`h-5 w-5 text-cosmic-blue`, className)} />
+    ),
+    description: `Adds a User Management Object type to your Bucket, which includes`,
+    confirmation: `This will install a \`users\` Object type to your Bucket.`,
+    preview_link: "/blocks/user-management",
+    object_types: 1,
+    objects: 0,
   },
 ]

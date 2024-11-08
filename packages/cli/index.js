@@ -66,6 +66,7 @@ const blocks = {
       "@radix-ui/react-label",
       "clsx",
       "tailwind-merge",
+      "resend",
     ],
     elements: ["Button", "Input", "Label", "TextArea"],
   },
@@ -167,6 +168,21 @@ const blocks = {
       "tailwind-merge",
     ],
     elements: ["TimeAgo"],
+  },
+  "user-management": {
+    name: "User Management",
+    installationSteps: [
+      "@cosmicjs/sdk@1.2.0",
+      "lucide-react",
+      "@radix-ui/react-slot",
+      "class-variance-authority",
+      "@radix-ui/react-label",
+      "clsx",
+      "tailwind-merge",
+      "resend",
+      "bcryptjs",
+    ],
+    elements: ["Button", "Input", "Label"],
   },
 }
 

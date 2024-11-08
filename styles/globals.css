@@ -6,17 +6,21 @@
   * {
     @apply border-gray-200 dark:border-dark-gray-200;
   }
+
   body {
     @apply bg-light-background text-gray-900 dark:bg-dark-background dark:text-dark-gray-900;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
   }
+
   html {
     scroll-behavior: smooth;
   }
+
   img {
-    transition: opacity 0.3s ease-in-out; /* You can adjust the duration and easing function */
+    transition: opacity 0.3s ease-in-out;
+    /* You can adjust the duration and easing function */
   }
 }
 
@@ -25,13 +29,11 @@
 }
 
 .header-gradient {
-  background: linear-gradient(
-    80deg,
-    #007aad 30.03%,
-    #8c4dff 38.64%,
-    #27aae2 64.25%,
-    #21c08b 69.86%
-  );
+  background: linear-gradient(80deg,
+      #005880 30.03%,
+      #6a35cc 38.64%,
+      #1a7da8 64.25%,
+      #168d62 69.86%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -39,13 +41,11 @@
 
 @media (prefers-color-scheme: dark) {
   .header-gradient {
-    background: linear-gradient(
-      80deg,
-      #0eacef 30.03%,
-      #ad80ff 35.22%,
-      #54bce8 70.25%,
-      #37dda5 89.86%
-    );
+    background: linear-gradient(80deg,
+        #0b82b3 30.03%,
+        #8f5ce6 35.22%,
+        #3d8cab 70.25%,
+        #2ab183 89.86%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -62,9 +62,11 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 200px; /* Adjust the height as needed */
+  height: 200px;
+  /* Adjust the height as needed */
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #0c1013);
-  pointer-events: none; /* Allows clicks to pass through the fade-out area */
+  pointer-events: none;
+  /* Allows clicks to pass through the fade-out area */
 }
 
 .dark .custom-zoom [data-rmiz-modal-overlay="visible"] {
