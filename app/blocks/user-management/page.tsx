@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import dedent from "dedent"
 
-import SignupForm from "@/components/user-management/SignupForm"
 import { CodeSteps } from "@/components/layouts/CodeSteps"
 import { PreviewCopy } from "@/components/PreviewCopy"
+import SignupForm from "@/components/user-management/SignupForm"
 
 export async function generateMetadata() {
   return {
@@ -62,7 +62,7 @@ function Code() {
 
   const verifyEmailPageCode = dedent`
     \`\`\`jsx
-    // app/verify-email/page.tsx
+    // app/verify/page.tsx
     "use client";
 
     import { verifyEmail } from "@/cosmic/blocks/user-management/actions";
@@ -115,20 +115,23 @@ function Code() {
     \`\`\`jsx
     // app/layout.tsx
     import { AuthProvider } from "@/cosmic/blocks/user-management/AuthContext";
+    import "./globals.css";
 
     export default function RootLayout({
       children,
-    }: Readonly<{
+    }: {
       children: React.ReactNode;
-    }>) {
+    }) {
       return (
         <html lang="en">
-          <body>
-            <AuthProvider>{children}</AuthProvider>
+          <body className="dark:bg-black bg-white">
+            <AuthProvider>
+              {children}
+            </AuthProvider>
           </body>
         </html>
       );
-    }
+    }    
     \`\`\`
     `
 
@@ -185,6 +188,7 @@ function Code() {
     `
   const dashboardExampleCode = dedent`
     \`\`\`jsx
+    // app/dashboard/page.tsx
     "use client";
     import { useAuth } from "@/cosmic/blocks/user-management/AuthContext";
     import { UserProfileForm } from "@/cosmic/blocks/user-management/UserProfileForm";
@@ -370,7 +374,7 @@ function Code() {
       title: "Usage: Verify email page",
       code: verifyEmailPageCode,
       description:
-        "Create a new file at `app/verify-email/page.tsx` and add the following code.",
+        "Create a new file at `app/verify/page.tsx` and add the following code.",
     },
     {
       title: "Usage: Login page",
