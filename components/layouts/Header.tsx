@@ -42,7 +42,7 @@ export default async function Header({
           <h1 className="header-gradient z-10 m-auto mb-4 mt-28 w-full max-w-[760px] text-5xl font-[900] text-transparent md:mt-24 md:text-8xl lg:mt-28">
             What will you build?
           </h1>
-          <div className="m-auto max-w-[629px] text-center text-lg text-gray-500 dark:text-dark-gray-500 md:text-2xl">
+          <div className="m-auto max-w-[629px] text-center text-lg text-gray-600 dark:text-dark-gray-600 md:text-2xl">
             Pre-built components for website content, user management, contact
             forms, and more. Build your next project faster with Blocks.
           </div>
