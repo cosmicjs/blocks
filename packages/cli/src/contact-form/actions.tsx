@@ -76,7 +76,7 @@ async function sendEmail({
     to,
     subject,
     html,
-    reply_to,
+    replyTo: reply_to,
   })
   return data
 }
