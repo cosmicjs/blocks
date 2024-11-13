@@ -1,10 +1,10 @@
 "use server"
 
+import crypto from "crypto"
+import { cookies } from "next/headers"
 import { cosmic } from "@/cosmic/client"
 import bcrypt from "bcryptjs"
-import { cookies } from "next/headers"
 import { Resend } from "resend"
-import crypto from "crypto"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -145,6 +145,14 @@ export async function login(formData: FormData) {
 
     // Generate token
     const token = Buffer.from(result.object.id).toString("base64")
+
+    // Set the user_id cookie
+    cookies().set("user_id", result.object.id, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+    })
 
     return { token, user }
   } catch (error) {
