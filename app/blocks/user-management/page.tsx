@@ -100,7 +100,7 @@ function Code() {
       return (
         <div className="h-[400px] flex items-center justify-center">
           <div className="text-center flex flex-col items-center gap-4">
-            <Loader2 className="text-cosmic-blue w-8 h-8 animate-spin" />
+            <Loader2 className="text-blue-600  w-8 h-8 animate-spin" />
             <p className="text-gray-600 dark:text-gray-400">
               Verifying your email...
             </p>
@@ -157,7 +157,11 @@ function Code() {
     import { forgotPassword } from "@/cosmic/blocks/user-management/actions";
 
     export default function ForgotPasswordPage() {
-      return <ForgotPasswordForm onSubmit={forgotPassword} />;
+      return (
+        <div className="container mx-auto py-8 px-4">
+          <ForgotPasswordForm onSubmit={forgotPassword} />
+        </div>
+      );
     }
     \`\`\`
     `
@@ -245,7 +249,7 @@ function Code() {
       if (isLoading) {
         return (
           <div className="flex justify-center items-center min-h-[50vh] p-4">
-            <Loader2 className="w-8 h-8 text-cosmic-blue animate-spin" />
+            <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
           </div>
         );
       }
@@ -269,7 +273,7 @@ function Code() {
       if (!userData) {
         return (
           <div className="flex justify-center items-center min-h-[50vh] p-4">
-            <Loader2 className="w-8 h-8 text-cosmic-blue animate-spin" />
+            <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
           </div>
         );
       }
