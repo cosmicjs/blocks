@@ -113,7 +113,7 @@ function Code() {
       return (
         <div className="container mx-auto py-8 px-4">
           <Suspense fallback={<Loader2 className="text-blue-600  w-8 h-8 animate-spin" />}>
-            <LoginClient onSubmit={login} redirect="/feed" />
+            <LoginClient onSubmit={login} redirect="/dashboard" />
           </Suspense>
         </div>
       );
