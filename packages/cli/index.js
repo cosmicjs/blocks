@@ -1,12 +1,11 @@
 #!/usr/bin/env node
-
 import path, { dirname } from "path"
-import { Command, program } from "commander"
 import { fileURLToPath } from "url"
-import { capitalize } from "./utils/capitalize.js"
-import { blockGenerator } from "./utils/block-generator.js"
-
 import chalk from "chalk"
+import { Command, program } from "commander"
+
+import { blockGenerator } from "./utils/block-generator.js"
+import { capitalize } from "./utils/capitalize.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -181,6 +180,7 @@ const blocks = {
       "tailwind-merge",
       "resend",
       "bcryptjs",
+      "@types/bcryptjs",
     ],
     elements: ["Button", "Input", "Label"],
   },

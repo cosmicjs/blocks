@@ -1,11 +1,18 @@
 "use client"
-import { useAuth } from "@/cosmic/blocks/user-management/AuthContext"
-import AuthForm from "@/cosmic/blocks/user-management/AuthForm"
+
 import { useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import { useAuth } from "@/cosmic/blocks/user-management/AuthContext"
+import AuthForm from "@/cosmic/blocks/user-management/AuthForm"
 import { Loader2 } from "lucide-react"
 
-export default function LoginClient({ onSubmit }: { onSubmit: any }) {
+export default function LoginClient({
+  onSubmit,
+  redirect,
+}: {
+  onSubmit: any
+  redirect: string
+}) {
   const { user, isLoading, login: authLogin } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -14,14 +21,14 @@ export default function LoginClient({ onSubmit }: { onSubmit: any }) {
 
   useEffect(() => {
     if (!isLoading && user) {
-      router.push("/dashboard")
+      router.push(redirect)
     }
-  }, [user, isLoading, router])
+  }, [user, isLoading, router, redirect])
 
   if (isLoading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center p-4">
-        <Loader2 className="h-8 w-8 animate-spin text-cosmic-blue" />
+        <Loader2 className="size-8 animate-spin text-blue-600" />
       </div>
     )
   }
@@ -44,9 +51,8 @@ export default function LoginClient({ onSubmit }: { onSubmit: any }) {
           const result = await onSubmit(formData)
           if (result.error) {
             router.push(`/login?error=${encodeURIComponent(result.error)}`)
-          } else if (result.token && result.user) {
-            // Login the user with the token and user data
-            authLogin(result.token, result.user)
+          } else if (result.user) {
+            authLogin(result.user)
           }
         }}
       />

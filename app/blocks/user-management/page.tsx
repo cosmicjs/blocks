@@ -63,49 +63,15 @@ function Code() {
   const verifyEmailPageCode = dedent`
     \`\`\`jsx
     // app/verify/page.tsx
-    "use client";
-
-    import { verifyEmail } from "@/cosmic/blocks/user-management/actions";
-    import { useSearchParams, useRouter } from "next/navigation";
-    import { useEffect } from "react";
+    import { Suspense } from "react";
+    import VerifyClient from "@/cosmic/blocks/user-management/VerifyClient";
     import { Loader2 } from "lucide-react";
+
     export default function VerifyPage() {
-      const searchParams = useSearchParams();
-      const router = useRouter();
-
-      useEffect(() => {
-        const verifyUserEmail = async () => {
-          const code = searchParams.get("code");
-
-          if (!code) {
-            router.push("/login?error=Invalid verification link");
-            return;
-          }
-
-          try {
-            await verifyEmail(code);
-            router.push(
-              "/login?success=Email verified successfully. You may now log in."
-            );
-          } catch (error) {
-            const errorMessage =
-              error instanceof Error ? error.message : "Verification failed";
-            router.push(\`/login?error=\${encodeURIComponent(errorMessage)}\`);
-            }
-          };
-
-          verifyUserEmail();
-      }, [searchParams, router]);
-
       return (
-        <div className="h-[400px] flex items-center justify-center">
-          <div className="text-center flex flex-col items-center gap-4">
-            <Loader2 className="text-blue-600  w-8 h-8 animate-spin" />
-            <p className="text-gray-600 dark:text-gray-400">
-              Verifying your email...
-            </p>
-          </div>
-        </div>
+        <Suspense fallback={<Loader2 className="text-blue-600  w-8 h-8 animate-spin" />}>
+          <VerifyClient />
+        </Suspense>
       );
     }
     \`\`\`
@@ -138,13 +104,17 @@ function Code() {
   const loginExampleCode = dedent`
     \`\`\`jsx
     // app/login/page.tsx
+    import { Suspense } from "react";
     import LoginClient from "@/cosmic/blocks/user-management/LoginClient";
     import { login } from "@/cosmic/blocks/user-management/actions";
+    import { Loader2 } from "lucide-react";
 
     export default function LoginPage() {
       return (
         <div className="container mx-auto py-8 px-4">
-          <LoginClient onSubmit={login} />
+          <Suspense fallback={<Loader2 className="text-blue-600  w-8 h-8 animate-spin" />}>
+            <LoginClient onSubmit={login} redirect="/dashboard" />
+          </Suspense>
         </div>
       );
     }
@@ -167,6 +137,7 @@ function Code() {
     `
   const resetPasswordExampleCode = dedent`
     \`\`\`jsx
+    // app/reset-password/page.tsx
     import { redirect } from "next/navigation";
     import ResetPasswordForm from "@/cosmic/blocks/user-management/ResetPasswordForm";
     import { resetPassword } from "@/cosmic/blocks/user-management/actions";
@@ -193,102 +164,17 @@ function Code() {
   const dashboardExampleCode = dedent`
     \`\`\`jsx
     // app/dashboard/page.tsx
-    "use client";
-    import { useAuth } from "@/cosmic/blocks/user-management/AuthContext";
-    import { UserProfileForm } from "@/cosmic/blocks/user-management/UserProfileForm";
-    import { useEffect, useState } from "react";
-    import { useRouter } from "next/navigation";
-    import { getUserData } from "@/cosmic/blocks/user-management/actions";
+    import { Suspense } from "react";
+    import DashboardClient from "@/cosmic/blocks/user-management/DashboardClient";
     import { Loader2 } from "lucide-react";
 
     export default function DashboardPage() {
-      const { user, isLoading, logout } = useAuth();
-      const [userData, setUserData] = useState<any>(null);
-      const [error, setError] = useState<string | null>(null);
-      const router = useRouter();
-
-      useEffect(() => {
-        let isMounted = true;
-
-        const checkUserAndFetchData = async () => {
-          if (isLoading) return;
-
-          if (!user) {
-            router.push("/login");
-            return;
-          }
-
-          try {
-            const { data, error } = await getUserData(user.id);
-
-            if (!isMounted) return;
-
-            if (error) {
-              if (error === "Account is not active") {
-                logout();
-                router.push("/login?error=Your account is no longer active");
-                return;
-              }
-              setError(error);
-            } else {
-              setUserData(data);
-            }
-          } catch (err) {
-            if (!isMounted) return;
-            setError("Failed to fetch user data");
-          }
-        };
-
-        checkUserAndFetchData();
-
-        return () => {
-          isMounted = false;
-        };
-      }, [user, isLoading, logout, router]);
-
-      if (isLoading) {
-        return (
-          <div className="flex justify-center items-center min-h-[50vh] p-4">
-            <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
-          </div>
-        );
-      }
-
-      if (!user) {
-        return null;
-      }
-
-      if (error === "Account is not active") {
-        return null; // Don't show anything while redirecting
-      }
-
-      if (error) {
-        return (
-          <div className="flex justify-center items-center min-h-[50vh] p-4">
-            <div className="text-red-500">Error: {error}</div>
-          </div>
-        );
-      }
-
-      if (!userData) {
-        return (
-          <div className="flex justify-center items-center min-h-[50vh] p-4">
-            <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
-          </div>
-        );
-      }
-
       return (
-        <main className="py-4">
-          <section className="pb-8 m-auto">
-            <div className="flex flex-col items-center gap-2 px-4">
-              <h1 className="mb-4 text-3xl md:text-4xl font-display text-zinc-900 dark:text-zinc-100 leading-tight tracking-tighter">
-                Welcome, {userData.metadata.first_name}!
-              </h1>
-              <UserProfileForm user={userData} />
-            </div>
-          </section>
-        </main>
+        <div className="container mx-auto py-8 px-4">
+          <Suspense fallback={<Loader2 className="text-blue-600  w-8 h-8 animate-spin" />}>
+            <DashboardClient />
+          </Suspense>
+        </div>
       );
     }
     \`\`\`

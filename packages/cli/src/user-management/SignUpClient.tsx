@@ -1,10 +1,11 @@
 "use client"
+
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useAuth } from "@/cosmic/blocks/user-management/AuthContext"
 import AuthForm from "@/cosmic/blocks/user-management/AuthForm"
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import { Loader2 } from "lucide-react"
-import Link from "next/link"
 
 export default function SignUpClient({ onSubmit }: { onSubmit: any }) {
   const { user, isLoading } = useAuth()
@@ -21,7 +22,7 @@ export default function SignUpClient({ onSubmit }: { onSubmit: any }) {
   if (isLoading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center p-4">
-        <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+        <Loader2 className="size-8 animate-spin text-blue-600" />
       </div>
     )
   }

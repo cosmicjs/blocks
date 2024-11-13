@@ -1,13 +1,13 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/cosmic/blocks/user-management/AuthContext"
-import { Loader2 } from "lucide-react"
-import Link from "next/link"
 import { Button } from "@/cosmic/elements/Button"
 import { Input } from "@/cosmic/elements/Input"
 import { Label } from "@/cosmic/elements/Label"
+import { Loader2 } from "lucide-react"
 
 interface AuthFormProps {
   type: "login" | "signup"
@@ -16,12 +16,14 @@ interface AuthFormProps {
 
 export default function AuthForm({ type, onSubmit }: AuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
   const router = useRouter()
   const { login: authLogin } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
+    setError("")
 
     try {
       const formData = new FormData(e.currentTarget)
@@ -30,19 +32,18 @@ export default function AuthForm({ type, onSubmit }: AuthFormProps) {
         const result = await onSubmit(formData)
 
         if (result.error) {
-          throw new Error(result.error)
+          setError(result.error)
+          return
         }
 
-        if (type === "login" && result.token && result.user) {
-          authLogin(result.token, result.user)
-          setTimeout(() => {
-            router.push("/dashboard")
-            router.refresh()
-          }, 100)
+        if (type === "login" && result.user) {
+          authLogin(result.user)
+          router.push("/dashboard")
+          router.refresh()
         }
       }
     } catch (err: any) {
-      console.error(err.message || "An error occurred")
+      setError(err.message || "An error occurred")
     } finally {
       setIsLoading(false)
     }
@@ -119,7 +120,7 @@ export default function AuthForm({ type, onSubmit }: AuthFormProps) {
 
       <Button type="submit" disabled={isLoading} className="w-full">
         {isLoading ? (
-          <Loader2 className="h-5 w-5 animate-spin" />
+          <Loader2 className="size-5 animate-spin" />
         ) : type === "login" ? (
           "Login"
         ) : (
