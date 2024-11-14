@@ -315,7 +315,7 @@ function Code() {
         "Add the `AuthButtons` component to your navigation menu. This will show the login/logout buttons and user dashboard menu items.",
     },
     {
-      title: "Example: Agency Website",
+      title: "Example: Podcast Network Website",
       description: (
         <>
           Check out a full-featured working example{" "}
@@ -323,9 +323,9 @@ function Code() {
             target="_blank"
             rel="noreferrer"
             className="text-cosmic-blue-link dark:text-cosmic-blue"
-            href="https://cosmic-agency-template.vercel.app/"
+            href="https://cosmic-podcast-network.vercel.app/"
           >
-            Agency Website
+            Cosmic Podcast Network
           </a>
           .
         </>
