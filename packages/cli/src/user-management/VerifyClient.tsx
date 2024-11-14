@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { verifyEmail } from "@/cosmic/blocks/user-management/actions"
 import { Loader2 } from "lucide-react"
@@ -8,10 +8,14 @@ import { Loader2 } from "lucide-react"
 export default function VerifyClient() {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const verificationAttempted = useRef(false)
 
   useEffect(() => {
     const verifyUserEmail = async () => {
+      if (verificationAttempted.current) return
+
       const code = searchParams.get("code")
+      verificationAttempted.current = true
 
       if (!code) {
         router.push("/login?error=Invalid verification link")
