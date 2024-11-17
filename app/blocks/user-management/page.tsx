@@ -69,7 +69,7 @@ function Code() {
 
     export default function VerifyPage() {
       return (
-        <Suspense fallback={<Loader2 className="text-blue-600  w-8 h-8 animate-spin" />}>
+        <Suspense fallback={<Loader2 className="text-blue-600 mx-auto w-8 h-8 animate-spin" />}>
           <VerifyClient />
         </Suspense>
       );
@@ -112,7 +112,7 @@ function Code() {
     export default function LoginPage() {
       return (
         <div className="container mx-auto py-8 px-4">
-          <Suspense fallback={<Loader2 className="text-blue-600  w-8 h-8 animate-spin" />}>
+          <Suspense fallback={<Loader2 className="text-blue-600 mx-auto w-8 h-8 animate-spin" />}>
             <LoginClient onSubmit={login} redirect="/dashboard" />
           </Suspense>
         </div>
@@ -171,7 +171,7 @@ function Code() {
     export default function DashboardPage() {
       return (
         <div className="container mx-auto py-8 px-4">
-          <Suspense fallback={<Loader2 className="text-blue-600  w-8 h-8 animate-spin" />}>
+          <Suspense fallback={<Loader2 className="text-blue-600 mx-auto w-8 h-8 animate-spin" />}>
             <DashboardClient />
           </Suspense>
         </div>
