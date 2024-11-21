@@ -14,18 +14,23 @@ export async function createCheckoutSession(
 
     for (const stripe_product_id of stripe_product_ids) {
       const product = await stripe.products.retrieve(stripe_product_id)
+      if (!product.default_price || typeof product.default_price !== "string") {
+        throw new Error(
+          `No default price found for product ${stripe_product_id}`
+        )
+      }
       const price = await stripe.prices.retrieve(product.default_price)
       line_items.push({
         price: price.id,
         quantity: 1,
       })
       // If any items are recurring
-      if (price.type === "recurring") mode = "subscription"
+      if (price.type === "recurring") mode = "subscription" as const
     }
 
     const session = await stripe.checkout.sessions.create({
       line_items,
-      mode,
+      mode: mode as Stripe.Checkout.SessionCreateParams.Mode,
       success_url: `${redirect_url}/?success=true`,
       cancel_url: `${redirect_url}/?canceled=true`,
     })
