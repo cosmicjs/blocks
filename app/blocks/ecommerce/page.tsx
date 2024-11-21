@@ -144,20 +144,22 @@ function Code() {
   const singleProductCode = dedent`
     \`\`\`jsx
     // app/shop/[slug]/page.tsx
-    import { SingleProduct } from "@/cosmic/blocks/ecommerce/SingleProduct"
+    import { SingleProduct } from "@/cosmic/blocks/ecommerce/SingleProduct";
     export default async function SingleProductPage({
       params,
-      searchParams
+      searchParams,
     }: {
-        params: { slug: string }
-        searchParams: {
-          success?: string
-        }
-      }) {
+      params: { slug: string };
+      searchParams: {
+        success?: string;
+      };
+    }) {
+      const slug = (await params).slug;
+      const success = (await searchParams).success;
       return (
         <SingleProduct
-          query={{ slug: params.slug, type: "products" }}
-          purchased={searchParams.success ? true : false}
+          query={{ slug, type: "products" }}
+          purchased={success ? true : false}
         />
       );
     }
@@ -177,16 +179,16 @@ function Code() {
       searchParams,
     }: {
       params: { slug: string };
-      searchParams: {
-        success?: string;
+      searchParams?: {
+        status: "draft" | "published" | "any";
       };
     }) {
       const slug = (await params).slug;
-      const success = (await searchParams).success;
+      const status = (await searchParams).status;
       return (
         <SingleProduct
           query={{ slug, type: "products" }}
-          purchased={success ? true : false}
+          status={status}
         />
       );
     }
