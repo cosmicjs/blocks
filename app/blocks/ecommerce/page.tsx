@@ -144,20 +144,22 @@ function Code() {
   const singleProductCode = dedent`
     \`\`\`jsx
     // app/shop/[slug]/page.tsx
-    import { SingleProduct } from "@/cosmic/blocks/ecommerce/SingleProduct"
+    import { SingleProduct } from "@/cosmic/blocks/ecommerce/SingleProduct";
     export default async function SingleProductPage({
       params,
-      searchParams
+      searchParams,
     }: {
-        params: { slug: string }
-        searchParams: {
-          success?: string
-        }
-      }) {
+      params: { slug: string };
+      searchParams: {
+        success?: string;
+      };
+    }) {
+      const slug = (await params).slug;
+      const success = (await searchParams).success;
       return (
         <SingleProduct
-          query={{ slug: params.slug, type: "products" }}
-          purchased={searchParams.success ? true : false}
+          query={{ slug, type: "products" }}
+          purchased={success ? true : false}
         />
       );
     }
@@ -181,10 +183,12 @@ function Code() {
         status: "draft" | "published" | "any";
       };
     }) {
+      const slug = (await params).slug;
+      const status = (await searchParams).status;
       return (
         <SingleProduct
-          query={{ slug: params.slug, type: "products" }}
-          status={searchParams?.status}
+          query={{ slug, type: "products" }}
+          status={status}
         />
       );
     }
@@ -300,7 +304,6 @@ function Code() {
     // app/layout.tsx
     import "./globals.css";
     import { Header } from "@/components/Header";
-    import { Footer } from "@/components/Footer";
     import { CartProvider } from "@/cosmic/blocks/ecommerce/CartProvider";
     
     export default function RootLayout({
@@ -314,7 +317,6 @@ function Code() {
             <CartProvider>
               <Header />
               {children}
-              <Footer />
             </CartProvider>
           </body>
         </html>
@@ -326,76 +328,14 @@ function Code() {
   const codeHeaderString = dedent`
     \`\`\`jsx
     // components/Header.tsx
-    import Link from "next/link";
-    import { cosmic } from "@/cosmic/client";
-    import { NavMenu } from "@/cosmic/blocks/navigation-menu/NavMenu";
     import { CheckOut } from "@/cosmic/blocks/ecommerce/CheckOut";
 
     export async function Header() {
-      // Header data
-      const { object: settings } = await cosmic.objects
-        .findOne({
-          type: "global-settings",
-          slug: "settings",
-        })
-        .props("metadata")
-        .depth(1);
-
       return (
         <div className="space-x-4 sticky top-0 bg-white/20 dark:bg-black/20 backdrop-blur-lg py-2 w-full z-[9999]">
-          <div className="m-auto flex items-center md:container justify-between pl-2 pr-4">
-            <Link href="/">
-              <img
-                src={\`\${settings.metadata.logo.imgix_url}?w=500&auto=format,compression\`}
-                alt={settings.metadata.company}
-                className="h-10 m-auto dark:hidden"
-              />
-              <img
-                src={\`\${settings.metadata.dark_logo.imgix_url}?w=500&auto=format,compression\`}
-                alt={settings.metadata.company}
-                className="h-10 m-auto hidden dark:block"
-              />
-            </Link>
-            <NavMenu query={{ type: "navigation-menus", slug: "header" }} />
-            <CheckOut className="ml-4" productPath={"/shop"} />
-          </div>
+          <CheckOut className="ml-4 flex justify-end" productPath={"/shop"} />
         </div>
       );
-    }
-    \`\`\`
-    `
-  const checkoutAPICodeString = dedent`
-    \`\`\`jsx
-    /// app/api/checkout/route.ts
-    import { type NextRequest, NextResponse } from "next/server";
-    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-    
-    export async function POST(request: NextRequest) {
-      const res = await request.json();
-      const stripe_product_ids = res.stripe_product_ids;
-      try {
-        let line_items = [];
-        let mode = "payment";
-        for (const stripe_product_id of stripe_product_ids) {
-          const product = await stripe.products.retrieve(stripe_product_id);
-          const price = await stripe.prices.retrieve(product.default_price);
-          line_items.push({
-            price: price.id,
-            quantity: 1,
-          });
-          // If any items are recurring
-          if (price.type === "recurring") mode = "subscription";
-        }
-        const session = await stripe.checkout.sessions.create({
-          line_items,
-          mode,
-          success_url: \`\${res.redirect_url}/?success=true\`,
-          cancel_url: \`\${res.redirect_url}/?canceled=true\`,
-        });
-        return Response.json({ url: session.url });
-      } catch (err) {
-        return NextResponse.json(err, { status: 500 });
-      }
     }
     \`\`\`
     `
@@ -405,7 +345,9 @@ function Code() {
     // app/api/cosmic-webhooks/route.ts
     import { type NextRequest, NextResponse } from "next/server";
     import { cosmic } from "@/cosmic/client";
-    const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+    import Stripe from "stripe";
+    
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
     type PriceType = {
       product?: string;
@@ -523,11 +465,6 @@ function Code() {
     }
     \`\`\`
     `
-  const installStripeClients = dedent`
-  \`\`\`bash
-  bun add stripe @stripe/stripe-js
-  \`\`\`
-  `
 
   const steps = [
     {
@@ -554,7 +491,7 @@ function Code() {
         "Add a new file located at `app/shop/[slug]/page.tsx` with the following:",
     },
     {
-      title: "Stripe: Install Stripe clients",
+      title: "Stripe: Add your Stripe API secret key",
       description: (
         <>
           This ecommerce block uses{" "}
@@ -566,19 +503,9 @@ function Code() {
           >
             Stripe
           </a>{" "}
-          to process ecommerce payments. Install the Stripe clients with the
-          following commands.
-        </>
-      ),
-      code: installStripeClients,
-    },
-    {
-      title: "Stripe: Add your Stripe API keys",
-      description: (
-        <>
-          Add the following Stripe API keys to the `.env.local` file. Change the
-          values to your Stripe public and secret keys. Find your Stripe API
-          keys in the{" "}
+          to process ecommerce payments. Add the following Stripe API key to the
+          `.env.local` file. Change the value to your Stripe secret key. Find
+          your Stripe API keys in the{" "}
           <a
             href="https://dashboard.stripe.com/login"
             target="_blank"
@@ -592,17 +519,10 @@ function Code() {
       ),
       code: dedent(`\`\`\`jsx
       // .env.local
-      ...
-      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=change_to_your_stripe_public_key
+      // ...existing env variables
       STRIPE_SECRET_KEY=change_to_your_stripe_secret_key
       \`\`\`
       `),
-    },
-    {
-      title: "Add the CartProvider",
-      description:
-        "Update your `app/layout.tsx` to include the `CartProvider`:",
-      code: layoutCodeString,
     },
     {
       title: "Add the CheckOut",
@@ -611,10 +531,10 @@ function Code() {
       code: codeHeaderString,
     },
     {
-      title: "Stripe: Create the checkout API route",
+      title: "Add the CartProvider",
       description:
-        "Create a new file at `app/api/checkout/route.ts` with the following:",
-      code: checkoutAPICodeString,
+        "Update your `app/layout.tsx` to include the `CartProvider`:",
+      code: layoutCodeString,
     },
     {
       title: "Stripe: Install the Stripe Products extension",
@@ -645,7 +565,7 @@ function Code() {
       ),
     },
     {
-      title: "Stripe: Create the webhooks API route",
+      title: "Optional: Create the webhooks API route",
       description: (
         <>
           We can use webhooks to keep your products in Cosmic in sync with
@@ -666,7 +586,7 @@ function Code() {
       code: webhookCodeString,
     },
     {
-      title: "Add webhooks to Cosmic",
+      title: "Optional: Add webhooks to Cosmic",
       description: (
         <>
           After deploying your project, you can take this endpoint

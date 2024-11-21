@@ -38,7 +38,7 @@ export default function BlocksMenu() {
             >
               <Popover.Panel className="absolute left-10 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 rounded-xl px-4 shadow-gray-50 sm:left-[140px] sm:px-0 sm:shadow-lg sm:dark:shadow-gray-800 lg:max-w-xl">
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
-                  <div className="relative grid gap-x-8 gap-y-5 bg-white p-7 dark:bg-dark-background lg:grid-cols-3">
+                  <div className="relative grid grid-cols-2 gap-x-8 gap-y-5 bg-white p-7 dark:bg-dark-background lg:grid-cols-3">
                     {blocksData?.map((item) => (
                       <Link
                         className="-m-3 flex items-center rounded-lg transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none hover:dark:bg-dark-gray-50"

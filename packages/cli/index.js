@@ -108,6 +108,7 @@ const blocks = {
       "class-variance-authority",
       "clsx",
       "tailwind-merge",
+      "stripe",
     ],
     elements: ["Button"],
   },
