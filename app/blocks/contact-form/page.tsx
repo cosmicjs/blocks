@@ -124,7 +124,7 @@ function Code() {
       ),
       code: dedent(`\`\`\`jsx
       // .env.local
-      ...
+      // ...existing env variables
       RESEND_API_KEY=re_123456
       CONTACT_EMAIL=youremail@domain.com
       \`\`\`

@@ -1,19 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import React from "react"
-import { loadStripe } from "@stripe/stripe-js"
-import { Button } from "@/cosmic/elements/Button"
-import { ShoppingCartIcon, XIcon, Trash2Icon } from "lucide-react"
-import { useState, useContext } from "react"
-import { CartContext } from "@/cosmic/blocks/ecommerce/CartProvider"
-import { ProductType } from "@/cosmic/blocks/ecommerce/AddToCart"
-import Link from "next/link"
-import { cn } from "@/cosmic/utils"
-import { useSearchParams } from "next/navigation"
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
-)
+import React, { useContext, useState } from "react"
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { createCheckoutSession } from "@/cosmic/blocks/ecommerce/actions/checkout"
+import { ProductType } from "@/cosmic/blocks/ecommerce/AddToCart"
+import { CartContext } from "@/cosmic/blocks/ecommerce/CartProvider"
+import { Button } from "@/cosmic/elements/Button"
+import { cn } from "@/cosmic/utils"
+import { ShoppingCartIcon, Trash2Icon, XIcon } from "lucide-react"
 
 function cartTotal(cart: ProductType[]) {
   let total = 0
@@ -96,25 +92,20 @@ export function CheckOut({
   }
   async function handleSubmit() {
     setSubmitting(true)
-    const stripe_product_ids = cart.map((product: any) => {
-      return product.metadata.stripe_product_id
-    })
-    const res = await fetch("/api/checkout", {
-      method: "POST",
-      body: JSON.stringify({
+    try {
+      const stripe_product_ids = cart.map((product: any) => {
+        return product.metadata.stripe_product_id
+      })
+
+      const result = await createCheckoutSession(
         stripe_product_ids,
-        redirect_url: window.location.href.split("?")[0],
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    const data = await res.json()
-    if (!res.ok) {
+        window.location.href.split("?")[0]
+      )
+
+      if (result.url) window.location = result.url
+    } catch (err: any) {
       setSubmitting(false)
-      setError(data.raw.message)
-    } else {
-      if (data.url) window.location = data.url
+      setError(err.message)
     }
   }
   // Remove cart
