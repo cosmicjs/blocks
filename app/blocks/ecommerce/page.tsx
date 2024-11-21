@@ -177,14 +177,16 @@ function Code() {
       searchParams,
     }: {
       params: { slug: string };
-      searchParams?: {
-        status: "draft" | "published" | "any";
+      searchParams: {
+        success?: string;
       };
     }) {
+      const slug = (await params).slug;
+      const success = (await searchParams).success;
       return (
         <SingleProduct
-          query={{ slug: params.slug, type: "products" }}
-          status={searchParams?.status}
+          query={{ slug, type: "products" }}
+          purchased={success ? true : false}
         />
       );
     }
