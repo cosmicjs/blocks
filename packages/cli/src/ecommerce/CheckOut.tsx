@@ -4,7 +4,7 @@
 import React, { useContext, useState } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
-import { createCheckoutSession } from "@/cosmic/blocks/ecommerce/actions/checkout"
+import { createCheckoutSession } from "@/cosmic/blocks/ecommerce/actions"
 import { ProductType } from "@/cosmic/blocks/ecommerce/AddToCart"
 import { CartContext } from "@/cosmic/blocks/ecommerce/CartProvider"
 import { Button } from "@/cosmic/elements/Button"
