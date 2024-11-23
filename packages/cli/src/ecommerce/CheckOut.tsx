@@ -115,68 +115,62 @@ export function CheckOut({
     removeCart()
   }
   return (
-    <div className={cn("relative", className)}>
-      {cart.length ? (
-        <>
+    <div className={cn("relative z-10", className)}>
+      <Button
+        onClick={() => (cartOpen ? setCartOpen(false) : setCartOpen(true))}
+        className={cn(
+          "w-[110px]",
+          !cart.length
+            ? "border border-gray-300 !bg-white text-gray-800 dark:border-gray-500 dark:!bg-black dark:text-white"
+            : ""
+        )}
+      >
+        <ShoppingCartIcon className="size-4 mr-2" />
+        {cart.length} item{cart.length !== 1 ? "s" : ""}
+      </Button>
+      {cartOpen && cart.length ? (
+        <div className="absolute right-0 top-12 w-[330px] rounded-lg border border-gray-300 bg-white p-4 text-gray-700 dark:border-gray-500 dark:bg-black dark:text-gray-200">
+          <div className="mb-2 text-xl font-semibold">Your Cart</div>
+          <div className="max-h-[300px] overflow-scroll">
+            {cart.map((item: ProductType) => {
+              return (
+                <CartItem key={item.id} item={item} removeItem={removeItem} />
+              )
+            })}
+          </div>
           <Button
-            onClick={() => (cartOpen ? setCartOpen(false) : setCartOpen(true))}
+            className="mt-3 w-full"
+            disabled={submitting}
+            type="submit"
+            onClick={handleSubmit}
           >
             <ShoppingCartIcon className="size-4 mr-2" />
-            {cart.length} item{cart.length !== 1 ? "s" : ""}
+            {submitting ? (
+              <>Checking out...</>
+            ) : (
+              <>Checkout Total: ${cartTotal(cart).toLocaleString("en-US")}</>
+            )}
           </Button>
-          {cartOpen ? (
-            <div className="absolute right-0 top-12 w-[330px] rounded-lg border border-gray-300 bg-white p-4 text-gray-700 dark:border-gray-500 dark:bg-black dark:text-gray-200">
-              <div className="mb-2 text-xl font-semibold">Your Cart</div>
-              <div className="max-h-[300px] overflow-scroll">
-                {cart.map((item: ProductType) => {
-                  return (
-                    <CartItem
-                      key={item.id}
-                      item={item}
-                      removeItem={removeItem}
-                    />
-                  )
-                })}
-              </div>
-              <Button
-                className="mt-3 w-full"
-                disabled={submitting}
-                type="submit"
-                onClick={handleSubmit}
-              >
-                <ShoppingCartIcon className="size-4 mr-2" />
-                {submitting ? (
-                  <>Checking out...</>
-                ) : (
-                  <>
-                    Checkout Total: ${cartTotal(cart).toLocaleString("en-US")}
-                  </>
-                )}
-              </Button>
-              <div
-                onClick={() => setCartOpen(false)}
-                className="mt-4 cursor-pointer text-center underline"
-              >
-                Continue shopping
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-          {error && (
-            <div className="absolute right-2 top-12 w-[300px] rounded-lg border border-red-500 bg-white p-4 text-gray-600 dark:bg-black dark:text-gray-200">
-              <XIcon
-                className="size-4 absolute right-4 top-4 cursor-pointer"
-                onClick={() => setError(false)}
-              />
-              There was an error from the API:
-              <br />
-              {error}
-            </div>
-          )}
-        </>
+          <div
+            onClick={() => setCartOpen(false)}
+            className="mt-4 cursor-pointer text-center underline"
+          >
+            Continue shopping
+          </div>
+        </div>
       ) : (
         ""
+      )}
+      {error && (
+        <div className="absolute right-2 top-12 w-[300px] rounded-lg border border-red-500 bg-white p-4 text-gray-600 dark:bg-black dark:text-gray-200">
+          <XIcon
+            className="size-4 absolute right-4 top-4 cursor-pointer"
+            onClick={() => setError(false)}
+          />
+          There was an error from the API:
+          <br />
+          {error}
+        </div>
       )}
     </div>
   )
