@@ -33,9 +33,9 @@
 🦺 Type safe
 
 ## Blocks include
-
-- Landing page
 - Blog
+- User management
+- Landing page
 - Ecommerce (powered by Stripe 🛒)
 - Contact form (powered by Resend ✉️)
 - Events
